@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-mar-2009 15:19:41 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+  <class name="domain.model.RespEnctaAyuCursoView" table="RESP_ENCTA_AYU_CURSO">
+    <id name="peaPreg" type="int">
+      <column name="PEA_PREG" precision="5" scale="2"/>
+    </id>
+    <property name="peaDes" type="string">
+      <column length="150" name="PEA_DES"/>
+    </property>
+    <property name="prom" type="big_decimal">
+      <column name="PROM" precision="2" scale="1"/>
+    </property>
+    <property name="desv" type="big_decimal">
+      <column name="DESV" precision="2" scale="1"/>
+    </property>
+    <property name="minimo" type="int">
+      <column name="MINIMO" precision="1" scale="0"/>
+    </property>
+    <property name="maximo" type="int">
+      <column name="MAXIMO" precision="1" scale="0"/>
+    </property>
+    <property name="numResp" type="int">
+      <column name="NUM_RESP" precision="3" scale="0"/>
+    </property>
+    <property name="reaAsign" type="java.lang.Integer">
+      <column name="REA_ASIGN" precision="10" scale="0"/>
+    </property>
+    <property name="reaElect" type="string">
+      <column length="1" name="REA_ELECT"/>
+    </property>
+    <property name="reaCoord" type="string">
+      <column length="1" name="REA_COORD"/>
+    </property>
+    <property name="reaSecc" type="java.lang.Integer">
+      <column name="REA_SECC" precision="2" scale="0"/>
+    </property>
+    <property name="reaAgno" type="int">
+      <column name="REA_AGNO" precision="4" scale="0"/>
+    </property>
+    <property name="reaSem" type="int">
+      <column name="REA_SEM" precision="1" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-09-2010 05:58:22 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EmisionNomina" table="EMISION_NOMINA">
+        <id name="emiCorrel" type="int">
+            <column name="EMI_CORREL" precision="7" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="emiAgno" type="int">
+            <column name="EMI_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="emiSem" type="int">
+            <column name="EMI_SEM" precision="1" scale="0"/>
+        </property>
+        <property name="emiTipo" type="int">
+            <column name="EMI_TIPO" precision="2" scale="0"/>
+        </property>
+        <property name="emiFecha" type="date">
+            <column length="7" name="EMI_FECHA"/>
+        </property>
+        <property name="emiReali" type="string">
+            <column length="16" name="EMI_REALI"/>
+        </property>
+    </class>
+</hibernate-mapping>

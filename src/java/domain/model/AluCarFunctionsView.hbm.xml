@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class dynamic-update="false" name="domain.model.AluCarFunctionsView" table="ALU_CAR_FUNCTIONS">
+    <composite-id class="domain.model.AluCarId" name="id">
+      <key-property name="acaRut" type="int">
+        <column name="ACA_RUT" precision="8" scale="0"/>
+      </key-property>
+      <key-property name="acaCodCar" type="int">
+        <column name="ACA_COD_CAR" precision="5" scale="0"/>
+      </key-property>
+      <key-property name="acaAgnoIng" type="int">
+        <column name="ACA_AGNO_ING" precision="4" scale="0"/>
+      </key-property>
+      <key-property name="acaSemIng" type="int">
+        <column name="ACA_SEM_ING" precision="1" scale="0"/>
+      </key-property>
+    </composite-id>
+    <property column="flag_nuevo" name="flagNuevo" type="java.lang.Integer"/>
+    <property column="nivel" name="nivel" type="java.lang.Integer"/>
+    <property column="promedio" name="promedio" type="java.lang.Float"/>
+    <property column="promedio_aprobados" name="promedioAprobados" type="java.lang.Float"/>
+    <property column="factor_avance" name="factorAvance" type="java.lang.Float"/>
+    <property column="factor_eficiencia" name="factorEficiencia" type="java.lang.Float"/>
+    <property column="reprobaciones" name="reprobaciones" type="java.lang.Integer"/>
+    <property column="progresion" name="progresion" type="java.lang.String"/>
+    <property column="nombre_facultad" name="nombreFacultad" type="java.lang.String"/>
+    <property column="unidad_facultad" name="unidadFacultad" type="java.lang.Integer"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-09-2010 05:58:22 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EstadoSolicitud" table="ESTADO_SOLICITUD">
+        <id name="esolCod" type="int">
+            <column name="ESOL_COD" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="esolDes" type="string">
+            <column length="80" name="ESOL_DES"/>
+        </property>
+        <property name="esolDesCorta" type="string">
+            <column length="3" name="ESOL_DES_CORTA"/>
+        </property>
+    </class>
+</hibernate-mapping>

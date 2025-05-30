@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ExpedienteNomina" table="EXPEDIENTE_NOMINA">
+        <id name="expnCorrel" type="int">
+            <column name="EXPN_CORREL" precision="10" scale="0"/>
+        </id>
+
+        <property name="expnLogro" type="int">
+            <column name="EXPN_LOGRO" precision="2" scale="0" />
+        </property>
+        <property name="expnNumero" type="string">
+            <column name="EXPN_NUMERO" length="10" />
+        </property>
+        <property name="expnAgno" type="int">
+            <column name="EXPN_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="expnFecha" type="timestamp">
+            <column length="7" name="EXPN_FECHA"/>
+        </property>
+    </class>
+</hibernate-mapping>

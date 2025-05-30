@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    
+    <listener>
+        <listener-class>
+            infrastructure.listener.IntranetContextListener
+        </listener-class>
+    </listener>
+    
+    <!-- activar cuando se necesite conocer los actions cargados en struts2 -->
+    <!--listener>
+        <listener-class>
+            infrastructure.dispatcher.ActionMenuBuilderListener
+        </listener-class>
+    </listener-->
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>
+            org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
+        </filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Parámetro de contexto que indica la ubicación del archivo struts.xml -->
+    <!--context-param>
+        <param-name>struts.configuration</param-name>
+        <param-value>/WEB-INF/classes/config/struts.xml</param-value>
+        <param-value>/config/struts/struts.xml</param-value>
+    </context-param-->
+   
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/message/messagePageNotFound.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/message/messageServerError.jsp</location>
+    </error-page>
+    
+    <multipart-config>
+        <max-file-size>8388608000</max-file-size>
+        <max-request-size>8388608000</max-request-size>
+        <file-size-threshold>0</file-size-threshold>
+    </multipart-config>
+    
+</web-app>

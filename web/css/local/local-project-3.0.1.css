@@ -1,0 +1,219 @@
+/*
+    Document   : local-project
+    Created on : 10-05-2011, 09:49:55 AM
+    Author     : Ricardo Contreras S.
+
+*/
+.login_image {position: absolute;top: 0;bottom: 0;left: 0;right: 0;margin: auto;}
+
+.row.content {height: 90%}
+
+.inner-body {margin:0 0 0 5px; padding: 0;}
+.usach-login{background-color: #394049;}
+.center-div{display: flex;justify-content: center;align-items: center;align-content: center}
+.boder-login{border-left:2px solid gray}
+.error{color:red; border: 0}
+
+.header-login {
+    color: #394049;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+* a:hover {
+    cursor: pointer
+}
+
+/***** LOGIN ******/
+.login-div {
+    max-width: 385px;
+    margin: 30px auto;
+}
+.login-div form {        
+    margin-bottom: 15px;
+    /*background: #f7f7f7;*/
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+.login-div h2 {
+    margin: 0 0 15px;
+}
+.login-btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+
+.input-group-addon .fa {
+    font-size: 18px;
+}
+.login-btn {
+    font-size: 15px;
+    /*font-weight: bold;*/
+} 
+.version-bottom-right {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    margin: 5px;
+}
+.home-iframe {
+    height:82vh;
+    width: 100vw;
+}
+
+.div-inner-iframe {
+    height: 85vh;
+    width: 95vw;
+}
+
+.inner-iframe {    
+    border:0 !important; margin: 0 !important; width: 95vw;height: 85vh;position: relative; background-color: white;
+}
+
+.content-record {width: 90% !important}
+
+/*****************/
+
+.custom-button{width: 150px !important; }
+
+
+/** TABLAS **/
+thead {background:#ddd; color:#111; height: 24px;}
+/************/
+
+.header-home {background:#394049}
+.header-home .container{margin: 0;}
+.header-home p{color: white;text-align: left;margin: 0;}
+
+.header-interno {background:#5c7380; margin-top: 15px}
+.header-interno .container{margin: 0;}
+.header-interno p{color: white;text-align: left;margin: 0;}
+
+.nav-header-interno{background-color: #a4a4a4; border-color: #a4a4a4;}
+.nav-header-interno a:hover {color: #141414 !important}
+.nav-header-interno a {color: white !important}
+
+.nav-header-interno2{background-color: #a4a4a4; border-color: #a4a4a4;}
+.nav-header-interno2 a:hover {color: #141414 !important}
+.nav-header-interno2 a {color: white !important}
+
+footer p{
+    font-size: 11px;
+    font-weight: normal;
+    color:#333;
+    background:white ;
+    margin: 0;
+    padding: 0;
+    height: 30px;
+}
+
+.rut {
+    max-width: 90px;
+    text-align: right
+}
+
+.dv {
+    max-width: 16px; text-align: center; padding: 0
+}
+
+.materno, .paterno {
+    max-width: 200px
+}
+
+.data-tables-container {width: 95%}
+
+.actionMessage li {
+    list-style: none
+}
+
+.actionMessage li span {
+    color: #00529B;
+    /*font-size: 12px*/
+        /*text-align: left !important;*/
+}
+
+.actionError li {
+    list-style: none
+}
+
+.actionError li span {
+    color: red;
+    font-size: 16px
+}
+
+/******************Calificaciones*********************/
+.aprobado {color: #0e51a7 !important}
+.reprobado {color: red !important}
+.aprobado, .reprobado {text-align: center !important}
+/*****************************************************/
+
+.title-div {background-color: #F18B29; color: white;margin-top: 15px;font-weight: bold; font-size:16px }
+.container-menu {margin:0; padding-bottom: 15px; padding-left: 0px; padding-top: 0px; padding-right: 0;}
+.table-agno-sem {margin-top: 10px; margin-bottom: 10px}
+.table-agno-sem tr td {padding-right: 5px;}
+.table-search tr td {padding-right: 5px;}
+.input-agno {min-width: 50px; max-width: 50px; padding: 0; margin: 0; text-align: center;}
+.input-sem {min-width: 20px; max-width: 20px; text-align: center; padding: 0; margin: 0}
+.input-inline{display: inline}
+.foto{height: 125px; width: 110px; border: 1px solid gray;padding: 3px; margin-bottom: 15px;}
+.no-padding {padding:0;margin: 0}
+label{font-weight: normal}
+
+
+/************** Encuestas ***********/
+.pregunta {text-align: left}
+.respuesta {text-align: center}
+/***********************************/
+
+
+/**** Navbar  ****/
+
+.navbar-default .navbar-toggle .icon-bar{
+    background-color: #fff;
+}
+.navbar-default .navbar-toggle{
+    border: 0px;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover{
+    background-color: #10223e;
+}
+/* Remove the navbar's default margin-bottom and rounded borders */ 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: #00a499;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.85);
+}
+
+.imageLink{cursor: pointer;}
+
+
+/* Card */
+.card-header { border-bottom: 5px solid #00a499; }
+.card-header h3 { color: #394049; text-align: center; margin: 0px;}
+.card-footer { background: #00a499; text-align: center;}
+.card-footer a { color: #fff; }
+
+.modal-header {color: white;background-color: #00a499}
+.anchor {color:#007bff}
+
+
+.btn-warning {
+    background: #ec971f;
+    border-color: #eea236;
+    color: #fff;
+}
+.btn-warning:hover {
+    background: #eb7704;
+    color: #fff;
+}
+
+/* logo login  */
+
+.logo-login {
+    width: 390px;
+    max-width: 90%;
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.WebUserAction" table="WEB_USER_ACTION">
+        <composite-id class="domain.model.WebUserActionId" name="id">
+            <key-property name="wuaUser" type="string">
+                <column length="5" name="WUA_USER"/>
+            </key-property>
+            <key-property name="wuaAction" type="string">
+                <column length="100" name="WUA_ACTION"/>
+            </key-property>
+        </composite-id>
+
+        <many-to-one class="domain.model.WebUser" fetch="select" insert="false" name="webUser" update="false">
+            <column name="WUA_USER" not-null="true" length="5"/>
+        </many-to-one>
+        <many-to-one class="domain.model.WebAction" fetch="select" insert="false" name="webAction" update="false">
+            <column name="WUA_ACTION" not-null="true" length="100"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

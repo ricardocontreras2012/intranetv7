@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Profesor" table="PROFESOR">
+        <id name="profRut" type="int">
+            <column name="PROF_RUT" precision="8" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="profNom" type="string">
+            <column length="50" name="PROF_NOM"/>
+        </property>
+        <property name="profPat" type="string">
+            <column length="20" name="PROF_PAT"/>
+        </property>
+        <property name="profMat" type="string">
+            <column length="20" name="PROF_MAT"/>
+        </property>
+        <property name="profSexo" type="string">
+            <column length="1" name="PROF_SEXO"/>
+        </property>
+        <property name="profFechaNac" type="timestamp">
+            <column length="7" name="PROF_FECHA_NAC"/>
+        </property>
+        <property name="profFono" type="string">
+            <column length="50" name="PROF_FONO"/>
+        </property>
+        <property name="profDireccion" type="string">
+            <column length="80" name="PROF_DIRECCION"/>
+        </property>
+        <property name="profDv" type="string">
+            <column length="1" name="PROF_DV"/>
+        </property>
+        <property name="profEmail" type="string">
+            <column length="256" name="PROF_EMAIL"/>
+        </property>
+        <property name="profNombreSimple" type="string">
+            <column length="120" name="PROF_NOMBRE_SIMPLE"/>
+        </property>
+        <property name="profLastLogin" type="timestamp">
+            <column length="7" name="PROF_LAST_LOGIN"/>
+        </property>        
+        <property name="profUpdated" type="timestamp">
+            <column length="7" name="PROF_UPDATED"/>
+        </property>
+        <many-to-one class="domain.model.Comuna" fetch="select" insert="true" name="comuna" update="false">
+            <column name="PROF_COMUNA" precision="5" scale="0"/>
+        </many-to-one>
+        
+        <set fetch="select" inverse="true" lazy="true" name="cursos" table="CURSO_PROF">
+            <key>
+                <column name="CPRO_PROF_RUT" not-null="true" precision="8" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.CursoProfesor"/>
+        </set>
+    </class>
+</hibernate-mapping>

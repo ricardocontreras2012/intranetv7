@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Plan" table="PLAN">
+        <composite-id class="domain.model.PlanId" name="id">
+            <key-property name="plaCodCar" type="int">
+                <column name="PLA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="plaCodMen" type="int">
+                <column name="PLA_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="plaCod" type="int">
+                <column name="PLA_COD" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Regimen" fetch="select" name="regimen">
+            <column name="PLA_REGIMEN" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Mencion" fetch="select" insert="false" name="mencion" update="false">
+            <column name="PLA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="PLA_COD_MEN" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <property name="plaVigente" type="java.lang.Character">
+            <column length="1" name="PLA_VIGENTE"/>
+        </property>
+        <property name="plaResoluciones" type="string">
+            <column length="500" name="PLA_RESOLUCIONES"/>
+        </property>
+        
+        <!--set fetch="select" inverse="true" lazy="true" name="planLogro"
+             table="PLAN_LOGRO">
+            <key>
+                <column name="PLAL_COD_CAR" not-null="true" precision="5" scale="0"/>
+                <column name="PLAL_COD_MEN" not-null="true" precision="1" scale="0"/>
+                <column name="PLAL_COD_PLAN" not-null="true" precision="2" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.PlanLogroId"/>
+        </set-->
+        
+    </class>
+</hibernate-mapping>

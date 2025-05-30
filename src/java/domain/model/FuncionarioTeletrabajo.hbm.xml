@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="domain.model.FuncionarioTeletrabajo" table="FUNCIONARIO_TELETRABAJO">
+        <id name="ftelRut" type="int">
+            <column name="FTEL_RUT" precision="8" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <one-to-one name="funcionario" class="domain.model.Funcionario" />
+        <property name="ftelRutJefe" type="int">
+            <column name="FTEL_RUT_JEFE" precision="8" scale="0"/>
+        </property>
+        <property name="ftelType" type="string">
+            <column name="FTEL_TYPE" precision="1" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

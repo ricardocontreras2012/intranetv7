@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.CursoCarrera" table="CURSO_CAR">
+        <composite-id class="domain.model.CursoCarreraId" name="id">
+            <key-property name="ccarAsign" type="int">
+                <column name="CCAR_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="ccarElect" type="string">
+                <column length="2" name="CCAR_ELECT"/>
+            </key-property>
+            <key-property name="ccarCoord" type="string">
+                <column length="1" name="CCAR_COORD"/>
+            </key-property>
+            <key-property name="ccarSecc" type="int">
+                <column name="CCAR_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="ccarAgno" type="int">
+                <column name="CCAR_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="ccarSem" type="int">
+                <column name="CCAR_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="ccarCodCar" type="int">
+                <column name="CCAR_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="ccarCodMen" type="int">
+                <column name="CCAR_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="ccarComp" type="string">
+                <column length="1" name="CCAR_COMP"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="CCAR_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="1" name="CCAR_ELECT" not-null="true"/>
+            <column length="1" name="CCAR_COORD" not-null="true"/>
+            <column name="CCAR_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="CCAR_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="CCAR_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="CCAR_COMP" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Mencion" fetch="select" insert="false" name="mencion" update="false">
+            <column name="CCAR_COD_CAR" precision="5" scale="0"/>
+            <column name="CCAR_COD_MEN" precision="1" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

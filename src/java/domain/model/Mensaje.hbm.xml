@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Mensaje" table="MENSAJE">
+        <id name="msgCorrel" type="int">
+            <column name="MSG_CORREL" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="msgRutEnv" type="int">
+            <column name="MSG_RUT_ENV" precision="8" scale="0"/>
+        </property>
+        <property name="msgRolEnv" type="string">
+            <column length="3" name="MSG_ROL_ENV"/>
+        </property>
+        <property name="msgNombreEnv" type="string">
+            <column length="80" name="MSG_NOMBRE_ENV"/>
+        </property>
+        <property name="msgFecha" type="timestamp">
+            <column length="7" name="MSG_FECHA"/>
+        </property>
+        <property name="msgSubject" type="string">
+            <column length="250" name="MSG_SUBJECT"/>
+        </property>
+        <property name="msgMsg" type="string">
+            <column length="4000" name="MSG_MSG"/>
+        </property>
+
+        <property name="msgPara" type="string">
+            <column length="3200" name="MSG_PARA"/>
+        </property>
+        <property name="msgEstado" type="string">
+            <column length="1" name="MSG_ESTADO"/>
+        </property>
+        <property name="msgIdSession" type="string">
+            <column length="20" name="MSG_ID_SESSION"/>
+        </property>
+        <property name="msgAttach" type="string">
+            <column length="1" name="MSG_ATTACH"/>
+        </property>
+        <property name="msgImagen" type="string">
+            <column length="500" name="MSG_IMAGEN"/>
+        </property>
+        <property name="msgUrl" type="string">
+            <column length="4000" name="MSG_URL"/>
+        </property>
+        <property name="msgTipo" type="string">
+            <column length="5" name="MSG_TIPO"/>
+        </property>
+    </class>
+</hibernate-mapping>

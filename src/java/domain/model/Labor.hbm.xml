@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Labor" table="LABOR">
+        <id name="labCod" type="int">
+            <column name="LAB_COD" precision="3" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="labDesMasc" type="string">
+            <column length="200" name="LAB_DES_MASC"/>
+        </property>
+        <property name="labDesFem" type="string">
+            <column length="200" name="LAB_DES_FEM"/>
+        </property>
+        <property name="labUser" type="string">
+            <column length="5" name="LAB_USER"/>
+        </property>
+    </class>
+</hibernate-mapping>

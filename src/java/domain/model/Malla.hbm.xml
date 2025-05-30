@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Malla" table="MALLA">
+        <composite-id class="domain.model.MallaId" name="id">
+            <key-property name="maCodCar" type="int">
+                <column name="MA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="maCodMen" type="int">
+                <column name="MA_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="maCodPlan" type="int">
+                <column name="MA_COD_PLAN" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="maAsign" type="int">
+                <column name="MA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Plan" fetch="select" insert="false" name="plan" update="false">
+            <column name="MA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="MA_COD_MEN" not-null="true" precision="1" scale="0"/>
+            <column name="MA_COD_PLAN" not-null="true" precision="5" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Asignatura" fetch="select" insert="false" name="asignatura" update="false">
+            <column name="MA_ASIGN" not-null="true" precision="7" scale="0"/>
+        </many-to-one>
+        <property name="maNivel" type="int">
+            <column name="MA_NIVEL" precision="2" scale="0"/>
+        </property>
+        <property name="maCorrelElect" type="int">
+            <column name="MA_CORREL_ELECT" precision="2" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="maUnidadDicta" update="false">
+            <column name="MA_UNIDAD_DICTA" not-null="true" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="maLineaVisual" type="int">
+            <column name="MA_LINEA_VISUAL" precision="2" scale="0"/>
+        </property>
+        <property name="maCorrelVisual" type="int">
+            <column name="MA_CORREL_VISUAL" precision="2" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

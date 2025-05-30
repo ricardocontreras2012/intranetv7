@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query callable="true" name="DerechoCoordinadorFunction">
+        { ? = call jefe_carrera_pkg.get_derechos_jefe_carrera(?,?,?,?,?,?,?,?,?) }
+    </sql-query>
+    
+    <sql-query callable="true" name="DerechoCoordinadorLibreFunction">
+        { ? = call jefe_carrera_pkg.get_derechos_libre_jefe_carr(?,?,?,?,?) }
+    </sql-query>
+    
+    <sql-query callable="true" name="DerechoFIFunction">
+        { ? = call jefe_carrera_pkg.get_derechos_form_integral(?,?,?,?,?,?) }
+    </sql-query>
+    
+    <sql-query name="IsAlumnoPropioFunction">
+        <return-scalar column="flag"  type="java.lang.Integer" />
+        <![CDATA[select jefe_carrera_pkg.is_alumno_propio(?,?,?,?) as flag from dual]]>
+    </sql-query>
+    <sql-query callable="true" name="CursosActaComplementariaFunction">
+        { ? = call jefe_carrera_pkg.get_cursos_acta_complementaria(?,?,?,?,?,?,?,?,?,?,?) }
+    </sql-query>    
+    <sql-query name="ExisteActaFunction">
+        <return-scalar column="flag"  type="java.lang.Integer" />
+        <![CDATA[select  jefe_carrera_pkg.tiene_actas_generadas(?,?,?,?,?,?,?,?,?,?) as flag from dual]]>
+    </sql-query>
+    <sql-query name="GenerarActaComplemetariaFunction">
+        { call generar_acta_complementaria(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="CreaProfesorFunction">
+        { call CREA_PROFESOR(?)}
+    </sql-query>
+    <sql-query name="CreaAyudanteFunction">
+        { call CREA_AYUDANTE(?)}
+    </sql-query>
+
+
+    <sql-query name="AddCursoTransversalFunction">
+        { call curso_espejo_transversal_pkg.add_transversal(?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="RemoveCursoTransversalFunction">
+        { call curso_espejo_transversal_pkg.remove_transversal(?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="AddCursoEspejoFunction">
+        { call curso_espejo_transversal_pkg.add_espejo(?,?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="RemoveCursoEspejoFunction">
+        { call curso_espejo_transversal_pkg.remove_espejo(?,?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+</hibernate-mapping>
+

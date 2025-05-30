@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Persona" table="PERSONA">
+        <id name="perRut" type="int">
+            <column name="PER_RUT" precision="10" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="perNombre" type="string">
+            <column length="50" name="PER_NOMBRE"/>
+        </property>
+        <property name="perPaterno" type="string">
+            <column length="20" name="PER_PATERNO"/>
+        </property>
+        <property name="perMaterno" type="string">
+            <column length="20" name="PER_MATERNO"/>
+        </property>
+        <property name="perFull" type="string">
+            <column length="20" name="PER_FULL"/>
+        </property>
+    </class>
+</hibernate-mapping>

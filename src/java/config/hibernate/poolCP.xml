@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="hibernate.connection.url">ENC(CfYSPZOp9qPcT5R10c0ylI69cewaoJ3acieau7mTj38rT/QyV7ButC2uZZuuK3JT94a+sYWd5ng=)</entry>
+    <entry key="hibernate.connection.username">ENC(hA4mcdWaGZg0P5s28gdAuCfVjgIZ602qILJ8iKqljOc=)</entry>
+    <entry key="hibernate.connection.password">ENC(AHfjab360XvLuxENQf2OYNpN4hMnz0pfdD7fMyZETsX56KQfsKsMHQ==)</entry>
+</properties>

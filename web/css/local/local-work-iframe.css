@@ -1,0 +1,51 @@
+/*
+    Document   : local-work-iframe
+    Created on : 04-may-2012, 20:03:33
+    Author     : Ricardo Contreras S.
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    background-color: #f0faff;
+    font-family: Arial, Verdana, sans-serif;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    color: #00529b
+}
+
+div#top_work_iframe {
+    position: relative;
+    z-index: 2;
+    height: 20px;
+    text-align: right;
+    background-color: #F7EDD8
+}
+
+#layoutdims {
+    margin-top: 5px;
+    font-family: Arial, Verdana, sans-serif;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+    margin-left: 10px;
+    height: 20px
+}
+
+#top_east_iframe {
+    line-height: 30px;
+    vertical-align: middle;
+    height: 30px;
+    width: 100%;
+    background-color: #ccc;
+    margin: auto
+}
+
+#center_east_iframe {
+    width: 100%;
+    background-color: #BDE5F8;
+    margin: auto
+}

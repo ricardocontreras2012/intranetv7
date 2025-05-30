@@ -1,0 +1,101 @@
+/*
+ Document:local-tablas
+ Created on:21-09-2010,03:40:39 PM
+ Author:Ricardo Contreras S.
+*/
+/*********************
+*
+LOGIN TABLES
+*
+*********************/
+.loginTable {
+    border: 1px solid #00529B;
+    margin: -10px 0 10px;
+    padding: 15px 30px 15px 50px;
+    width: 100%;
+}
+
+.loginTable tr td {
+    vertical-align: middle;
+    padding-left: 5px
+}
+
+/*********************
+*
+FREE-FORM TABLES
+*
+*********************/
+.free-form-table {
+    border: 1px solid #F0FAFF;
+    width: 99%
+}
+
+.free-form-table tr td {
+    vertical-align: middle
+}
+
+/*********************
+*
+MULTI-ROW TABLE
+*
+*********************/
+table {
+    width: 99%
+}
+
+tr.header {
+    text-align: center;
+    font-weight: bold
+}
+
+tr.header, tr {
+    height: 20px
+}
+
+tr.header a {
+    color: white
+}
+
+tr {
+    padding-left: 3px
+}
+
+tr.even {
+    background: #F0FAFF
+}
+
+tr.odd, tr td input, tr td textarea, tr td input.label-dark, tr td select {
+    background: white
+}
+
+tr.even:hover, tr.odd:hover {
+    background: #8cf
+}
+
+tr.odd td input, tr.even td input {
+    background: white
+}
+
+tr.odd td input:hover {
+    background: #bcd4ec
+}
+
+tr.even td input:hover {
+    background: #ecf6fc
+}
+
+tr td input, tr td textarea {
+    color: #26537c;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    margin: 3px 0px;
+    padding: 0px 3px;
+}
+
+tr td input.label-dark {
+    vertical-align: top
+}
+
+td {
+    padding: 0 4px 0 5px
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsVerificacionCertificado.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetVerificacionCertificadoInterceptors" extends="struts-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        VC
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="cachingHeadersInterceptor">
+                    <param name="excludeActions">CustomError</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetVerificacionCertificadoActions" extends="intranetVerificacionCertificadoInterceptors">
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+        </result-types>
+
+        <action name="VerificacionCertificado" class="action.verificacioncertificado.VerificacionCertificadoAction"
+                method="execute">
+            <result name="C1">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C2">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C3">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C4">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C5">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>            
+            <result name="C6">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C7">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C8">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C9">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I3">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I4">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I7">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="ISO27001">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="input">/jsp/users/verificacionCertificado/verificacionCertificado.jsp</result>
+            <result name="none">/jsp/users/verificacionCertificado/verificacionCertificado.jsp</result>
+        </action>
+        <action name="VerificacionCertificadoQR" class="action.verificacioncertificado.VerificacionCertificadoQRAction"
+                method="execute">
+            <result name="C1">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C2">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C3">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C4">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C5">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>            
+            <result name="C6">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C7">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C8">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="C9">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I3">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I4">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="I7">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="ISO27001">/jsp/users/verificacionCertificado/verificacionShowValid.jsp</result>
+            <result name="input">/jsp/users/verificacionCertificado/verificacionCertificado.jsp</result>
+            <result name="none">/jsp/users/verificacionCertificado/verificacionCertificado.jsp</result>
+        </action>        
+
+        <action name="VerificacionCertificadoDownLoadDocumento" class="action.verificacioncertificado.VerificacionCertificadoDownLoadDocumentoAction"
+                method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>       
+    </package>
+</struts>

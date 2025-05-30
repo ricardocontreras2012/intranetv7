@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-08-2014 03:40:23 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.FichaEstudio" table="FICHA_ESTUDIO">
+        <id name="festCorrel" type="java.lang.Integer">
+            <column name="FEST_CORREL" precision="9" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="alumno" class="domain.model.Alumno" fetch="select">
+            <column name="FEST_RUT_ALUMNO" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="pais" class="domain.model.Pais" fetch="select">
+            <column name="FEST_PAIS" precision="3" scale="0" />
+        </many-to-one>
+        <many-to-one name="areaEstudio" class="domain.model.AreaEstudio" fetch="select">
+            <column name="FEST_AREA_ESTUDIO" precision="3" scale="0" />
+        </many-to-one>
+        <many-to-one name="institucionEducacional" class="domain.model.InstitucionEducacional" fetch="select">
+            <column name="FEST_INSTITUCION" precision="4" scale="0" />
+        </many-to-one>
+        <many-to-one name="testudio" class="domain.model.Testudio" fetch="select">
+            <column name="FEST_TIPO_ESTUDIO" precision="2" scale="0" />
+        </many-to-one>
+        <many-to-one name="estadoEstudio" class="domain.model.EstadoEstudio" fetch="select">
+            <column name="FEST_ESTADO_ESTUDIO" precision="2" scale="0" />
+        </many-to-one>
+        <property name="festOtraInstitucion" type="string">
+            <column name="FEST_OTRA_INSTITUCION" length="500" />
+        </property>
+        <property name="festNombreEstudio" type="string">
+            <column name="FEST_NOMBRE_ESTUDIO" length="200" />
+        </property>
+        <property name="festDesdeMes" type="java.lang.Integer">
+            <column name="FEST_DESDE_MES" precision="2" scale="0" />
+        </property>
+        <property name="festDesdeAgno" type="java.lang.Integer">
+            <column name="FEST_DESDE_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="festHastaMes" type="java.lang.Integer">
+            <column name="FEST_HASTA_MES" precision="2" scale="0" />
+        </property>
+        <property name="festHastaAgno" type="java.lang.Integer">
+            <column name="FEST_HASTA_AGNO" precision="4" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

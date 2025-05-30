@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ConvalidacionComision" table="CONVALIDACION_COMISION">
+        <id name="ccoCod" type="int">
+            <column name="CCO_COD" precision="5" scale="0"/>
+        </id>
+        <property name="ccoDepto" type="int">
+            <column name="CCO_DEPTO" precision="5" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

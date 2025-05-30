@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-08-2014 03:40:23 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.FichaLaboral" table="FICHA_LABORAL">
+        <id name="flabCorrelFicha" type="java.lang.Integer">
+            <column name="FLAB_CORREL_FICHA" precision="9" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="alumnoEmpleador" class="domain.model.AlumnoEmpleador" fetch="select">
+            <column name="FLAB_CORREL_ALU_EMP" precision="9" scale="0" />
+        </many-to-one>
+        <many-to-one name="region" class="domain.model.Region" fetch="select">
+            <column name="FLAB_REGION" precision="2" scale="0" />
+        </many-to-one>
+        <many-to-one name="comuna" class="domain.model.Comuna" fetch="select">
+            <column name="FLAB_COMUNA" precision="3" scale="0" />
+        </many-to-one>
+        <property name="flabOtroLugar" type="string">
+            <column name="FLAB_OTRO_LUGAR" length="500" />
+        </property>
+        <many-to-one name="areaTrabajo" class="domain.model.AreaTrabajo" fetch="select">
+            <column name="FLAB_AREA_TRABAJO" precision="2" scale="0" />
+        </many-to-one>
+        <property name="flabCargo" type="string">
+            <column name="FLAB_CARGO" length="500" />
+        </property>
+        <many-to-one name="tipoTrabajo" class="domain.model.TipoTrabajo" fetch="select">
+            <column name="FLAB_TIPO_TRABAJO" precision="2" scale="0" />
+        </many-to-one>
+        <property name="flabSueldo" type="java.lang.Integer">
+            <column name="FLAB_SUELDO" precision="8" scale="0" />
+        </property>
+        <property name="flabDesdeMes" type="java.lang.Integer">
+            <column name="FLAB_DESDE_MES" precision="2" scale="0" />
+        </property>
+        <property name="flabDesdeAgno" type="java.lang.Integer">
+            <column name="FLAB_DESDE_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="flabHastaMes" type="java.lang.Integer">
+            <column name="FLAB_HASTA_MES" precision="2" scale="0" />
+        </property>
+        <property name="flabHastaAgno" type="java.lang.Integer">
+            <column name="FLAB_HASTA_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="flabDescripcion" type="string">
+            <column name="FLAB_DESCRIPCION" length="500" />
+        </property>
+    </class>
+</hibernate-mapping>

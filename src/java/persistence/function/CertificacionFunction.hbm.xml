@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="CreateSolicitudCertificadoFunction">
+        <return-scalar column="correl"  type="java.lang.Integer" />
+        <![CDATA[select certificacion_pkg.crear_solicitud(?,?,?,?,?,?) as correl from dual]]>
+    </sql-query>
+    <sql-query  name="CreatePagoFunction">
+        { call certificacion_pkg.crear_solicitud_por_pagar(?,?) }
+    </sql-query>
+    <sql-query name="SetEstadoCarritoFunction">
+        { call certificacion_pkg.set_estado_carrito (?,?,?)}
+    </sql-query>
+    <sql-query name="SetEstadoPagoFunction">
+        { call certificacion_pkg.set_status_pago (?,?)}
+    </sql-query>
+    <sql-query  name="SetGlosaFunction">
+        { call certificacion_pkg.set_glosa(?,?,?) }
+    </sql-query>
+    
+    <sql-query name="GetRankingEgresadoFunction">
+        <return-scalar column="rank"  type="java.lang.String" />
+        <![CDATA[select get_ranking_egreso(?,?,?,?) as rank from dual]]>
+    </sql-query>
+    <sql-query name="GetRankingEgresadoMencionFunction">
+        <return-scalar column="rank"  type="java.lang.String" />
+        <![CDATA[select get_ranking_egreso_x_mencion(?,?,?,?,?) as rank from dual]]>
+    </sql-query>        
+    <sql-query name="GetRankingRegularFunction">
+        <return-scalar column="rank"  type="java.lang.String" />
+        <![CDATA[select get_ranking_alumno_regular(?,?,?,?) as rank from dual]]>
+    </sql-query>
+    <sql-query name="GetRankingRegularMencionFunction">
+        <return-scalar column="rank"  type="java.lang.String" />
+        <![CDATA[select get_ranking_alumno_reg_x_men(?,?,?,?,?) as rank from dual]]>
+    </sql-query>                            
+    <sql-query callable="true" name="I4CalificacionesMallaFunction">
+        { ? = call certificacion_pkg.get_calificaciones_asig_malla(?,?,?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="I4CalificacionesOtrasFunction">
+        { ? = call certificacion_pkg.get_calificaciones_asig_otras(?,?,?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="I4CalificacionesAdicionalesFunction">
+        { ? = call certificacion_pkg.get_calificaciones_adicionales(?,?,?,?,?,?) }
+    </sql-query>   
+</hibernate-mapping>

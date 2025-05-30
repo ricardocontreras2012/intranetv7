@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.SolicitudInscripcion" table="SOLICITUD_INSCRIPCION">
+        <composite-id class="domain.model.SolicitudInscripcionId" name="id">
+            <key-property name="soliSol" type="int">
+                <column name="SOLI_SOL" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="soliAsign" type="int">
+                <column name="SOLI_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="soliElect" type="string">
+                <column length="2" name="SOLI_ELECT"/>
+            </key-property>
+            <key-property name="soliCoord" type="string">
+                <column length="1" name="SOLI_COORD"/>
+            </key-property>
+            <key-property name="soliSecc" type="int">
+                <column name="SOLI_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="soliAgno" type="int">
+                <column name="SOLI_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="soliSem" type="int">
+                <column name="SOLI_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="soliComp" type="string">
+                <column length="1" name="SOLI_COMP"/>
+            </key-property>
+        </composite-id>
+
+        <property name="soliEstado" type="string">
+            <column length="1" name="SOLI_ESTADO"/>
+        </property>
+        <property name="soliOtroGlosa" type="string">
+            <column length="500" name="SOLI_OTRO_GLOSA"/>
+        </property>
+
+        <many-to-one class="domain.model.TmotivoSolicitudInscripcion" fetch="select" insert="false" name="motivo" update="false">
+            <column name="SOLI_MOTIVO" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="SOLI_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="SOLI_ELECT" not-null="true"/>
+            <column length="1" name="SOLI_COORD" not-null="true"/>
+            <column name="SOLI_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="SOLI_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="SOLI_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="SOLI_COMP" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

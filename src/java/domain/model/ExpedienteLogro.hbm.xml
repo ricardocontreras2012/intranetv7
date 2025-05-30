@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ExpedienteLogro" table="EXPEDIENTE_LOGRO">
+        <composite-id name="id" class="domain.model.ExpedienteLogroId">
+            <key-property name="explRut" type="int">
+                <column name="EXPL_RUT" precision="8" scale="0" />
+            </key-property>
+            <key-property name="explCodCar" type="int">
+                <column name="EXPL_COD_CAR" precision="5" scale="0" />
+            </key-property>
+            <key-property name="explAgnoIng" type="int">
+                <column name="EXPL_AGNO_ING" precision="4" scale="0" />
+            </key-property>
+            <key-property name="explSemIng" type="int">
+                <column name="EXPL_SEM_ING" precision="1" scale="0" />
+            </key-property>
+            <key-property name="explCorrel" type="int">
+                <column name="EXPL_CORREL" precision="2" scale="0" />
+            </key-property>            
+        </composite-id>
+        <many-to-one name="aluCar" class="domain.model.AluCar" update="false" insert="false" fetch="select">
+            <column name="EXPL_RUT" precision="8" scale="0" not-null="true" />
+            <column name="EXPL_COD_CAR" precision="5" scale="0" not-null="true" />
+            <column name="EXPL_AGNO_ING" precision="4" scale="0" not-null="true" />
+            <column name="EXPL_SEM_ING" precision="1" scale="0" not-null="true" />
+        </many-to-one>
+
+        <many-to-one name="planLogro" class="domain.model.PlanLogro" update="false" insert="false" fetch="select">
+            <column name="EXPL_COD_CAR" precision="5" scale="0" not-null="true" />
+            <column name="EXPL_COD_MEN" precision="1" scale="0" not-null="true" />
+            <column name="EXPL_COD_PLAN" precision="2" scale="0" not-null="true" />
+            <column name="EXPL_CORREL" precision="2" scale="0" not-null="true" />
+        </many-to-one>
+
+        <many-to-one class="domain.model.ExpedienteNomina" fetch="select" name="nomina">
+            <column name="EXPL_NOMINA" precision="10" scale="0"/>
+        </many-to-one>
+
+        <property name="explNumResol" type="int">
+            <column name="EXPL_NUM_RESOL" precision="5" scale="0" />
+        </property>
+        <property name="explFecResol" type="date">
+            <column name="EXPL_FEC_RESOL" length="7" />
+        </property>
+
+        <property name="explNumExp" type="int">
+            <column name="EXPL_NUM_EXP" precision="5" scale="0" />
+        </property>
+        <property name="explFecExp" type="date">
+            <column name="EXPL_FEC_EXP" length="7" />
+        </property>
+
+        <property name="explGenero" type="string">
+            <column name="EXPL_GENERO" length="1" />
+        </property>
+        
+        <property name="explEstado" type="string">
+            <column name="EXPL_ESTADO" length="2" />
+        </property>
+
+        <property name="explAgnoLogroAcad" type="int">
+            <column name="EXPL_AGNO_LOGRO_ACAD" precision="4" scale="0" />
+        </property>
+        <property name="explSemLogroAcad" type="int">
+            <column name="EXPL_SEM_LOGRO_ACAD" precision="1" scale="0" />
+        </property>
+        <property name="explFecLogroAcad" type="date">
+            <column name="EXPL_FEC_LOGRO_ACAD" length="7" />
+        </property>
+        <property name="explAgnoLogroAdm" type="int">
+            <column name="EXPL_AGNO_LOGRO_ADM" precision="4" scale="0" />
+        </property>
+        <property name="explSemLogroAdm" type="int">
+            <column name="EXPL_SEM_LOGRO_ADM" precision="1" scale="0" />
+        </property>
+        <property name="explFecLogroAdm" type="date">
+            <column name="EXPL_FEC_LOGRO_ADM" length="7" />
+        </property>
+
+        <property name="explFecOrd" type="date">
+            <column name="EXPL_FEC_ORD" length="7" />
+        </property>
+        <property name="explNumOrd" type="int">
+            <column name="EXPL_NUM_ORD" precision="5" scale="0" />
+        </property>
+
+        <property name="explCodPago" type="string">
+            <column name="EXPL_COD_PAGO" length="3" />
+        </property>
+        <property name="explDocPago" type="string">
+            <column name="EXPL_DOC_PAGO" length="20" />
+        </property>
+        <property name="explRol" type="string">
+            <column name="EXPL_ROL" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>

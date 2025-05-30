@@ -1,0 +1,135 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsSecretariaDocente.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetSecretariaDocenteInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        SM
+                    </param>
+                    <param name="excludeActions">CustomError</param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        SM
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="cachingHeadersInterceptor">
+                    <param name="excludeActions">
+                    </param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetSecretariaDocenteActions" extends="intranetSecretariaDocenteInterceptors">
+
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+        </result-types>
+
+        <action name="SecretariaDocenteLogin" class="action.secretariadocente.SecretariaDocenteLoginAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="SecretariaDocenteLoginHome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/id/secretariaDocenteIdHomePage.jsp
+            </result>
+        </action>
+        <action name="SecretariaDocenteLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/id/secretariaDocenteIdBienvenida.jsp
+            </result>
+        </action>
+
+
+        <action name="SecretariaDocenteConvalidacionGenerarActa" class="action.secretariadocente.SecretariaDocenteConvalidacionGenerarActaAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="noMatriculado">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionEnableExcel" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionGetExcel.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionGetExcel" class="action.secretariadocente.SecretariaDocenteConvalidacionGetExcelAction">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp</result>
+        </action>
+
+        <!--action name="SecretariaDocenteConvalidacionGetExcel" class="action.secretariadocente.SecretariaDocenteConvalidacionGetExcelAction"
+                method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">104857600</param>
+                <param name="allowedTypes">application/ms-excel,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+            </interceptor-ref>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">SecretariaDocenteConvalidacionShowExcel</param>
+                <param name="key">${key}</param>
+            </result>
+        </action-->
+
+        <action name="SecretariaDocenteConvalidacionShowExcel" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionShowExcel.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionGetSolicitudes" class="action.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudesAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitudes.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionGetSolicitud" class="action.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionNewSolicitud" class="action.secretariadocente.SecretariaDocenteConvalidacionNewSolicitudAction" method="execute">
+            <result name="success">/jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp</result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionSaveSolicitud" class="action.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">SecretariaDocenteConvalidacionGetSolicitudes</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="SecretariaDocenteConvalidacionImprimirInforme"
+                class="action.secretariadocente.SecretariaDocenteConvalidacionImprimirInformeAction" method="execute">
+            <result type="myStream"/>
+        </action>        
+
+    </package>
+</struts>

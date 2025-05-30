@@ -1,0 +1,2 @@
+
+$("#print-button").click(printHorario);

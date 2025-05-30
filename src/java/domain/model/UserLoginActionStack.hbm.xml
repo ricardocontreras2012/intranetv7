@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.UserLoginActionStack" table="USER_LOGIN_ACTION_STACK">
+        <composite-id class="domain.model.UserLoginActionStackId" name="id">
+            <key-property name="ulasCorrel" type="int">
+                <column name="ULAS_CORREL" precision="3" scale="0"/>
+            </key-property>
+            <key-property name="ulasUser" type="string">
+                <column length="5" name="ULAS_USER"/>
+            </key-property>
+        </composite-id>
+        <property name="ulasAction" type="string">
+            <column length="200" name="ULAS_ACTION"/>
+        </property>
+    </class>
+</hibernate-mapping>

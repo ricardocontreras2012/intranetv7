@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Sacarrera" table="SACARRERA">
+        <composite-id class="domain.model.SacarreraId" name="id">
+            <key-property name="sacRut" type="int">
+                <column name="SAC_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="sacCcarr" type="int">
+                <column name="SAC_CCARR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="sacAgnoIng" type="int">
+                <column name="SAC_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="sacSemIng" type="int">
+                <column name="SAC_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="sacCorrel" type="int">
+                <column name="SAC_CORREL" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="SAC_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="SAC_CCARR" not-null="true" precision="5" scale="0"/>
+            <column name="SAC_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="SAC_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tsacademica" fetch="select" name="tsacademica">
+            <column name="SAC_CODSIT" precision="3" scale="0"/>
+        </many-to-one>
+        <property name="sacDurac" type="int">
+            <column name="SAC_DURAC" precision="2" scale="0"/>
+        </property>
+        <property name="sacSemInic" type="int">
+            <column name="SAC_SEM_INIC" precision="1" scale="0"/>
+        </property>
+        <property name="sacAgnoInic" type="int">
+            <column name="SAC_AGNO_INIC" precision="4" scale="0"/>
+        </property>
+        <property name="sacSemTerm" type="int">
+            <column name="SAC_SEM_TERM" precision="1" scale="0"/>
+        </property>
+        <property name="sacAgnoTerm" type="int">
+            <column name="SAC_AGNO_TERM" precision="4" scale="0"/>
+        </property>
+        <property name="sacDocPres" type="int">
+            <column name="SAC_DOC_PRES" precision="9" scale="0"/>
+        </property>
+        <property name="sacFechaPres" type="timestamp">
+            <column length="7" name="SAC_FECHA_PRES"/>
+        </property>
+        <property name="sacFechaAcep" type="timestamp">
+            <column length="7" name="SAC_FECHA_ACEP"/>
+        </property>
+        <property name="sacDocAcep" type="int">
+            <column name="SAC_DOC_ACEP" precision="9" scale="0"/>
+        </property>
+        <property name="sacFecMod" type="timestamp">
+            <column length="7" name="SAC_FEC_MOD"/>
+        </property>
+    </class>
+</hibernate-mapping>

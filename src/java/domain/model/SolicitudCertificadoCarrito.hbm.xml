@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.SolicitudCertificadoCarrito" table="SOLICITUD_CERTIFICADO_CARRITO">
+        <composite-id class="domain.model.SolicitudCertificadoCarritoId" name="id">
+            <key-property name="sccSolicitud" type="int">
+                <column name="SCC_SOLICITUD" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="sccOrd" type="int">
+                <column name="SCC_ORD" precision="2" scale="0"/>
+            </key-property>            
+        </composite-id>
+        <many-to-one class="domain.model.SolicitudCertificado" fetch="select" insert="false" name="solicitud" update="false">
+            <column name="SCC_SOLICITUD" not-null="true" precision="9" scale="0"/>            
+        </many-to-one>
+        <many-to-one class="domain.model.Tcertificado" fetch="select" name="tcertificado">
+            <column name="SCC_TCERT" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="sccMonto" type="int">
+            <column name="SCC_MONTO" precision="9" scale="0"/>
+        </property>        
+        <property name="sccParams" type="string">
+            <column name="SCC_PARAMS" length="2000" />
+        </property>
+         <property name="sccEstado" type="string">
+            <column name="SCC_ESTADO" length="2" />
+        </property>        
+    </class>
+</hibernate-mapping>

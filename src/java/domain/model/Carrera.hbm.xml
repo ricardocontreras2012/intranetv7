@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Carrera" table="CARRERA">
+        <id name="carCod" type="int">
+            <column name="CAR_COD" precision="5" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="domain.model.Especialidad" fetch="select" name="especialidad">
+            <column name="CAR_CESP" precision="5" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tcarrera" fetch="select" name="tcarrera">
+            <column name="CAR_CTIP" precision="3" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tprograma" fetch="select" name="tprograma">
+            <column name="CAR_TPROGRAMA" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="carRegimen" type="string">
+            <column length="1" name="CAR_REGIMEN"/>
+        </property>
+        <!--
+        <set name="mencions" inverse="true" lazy="true" table="MENCION" fetch="select">
+            <key>
+                <column name="MEN_COD_CAR" precision="5" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="domain.model.Mencion" />
+        </set>
+        -->
+    </class>
+</hibernate-mapping>

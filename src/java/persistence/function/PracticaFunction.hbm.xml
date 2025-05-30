@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="HorasPracticaFunction">
+        <return-scalar column="horas"  type="java.lang.String" />
+        <![CDATA[select get_horas_practica(?) as horas from dual]]>
+    </sql-query>
+    <sql-query name="GetPracticaxInscribirFunction">
+        <return-scalar column="practica"  type="java.lang.Integer" />
+        <![CDATA[select get_practica_a_inscribir(?,?,?,?,?,?) as practica from dual]]>
+    </sql-query>
+    <sql-query name="InsertarPracticaFunction">
+        { call insertar_practica(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="ResolverPracticaFunction">
+        { call inscribir_practica(?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+</hibernate-mapping>

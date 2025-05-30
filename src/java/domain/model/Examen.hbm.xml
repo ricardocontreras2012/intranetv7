@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Examen" table="EXAMEN">
+        <id name="exaFolio" type="int">
+            <column name="EXA_FOLIO" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="EXA_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="EXA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="EXA_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="EXA_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        
+        <property name="exaAgno" type="int">
+            <column name="EXA_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="exaSem" type="int">
+            <column name="EXA_SEM" precision="1" scale="0" />
+        </property>
+        <property name="exaTrabajo" type="string">
+            <column name="EXA_TRABAJO" length="1000" />
+        </property>
+        <property name="exaFechaTrabajo" type="date">
+            <column name="EXA_FECHA_TRABAJO" length="7" />
+        </property>
+        <property name="exaFechaExamen" type="date">
+            <column name="EXA_FECHA_EXAMEN" length="7" />
+        </property>
+        <property name="exaPorcTrabajo" type="int">
+            <column name="EXA_PORC_TRABAJO" precision="3" scale="0" />
+        </property>
+        <property name="exaPorcExamen" type="int">
+            <column name="EXA_PORC_EXAMEN" precision="3" scale="0" />
+        </property>                
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query name="TipoAlumnoFunction">
+        <return-scalar column="tipo"  type="java.lang.String" />
+        <![CDATA[select get_tipo_alumno(?,?,?,?) as tipo from dual]]>
+    </sql-query>
+    <sql-query name="EstaMatriculadoFunction">
+        <return-scalar column="estado"  type="java.lang.Integer" />
+        <![CDATA[select esta_matriculado_agno_sem(?,?,?,?,?,?) as estado from dual]]>
+    </sql-query>
+    <sql-query name="GeneraExamenAPFunction">
+        { call genera_asign_examen_ap(?,?,?,?) }
+    </sql-query>     
+    <sql-query name="GetPromedioEgresoFunction">
+        <return-scalar column="prom"  type="java.lang.Float" />
+        <![CDATA[select GET_PROMEDIO_EGRESO(?,?,?,?,?,?) as prom from dual]]>
+    </sql-query>
+    <sql-query name="GetPromedioRankingFunction">
+        <return-scalar column="prom"  type="java.lang.Float" />
+        <![CDATA[select GET_PROMEDIO_PONDERADO_SIN_REP(?,?,?,?,?,?) as prom from dual]]>
+    </sql-query> 
+    <sql-query name="DerechoAlumnoFunction">
+        { call derecho_inscripcion_pkg.derechos_alumno(?,?,?,?,?,?,?,?,?,?,?) }
+    </sql-query>
+     <sql-query name="GeneraLogrosFunction">
+        { call genera_logros_x_alumno(?,?,?,?,?,?) }
+    </sql-query>       
+</hibernate-mapping>

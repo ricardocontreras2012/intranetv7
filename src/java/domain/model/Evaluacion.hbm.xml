@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class dynamic-update="false" name="domain.model.Evaluacion" table="EVALUACION">
+        <composite-id class="domain.model.EvaluacionId" name="id">
+            <key-property name="evalAsign" type="int">
+                <column name="EVAL_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="evalElect" type="string">
+                <column length="2" name="EVAL_ELECT"/>
+            </key-property>
+            <key-property name="evalCoord" type="string">
+                <column length="1" name="EVAL_COORD"/>
+            </key-property>
+            <key-property name="evalSecc" type="int">
+                <column name="EVAL_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="evalAgno" type="int">
+                <column name="EVAL_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="evalSem" type="int">
+                <column name="EVAL_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="evalComp" type="string">
+                <column length="1" name="EVAL_COMP"/>
+            </key-property>
+            <key-property name="evalTeva" type="int">
+                <column name="EVAL_TEVA" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="evalEval" type="int">
+                <column name="EVAL_EVAL" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        
+        <property name="evalPorc" type="big_decimal">
+            <column name="EVAL_PORC" precision="6" scale="3"/>
+        </property>
+        
+        <property name="evalStatus" type="string">
+            <column length="2" name="EVAL_STATUS"/>
+        </property>
+        <property name="evalLabel" type="string">
+            <column length="150" name="EVAL_LABEL"/>
+        </property>
+        <many-to-one class="domain.model.CursoTevaluacion" fetch="select" insert="false" name="cursoTevaluacion"
+                     update="false">
+            <column name="EVAL_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="EVAL_ELECT" not-null="true"/>
+            <column length="1" name="EVAL_COORD" not-null="true"/>
+            <column name="EVAL_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="EVAL_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="EVAL_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="EVAL_COMP" not-null="true"/>
+            <column name="EVAL_TEVA" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

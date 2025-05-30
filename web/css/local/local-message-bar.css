@@ -1,0 +1,48 @@
+/*
+ Document:local-messagebar
+ Created on:05-06-2009,08:47:03 AM
+ Author:Ricardo Contreras S.
+*/
+
+.validationBox, .errorBox, .warningBox, .successBox, .infoBox {
+    background: no-repeat;
+    border: 1px solid;
+    margin: 10px 0;
+    padding: 15px 30px 15px 50px
+}
+
+.infoBox {
+    background: #dfd url('/intranetv7/images/local/icon/check.png');
+    border-color: #090
+}
+
+.infoBox span, .infoBox li {
+    background: #bde5f8;
+    color: #00529b
+}
+
+.infoBox li, .errorBox li, .successBox {
+    list-style: none
+}
+
+.successBox {
+    background: #dff2bf url('/intranetv7/images/local/icon/info.png');
+    color: #4f8a10
+}
+
+.warningBox {
+    background: #feefb3 url('warning.png');
+    color: #9f6000
+}
+
+.errorBox {
+    background: #ffbaba url('/intranetv7/images/local/icon/cancel-circle.png') no-repeat
+}
+
+.errorMessage, .errorBox span, .errorBox li, .errorBox {
+    color: #d8000c
+}
+
+.errorMessage, .errorBox span, .errorBox li {
+    background: #ffbaba
+}

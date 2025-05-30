@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Tdocumento" table="TDOCUMENTO">
+        <id name="tdocCod" type="int">
+            <column name="TDOC_COD" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tdocDes" type="string">
+            <column length="500" name="TDOC_DES"/>
+        </property>
+    </class>
+</hibernate-mapping>

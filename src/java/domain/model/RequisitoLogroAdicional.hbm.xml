@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.RequisitoLogroAdicional" table="REQUISITO_LOGRO_ADICIONAL">
+        <composite-id class="domain.model.RequisitoLogroAdicionalId" name="id">
+            <key-property name="rlaCodCar" type="int">
+                <column name="RLA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="rlaCodMen" type="int">
+                <column name="RLA_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="rlaCodPlan" type="int">
+                <column name="RLA_COD_PLAN" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="rlaCorrel" type="int">
+                <column name="RLA_CORREL_LOGRO" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="rlaReq" type="int">
+                <column name="RLA_REQ_ADIC" precision="2" scale="0"/>
+            </key-property>
+
+        </composite-id>
+        <many-to-one class="domain.model.TrequisitoLogroAdicional" fetch="select" insert="false"
+                     name="trequisitoLogroAdicional" update="false">
+            <column name="RLA_REQ_ADIC" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.PlanLogro" fetch="select" insert="false" name="planLogro" update="false">
+            <column name="RLA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="RLA_COD_MEN" not-null="true" precision="1" scale="0"/>
+            <column name="RLA_COD_PLAN" precision="2" scale="0"/>
+            <column name="RLA_CORREL_LOGRO" precision="2" scale="0"/>
+        </many-to-one>               
+        
+        <property name="rlaTipoOpc" type="int">
+            <column name="RLA_TIPO_OPC" precision="2" scale="0"/>
+        </property>
+        <property name="rlaOrder" type="int">
+            <column name="RLA_ORDER" precision="2" scale="0"/>
+        </property>
+        <property name="rlaHorasCred" type="int">
+            <column name="RLA_HORAS_CRED" precision="3" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

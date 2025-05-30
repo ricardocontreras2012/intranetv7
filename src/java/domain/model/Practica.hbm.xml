@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-05-2011 07:44:48 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Practica" table="PRACTICA">
+        <composite-id class="domain.model.PracticaId" name="id">
+            <key-property name="praRut" type="int">
+                <column name="PRA_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="praCodCar" type="int">
+                <column name="PRA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="praAgnoIng" type="int">
+                <column name="PRA_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="praSemIng" type="int">
+                <column name="PRA_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="praAsign" type="int">
+                <column name="PRA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="praAgno" type="int">
+                <column name="PRA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="praSem" type="int">
+                <column name="PRA_SEM" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="PRA_RUT" not-null="true" precision="8" scale="0" unique="true"/>
+            <column name="PRA_COD_CAR" precision="5" scale="0"/>
+            <column name="PRA_AGNO_ING" precision="4" scale="0"/>
+            <column name="PRA_SEM_ING" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Asignatura" fetch="select" insert="false" name="asignatura" update="false">
+            <column name="PRA_ASIGN" not-null="true" precision="7" scale="0"/>
+        </many-to-one>
+        <property name="praFechaInicio" type="date">
+            <column length="7" name="PRA_FECHA_INICIO"/>
+        </property>
+        <property name="praFechaTermino" type="date">
+            <column length="7" name="PRA_FECHA_TERMINO"/>
+        </property>
+        <many-to-one class="domain.model.Empleador" fetch="select" insert="false" name="empleador" update="false">
+            <column name="PRA_RUT_EMP" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <property name="praTelefonoEmp" type="string">
+            <column length="50" name="PRA_TELEFONO_EMP"/>
+        </property>
+        <property name="praLabor" type="string">
+            <column length="2500" name="PRA_LABOR"/>
+        </property>
+        <many-to-one class="domain.model.Comuna" fetch="select" name="comuna">
+            <column name="PRA_COMUNA" precision="5" scale="0"/>
+        </many-to-one>
+        <property name="praDireccion" type="string">
+            <column length="500" name="PRA_DIRECCION"/>
+        </property>
+        <many-to-one class="domain.model.Persona" fetch="select" insert="false" name="autoriza" update="false">
+            <column name="PRA_RUT_AUT" not-null="true" precision="8" scale="0"/>
+        </many-to-one>
+        <property name="praTelefonoAut" type="string">
+            <column length="50" name="PRA_TELEFONO_AUT"/>
+        </property>
+        <property name="praCalidadAut" type="string">
+            <column length="100" name="PRA_CALIDAD_AUT"/>
+        </property>
+        <property name="praEstado" type="string">
+            <column length="1" name="PRA_ESTADO"/>
+        </property>
+        <many-to-one class="domain.model.Solicitud" fetch="select" name="solicitud">
+            <column name="PRA_SOLICITUD" precision="9" scale="0"/>
+        </many-to-one>
+        <property name="praEmail" type="string">
+            <column length="50" name="PRA_EMAIL"/>
+        </property>
+    </class>
+</hibernate-mapping>

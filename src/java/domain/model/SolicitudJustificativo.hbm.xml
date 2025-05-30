@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.SolicitudJustificativo" table="SOLICITUD_JUSTIFICATIVO">
+        <composite-id class="domain.model.SolicitudJustificativoId" name="id">
+            <key-property name="soljSol" type="int">
+                <column name="SOLJ_SOL" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="soljAsign" type="int">
+                <column name="SOLJ_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="soljElect" type="string">
+                <column length="2" name="SOLJ_ELECT"/>
+            </key-property>
+            <key-property name="soljCoord" type="string">
+                <column length="1" name="SOLJ_COORD"/>
+            </key-property>
+            <key-property name="soljSecc" type="int">
+                <column name="SOLJ_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="soljAgno" type="int">
+                <column name="SOLJ_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="soljSem" type="int">
+                <column name="SOLJ_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="soljComp" type="string">
+                <column length="1" name="SOLJ_COMP"/>
+            </key-property>
+        </composite-id> 
+        
+        <many-to-one class="domain.model.Solicitud" fetch="select" insert="false" name="solicitud" update="false">
+            <column name="SOLJ_SOL" not-null="true" precision="9" scale="0"/>
+        </many-to-one>      
+
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="SOLJ_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="SOLJ_ELECT" not-null="true"/>
+            <column length="1" name="SOLJ_COORD" not-null="true"/>
+            <column name="SOLJ_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="SOLJ_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="SOLJ_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="SOLJ_COMP" not-null="true"/>
+        </many-to-one>
+                
+        <property name="soljEstado" type="string">
+            <column length="1" name="SOLJ_ESTADO"/>
+        </property>
+        
+        <property name="soljRespuesta" type="string">
+            <column length="2000" name="SOLJ_RESPUESTA"/>
+        </property>
+    </class>
+</hibernate-mapping>

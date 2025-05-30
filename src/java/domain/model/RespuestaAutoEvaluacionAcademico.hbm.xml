@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 05-09-2013 14:01:42 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.RespuestaAutoEvaluacionAcademico" table="RESPUESTA_AUTOEVAL_ACADEMICO">
+        <composite-id class="domain.model.RespuestaAutoEvaluacionAcademicoId" name="id">
+            <key-property name="raaRut" type="int">
+                <column name="RAA_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="raaAsign" type="int">
+                <column name="RAA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="raaElect" type="string">
+                <column length="2" name="RAA_ELECT"/>
+            </key-property>
+            <key-property name="raaCoord" type="string">
+                <column length="1" name="RAA_COORD"/>
+            </key-property>
+            <key-property name="raaSecc" type="int">
+                <column name="RAA_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="raaAgno" type="int">
+                <column name="RAA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="raaSem" type="int">
+                <column name="RAA_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="raaComp" type="string">
+                <column length="1" name="RAA_COMP"/>
+            </key-property>
+            <key-property name="raaEnc" type="int">
+                <column name="RAA_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="raaPreg" type="int">
+                <column name="RAA_PREG" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="raaResp" type="int">
+                <column name="RAA_RESP" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.CursoProfesor" fetch="select" insert="false" name="cursoProfesor" update="false">
+            <column name="RAA_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="RAA_ELECT" not-null="true"/>
+            <column length="1" name="RAA_COORD"/>
+            <column name="RAA_SECC" precision="2" scale="0"/>
+            <column name="RAA_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="RAA_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="RAA_COMP"/>
+            <column name="RAA_RUT" not-null="true" precision="8" scale="0"/>
+        </many-to-one>
+        <property name="raaCorrel" type="int">
+            <column name="RAA_CORREL" precision="9" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

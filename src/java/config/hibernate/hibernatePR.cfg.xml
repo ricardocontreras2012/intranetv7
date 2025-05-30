@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "classpath://org/hibernate/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.provider_class">
+            com.zaxxer.hikari.hibernate.HikariConnectionProvider
+        </property>
+        <property name="connection.encryptor_registered_name">configurationHibernateEncryptor
+        </property>
+        <property name="connection.useUnicode">true
+        </property>
+        <property name="connection.characterEncoding">UTF-8
+        </property>
+        <property name="connection.driver_class">oracle.jdbc.OracleDriver
+        </property>
+                       
+        <property name="hibernate.hikari.minimumIdle">2</property>
+        <property name="hibernate.hikari.maximumPoolSize">100</property>        
+        
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect
+        </property>
+        <property name="show_sql">false
+        </property>
+        <property name="format_sql">false
+        </property>
+        <property name="current_session_context_class">thread
+        </property>
+
+        <mapping resource="domain/model/Aaingreso.hbm.xml"/>
+        <mapping resource="domain/model/ActaCalificacion.hbm.xml"/>
+        <mapping resource="domain/model/ActaCalificacionNomina.hbm.xml"/>
+        <mapping resource="domain/model/Administrativo.hbm.xml"/>
+        <mapping resource="domain/model/AluCar.hbm.xml"/>
+        <mapping resource="domain/model/Alumno.hbm.xml"/>
+        <mapping resource="domain/model/Area.hbm.xml"/>
+        <mapping resource="domain/model/Asignatura.hbm.xml"/>
+        <mapping resource="domain/model/Asistencia.hbm.xml"/>
+        <mapping resource="domain/model/AsistenciaAlumno.hbm.xml"/>
+        <mapping resource="domain/model/AsistenciaAlumnoNomina.hbm.xml"/>
+        <mapping resource="domain/model/Ayudante.hbm.xml"/>
+        <mapping resource="domain/model/Calificacion.hbm.xml"/>
+        <mapping resource="domain/model/CalificacionLogroAdicional.hbm.xml"/>
+        <mapping resource="domain/model/Carrera.hbm.xml"/>
+        <mapping resource="domain/model/Categoria.hbm.xml"/>
+        <mapping resource="domain/model/Ccalidad.hbm.xml"/>
+        <mapping resource="domain/model/ComentarioEncuestaAyudante.hbm.xml"/>
+        <mapping resource="domain/model/ComentarioEncuestaDocente.hbm.xml"/>
+        <mapping resource="domain/model/Comuna.hbm.xml"/>
+        <mapping resource="domain/model/Curso.hbm.xml"/>
+        <mapping resource="domain/model/CursoAyudante.hbm.xml"/>
+        <mapping resource="domain/model/DocenteHorario.hbm.xml"/>
+        <mapping resource="domain/model/AyudanteHorario.hbm.xml"/>
+        <mapping resource="domain/model/CursoCarrera.hbm.xml"/>
+        <mapping resource="domain/model/CursoEncuestaAyudante.hbm.xml"/>
+        <mapping resource="domain/model/CursoEncuestaDocente.hbm.xml"/>
+        <mapping resource="domain/model/CursoProfesor.hbm.xml"/>
+        <mapping resource="domain/model/CursoTevaluacion.hbm.xml"/>
+        <mapping resource="domain/model/CursoEspejo.hbm.xml"/>
+        <mapping resource="domain/model/Derecho.hbm.xml"/>
+        <mapping resource="domain/model/Dia.hbm.xml"/>
+        <mapping resource="domain/model/Dummy.hbm.xml"/>
+        <mapping resource="domain/model/Electivo.hbm.xml"/>
+        <mapping resource="domain/model/EncuestaAyudante.hbm.xml"/>
+        <mapping resource="domain/model/EncuestaDocente.hbm.xml"/>
+        <mapping resource="domain/model/EncuestaAyudanteCarrera.hbm.xml"/>
+        <mapping resource="domain/model/EncuestaDocenteCarrera.hbm.xml"/>
+        <mapping resource="domain/model/Equivalencia.hbm.xml"/>
+        <mapping resource="domain/model/Especialidad.hbm.xml"/>
+        <mapping resource="domain/model/EstadoActa.hbm.xml"/>
+        <mapping resource="domain/model/EstadoSolicitud.hbm.xml"/>
+        <mapping resource="domain/model/Evaluacion.hbm.xml"/>
+        <mapping resource="domain/model/EvaluacionAlumno.hbm.xml"/>
+        <mapping resource="domain/model/Horario.hbm.xml"/>
+        <mapping resource="domain/model/Inscripcion.hbm.xml"/>
+        <mapping resource="domain/model/Jerarquia.hbm.xml"/>
+        <mapping resource="domain/model/Jornada.hbm.xml"/>
+        <mapping resource="domain/model/Labor.hbm.xml"/>
+        <mapping resource="domain/model/LaborRealizada.hbm.xml"/>
+        <mapping resource="domain/model/LogInscripcion.hbm.xml"/>
+        <mapping resource="domain/model/Logro.hbm.xml"/>
+        <mapping resource="domain/model/Malla.hbm.xml"/>
+        <mapping resource="domain/model/MaterialApoyo.hbm.xml"/>
+        <mapping resource="domain/model/MatriculaHistorico.hbm.xml"/>
+        <mapping resource="domain/model/Mencion.hbm.xml"/>
+        <mapping resource="domain/model/MencionInfoIntranet.hbm.xml"/>
+        <mapping resource="domain/model/Mensaje.hbm.xml"/>
+        <mapping resource="domain/model/MensajeAttach.hbm.xml"/>
+        <mapping resource="domain/model/MensajeDestinatario.hbm.xml"/>
+        <mapping resource="domain/model/ModuloHorario.hbm.xml"/>
+        <mapping resource="domain/model/ModuloHorarioVersion.hbm.xml"/>
+        <mapping resource="domain/model/Pais.hbm.xml"/>
+        <mapping resource="domain/model/ParamArchivosWeb.hbm.xml"/>
+        <mapping resource="domain/model/ParametroMencion.hbm.xml"/>
+        <mapping resource="domain/model/Parametro.hbm.xml"/>
+        <mapping resource="domain/model/PasswordTicket.hbm.xml"/>
+        <mapping resource="domain/model/Plan.hbm.xml"/>
+        <mapping resource="domain/model/PlanLogro.hbm.xml"/>
+        <mapping resource="domain/model/PregEncta.hbm.xml"/>
+        <mapping resource="domain/model/PreguntaAutoEvaluacion.hbm.xml"/>
+        <mapping resource="domain/model/PrerequisitoElectivo.hbm.xml"/>
+        <mapping resource="domain/model/ProcedenciaCalificacion.hbm.xml"/>
+        <mapping resource="domain/model/Profesor.hbm.xml"/>
+        <mapping resource="domain/model/Regimen.hbm.xml"/>
+        <mapping resource="domain/model/Region.hbm.xml"/>
+        <mapping resource="domain/model/ReporteClase.hbm.xml"/>
+        <mapping resource="domain/model/RequisitoLogroAdicional.hbm.xml"/>
+        <mapping resource="domain/model/TrequisitoLogroAdicional.hbm.xml"/>        
+        <mapping resource="domain/model/RespEnctaHist.hbm.xml"/>
+        <mapping resource="domain/model/RespuestaAutoEvaluacionAcademico.hbm.xml"/>
+        <mapping resource="domain/model/Sacarrera.hbm.xml"/>
+        <mapping resource="domain/model/Sala.hbm.xml"/>
+        <mapping resource="domain/model/Solicitud.hbm.xml"/>
+        <mapping resource="domain/model/SolicitudAttach.hbm.xml"/>
+        <mapping resource="domain/model/SolicitudJustificativo.hbm.xml"/>
+        <mapping resource="domain/model/Tcalidad.hbm.xml"/>
+        <mapping resource="domain/model/Tcarrera.hbm.xml"/>
+        <mapping resource="domain/model/Tprograma.hbm.xml"/>
+        <mapping resource="domain/model/Tevaluacion.hbm.xml"/>
+        <mapping resource="domain/model/Tlogro.hbm.xml"/>
+        <mapping resource="domain/model/Tmaterial.hbm.xml"/>
+        <mapping resource="domain/model/TmaterialPerfil.hbm.xml"/>
+        <mapping resource="domain/model/TmensajeBarraDestino.hbm.xml"/>
+        <mapping resource="domain/model/TmensajeDestino.hbm.xml"/>
+        <mapping resource="domain/model/TmensajeOrigen.hbm.xml"/>
+        <mapping resource="domain/model/TmensajeOrigenDestino.hbm.xml"/>
+        <mapping resource="domain/model/ProcesoInscripcion.hbm.xml"/>
+        <mapping resource="domain/model/TdocumentoSolicitud.hbm.xml"/>
+        <mapping resource="domain/model/Tsacademica.hbm.xml"/>
+        <mapping resource="domain/model/Tsolicitud.hbm.xml"/>
+        <mapping resource="domain/model/Unidad.hbm.xml"/>
+        <mapping resource="domain/model/UserLoginActionStack.hbm.xml"/>
+        <mapping resource="domain/model/ViaIngreso.hbm.xml"/>
+        <mapping resource="domain/model/WebAction.hbm.xml"/>
+        <mapping resource="domain/model/WebUser.hbm.xml"/>
+        <mapping resource="domain/model/WebUserAction.hbm.xml"/>               
+                                
+        <!--Mapeo Especial-->
+        <mapping resource="persistence/function/ActaFunction.hbm.xml"/>
+        <mapping resource="persistence/function/AlumnoFunction.hbm.xml"/>        
+        <mapping resource="persistence/function/CarreraFunction.hbm.xml"/>        
+        <mapping resource="persistence/function/MallaFunction.hbm.xml"/>
+        <mapping resource="persistence/function/EmailFunction.hbm.xml"/>
+        <mapping resource="persistence/function/JefeAreaFunction.hbm.xml"/>
+        <mapping resource="persistence/function/PasswordFunction.hbm.xml"/>
+        <mapping resource="persistence/function/PerfilIntranetFunction.hbm.xml"/>
+        <mapping resource="persistence/function/ResumenFunction.hbm.xml"/>
+        <mapping resource="domain/model/ActaNominaView.hbm.xml"/>
+        <mapping resource="domain/model/ActaFacultadView.hbm.xml"/>
+        <mapping resource="domain/model/AluCarFunctionsView.hbm.xml"/>
+        <mapping resource="domain/model/AlumnoActivoView.hbm.xml"/>
+        <mapping resource="domain/model/CartolaView.hbm.xml"/>
+        <mapping resource="domain/model/CursoActualView.hbm.xml"/>
+        <mapping resource="domain/model/EvaluacionAlumnoView.hbm.xml"/>
+        <mapping resource="domain/model/FlagInscripcionView.hbm.xml"/>
+        <mapping resource="domain/model/InscripcionCursoView.hbm.xml"/>
+        <mapping resource="domain/model/MencionInfoIntranetProfesorView.hbm.xml"/>
+        <mapping resource="domain/model/ProfesorActivoView.hbm.xml"/>
+        <mapping resource="domain/model/RespEnctaCursoView.hbm.xml"/>
+        <mapping resource="domain/model/TrabajadorView.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

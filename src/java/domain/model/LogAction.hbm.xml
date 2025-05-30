@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.LogAction" table="LOG_ACTION" schema="WEB_LOGGING">
+        <id name="logSeq" type="int">
+            <column name="LOG_SEQ" precision="9" scale="0"/>
+        </id>
+       <property name="logDate" type="timestamp">
+            <column name="LOG_DATE" length="7"/>
+        </property>
+        <property name="logMessage" type="string">
+            <column name="LOG_MESSAGE" length="500"/>
+        </property>
+    </class>
+</hibernate-mapping>

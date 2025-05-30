@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class dynamic-update="false" name="domain.model.AlumnoActivoView" table="ALUMNO_ACTIVO">
+    <id name="rut" type="int">
+      <column name="ALU_RUT" precision="8" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="carrera" type="java.lang.Integer">
+      <column name="ACA_COD_CAR" precision="5" scale="0"/>
+    </property>
+    <property name="mencion" type="java.lang.Integer">
+      <column name="ACA_COD_MEN" precision="5" scale="0"/>
+    </property>
+    <property name="depto" type="java.lang.Integer">
+      <column name="DEPTO" precision="3" scale="0"/>
+    </property>
+    <property name="facultad" type="java.lang.Integer">
+      <column name="FACULTAD" precision="3" scale="0"/>
+    </property>
+    <property name="email" type="string">
+      <column length="200" name="ALU_EMAIL"/>
+    </property>
+    <property name="nivel" type="java.lang.Integer">
+      <column name="NIVEL" precision="2" scale="0"/>
+    </property>
+    <property name="unidad" type="java.lang.Integer">
+      <column name="UNIDAD" precision="10" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>

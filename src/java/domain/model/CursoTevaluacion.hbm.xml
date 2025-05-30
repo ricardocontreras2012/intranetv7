@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class dynamic-update="false" name="domain.model.CursoTevaluacion" table="CURSO_TEVALUACION">
+        <composite-id class="domain.model.CursoTevaluacionId" name="id">
+            <key-property name="ctevaAsign" type="int">
+                <column name="CTEVA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="ctevaElect" type="string">
+                <column length="2" name="CTEVA_ELECT"/>
+            </key-property>
+            <key-property name="ctevaCoord" type="string">
+                <column length="1" name="CTEVA_COORD"/>
+            </key-property>
+            <key-property name="ctevaSecc" type="int">
+                <column name="CTEVA_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="ctevaAgno" type="int">
+                <column name="CTEVA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="ctevaSem" type="int">
+                <column name="CTEVA_SEM" precision="1" scale="0"/>
+            </key-property>
+             <key-property name="ctevaComp" type="string">
+                <column length="1" name="CTEVA_COMP"/>
+            </key-property>
+            <key-property name="ctevaTeva" type="int">
+                <column name="CTEVA_TEVA" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <property name="ctevaNumEval" type="int">
+            <column name="CTEVA_NUM_EVAL" precision="2" scale="0"/>
+        </property>
+        <property name="ctevaPorc" type="int">
+            <column name="CTEVA_PORC" precision="3" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="CTEVA_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="CTEVA_ELECT" not-null="true"/>
+            <column length="1" name="CTEVA_COORD" not-null="true"/>
+            <column name="CTEVA_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="CTEVA_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="CTEVA_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="CTEVA_COMP" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tevaluacion" fetch="select" insert="false" name="tevaluacion" update="false">
+            <column name="CTEVA_TEVA" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

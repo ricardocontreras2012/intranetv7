@@ -1,0 +1,68 @@
+/*
+ * @(#)ProfesorReporteRemoveReportesService.java
+ *
+ * Copyright (c) 2016 FAE-USACH
+ */
+package service.profesor;
+
+import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.util.Map;
+import domain.repository.ReporteClasePersistence;
+import session.GenericSession;
+import session.WorkSession;
+import infrastructure.util.ActionUtil;
+import infrastructure.util.ContextUtil;
+import static infrastructure.util.HibernateUtil.beginTransaction;
+import static infrastructure.util.HibernateUtil.commitTransaction;
+import infrastructure.util.LogUtil;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * Class description
+ *
+ * @author Ricardo Contreras S.
+ * @version 7, 24/05/2012
+ */
+public final class ProfesorReporteRemoveReportesService {
+
+    /**
+     * Method Servicio
+     *
+     * @param genericSession Sesion de trabajo.
+     * @param parameters Todos los valores del formulario.
+     * @param key LLave para acceder a los datos de la sesion.
+     * @return Action status.
+     */
+    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+        WorkSession ws = genericSession.getWorkSession(key);
+
+        if ("PR".equals(genericSession.getUserType())
+                || (genericSession.isAutoridad()
+                && ws.getCurso().cursoPropio(genericSession.getUserType(), genericSession.getUserType(),
+                        genericSession.getRut(), genericSession.isAutoridad()))) {
+
+            ReporteClasePersistence reporteClasePersistence
+                    = ContextUtil.getDAO().getReporteClasePersistence(ActionUtil.getDBUser());
+
+            beginTransaction(ActionUtil.getDBUser());
+
+            // Elimina reportes si existen en los parámetros
+            ws.getReportes().stream()
+                    .filter(reporte -> parameters.containsKey("ck_" + ws.getReportes().indexOf(reporte)))
+                    .forEach(reporteClasePersistence::makeTransient);
+
+            // Obtiene los reportes y asigna el número de sesión de manera secuencial
+            AtomicInteger counter = new AtomicInteger(1);
+            reporteClasePersistence.find(genericSession.getCurso(key).getId())
+                    .forEach(reporte -> {
+                        reporte.setRclaSesion(counter.getAndIncrement());
+                        reporteClasePersistence.makePersistent(reporte);
+                    });
+
+            commitTransaction();
+            LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());
+        }
+
+        return SUCCESS;
+    }
+}

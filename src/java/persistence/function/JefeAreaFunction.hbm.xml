@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query callable="true" name="ResumenReportesJefeAreaFunction">
+        { ? = call get_resumen_reportes_jefe_area(?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="ResumenMaterialesJefeAreaFunction">
+        { ? = call get_resumen_material_jefe_area(?,?,?) }
+    </sql-query>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>   
+    <sql-query callable="true" name="GetCursosFunction">
+        { ? = call perfil_intranet_pkg.get_cursos(?,?,?,?,?,?,?) }
+    </sql-query>    
+    <sql-query callable="true" name="GetCursosxPerfilPeriodoFunction">
+        { ? = call perfil_intranet_pkg.get_cursos_x_perfil_periodo(?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="GetCursosProfFunction">
+        { ? = call perfil_intranet_pkg.get_cursos_prof(?,?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="GetCursosUserFunction">
+        { ? = call perfil_intranet_pkg.get_cursos_x_user(?,?) }
+    </sql-query>
+    <sql-query callable="true" name="GetProfesoresUserFunction">
+        { ? = call perfil_intranet_pkg.get_profesores_x_user(?,?) }
+    </sql-query>
+    <sql-query callable="true" name="GetMallaFunction">
+        { ? = call perfil_intranet_pkg.get_malla(?,?,?,?,?) }
+    </sql-query>
+</hibernate-mapping>

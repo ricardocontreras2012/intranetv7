@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>    
+    <sql-query name="RemoveCursoFunction">
+        { call curso_pkg.remove_curso(?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="RemoveDocenteFunction">
+        { call curso_pkg.remove_docente(?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="AddDocenteFunction">
+        { call curso_pkg.add_docente(?,?,?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+</hibernate-mapping>

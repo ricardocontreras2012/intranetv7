@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ActaCalificacionNomina" table="ACTA_CALIFICACION_NOMINA">
+        <composite-id class="domain.model.ActaCalificacionNominaId" name="id">
+            <key-property name="acanFolio" type="int">
+                <column name="ACAN_FOLIO" precision="7" scale="0"/>
+            </key-property>
+            <key-property name="acanAgno" type="int">
+                <column name="ACAN_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="acanSem" type="int">
+                <column name="ACAN_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="acanRut" type="int">
+                <column name="ACAN_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="acanCodCar" type="int">
+                <column name="ACAN_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="acanAgnoIng" type="int">
+                <column name="ACAN_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="acanSemIng" type="int">
+                <column name="ACAN_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.ActaCalificacion" fetch="select" insert="false" name="actaCalificacion" update="false">
+            <column name="ACAN_FOLIO" not-null="true" precision="5" scale="0"/>
+            <column name="ACAN_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="ACAN_SEM" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="ACAN_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="ACAN_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="ACAN_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="ACAN_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <property name="acanTeo" type="big_decimal">
+            <column name="ACAN_TEO" precision="4" scale="1"/>
+        </property>
+        <property name="acanLab" type="big_decimal">
+            <column name="ACAN_LAB" precision="4" scale="1"/>
+        </property>
+        <property name="acanFinal" type="big_decimal">
+            <column name="ACAN_FINAL" precision="4" scale="1"/>
+        </property>
+        <property name="acanConcep" type="string">
+            <column length="5" name="ACAN_CONCEP"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ReservaSala" table="RESERVA_SALA">
+        <id name="rsalCorrel" type="int">
+            <column name="RSAL_CORREL" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+
+        <property name="rsalDia" type="string">
+            <column length="1" name="RSAL_DIA"/>
+        </property>
+        <property name="rsalModulo" type="int">
+            <column name="RSAL_MODULO" precision="2" scale="0"/>
+        </property>
+       
+        <many-to-one class="domain.model.Sala" fetch="select" name="sala" insert="false" update="false">
+            <column length="20" name="RSAL_SALA"/>
+        </many-to-one>
+                
+        <many-to-one class="domain.model.Administrativo" fetch="select" name="administrativo" insert="false" update="false">
+           <column name="RSAL_RUT" precision="8" scale="0"/>
+        </many-to-one>
+        
+        <property name="rsalMotivo" type="string">
+            <column length="500" name="RSAL_MOTIVO"/>
+        </property>        
+        <property name="rsalFecha" type="timestamp">
+            <column length="7" name="RSAL_FECHA"/>
+        </property>
+        <property name="rsalFechaInicio" type="timestamp">
+            <column length="7" name="RSAL_FECHA_INICIO"/>
+        </property>
+        <property name="rsalFechaTermino" type="timestamp">
+            <column length="7" name="RSAL_FECHA_TERMINO"/>
+        </property>
+    </class>
+</hibernate-mapping>

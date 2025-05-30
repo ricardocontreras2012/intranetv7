@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-08-2014 03:40:23 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.AlumnoEmpleador" table="ALUMNO_EMPLEADOR">
+        <id name="aemCorrel" type="java.lang.Integer">
+            <column name="AEM_CORREL" precision="9" scale="0" />
+        </id>
+        <many-to-one name="empleador" class="domain.model.Empleador" fetch="select">
+            <column name="AEM_RUT_EMPLEADOR" precision="9" scale="0" />
+        </many-to-one>
+        <many-to-one name="alumno" class="domain.model.Alumno" fetch="select">
+            <column name="AEM_RUT_ALUMNO" precision="8" scale="0" />
+        </many-to-one>
+        <many-to-one name="actividadEconomica" class="domain.model.ActividadEconomica" fetch="select">
+            <column name="AEM_INDEP_ACTIVIDAD_ECONOMICA" precision="2" scale="0" />
+        </many-to-one>
+        <property name="aemDesdeMes" type="java.lang.Integer">
+            <column name="AEM_DESDE_MES" precision="2" scale="0" />
+        </property>
+        <property name="aemDesdeAgno" type="java.lang.Integer">
+            <column name="AEM_DESDE_AGNO" precision="4" scale="0" />
+        </property>
+        <property name="aemHastaMes" type="java.lang.Integer">
+            <column name="AEM_HASTA_MES" precision="2" scale="0" />
+        </property>
+        <property name="aemHastaAgno" type="java.lang.Integer">
+            <column name="AEM_HASTA_AGNO" precision="4" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Aaingreso" table="AAINGRESO">
+        <composite-id class="domain.model.AaingresoId" name="id">
+            <key-property name="aaiRut" type="int">
+                <column name="AAI_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="aaiCcarr" type="int">
+                <column name="AAI_CCARR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="aaiAnoIng" type="int">
+                <column name="AAI_ANO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="aaiSemIng" type="int">
+                <column name="AAI_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>        
+        <!--- Fin En base de datos son realmente 1:1 -->
+        <many-to-one class="domain.model.ViaIngreso" fetch="select" insert="false" name="aaiViaIng" update="false">
+            <column name="aai_via_ing" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="aaiPtjePond" type="big_decimal">
+            <column name="AAI_PTJE_POND" precision="6" scale="2"/>
+        </property>
+    </class>
+</hibernate-mapping>

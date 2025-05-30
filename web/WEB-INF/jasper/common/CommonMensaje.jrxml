@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CommonMensaje" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="84c33183-ba3e-405c-94ea-2129a4784a42">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="enviado" class="java.lang.String"/>
+	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="logoUsach" class="java.lang.String"/>
+	<parameter name="dirigido" class="java.lang.String"/>
+	<parameter name="asunto" class="java.lang.String"/>
+	<parameter name="mensaje" class="java.lang.String"/>
+	<parameter name="fechaMsg" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="id.curAsign" class="java.lang.Integer"/>
+	<field name="id.curElect" class="java.lang.String"/>
+	<field name="id.curCoord" class="java.lang.String"/>
+	<field name="id.curSecc" class="java.lang.Integer"/>
+	<field name="id.curAgno" class="java.lang.Integer"/>
+	<field name="id.curSem" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="17" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4f6c498a-4d85-465d-a9eb-62a6fe5c6c6c" mode="Opaque" x="14" y="55" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement>
+					<font fontName="Tahoma"/>
+				</textElement>
+				<text><![CDATA[Mensaje]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="6f997c9a-b2d5-4bb6-8147-3a12776ef2b0" x="496" y="14" width="45" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="93d653d3-6e4e-422f-8cf8-3e7ed7eb0586" x="541" y="14" width="13" height="14"/>
+				<textElement textAlignment="Right">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8b0d5f49-8b3d-41bc-a460-a1df74f170aa" x="54" y="5" width="229" height="14"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Universidad de Santiago de Chile]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="595d0649-de1e-4d09-8941-8f13f83b42e4" x="54" y="20" width="229" height="20"/>
+				<textElement>
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Facultad de Administración y Economía]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="99d6ed5e-a1c9-4584-bd20-7bbe173dfd2e" x="421" y="0" width="133" height="14"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="5ff2b80f-76d0-4b12-8274-331c73030064" x="14" y="0" width="40" height="41"/>
+				<imageExpression><![CDATA[$P{logoUsach}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="9" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="555" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ccf209da-807d-408a-acce-a9d56d89f583" mode="Opaque" x="14" y="6" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement/>
+				<text><![CDATA[Enviado por]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b062d1aa-9b36-45ed-8df9-abc974687729" mode="Opaque" x="14" y="28" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement/>
+				<text><![CDATA[Dirigido a]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="761cd54f-0074-4b99-b98f-0889c7c1f82e" mode="Opaque" x="14" y="50" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e5c22776-2ebe-4a5f-b993-685e59545654" mode="Opaque" x="14" y="72" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement/>
+				<text><![CDATA[Asunto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="11b14516-9d1a-48be-a79d-732df5dcd7d2" mode="Opaque" x="14" y="116" width="67" height="20" backcolor="#CCCCCC"/>
+				<textElement/>
+				<text><![CDATA[Mensaje]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ef9729fd-ad58-4a4f-b447-3cff613ec908" x="86" y="6" width="356" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{enviado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9d770b80-2441-4e4e-8816-f83cee90bb81" x="86" y="50" width="120" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{fechaMsg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9dc2b738-9483-4f19-b24a-702399b61062" x="86" y="28" width="356" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{dirigido}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a300d692-ec32-466e-8d42-5b1b8c50ba8a" x="86" y="72" width="486" height="42"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{asunto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="48f3c286-caf4-412c-87be-8065a3aa4298" x="86" y="116" width="486" height="439"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{mensaje}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

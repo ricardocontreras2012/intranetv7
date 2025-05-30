@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-mar-2009 15:19:41 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+  <class name="domain.model.NominaActaView" table="NOMINA_ACTA_PROCESADA">
+    <id name="acalFolio" type="int">
+      <column name=" ACAL_FOLIO" precision="7" scale="0"/>
+    </id>
+    <property name="nomCorrel" type="int">
+      <column name="NOM_CORREL" precision="9" scale="0"/>
+    </property>
+    <property name="acalAsign" type="int">
+      <column name="ACAL_ASIGN" precision="10" scale="0"/>
+    </property>
+    <property name="acalSecc" type="int">
+      <column name="ACAL_SECC" precision="2" scale="0"/>
+    </property>
+    <property name="acalAgno" type="int">
+      <column name="ACAL_AGNO" precision="4" scale="0"/>
+    </property>
+    <property name="acalSem" type="int">
+      <column name="ACAL_SEM" precision="1" scale="0"/>
+    </property>
+    <property name="acalElect" type="string">
+      <column length="2" name="ACAL_ELECT"/>
+    </property>
+    <property name="acalCoord" type="string">
+      <column length="2" name="ACAL_COORD"/>
+    </property>
+    <property name="asign" type="string">
+      <column length="500" name="ASIGN"/>
+    </property>
+  </class>
+</hibernate-mapping>

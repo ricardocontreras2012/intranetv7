@@ -1,0 +1,122 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package infrastructure.persistence;
+
+import domain.repository.FuncionarioPersistence;
+import infrastructure.persistence.dao.CrudAbstractDAO;
+import domain.model.Funcionario;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import static org.hibernate.criterion.Restrictions.eq;
+import static org.hibernate.criterion.Restrictions.idEq;
+import static org.hibernate.criterion.Restrictions.sqlRestriction;
+import org.hibernate.type.StringType;
+import org.hibernate.type.StandardBasicTypes;
+import infrastructure.util.FormatUtil;
+
+/**
+ *
+ * @author Ricardo
+ */
+public class FuncionarioPersistenceImpl extends CrudAbstractDAO<Funcionario, Long> implements FuncionarioPersistence {
+
+    /**
+     * Method description
+     *
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Funcionario> find(String apellido) {                       
+        // Normalizamos el apellido en el servidor antes de usarlo en la consulta
+        String normalizedApellido = FormatUtil.toUpper(apellido);
+
+        // Usamos HQL para realizar la consulta de forma más segura y sencilla
+        String hql = "FROM Funcionario f WHERE normaliza_string(upper(f.funPaterno)) LIKE normaliza_string('%'||:apellido||'%') "
+                + "ORDER BY normaliza_string(upper(f.funPaterno)), normaliza_string(upper(f.funMaterno)), f.funNombre";
+
+        // Creamos la consulta y pasamos los parámetros
+        Query query = getSession().createQuery(hql);
+        query.setParameter("apellido", normalizedApellido, StandardBasicTypes.STRING);
+
+        // Ejecutamos y retornamos la lista de resultados
+        return query.list();
+    }
+
+    @Override
+    public Funcionario find(Integer rut) {
+        Criteria criteria = getSession().createCriteria(Funcionario.class);
+        criteria.add(eq("funRut", rut));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+
+    @Override
+    public void creaFuncionario(Integer rut) {
+        Query query = getSession().getNamedQuery("CreaFuncionarioFunction");
+
+        query.setParameter(0, rut, StandardBasicTypes.INTEGER);
+
+        query.executeUpdate();
+    }
+
+    @Override
+    public void modify(Integer rut, String direccion) {  
+        String sql = "update funcionario set fun_direccion=:direccion where fun_rut=:rut";
+        Query query = getSession().createSQLQuery(sql);
+
+        query.setParameter("direccion", direccion, StandardBasicTypes.STRING);
+        query.setParameter("rut", rut, StandardBasicTypes.INTEGER);
+
+        query.executeUpdate();
+    }
+
+    @Override
+    public Funcionario findTeletrabajo(Integer rut, String password) {
+        Criteria criteria = getSession().createCriteria(Funcionario.class);
+
+        criteria.add(idEq(rut));
+        criteria.add(sqlRestriction("valid_user_tele_trabajo(fun_rut, (?))=1", password, new StringType()));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+
+    @Override
+    public Funcionario findTeleTrabajoJefe(Integer rut) {
+        Criteria criteria = getSession().createCriteria(Funcionario.class);
+
+        String filter = "EXISTS (select * from funcionario_teletrabajo where "
+                + "fun_rut = ftel_rut_jefe AND fun_rut= " + rut + ")";
+
+        criteria.add(sqlRestriction(filter));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+
+    @Override
+    public Funcionario findTeleTrabajo(Integer rut) {
+        Criteria criteria = getSession().createCriteria(Funcionario.class);
+
+        String filter = "EXISTS (select * from funcionario_teletrabajo where "
+                + "fun_rut = ftel_rut AND fun_rut= " + rut + ")";
+
+        criteria.add(sqlRestriction(filter));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+
+    @Override
+    public Funcionario findSuperTeleTrabajo(Integer rut) {
+        Criteria criteria = getSession().createCriteria(Funcionario.class);
+
+        String filter = "fun_rut = " + rut + " AND FUN_REPORTE_TELETRABAJO = 'S'";
+
+        criteria.add(sqlRestriction(filter));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.CursoEncuestaAyudante" table="CURSO_ENCUESTA_AYUDANTE">
+        <composite-id class="domain.model.CursoEncuestaAyudanteId" name="id">
+            <key-property name="ceaAsign" type="int">
+                <column name="CEA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="ceaElect" type="string">
+                <column length="1" name="CEA_ELECT"/>
+            </key-property>
+            <key-property name="ceaCoord" type="string">
+                <column length="1" name="CEA_COORD"/>
+            </key-property>
+            <key-property name="ceaSecc" type="int">
+                <column name="CEA_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="ceaAgno" type="int">
+                <column name="CEA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="ceaSem" type="int">
+                <column name="CEA_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="ceaComp" type="string">
+                <column length="1" name="CEA_COMP"/>
+            </key-property>
+            <key-property name="ceaPromCur" type="big_decimal">
+                <column name="CEA_PROM_CUR" precision="2" scale="1"/>
+            </key-property>
+            <key-property name="ceaProArea" type="big_decimal">
+                <column name="CEA_PRO_AREA" precision="2" scale="1"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="CEA_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="CEA_ELECT"/>
+            <column length="1" name="CEA_COORD"/>
+            <column name="CEA_SECC" precision="2" scale="0"/>
+            <column name="CEA_AGNO" precision="4" scale="0"/>
+            <column name="CEA_SEM" precision="1" scale="0"/>
+            <column length="1" name="CEA_COMP"/>
+        </many-to-one>
+        <many-to-one class="domain.model.EncuestaAyudante" fetch="select" insert="false" name="encuestaAyudante" update="false">
+            <column name="CEA_ENC" precision="7" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

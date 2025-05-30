@@ -1,0 +1,27 @@
+/* 
+    Created on : 05-01-2021, 11:20:15
+    Author     : Ricardo
+*/
+
+.tooltip-inner {
+    background-color: #0033FF !important;
+    /*!important is not necessary if you place custom.css at the end of your css calls. For the purpose of this demo, it seems to be required in SO snippet*/
+    color: #fff;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #0033FF;
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: #0033FF;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #0033FF;
+}
+
+.tooltip.left .tooltip-arrow {
+    border-left-color: #0033FF;
+}
+

@@ -1,0 +1,28 @@
+/*
+    Document   : local-common
+    Created on : 04-may-2012, 15:13:52
+    Author     : Ricardo Contreras S.
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%
+}
+
+#title-div {
+    line-height: 30px;
+    vertical-align: middle;
+    height: 30px;
+    width: 100%;
+    background-color: #F7EDD8;
+    margin: auto
+}
+
+#central-div {
+    width: 100%;
+    background-color: #F0FAFF;
+    margin: auto
+}

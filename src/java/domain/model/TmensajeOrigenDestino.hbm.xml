@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-oct-2009 19:46:29 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TmensajeOrigenDestino" table="TMENSAJE_ORIGEN_DESTINO">
+        <composite-id class="domain.model.TmensajeOrigenDestinoId" name="id">
+            <key-property name="todOrigen" type="string">
+                <column length="3" name="TOD_ORIGEN"/>
+            </key-property>
+            <key-property name="todDestino" type="string">
+                <column length="4" name="TOD_DESTINO"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.TmensajeDestino" fetch="select" insert="false" name="tmensajeDestino" update="false">
+            <column length="4" name="TOD_DESTINO"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

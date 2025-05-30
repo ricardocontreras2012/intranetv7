@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Asistencia" table="ASISTENCIA">
+        <composite-id class="domain.model.AsistenciaId" name="id">
+            <key-property name="asisAsign" type="int">
+                <column name="ASIS_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="asisElect" type="string">
+                <column length="1" name="ASIS_ELECT"/>
+            </key-property>
+            <key-property name="asisCoord" type="string">
+                <column length="1" name="ASIS_COORD"/>
+            </key-property>
+            <key-property name="asisSecc" type="int">
+                <column name="ASIS_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="asisAgno" type="int">
+                <column name="ASIS_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="asisSem" type="int">
+                <column name="ASIS_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="asisComp" type="string">
+                <column length="1" name="ASIS_COMP"/>
+            </key-property>
+            <key-property name="asisDia" type="string">
+                <column length="1" name="ASIS_DIA"/>
+            </key-property>
+            <key-property name="asisModulo" type="int">
+                <column name="ASIS_MODULO" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="asisFecha" type="timestamp">
+                <column length="7" name="ASIS_FECHA"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Horario" fetch="select" insert="false" name="horario" update="false">
+            <column name="ASIS_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="1" name="ASIS_ELECT" not-null="true"/>
+            <column length="1" name="ASIS_COORD" not-null="true"/>
+            <column name="ASIS_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="ASIS_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="ASIS_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="ASIS_COMP" not-null="true"/>
+            <column length="1" name="ASIS_DIA" not-null="true"/>
+            <column name="ASIS_MODULO" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="asisMinAtraso" type="int">
+            <column name="ASIS_MIN_ATRASO" precision="2" scale="0"/>
+        </property>
+        <property name="asisAsist" type="string">
+            <column length="2" name="ASIS_ASIST"/>
+        </property>
+    </class>
+</hibernate-mapping>

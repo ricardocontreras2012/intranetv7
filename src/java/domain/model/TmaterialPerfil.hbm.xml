@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TmaterialPerfil" table="TMATERIAL_PERFIL">
+        <composite-id class="domain.model.TmaterialPerfilId" name="id">
+            <key-property name="tmapCod" type="int">
+                <column name="TMAP_COD" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="tmapDes" type="string">
+                <column length="2" name="TMAP_PERFIL"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Tmaterial" fetch="select" insert="false" name="tmaterial" update="false">
+            <column name="TMAP_COD" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

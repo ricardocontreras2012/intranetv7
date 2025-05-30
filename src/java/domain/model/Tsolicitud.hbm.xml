@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-09-2010 05:58:22 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Tsolicitud" table="TSOLICITUD">
+        <id name="tsolCodigo" type="int">
+            <column name="TSOL_CODIGO" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tsolDescrip" type="string">
+            <column length="50" name="TSOL_DESCRIP"/>
+        </property>
+        <property name="tsolTipo" type="string">
+            <column length="3" name="TSOL_TIPO"/>
+        </property>
+    </class>
+</hibernate-mapping>

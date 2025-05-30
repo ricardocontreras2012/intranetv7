@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ViaIngreso" table="VIA_INGRESO">
+        <id name="viiCod" type="int">
+            <column name="VII_COD" precision="3" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="viiDes" type="string">
+            <column length="70" name="VII_DES"/>
+        </property>        
+    </class>
+</hibernate-mapping>

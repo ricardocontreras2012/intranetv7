@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="domain.model.CertificacionView" table="LISTA_CERTIFICADO">
+    <id name="certTipo" type="int">
+      <column name="CERT_TIPO" precision="2" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="certDes" type="string">
+      <column length="100" name="CERT_DES"/>
+    </property>
+    <property name="certDesPrint" type="string">
+      <column length="100" name="CERT_DES_PRINT"/>
+    </property>
+    <property name="certAviso" type="string">
+      <column length="100" name="CERT_AVISO"/>
+    </property>
+    <property name="certTlogro" type="string">
+      <column length="100" name="CERT_TLOGRO"/>
+    </property>
+    <property name="certCorrel" type="int">
+      <column name="CERT_CORREL" precision="2" scale="0"/>
+    </property>
+    <property name="certValor" type="int">
+      <column name="CERT_VALOR" precision="6" scale="0"/>
+    </property>
+    <property name="acaRut" type="int">
+      <column name="ACA_RUT" precision="8" scale="0"/>
+    </property>
+    <property name="acaCodCar" type="int">
+      <column name="ACA_COD_CAR" precision="5" scale="0"/>
+    </property>
+    <property name="acaAgnoIng" type="int">
+      <column name="ACA_AGNO_ING" precision="4" scale="0"/>
+    </property>
+    <property name="acaSemIng" type="int">
+      <column name="ACA_SEM_ING" precision="1" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>

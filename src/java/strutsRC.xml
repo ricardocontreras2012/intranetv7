@@ -1,0 +1,267 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsRegistradorCurricular.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetRegistradorCurricularInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        RC
+                    </param>
+                    <param name="excludeActions">CustomError</param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        RC
+                    </param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetRegistradorCurricularActions" extends="intranetRegistradorCurricularInterceptors">
+
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+        </result-types>
+
+        <action name="RegistradorCurricularLogin" class="action.registradorcurricular.RegistradorCurricularLoginAction" method="execute">
+            <result name="success" type="redirectAction">
+            <param name="actionName">CommonLoginStack</param>
+            <param name="key">${key}</param>
+        </result>
+        </action>
+        <action name="RegistradorCurricularLoginHome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/registradorCurricular/id/registradorCurricularIdHomePage.jsp
+            </result>
+        </action>
+
+        <action name="RegistradorCurricularLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/registradorCurricular/id/registradorCurricularIdBienvenida.jsp
+            </result>
+        </action>
+
+        <action name="RegistradorCurricularCertificadosGetGlosa"
+                class="action.registradorcurricular.RegistradorCurricularCertificadosGetGlosaAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/certificacion/registradorCurricularCertificadosGetGlosa.jsp
+            </result>
+        </action>
+        
+        <action name="RegistradorCurricularCertificadosEmitirGlosa"
+                class="action.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaAction" method="execute">
+            <result name="C1" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirAlumnoRegular</param>
+                <param name="correl">${correl}</param>              
+            </result>
+            <result name="C2" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirNoImpedimentos</param>
+                <param name="correl">${correl}</param>              
+            </result>             
+            <result name="C3" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirAlumnoEgresado</param>
+                <param name="correl">${correl}</param>              
+            </result>            
+            <result name="C4" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
+                <param name="correl">${correl}</param>              
+            </result>            
+            <result name="C5" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
+                <param name="correl">${correl}</param>              
+            </result> 
+            <result name="C6" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirRankEgresado</param>
+                <param name="correl">${correl}</param>              
+            </result> 
+            <result name="C7" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirRankRegular</param>
+                <param name="correl">${correl}</param>              
+            </result>            
+            <result name="C8" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
+                <param name="correl">${correl}</param>              
+            </result>            
+            <result name="C9" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
+                <param name="correl">${correl}</param>              
+            </result>            
+            <result name="I3" type="redirectAction">
+                <param name="actionName">AlumnoCertificacionEmitirInformeCalificaciones</param>
+                <param name="correl">${correl}</param>              
+            </result>
+        </action>
+
+        <action name="OficinaCurricularSolicitudEnableReceiveSolicitud"
+                class="action.oficinacurricular.OficinaCurricularSolicitudEnableReceiveSolicitudAction"
+                method="execute">
+            <result name="success">
+                /jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudRecepcionar.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudAddDocumento"
+                class="action.oficinacurricular.OficinaCurricularSolicitudAddDocumentoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularSolicitudEnableReceiveSolicitud</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudRemoveDocumento"
+                class="action.oficinacurricular.OficinaCurricularSolicitudRemoveDocumentoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularSolicitudEnableReceiveSolicitud</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudReceiveSolicitud"
+                class="action.oficinacurricular.OficinaCurricularSolicitudReceiveSolicitudAction" method="execute">
+            <result name="success">
+                /jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudAdministrar.jsp
+            </result>
+        </action>
+        <!--action name="OficinaCurricularSolicitudEnableInformSolicitud" class="action.oficinacurricular.OficinaCurricularSolicitudInformSolicitudAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudRecepcionar.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudInformSolicitud" class="action.oficinacurricular.OficinaCurricularSolicitudInformSolicitudAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudAdministrar.jsp
+            </result>
+        </action-->
+
+        <action name="RegistradorCurricularGetCarreras" class="action.common.CommonCarreraGetCarrerasAction"
+                method="execute">
+            <result name="success">/jsp/common/carrera/commonCarreraListaCarreras.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularActaGenerarxCarrera"
+                class="action.registradorcurricular.RegistradorCurricularActaGenerarxCarreraAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/acta/registradorCurricularActaNominaGeneradas.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularActaConfirmarIntercambio" class="action.common.CommonGetSemAgnoAction"
+                method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/acta/registradorCurricularActaConfirmarIntercambio.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularActaGenerarIntercambio"
+                class="action.registradorcurricular.RegistradorCurricularActaGenerarIntercambioAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/acta/registradorCurricularActaNominaGeneradas.jsp
+            </result>
+        </action>
+
+        <action name="RegistradorCurricularUserExternoGetNomina"
+                class="action.registradorcurricular.RegistradorCurricularUserExternoGetNominaAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/usuarios/registradorCurricularUsuariosListaExternos.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularUserExternoRemove"
+                class="action.registradorcurricular.RegistradorCurricularUserExternoRemoveAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/usuarios/registradorCurricularUsuariosListaExternos.jsp
+            </result>
+        </action>
+
+        <action name="RegistradorCurricularReincorporacion"
+                class="action.registradorcurricular.RegistradorCurricularReincorporacionAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/reincorporacion/registradorCurricularReincorporacionNomina.jsp
+            </result>
+        </action>       
+
+        <action name="RegistradorCurricularReincorporacionEliminadoReprintForm"
+                class="action.common.CommonDummyAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/reincorporacion/registradorCurricularReincorporacionReprint.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularReincorporacionEliminadoReprint"
+                class="action.registradorcurricular.RegistradorCurricularReincorporacionEliminadoReprintAction" method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp</result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        <action name="RegistradorCurricularCertificacionEmitirISO27001" class="action.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Action" method="execute">
+            <result type="myStream"/>
+        </action>
+
+        <action name="RegistradorCurricularGetCartola" class="action.common.CommonAlumnoGetCalificacionesAction"
+                method="execute">
+            <result name="success">/jsp/users/registradorCurricular/calificacion/registradorCurricularCalificacionesCartola.jsp
+            </result>
+        </action>
+        
+        <action name="RegistradorCurricularAddEquivalencia" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/equivalencia/registradorCurricularEquivalenciaConsola.jsp
+            </result>
+        </action>
+        
+        <action name="RegistradorCurricularSolicitudReprintForm"
+                class="action.common.CommonDummyAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/solicitud/registradorCurricularSolicitudReprint.jsp
+            </result>
+        </action>
+        <action name="RegistradorCurricularSolicitudReprint" class="action.registradorcurricular.RegistradorCurricularSolicitudReprintAction"
+                method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp</result>
+        </action>
+        
+        <action name="RegistradorCurricularMencionGet" class="action.registradorcurricular.RegistradorCurricularMencionGetAction"
+                method="execute">
+            <result name="success">/jsp/users/registradorCurricular/mencion/registradorCurricularMencionGet.jsp</result>
+        </action>
+        
+        <action name="RegistradorCurricularParametrosxMencionGet" class="action.registradorcurricular.RegistradorCurricularParametrosxMencionGetAction"
+                method="execute">
+            <result name="success">/jsp/users/registradorCurricular/mencion/registradorCurricularMencionView.jsp</result>
+        </action>
+        
+        <action name="RegistradorCurricularParametrosxMencionSave" class="action.registradorcurricular.RegistradorCurricularParametrosxMencionSaveAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">RegistradorCurricularMencionGet</param>
+                <param name="key">${key}</param>
+                <param name="actionCall">RegistradorCurricularParametrosxMencionGet</param>              
+            </result>
+        </action>
+
+    </package>
+</struts>

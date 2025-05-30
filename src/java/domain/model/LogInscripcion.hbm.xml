@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-01-2011 09:49:39 AM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.LogInscripcion" table="LOG_INSCRIPCION">
+        <id name="logCorrel" type="int">
+            <column name="LOG_CORREL" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="domain.model.AluCar" fetch="select" name="aluCar">
+            <column name="LOG_RUT" precision="8" scale="0"/>
+            <column name="LOG_COD_CAR" precision="5" scale="0"/>
+            <column name="LOG_AGNO_ING" precision="4" scale="0"/>
+            <column name="LOG_SEM_ING" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Asignatura" fetch="select" insert="false" name="asignatura" update="false">
+            <column name="LOG_ASIGN" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="LOG_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="LOG_ELECT"/>
+            <column length="1" name="LOG_COORD"/>
+            <column name="LOG_SECC" precision="2" scale="0"/>
+            <column name="LOG_AGNO" precision="4" scale="0"/>
+            <column name="LOG_SEM" precision="1" scale="0"/>
+            <column length="1" name="LOG_COMP"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Electivo" fetch="select" insert="false" name="electivo" update="false">
+            <column name="LOG_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="LOG_ELECT"/>
+            <column name="LOG_AGNO" precision="4" scale="0"/>
+            <column name="LOG_SEM" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.ProcesoInscripcion" fetch="select" insert="false" name="procesoInscripcion"
+                     update="false">
+            <column length="16" name="LOG_PROCESO"/>
+        </many-to-one>
+        <property name="logElect" type="string">
+            <column length="2" name="LOG_ELECT"/>
+        </property>
+        <property name="logCoord" type="string">
+            <column length="1" name="LOG_COORD"/>
+        </property>
+        <property name="logSecc" type="int">
+            <column name="LOG_SECC" precision="2" scale="0"/>
+        </property>
+        <property name="logAgno" type="int">
+            <column name="LOG_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="logSem" type="int">
+            <column name="LOG_SEM" precision="1" scale="0"/>
+        </property>
+        <property name="logFecha" type="timestamp">
+            <column length="7" name="LOG_FECHA"/>
+        </property>
+        <property name="logTipoMod" type="string">
+            <column length="1" name="LOG_TIPO_MOD"/>
+        </property>
+        <property name="logUser" type="string">
+            <column length="50" name="LOG_USER"/>
+        </property>
+        <property name="logRutReali" type="int">
+            <column name="LOG_RUT_REALI" precision="8" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

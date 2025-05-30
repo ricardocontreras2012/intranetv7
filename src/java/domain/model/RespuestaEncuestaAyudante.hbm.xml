@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.RespuestaEncuestaAyudante" table="RESPUESTA_ENCUESTA_AYUDANTE">
+        <composite-id class="domain.model.RespuestaEncuestaAyudanteId" name="id">
+            <key-property name="reaRut" type="int">
+                <column name="REA_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="reaCodCar" type="int">
+                <column name="REA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="reaAgnoIng" type="int">
+                <column name="REA_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="reaSemIng" type="int">
+                <column name="REA_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="reaAsign" type="int">
+                <column name="REA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="reaElect" type="string">
+                <column length="2" name="REA_ELECT"/>
+            </key-property>
+            <key-property name="reaCoord" type="string">
+                <column length="1" name="REA_COORD"/>
+            </key-property>
+            <key-property name="reaSecc" type="int">
+                <column name="REA_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="reaAgno" type="int">
+                <column name="REA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="reaSem" type="int">
+                <column name="REA_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="reaComp" type="string">
+                <column length="1" name="REA_COMP"/>
+            </key-property>
+            <key-property name="reaRutAyu" type="int">
+                <column name="REA_RUT_AYU" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="reaEnc" type="int">
+                <column name="REA_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="reaPreg" type="int">
+                <column name="REA_PREG" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="reaResp" type="int">
+                <column name="REA_RESP" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="REA_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="REA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="REA_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="REA_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.CursoAyudante" fetch="select" insert="false" name="cursoAyudante" update="false">
+            <column name="REA_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="REA_ELECT" not-null="true"/>
+            <column length="1" name="REA_COORD"/>
+            <column name="REA_SECC" precision="2" scale="0"/>
+            <column name="REA_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="REA_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="REA_COMP"/>
+            <column name="REA_RUT_AYU" not-null="true" precision="8" scale="0"/>
+        </many-to-one>
+        <property name="reaCorrel" type="int">
+            <column name="REA_CORREL" precision="9" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

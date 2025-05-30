@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>   
+    <sql-query name="RetiroSinExpFunction">
+        { call situacion_pkg.retiro_sin_expresion(?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="RetiroConExpFunction">
+        { call situacion_pkg.retiro_con_expresion(?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="ProrrogaFunction">
+        { call situacion_pkg.prorroga(?,?,?,?,?,?,?)}
+    </sql-query>
+     <sql-query name="RenunciaFunction">
+        { call situacion_pkg.renuncia(?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="ReincorporacionEliminacionFunction">
+        { call situacion_pkg.reinc_eliminacion(?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="ReincorporacionAbandonoFunction">
+        { call situacion_pkg.reinc_abandono(?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+    <sql-query name="ReincorporacionNoTitulacionFunction">
+        { call situacion_pkg.reinc_notitulacion(?,?,?,?,?,?,?,?,?)}
+    </sql-query>
+</hibernate-mapping>

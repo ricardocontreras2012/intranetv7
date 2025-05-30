@@ -1,0 +1,98 @@
+/*
+ Document:local-malla
+ Created on:09-05-2009,09:00:24 AM
+ Author:Ricardo Contreras S.
+*/
+
+a {cursor:pointer}
+
+.title-div-fixed {
+    background-color: #00a499;
+    color: white;
+    margin-top: 15px;
+    position: fixed;
+    top: 0px;
+    left: 10px;
+    padding: 3px 15px;
+}
+
+th {
+    background: #394049;
+    margin-left: 25px;
+    color:white
+}
+
+th, td {
+    width: 124px;
+}
+
+th, div.box .codigo, div.box .reprobaciones,div.box .requisitos, div.box .tel-reprobaciones {
+    height: 20px;
+}
+
+th, div.box .codigo {
+    text-align: center
+}
+
+td, div.box {
+    background: white;
+    height: 100px;
+    border: 1px #f00;
+    width: 150px;
+}
+
+div.box .codigo {
+    vertical-align: top;
+}
+
+div.box .nombre {
+    height: 40px;
+    color: #06266f
+}
+
+/**/
+div.box .requisitos {
+    vertical-align: bottom; text-align: left
+}
+
+div.box .tel-reprobaciones {
+    vertical-align: middle; text-align: left; height: 20px;
+}
+
+/**/
+
+div.box .nombre.A, div.box .requisitos.A, div.box .tel-reprobaciones.A{
+    background: #093;
+    color: white
+}
+
+div.box .nombre.R, div.box .requisitos.R, div.box .tel-reprobaciones.R{
+    background: #f00;
+    color: white
+}
+
+div.box .nombre.C, div.box .requisitos.C, div.box .tel-reprobaciones.C {
+    background: #0f3;
+    color: black
+}
+
+div.box .nombre.I, div.box .requisitos.I, div.box .tel-reprobaciones.I {
+    background: #ff3;
+    color: black
+}
+
+div.box .nombre.P, div.box .requisitos.P, div.box .tel-reprobaciones.P {
+    background: #0ff;
+    color: black;
+}
+
+div.box .nombre.S, div.box .requisitos.S, div.box .tel-reprobaciones.S {
+    background: #D3E5FA;
+    color: black
+}
+
+.tableHead {border-spacing:0; border-collapse:collapse; margin: 0; width: 100%; }
+.tableHead tr td {height:20px;padding: 0;background: #ffd073;}
+.tableTelRepro {border-spacing:0; border-collapse:collapse; margin: 0}
+.tableTelRepro tr td {height:20px;padding: 0;background-color: transparent}
+.tableTelRepro .A, .R {color: white}

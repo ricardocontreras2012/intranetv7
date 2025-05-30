@@ -1,0 +1,28 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="tipo">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1
+            </param>
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+    <field name="caption">
+        <field-validator type="stringlength">
+            <param name="maxLength">500
+            </param>
+            <message key="error.maxLength.parameter"/>
+        </field-validator>
+    </field>
+    <field name="uploadFileName">
+        <field-validator type="stringlength">
+            <param name="maxLength">100
+            </param>
+            <message key="error.maxLength.parameter"/>
+        </field-validator>
+    </field>
+</validators>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+   "/WEB-INF/classes/struts-2.3.dtd">
+<!--
+    Document   : struts.xml
+    Created on : 2 de marzo de 2009, 04:26 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <!-- Constants -->
+    <constant name="struts.devMode" value="false"/>
+    <constant name="struts.custom.i18n.resources" value="i18n-resources"/>
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.multipart.maxSize" value="8388608000"/>
+  
+    <include file="struts-default.xml"/>
+    
+    <include file="strutsAA.xml"/>
+    <include file="strutsAL.xml"/>
+    <include file="strutsAP.xml"/>
+    <include file="strutsAS.xml"/>
+    <include file="strutsAY.xml"/>
+    <include file="strutsCM.xml"/>
+    <include file="strutsCN.xml"/>
+    <include file="strutsCP.xml"/>
+    <include file="strutsDD.xml"/>
+    <include file="strutsDE.xml"/>
+    <include file="strutsDP.xml"/>
+    <include file="strutsDPG.xml"/>
+    <include file="strutsEG.xml"/>
+    <include file="strutsJA.xml"/>
+    <include file="strutsJB.xml"/>
+    <include file="strutsJC.xml"/>
+    <include file="strutsOC.xml"/>
+    <include file="strutsPR.xml"/>
+    <include file="strutsRC.xml"/>
+    <include file="strutsRI.xml"/>
+    <include file="strutsSD.xml"/>
+    <include file="strutsSDD.xml"/>
+    <include file="strutsSDP.xml"/>
+    <include file="strutsSE.xml"/>
+    <include file="strutsSF.xml"/>
+    <include file="strutsSM.xml"/>
+    <include file="strutsSP.xml"/>
+    <include file="strutsSC.xml"/>
+    <include file="strutsTG.xml"/>
+    <include file="strutsVC.xml"/>
+    <include file="strutsVDD.xml"/>
+    <include file="strutsVDI.xml"/>
+    <include file="strutsDCO.xml"/>
+    <include file="strutsCFI.xml"/>
+    <include file="strutsSAD.xml"/>
+    <include file="strutsTT.xml"/>
+</struts>

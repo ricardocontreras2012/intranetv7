@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="domain.model.EvidenciaTareaActTeletrabajo" table="EVIDENCIA_TAR_ACT_TELETRABAJO">
+        <composite-id class="domain.model.EvidenciaTareaActTeletrabajoId" name="id">
+            <key-property name="etatelRut" type="int">
+                <column name="ETATEL_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="etatelFecha" type="date">
+                <column name="ETATEL_FECHA" />
+            </key-property>
+            <key-property name="etatelTarea" type="int">
+                <column name="ETATEL_TAREA" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="etatelCorrel" type="int">
+                <column name="ETATEL_CORREL" precision="9" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.TareaActividadTeletrabajo" fetch="select" insert="false" name="tareaActividadTeletrabajo" update="false">
+            <column name="ETATEL_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="ETATEL_FECHA" not-null="true" />
+            <column name="ETATEL_TAREA" not-null="true" precision="9" scale="0"/>
+        </many-to-one>
+        <property name="etatelFile" type="string">
+            <column length="500" name="ETATEL_FILE"/>
+        </property>
+        <property name="etatelDes" type="string">
+            <column length="500" name="ETATEL_DES"/>
+        </property>
+    </class>
+</hibernate-mapping>

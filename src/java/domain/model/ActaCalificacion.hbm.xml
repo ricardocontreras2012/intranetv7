@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ActaCalificacion" table="ACTA_CALIFICACION">
+        <composite-id class="domain.model.ActaCalificacionId" name="id">
+            <key-property name="acalFolio" type="int">
+                <column name="ACAL_FOLIO" precision="7" scale="0"/>
+            </key-property>
+            <key-property name="acalAgno" type="int">
+                <column name="ACAL_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="acalSem" type="int">
+                <column name="ACAL_SEM" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="ACAL_ASIGN" precision="10" scale="0"/>
+            <column length="1" name="ACAL_ELECT"/>
+            <column length="1" name="ACAL_COORD"/>
+            <column name="ACAL_SECC" precision="2" scale="0"/>
+            <column name="ACAL_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="ACAL_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="ACAL_COMP"/>
+        </many-to-one>
+        <many-to-one class="domain.model.EstadoActa" fetch="select" insert="true" name="estadoActa" update="true">
+            <column length="1" name="ACAL_EST"/>
+        </many-to-one>
+        <property name="acalTipo" type="string">
+            <column length="1" name="ACAL_TIPO"/>
+        </property>
+        <property name="acalTipoAlu" type="string">
+            <column length="1" name="ACAL_TIPO_ALU"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="actaCalificacionNominas" table="ACTA_CALIFICACION">
+            <key>
+                <column name="ACAN_FOLIO" not-null="true" precision="5" scale="0"/>
+                <column name="ACAN_AGNO" not-null="true" precision="4" scale="0"/>
+                <column name="ACAN_SEM" not-null="true" precision="1" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.ActaCalificacionNomina"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ParamArchivosWeb" table="PARAM_ARCHIVOS_WEB">
+        <id name="parNomVar" type="string">
+            <column length="30" name="PAR_NOM_VAR"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="parValor" type="string">
+            <column length="90" name="PAR_VALOR"/>
+        </property>
+        <property name="parDescripcion" type="string">
+            <column length="70" name="PAR_DESCRIPCION"/>
+        </property>
+    </class>
+</hibernate-mapping>

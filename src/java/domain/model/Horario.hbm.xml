@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Horario" table="HORARIO">
+        <composite-id class="domain.model.HorarioId" name="id">
+            <key-property name="horAsign" type="int">
+                <column name="HOR_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="horElect" type="string">
+                <column length="2" name="HOR_ELECT"/>
+            </key-property>
+            <key-property name="horCoord" type="string">
+                <column length="1" name="HOR_COORD"/>
+            </key-property>
+            <key-property name="horSecc" type="int">
+                <column name="HOR_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="horAgno" type="int">
+                <column name="HOR_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="horSem" type="int">
+                <column name="HOR_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="horDia" type="string">
+                <column length="1" name="HOR_DIA"/>
+            </key-property>
+            <key-property name="horModulo" type="int">
+                <column name="HOR_MODULO" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="horComp" type="string">
+                <column length="1" name="HOR_COMP"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="HOR_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="HOR_ELECT" not-null="true"/>
+            <column length="1" name="HOR_COORD" not-null="true"/>
+            <column name="HOR_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="HOR_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="HOR_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="HOR_COMP" not-null="true"/>
+        </many-to-one>        
+
+        <many-to-one class="domain.model.Sala" fetch="select" name="sala">
+            <column length="12" name="HOR_SALA"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Profesor" fetch="select" name="profesor">
+            <column name="HOR_RUT_PROF" precision="8" scale="0"/>
+        </many-to-one>
+        <property name="horTipoClase" type="java.lang.Character">
+            <column length="1" name="HOR_TIPO_CLASE"/>
+        </property>
+
+        <property name="horCorrelativo" type="int">
+            <column name="HOR_CORRELATIVO" precision="2" scale="0"/>
+        </property>
+        
+        <many-to-one class="domain.model.Dia" fetch="select" insert="false" update="false" name="dia">
+            <column length="1" name="HOR_DIA"/>
+        </many-to-one>       
+    </class>
+</hibernate-mapping>

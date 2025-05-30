@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 09-06-2021, 13:15:51
+    Author     : Ricardo
+*/
+
+/*.rows-selected {background-color: yellow}*/
+
+
+ul li {
+    min-width: 200px;
+}
+.dragging li.ui-state-hover {
+    min-width: 240px;
+}
+.dragging .ui-state-hover a {
+    color:green !important;
+    font-weight: bold;
+}
+th,td {
+    text-align: right;
+    padding: 2px 4px;
+    border: 1px solid;
+}
+.connectedSortable tr, .ui-sortable-helper {
+    cursor: move;
+}
+.connectedSortable tr:first-child {
+    cursor: default;
+}
+.ui-sortable-placeholder {
+    background: yellow;
+}
+

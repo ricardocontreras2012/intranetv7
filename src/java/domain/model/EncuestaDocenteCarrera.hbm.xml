@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-05-2011 10:29:32 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EncuestaDocenteCarrera" table="ENCUESTA_DOCENTE_CARRERA">
+        <composite-id class="domain.model.EncuestaDocenteCarreraId" name="id">
+            <key-property name="edcEnc" type="int">
+                <column name="EDC_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="edcCodCar" type="int">
+                <column name="EDC_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="edcCodMen" type="int">
+                <column name="EDC_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.EncuestaDocente" fetch="select" insert="false" name="encuestaDocente" update="false">
+            <column name="EDC_ENC" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Mencion" fetch="select" insert="false" name="mencion" update="false">
+            <column name="EDC_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="EDC_COD_MEN" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

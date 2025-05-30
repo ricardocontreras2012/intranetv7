@@ -1,0 +1,12 @@
+/* 
+    Document   : local-encuesta-alumno
+    Created on : 05-09-2013, 08:28:18 AM
+    Author     : Ricardo Contreras S.
+    Description: Estilo para Formulario de Encuesta Docente
+*/
+
+#central-div{background-color: white}
+.apartado{background-color: #cccccc; height: 30px; vertical-align: middle;}
+.dimension {background-color: #D3E5FA}
+.pregunta {vertical-align: middle; background-color: #F0FAFF}
+.respuesta{text-align:center; background-color: white}

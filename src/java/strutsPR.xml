@@ -1,0 +1,371 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+<!--
+    Document   : strutsProfesor.xml
+    Created on : 2 de marzo de 2009, 04:26 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetProfesorInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        PR
+                    </param>
+                    <param name="excludeActions">
+                        ProfesorLogin, CustomError
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        PR
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="cachingHeadersInterceptor">
+                    <param name="excludeActions">
+                        ProfesorActaExportActa,
+                        ProfesorMaterialDownLoadReusedMaterial
+                    </param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="notDataFound">/jsp/message/messageNotDataFound.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+    </package>
+
+
+    <package name="intranetProfesorActions" extends="intranetProfesorInterceptors">
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+        </result-types>
+
+        <action name="ProfesorLogin" class="action.profesor.ProfesorLoginAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="error">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="input">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="relogin" type="redirectAction">
+                <param name="actionName">CommonLoginEnableForm</param>
+            </result>
+        </action>
+
+        <action name="ProfesorLoginHome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/profesor/id/profesorIdHomePage.jsp
+            </result>
+        </action>
+        
+        <action name="ProfesorLoginStackDatosPersonales" class="action.profesor.ProfesorLoginStackDatosPersonalesAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonProfesorGetMisDatos</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="stack" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="ProfesorMisDatosSave" class="action.profesor.ProfesorMisDatosSaveAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="stack" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="input">/jsp/users/profesor/id/profesorIdMisDatos.jsp</result>
+            <result name="error">/jsp/users/profesor/id/profesorIdMisDatos.jsp</result>
+        </action>
+
+        <action name="ProfesorAutoEvaluacionSearchAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction" method="search">
+            <result name="success">/jsp/users/profesor/encuesta/profesorEncuestaConfirm.jsp
+            </result>
+            <!--result name="stack" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result-->
+            <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
+        </action>
+
+        <action name="ProfesorAutoEvaluacionGetAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction" method="showForm">
+            <result name="success">/jsp/users/profesor/encuesta/profesorEncuestaFormAutoEvaluacion.jsp
+            </result>
+            <!--result name="stack" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result-->
+            <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
+        </action>
+        <action name="ProfesorAutoEvaluacionSaveAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction" method="save">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ProfesorAutoEvaluacionGetAutoEvaluacion
+                </param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorAutoEvaluacionRemoveAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction" method="remove">
+            <!--result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result-->
+            <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
+        </action>
+
+       <action name="ProfesorLoginWelcome" class="action.profesor.ProfesorLoginWelcomeAction" method="execute">
+            <result name="success">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
+       </action>
+
+        <!--
+
+            ACTA
+        -->
+        <action name="ProfesorActaGetActa" class="action.profesor.ProfesorActaGetActaAction" method="execute">
+            <result name="acta_numerica">/jsp/users/profesor/calificacion/profesorCalificacionActaNumerica.jsp
+            </result>
+            <result name="acta_concepto">/jsp/users/profesor/calificacion/profesorCalificacionActaConcepto.jsp
+            </result>
+            <result name="acta_no_generada">/jsp/message/messageActionMessage.jsp
+            </result>
+        </action>
+        <action name="ProfesorActaEmitirActaNumerica" class="action.profesor.ProfesorActaEmitirActaNumericaAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ProfesorActaGetActa</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorActaEmitirActaConcepto" class="action.profesor.ProfesorActaEmitirActaConceptoAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ProfesorActaGetActa</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorActaGetCargaHistorica" class="action.common.CommonProfesorCargaHistoricaActaAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        <action name="ProfesorActaRectificatoriaGetCursos" class="action.profesor.ProfesorActaRectificatoriaGetCursosAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        <action name="ProfesorActaRectificatoriaGetNomina" class="action.profesor.ProfesorActaRectificatoriaGetNominaAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/calificacion/profesorCalificacionActaRectificatoriaNumerica.jsp
+            </result>
+        </action>            
+
+        <!--
+
+            EVALUACIONES PARCIALES
+        -->
+         <action name="ProfesorEvaluacionEnableForm" class="action.profesor.ProfesorEvaluacionEnableFormAction" method="execute">
+            <result name="none">
+                /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionSeleccionModalidad.jsp
+            </result>
+            <result name="relativa" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="absoluta" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesAbsolutos</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionSetModalidad" class="action.profesor.ProfesorEvaluacionSetModalidadAction" method="execute">
+            <result name="relativa" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="absoluta" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesAbsolutos</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionPorcentajesRelativos" class="action.profesor.ProfesorEvaluacionPorcentajesRelativosAction" method="execute">
+            <result name="success">
+                /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionPorcentajesRelativos.jsp
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionSavePorcentajesRelativos" class="action.profesor.ProfesorEvaluacionSavePorcentajesRelativosAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionPorcentajesAbsolutos" class="action.profesor.ProfesorEvaluacionPorcentajesAbsolutosAction" method="execute">
+            <result name="success">
+                /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionPorcentajesAbsolutos.jsp
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionSavePorcentajesAbsolutos" class="action.profesor.ProfesorEvaluacionSavePorcentajesAbsolutosAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesAbsolutos</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionGetAlumnoEvaluacion" class="action.profesor.ProfesorEvaluacionGetAlumnoEvaluacionAction" method="execute">
+            <result name="success">/jsp/users/profesor/calificacion/profesorCalificacionEvaluacionNominaCurso.jsp
+            </result>
+        </action>
+
+
+        <action name="ProfesorEvaluacionSaveAlumnoEvaluacion" class="action.profesor.ProfesorEvaluacionSaveAlumnoEvaluacionAction" method="execute">
+            <result name="R" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="A" type="redirectAction">
+                <param name="actionName">ProfesorEvaluacionPorcentajesAbsolutos</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="ProfesorEvaluacionEmitirActa" class="action.profesor.ProfesorEvaluacionEmitirActaAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+        </action>
+
+
+        <!--
+
+            MATERIAL
+        -->
+        <action name="ProfesorMaterialGetListaCursosReutilizacion"
+                class="action.profesor.ProfesorMaterialGetListaCursosReutilizacionAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialCursosReutilizacion.jsp
+            </result>
+        </action>
+        <action name="ProfesorMaterialGetListaMaterialesReutilizacion"
+                class="action.profesor.ProfesorMaterialGetListaMaterialesReutilizacionAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialReutilizacion.jsp
+            </result>
+        </action>
+        <action name="ProfesorMaterialReuseMateriales" class="action.profesor.ProfesorMaterialReuseMaterialesAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMaterialGetMaterialesCurso</param>
+                <param name="key">${key}</param>
+                <param name="tipoMaterial">PR</param>
+            </result>
+        </action>
+        <action name="ProfesorMaterialDownLoadReusedMaterial"
+                class="action.profesor.ProfesorMaterialDownLoadReusedMaterialAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+        
+        <action name="ProfesorMaterialGetMaterialesOtrosCursos" class="action.profesor.ProfesorMaterialGetMaterialesOtrosCursosAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonCursoGetCursoActual</param>
+                <param name="key">${keyNew}</param>
+                <param name="pos">${pos}</param>
+                <param name="actionCall">ProfesorMaterialGetListaMaterialesReutilizacion</param>
+            </result>
+        </action>
+
+
+        <action name="ProfesorNormativaMencion" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/profesor/normativa/profesorNormativa.jsp
+            </result>
+        </action>
+        <action name="ProfesorCalendarioMencion" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/profesor/normativa/profesorCalendario.jsp
+            </result>
+        </action>
+
+        <action name="ProfesorSolicitudGetJustificativosCurso"
+                class="action.profesor.ProfesorSolicitudGetJustificativosCursoAction" method="execute">
+            <result name="success">/jsp/users/profesor/solicitud/profesorSolicitudListado.jsp
+            </result>
+        </action>
+        
+        <action name="ProfesorHorarioComun"
+                class="action.profesor.ProfesorHorarioComunAction" method="execute">
+            <result name="success">/jsp/users/profesor/horario/profesorHorarioComun.jsp
+            </result>
+        </action>
+
+        <!--
+
+            REPORTES DE CLASES
+        -->
+        <action name="ProfesorReporteAddReporte" class="action.profesor.ProfesorReporteAddReporteAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/reporte/profesorReporteFormulario.jsp
+            </result>
+        </action>
+        <action name="ProfesorReporteSaveNewReporte" class="action.profesor.ProfesorReporteSaveNewReporteAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="yaExiste">/jsp/users/profesor/reporte/profesorReporteFormulario.jsp
+            </result>
+            <result name="input">/jsp/users/profesor/reporte/profesorReporteFormulario.jsp
+            </result>
+        </action>
+        <action name="ProfesorReporteSaveModifiedReporte"
+                class="action.profesor.ProfesorReporteSaveModifiedReporteAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="input">/jsp/common/reporte/commonReporteViewReporte.jsp
+            </result>
+        </action>
+        <action name="ProfesorReporteRemoveReportes" class="action.profesor.ProfesorReporteRemoveReportesAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>                
+        
+        <action name="ProfesorEvaluacionExportPlanilla" class="action.profesor.ProfesorEvaluacionExportPlanillaAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+
+    </package>
+</struts>

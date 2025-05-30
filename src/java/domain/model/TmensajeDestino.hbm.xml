@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 26-oct-2009 19:46:29 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TmensajeDestino" table="TMENSAJE_DESTINO">
+        <id name="tmdCod" type="string">
+            <column length="4" name="TMD_COD"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tmdDes" type="string">
+            <column length="80" name="TMD_DES"/>
+        </property>
+        <property name="tmdBarra" type="java.lang.Character">
+            <column length="1" name="TMD_BARRA"/>
+        </property>
+        <property name="tmdCorrel" type="int">
+            <column name="TMD_CORREL" precision="3" scale="0"/>
+        </property>
+        <property name="tmdLista" type="java.lang.Character">
+            <column length="1" name="TMD_LISTA"/>
+        </property>       
+    </class>
+</hibernate-mapping>

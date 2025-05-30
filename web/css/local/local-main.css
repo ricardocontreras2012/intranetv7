@@ -1,0 +1,267 @@
+/*
+Document   : local-main
+Created on : 15-06-2009, 02:30:43 PM
+Author     : Ricardo Contreras S.
+Description:
+*/
+body {
+    background-color: #F0FAFF;
+    margin: 0;
+    padding: 0;
+    border: 0; /* This removes the border around the viewport in old versions of IE */
+    width: 100%
+}
+
+body * {
+    font-family: arial, verdana, sans-serif;
+    text-decoration: none;
+    /*font-size: 11px;*/
+    font-weight: bold;
+    color: #00529B
+}
+
+div#top {
+    position: relative;
+    z-index: 2;
+    height: 30px;
+    text-align: right;
+    margin-top: -5px;
+    color: white;
+    background: #0E51A7 url('/intranetv7/images/local/barra.jpg');
+}
+
+.menu, .content-div {
+    margin: 0;
+}
+
+.label-dark {
+    color: #00529B
+}
+
+.actionError li {
+    list-style: none
+}
+
+.actionError li span {
+    color: red;
+    font-size: 16px
+}
+
+.actionMessage li {
+    list-style: none
+}
+
+.actionMessage li span {
+    color: #00529B;
+    font-size: 12px
+        /*text-align: left !important;*/
+}
+
+textarea {
+    /*border: 2px inset #eee;*/
+    width: 90%;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    margin: 3px;
+    padding: 2px 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 99%;
+    margin: 5px
+}
+
+th {
+    color: #fff;
+    font-weight: bold;
+    padding: 2px 11px;
+    text-align: left;
+    border-right: 1px solid #fff;
+    /*line-height: 1.2;*/
+    background-color: #679FD2
+}
+
+/*********************
+*
+buttons-div
+*
+*********************/
+.buttons-div {
+    height: 30px;
+    width: 100%
+        /*padding-bottom: 20px;*/
+}
+
+.buttons-div a, .buttons-div button {
+    display: block;
+    float: left;
+    /*margin:0 7px 0 0;*/
+    font-size: 100%;
+    line-height: 100%;
+    font-weight: bold;
+    color: #565656
+        /*margin-top: -8px;*/
+        /*padding:5px 10px 6px 7px; *//* Links */
+}
+
+.buttons-div button {
+    width: auto;
+    overflow: visible
+        /*padding:4px 10px 3px 7px;*/
+        /* IE6 */
+}
+
+.buttons-div button[type] {
+    /*padding:5px 10px 5px 7px;*/
+    /* Firefox */
+    /*line-height:17px;*/
+    /* Safari */
+}
+
+*:first-child+html button[type] {
+    /*padding:4px 10px 3px 7px; *//* IE7 */
+}
+
+.buttons-div button img, .buttons-div a img {
+    /*margin:0 3px -3px 0 !important;*/
+    /*margin:0 3px -3px 0 !important;*/
+    /*padding:0;
+    border:none;*/
+    width: 16px;
+    height: 16px
+}
+
+/* STANDARD */
+
+button:hover, .buttons-div a:hover {
+    background-color: #dff4ff;
+    color: #336699
+}
+
+.buttons-div a:active {
+    background-color: #6299c5;
+    color: #fff
+}
+
+/* POSITIVE */
+button.back {
+    float: right
+}
+
+button.positive, button.back, .buttons-div a.positive {
+    color: #0B61A4
+}
+
+.buttons-div a.positive:hover, button.positive:hover, button.back:hover {
+    background-color: #0B61A4;
+    color: #FFFFFF
+}
+
+.buttons-div a.positive:active {
+    background-color: #0B61A4;
+    color: #fff
+}
+
+/* NEGATIVE */
+.buttons-div a.negative, button.negative {
+    color: #d12f19
+}
+
+.buttons-div a.negative:hover, button.negative:hover {
+    background: #fbe3e4;
+    color: #d12f19
+}
+
+.buttons-div a.negative:active {
+    background-color: #d12f19;
+    color: #fff
+}
+
+th.checkBarTH {
+    width: 30px;
+    padding-right: 0
+}
+
+div#checkBar {
+    height: 25px;
+    width: 33px
+}
+
+div#checkBar img {
+    border: none
+}
+
+div#confirmacion, div#msg, div#confirmacion2, div#msg2 {
+    display: none
+}
+
+.input, input {
+    background-color: white;
+    color: #26537C;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    height: 23px;
+    margin: 3px 0;
+}
+
+* a:hover {
+    cursor: pointer
+}
+
+.link {
+    color: #0033FF
+}
+
+.errorPond, label.error {
+    background-color: red;
+    color: white !important
+}
+
+/* Calificaciones */
+.aprobado {
+    color: #0e51a7
+}
+
+.aprobado, .reprobado {
+    text-align: center
+}
+
+.reprobado {
+    color: red
+}
+
+/*Consultas*/
+.rut {
+    width: 80px;
+    text-align: right
+}
+
+.dv {
+    width: 10px
+}
+
+.materno, .paterno {
+    width: 150px
+}
+
+.nombre {
+    width: 210px
+}
+
+.search-table {
+    width: 700px
+}
+
+.search-table-div {
+    width: 720px;
+    overflow: auto
+}
+
+.errorMessage ul, .errorMessage ul li, .errorMessage ul li span {
+    background: red;
+    color: white !important;
+    list-style: none
+}
+
+iframe {border: 0;}

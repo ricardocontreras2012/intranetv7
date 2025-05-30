@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.PregEncta" table="PREG_ENCTA">
+        <composite-id class="domain.model.PregEnctaId" name="id">
+            <key-property name="pregEnc" type="int">
+                <column name="PREG_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="pregNro" type="int">
+                <column name="PREG_NRO" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.EncuestaDocente" fetch="select" insert="false" name="encuestaDocente" update="false">
+            <column name="PREG_ENC" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="pregDes" type="string">
+            <column length="200" name="PREG_DES"/>
+        </property>
+        <property name="pregPrefijo" type="string">
+            <column length="40" name="PREG_PREFIJO"/>
+        </property>
+        <property name="pregSufijo" type="string">
+            <column length="40" name="PREG_SUFIJO"/>
+        </property>
+        <property name="pregNroItems" type="int">
+            <column name="PREG_NRO_ITEMS" precision="2" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

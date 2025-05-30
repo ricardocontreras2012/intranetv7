@@ -1,0 +1,23 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="subject">
+        <field-validator type="stringlength">
+            <param name="maxLength">250
+            </param>
+            <message key="error.maxLength.parameter"/>
+        </field-validator>
+    </field>
+    <!--field name="messageText">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message key="error.mensaje.sin.texto"/>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="maxLength">3500
+            </param>
+            <message key="error.maxLength.parameter"/>
+        </field-validator>
+    </field-->
+</validators>

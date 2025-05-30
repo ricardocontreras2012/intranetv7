@@ -1,0 +1,34 @@
+# Carpetas de compilación y distribución
+/build/
+/dist/
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/nbdist/private/
+.idea/
+
+# Archivos de configuración específicos de NetBeans
+/nbproject/private/
+
+# Archivos temporales de NetBeans
+*.cache
+*.log
+
+# Carpetas y archivos binarios comunes en Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración del entorno de desarrollo
+*.iml
+*.ipr
+*.iws
+
+# Archivos generados por Maven o Gradle (si usas alguno)
+target/
+.gradle/

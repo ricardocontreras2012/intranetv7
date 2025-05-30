@@ -1,0 +1,2344 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+<!--
+    Document   : strutsCommon.xml
+    Created on : 2 de marzo de 2009, 04:26 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetCommonInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+            <interceptor name="tokenSession" class="org.apache.struts2.interceptor.TokenSessionStoreInterceptor"/>
+            <interceptor name="createSessionInterceptor" class="org.apache.struts2.interceptor.CreateSessionInterceptor" />
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        CM
+                    </param>
+                    <param name="excludeActions">
+                        CommonLoginEnableForm,CommonLogin,
+                        CommonLoginPlusEnableForm, LoginPlusEnableForm, CommonLoginPlus, 
+                        CommonLoginSolicitudEnable, CommonLoginSolicitudPlusEnable,
+                        CommonLoginClaveUnicaResult,
+                        CommonSessionClose,
+                        CommonLoginEmpleadorEnableForm,CommonLoginEmpleador,
+                        CommonPasswordAskNewPassword,
+                        CommonPasswordSetNewPassword,
+                        CommonAdministrativoLogin,CommonAutoridadLogin,
+                        CustomError,
+                        CommonMensajeDownloadAttachFile,
+                        CommonMensajeGetNumMessages
+                    </param>
+                </interceptor-ref>
+
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        CM
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="cachingHeadersInterceptor">
+                    <param name="excludeActions">
+                        CommonAlumnoPrintCalidades,CommonAlumnoPrintCurriculares
+                        CommonAlumnoPrintCartola, CommonAlumnoPrintMatriculas,
+                        CommonAlumnoPrintSituaciones,CommonAlumnoPrintLogInscripcion,
+                        CommonAlumnoPrintPersonales,
+                        CommonAlumnoPrintHorarioInscripcion,
+                        CommonHorarioPrintHorario, CommonCursoExportLista,
+                        CommonMensajePrintMessage, CommonProfesorExportCargaHistorica,
+                        CommonEncuestaExport,
+                        CommonMaterialDownLoadMaterial, CommonMaterialDownLoadMaterialAlumno, CommonMensajeDownLoadFile,
+                        CommonAsistenciaExportPlanilla, 
+                        CommonCursoExportListaFoto, CommonCursoDefinicionPrint,
+                        CommonSalaPrintHorario,CommonSalaReservaPrintHorario,
+                        CommonReportePrintResumen,
+                        CommonMaterialPrintResumen, CommonReporteDownLoadAttach,
+                        CommonEstadisticasAlumnosxCalidad, CommonActaActasCarreraExport,
+                        CommonMensajeDownloadAttachFile,
+                        CommonJefeCarreraSolicitudPAF
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="requireSSLInterceptor"/>
+            </interceptor-stack>
+            <!--interceptor-stack name="IntranetTokenStack">
+                <interceptor-ref name="token"/>
+                <interceptor-ref name="IntranetStack"/>
+            </interceptor-stack-->
+
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+            <result name="notDataFound">/jsp/message/messageNotDataFound.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetCommonActions" extends="intranetCommonInterceptors">
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>        
+        
+        <action name="CommonLoginEnableForm" class="action.common.CommonLoginEnableFormAction" method="execute">
+            <result name="success">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+        </action>
+
+        <action name="CommonLogin" class="action.common.CommonLoginAction" method="execute">
+            <interceptor-ref name="tokenSession"/>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="input">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="error">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="relogin" type="redirectAction">
+                <param name="actionName">CommonLoginEnableForm</param>
+            </result>
+            <result name="exception">/jsp/message/messageReload.jsp
+            </result>
+            <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
+        </action>
+        
+        <action name="CommonLoginPlusEnableForm" class="action.common.CommonLoginPlusEnableFormAction" method="execute">
+            <result name="success">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+        </action>
+        
+        <action name="LoginPlusEnableForm" class="action.common.CommonLoginPlusEnableFormAction" method="execute">
+            <result name="success">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+        </action>
+
+        <action name="CommonLoginPlus" class="action.common.CommonLoginAction" method="execute">
+            <interceptor-ref name="tokenSession"/>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="keyProf">${keyProf}</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="relogin" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+            </result>
+            <result name="exception">/jsp/message/messageReload.jsp
+            </result>
+            <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
+        </action>
+        
+        <action name="CommonLoginSolicitudEnable" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/id/commonIdSolicitudPassword.jsp
+            </result>
+        </action>
+        
+        <action name="CommonLoginSolicitudPlusEnable" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/idPlus/commonIdPlusSolicitudPassword.jsp
+            </result>
+        </action>
+        
+        <action name="CommonPasswordAskNewPassword" class="action.common.CommonPasswordAskNewPasswordAction"
+                method="execute">
+            <result name="success">/jsp/common/id/commonIdSolicitudPasswordSuccess.jsp
+            </result>
+            <result name="error">/jsp/common/id/commonIdSolicitudPassword.jsp
+            </result>
+            <result name="input">/jsp/common/id/commonIdSolicitudPassword.jsp
+            </result>
+        </action>
+        
+        <action name="CommonPasswordSetNewPassword" class="action.common.CommonPasswordSetNewPasswordAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="user">${userType}</param>
+                <param name="rut">${rut}</param>
+                <param name="password">${password}</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="error">/jsp/common/id/commonIdSolicitudPassword.jsp
+            </result>
+        </action>
+
+        <action name="CommonSessionClose" class="action.common.CommonSessionCloseAction" method="execute">
+            <result name="success">/jsp/message/messageExit.jsp</result>
+        </action>
+        
+        <action name="CommonSessionHelp" class="action.common.CommonSessionHelpAction" method="execute">
+            <result name="success">${page}
+            </result>
+        </action>
+
+        <action name="CommonAutoridadLogin" class="action.common.CommonAutoridadLoginAction" method="execute">
+            <result name="DE" type="redirectAction">
+                <param name="actionName">DecanoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="DD" type="redirectAction">
+                <param name="actionName">DirectorDepartamentoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="DP" type="redirectAction">
+                <param name="actionName">DirectorProgramaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="DPG" type="redirectAction">
+                <param name="actionName">DirectorPostgradoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SDD" type="redirectAction">
+                <param name="actionName">SubDirectorDepartamentoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SDP" type="redirectAction">
+                <param name="actionName">SubDirectorProgramaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="JC" type="redirectAction">
+                <param name="actionName">JefeCarreraLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="JA" type="redirectAction">
+                <param name="actionName">JefeAreaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="VDD" type="redirectAction">
+                <param name="actionName">ViceDecanoDocenciaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="VDI" type="redirectAction">
+                <param name="actionName">ViceDecanoInvestigacionLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SE" type="redirectAction">
+                <param name="actionName">SecretarioLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="CP" type="redirectAction">
+                <param name="actionName">CoordinadorPracticaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="error">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="notAllow">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+        </action>
+
+        <action name="CommonAdministrativoLogin" class="action.common.CommonAdministrativoLoginAction" method="execute">
+            <result name="SP" type="redirectAction">
+                <param name="actionName">SecretariaProyectosLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SF" type="redirectAction">
+                <param name="actionName">SecretariaFacultadLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SD" type="redirectAction">
+                <param name="actionName">SecretariaDepartamentoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SM" type="redirectAction">
+                <param name="actionName">SecretariaDocenteLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="OC" type="redirectAction">
+                <param name="actionName">OficinaCurricularLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="RC" type="redirectAction">
+                <param name="actionName">RegistradorCurricularLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="AS" type="redirectAction">
+                <param name="actionName">AsistenteLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="AP" type="redirectAction">
+                <param name="actionName">ApoyoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="JB" type="redirectAction">
+                <param name="actionName">JefeBibliotecaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="RI" type="redirectAction">
+                <param name="actionName">RelacionesInternacionalesLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="TG" type="redirectAction">
+                <param name="actionName">TitulosyGradosLogin</param>
+                <param name="key">${key}</param>
+            </result>            
+            <result name="DCO" type="redirectAction">
+                <param name="actionName">DirectorEdContinuaLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="AA" type="redirectAction">
+                <param name="actionName">AreaApoyoLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="CFI" type="redirectAction">
+                <param name="actionName">FormacionIntegralLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SAD" type="redirectAction">
+                <param name="actionName">SecretariaApoyoDiplomadosLogin</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="SC" type="redirectAction">
+                <param name="actionName">SecretariaCoordinacionLogin</param>
+                <param name="key">${key}</param>
+            </result>
+
+            <result name="error">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="notAllow">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="exception">/jsp/message/messageReload.jsp
+            </result>
+        </action>
+        
+        <action name="CommonLoginClaveUnicaResult" class="action.common.CommonLoginClaveUnicaResultAction" method="getValidacion">            
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="error">/jsp/common/id/commonIdLogIn.jsp
+            </result>            
+        </action>         
+
+        <action name="CommonAdministrativoEmailSetEmail" class="action.common.CommonAdministrativoEmailSetEmailAction"
+                method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp</result>
+            <result name="input">/jsp/common/id/commonIdEmailForm.jsp</result>
+            <result name="error">/jsp/common/id/commonIdEmailForm.jsp</result>
+        </action> 
+                      
+        <action name="CommonAgnoSem" class="action.common.CommonAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/commonAgnoSem.jsp
+            </result>
+        </action> 
+        
+        <action name="CommonCertificacionCheckRegular" class="action.alumno.AlumnoCertificacionCheckRegularAction" method="execute">
+            <result name="success">/jsp/common/certificacion/commonCertificacionAlumnoRegular.jsp
+            </result>
+        </action>
+        <action name="CommonCertificacionCheckEgresado" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/certificacion/commonCertificacionAlumnoEgresado.jsp
+            </result>
+        </action>
+        <action name="CommonCertificacionCheckInformeCalificaciones" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/certificacion/commonCertificacionInformeCalificaciones.jsp
+            </result>
+            <result name="noMatriculado">/jsp/message/messageActionError.jsp</result>
+        </action>        
+        <action name="CommonCertificacionEmitirAlumnoRegular" class="action.alumno.AlumnoCertificacionEmitirAlumnoRegularAction" method="execute">
+            <result type="myStream"/>
+        </action>
+        <action name="CommonCertificacionEmitirAlumnoEgresado" class="action.alumno.AlumnoCertificacionEmitirAlumnoEgresadoAction" method="execute">
+            <result type="myStream"/>
+        </action>
+        <action name="CommonCertificacionEmitirInformeCalificaciones"
+                class="action.alumno.AlumnoCertificacionEmitirInformeCalificacionesAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>          
+                                                                                                                  
+        <action name="CommonActaGetActasCarrera" class="action.common.CommonActaGetActasCarreraAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaListaActas.jsp
+            </result>
+        </action>
+                        
+        <action name="CommonActaActasCarreraExport" class="action.common.CommonActaActasCarreraExportAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="CommonAlumnoSearchEnable" class="action.common.CommonAlumnoSearchEnableAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoSearch" class="action.common.CommonAlumnoSearchAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetAlumnoNomina" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetAlumno" class="action.common.CommonAlumnoGetAlumnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonAlumnoGetAluCarList" class="action.common.CommonAlumnoGetAlumnoCarreraAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonAlumnoGetAluCarListAfterSearch</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="multiplesIngresos">/jsp/common/alumno/commonAlumnoAluCar.jsp</result>
+        </action>
+
+        <action name="CommonAlumnoGetAluCar" class="action.common.CommonAlumnoGetCarreraAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonAlumnoGetAluCarListAfterSearch</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetAluCarListAfterSearch" class="action.common.CommonAlumnoGetAluCarAfterSearchAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionNested}</param>
+                <param name="key">${keyParent}</param>
+            </result>
+        </action>
+
+        <action name="CommonAlumnoGetAlumnoCarreras" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoCarreras.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoRecordEnable" class="action.common.CommonAlumnoRecordEnableAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoRecord.jsp
+            </result>
+            <result name="multiplesIngresos">/jsp/common/alumno/commonAlumnoCarreras.jsp
+            </result>
+            <result name="sinPermiso">/jsp/message/messageActionError.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetCarrera" class="action.common.CommonAlumnoGetCarreraAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionNested}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetRecord" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoRecord.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoSearchDirect" class="action.common.CommonAlumnoSearchDirectAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoRecord.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetCalidades" class="action.common.CommonAlumnoGetCalidadesAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoCalidades.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetDatosCurriculares" class="action.common.CommonAlumnoGetCurricularesAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoDatosCurriculares.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetDatosPersonales" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoDatosPersonales.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetSituaciones" class="action.common.CommonAlumnoGetSituacionesAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoSituaciones.jsp
+            </result>
+        </action>                
+        
+        <action name="CommonAlumnoProgramaEstudioGetCalificaciones" class="action.common.CommonAlumnoProgramaEstudioGetCalificacionesAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoProgramaEstudioCalificaciones.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoProgramaEstudioPrintProgramas" class="action.common.CommonAlumnoProgramaEstudioPrintProgramasAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>               
+        
+        <action name="CommonAlumnoSituacionGetFile" class="action.common.CommonAlumnoSituacionGetFileAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonAlumnoGetMatriculas" class="action.common.CommonAlumnoGetMatriculasAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoMatriculas.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetMalla" class="action.common.CommonAlumnoGetMallaAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoMalla.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetNotasAsignatura" class="action.common.CommonAlumnoGetNotasAsignaturaAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoNotasAsignatura.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetNotasAdicional" class="action.common.CommonAlumnoGetNotasAdicionalAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoNotasAdicional.jsp
+            </result>
+        </action>
+        
+        
+        <action name="CommonInscripcionGetFotoProfesor" class="action.common.CommonInscripcionGetFotoProfesorAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>   
+        
+        <action name="CommonAlumnoGetCalificaciones" class="action.common.CommonAlumnoGetCalificacionesAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoCalificaciones.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetAsistencia" class="action.common.CommonAlumnoGetAsistenciaAction" method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoAsistencia.jsp
+            </result>
+        </action>
+
+        <action name="CommonAlumnoEvaluacion" class="action.common.CommonAlumnoGetEvaluacionesParcialesAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoEvaluacionParcial.jsp
+            </result>
+        </action>
+
+        <action name="CommonAlumnoGetLogInscripcion" class="action.common.CommonAlumnoGetLogInscripcionAction"
+                method="execute">
+            <result name="success">/jsp/common/alumno/commonAlumnoLogInscripcion.jsp
+            </result>
+        </action>
+ 
+        <action name="CommonAyudanteSearchEnable" class="action.common.CommonAyudanteSearchEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/ayudante/commonAyudanteSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteSearch" class="action.common.CommonAyudanteSearchAction" method="execute">
+            <result name="success">/jsp/common/ayudante/commonAyudanteNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteGetAyudanteNomina" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/ayudante/commonAyudanteNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteGetAyudante" class="action.common.CommonAyudanteGetAyudanteAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteRecordEnable" class="action.common.CommonAyudanteRecordEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/ayudante/commonAyudanteRecord.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteGetDatosPersonales" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/ayudante/commonAyudanteDatosPersonales.jsp
+            </result>
+        </action>
+
+        <action name="CommonAyudanteGetFoto" class="action.common.CommonAyudanteGetFotoAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="CommonProfesorSearchEnable" class="action.common.CommonProfesorSearchEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/profesor/commonProfesorSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorSearch" class="action.common.CommonProfesorSearchAction" method="execute">
+            <result name="success">/jsp/common/profesor/commonProfesorNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorGetProfesorNomina" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/profesor/commonProfesorNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorGetProfesor" class="action.common.CommonProfesorGetProfesorAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonProfesorRecordEnable" class="action.common.CommonProfesorRecordEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/profesor/commonProfesorRecord.jsp
+            </result>
+        </action>
+
+        <action name="CommonProfesorCargaHistorica" class="action.common.CommonProfesorCargaHistoricaAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorGetFoto" class="action.common.CommonProfesorGetFotoAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+        
+        <action name="CommonProfesorCargaHistorica" class="action.common.CommonProfesorCargaHistoricaAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorGetMisDatos" class="action.common.CommonProfesorGetMisDatosAction" method="execute">
+            <result name="success">/jsp/users/profesor/id/profesorIdMisDatos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMatriculaGetNomina" class="action.common.CommonMatriculaGetNominaAction" method="execute">
+            <result name="success">/jsp/common/matricula/commonMatriculaGetNomina.jsp
+            </result>
+        </action>
+                
+        <action name="CommonMatriculaExportNomina" class="action.common.CommonMatriculaExportNominaAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="inputName">excelFile
+                </param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentType">${description}</param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>     
+
+        <action name="CommonAsistenciaGetPlanilla" class="action.common.CommonAsistenciaGetPlanillaAction"
+                method="execute">
+            <result name="success">/jsp/common/asistencia/commonAsistenciaPlanilla.jsp
+            </result>
+        </action>                
+        
+        <action name="CommonAsistenciaExportPlanilla" class="action.common.CommonAsistenciaExportPlanillaAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaGetAsistencias" class="action.common.CommonAsistenciaGetAsistenciasAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaListAsistencia.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaNewAsistencia" class="action.common.CommonCursoGetListaCursoAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaNew.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaSaveNewAsistencia" class="action.common.CommonAsistenciaSaveNewAsistenciaAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaListAsistencia.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaGetAsistencia" class="action.common.CommonAsistenciaGetAsistenciaAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaView.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaRemoveAsistencia" class="action.common.CommonAsistenciaRemoveAsistenciaAction"
+                method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaListAsistencia.jsp</result>
+        </action>
+        
+        <action name="CommonAsistenciaSaveModifiedAsistencia"
+                class="action.common.CommonAsistenciaSaveModifiedAsistenciaAction" method="execute">
+            <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaListAsistencia.jsp</result>
+        </action>
+
+        <action name="CommonComunaGetComunas" class="action.common.CommonComunaGetComunasAction" method="execute">
+            <result name="success">/jsp/common/comuna/commonComunaComunas.jsp</result>
+        </action>
+
+        <action name="CommonCursoGetCursos" class="action.common.CommonCursoGetCursosAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursoActual" class="action.common.CommonCursoGetCursoActualAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonCursoGetMenu" class="action.common.CommonCursoGetMenuAction" method="execute">
+            <result name="PR">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="AL">/jsp/users/alumno/menuCurso/alumnoMenuCurso.jsp
+            </result>
+            <result name="AY">/jsp/users/ayudante/menuCurso/ayudanteMenuCurso.jsp
+            </result>
+            <result name="DE">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="VDD">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="VDI">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="DD">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="JC">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="JA">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+            <result name="SE">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoGetCursoResumen" class="action.common.CommonCursoGetCursoResumenAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonCursoGetCursoActualxAgnoSem" class="action.common.CommonCursoGetCursoActualxAgnoSemAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCarreras" class="action.common.CommonCursoGetCarrerasAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCarreras.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursosxAgnoSem" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursosxAgnoSem.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursosxAgnoSemEncuestaIns" class="action.common.CommonDummyAgnoSemPosAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonCursoGetCursosxAgnoSemEncuesta</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+                <param name="agno">${agno}</param>
+                <param name="sem">${sem}</param>
+                <param name="tipo">I</param>
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursosxAgnoSemEncuestaInt" class="action.common.CommonDummyAgnoSemPosAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonCursoGetCursosxAgnoSemEncuesta</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+                <param name="agno">${agno}</param>
+                <param name="sem">${sem}</param>
+                <param name="tipo">V</param>
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursosxAgnoSemEncuesta" class="action.common.CommonCursoGetCursosxAgnoSemEncuestaAction" method="execute">
+            <result name="success">/jsp/common/encuesta/commonEncuestaListaCursos.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoListaDefCursosActuales" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaDefCursos.jsp
+            </result>
+        </action>
+
+        <action name="CommonLoginIframeContent" class="action.common.CommonLoginIframeContentAction" method="execute">
+            <result name="alumno">/jsp/users/alumno/id/alumnoIdBienvenida.jsp</result>
+            <result name="egresado">/jsp/users/egresado/id/egresadoIdBienvenida.jsp</result>
+            <result name="profesor">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
+            <result name="common">/jsp/common/id/commonIdBienvenida.jsp</result>
+        </action>
+        
+        <action name="CommonGetFoto" class="action.common.CommonGetFotoAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpg
+                </param>
+                <param name="inputName">image
+                </param>
+                <param name="contentDisposition">filename="1.jpg"
+                </param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+        </action>
+        
+        <action name="CommonAlumnoGetFoto" class="action.common.CommonAlumnoGetFotoAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpg
+                </param>
+                <param name="inputName">image
+                </param>
+                <param name="contentDisposition">filename="1.jpg"
+                </param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+        </action>
+
+        <action name="CommonPasswordEnableForm" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/id/commonIdChangePassword.jsp
+            </result>
+        </action>
+
+        <action name="CommonPasswordEnablePlusForm" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/idPlus/commonIdPlusChangePassword.jsp
+            </result>
+        </action>
+        
+        <action name="CommonPasswordChangeSave" class="action.common.CommonPasswordSavePasswordAction"
+                method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp
+            </result>
+            <result name="askNormal">/jsp/common/id/commonIdChangePassword.jsp
+            </result>
+            <result name="askPlus">/jsp/common/idPlus/commonIdPlusChangePassword.jsp
+            </result>
+        </action>
+
+        <action name="CommonEmailEnableForm" class="action.common.CommonEmailEnableEmailAction" method="execute">
+            <result name="success">/jsp/common/id/commonIdEmailForm.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoGetDefCursosxAgnoSem" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursosConsulta.jsp
+            </result>
+            <result name="input">/jsp/common/tipoCarrera/commonTipoCarreraLista.jsp</result>
+        </action>
+
+        <action name="CommonEmpleadorGetEmpleadorxRut" class="action.common.CommonEmpleadorGetEmpleadorxRutAction"
+                method="execute">
+            <result name="success">/jsp/common/empleador/commonEmpleador.jsp</result>
+        </action>
+        
+        <action name="CommonEmpleadorGetEmpleadorxRutEgresado" class="action.common.CommonEmpleadorGetEmpleadorxRutAction"
+                method="execute">
+            <result name="success">/jsp/common/empleador/commonEmpleadorEgresado.jsp</result>
+        </action>
+        
+        <action name="CommonEmpleadorGetEmpleadoresxNombre" class="action.common.CommonEmpleadorGetEmpleadoresxNombreAction"
+                method="execute">
+            <result name="success">/jsp/common/empleador/commonEmpleadoresxNombre.jsp</result>
+        </action>
+
+        <action name="CommonProfesorGetEncuesta" class="action.common.CommonProfesorGetEncuestaAction" method="execute">
+            <result name="success">/jsp/common/encuesta/commonEncuestaCurso.jsp
+            </result>
+            <result name="none">/jsp/message/messageActionMessage.jsp
+            </result>
+        </action>
+        
+        <action name="CommonAyudanteGetEncuesta" class="action.common.CommonAyudanteGetEncuestaAction" method="execute">
+            <result name="success">/jsp/common/encuesta/commonEncuestaAyudanteCurso.jsp
+            </result>
+            <result name="none">/jsp/message/messageActionMessage.jsp
+            </result>
+        </action>
+        
+        <action name="CommonEncuestaGetCargaHistorica" class="action.common.CommonEncuestaGetCargaHistoricaAction"
+                method="execute">
+            <result name="success">/jsp/common/encuesta/commonEncuestaListaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonEncuestaGetCargaHistoricaAyudante" class="action.common.CommonAyudanteCargaHistoricaEncuestaAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursosAyudante.jsp
+            </result>
+        </action>
+
+        <action name="CommonEstadisticaEnableAgnoForm" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/estadistica/commonEstadisticaAgnoForm.jsp
+            </result>
+        </action>                
+
+        <action name="CommonNotasParcialesGetCargaHistorica"
+                class="action.common.CommonProfesorCargaHistoricaNotaParcialAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+
+        <action name="CommonHorarioGetHorario" class="action.common.CommonHorarioGetHorarioAction" method="execute">
+            <result name="success">/jsp/common/horario/commonHorario.jsp
+            </result>
+        </action>
+
+        <action name="CommonInscripcionResumen"
+                class="action.common.CommonInscripcionResumenAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionResumen.jsp
+            </result>
+        </action>
+
+        <action name="CommonPersonaGetPersonaxRut" class="action.common.CommonPersonaGetPersonaxRutAction"
+                method="execute">
+            <result name="success">/jsp/common/persona/commonPersona.jsp</result>
+        </action>
+
+        <action name="CommonRequisitoAdicionalLogroAddAlumno"
+                class="action.common.CommonRequisitoAdicionalLogroAddAlumnoAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetTema.jsp
+            </result>
+            <result name="notFound">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
+            </result>
+            <result name="sinRequisitos">
+                /jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroEnableInscripcion"
+                class="action.common.CommonRequisitoAdicionalLogroEnableInscripcionAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroGetInscripciones"
+                class="action.common.CommonRequisitoAdicionalLogroGetInscripcionesAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroRemoveInscripciones"
+                class="action.common.CommonRequisitoAdicionalLogroRemoveInscripcionesAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonRequisitoAdicionalLogroGetInscripciones</param>
+                <param name="key">${key}</param>
+                <param name="TrequisitoLogroAdicional">${TrequisitoLogroAdicional}</param>
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroSaveInscripcion"
+                class="action.common.CommonRequisitoAdicionalLogroSaveInscripcionAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonRequisitoAdicionalLogroGetInscripciones</param>
+                <param name="key">${key}</param>
+                <param name="TrequisitoLogroAdicional">${TrequisitoLogroAdicional}</param>
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroGetInscripcion"
+                class="action.common.CommonRequisitoAdicionalLogroGetInscripcionAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetTema.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroEnableListaxCalificar"
+                class="action.common.CommonRequisitoAdicionalLogroEnableInscripcionAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetListaxCalificar.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRequisitoAdicionalLogroGetListaxCalificar"
+                class="action.common.CommonRequisitoAdicionalLogroGetListaxCalificarAction" method="execute">
+            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetListaxCalificar.jsp
+            </result>
+        </action>
+                
+
+        <action name="CommonLoginStack" class="action.common.CommonLoginStackAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${action}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonLoginStackPassword" class="action.common.CommonLoginStackPasswordAction" method="execute">
+            <result name="askNormal">/jsp/common/id/commonIdSecurePassword.jsp
+            </result>
+            <result name="askPlus">/jsp/common/idPlus/commonIdPlusSecurePassword.jsp
+            </result>
+            <result name="stack" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonLoginStackPasswordSave" class="action.common.CommonPasswordSavePasswordAction" method="execute">
+            <interceptor-ref name="tokenSession"/>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="askNormal">/jsp/common/id/commonIdSecurePassword.jsp
+            </result>
+            <result name="askPlus">/jsp/common/idPlus/commonIdPlusSecurePassword.jsp
+            </result>
+        </action>
+
+        <action name="CommonMisCursos" class="action.common.CommonMisCursosAction" method="execute">
+            <result name="success">/jsp/common/id/commonIdMisCursos.jsp</result>
+        </action>
+        
+        <action name="CommonCursoGetListaCurso" class="action.common.CommonCursoGetListaCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoNominaAlumnos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetFotoAlumno" class="action.common.CommonCursoGetFotoAlumnoAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpg
+                </param>
+                <param name="inputName">image
+                </param>
+                <param name="contentDisposition">filename="1.jpg"
+                </param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionGetCursos" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonCursoDefinicionGetMalla</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionGetElectivos" class="action.common.CommonCursoDefinicionGetElectivosAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionAddElectivo" class="action.common.CommonCursoDefinicionAddElectivoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionModifyElectivo" class="action.common.CommonCursoDefinicionModifyElectivoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionRemoveElectivos" class="action.common.CommonCursoDefinicionRemoveElectivosAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
+            </result>
+        </action>        
+        
+        <action name="CommonCursoDefinicionGetMalla" class="action.common.CommonCursoDefinicionGetMallaAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionGetElectivo" class="action.common.CommonCursoDefinicionGetElectivoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivo.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionAddCurso" class="action.common.CommonCursoDefinicionAddCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionModifyCurso" class="action.common.CommonCursoDefinicionModifyCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionRemoveCursos" class="action.common.CommonCursoDefinicionRemoveCursosAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionRefreshCursos" class="action.common.CommonCursoDefinicionRefreshCursosAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionToolGetHorario" class="action.common.CommonCursoDefinicionToolAction" method="getHorario">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetHorario.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionToolGetProfesor" class="action.common.CommonCursoDefinicionToolAction"
+                method="getProfesor">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesor.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionToolGetProfesorEstricto" class="action.common.CommonCursoDefinicionToolAction"
+                method="getProfesor">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesorEstricto.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionToolGetAyudante" class="action.common.CommonCursoDefinicionToolAction" 
+                method="getAyudante">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudante.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionToolGetAyudanteEstricto" class="action.common.CommonCursoDefinicionToolAction" 
+                method="getAyudante">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudanteEstricto.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionHorarioSave" class="action.common.CommonCursoDefinicionHorarioSaveAction"
+                method="execute">
+            <result name="success">/jsp/common/action/commonActionResult.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionProfesorSearch" class="action.common.CommonCursoDefinicionProfesorSearchAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionProfesorSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionProfesorEstrictoSearch" class="action.common.CommonCursoDefinicionProfesorSearchAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionProfesorEstrictoSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionProfesorSave" class="action.common.CommonCursoDefinicionProfesorSaveAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesorSaved.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionAyudanteSearch" class="action.common.CommonCursoDefinicionAyudanteSearchAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionAyudanteSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionAyudanteEstrictoSearch" class="action.common.CommonCursoDefinicionAyudanteSearchAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionAyudanteEstrictoSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionAyudanteSave" class="action.common.CommonCursoDefinicionAyudanteSaveAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudanteSaved.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionGetTransversales" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionSaveTransversales" class="action.common.CommonCursoDefinicionSaveTransversalesAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp
+            </result>
+        </action>
+
+        <action name="CommonCursoDefinicionGetEspejos" class="action.common.CommonCursoDefinicionGetEspejosAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionSaveEspejo" class="action.common.CommonCursoDefinicionSaveEspejoAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoDefinicionRemoveEspejos" class="action.common.CommonCursoDefinicionRemoveEspejosAction" method="execute">
+            <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
+            </result>
+        </action>
+        
+        
+        
+        <!-- MATERIAL -->
+        
+        <action name="CommonMaterialEnableConsola" class="action.common.CommonMaterialEnableConsolaAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMaterialGetMaterialesCurso</param>
+                <param name="key">${key}</param>
+                <param name="tipoMaterial">${tipo}</param>
+            </result>
+        </action>
+                 
+        
+        <action name="CommonMaterialGetAsignaturas" class="action.common.CommonMaterialGetAsignaturasAction"
+                method="execute">
+            <result name="success">/jsp/common/asignatura/commonAsignaturaListado.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialGetMaterialesCurso" class="action.common.CommonMaterialGetMaterialesCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialHistoricoGetMaterialesCurso" class="action.common.CommonMaterialGetMaterialesCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/material/commonMaterialHistoricoListado.jsp
+            </result>
+            <result name="notDataFound">/jsp/common/material/commonMaterialSinMaterial.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialSelectTipo" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/material/commonMaterialSelectTipo.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialGetMaterialesAlumno" class="action.common.CommonMaterialGetMaterialesAlumnoAction"
+                method="execute">
+            <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
+            </result>
+            <!--result name="notDataFound">/jsp/common/material/commonMaterialSinMaterial.jsp
+            </result-->
+        </action>
+        
+        <action name="CommonMaterialGetMaterialesCursoNoLog" class="action.common.CommonMaterialGetMaterialesCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
+            </result>
+            <result name="notDataFound">/jsp/common/material/commonMaterialSinMaterial.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialGetListaCurso" class="action.common.CommonCursoGetListaCursoAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialNominaAlumnos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialAddMaterial" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialNewMaterial.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialGetMaterial" class="action.common.CommonMaterialGetMaterialAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialViewMaterial.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialModifyMaterial" class="action.common.CommonMaterialModifyMaterialAction"
+                method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">104857600</param>
+            </interceptor-ref>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMaterialGetMaterialesCursoNoLog</param>
+                <param name="key">${key}</param>
+                <param name="tipoMaterial">${tipoMaterial}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMaterialRemoveMateriales" class="action.common.CommonMaterialRemoveMaterialesAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMaterialGetMaterialesCursoNoLog</param>
+                <param name="key">${key}</param>
+                <param name="tipoMaterial">${tipoMaterial}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMaterialUploadMaterial" class="action.common.CommonMaterialUploadMaterialAction"
+                method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">104857600</param>
+            </interceptor-ref>
+            <interceptor-ref name="IntranetStack"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMaterialGetMaterialesCursoNoLog</param>
+                <param name="key">${key}</param>
+                <param name="tipoMaterial">${tipoMaterial}</param>
+            </result>
+            <result name="input">/jsp/common/material/commonMaterialNewMaterial.jsp
+            </result>
+        </action>
+        
+        <action name="CommonProfesorCargaHistoricaMaterial" class="action.common.CommonProfesorCargaHistoricaMaterialAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+                        
+        <action name="CommonMaterialGetResumen" class="action.common.CommonMaterialGetResumenAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoMaterialesResumen.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMaterialConsultaMateriales"
+                class="action.profesor.ProfesorMaterialGetListaMaterialesReutilizacionAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialConsulta.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeEnableConsola" class="action.common.CommonMensajeEnableConsolaAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeConsola.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeEnableListaDestinatarios"
+                class="action.common.CommonMensajeEnableListaDestinatariosAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeProcessLista</param>
+                <!--param name="method">post</param-->
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMensajeEnableFwd" class="action.common.CommonMensajeEnableFwdAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeProcessLista</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonMensajeReceiveLista" class="action.common.CommonMensajeReceiveListaAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeProcessLista</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMensajeProcessLista" class="action.common.CommonMensajeProcessListaAction" method="execute">
+            <result name="processList" type="redirectAction">
+                <param name="actionName">CommonMensajeProcessLista</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="newMessage">/jsp/common/mensaje/commonMensajeNewMessage.jsp
+            </result>
+            <result name="forwardMessage">/jsp/common/mensaje/commonMensajeForwardMessage.jsp
+            </result>
+            <result name="success">/jsp/common/mensaje/commonMensajeListaDestinatarios.jsp
+            </result>
+
+            <result name="alumno" type="redirectAction">
+                <param name="actionName">CommonMensajeAlumnoSearchEnable</param>
+                <param name="actionCall">CommonMensajeAddAlumno</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="ayudante" type="redirectAction">
+                <param name="actionName">CommonMensajeAyudanteSearchEnable</param>
+                <param name="actionCall">CommonMensajeAddAyudante</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="profesor" type="redirectAction">
+                <param name="actionName">CommonMensajeProfesorSearchEnable</param>
+                <param name="actionCall">CommonMensajeAddProfesor</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="lista">/jsp/common/mensaje/commonMensajeGetListaRUN.jsp
+            </result>
+        </action>
+
+        <action name="CommonMensajeAlumnoSearchEnable" class="action.common.CommonAlumnoSearchEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAlumnoSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeAyudanteSearchEnable" class="action.common.CommonAyudanteSearchEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAyudanteSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeProfesorSearchEnable" class="action.common.CommonProfesorSearchEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeProfesorSearch.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeAlumnoSearch" class="action.common.CommonAlumnoSearchAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAlumnoNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeAyudanteSearch" class="action.common.CommonAyudanteSearchAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAyudanteNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeProfesorSearch" class="action.common.CommonProfesorSearchAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeProfesorNomina.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeUploadListaRUN" class="action.common.CommonMensajeUploadListaRUNAction" method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">104857600</param>
+            </interceptor-ref>
+            <interceptor-ref name="IntranetStack"/>
+
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeProcessLista</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonMensajeSendMessage" class="action.common.CommonMensajeSendMessageAction" method="execute">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">104857600</param>
+            </interceptor-ref>
+            <interceptor-ref name="IntranetStack"/>
+
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeGetSentMessages</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="input">/jsp/common/mensaje/commonMensajeNewMessage.jsp</result>
+        </action>
+
+        <action name="CommonMensajeSendFwdMessage" class="action.common.CommonMensajeSendFwdMessageAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeGetSentMessages</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetReceivedMessages" class="action.common.CommonDummyAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeReceivedMessages.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetDataTable" class="action.common.CommonMensajeGetDataTableAction">
+            <result type="json"/>
+        </action>
+        
+        <action name="CommonMensajeRemoveReceivedMessages" class="action.common.CommonMensajeRemoveReceivedMessagesAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeGetReceivedMessages</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMensajeRemoveSentMessages" class="action.common.CommonMensajeRemoveSentMessagesAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonMensajeGetSentMessages</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetSentMessages" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeSentMessages.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetSentDataTable" class="action.common.CommonMensajeGetSentDataTableAction">
+            <result type="json"/>
+        </action>
+        
+        <action name="CommonMensajeGetReceivedMessage" class="action.common.CommonMensajeGetReceivedMessageAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeViewReceivedMessage.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetSentMessage" class="action.common.CommonMensajeGetSentMessageAction"
+                method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeViewSentMessage.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeReplyMessage" class="action.common.CommonMensajeReplyMessageAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeNewMessage.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetNumMessages" class="action.common.CommonMensajeGetNumMessagesAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeNumMessages.jsp
+            </result>
+        </action>
+
+        <action name="CommonMensajeAddAlumno" class="action.common.CommonMensajeAddAlumnoAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAlumnoLista.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeAddAyudante" class="action.common.CommonMensajeAddAyudanteAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeAyudanteLista.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeAddProfesor" class="action.common.CommonMensajeAddProfesorAction" method="execute">
+            <result name="success">/jsp/common/mensaje/commonMensajeProfesorLista.jsp
+            </result>
+        </action>
+        
+        <action name="CommonMensajeGetPage" class="action.common.CommonMensajeGetPageAction" method="execute">
+            <result type="stream">
+                <param name="contentType">text/html</param>
+                <param name="inputName">inputStream</param>
+            </result>
+        </action>
+
+        <action name="CommonPracticaActaEnable" class="action.common.CommonPracticaActaEnableAction" method="execute">
+            <result name="success">/jsp/common/practica/commonPracticaActaEnable.jsp</result>
+        </action>
+        
+        <action name="CommonPracticaActaRectificatoriaEnable" class="action.common.CommonPracticaActaRectificatoriaEnableAction" method="execute">
+            <result name="success">/jsp/common/practica/commonPracticaActaRectificatoriaEnable.jsp</result>
+        </action>
+        
+        <action name="CommonPracticaActaEmitir" class="action.common.CommonPracticaActaEmitirAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonPracticaActaEnable</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonPracticaActaRectificatoriaEmitir" class="action.common.CommonPracticaActaRectificatoriaEmitirAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonPracticaActaRectificatoriaEnable</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonReporteGetReportesCurso" class="action.common.CommonReporteGetReportesCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/reporte/commonReporteListado.jsp
+            </result>
+        </action>
+        
+        <action name="CommonReporteGetReportesCursoNoLog" class="action.common.CommonReporteGetReportesCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/reporte/commonReporteListado.jsp
+            </result>
+        </action>
+        
+        <action name="CommonReporteGetCargaHistorica" class="action.common.CommonProfesorCargaHistoricaReporteAction"
+                method="execute">
+            <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonReporteViewReporte" class="action.common.CommonReporteViewReporteAction" method="execute">
+            <result name="success">/jsp/common/reporte/commonReporteViewReporte.jsp
+            </result>
+        </action>
+        
+        <action name="CommonReporteGetResumen" class="action.common.CommonReporteGetResumenAction" method="execute">
+            <result name="success">/jsp/common/curso/commonCursoReportesResumen.jsp
+            </result>
+        </action>
+        
+        <action name="CommonReporteDownLoadAttach" class="action.common.CommonReporteDownLoadAttachAction"
+                method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <action name="CommonSolicitudGetEstados" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/solicitud/commonSolicitudEstados.jsp</result>
+        </action>        
+        
+        <action name="CommonSolicitudViewSolicitud" class="action.common.CommonSolicitudViewSolicitudAction"
+                method="execute">
+            <result name="inscripcion">/jsp/common/solicitud/inscripcion/commonSolicitudInscripcionViewSolicitud.jsp
+            </result>
+            <result name="practica">/jsp/users/alumno/solicitud/practica/alumnoSolicitudPracticaViewSolicitud.jsp
+            </result>
+            <result name="situacion">/jsp/users/viceDecano/solicitud/viceDecanoSolicitudViewSolicitud.jsp
+            </result>
+            <result name="justificativo">/jsp/common/solicitud/justificativo/commonSolicitudJustificativoViewSolicitud.jsp
+            </result>
+            <result name="matricula">/jsp/users/viceDecano/solicitud/viceDecanoSolicitudViewSolicitud.jsp
+            </result>            
+        </action>
+
+        <action name="CommonPracticaGetSolicitudesxEstado" class="action.common.CommonPracticaGetSolicitudesxEstadoAction" method="execute">
+            <result name="success">/jsp/common/practica/commonPracticaSolicitudListado.jsp
+            </result>
+        </action>
+        
+        <action name="CommonPracticaViewSolicitud" class="action.common.CommonPracticaViewSolicitudAction"
+                method="execute">
+            <result name="success">/jsp/common/practica/commonPracticaViewSolicitud.jsp
+            </result>
+        </action>
+        
+        <action name="CommonPracticaSaveResolucionPractica" class="action.common.CommonPracticaSaveResolucionPracticaAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonPracticaGetSolicitudesxEstado</param>
+                <param name="key">${key}</param>
+                <param name="estado">10</param>
+                <param name="autoridad">67</param>
+            </result>
+        </action>
+
+        <action name="CommonCarreraGetCarreras" class="action.common.CommonCarreraGetCarrerasAction" method="execute">
+            <result name="success">/jsp/common/carrera/commonCarreraListaTipoCarreras.jsp
+            </result>
+        </action>
+
+        <action name="CommonSalaEnable" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaContainer.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaGetSalasPropias" class="action.common.CommonSalaGetSalasPropiasAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaListaSalas.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaGetHorario" class="action.common.CommonSalaGetHorarioAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaHorario.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaGetReservas" class="action.common.CommonSalaReservaGetReservasAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaListaReservas.jsp
+            </result>
+        </action>
+
+        <action name="CommonSalaReservaEnable" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaContainer.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaGetSalas" class="action.common.CommonSalaReservaGetSalasAction" method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaListaSalas.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaGetHorario" class="action.common.CommonSalaReservaGetHorarioAction"
+                method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaHorario.jsp</result>
+        </action>
+        
+        <action name="CommonSalaReservaGetCurso" class="action.common.CommonSalaReservaGetCursoAction"
+                method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaCurso.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaGetReserva" class="action.common.CommonSalaReservaGetReservaAction"
+                method="execute">
+            <result name="success">/jsp/common/sala/commonSalaReservaReserva.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaReservar" class="action.common.CommonSalaReservaReservarAction" method="execute">            
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonSalaReservaGetReservas</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="tope">/jsp/message/messageActionError.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSalaReservaRemoveReserva" class="action.common.CommonSalaReservaRemoveReservaAction" method="execute">            
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonSalaReservaGetReservas</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="tope">/jsp/message/messageActionError.jsp
+            </result>
+        </action>
+
+        <action name="CommonPrintPDFDownload" class="action.common.CommonPrintPDFDownloadAction"
+                method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <!-- ACTAS -->
+        <action name="CommonActaGetActa" class="action.common.CommonActaGetActaAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaGetActa.jsp</result>
+        </action>
+
+        <action name="CommonActaComplementariaEnableActa" class="action.common.CommonAlumnoGetAlumnoCarreraAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonActaComplementariaGetCursos</param>
+                <param name="key">${key}</param>
+            </result>           
+            <result name="multiplesIngresos">/jsp/common/alumno/commonAlumnoCarreras.jsp</result>
+        </action>
+        
+        <action name="CommonActaComplementariaGetForm" class="action.common.CommonActaComplementariaGetCursosAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
+        </action>                
+        
+        <action name="CommonActaComplementariaGetCursos" class="action.common.CommonActaComplementariaGetCursosAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
+        </action>
+        
+        <action name="CommonActaComplementariaEmitirActa" class="action.common.CommonActaComplementariaEmitirActaAction" method="execute">
+            <!--result name="success" type="redirectAction">
+                <param name="actionName">CommonActaComplementariaGetCursos</param>
+                <param name="key">${key}</param>
+                <param name="agnoCal">${agnoCal}</param>
+                <param name="semCal">${semCal}</param>
+            </result-->
+            <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
+        </action>
+        
+        <action name="CommonActaRectificatoriaGetCursos" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaRectificatoriaCursos.jsp
+            </result>
+        </action>
+        
+        <action name="CommonActaRectificatoriaGetActa" class="action.common.CommonActaRectificatoriaGetActaAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaRectificatoriaActaNumerica.jsp
+            </result>
+            <result name="acta_numerica">/jsp/common/acta/commonActaRectificatoriaActaNumerica.jsp
+            </result>
+            <result name="acta_concepto">/jsp/common/acta/commonActaRectificatoriaActaConcepto.jsp
+            </result>
+        </action>
+        
+        <action name="CommonActaRectificatoriaEmitirActa" class="action.common.CommonActaRectificatoriaEmitirActaAction" method="execute">
+            <result name="success">/jsp/common/acta/commonActaRectificatoriaCursos.jsp
+            </result>
+        </action>                           
+        
+        <action name="CommonActaPrint"
+                class="action.common.CommonActaPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonActaExport"
+                class="action.common.CommonActaExportAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <action name="CommonInscripcionEnableInscripcion" class="action.common.CommonInscripcionEnableInscripcionAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionConsola.jsp</result>            
+            <result name="multiplesIngresos">/jsp/common/alumno/commonAlumnoCarreras.jsp</result>
+        </action>
+        
+        <action name="CommonInscripcionGetForm" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionConsola.jsp</result>
+        </action>
+        
+        <action name="CommonInscripcionGetDerechos" class="action.common.CommonInscripcionGetDerechosAction"
+                method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionDerechos.jsp</result>
+        </action>
+        
+        <action name="CommonInscripcionGetInscripcion" class="action.common.CommonSetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionGetInscripcionInner</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionGetInscripcionInner" class="action.common.CommonInscripcionGetInscripcionInnerAction"
+                method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcion.jsp
+            </result>            
+        </action>                
+        
+        <action name="CommonInscripcionGetCursos" class="action.common.CommonInscripcionGetCursosAction"
+                method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionCursos.jsp
+            </result>
+            <result name="cambioMencion">/jsp/common/inscripcion/commonInscripcionCambioMencion.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAddInscripcion" class="action.common.CommonInscripcionAddInscripcionAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionGetInscripcionInner</param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="error">/jsp/common/inscripcion/commonInscripcion.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionNewInscripcion" class="action.common.CommonInscripcionNewInscripcionAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionGetInscripcionInner</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionSaveForce" class="action.common.CommonInscripcionSaveForceAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionGetInscripcionInner</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionRemoveInscripcion" class="action.common.CommonInscripcionRemoveInscripcionAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionGetInscripcionInner
+                </param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="acta_emitida">/jsp/common/inscripcion/commonInscripcion.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionGetFotoProfesor" class="action.common.CommonInscripcionGetFotoProfesorAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpg
+                </param>
+                <param name="inputName">image
+                </param>
+                <param name="contentDisposition">filename="1.jpg"
+                </param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+        </action>
+                
+        <action name="CommonInscripcionAdministracion" class="action.common.CommonCursoGetCursosxAgnoSemAction" method="execute">            
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdministracion.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmGetCursosIzq" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdmGetCursosIzq.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmGetCursosDer" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdmGetCursosDer.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmGetNominaIzq" class="action.common.CommonInscripcionAdministracionGetNominaIzqAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdmGetNominaIzq.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmGetNominaDer" class="action.common.CommonInscripcionAdministracionGetNominaDerAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdmGetNominaDer.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmDummy" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/inscripcion/commonInscripcionAdmDummy.jsp
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmChangeNominaIzq" class="action.common.CommonInscripcionAdmChangeNominaIzqAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionAdmGetNominaIzq
+                </param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="no_elimina" type="json"/>
+            <result name="sin_llegada">
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmChangeNominaDer" class="action.common.CommonInscripcionAdmChangeNominaDerAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionAdmGetNominaDer
+                </param>
+                <param name="key">${key}</param>
+            </result>
+            <result name="no_elimina" type="json"/>
+        </action>
+        
+        <action name="CommonInscripcionAdmRemoveNominaIzq" class="action.common.CommonInscripcionAdmRemoveNominaIzqAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionAdmGetNominaIzq
+                </param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonInscripcionAdmRemoveNominaDer" class="action.common.CommonInscripcionAdmRemoveNominaDerAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonInscripcionAdmGetNominaDer
+                </param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+                
+        <action name="CommonCursoGetCursoAdmInscripcionIzq" class="action.common.CommonCursoGetCursoAdmInscripcionIzqAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetCursoAdmInscripcionDer" class="action.common.CommonCursoGetCursoAdmInscripcionDerAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>            
+
+        <action name="CommonSolicitudGetSolicitudes" class="action.common.CommonSolicitudGetSolicitudesAction" method="execute">
+            <result name="success">/jsp/common/solicitud/commonSolicitudListado.jsp
+            </result>
+        </action>
+        
+        <action name="CommonSolicitudSaveResolucion" class="action.common.CommonSolicitudSaveResolucionAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonSolicitudGetSolicitudes
+                </param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonSolicitudSaveResolucionJustificativo" class="action.common.CommonSolicitudSaveResolucionJustificativoAction"
+                method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonSolicitudGetSolicitudes
+                </param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="CommonConvalidacionComisionEnable" class="action.common.CommonConvalidacionComisionEnableAction"
+                method="execute">
+            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
+            </result>
+        </action>
+        
+        <action name="CommonConvalidacionComisionAddProf" class="action.common.CommonConvalidacionComisionAddProfAction"
+                method="execute">
+            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
+            </result>
+        </action>
+        
+        <action name="CommonConvalidacionComisionSave" class="action.common.CommonConvalidacionComisionSaveAction"
+                method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp
+            </result>
+        </action>        
+               
+        <action name="CommonCursoListaExport" class="action.common.CommonCursoListaExportAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="inputName">excelFile
+                </param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentType">${description}</param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>              
+                
+        <action name="CommonEncuestaPrintGroup" class="action.common.CommonEncuestaPrintGroupAction" method="execute">
+            <result type="stream">
+                <param name="contentType">application/pdf; charset=UTF-8</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment; filename="encuestas.pdf"</param>
+                <param name="bufferSize">2048</param>
+            </result>
+        </action>
+
+        <action name="CommonEncuestaPrintGroupCursos" class="action.common.CommonEncuestaPrintGroupCursosAction" method="execute">
+            <result type="stream">
+                <param name="contentType">application/pdf; charset=UTF-8</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment; filename="encuestas.pdf"</param>
+                <param name="bufferSize">2048</param>
+            </result>
+        </action>        
+        
+        <action name="CommonMaterialDownLoadMaterial" class="action.common.CommonMaterialDownLoadMaterialAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonMaterialDownLoadMaterialOtros" class="action.common.CommonMaterialDownLoadMaterialOtrosAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonMensajeDownLoadFile" class="action.common.CommonMensajeDownLoadFileAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonMensajeDownLoadImg" class="action.common.CommonMensajeDownLoadImgAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonMensajeDownloadAttachFile" class="action.common.CommonMensajeDownloadAttachFileAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonCursoDefinicionExport" class="action.common.CommonCursoDefinicionExportAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <action name="CommonSolicitudDownLoadFile" class="action.common.CommonSolicitudDownLoadFileAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+
+        <action name="CommonSalaPrintHorario" class="action.common.CommonSalaPrintHorarioAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>       
+
+        <action name="CommonReportePrintResumen" class="action.common.CommonReportePrintResumenAction" method="execute">
+            <result name="success" type="jasper">
+                <param name="location">/WEB-INF/jasper/common/CommonReportesResumen.jasper</param>
+                <param name="dataSource">cursos</param>
+                <param name="reportParameters">report</param>
+                <param name="format">${format}</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+            </result>
+        </action>
+        
+        <action name="CommonMaterialPrintResumen" class="action.common.CommonMaterialPrintResumenAction" method="execute">
+            <result name="success" type="jasper">
+                <param name="location">/WEB-INF/jasper/common/CommonMaterialesResumen.jasper</param>
+                <param name="dataSource">cursos</param>
+                <param name="reportParameters">report</param>
+                <param name="format">${format}</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+            </result>
+        </action>          
+        
+        <action name="CommonCursoDefinicionPrint" class="action.common.CommonCursoDefinicionPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+                
+        <action name="CommonReporteExport" class="action.common.CommonReporteExportAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonEncuestaExport" class="action.common.CommonEncuestaExportAction"
+                method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonEncuestaPrint" class="action.common.CommonEncuestaPrintAction"
+                method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonProfesorCargaHistoricaExport" class="action.common.CommonProfesorCargaHistoricaExportAction"
+                method="execute">
+            <result name="success" type="stream">
+                <param name="inputName">excelFile
+                </param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentType">${description}</param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>                
+        
+        <action name="CommonCursoListaFotoPrint" class="action.common.CommonCursoListaFotoPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonCursoListaAsistenciaPrint" class="action.common.CommonCursoListaAsistenciaPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>                                        
+        
+        <action name="CommonMensajePrintMessage" class="action.common.CommonMensajePrintMessageAction" method="execute">
+            <result type="myStream"/>
+        </action>
+        
+        <action name="CommonAlumnoPrintLogInscripcion" class="action.common.CommonAlumnoPrintLogInscripcionAction"
+                method="execute">
+            <result type="myStream"/>
+        </action>
+        
+        <action name="CommonAlumnoPrintPersonales" class="action.common.CommonAlumnoPrintPersonalesAction"
+                method="execute">
+            <result type="myStream"/>
+        </action>
+
+        <action name="CommonAlumnoHorarioInscripcionPrint"
+                class="action.common.CommonAlumnoHorarioInscripcionPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>               
+        
+        <action name="CommonHorarioPrint" class="action.common.CommonHorarioPrintAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="CommonAlumnoPrintCalidades" class="action.common.CommonAlumnoPrintCalidadesAction"
+                method="execute">
+            <result type="myStream"/>
+        </action>
+        <action name="CommonAlumnoPrintCurriculares" class="action.common.CommonAlumnoPrintCurricularesAction"
+                method="execute">
+            <result type="myStream"/>
+        </action>
+        <action name="CommonAlumnoPrintMatriculas" class="action.common.CommonAlumnoPrintMatriculasAction"
+                method="execute">
+            <result type="myStream"/>
+        </action>
+        <action name="CommonAlumnoPrintSituaciones" class="action.common.CommonAlumnoPrintSituacionesAction"
+                method="execute">
+           <result type="myStream"/>
+        </action>
+       
+        <action name="CommonAlumnoPrintCartola" class="action.common.CommonAlumnoPrintCartolaAction" method="execute">
+            <result type="myStream"/>
+        </action>
+        
+        <action name="CommonEstadisticasAlumnosxCalidad" class="action.common.CommonEstadisticasAlumnosxCalidadAction"
+                method="execute">
+            <result name="success" type="jasper">
+                <param name="location">/WEB-INF/jasper/common/CommonEstadisticaCalidad.jasper</param>
+                <param name="dataSource">nomina</param>
+                <param name="reportParameters">report</param>
+                <param name="format">XLS</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+        
+        <action name="CommonCursoGetBoletin" class="action.common.CommonCursoGetBoletinAction" method="execute">
+            <result name="success">
+                /jsp/common/curso/CommonCursoGetBoletin.jsp
+            </result>
+        </action>
+        
+        <action name="CommonCursoGetBoletinHorario" class="action.common.CommonCursoGetBoletinHorarioAction" method="execute">
+            <result name="success">
+                /jsp/common/horario/commonHorario.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRCurricularGetMencion" class="action.common.CommonRCurricularGetMencionAction" method="execute">
+            <result name="success">
+                /jsp/users/registradorCurricular/mencion/CommonRCurricularGetMencion.jsp
+            </result>
+        </action>
+        
+        <action name="CommonRCurricularCreateMencion" class="action.common.CommonRCurricularCreateMencionAction" method="execute">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+        
+        <action name="CommonRCurricularAddUnidad" class="action.common.CommonRCurricularAddUnidadAction" method="execute">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+        
+        <action name="CommonRCurricularDeleteUnidad" class="action.common.CommonRCurricularDeleteUnidadAction" method="execute">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+        
+        <action name="CommonRCurricularEditMencion" class="action.common.CommonRCurricularEditMencionAction" method="execute">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
+        </action>
+        
+        <action name="CommonSetAgnoSemAct" class="action.common.CommonAgnoSemAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionName}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="CommonExportControlAsistencia" class="action.common.CommonExportControlAsistenciaAction" method="execute">
+            <result name="success" type="stream">
+                <param name="inputName">excelFile
+                </param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentType">${description}</param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+        
+        <action name="CommonInscripcionResumenExport" class="action.common.CommonInscripcionResumenExportAction" method="execute">
+            <result name="success" type="stream">
+                <param name="inputName">excelFile
+                </param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="contentType">${description}</param>
+                <param name="bufferSize">512
+                </param>
+            </result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+        
+        <action name="CommonProfesorSolicitudPAF" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/paf/commonProfesorSolicitudPAF.jsp</result>
+        </action>
+        
+        <action name="CommonJefeCarreraSolicitudPAF" class="action.common.CommonPAFDownloadPAFAction" method="execute">
+            <!--result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result-->
+            <result type="myStream"/>
+            <!--result name="success">/jsp/common/paf/CommonJefeCarreraSolicitudPAF.jsp</result-->
+        </action>
+        
+        <action name="CommonDecanoSolicitudPAF" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/common/paf/CommonDecanoSolicitudPAF.jsp</result>
+        </action>
+        
+    </package>
+</struts>

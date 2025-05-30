@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TrequisitoLogroAdicional" table="TREQ_LOGRO_ADICIONAL">
+        <id name="trlaCod" type="int">
+            <column name="TRLA_COD" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="trlaDes" type="string">
+            <column length="70" name="TRLA_DES"/>
+        </property>        
+        <set fetch="select" inverse="true" lazy="true" name="calificacionLogroAdicionals"
+             table="CALIFICACION_LOGRO_ADICIONAL">
+            <key>
+                <column name="CLA_REQ" not-null="true" precision="2" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.CalificacionLogroAdicional"/>
+        </set>
+    </class>
+</hibernate-mapping>

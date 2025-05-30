@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.RespEnctaHist" table="RESP_ENCTA_HIST">
+        <composite-id class="domain.model.RespEnctaHistId" name="id">
+            <key-property name="respEnc" type="int">
+                <column name="RESP_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="respAgno" type="int">
+                <column name="RESP_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="respSem" type="int">
+                <column name="RESP_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="respAsign" type="int">
+                <column name="RESP_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="respElect" type="string">
+                <column length="1" name="RESP_ELECT"/>
+            </key-property>
+            <key-property name="respCoord" type="string">
+                <column length="1" name="RESP_COORD"/>
+            </key-property>
+            <key-property name="respSecc" type="int">
+                <column name="RESP_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="respPreg" type="int">
+                <column name="RESP_PREG" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="respResp" type="int">
+                <column name="RESP_RESP" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

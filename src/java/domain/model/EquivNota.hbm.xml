@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EquivNota" table="EQUIV_NOTA">
+        <id name="eqnCeroCien" type="int">
+            <column name="EQN_CERO_CIEN" precision="5" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="eqnUnoSiete" type="big_decimal">
+            <column name="EQN_UNO_SIETE" precision="5" scale="1"/>
+        </property>
+    </class>
+</hibernate-mapping>

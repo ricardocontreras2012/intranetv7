@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Tlogro" table="TLOGRO">
+        <id name="tloCod" type="int">
+            <column name="TLO_COD" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tloDes" type="string">
+            <column length="20" name="TLO_DES"/>
+        </property>
+        <property name="tloCorto" type="string">
+            <column length="1" name="TLO_CORTO"/>
+        </property>
+        <property name="tloProc" type="string">
+            <column length="50" name="TLO_PROC"/>
+        </property>
+        <property name="tloDesLarga" type="string">
+            <column length="50" name="TLO_DES_LARGA"/>
+        </property>
+        <property name="tloDesLargaPlural" type="string">
+            <column length="50" name="TLO_DES_LARGA_PLURAL"/>
+        </property>
+    </class>
+</hibernate-mapping>

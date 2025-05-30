@@ -1,0 +1,63 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package action.common;
+
+import static com.opensymphony.xwork2.Action.SUCCESS;
+import java.io.InputStream;
+import static service.common.CommonAlumnoSituacionGetFileService.service;
+import infrastructure.support.action.ActionValidationPosSupport;
+import infrastructure.util.ActionInputStreamUtil;
+
+/**
+ *
+ * @author Administrador
+ */
+public class CommonAlumnoSituacionGetFileAction extends ActionValidationPosSupport {
+
+    private static final long serialVersionUID = 1L;
+    ActionInputStreamUtil ais;
+
+    /**
+     * Method description
+     *
+     * @return Action status.
+     */
+    @Override
+    public String action() {
+
+        String retValue = SUCCESS;
+        try {
+            ais = service(getGenericSession(), getPos(), getKey());
+        } catch (Exception e) {
+            retValue = "exception";
+            this.addActionError(this.getText("error.file.not.found"));
+        }
+
+        return retValue;
+    }
+
+    /**
+     * Method description
+     *
+     * @return
+     */
+    @Override
+    public boolean isValidParam() throws IllegalArgumentException {
+        return isValidPos(getPos(), getGenericSession().getWorkSession(getKey()).getAluCar().getSituaciones());
+    }
+
+    public String getDescription() {
+        return ais.getContentType();
+    }
+
+    public String getName() {
+        return ais.getName();
+    }
+
+    public InputStream getInputStream() {
+        return ais.getInputStream();
+    }
+}

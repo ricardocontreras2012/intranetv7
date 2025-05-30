@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.RespuestaEncuestaDocente" table="RESPUESTA_ENCUESTA_DOCENTE">
+        <composite-id class="domain.model.RespuestaEncuestaDocenteId" name="id">
+            <key-property name="redRut" type="int">
+                <column name="RED_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="redCodCar" type="int">
+                <column name="RED_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="redAgnoIng" type="int">
+                <column name="RED_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="redSemIng" type="int">
+                <column name="RED_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="redAsign" type="int">
+                <column name="RED_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="redElect" type="string">
+                <column length="2" name="RED_ELECT"/>
+            </key-property>
+            <key-property name="redCoord" type="string">
+                <column length="1" name="RED_COORD"/>
+            </key-property>
+            <key-property name="redSecc" type="int">
+                <column name="RED_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="redAgno" type="int">
+                <column name="RED_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="redSem" type="int">
+                <column name="RED_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="redComp" type="string">
+                <column length="1" name="RED_COMP"/>
+            </key-property>
+            <key-property name="redRutProf" type="int">
+                <column name="RED_RUT_PROF" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="redEnc" type="int">
+                <column name="RED_ENC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="redPreg" type="int">
+                <column name="RED_PREG" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="redResp" type="int">
+                <column name="RED_RESP" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="redApartado" type="int">
+                <column name="RED_APARTADO" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="RED_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="RED_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="RED_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="RED_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.CursoProfesor" fetch="select" insert="false" name="cursoProfesor" update="false">
+            <column name="RED_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="RED_ELECT" not-null="true"/>
+            <column length="1" name="RED_COORD"/>
+            <column name="RED_SECC" precision="2" scale="0"/>
+            <column name="RED_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="RED_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="RED_COMP"/>
+            <column name="RED_RUT_PROF" not-null="true" precision="8" scale="0"/>
+        </many-to-one>
+        <property name="redCorrel" type="int">
+            <column name="RED_CORREL" precision="9" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

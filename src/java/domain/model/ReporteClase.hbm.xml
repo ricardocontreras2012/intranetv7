@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ReporteClase" table="REPORTE_CLASE">
+        <composite-id class="domain.model.ReporteClaseId" name="id">
+            <key-property name="rclaAsign" type="int">
+                <column name="RCLA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="rclaElect" type="string">
+                <column length="2" name="RCLA_ELECT"/>
+            </key-property>
+            <key-property name="rclaCoord" type="string">
+                <column length="1" name="RCLA_COORD"/>
+            </key-property>
+            <key-property name="rclaSecc" type="int">
+                <column name="RCLA_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="rclaAgno" type="int">
+                <column name="RCLA_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="rclaSem" type="int">
+                <column name="RCLA_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="rclaComp" type="string">
+                <column length="1" name="RCLA_COMP"/>
+            </key-property>
+            <key-property name="rclaDia" type="string">
+                <column length="1" name="RCLA_DIA"/>
+            </key-property>
+            <key-property name="rclaModulo" type="int">
+                <column name="RCLA_MODULO" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="rclaFecClase" type="timestamp">
+                <column length="7" name="RCLA_FEC_CLASE"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="RCLA_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="RCLA_ELECT" not-null="true"/>
+            <column length="1" name="RCLA_COORD"/>
+            <column name="RCLA_SECC" precision="2" scale="0"/>
+            <column name="RCLA_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="RCLA_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="RCLA_COMP"/>
+        </many-to-one>
+        <property name="rclaFecGen" type="timestamp">
+            <column length="7" name="RCLA_FEC_GEN"/>
+        </property>
+        <property name="rclaFecRecupera" type="timestamp">
+            <column length="7" name="RCLA_FEC_RECUPERA"/>
+        </property>
+        <property name="rclaObApren" type="string">
+            <column length="1000" name="RCLA_OB_APREN"/>
+        </property>
+        <property name="rclaContenido" type="string">
+            <column length="1000" name="RCLA_CONTENIDO"/>
+        </property>
+        <property name="rclaMetodo" type="string">
+            <column length="1000" name="RCLA_METODO"/>
+        </property>
+        <property name="rclaObs" type="string">
+            <column length="1000" name="RCLA_OBS"/>
+        </property>
+        <property name="rclaSesion" type="int">
+            <column name="RCLA_SESION" precision="4" scale="0"/>
+        </property>
+        <property name="rclaAttach" type="string">
+            <column length="500" name="RCLA_ATTACH"/>
+        </property>
+    </class>
+</hibernate-mapping>

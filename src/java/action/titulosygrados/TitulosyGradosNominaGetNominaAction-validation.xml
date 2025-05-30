@@ -1,0 +1,27 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="nomina">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+    </field>
+    <field name="agno">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1900
+            </param>
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+    <field name="tipo">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="int">
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+</validators>

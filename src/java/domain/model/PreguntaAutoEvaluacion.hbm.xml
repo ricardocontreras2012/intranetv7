@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.PreguntaAutoEvaluacion" table="PREGUNTA_AUTOEVAL_DOCENTE">
+        <composite-id class="domain.model.PreguntaAutoEvaluacionId" name="id">
+            <key-property name="padEnc" type="int">
+                <column name="PAD_ENC" precision="3" scale="0"/>
+            </key-property>
+            <key-property name="padPreg" type="int">
+                <column name="PAD_PREG" precision="2" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.EncuestaDocente" fetch="select" insert="false" name="encuestaDocente" update="false">
+            <column name="PAD_ENC" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="padDes" type="string">
+            <column length="250" name="PAD_DES"/>
+        </property>
+
+    </class>
+</hibernate-mapping>

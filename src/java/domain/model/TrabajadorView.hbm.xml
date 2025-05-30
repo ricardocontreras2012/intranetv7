@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class dynamic-update="false" name="domain.model.TrabajadorView" table="TRABAJADOR">
+    <id name="traRut" type="int">
+      <column name="TRA_RUT" precision="8" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="traDv" type="string">
+      <column length="1" name="TRA_DV"/>
+    </property>
+    <property name="traPaterno" type="string">
+      <column length="50" name="TRA_PATERNO"/>
+    </property>
+    <property name="traMaterno" type="string">
+      <column length="50" name="TRA_MATERNO"/>
+    </property>
+    <property name="traNombre" type="string">
+      <column length="50" name="TRA_NOMBRE"/>
+    </property>
+    <property name="traNombreSimple" type="string">
+      <column length="150" name="TRA_NOMBRE_SIMPLE"/>
+    </property>
+    <property name="traEmail" type="string">
+      <column length="50" name="TRA_EMAIL"/>
+    </property>
+    <property name="traSexo" type="string">
+      <column length="1" name="TRA_SEXO"/>
+    </property>
+  </class>
+</hibernate-mapping>

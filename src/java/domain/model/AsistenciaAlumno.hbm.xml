@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.AsistenciaAlumno" table="ASISTENCIA_ALUMNO">
+        <id name="asaCorrel" type="int">
+            <column name="ASA_CORREL" precision="7" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="asaFecha" type="timestamp">
+            <column length="7" name="ASA_FECHA"/>
+        </property>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="true" name="curso" update="true">
+            <column name="ASA_ASIGN" precision="10" scale="0"/>
+            <column length="1" name="ASA_ELECT"/>
+            <column length="1" name="ASA_COORD"/>
+            <column name="ASA_SECC" precision="2" scale="0"/>
+            <column name="ASA_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="ASA_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="ASA_COMP"/>
+        </many-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="nomina" table="ASISTENCIA_ALUMNO_NOMINA">
+            <key>
+                <column name="AAN_CORREL" not-null="true" precision="7" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.AsistenciaAlumnoNomina"/>
+        </set>
+    </class>
+</hibernate-mapping>

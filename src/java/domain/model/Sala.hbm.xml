@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Sala" table="SALA">
+        <id name="salaNum" type="string">
+            <column length="12" name="SSA_ID"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="salaDescrip" type="string">
+            <column length="100" name="SSA_DESCRIPCION"/>
+        </property>
+        <property name="salaCapacidad" type="int">
+            <column name="SSA_CAPACIDAD" precision="3" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="unidad" update="false">
+            <column name="SSA_UNIDAD_DIURNO" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="unidadVesp" update="false">
+            <column name="SSA_UNIDAD_VESP" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="horarios" table="HORARIO">
+            <key>
+                <column length="20" name="HOR_SALA"/>
+            </key>
+            <one-to-many class="domain.model.Horario"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.LogSolicitud" table="LOG_SOLICITUD">
+        <id name="logCorrel" type="int">
+            <column name="LOG_CORREL" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="domain.model.EstadoSolicitud" fetch="select" insert="true" name="estadoSolicitud" update="true">
+            <column name="LOG_ESTADO" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tsolicitud" fetch="select" insert="true" name="tsolicitud" update="true">
+            <column name="LOG_TIPO" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="logFecha" type="timestamp">
+            <column length="7" name="LOG_FECHA"/>
+        </property>
+        <property name="logUser" type="string">
+            <column length="50" name="LOG_USER"/>
+        </property>
+        <property name="logResolucion" type="string">
+            <column length="1" name="LOG_RESOLUCION"/>
+        </property>
+        <property name="logFolio" type="int">
+            <column name="LOG_FOLIO" precision="7" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

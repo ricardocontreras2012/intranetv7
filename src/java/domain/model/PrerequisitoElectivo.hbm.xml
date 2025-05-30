@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.PrerequisitoElectivo" table="PREREQUISITO_ELECTIVO">
+        <composite-id class="domain.model.PrerequisitoElectivoId" name="id">
+            <key-property name="preeAsign" type="int">
+                <column name="PREE_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="preeElect" type="string">
+                <column length="1" name="PREE_ELECT"/>
+            </key-property>
+            <key-property name="preeAgno" type="int">
+                <column name="PREE_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="preeSem" type="int">
+                <column name="PREE_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="preeAsignPre" type="int">
+                <column name="PREE_ASIGN_PRE" precision="7" scale="0"/>
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

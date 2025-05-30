@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ComentarioEncuestaDocente" table="COMENTARIO_ENCUESTA_DOCENTE">
+        <id name="cedCorrel" type="int">
+            <column name="CED_CORREL" precision="7" scale="0"/>
+        </id>
+        <property name="cedComen1" type="string">
+            <column length="500" name="CED_COMEN1"/>
+        </property>
+        <property name="cedComen2" type="string">
+            <column length="500" name="CED_COMEN2"/>
+        </property>
+        <property name="cedComen3" type="string">
+            <column length="500" name="CED_COMEN3"/>
+        </property>
+        <property name="cedCorrelAlu" type="int">
+            <column name="CED_CORREL_ALU" precision="9" scale="0"/>
+        </property>
+        <property name="cedRut" type="int">
+            <column name="CED_RUT" precision="9" scale="0"/>
+        </property> 
+        <many-to-one class="domain.model.EncuestaDocente" fetch="select" insert="true" name="encuestaDocente" update="false">
+            <column name="CED_ENC" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.CursoProfesor" fetch="select" insert="true" name="cursoProfesor" update="false">
+            <column name="CED_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="CED_ELECT"/>
+            <column length="1" name="CED_COORD"/>
+            <column name="CED_SECC" precision="2" scale="0"/>
+            <column name="CED_AGNO" precision="4" scale="0"/>
+            <column name="CED_SEM" precision="1" scale="0"/>            
+            <column length="1" name="CED_COMP"/>
+            <column name="CED_RUT_PROF" precision="8" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

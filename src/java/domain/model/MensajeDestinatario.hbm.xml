@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.MensajeDestinatario" table="MENSAJE_DESTINATARIO">
+        <composite-id class="domain.model.MensajeDestinatarioId" name="id">
+            <key-property name="msgdCorrel" type="int">
+                <column name="MSGD_CORREL" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="msgdRutDest" type="int">
+                <column name="MSGD_RUT_DEST" precision="8" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Mensaje" fetch="select" insert="false" name="mensaje" update="false">
+            <column name="MSGD_CORREL" not-null="true" precision="9" scale="0"/>
+        </many-to-one>
+        <property name="msgdEstado" type="string">
+            <column length="1" name="MSGD_ESTADO"/>
+        </property>
+    </class>
+</hibernate-mapping>

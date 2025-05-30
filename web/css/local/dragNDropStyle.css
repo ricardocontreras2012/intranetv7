@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28-09-2023, 9:37:17
+    Author     : Javier
+*/
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+    display: none;
+}
+
+.box.has-advanced-upload {
+    background-color: white;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+
+    /*border: 3px dashed #0087F7;
+    border-radius: 5px;
+    background: #F3F4F5;*/
+    
+    min-height: 120px;
+    padding: 35px;
+    box-sizing: border-box;
+}
+.box__file {
+    opacity: 0;
+}
+.box.has-advanced-upload .box__dragndrop {
+    display: inline;
+}
+.box.is-dragover {
+  background-color: grey;
+}
+.box.is-uploading .box__input {
+  visibility: none;
+}
+.box.is-uploading .box__uploading {
+  display: block;
+}
+.modal-header {
+    color: white;
+    background-color: #00a499;
+}
+#errorMessage .upLoadExito {
+    color: green;
+}
+#errorMessage .upLoadFallo {
+    color: red;
+}

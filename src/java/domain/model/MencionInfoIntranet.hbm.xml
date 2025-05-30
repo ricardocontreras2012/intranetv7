@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-03-2011 04:53:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.MencionInfoIntranet" table="MENCION_INFO_INTRANET">
+        <composite-id class="domain.model.MencionInfoIntranetId" name="id">
+            <key-property name="miniCodCar" type="int">
+                <column name="MINI_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="miniCodMen" type="int">
+                <column name="MINI_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+
+        <property name="miniUrlNormativa" type="string">
+            <column length="512" name="MINI_URL_NORMATIVA"/>
+        </property>
+        <property name="miniUrlCalendarioAct" type="string">
+            <column length="512" name="MINI_URL_CALENDARIO_ACT"/>
+        </property>
+        <many-to-one class="domain.model.Mencion" fetch="select" insert="false" name="mencion" update="false">
+            <column name="MINI_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="MINI_COD_MEN" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

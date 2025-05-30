@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.MensajeAttach" table="MENSAJE_ATTACH">
+        <composite-id class="domain.model.MensajeAttachId" name="id">
+            <key-property name="menaCorrelMsg" type="int">
+                <column name="MENA_CORREL_MSG" precision="9" scale="0"/>
+            </key-property>
+            <key-property name="menaCorrelAttach" type="int">
+                <column name="MENA_CORREL_ATTACH" precision="3" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Mensaje" fetch="select" insert="false" name="mensaje" update="false">
+            <column name="MENA_CORREL_MSG" not-null="true" precision="9" scale="0"/>
+        </many-to-one>
+        <property name="menaAttachFile" type="string">
+            <column length="500" name="MENA_ATTACH_FILE"/>
+        </property>
+    </class>
+</hibernate-mapping>

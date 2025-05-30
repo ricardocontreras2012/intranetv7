@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Administrativo" table="ADMINISTRATIVO">
+        <id name="admRut" type="int">
+            <column name="ADM_RUT" precision="8" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="admDv" type="string">
+            <column length="1" name="ADM_DV"/>
+        </property>
+        <property name="admPaterno" type="string">
+            <column length="40" name="ADM_PATERNO"/>
+        </property>
+        <property name="admMaterno" type="string">
+            <column length="40" name="ADM_MATERNO"/>
+        </property>
+        <property name="admNombre" type="string">
+            <column length="50" name="ADM_NOMBRE"/>
+        </property>
+        <property name="admEmail" type="string">
+            <column length="256" name="ADM_Email"/>
+        </property>
+        <property name="admLastLogin" type="timestamp">
+            <column length="7" name="ADM_LAST_LOGIN"/>
+        </property>
+    </class>
+</hibernate-mapping>

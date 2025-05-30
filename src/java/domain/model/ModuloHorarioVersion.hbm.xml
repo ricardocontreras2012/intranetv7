@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ModuloHorarioVersion" table="MODULO_HORARIO_VERSION">
+        <id name="modvVersion" type="int">
+            <column name="MODV_VERSION" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="modvAnoInicio" type="int">
+            <column name="MODV_ANO_INICIO" precision="4" scale="0"/>
+        </property>
+        <property name="modvSemInicio" type="int">
+            <column name="MODV_SEM_INICIO" precision="4" scale="0"/>
+        </property>
+        <property name="modvAnoTermino" type="int">
+            <column name="MODV_ANO_TERMINO" precision="4" scale="0"/>
+        </property>
+        <property name="modvSemTermino" type="int">
+            <column name="MODV_SEM_TERMINO" precision="4" scale="0"/>
+        </property>        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 03-05-2011 07:30:51 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Empleador" table="EMPLEADOR">
+        <id name="empRut" type="int">
+            <column name="EMP_RUT" precision="10" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one name="actividadEconomica" class="domain.model.ActividadEconomica" fetch="select">
+            <column name="EMP_ACTIVIDAD_ECONOMICA" precision="2" scale="0" />
+        </many-to-one>
+        <property name="empDv" type="string">
+            <column length="1" name="EMP_DV"/>
+        </property>
+        <property name="empNombre" type="string">
+            <column length="200" name="EMP_NOMBRE"/>
+        </property>
+        <property name="empTipoEmpleador" type="string">
+            <column name="EMP_TIPO_EMPLEADOR" length="2" />
+        </property>
+    </class>
+</hibernate-mapping>

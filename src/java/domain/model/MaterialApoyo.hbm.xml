@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.MaterialApoyo" table="MATERIAL_APOYO">
+        <id name="matCorrel" type="int">
+            <column name="MAT_CORREL" precision="9" scale="0"/>
+            <!--generator class="sequence">
+                    <param name="sequence">SEQ_DOCUMENTO</param>
+            </generator-->
+            <generator class="assigned"/>
+        </id>
+        <property name="matArchivo" type="string">
+            <column length="500" name="MAT_ARCHIVO"/>
+        </property>
+        <property name="matDescripcion" type="string">
+            <column length="500" name="MAT_DESCRIPCION"/>
+        </property>
+        <property name="matFechaHabilitacion" type="timestamp">
+            <column length="7" name="MAT_FECHA_HABILITACION"/>
+        </property>
+        <property name="matFechaArchivado" type="timestamp">
+            <column length="7" name="MAT_FECHA_ARCHIVADO"/>
+        </property>
+        <property name="matRutAutor" type="int">
+            <column name="MAT_RUT_AUTOR" precision="8" scale="0"/>
+        </property>
+        <property name="matPerfil" type="string">
+            <column length="2" name="MAT_PERFIL"/>
+        </property>
+        <property name="matTipo" type="int">
+            <column name="MAT_TIPO" precision="2" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="true" name="curso" update="true">
+            <column name="MAT_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="MAT_ELECT" not-null="true"/>
+            <column length="1" name="MAT_COORD" not-null="true"/>
+            <column name="MAT_SECC" not-null="true" precision="2" scale="0"/>
+            <column name="MAT_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="MAT_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="MAT_COMP" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tmaterial" fetch="select" insert="false" name="tmaterial" update="false">
+            <column name="MAT_TIPO" precision="2" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

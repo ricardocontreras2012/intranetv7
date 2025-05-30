@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query callable="true" name="GetHorarioSalaFunction">
+        { ? = call sala_pkg.get_horario_sala(?,?,?) }
+    </sql-query>
+    <sql-query name="ReservarSalaFunction">
+        { call sala_pkg.reservar_sala_periodo(?,?,?,?,?,?,?) }
+    </sql-query>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+.trash-icon {
+    position: fixed;
+    bottom: 20px; /* 20px desde la parte inferior */
+    left: 50%;  /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino para asegurar que esté perfectamente centrado */
+    font-size: 80px; /* Tamaño grande del ícono */
+    color: #ffffff; /* Color blanco para el icono */
+    background-color: #f44336; /* Fondo rojo suave (menos intenso) */
+    padding: 15px; /* Espaciado interno para hacer el ícono más grande */
+    border-radius: 50%; /* Hace que el icono tenga forma circular */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
+    cursor: pointer; /* Cambia el cursor a un puntero para indicar que es interactivo */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+    transition: all 0.3s ease; /* Transición suave para cambios de estilo */
+}
+
+/* Efecto hover para el icono de basurero */
+.trash-icon:hover {
+    background-color: #e53935; /* Fondo más oscuro al pasar el mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+    transform: translateX(-50%) scale(1.1); /* Agranda el icono ligeramente */
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="rut">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">0
+            </param>
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+    <field name="password">
+        <field-validator type="requiredstring">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[[a-zA-Z0-9]+]]>
+            </param>
+            <message key="error.valueAlfaNumeric.parameter"/>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="minLength">6
+            </param>
+            <param name="maxLength">16
+            </param>
+            <message key="error.rangeLength.parameter"/>
+        </field-validator>
+    </field>
+    <field name="userType">
+        <field-validator type="requiredstring">
+            <message key="error.required.parameter"/>
+        </field-validator>
+    </field>
+</validators>

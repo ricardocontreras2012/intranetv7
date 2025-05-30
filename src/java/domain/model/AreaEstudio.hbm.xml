@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14-08-2014 03:40:23 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.AreaEstudio" table="AREA_ESTUDIO">
+        <id name="aestId" type="java.lang.Integer">
+            <column name="AEST_ID" precision="9" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="aestNombre" type="string">
+            <column name="AEST_NOMBRE" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

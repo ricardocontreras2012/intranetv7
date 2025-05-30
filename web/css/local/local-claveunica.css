@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-07-2023, 7:12:40
+    Author     : Administrador
+*/
+
+/* Boton estilo de base */
+.btn-cu {
+display: inline-block;
+font-family: Roboto, sans-serif;
+font-weight: 400;
+text-align: center;
+vertical-align: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+border-radius: 0;
+}
+
+/*Icono ClaveÚnica*/
+.btn-cu .cl-claveunica {
+display: inline;
+float: left;
+text-indent: -9999px;
+background-image: url("/intranetv7/images/local/claveunica.svg")
+}
+/*Texto ClaveÚnica*/
+.btn-cu .texto {
+padding-left: 3px;
+text-decoration: underline;
+}
+
+/* Tamaño M */
+.btn-cu.btn-m {
+width: 160px;
+min-width: 160px;
+max-height: 42px;
+padding: 8px 18px 8px 15px !important;
+font-size: 16px;
+line-height: 1.6em;
+}
+.btn-cu.btn-m .cl-claveunica {
+display: inline-block;
+width: 24px;
+height: 24px;
+background-size: 24px 24px;
+}
+
+.btn-cu.btn-color-estandar {
+background-color: #0F69C4;
+color: #FFF;
+}
+
+.btn-cu.btn-color-estandar:hover {
+background-color: #0C549C;
+color: #FFF;
+}
+
+.btn-cu.btn-color-estandar:active {
+background-color: #093F75;
+color: #FFF;
+}
+
+.btn-cu.btn-color-estandar:focus {
+background-color: #0C549C;
+color: #FFF;
+outline: 1px dashed #000;
+}
+
+
+

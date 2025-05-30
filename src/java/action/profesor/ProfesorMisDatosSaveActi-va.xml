@@ -1,0 +1,33 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="fechaNac">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="localDate">
+            <message key="error.valueDate.parameter"/>
+        </field-validator>
+    </field>
+    <field name="email">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="emailList">
+            <param name="trim">true</param>
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+    <field name="comuna">
+        <field-validator type="required">
+            <message key="error.required.parameter"/>
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">0
+            </param>
+            <message key="error.value.parameter"/>
+        </field-validator>
+    </field>
+</validators>

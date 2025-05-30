@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Externo" table="EXTERNO">
+        <id name="extRut" type="int">
+            <column name="EXT_RUT" precision="8" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="extDv" type="string">
+            <column length="1" name="EXT_DV"/>
+        </property>
+        <property name="extPaterno" type="string">
+            <column length="40" name="EXT_PATERNO"/>
+        </property>
+        <property name="extMaterno" type="string">
+            <column length="40" name="EXT_MATERNO"/>
+        </property>
+        <property name="extNombre" type="string">
+            <column length="50" name="EXT_NOMBRE"/>
+        </property>
+        <property name="extEmail" type="string">
+            <column length="256" name="EXT_EMAIL"/>
+        </property>
+        <property name="extLastLogin" type="timestamp">
+            <column length="7" name="EXT_LAST_LOGIN"/>
+        </property>
+    </class>
+</hibernate-mapping>

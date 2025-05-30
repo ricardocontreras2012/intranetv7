@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="domain.model.DocenteHorario" table="DOCENTE_HORARIO">
+    <id name="dhorId" type="int">
+      <column name="DHOR_ID" precision="9" scale="0"/>
+      <generator class="assigned"/>
+    </id>
+    <many-to-one class="domain.model.CursoActualView" fetch="select" insert="false" name="cursoActual" update="false">
+      <column name="DHOR_ASIGN" not-null="true" precision="7" scale="0"/>
+      <column length="2" name="DHOR_ELECT" not-null="true"/>
+      <column length="1" name="DHOR_COORD" not-null="true"/>
+      <column name="DHOR_SECC" not-null="true" precision="2" scale="0"/>
+      <column name="DHOR_AGNO" not-null="true" precision="4" scale="0"/>
+      <column name="DHOR_SEM" not-null="true" precision="1" scale="0"/>
+      <column length="1" name="DHOR_COMP" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+      <column name="DHOR_ASIGN" not-null="true" precision="7" scale="0"/>
+      <column length="2" name="DHOR_ELECT" not-null="true"/>
+      <column length="1" name="DHOR_COORD" not-null="true"/>
+      <column name="DHOR_SECC" not-null="true" precision="2" scale="0"/>
+      <column name="DHOR_AGNO" not-null="true" precision="4" scale="0"/>
+      <column name="DHOR_SEM" not-null="true" precision="1" scale="0"/>
+      <column length="1" name="DHOR_COMP" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="domain.model.Profesor" fetch="select" insert="false" name="profesor" update="false">
+      <column name="DHOR_RUT" not-null="true" precision="8" scale="0"/>
+    </many-to-one>
+    <many-to-one class="domain.model.Ayudante" fetch="select" insert="false" name="ayudante" update="false">
+      <column name="DHOR_RUT" not-null="true" precision="8" scale="0"/>
+    </many-to-one>
+    <property name="dhorDia" type="string">
+      <column length="1" name="DHOR_DIA"/>
+    </property>
+    <property name="dhorModulo" type="integer">
+      <column name="DHOR_MODULO" precision="1" scale="0"/>
+    </property>
+    <property name="dhorTipo" type="string">
+      <column length="1" name="DHOR_TIPO"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <sql-query callable="true" name="CalificacionesMallaFunction">
+        { ? = call malla_grafica_pkg.get_malla_calificaciones(?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="InscripcionesMallaFunction">
+        { ? = call malla_grafica_pkg.get_malla_inscripciones(?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="NotasAsinaturaMallaFunction">
+        { ? = call malla_grafica_pkg.get_malla_calif_asignatura(?,?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query name="CreditosNivelFunction">
+        <return-scalar column="creditos"  type="java.lang.Integer" />
+        <![CDATA[select get_creditos_nivel(?,?,?,?,?,?) as creditos from dual]]>
+    </sql-query>
+    <sql-query name="SctNivelFunction">
+        <return-scalar column="sct"  type="java.lang.Integer" />
+        <![CDATA[select get_sct_nivel(?,?,?,?,?,?) as sct from dual]]>
+    </sql-query>
+    <sql-query callable="true" name="PorConvalidarMallaFunction">
+        { ? = call get_por_convalidar(?,?,?,?,?,?) }
+    </sql-query>
+    <sql-query callable="true" name="PorConvalidarSolicitudMallaFunction">
+        { ? = call get_por_convalidar_solicitud(?,?,?,?,?,?,?) }
+    </sql-query>
+</hibernate-mapping>

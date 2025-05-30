@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Electivo" table="ELECTIVO">
+        <composite-id class="domain.model.ElectivoId" name="id">
+            <key-property name="eleAsign" type="int">
+                <column name="ELE_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="eleElect" type="string">
+                <column length="1" name="ELE_ELECT"/>
+            </key-property>
+            <key-property name="eleAgno" type="int">
+                <column name="ELE_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="eleSem" type="int">
+                <column name="ELE_SEM" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        
+        <many-to-one class="domain.model.Asignatura" fetch="select" insert="false" name="asignatura" update="false">
+            <column name="ELE_ASIGN" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        
+        <many-to-one class="domain.model.Area" fetch="select" insert="false" name="area" update="false">
+            <column name="ELE_AREA" not-null="false" precision="5" scale="0"/>
+        </many-to-one>
+        
+        <property name="minor" type="int">
+            <column name="ELE_ASIGN_MINOR" precision="10" scale="0"/>
+        </property>
+            
+        <property name="eleNom" type="string">
+            <column length="120" name="ELE_NOM"/>
+        </property>
+        
+    </class>
+</hibernate-mapping>

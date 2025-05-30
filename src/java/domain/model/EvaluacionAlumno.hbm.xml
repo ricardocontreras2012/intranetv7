@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EvaluacionAlumno" table="EVALUACION_ALUMNO">
+        <id name="evaluCorrel" type="int">
+            <column name="EVALU_CORREL" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="evaluNota" type="big_decimal">
+            <column name="EVALU_NOTA" precision="2" scale="1"/>
+        </property>
+        <many-to-one class="domain.model.Evaluacion" fetch="select" insert="false" name="evaluacion" update="false">
+            <column name="EVALU_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="EVALU_ELECT"/>
+            <column length="1" name="EVALU_COORD"/>
+            <column name="EVALU_SECC" precision="2" scale="0"/>
+            <column name="EVALU_AGNO" precision="4" scale="0"/>
+            <column name="EVALU_SEM" precision="1" scale="0"/>
+            <column length="1" name="EVALU_COMP"/>
+            <column name="EVALU_TEVA" precision="2" scale="0"/>
+            <column name="EVALU_EVAL" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="EVALU_RUT" precision="8" scale="0"/>
+            <column name="EVALU_COD_CAR" precision="5" scale="0"/>
+            <column name="EVALU_AGNO_ING" precision="4" scale="0"/>
+            <column name="EVALU_SEM_ING" precision="1" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

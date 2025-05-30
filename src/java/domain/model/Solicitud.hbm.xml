@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-09-2010 05:58:22 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Solicitud" table="SOLICITUD">
+        <id name="solFolio" type="int">
+            <column name="SOL_FOLIO" precision="9" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="domain.model.Tsolicitud" fetch="select" insert="true" name="tsolicitud" update="true">
+            <column name="SOL_TIPO" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.EstadoSolicitud" fetch="select" insert="true" name="estadoSolicitud" update="true">
+            <column name="SOL_ESTADO" precision="2" scale="0"/>
+        </many-to-one>
+        
+        <property name="solResolucion" type="string">
+            <column length="1" name="SOL_RESOLUCION"/>
+        </property>
+        <property name="solMotivo" type="string">
+            <column length="2000" name="SOL_MOTIVO"/>
+        </property>
+        <property name="solInformeRegCurr" type="string">
+            <column length="2000" name="SOL_INFORME_REG_CURR"/>
+        </property>
+        <property name="solSolicita" type="string">
+            <column length="2000" name="SOL_SOLICITA"/>
+        </property>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="true" name="aluCar" update="true">
+            <column name="SOL_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="SOL_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="SOL_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="SOL_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <property name="solRespuesta" type="string">
+            <column length="2000" name="SOL_RESPUESTA"/>
+        </property>
+        <property name="solAgno" type="int">
+            <column name="SOL_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="solSem" type="int">
+            <column name="SOL_SEM" precision="1" scale="0"/>
+        </property>
+        <property name="solFecha" type="timestamp">
+            <column length="7" name="SOL_FECHA"/>
+        </property>
+        <property name="solFechaInicio" type="timestamp">
+            <column length="7" name="SOL_FECHA_INICIO"/>
+        </property>
+        <property name="solFechaTermino" type="timestamp">
+            <column length="7" name="SOL_FECHA_TERMINO"/>
+        </property>
+    </class>
+</hibernate-mapping>

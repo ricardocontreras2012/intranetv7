@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.AsistenciaAlumnoNomina" table="ASISTENCIA_ALUMNO_NOMINA">
+        <composite-id class="domain.model.AsistenciaAlumnoNominaId" name="id">
+            <key-property name="aanRut" type="int">
+                <column name="AAN_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="aanCodCar" type="int">
+                <column name="AAN_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="aanAgnoIng" type="int">
+                <column name="AAN_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="aanSemIng" type="int">
+                <column name="AAN_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="aanCorrel" type="int">
+                <column name="AAN_CORREL" precision="7" scale="0"/>
+            </key-property>
+        </composite-id>
+        <property name="aanAsistio" type="int">
+            <column name="AAN_ASISTIO" precision="1" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.AsistenciaAlumno" fetch="select" insert="false" name="asistenciaAlumno"
+                     update="false">
+            <column name="AAN_CORREL" not-null="true" precision="7" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="AAN_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="AAN_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="AAN_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="AAN_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

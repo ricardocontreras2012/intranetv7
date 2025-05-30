@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.LogActa" table="LOG_ACTA">
+        <composite-id name="id" class="domain.model.LogActaId">
+            <key-property name="logFolio" type="int">
+                <column name="LOG_FOLIO" precision="7" scale="0" />
+            </key-property>
+            <key-property name="logAgno" type="short">
+                <column name="LOG_AGNO" precision="4" scale="0" />
+            </key-property>
+            <key-property name="logSem" type="boolean">
+                <column name="LOG_SEM" precision="1" scale="0" />
+            </key-property>
+            <key-property name="logEstado" type="string">
+                <column name="LOG_ESTADO" length="1" />
+            </key-property>
+            <key-property name="logFecha" type="date">
+                <column name="LOG_FECHA" length="7" />
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.EstadoActa" fetch="select" name="estadoActa" insert="false" update="false">
+            <column name="LOG_ESTADO" length="1"/>
+        </many-to-one>
+        <property name="logUsuario" type="string">
+            <column name="LOG_USUARIO" length="32" />
+        </property>
+    </class>
+</hibernate-mapping>

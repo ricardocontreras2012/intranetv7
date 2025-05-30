@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ParametroMencion" table="PARAMETRO_MENCION">
+        <composite-id class="domain.model.ParametroMencionId" name="id">
+            <key-property name="pmenCodCar" type="int">
+                <column name="PMEN_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="pmenCodMen" type="int">
+                <column name="PMEN_COD_MEN" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+
+
+        <property name="pmenAgnoAct" type="integer">
+            <column name="PMEN_AGNO_ACT" precision="4" scale="0"/>
+        </property>
+        <property name="pmenSemAct" type="integer">
+            <column name="PMEN_SEM_ACT" precision="1" scale="0"/>
+        </property>
+
+        <property name="pmenAgnoCal" type="integer">
+            <column name="PMEN_AGNO_CAL" precision="4" scale="0"/>
+        </property>
+        <property name="pmenSemCal" type="integer">
+            <column name="PMEN_SEM_CAL" precision="1" scale="0"/>
+        </property>
+        <property name="pmenAgnoEnc" type="integer">
+            <column name="PMEN_AGNO_ENC" precision="4" scale="0"/>
+        </property>
+        <property name="pmenSemEnc" type="integer">
+            <column name="PMEN_SEM_ENC" precision="1" scale="0"/>
+        </property>
+        <property name="pmenAgnoIns" type="integer">
+            <column name="PMEN_AGNO_INS" precision="4" scale="0"/>
+        </property>
+        <property name="pmenSemIns" type="integer">
+            <column name="PMEN_SEM_INS" precision="1" scale="0"/>
+        </property>
+        <property name="pmenInsPostInicio" type="timestamp">
+            <column length="7" name="PMEN_INS_POST_INICIO"/>
+        </property>
+        <property name="pmenInsPostTermino" type="timestamp">
+            <column length="7" name="PMEN_INS_POST_TERMINO"/>
+        </property>
+        <property name="pmenInsAdmTermino" type="timestamp">
+            <column length="7" name="PMEN_INS_ADM_TERMINO"/>
+        </property>
+        <property name="pmenInsModTermino" type="timestamp">
+            <column length="7" name="PMEN_INS_MOD_TERMINO"/>
+        </property>
+        <property name="pmenInsEliminTermino" type="timestamp">
+            <column length="7" name="PMEN_INS_ELIMIN_TERMINO"/>
+        </property>
+        <property name="pmenInsLock" type="string">
+            <column length="7" name="PMEN_INS_LOCK"/>
+        </property>
+        <property name="pmenInsMaxAsign" type="integer">
+            <column name="PMEN_INS_MAX_ASIGN" precision="2" scale="0"/>
+        </property>
+        <property name="pmenInsMaxNivelAdelanto" type="integer">
+            <column name="PMEN_INS_MAX_NIVEL_ADELANTO" precision="2" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

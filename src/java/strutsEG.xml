@@ -1,0 +1,148 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+<!--
+    Document   : strutsEgresado.xml
+    Created on : 25 de enero de 2012, 04:26 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetEgresadoInterceptors" extends="struts-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        EG
+                    </param>
+                    <param name="excludeActions">
+                        EgresadoLogin, CustomError
+                    </param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        EG
+                    </param>
+                </interceptor-ref>
+
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="noActivo">/jsp/message/messageActionError.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetEgresadoActions" extends="intranetEgresadoInterceptors">
+        <action name="EgresadoLogin" class="action.egresado.EgresadoLoginAction" method="execute">
+            <result name="success">/jsp/users/egresado/id/egresadoIdHomePage.jsp
+            </result>
+            <result name="multiplesIngresos">/jsp/users/egresado/id/egresadoIdIngresos.jsp
+            </result>
+            <result name="error">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="input">/jsp/common/id/commonIdLogIn.jsp
+            </result>
+            <result name="exception">/jsp/message/messageReload.jsp
+            </result>
+        </action>
+        <!--
+
+            ID
+        -->
+        <action name="EgresadoLoginSeleccionarIngreso" class="action.egresado.EgresadoLoginSeleccionarIngresoAction"
+                method="execute">
+            <result name="success">/jsp/users/egresado/id/egresadoIdHomePage.jsp
+            </result>
+        </action>
+        <action name="EgresadoGetMisDatos" class="action.alumno.AlumnoMisDatosGetMisDatosAction" method="execute">
+            <result name="success">/jsp/users/egresado/id/egresadoIdMisDatos.jsp
+            </result>
+        </action>
+        <action name="EgresadoMisDatosSave" class="action.alumno.AlumnoMisDatosSaveAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="input">/jsp/users/egresado/id/egresadoIdMisDatos.jsp</result>
+            <result name="error">/jsp/users/egresado/id/egresadoIdMisDatos.jsp</result>
+        </action>
+
+<!-- Laborales -->
+        <action name="EgresadoLaboralesGetMisDatos" class="action.egresado.EgresadoLaboralesGetMisDatosAction" method="execute">
+            <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp
+            </result>
+        </action>
+        <action name="EgresadoLaboralesViewLaboral" class="action.egresado.EgresadoLaboralesViewLaboralAction" method="execute">
+            <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesViewLaboral.jsp</result>
+            <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoLaboralesNewLaboral" class="action.egresado.EgresadoLaboralesNewLaboralAction" method="execute">
+            <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesNewLaboral.jsp</result>
+            <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoLaboralesUpdateLaboral" class="action.egresado.EgresadoLaboralesUpdateLaboralAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="input">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+            <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoLaboralesSaveLaboral" class="action.egresado.EgresadoLaboralesSaveLaboralAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="input">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+            <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoLaboralesDeleteLaboral" class="action.egresado.EgresadoLaboralesDeleteLaboralAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
+        </action>
+
+<!-- Estudios -->
+        <action name="EgresadoEstudiosGetMisDatos" class="action.egresado.EgresadoEstudiosGetMisDatosAction" method="execute">
+            <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp
+            </result>
+        </action>
+        <action name="EgresadoEstudiosViewEstudio" class="action.egresado.EgresadoEstudiosViewEstudioAction" method="execute">
+            <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosViewEstudio.jsp</result>
+            <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoEstudiosNewEstudio" class="action.egresado.EgresadoEstudiosNewEstudioAction" method="execute">
+            <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosNewEstudio.jsp</result>
+            <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoEstudiosUpdateEstudio" class="action.egresado.EgresadoEstudiosUpdateEstudioAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="input">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+            <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoEstudiosSaveEstudio" class="action.egresado.EgresadoEstudiosSaveEstudioAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="input">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+            <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+        </action>
+        <action name="EgresadoEstudiosDeleteEstudio" class="action.egresado.EgresadoEstudiosDeleteEstudioAction" method="execute">
+            <result name="success">/jsp/message/messageActionMessage.jsp</result>
+            <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
+        </action>
+
+
+
+    </package>
+</struts>

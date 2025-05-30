@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ActaConvalidacionAsignatura" table="ACTA_CONVALIDACION_ASIGNATURA">
+        <composite-id class="domain.model.ActaConvalidacionAsignaturaId" name="id">
+            <key-property name="acoaFolio" type="int">
+                <column name="ACOA_FOLIO" precision="7" scale="0"/>
+            </key-property>
+            <key-property name="acoaAsign" type="int">
+                <column name="ACOA_ASIGN" precision="10" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.ActaConvalidacion" fetch="select" insert="false" name="actaConvalidacion" update="false">
+            <column name="ACOA_FOLIO" not-null="true" precision="7" scale="0"/>
+        </many-to-one>
+        <property name="acoaCursada" type="string">
+            <column length="500" name="ACOA_CURSADA"/>
+        </property>
+        <property name="acoaNota" type="big_decimal">
+            <column name="ACOA_NOTA" precision="2" scale="1"/>
+        </property>
+
+    </class>
+</hibernate-mapping>

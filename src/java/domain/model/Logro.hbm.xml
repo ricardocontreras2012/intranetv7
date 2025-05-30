@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Logro" table="LOGRO">
+        <id name="logrCod" type="int">
+            <column name="LOGR_COD" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="logrDes" type="string">
+            <column length="50" name="LOGR_DES"/>
+        </property>
+        <many-to-one class="domain.model.Tlogro" fetch="select" insert="false" name="tlogro" update="false">
+            <column name="LOGR_TLOGRO" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="logrValor" type="int">
+            <column name="LOGR_VALOR" precision="7" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

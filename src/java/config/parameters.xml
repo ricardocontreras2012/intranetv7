@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+    <comment>System Parameters</comment>
+    <entry key="AccesoWEB">W</entry>
+    
+    <entry key="backgroundLogoPath">/images/local/background/usach-letter-size.png</entry>
+    <entry key="universityLogoPath1">/images/local/logo-usach/logo_usach.jpg</entry>    
+    <entry key="universityLogoPath2">/images/local/logo-usach/logo_usach2.jpg</entry>
+    <entry key="universityLogoPath3">/images/local/logo-usach/logo_usach4.png</entry>
+    <entry key="somosUsachPath">/images/local/certificado/somos_usach.png</entry>
+    <entry key="universityLogoUsach">/images/local/logo-usach/logo-usach.png</entry>
+    <entry key="contratoBckDirectory">/images/local/contrato/</entry>
+
+    <entry key="ExtencionFotos">.jpg</entry>
+    <entry key="FotoDummy">/images/local/fotoDummy.jpg</entry>
+    <entry key="LargoNombreArchivoFoto">10</entry>
+    <entry key="PadNombreArchivoFotos">0</entry>
+
+    <entry key="dateShortFormat">dd/MM</entry>
+    <entry key="dateFormat">dd/MM/yyyy</entry>
+    <entry key="dateFullFormat">dd/MM/yyyy HH:mm:ss</entry>
+
+    <entry key="certificateBackgroundCleanImagePath">/images/local/certificado/fondo_certificado.jpg</entry>
+    <entry key="certificateBackgroundImagePath">/images/local/certificado/fac_###_certificado.jpg</entry>
+    <entry key="constanciaBackgroundImagePath">/images/local/certificado/fac_###_constancia.jpg</entry>
+    <entry key="certificateRegistradorImagePath">/images/local/certificado/fac_###_registrador.jpg</entry>
+    <entry key="certificateCleanBackgroundImagePath">/images/local/certificado/fondo_certificado.jpg</entry>
+    <entry key="certificateBarcodeBlankImagePath">/images/local/certificado/cert_barcode_blank.jpg</entry>
+    <entry key="certificateBackgroundImageISO27001Path">/images/local/certificado/ISO_27001.jpg</entry>
+    <entry key="certificateTimbreProgramasPath">/images/local/certificado/timbre-programas.jpg</entry>
+    <entry key="certificateRegularCode">1</entry>
+    <entry key="certificateEgresadoCode">3</entry>
+    <entry key="certificateLogroEnTramiteCode">4</entry>
+    <entry key="certificateISOCode">60</entry>
+    <entry key="certificateI4CodeTitulosyGrados">21</entry>
+    <entry key="certificateI3Code">7</entry>
+
+    <entry key="messageToMaxLength">3000</entry>
+    <entry key="messageSubjectMaxLength">250</entry>
+
+    <entry key="keySessionLength">20</entry>
+    <entry key="passwordUserMinLength">6</entry>
+    <entry key="passwordUserPlusMinLength">10</entry>
+
+    <entry key="actaGradoTituloBackgroundImagePath">/images/acta_grado_titulo.jpg</entry>
+</properties>

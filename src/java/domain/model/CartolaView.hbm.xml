@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="domain.model.CartolaView" table="CARTOLA">
+    <composite-id class="domain.model.CartolaViewId" name="id">
+      <key-property name="cartRut" type="int">
+        <column name="CART_RUT" precision="8" scale="0"/>
+      </key-property>
+      <key-property name="cartCodCar" type="int">
+        <column name="CART_COD_CAR" precision="5" scale="0"/>
+      </key-property>
+      <key-property name="cartAgnoIng" type="int">
+        <column name="CART_AGNO_ING" precision="4" scale="0"/>
+      </key-property>
+      <key-property name="cartSemIng" type="int">
+        <column name="CART_SEM_ING" precision="1" scale="0"/>
+      </key-property>
+      <key-property name="cartAsign" type="int">
+        <column name="CART_ASIGN" precision="10" scale="0"/>
+      </key-property>
+      <key-property name="cartElect" type="string">
+        <column length="2" name="CART_ELECT"/>
+      </key-property>
+      <key-property name="cartAgno" type="int">
+        <column name="CART_AGNO" precision="4" scale="0"/>
+      </key-property>
+      <key-property name="cartSem" type="int">
+        <column name="CART_SEM" precision="1" scale="0"/>
+      </key-property>
+    </composite-id>
+    <property name="cartCoord" type="string">
+      <column length="1" name="CART_COORD"/>
+    </property>
+    <property name="cartSecc" type="int">
+      <column name="CART_SECC" precision="2" scale="0"/>
+    </property>
+    <property name="cartNombreCompleto" type="string">
+      <column length="200" name="CART_NOMBRE_COMPLETO"/>
+    </property>
+    <property name="cartNotaFin" type="string">
+      <column length="20" name="CART_NOTA_FIN"/>
+    </property>
+    <property name="cartSitAlu" type="string">
+      <column length="1" name="CART_SIT_ALU"/>
+    </property>
+    <property name="cartProc" type="string">
+      <column length="50" name="CART_PROC"/>
+    </property>
+    <property name="cartHC" type="int">
+      <column name="CART_HC" precision="3" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>

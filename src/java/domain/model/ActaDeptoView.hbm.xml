@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="domain.model.ActaDeptoView" table="ACTA_DEPTO">
+    <composite-id class="domain.model.ActaCalificacionId" name="id">
+      <key-property name="acalFolio" type="int">
+        <column name="ACAL_FOLIO" precision="7" scale="0"/>
+      </key-property>
+      <key-property name="acalAgno" type="int">
+        <column name="ACAL_AGNO" precision="4" scale="0"/>
+      </key-property>
+      <key-property name="acalSem" type="int">
+        <column name="ACAL_SEM" precision="1" scale="0"/>
+      </key-property>
+    </composite-id>
+    <property name="profesores" type="string">
+      <column length="500" name="PROFESORES"/>
+    </property>
+    <property name="nombreCurso" type="string">
+      <column length="500" name="NOMBRE_CURSO"/>
+    </property>
+    <property name="tcrCtip" type="int">
+      <column name="TCR_CTIP" precision="3" scale="0"/>
+    </property>
+    <property name="espCod" type="int">
+      <column name="ESP_COD" precision="3" scale="0"/>
+    </property>
+    <property name="carRegimen" type="string">
+      <column length="1" name="CAR_REGIMEN"/>
+    </property>
+    <property name="lreaRut" type="int">
+      <column name="LREA_RUT" precision="8" scale="0"/>
+    </property>
+    <property name="labUser" type="string">
+      <column length="5" name="LAB_USER"/>
+    </property>
+    <property name="acalAsign" type="int">
+      <column name="ACAL_ASIGN" precision="10" scale="0"/>
+    </property>
+    <property name="acalElect" type="string">
+      <column length="2" name="ACAL_ELECT"/>
+    </property>
+    <property name="acalCoord" type="string">
+      <column length="1" name="ACAL_COORD"/>
+    </property>
+    <property name="acalSecc" type="int">
+      <column name="ACAL_SECC" precision="2" scale="0"/>
+    </property>
+    <property name="acalTipo" type="string">
+      <column length="1" name="ACAL_TIPO"/>
+    </property>
+    <property name="estado" type="string">
+      <column length="50" name="EAC_DES"/>
+    </property>
+  </class>
+</hibernate-mapping>

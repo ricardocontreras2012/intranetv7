@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.EncuestaDocente" table="ENCUESTA_DOCENTE">
+        <id name="edoNro" type="int">
+            <column name="EDO_NRO" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="edoAgno" type="int">
+            <column name="EDO_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="edoCiclo" type="int">
+            <column name="EDO_CICLO" precision="1" scale="0"/>
+        </property>
+        <property name="edoNroPreg" type="int">
+            <column name="EDO_NRO_PREG" precision="2" scale="0"/>
+        </property>
+        <property name="edoTipo" type="string">
+            <column length="1" name="EDO_TIPO"/>
+        </property>
+        <set inverse="true" name="encuestaCarreras">
+            <key>
+                <column name="EDC_ENC" not-null="true" precision="2" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.EncuestaDocenteCarrera"/>
+        </set>                
+    </class>
+</hibernate-mapping>

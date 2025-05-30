@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>Mail Properties</comment>
+    <entry key="mail.smtp.host">smtp.gmail.com</entry>
+    <entry key="mail.smtp.starttls.enable">true</entry>
+    <entry key="mail.smtp.port">587</entry>
+
+    <entry key="users">21</entry>
+
+    <entry key="mail.smtp.mail.sender0">intranetfae@usach.cl</entry>
+    <entry key="mail.smtp.user0">intranetfae@usach.cl</entry>
+    <entry key="mail.smtp.password0">wkgucffdllvqwvts</entry>
+
+    <entry key="mail.smtp.mail.sender1">intranetfae1@usach.cl</entry>
+    <entry key="mail.smtp.user1">intranetfae1@usach.cl</entry>
+    <entry key="mail.smtp.password1">cbwhftepwrvzuvsy</entry>
+
+    <entry key="mail.smtp.mail.sender2">intranetfae2@usach.cl</entry>
+    <entry key="mail.smtp.user2">intranetfae2@usach.cl</entry>
+    <entry key="mail.smtp.password2">xgutwvnlnnphvvzk</entry>
+
+    <entry key="mail.smtp.mail.sender3">intranetfae3@usach.cl</entry>
+    <entry key="mail.smtp.user3">intranetfae3@usach.cl</entry>
+    <entry key="mail.smtp.password3">wafzsajybgbruzne</entry>
+
+    <entry key="mail.smtp.mail.sender4">intranetfae4@usach.cl</entry>
+    <entry key="mail.smtp.user4">intranetfae4@usach.cl</entry>
+    <entry key="mail.smtp.password4">qkhvnqkybnbjsxud</entry>
+
+    <entry key="mail.smtp.mail.sender5">intranetfae5@usach.cl</entry>
+    <entry key="mail.smtp.user5">intranetfae5@usach.cl</entry>
+    <entry key="mail.smtp.password5">alnkwqrhuhevlnhl</entry>
+
+    <entry key="mail.smtp.mail.sender6">intranetfae6@usach.cl</entry>
+    <entry key="mail.smtp.user6">intranetfae6@usach.cl</entry>
+    <entry key="mail.smtp.password6">ftdblycxfyvfxhnq</entry>
+
+    <entry key="mail.smtp.mail.sender7">intranetfae7@usach.cl</entry>
+    <entry key="mail.smtp.user7">intranetfae7@usach.cl</entry>
+    <entry key="mail.smtp.password7">lletvxwrjemysjvq</entry>
+
+    <entry key="mail.smtp.mail.sender8">intranetfae8@usach.cl</entry>
+    <entry key="mail.smtp.user8">intranetfae8@usach.cl</entry>
+    <entry key="mail.smtp.password8">kksinagfszthbdmj</entry>
+
+    <entry key="mail.smtp.mail.sender9">intranetfae@usach.cl</entry>
+    <entry key="mail.smtp.user9">intranetfae@usach.cl</entry>
+    <entry key="mail.smtp.password9">wkgucffdllvqwvts</entry>
+
+    <entry key="mail.smtp.mail.sender10">intranetfae1@usach.cl</entry>
+    <entry key="mail.smtp.user10">intranetfae1@usach.cl</entry>
+    <entry key="mail.smtp.password10">cbwhftepwrvzuvsy</entry>
+
+    <entry key="mail.smtp.mail.sender11">intranetfae2@usach.cl</entry>
+    <entry key="mail.smtp.user11">intranetfae2@usach.cl</entry>
+    <entry key="mail.smtp.password11">xgutwvnlnnphvvzk</entry>
+
+    <entry key="mail.smtp.mail.sender12">intranetfae3@usach.cl</entry>
+    <entry key="mail.smtp.user12">intranetfae3@usach.cl</entry>
+    <entry key="mail.smtp.password3">wafzsajybgbruzne</entry>
+
+    <entry key="mail.smtp.mail.sender13">intranetfae13@usach.cl</entry>
+    <entry key="mail.smtp.user13">intranetfae13@usach.cl</entry>
+    <entry key="mail.smtp.password13">zqcesoevagpnhrtk</entry>
+
+    <entry key="mail.smtp.mail.sender14">intranetfae14@usach.cl</entry>
+    <entry key="mail.smtp.user14">intranetfae14@usach.cl</entry>
+    <entry key="mail.smtp.password14">uajqlomnqvcnbbyg</entry>
+
+    <entry key="mail.smtp.mail.sender15">intranetfae15@usach.cl</entry>
+    <entry key="mail.smtp.user15">intranetfae15@usach.cl</entry>
+    <entry key="mail.smtp.password15">ojouezrkrifaybks</entry>
+
+    <entry key="mail.smtp.mail.sender16">intranetfae16@usach.cl</entry>
+    <entry key="mail.smtp.user16">intranetfae16@usach.cl</entry>
+    <entry key="mail.smtp.password16">yvtjoydbxipqqcoy</entry>
+
+    <entry key="mail.smtp.mail.sender17">intranetfae17@usach.cl</entry>
+    <entry key="mail.smtp.user17">intranetfae17@usach.cl</entry>
+    <entry key="mail.smtp.password17">lolxhcxvwmhyiydc</entry>
+
+    <entry key="mail.smtp.mail.sender18">intranetfae18@usach.cl</entry>
+    <entry key="mail.smtp.user18">intranetfae18@usach.cl</entry>
+    <entry key="mail.smtp.password18">cucezqsrsbhzodvl</entry>
+
+    <entry key="mail.smtp.mail.sender19">intranetfae19@usach.cl</entry>
+    <entry key="mail.smtp.user19">intranetfae19@usach.cl</entry>
+    <entry key="mail.smtp.password19">xytedlvqjgugbwnz</entry>
+
+    <entry key="mail.smtp.mail.sender20">intranetfae20@usach.cl</entry>
+    <entry key="mail.smtp.user20">intranetfae20@usach.cl</entry>
+    <entry key="mail.smtp.password20">zevaotdmibsbnznv</entry>
+
+    <entry key="mail.smtp.auth">true</entry>
+</properties>

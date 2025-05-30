@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Justificativo" table="JUSTIFICATIVO">
+        <id name="jusSol" type="int">
+            <column name="JUS_SOL" precision="10" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <many-to-one class="domain.model.Solicitud" fetch="select" name="solicitud" insert="false" update="false">
+            <column name="JUS_SOL" precision="9" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="JUS_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="2" name="JUS_ELECT" not-null="true"/>
+            <column length="1" name="JUS_COORD"/>
+            <column name="JUS_SECC" precision="2" scale="0"/>
+            <column name="JUS_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="JUS_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="JUS_COMP"/>
+        </many-to-one>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="JUS_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="JUS_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="JUS_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="JUS_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tevaluacion" fetch="select" insert="false" name="tevaluacion" update="false">
+            <column name="JUS_TEVA" not-null="true" precision="2" scale="0"/>
+        </many-to-one>
+        <property name="jusFecha" type="timestamp">
+            <column length="7" name="JUS_FECHA"/>
+        </property>
+        <property name="jusEstado" type="string">
+            <column length="1" name="JUS_ESTADO"/>
+        </property>
+        <property name="jusMotivo" type="string">
+            <column length="500" name="JUS_MOTIVO"/>
+        </property>
+        <property name="jusEval" type="int">
+            <column name="JUS_EVAL" precision="2" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

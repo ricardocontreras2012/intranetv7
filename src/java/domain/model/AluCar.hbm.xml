@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.AluCar" table="ALU_CAR">
+        <composite-id class="domain.model.AluCarId" name="id">
+            <key-property name="acaRut" type="int">
+                <column name="ACA_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="acaCodCar" type="int">
+                <column name="ACA_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="acaAgnoIng" type="int">
+                <column name="ACA_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="acaSemIng" type="int">
+                <column name="ACA_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Alumno" fetch="select" insert="false" name="alumno" update="false">
+            <column name="ACA_RUT" not-null="true" precision="8" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tsacademica" fetch="select" name="tsacademica">
+            <column name="ACA_CSIT" precision="3" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Tcalidad" fetch="select" name="tcalidad">
+            <column name="ACA_CCAL" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Plan" fetch="select" insert="false" name="plan" update="false">
+            <column name="ACA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="ACA_COD_MEN" precision="1" scale="0"/>
+            <column name="ACA_COD_PLAN" precision="2" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.ParametroMencion" fetch="select" insert="false" name="parametroMencion" update="false">
+            <column name="ACA_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="ACA_COD_MEN" precision="1" scale="0"/>
+        </many-to-one>
+        <!--- En base de datos son realmente 1:1 -->
+        <many-to-one class="domain.model.Aaingreso" fetch="select" insert="false" name="aaingreso" update="false">
+            <column name="ACA_RUT" precision="8" scale="0"/>
+            <column name="ACA_COD_CAR" precision="5" scale="0"/>
+            <column name="ACA_AGNO_ING" precision="4" scale="0"/>
+            <column name="ACA_SEM_ING" precision="1" scale="0"/>
+        </many-to-one>
+        <!--- Fin En base de datos son realmente 1:1 -->
+        <property name="acaRanking" type="int">
+            <column name="ACA_RANKING" precision="5" scale="0"/>
+        </property>
+        <property name="acaPtjeRank" type="big_decimal">
+            <column name="ACA_PTJE_RANK" precision="9" scale="4"/>
+        </property>
+        <property name="acaAsigR2da" type="int">
+            <column name="ACA_ASIG_R2DA" precision="2" scale="0"/>
+        </property>
+        <property name="acaResol" type="int">
+            <column name="ACA_RESOL" precision="9" scale="0"/>
+        </property>
+        <property name="acaFecResol" type="timestamp">
+            <column length="7" name="ACA_FEC_RESOL"/>
+        </property>
+                        
+        <property name="acaCodMen" type="int">
+            <column name="ACA_COD_MEN" precision="1" scale="0"/>
+        </property>
+        <property name="acaCodPlan" type="int">
+            <column name="ACA_COD_PLAN" precision="2" scale="0"/>
+        </property>
+        
+         <property name="acaPromAnt" type="big_decimal">
+            <column name="ACA_PROM_ANT" precision="8" scale="5"/>
+        </property>
+        <property name="acaFaAnt" type="big_decimal">
+            <column name="ACA_FA_ANT" precision="6" scale="5"/>
+        </property>
+        <property name="acaFeAnt" type="big_decimal">
+            <column name="ACA_FE_ANT" precision="6" scale="5"/>
+        </property>                            
+    </class>
+</hibernate-mapping>

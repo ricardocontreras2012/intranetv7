@@ -1,0 +1,200 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsTeleTrabajo.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Felipe Gonzalez and Javier Frez
+-->
+<struts>
+    <package name="intranetTeleTrabajoInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        TT
+                    </param>
+                    <param name="excludeActions">CustomError, TeleTrabajoLogin</param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        TT
+                    </param>
+                </interceptor-ref>
+
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetTeleTrabajoActions" extends="intranetTeleTrabajoInterceptors">
+
+        <result-types>
+            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types> 
+
+        <action name="TeleTrabajoLogin" class="action.teletrabajo.TeleTrabajoLoginAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/id/teleTrabajoIdHomePage.jsp
+            </result>
+            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="relogin" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+            </result>
+            <result name="error">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="exception">/jsp/message/messageReload.jsp
+            </result>
+            <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
+        </action>
+        
+        <action name="TeleTrabajoLoginHome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/id/teleTrabajoIdHomePage.jsp
+            </result>
+        </action>
+        <action name="TeleTrabajoLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/id/teleTrabajoIdBienvenida.jsp
+            </result>
+        </action> 
+        
+        <action name="TeleTrabajoGetFuncionarios" class="action.teletrabajo.TeleTrabajoGetFuncionariosAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetFuncionarios.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoGetActividades" class="action.teletrabajo.TeleTrabajoGetActividadesAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoGetTareas" class="action.teletrabajo.TeleTrabajoGetTareasAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetTareas.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoGetMisTareas" class="action.teletrabajo.TeleTrabajoGetTareasAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMisTareas.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoGetEvidencia" class="action.teletrabajo.TeleTrabajoGetEvidenciaAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetEvidencia.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoGetMiEvidencia" class="action.teletrabajo.TeleTrabajoGetMiEvidenciaAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMiEvidencia.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoDownLoadEvidencia" class="action.teletrabajo.TeleTrabajoDownLoadEvidenciaAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">${contentType}</param>
+                <param name="contentDisposition">attachment;filename="${name}"</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result name="exception">/jsp/message/messageActionError.jsp</result>
+        </action>
+        
+        <action name="TeleTrabajoSaveActividad" class="action.teletrabajo.TeleTrabajoSaveActividadAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoUpdateEstadoActividad" class="action.teletrabajo.TeleTrabajoUpdateEstadoActividadAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoUpdateEstadoMiActividad" class="action.teletrabajo.TeleTrabajoUpdateEstadoMiActividadAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMisActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoRemoveActividad" class="action.teletrabajo.TeleTrabajoRemoveActividadAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoRemoveTarea" class="action.teletrabajo.TeleTrabajoRemoveTareaAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMisTareas.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoAsignarTeletrabajo" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/asignacion/teleTrabajoAsignacionConsola.jsp
+            </result>
+        </action> 
+        
+        <action name="TeleTrabajoAsignarGetHorario" class="action.teletrabajo.TeleTrabajoAsignarGetHorarioAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/asignacion/teleTrabajoAsignacionGetHorario.jsp</result>
+        </action>
+        
+        <action name="TeleTrabajoAddTarea" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/asignacion/teleTrabajoAsignacionTareaActividad.jsp          
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoSaveTarea" class="action.teletrabajo.TeleTrabajoSaveTareaAction" method="execute">            
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMisTareas.jsp
+            </result>
+        </action>                   
+        
+        <action name="TeleTrabajoGetMisActividades" class="action.teletrabajo.TeleTrabajoGetMisActividadesAction" method="execute">
+            <result name="success">/jsp/users/teleTrabajo/teleTrabajoGetMisActividades.jsp
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoUpLoadEvidencia" class="action.teletrabajo.TeleTrabajoUpLoadEvidenciaAction" method="execute">
+            <result type="json"/>
+        </action>
+        
+        <action name="TeleTrabajoDeleteEvidencia" class="action.teletrabajo.TeleTrabajoDeleteEvidenciaAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoEnviarRevisionMiActividad" class="action.teletrabajo.TeleTrabajoEnviarRevisionMiActividadAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">${actionCall}</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        
+        <action name="TeleTrabajoExportReporte" class="action.teletrabajo.TeleTrabajoExportReporteAction" method="execute">
+            <result type="myStream"/>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </action>
+        
+    </package>
+</struts>

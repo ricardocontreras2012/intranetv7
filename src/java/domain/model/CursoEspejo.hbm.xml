@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.CursoEspejo" table="CURSO_ESPEJO">
+        <composite-id class="domain.model.CursoEspejoId" name="id">
+            <key-property name="cesAsign" type="int">
+                <column name="CES_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="cesElect" type="string">
+                <column length="2" name="CES_ELECT"/>
+            </key-property>
+            <key-property name="cesCoord" type="string">
+                <column length="1" name="CES_COORD"/>
+            </key-property>
+            <key-property name="cesSecc" type="int">
+                <column name="CES_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="cesAgno" type="int">
+                <column name="CES_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="cesSem" type="int">
+                <column name="CES_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="cesComp" type="string">
+                <column length="1" name="CES_COMP"/>
+            </key-property>
+        </composite-id>
+
+        <property name="cesAsignTr" type="int">
+            <column name="CES_ASIGN_TR" precision="7" scale="0"/>
+        </property>
+        <property name="cesElectTr" type="string">
+            <column length="2" name="CES_ELECT_TR"/>
+        </property>
+        <property name="cesCoordTr" type="string">
+            <column length="1" name="CES_COORD_TR"/>
+        </property>
+        <property name="cesSeccTr" type="int">
+            <column name="CES_SECC_TR" precision="2" scale="0"/>
+        </property>
+        <property name="cesAgnoTr" type="int">
+            <column name="CES_AGNO_TR" precision="4" scale="0"/>
+        </property>
+        <property name="cesSemTr" type="int">
+            <column name="CES_SEM_TR" precision="1" scale="0"/>
+        </property>
+        <property name="cesCompTr" type="string">
+            <column length="1" name="CES_COMP_TR"/>
+        </property>
+
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="espejo" update="false">
+            <column name="CES_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="1" name="CES_ELECT" not-null="true"/>
+            <column length="1" name="CES_COORD"/>
+            <column name="CES_SECC" precision="2" scale="0"/>
+            <column name="CES_AGNO" not-null="true" precision="4" scale="0"/>
+            <column name="CES_SEM" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="CES_COMP" not-null="true"/>
+        </many-to-one>
+
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="transversal" update="false">
+            <column name="CES_ASIGN_TR" not-null="true" precision="7" scale="0"/>
+            <column length="1" name="CES_ELECT_TR" not-null="true"/>
+            <column length="1" name="CES_COORD_TR"/>
+            <column name="CES_SECC_TR" precision="2" scale="0"/>
+            <column name="CES_AGNO_TR" not-null="true" precision="4" scale="0"/>
+            <column name="CES_SEM_TR" not-null="true" precision="1" scale="0"/>
+            <column length="1" name="CES_COMP_TR" not-null="true"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

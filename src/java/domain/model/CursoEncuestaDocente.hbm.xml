@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.CursoEncuestaDocente" table="CURSO_ENCUESTA_DOCENTE">
+        <composite-id class="domain.model.CursoEncuestaDocenteId" name="id">
+            <key-property name="cedAsign" type="int">
+                <column name="CED_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="cedElect" type="string">
+                <column length="1" name="CED_ELECT"/>
+            </key-property>
+            <key-property name="cedCoord" type="string">
+                <column length="1" name="CED_COORD"/>
+            </key-property>
+            <key-property name="cedSecc" type="int">
+                <column name="CED_SECC" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="cedAgno" type="int">
+                <column name="CED_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="cedSem" type="int">
+                <column name="CED_SEM" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="cedComp" type="string">
+                <column length="1" name="CED_COMP"/>
+            </key-property>
+            <key-property name="cedPromCur" type="big_decimal">
+                <column name="CED_PROM_CUR" precision="2" scale="1"/>
+            </key-property>
+            <key-property name="cedProArea" type="big_decimal">
+                <column name="CED_PRO_AREA" precision="2" scale="1"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.Curso" fetch="select" insert="false" name="curso" update="false">
+            <column name="CED_ASIGN" precision="10" scale="0"/>
+            <column length="2" name="CED_ELECT"/>
+            <column length="1" name="CED_COORD"/>
+            <column name="CED_SECC" precision="2" scale="0"/>
+            <column name="CED_AGNO" precision="4" scale="0"/>
+            <column name="CED_SEM" precision="1" scale="0"/>
+            <column length="1" name="CED_COMP"/>
+        </many-to-one>
+        <many-to-one class="domain.model.EncuestaDocente" fetch="select" insert="false" name="encuestaDocente" update="false">
+            <column name="CED_ENC" precision="7" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

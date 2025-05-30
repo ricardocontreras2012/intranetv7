@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Unidad" table="UNIDAD">
+        <id name="uniCod" type="int">
+            <column name="UNI_COD" precision="10" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="uniNom" type="string">
+            <column length="500" name="UNI_NOM"/>
+        </property>
+        <property name="uniCC" type="int">
+            <column name="UNI_CENTRO_COSTO" precision="3" scale="0"/>
+        </property>
+        <property name="uniUrl" type="string">
+            <column length="1000" name="UNI_URL"/>
+        </property>
+        <property name="uniTipo" type="int">
+            <column name="UNI_TIPO" precision="4" scale="0"/>
+        </property>
+        <property name="uniColorSala" type="string">
+            <column length="6" name="UNI_COLOR_SALA"/>
+        </property>
+        <property name="atributoUniAcadMayor" type="int">
+            <column name="UNI_ACAD_MAYOR" precision="10" scale="0"/>
+        </property>
+        <property name="atributoUniAdmMayor" type="int">
+            <column name="UNI_ADM_MAYOR" precision="10" scale="0"/>
+        </property>
+        <property name="atributoUniMayor" type="int">
+            <column name="UNI_MAYOR" precision="10" scale="0"/>
+        </property>
+        <property name="atributoUniSuperior" type="int">
+            <column name="UNI_SUPERIOR" precision="10" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="uniAcadMayor" update="false">
+            <column name="UNI_ACAD_MAYOR" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="uniAdmMayor" update="false">
+            <column name="UNI_ADM_MAYOR" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="uniMayor" update="false">
+            <column name="UNI_MAYOR" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Unidad" fetch="select" insert="false" name="uniSuperior" update="false">
+            <column name="UNI_SUPERIOR" not-null="true" precision="10" scale="0"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

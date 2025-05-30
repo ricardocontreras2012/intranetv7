@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{dd-MM-yyyy HH:mm:ss} %5p %c{1}:%L - %m%n"/>
+            <!--PatternLayout pattern="%d %-5p [%t] %C{2} (%F:%L) - %m%n"/-->
+            <RegexFilter regex=".*\b( IP:)\b.*" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Console>
+
+        <Jdbc name="databaseAppender" tableName="LOG_ACTION">
+            <ConnectionFactory class="infrastructure.util.PoolLoggingUtil" method="getConnection" />
+
+            <!--Column name="LOG_ID" pattern="%u" />
+            <Column name="ENTRY_DATE" isEventTimestamp="true" />
+            <Column name="LOGGER" pattern="%logger" />
+            <Column name="LOG_LEVEL" pattern="%level" />
+            <Column name="MESSAGE" pattern="%m" /-->
+
+            <Column name="LOG_DATE" isEventTimestamp="true" />
+            <Column name="LOG_LEVEL" pattern="%level" />
+            <Column name="LOG_MESSAGE" pattern="%m" />
+
+            <RegexFilter regex=".*\b( IP:)\b.*" onMatch="ACCEPT" onMismatch="DENY"/>
+        </Jdbc>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="com.zaxxer.hikari.HikariConfig" level="debug" additivity="true">
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+        <Logger name="com.opensymphony.xwork2" level="info"/>
+        <Logger name="org.apache.struts2" level="info"/>
+        <Logger name="org.apache.struts2.edit" level="debug"/>
+        
+        <Root level="info">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="databaseAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Ayudante" table="AYUDANTE">
+        <id name="ayuRut" type="int">
+            <column name="AYU_RUT" precision="8" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="ayuDv" type="string">
+            <column length="1" name="AYU_DV"/>
+        </property>
+        <property name="ayuPaterno" type="string">
+            <column length="40" name="AYU_PATERNO"/>
+        </property>
+        <property name="ayuMaterno" type="string">
+            <column length="40" name="AYU_MATERNO"/>
+        </property>
+        <property name="ayuNombre" type="string">
+            <column length="60" name="AYU_NOMBRE"/>
+        </property>
+        <property name="ayuTipo" type="string">
+            <column length="1" name="AYU_TIPO"/>
+        </property>
+        <property name="ayuEmail" type="string">
+            <column length="256" name="AYU_EMAIL"/>
+        </property>
+        <property name="ayuLastLogin" type="timestamp">
+            <column length="7" name="AYU_LAST_LOGIN"/>
+        </property>
+        <property name="ayuDirec" type="string">
+            <column length="120" name="AYU_DIREC"/>
+        </property>
+        <property name="ayuFono" type="string">
+            <column length="30" name="AYU_FONO"/>
+        </property>
+         <many-to-one class="domain.model.Comuna" fetch="select" name="comuna">
+            <column name="AYU_COMUNA" precision="5" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Region" fetch="select" name="regionByAyuRegion">
+            <column name="AYU_REGION" precision="2" scale="0"/>
+        </many-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="cursos" table="CURSO_AYUDANTE">
+            <key>
+                <column name="CAYU_RUT" not-null="true" precision="8" scale="0"/>
+            </key>
+            <one-to-many class="domain.model.CursoAyudante"/>
+        </set>
+    </class>
+</hibernate-mapping>

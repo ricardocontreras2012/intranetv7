@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-mar-2009 15:19:41 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+  <class name="domain.model.RespEnctaCursoView" table="RESP_ENCTA_DOC_CURSO">
+    <id name="pregNro" type="int">
+      <column name="PREG_NRO" precision="5" scale="2"/>
+    </id>
+    <property name="pregDes" type="string">
+      <column length="150" name="PREG_DES"/>
+    </property>
+    <property name="prom" type="big_decimal">
+      <column name="PROM" precision="2" scale="1"/>
+    </property>
+    <property name="desv" type="big_decimal">
+      <column name="DESV" precision="2" scale="1"/>
+    </property>
+    <property name="minimo" type="int">
+      <column name="MINIMO" precision="1" scale="0"/>
+    </property>
+    <property name="maximo" type="int">
+      <column name="MAXIMO" precision="1" scale="0"/>
+    </property>
+    <property name="numResp" type="int">
+      <column name="NUM_RESP" precision="3" scale="0"/>
+    </property>
+    <property name="cedPromCur" type="big_decimal">
+      <column name="CED_PROM_CUR" precision="2" scale="1"/>
+    </property>
+    <property name="cedPromArea" type="big_decimal">
+      <column name="CED_PROM_AREA" precision="2" scale="1"/>
+    </property>
+    <property name="respAsign" type="java.lang.Integer">
+      <column name="RESP_ASIGN" precision="10" scale="0"/>
+    </property>
+    <property name="respElect" type="string">
+      <column length="1" name="RESP_ELECT"/>
+    </property>
+    <property name="respCoord" type="string">
+      <column length="1" name="RESP_COORD"/>
+    </property>
+    <property name="respSecc" type="java.lang.Integer">
+      <column name="RESP_SECC" precision="2" scale="0"/>
+    </property>
+    <property name="respAgno" type="int">
+      <column name="RESP_AGNO" precision="4" scale="0"/>
+    </property>
+    <property name="respSem" type="int">
+      <column name="RESP_SEM" precision="1" scale="0"/>
+    </property>
+    <property name="respProf" type="int">
+      <column name="RESP_RUT_PROF" precision="8" scale="0"/>
+    </property>
+    <property name="edoTipo" type="string">
+      <column length="1" name="EDO_TIPO"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Tramite" table="TRAMITE">
+        <id name="traTramite" type="int">
+            <column name="TRA_TRAMITE" precision="2" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="traDescripcion" type="string">
+            <column length="70" name="TRA_DESCRIPCION"/>
+        </property>
+        <property name="traPrefijo" type="string">
+            <column length="4" name="TRA_PREFIJO"/>
+        </property>
+        <property name="traDescripcionCorta" type="string">
+            <column length="3" name="TRA_DESCRIPCION_CORTA"/>
+        </property>
+        <property name="traExcentoPago" type="java.lang.Character">
+            <column length="1" name="TRA_EXCENTO_PAGO"/>
+        </property>
+    </class>
+</hibernate-mapping>

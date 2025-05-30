@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.Calificacion" table="CALIFICACION">
+        <composite-id class="domain.model.CalificacionId" name="id">
+            <key-property name="calRut" type="int">
+                <column name="CAL_RUT" precision="8" scale="0"/>
+            </key-property>
+            <key-property name="calCodCar" type="int">
+                <column name="CAL_COD_CAR" precision="5" scale="0"/>
+            </key-property>
+            <key-property name="calAgnoIng" type="int">
+                <column name="CAL_AGNO_ING" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="calSemIng" type="int">
+                <column name="CAL_SEM_ING" precision="1" scale="0"/>
+            </key-property>
+            <key-property name="calAsign" type="int">
+                <column name="CAL_ASIGN" precision="10" scale="0"/>
+            </key-property>
+            <key-property name="calElect" type="string">
+                <column length="1" name="CAL_ELECT"/>
+            </key-property>
+            <key-property name="calAgno" type="int">
+                <column name="CAL_AGNO" precision="4" scale="0"/>
+            </key-property>
+            <key-property name="calSem" type="int">
+                <column name="CAL_SEM" precision="1" scale="0"/>
+            </key-property>
+        </composite-id>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="CAL_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="CAL_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="CAL_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="CAL_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Asignatura" fetch="select" insert="false" name="asignatura" update="false">
+            <column name="CAL_ASIGN" not-null="true" precision="7" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.Electivo" fetch="select" insert="false" name="electivo" update="false">
+            <column name="CAL_ASIGN" not-null="true" precision="7" scale="0"/>
+            <column length="1" name="CAL_ELECT" not-null="true"/>
+            <column name="CAL_AGNO" precision="4" scale="0"/>
+            <column name="CAL_SEM" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.ProcedenciaCalificacion" fetch="select" insert="true" name="procedenciaCalificacion"
+                     update="true">
+            <column name="CAL_PROC" not-null="true" precision="3" scale="0"/>
+        </many-to-one>
+        <property name="calCoord" type="string">
+            <column length="1" name="CAL_COORD"/>
+        </property>
+        <property name="calSecc" type="int">
+            <column name="CAL_SECC" precision="2" scale="0"/>
+        </property>
+        <property name="calNotaFin" type="big_decimal">
+            <column name="CAL_NOTA_FIN" precision="4" scale="1"/>
+        </property>
+        <property name="calConcep" type="string">
+            <column length="5" name="CAL_CONCEP"/>
+        </property>
+        <property name="calSitAlu" type="string">
+            <column length="1" name="CAL_SIT_ALU" not-null="true"/>
+        </property>
+        <property name="calSeq" type="java.lang.Long">
+            <column name="CAL_SEQ" precision="10" scale="0"/>
+        </property>
+        <property name="calDocto" type="int">
+            <column name="CAL_DOCTO" precision="7" scale="0"/>
+        </property>
+        <property name="calElectAsign" type="int">
+            <column name="CAL_ELECT_ASIGN" precision="10" scale="0"/>
+        </property>
+        <property name="calElectElect" type="string">
+            <column length="2" name="CAL_ELECT_ELECT"/>
+        </property>
+        <property name="calElectFlag" type="string">
+            <column length="1" name="CAL_ELECT_FLAG"/>
+        </property>
+    </class>
+</hibernate-mapping>

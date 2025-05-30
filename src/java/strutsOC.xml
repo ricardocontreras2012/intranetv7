@@ -1,0 +1,202 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsOficinaCurricular.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetOficinaCurricularInterceptors" extends="struts-default, jasperreports-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        OC
+                    </param>
+                    <param name="excludeActions">CustomError</param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        OC
+                    </param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetOficinaCurricularActions" extends="intranetOficinaCurricularInterceptors">
+
+        <action name="OficinaCurricularLogin" class="action.oficinacurricular.OficinaCurricularLoginAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularLoginHome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/id/oficinaCurricularIdHomePage.jsp
+            </result>
+        </action>
+        <action name="OfCurricularLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/id/oficinaCurricularIdBienvenida.jsp
+            </result>
+        </action>
+
+        <!--
+            ACTA
+        -->
+
+        <action name="OficinaCurricularActaConsultar"
+                class="action.oficinacurricular.OficinaCurricularActaConsultarAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaConsultarDummy</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaConsultarDummy"
+                class="action.common.CommonGetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaConsultarGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaConsultarGetActasxSemAgno"
+                class="action.common.CommonSetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaConsultarGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaConsultarGetActas"
+                class="action.oficinacurricular.OficinaCurricularActaConsultarGetActasAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaConsulta.jsp
+            </result>
+        </action>
+
+        <action name="OficinaCurricularActaPrint"
+                class="action.common.CommonGetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaPrintGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaPrintGetActasxSemAgno"
+                class="action.common.CommonSetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaPrintGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaPrintGetActas"
+                class="action.oficinacurricular.OficinaCurricularActaPrintGetActasAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaxImprimir.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularActaPrintActas"
+                class="action.oficinacurricular.OficinaCurricularActaPrintActasAction" method="execute">
+            <result name="success">/jsp/common/print/commonPrintPDF.jsp
+            </result>
+        </action>
+
+        <action name="OficinaCurricularActaRecepcion"
+                class="action.common.CommonGetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaRecepcionarGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaRecepcionGetActasxSemAgno"
+                class="action.common.CommonSetSemAgnoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaRecepcionarGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularActaRecepcionarGetActas"
+                class="action.oficinacurricular.OficinaCurricularActaRecepcionarGetActasAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaxRecepcionar.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularActaRecepcionarActas"
+                class="action.oficinacurricular.OficinaCurricularActaRecepcionarActasAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularActaRecepcionarGetActas</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <!--
+            SOLICITUD
+        -->
+        <!--action name="OficinaCurricularSolicitudGetSolicitudes"
+                class="action.common.CommonSolicitudGetSolicitudesAction" method="execute">
+            <result name="success">
+                /jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudAdministrar.jsp
+            </result>
+        </action-->
+
+        <action name="OficinaCurricularSolicitudEnableReceiveSolicitud"
+                class="action.oficinacurricular.OficinaCurricularSolicitudEnableReceiveSolicitudAction"
+                method="execute">
+            <result name="success">
+                /jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudRecepcionar.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudAddDocumento"
+                class="action.oficinacurricular.OficinaCurricularSolicitudAddDocumentoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularSolicitudEnableReceiveSolicitud</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudRemoveDocumento"
+                class="action.oficinacurricular.OficinaCurricularSolicitudRemoveDocumentoAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">OficinaCurricularSolicitudEnableReceiveSolicitud</param>
+                <param name="key">${key}</param>
+                <param name="pos">${pos}</param>
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudReceiveSolicitud"
+                class="action.oficinacurricular.OficinaCurricularSolicitudReceiveSolicitudAction" method="execute">
+            <result name="success">
+                /jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudAdministrar.jsp
+            </result>
+        </action>
+        <!--action name="OficinaCurricularSolicitudEnableInformSolicitud" class="action.oficinacurricular.OficinaCurricularSolicitudInformSolicitudAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudRecepcionar.jsp
+            </result>
+        </action>
+        <action name="OficinaCurricularSolicitudInformSolicitud" class="action.oficinacurricular.OficinaCurricularSolicitudInformSolicitudAction" method="execute">
+            <result name="success">/jsp/users/oficinaCurricular/solicitud/oficinaCurricularSolicitudAdministrar.jsp
+            </result>
+        </action-->
+    </package>
+</struts>

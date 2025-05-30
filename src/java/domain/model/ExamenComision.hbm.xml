@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-08-2013 03:30:55 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ExamenComision" table="EXAMEN_COMISION">
+        <composite-id name="id" class="domain.model.ExamenComisionId">
+            <key-property name="exacFolioExa" type="int">
+                <column name="EXAC_FOLIO_EXA" precision="9" scale="0" />
+            </key-property>
+            <key-property name="exacRutProf" type="int">
+                <column name="EXAC_RUT_PROF" precision="8" scale="0" />
+            </key-property>            
+        </composite-id>
+        
+        <many-to-one class="domain.model.Examen" fetch="select" name="examen" insert="false" update="false">
+            <column name="EXAC_FOLIO_EXA" precision="9" scale="0"/>
+        </many-to-one>
+        
+        <many-to-one class="domain.model.Profesor" fetch="select" name="profesor" insert="false" update="false">
+            <column name="EXAC_RUT_PROF" precision="8" scale="0"/>
+        </many-to-one>
+
+        <property name="exacNotaTrabajo" type="big_decimal">
+            <column name="EXAC_PORC_TRABAJO" precision="2" scale="1" />
+        </property>
+        
+        <property name="exacNotaExamen" type="big_decimal">
+            <column name="EXAC_PORC_EXAMEN" precision="2" scale="1" />
+        </property>
+                
+    </class>
+</hibernate-mapping>

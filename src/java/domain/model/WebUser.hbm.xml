@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.WebUser" table="WEB_USER">
+        <id name="wuUser" type="string">
+            <column length="5" name="WU_USER"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="wuDes" type="string">
+            <column length="100" name="WU_DES"/>
+        </property>
+        <property name="wuJsp" type="string">
+            <column length="50" name="WU_JSP"/>
+        </property>
+        <property name="wuNormalPlus" type="string">
+            <column length="1" name="WU_NORMAL_PLUS"/>
+        </property>
+        <property name="wuBD" type="string">
+            <column length="5" name="WU_BD"/>
+        </property>
+        <property name="wuLogin" type="string">
+            <column length="50" name="WU_LOGIN"/>
+        </property>
+        <property name="wuEmail" type="string">
+            <column length="50" name="WU_SET_EMAIL"/>
+        </property>
+        <property name="wuAutoridad" type="string">
+            <column length="1" name="WU_AUTORIDAD"/>
+        </property>
+        <property name="wuSecretaria" type="string">
+            <column length="1" name="WU_SECRETARIA"/>
+        </property>
+    </class>
+</hibernate-mapping>

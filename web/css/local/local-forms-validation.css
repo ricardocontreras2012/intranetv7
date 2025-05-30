@@ -1,0 +1,11 @@
+/* 
+    Created on : 10-04-2018, 9:45:07
+    Author     : rcontreras
+*/
+
+label.error {
+    background-color: red;
+    color: white !important;
+    position: relative;
+}
+

@@ -1,0 +1,97 @@
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"/WEB-INF/classes/struts-2.3.dtd">
+
+<!--
+    Document   : strutsJefeArea.xml
+    Created on : 2 de marzo de 2009, 04:49 PM
+    Author     : Ricardo Contreras S.
+-->
+<struts>
+    <package name="intranetJefeAreaInterceptors" extends="struts-default">
+        <interceptors>
+            <interceptor-stack name="secureDefaultStack">
+                <interceptor-ref name="defaultStack">
+                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                </interceptor-ref>
+            </interceptor-stack>
+
+            <interceptor name="authenticationInterceptor" class="infrastructure.interceptor.AuthenticationInterceptor"/>
+            <interceptor name="hibernateInterceptor" class="infrastructure.interceptor.HibernateInterceptor"/>
+            <interceptor name="cachingHeadersInterceptor" class="infrastructure.interceptor.CachingHeadersInterceptor"/>
+            <interceptor name="requireSSLInterceptor" class="infrastructure.interceptor.RequireSSLInterceptor"/>
+
+            <interceptor-stack name="IntranetStack">
+                <interceptor-ref name="authenticationInterceptor">
+                    <param name="strutsId">
+                        JA
+                    </param>
+                    <param name="excludeActions">CustomError</param>
+                </interceptor-ref>
+                <interceptor-ref name="secureDefaultStack"/>
+                <interceptor-ref name="requireSSLInterceptor"/>
+                <interceptor-ref name="hibernateInterceptor">
+                    <param name="toggle">
+                        JA
+                    </param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="IntranetStack"/>
+        <global-results>
+            <result name="authentication_required">/jsp/message/messageSession.jsp</result>
+            <result name="access_denied">/jsp/message/messageAccessDenied.jsp</result>
+            <result name="input">/jsp/message/messageInput.jsp</result>
+            <result name="https">/jsp/message/messageSSL.jsp</result>
+            <result name="invalid.token">/jsp/message/messageDuplicatePage.jsp</result>
+            <result name="exception">/jsp/message/messageException.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="custom_error"/>
+        </global-exception-mappings>
+    </package>
+
+    <package name="intranetJefeAreaActions" extends="intranetJefeAreaInterceptors">
+
+        <action name="JefeAreaLogin" class="action.common.CommonDummyAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
+        </action>
+
+        <action name="JefeAreaGetKeyProfesor" class="action.common.CommonGetKeyProfesorAction" method="execute">
+            <result name="success" type="redirectAction">
+                <param name="actionName">JefeAreaLoginHome</param>
+                <param name="key">${key}</param>
+                <param name="keyProf">${keyProf}</param>
+            </result>
+        </action>
+
+        <action name="JefeAreaLoginHome" class="action.common.CommonDummyProfAction" method="execute">
+            <result name="success">/jsp/users/jefeArea/id/jefeAreaIdHomePage.jsp
+            </result>
+        </action>
+        <action name="JefeAreaLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/jefeArea/id/jefeAreaIdBienvenida.jsp
+            </result>
+        </action>
+        <action name="JefeAreaGetCursosReporte" class="action.jefearea.JefeAreaGetCursosAction" method="execute">
+            <result name="success">/jsp/common/reporte/commonReporteListaCursoAgnoSem.jsp
+            </result>
+        </action>
+        <action name="JefeAreaGetCursosEncuesta" class="action.jefearea.JefeAreaGetCursosEncuestaAction" method="execute">
+            <result name="success">/jsp/common/encuesta/commonEncuestaListaCursoAgnoSem.jsp
+            </result>
+        </action>
+        <action name="JefeAreaReportesGetResumen" class="action.jefearea.JefeAreaReportesGetResumenAction" method="execute">
+            <result name="success">/jsp/common/reporte/commonReporteResumenListaCursoAgnoSem.jsp
+            </result>
+        </action>
+        <action name="JefeAreaMaterialesGetResumen" class="action.jefearea.JefeAreaMaterialesGetResumenAction" method="execute">
+            <result name="success">/jsp/common/material/commonMaterialResumenListaCursoAgnoSem.jsp
+            </result>
+        </action>
+    </package>
+</struts>
+

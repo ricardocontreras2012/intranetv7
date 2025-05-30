@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-mar-2009 15:19:41 by Hibernate Tools 3.2.4.GA -->
+<hibernate-mapping>
+    <sql-query name="SincronizaCursoFunction">
+        { call sincroniza_evaluacion_curso(?,?,?,?,?,?)}
+    </sql-query>
+    <!--sql-query name="EvaluacionAlumnoView">
+        INSERT INTO evaluacion_alumno(
+        evalu_rut ,
+        evalu_cod_car,
+        evalu_agno_ing,
+        evalu_sem_ing,
+        evalu_asign,
+        evalu_elect,
+        evalu_coord,
+        evalu_secc,
+        evalu_agno,
+        evalu_sem,
+        evalu_teva,
+        evalu_eval,
+        evalu_correl
+        )
+        SELECT ins_rut, ins_cod_car, ins_agno_ing, ins_sem_ing,
+        ins_asign, ins_elect, ins_coord, ins_secc, ins_agno, ins_sem,
+        eval_teva, eval_eval, seq_evaluacion.nextval
+        FROM (SELECT ins_rut, ins_cod_car, ins_agno_ing, ins_sem_ing,
+        ins_asign, ins_elect, ins_coord, ins_secc, ins_agno, ins_sem,
+        eval_teva, eval_eval FROM inscripcion,evaluacion where
+        ins_asign = :asign and
+        ins_elect = :elect and
+        ins_coord = :coord and
+        ins_secc = :secc and
+        ins_agno = :agno and
+        ins_sem = :sem and
+        eval_teva = :tipo and
+        eval_eval = :eval and
+        eval_asign = ins_asign and
+        eval_elect = ins_elect and
+        eval_coord = ins_coord and
+        eval_secc = ins_secc and
+        eval_agno = ins_agno and
+        eval_sem = ins_sem and
+        not exists ( select * from evaluacion_alumno WHERE
+        evalu_rut = ins_rut and
+        evalu_cod_car = ins_cod_car and
+        evalu_agno_ing = ins_agno_ing and
+        evalu_sem_ing = ins_sem_ing and
+        evalu_asign = ins_asign and
+        evalu_elect = ins_elect and
+        evalu_agno = ins_agno and
+        evalu_sem = ins_sem and
+        evalu_teva = :tipo and
+        evalu_eval = :eval)
+        union
+        SELECT ins_rut, ins_cod_car, ins_agno_ing, ins_sem_ing,
+        ins_asign, ins_elect, ins_coord, ins_secc, ins_agno, ins_sem,
+        eval_teva, eval_eval
+        FROM inscripcion_espejo,evaluacion where
+        ins_asign = :asign and
+        ins_elect = :elect and
+        ins_coord = :coord and
+        ins_secc = :secc and
+        ins_agno = :agno and
+        ins_sem = :sem and
+        eval_teva = :tipo and
+        eval_eval = :eval and
+        eval_asign = ins_asign and
+        eval_elect = ins_elect and
+        eval_coord = ins_coord and
+        eval_secc = ins_secc and
+        eval_agno = ins_agno and
+        eval_sem = ins_sem and
+        not exists ( select * from evaluacion_alumno WHERE
+        evalu_rut = ins_rut and
+        evalu_cod_car = ins_cod_car and
+        evalu_agno_ing = ins_agno_ing and
+        evalu_sem_ing = ins_sem_ing and
+        evalu_asign = ins_asign and
+        evalu_elect = ins_elect and
+        evalu_agno = ins_agno and
+        evalu_sem = ins_sem and
+        evalu_teva = :tipo and
+        evalu_eval = :eval))
+
+    </sql-query-->
+</hibernate-mapping>

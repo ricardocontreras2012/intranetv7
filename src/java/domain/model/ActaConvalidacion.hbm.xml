@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-03-2009 04:40:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.ActaConvalidacion" table="ACTA_CONVALIDACION">
+        <id name="acoFolio" type="int">
+            <column name="ACO_FOLIO" precision="7" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="acoAgno" type="int">
+            <column name="ACO_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="acoSem" type="int">
+            <column name="ACO_SEM" precision="1" scale="0"/>
+        </property>
+        <many-to-one class="domain.model.AluCar" fetch="select" insert="false" name="aluCar" update="false">
+            <column name="ACO_RUT" not-null="true" precision="8" scale="0"/>
+            <column name="ACO_COD_CAR" not-null="true" precision="5" scale="0"/>
+            <column name="ACO_AGNO_ING" not-null="true" precision="4" scale="0"/>
+            <column name="ACO_SEM_ING" not-null="true" precision="1" scale="0"/>
+        </many-to-one>
+        <many-to-one class="domain.model.ConvalidacionSolicitud" fetch="select" insert="true" name="solicitud" update="false">
+            <column name="ACO_SOL" not-null="true" precision="9" scale="0"/>
+        </many-to-one>
+        <property name="acoEstado" type="string">
+            <column length="1" name="ACO_ESTADO"/>
+        </property>
+    </class>
+</hibernate-mapping>
