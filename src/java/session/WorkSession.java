@@ -213,8 +213,6 @@ public final class WorkSession {
     private ReservaSalaSupport[][] horarioSala;
     private ReservaSala reserva;
     private List<Malla> mallaList;
-    //private Justificativo justificativo;
-    //private List<Justificativo> justificativoList;
     private String pdfTempFile;
     private List<Reincorporacion> reincorporacionList;
     private String flag;

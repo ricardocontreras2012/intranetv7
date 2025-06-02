@@ -11,4 +11,4 @@ $(document).ready(function () {
         var fieldName = $(this).attr("id");
         getDoc(fieldName.substr(fieldName.indexOf("_") + 1));
     });
-    });
+});
