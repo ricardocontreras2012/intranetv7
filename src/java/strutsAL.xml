@@ -579,7 +579,7 @@
             <result name="matricula">/jsp/users/alumno/solicitud/matricula/alumnoSolicitudMatricula.jsp
             </result>             
             <result name="tramitacionLogro" type="redirectAction">
-                <param name="actionName">aaa
+                <param name="actionName">AlumnoSolicitudExpedienteLogrados
                 </param>
                 <param name="key">${key}</param>
             </result>                      
@@ -755,26 +755,30 @@
             <result name="success">/jsp/users/alumno/solicitud/practica/alumnoSolicitudPracticaUploadDocumento.jsp
             </result>
         </action>
-        
-        
 
-
-
-        <action name="aaa" class="action.alumno.aaa"
+        <action name="AlumnoSolicitudExpedienteLogrados" class="action.alumno.AlumnoSolicitudExpedienteLogradosAction"
                 method="execute">
-            <result name="success">/jsp/users/alumno/expedienteLogro/alumnoExpedienteLogroGetLogros.jsp
+            <result name="success">/jsp/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroGetLogros.jsp
             </result>
         </action>
         
-        <action name="bbb" class="action.alumno.bbb"
+        
+        <action name="AlumnoSolicitudExpedienteNew" class="action.alumno.AlumnoSolicitudExpedienteNewAction"
+                method="execute">
+            <result name="success">/jsp/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroNew.jsp
+            </result>
+        </action>
+        
+        
+        <!--action name="AlumnoSolicitudExpedienteNew" class="action.alumno.AlumnoSolicitudExpedienteNewAction"
                 method="execute">
             <result name="success" type="redirectAction">
-                <param name="actionName">yyy</param>
+                <param name="actionName">AlumnoSolicitudExpedienteGeneraCaratula</param>
                 <param name="key">${key}</param>
             </result>
-        </action>
+        </action-->
                 
-        <action name="xxx" class="action.alumno.xxx"
+        <action name="AlumnoSolicitudExpedienteGeneraPagoArancel" class="action.alumno.AlumnoSolicitudExpedienteGeneraPagoArancelAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -784,7 +788,7 @@
             </result>
         </action>
 
-        <action name="yyy" class="action.alumno.yyy"
+        <action name="AlumnoSolicitudExpedienteGeneraCaratula" class="action.alumno.AlumnoSolicitudExpedienteGeneraCaratulaAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>

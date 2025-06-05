@@ -9,15 +9,15 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.alumno.yyyS;
+import service.alumno.AlumnoSolicitudExpedienteGeneraPagoArancelService;
 
 /**
  *
  * @author Ricardo
  */
-public class yyy extends  ActionCommonSupport {
+public class AlumnoSolicitudExpedienteGeneraPagoArancelAction extends  ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-     yyyS cert = new yyyS();
+     AlumnoSolicitudExpedienteGeneraPagoArancelService cert = new AlumnoSolicitudExpedienteGeneraPagoArancelService();
 
     ActionInputStreamUtil ais;
 

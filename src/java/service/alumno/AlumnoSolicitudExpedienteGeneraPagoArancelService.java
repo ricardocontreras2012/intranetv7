@@ -28,7 +28,7 @@ import static org.apache.struts2.ServletActionContext.getServletContext;
 import session.GenericSession;
 import session.WorkSession;
 
-public class xxxS {
+public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
     
     public  ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
         InputStream input;

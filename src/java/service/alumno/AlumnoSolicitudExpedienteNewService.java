@@ -13,7 +13,7 @@ import session.WorkSession;
  *
  * @author Ricardo
  */
-public class bbbS {
+public class AlumnoSolicitudExpedienteNewService {
      public static String service(GenericSession genericSession, int pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 

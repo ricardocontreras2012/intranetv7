@@ -15,7 +15,7 @@ import session.WorkSession;
  *
  * @author Ricardo
  */
-public class aaaS {
+public class AlumnoSolicitudExpedienteLogradosService {
 
     public static String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);

@@ -6,13 +6,13 @@
 package action.alumno;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import static service.alumno.aaaS.service;
+import static service.alumno.AlumnoSolicitudExpedienteLogradosService.service;
 
 /**
  *
  * @author Ricardo
  */
-public class aaa extends ActionCommonSupport {
+public class AlumnoSolicitudExpedienteLogradosAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
 

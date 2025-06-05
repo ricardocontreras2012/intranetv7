@@ -6,13 +6,13 @@
 package action.alumno;
 
 import infrastructure.support.action.ActionValidationPosSupport;
-import static service.alumno.bbbS.service;
+import static service.alumno.AlumnoSolicitudExpedienteNewService.service;
 
 /**
  *
  * @author Ricardo
  */
-public class bbb extends ActionValidationPosSupport {
+public class AlumnoSolicitudExpedienteNewAction extends ActionValidationPosSupport {
 
     private static final long serialVersionUID = 1L;
 
