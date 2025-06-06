@@ -92,7 +92,6 @@
         <mapping resource="domain/model/InscripcionAdicionalLogro.hbm.xml"/>
         <mapping resource="domain/model/Jerarquia.hbm.xml"/>
         <mapping resource="domain/model/Jornada.hbm.xml"/>
-        <!--mapping resource="domain/Justificativo.hbm.xml"/-->
         <mapping resource="domain/model/Labor.hbm.xml"/>
         <mapping resource="domain/model/LaborRealizada.hbm.xml"/>
         <mapping resource="domain/model/LogActa.hbm.xml"/>
