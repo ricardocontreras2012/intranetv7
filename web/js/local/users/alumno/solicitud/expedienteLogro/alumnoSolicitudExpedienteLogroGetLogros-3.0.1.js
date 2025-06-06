@@ -1,6 +1,6 @@
 function getDoc(pos) {
     $("#pos").val(pos);
-    $("#solicitudes-form").attr("action", "bbb");
+    $("#solicitudes-form").attr("action", "AlumnoSolicitudExpedienteNew");
     $("#solicitudes-form").attr("target", "_self");
     $("#solicitudes-form").submit();
 }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : alumnoExpedienteLogroGetLogros
+    Document   : alumnoSolicitudExpedienteLogroGetLogros
     Created on : 26-05-2025, 12:39:26
     Author     : Ricardo
 --%>
@@ -23,7 +23,7 @@
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/expedienteLogro/alumnoExpedienteLogroGetLogros-3.0.0.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroGetLogros-3.0.1.js"></script>
     </head>
     <body>
         <form id="solicitudes-form" action="#">
