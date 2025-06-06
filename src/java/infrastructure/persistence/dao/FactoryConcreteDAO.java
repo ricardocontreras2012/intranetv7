@@ -244,8 +244,10 @@ import domain.repository.MaterialApoyoPersistence;
 import domain.repository.SolicitudCertificadoCarritoPersistence;
 import domain.repository.TmotivoSolicitudInscripcionPersistence;
 import domain.repository.ConvenioPersistence;
+import domain.repository.EstadoDocExpPersistence;
 import domain.repository.EvaluacionAlumnoPersistence;
 import domain.repository.NominaCarreraPersistence;
+import infrastructure.persistence.EstadoDocExpPersistenceImpl;
 import org.hibernate.Session;
 import persistence.scalar.ScalarPersistence;
 import persistence.scalar.ScalarPersistenceImpl;
@@ -1590,5 +1592,10 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
     @Override
     public CarreraPersistence getCarreraPersistence(String userType) {
         return (CarreraPersistence) instantiateDAO(CarreraPersistenceImpl.class, userType);
+    }
+    
+    @Override
+    public EstadoDocExpPersistence getEstadoDocExpPersistence(String userType) {
+        return (EstadoDocExpPersistence) instantiateDAO(EstadoDocExpPersistenceImpl.class, userType);
     }
 }

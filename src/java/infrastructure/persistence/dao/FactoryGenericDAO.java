@@ -122,6 +122,7 @@ import domain.repository.MaterialApoyoPersistence;
 import domain.repository.SolicitudCertificadoCarritoPersistence;
 import domain.repository.TmotivoSolicitudInscripcionPersistence;
 import domain.repository.ConvenioPersistence;
+import domain.repository.EstadoDocExpPersistence;
 import domain.repository.EvaluacionAlumnoPersistence;
 import domain.repository.NominaCarreraPersistence;
 import persistence.scalar.ScalarPersistence;
@@ -992,5 +993,7 @@ abstract class FactoryGenericDAO {
      * @return
      */
     public abstract CarreraPersistence getCarreraPersistence(String userType);
+    
+    public abstract EstadoDocExpPersistence getEstadoDocExpPersistence(String userType);
 
 }
