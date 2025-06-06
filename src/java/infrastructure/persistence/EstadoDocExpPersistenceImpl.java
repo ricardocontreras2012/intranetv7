@@ -32,9 +32,9 @@ public class EstadoDocExpPersistenceImpl extends CrudAbstractDAO<EstadoDocExp, L
         criteria.setFetchMode("expedienteLogro.planLogro", JOIN);
         criteria.setFetchMode("expedienteLogro.planLogro.logro", JOIN);
         criteria.setFetchMode("tDocExpediente", JOIN);
-        criteria.addOrder(asc("id.xxxx"));
-        criteria.addOrder(asc("id.yyyy"));
-        criteria.addOrder(asc("id.zzzz"));
+        //criteria.addOrder(asc("id.xxxx"));
+        //criteria.addOrder(asc("id.yyyy"));
+        //criteria.addOrder(asc("id.zzzz"));
 
         return criteria.list();
     }
