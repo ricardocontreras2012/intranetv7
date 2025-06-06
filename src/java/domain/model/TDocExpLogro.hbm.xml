@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-05-2025 01:05:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TDocExpLogro" table="TDOC_EXP_LOGRO" schema="ADMCURR_FAE">
+        <composite-id name="id" class="domain.model.TDocExpLogroId">
+            <key-property name="telCodLogro" type="int">
+                <column name="TEL_COD_LOGRO" precision="2" scale="0"/>
+            </key-property>
+            <key-property name="telCodTdoc" type="int">
+                <column name="TEL_COD_TDOC" precision="3" scale="0"/>
+            </key-property>
+        </composite-id>
+        <!--many-to-one class="domain.model.Tlogro" fetch="select" insert="false" name="tlogro" update="false">
+            <column name="TEL_COD_LOGRO" not-null="true" precision="2" scale="0"/>
+        </many-to-one-->
+        <many-to-one class="domain.model.TDocExpediente" fetch="select" insert="false" name="tDocExpediente" update="false">
+            <column name="TEL_COD_TDOC" not-null="true" precision="3" scale="0"/>
+        </many-to-one>
+        
+        <property name="telCodTprog" type="int">
+            <column name="TEL_COD_TPROG" precision="2" scale="0"/>
+        </property>
+    </class>
+</hibernate-mapping>

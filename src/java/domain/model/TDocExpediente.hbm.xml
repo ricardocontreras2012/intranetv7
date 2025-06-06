@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-05-2025 01:05:39 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="domain.model.TDocExpediente" table="TDOC_EXPEDIENTE" schema="ADMCURR_FAE">
+        <id name="tdeCod" type="int">
+            <column name="TDE_COD" precision="3" scale="0"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="tdeDes" type="string">
+            <column name="TDE_DES" length="50"/>
+        </property>
+        <property name="tdeUser" type="string">
+            <column name="TDE_USER" length="2"/>
+        </property>
+    </class>
+</hibernate-mapping>

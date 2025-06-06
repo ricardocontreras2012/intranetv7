@@ -153,6 +153,11 @@
         <mapping resource="domain/model/WebAction.hbm.xml"/>
         <mapping resource="domain/model/WebUser.hbm.xml"/>
         <mapping resource="domain/model/WebUserAction.hbm.xml"/>
+        
+        <mapping resource="domain/model/EstadoDocExp.hbm.xml"/>
+        <mapping resource="domain/model/TDocExpLogro.hbm.xml"/>
+        <mapping resource="domain/model/TDocExpediente.hbm.xml"/>
+
 
         <!--Mapeo Especial-->
         <mapping resource="persistence/function/AdicionalFunction.hbm.xml"/>
