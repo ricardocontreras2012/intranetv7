@@ -29,8 +29,17 @@ import session.WorkSession;
 
 public class TitulosyGradosNominaResolucionPrintService {
 
+    static Font TNR_6 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6);
+    static Font TNR_6B = FontFactory.getFont(FontFactory.TIMES_BOLD, 6);
+    static Font TNR_6_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6, Font.UNDERLINE);
+    
     static Font TNR_8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8);
-    static Font TNR_8B = FontFactory.getFont(FontFactory.TIMES_BOLD, 8);
+    
+    static Font TNR_9 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9);
+    static Font TNR_9B = FontFactory.getFont(FontFactory.TIMES_BOLD, 9);
+    static Font TNR_9B_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9, Font.UNDERLINE);
+    
+    
     static Font TNR_8_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8, Font.UNDERLINE);
     static Font TNR_10 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
     static Font TNR_10B = FontFactory.getFont(FontFactory.TIMES_BOLD, 10);
@@ -62,7 +71,7 @@ public class TitulosyGradosNominaResolucionPrintService {
 
         Document document = new Document(PageSize.LETTER);
         float margin = 80f; // márgenes
-        document.setMargins(margin, margin, margin, margin);
+        document.setMargins(margin, margin, margin, margin-40);
 
         // PdfWriter y buffer para el documento PDF
         InputStream pdfStream = null;  // Inicializamos pdfStream como null
@@ -86,7 +95,7 @@ public class TitulosyGradosNominaResolucionPrintService {
                         PdfContentByte cb = writer.getDirectContent();
                         Image image = Image.getInstance(imagePath);
                         image.scaleAbsolute(110f, 25f); // Escala la imagen
-                        image.setAbsolutePosition(margin + 50, PageSize.LETTER.getHeight() - 70); // Ubica la imagen
+                        image.setAbsolutePosition(margin + 50, PageSize.LETTER.getHeight() - 60); // Ubica la imagen
                         cb.addImage(image);
                     } catch (DocumentException | IOException e) {
                         e.printStackTrace();
@@ -96,7 +105,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             writer.setPageEvent(event);
 
             float headerAreaTop = PageSize.LETTER.getHeight() - 70; // Zona debajo de la imagen
-            float headerAreaBottom = PageSize.LETTER.getHeight() - 140;
+            float headerAreaBottom = PageSize.LETTER.getHeight() - 120;
             float headerAreaLeft = margin + 40; // Alineado a la izquierda
             float headerAreaRight = margin + 190f;
 
@@ -120,8 +129,8 @@ public class TitulosyGradosNominaResolucionPrintService {
             document.add(new Paragraph("\n"));
 
             // Fuente para el texto en negrita de la cabecera
-            Phrase headerPhrase = new Phrase("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + "\n", TNR_11B);
-            Phrase underlinedText = new Phrase("A PERSONAS QUE INDICA", FontFactory.getFont(FontFactory.TIMES_BOLD, 11, Font.UNDERLINE));
+            Phrase headerPhrase = new Phrase("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + "\n", TNR_9B);
+            Phrase underlinedText = new Phrase("A PERSONAS QUE INDICA", TNR_9B_UNDERLINED);
             headerPhrase.add(underlinedText);
             headerPhrase.add("\n\nSANTIAGO,\n\n");
 
@@ -136,31 +145,33 @@ public class TitulosyGradosNominaResolucionPrintService {
             document.add(header2);
 
             // VISTOS con sangría solo en la primera línea desde la mitad de la página
-            Phrase vistosPhrase = new Phrase("VISTOS: ", TNR_11B);
+            Phrase vistosPhrase = new Phrase("VISTOS: ", TNR_9B);
             vistosPhrase.add(new Phrase(
                     "El Decreto con Fuerza de Ley 29 de 2023, del Ministerio de Educación, que aprueba el Estatuto de la Universidad de Santiago de Chile, adecuado al Título II de la Ley 21.094, sobre Universidades Estatales; la Resolución Exenta 5.721 de 2024, de la Contralora Universitaria de la Universidad de Santiago de Chile, que exime del control de legalidad a las materias que indica; la Resolución Exenta 1.118 de 2025, del Rector de la Universidad de Santiago de Chile, que delega atribuciones en la autoridad que indica; El Oficio N°127 de 2025, del Rector de la Universidad de Santiago de Chile, que registra la firma de la autoridad ante el Ministerio de Educación; y la Resolución 36 de 2024, de la Contraloría General de la República, sobre exención del trámite de toma de razón en las materias que indican.\n\n",
-                    TNR_11
+                    TNR_9
             ));
+            
             Paragraph vistos = new Paragraph(vistosPhrase);
             // Sangría solo en la primera línea desde el centro de la página
             vistos.setFirstLineIndent(leftIndent); // Sangría en la primera línea
             vistos.setAlignment(Element.ALIGN_JUSTIFIED); // Justificado
+            vistos.setLeading(12f);
             document.add(vistos);
 
-            // RESUELVO con sangría solo en la primera línea desde la mitad de la página
-            Font resuelvoFont = FontFactory.getFont(FontFactory.TIMES_BOLD, 11);
-            Paragraph resuelvo = new Paragraph("RESUELVO:\n\n", resuelvoFont);
+            // RESUELVO con sangría solo en la primera línea desde la mitad de la página            
+            Paragraph resuelvo = new Paragraph("RESUELVO:\n\n", TNR_9B);
             resuelvo.setFirstLineIndent(leftIndent); // Sangría en la primera línea desde el centro de la página
-            resuelvo.setSpacingBefore(6);
+            resuelvo.setSpacingBefore(3);
             document.add(resuelvo);
 
             // Confierase           
-            Phrase confPhrase = new Phrase("1.   CONFIÉRASE", TNR_11B);
-            confPhrase.add(new Phrase(" a la(s) siguiente(s) persona(s) los " + tlogro.getTloDesLargaPlural().toLowerCase() + " que a continuación indican:\n\n", TNR_11));
+            Phrase confPhrase = new Phrase("1.   CONFIÉRASE", TNR_9B);
+            confPhrase.add(new Phrase(" a la(s) siguiente(s) persona(s) los " + tlogro.getTloDesLargaPlural().toLowerCase() + " que a continuación indican:\n\n", TNR_9));
 
             Paragraph conf = new Paragraph(confPhrase);
             conf.setFirstLineIndent(leftIndent);  // Sangría desde el centro de la página
             conf.setSpacingBefore(3);
+            conf.setLeading(12f);
             conf.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(conf);
 
@@ -176,7 +187,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             String[] headers = {"N°", "Nombre completo", "RUT", tlogro.getTloDesLarga(), "Otorgamiento"};
             for (String headerText : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(headerText, tableHeaderFont));
-                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
                 table.addCell(cell);
             }
 
@@ -207,56 +218,60 @@ public class TitulosyGradosNominaResolucionPrintService {
             document.add(table);
 
             // Incorporase
-            Phrase incorporaPhrase = new Phrase("2.   INCORPÓRESE", TNR_11B);
-            incorporaPhrase.add(new Phrase(" la presente Resolución a cada uno de los expedientes de las personas señaladas en el numeral primero precedente, según corresponda.", TNR_11));
+            Phrase incorporaPhrase = new Phrase("2.   INCORPÓRESE", TNR_9B);
+            incorporaPhrase.add(new Phrase(" la presente Resolución a cada uno de los expedientes de las personas señaladas en el numeral primero precedente, según corresponda.", TNR_9));
             Paragraph incorpora = new Paragraph(incorporaPhrase);
             incorpora.setFirstLineIndent(leftIndent);  // Sangría desde el centro de la página
             incorpora.setSpacingBefore(6);
+            incorpora.setLeading(12f);
             incorpora.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(incorpora);
 
             // Emítase            
-            Phrase emitaPhrase = new Phrase("3.   EMÍTESE", TNR_11B);
-            emitaPhrase.add(new Phrase(" las certificaciones de los " + tlogro.getTloDesLargaPlural().toLowerCase() + " antes individualizados a las personas señaladas en el numeral primero precedente.", TNR_11));
+            Phrase emitaPhrase = new Phrase("3.   EMÍTESE", TNR_9B);
+            emitaPhrase.add(new Phrase(" las certificaciones de los " + tlogro.getTloDesLargaPlural().toLowerCase() + " antes individualizados a las personas señaladas en el numeral primero precedente.", TNR_9));
             Paragraph emita = new Paragraph(emitaPhrase);
             emita.setFirstLineIndent(leftIndent);  // Sangría desde el centro de la página
             emita.setSpacingBefore(6);
+            emita.setLeading(12f);
             emita.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(emita);
 
             // Comuníquese
-            Phrase comunicaPhrase = new Phrase("4.   COMUNÍQUESE", TNR_11B);
-            comunicaPhrase.add(new Phrase(" la presente Resolución, una vez totalmente tramitada, a las autoridades de la Universidad de Santiago de Chile que corresponda.\n\n", TNR_11));
+            Phrase comunicaPhrase = new Phrase("4.   COMUNÍQUESE", TNR_9B);
+            comunicaPhrase.add(new Phrase(" la presente Resolución, una vez totalmente tramitada, a las autoridades de la Universidad de Santiago de Chile que corresponda.\n\n", TNR_9));
             Paragraph comunica = new Paragraph(comunicaPhrase);
             comunica.setFirstLineIndent(leftIndent);  // Sangría desde el centro de la página
             comunica.setSpacingBefore(6);
+            comunica.setLeading(12f);
             comunica.setAlignment(Element.ALIGN_JUSTIFIED);
             document.add(comunica);
 
-            Phrase comyregPhrase = new Phrase("COMUNÍQUESE Y REGÍSTRESE.\n\n\n\n\n", TNR_11B);
+            Phrase comyregPhrase = new Phrase("COMUNÍQUESE Y REGÍSTRESE.\n\n\n\n\n", TNR_9B);
             Paragraph comyreg = new Paragraph(comyregPhrase);
             comyreg.setFirstLineIndent(leftIndent);  // Sangría desde el centro de la página
             comyreg.setSpacingBefore(6);
+            comyreg.setLeading(12f);
             document.add(comyreg);
 
             Paragraph signature = new Paragraph();
             signature.setAlignment(Element.ALIGN_CENTER);
-
             LaborRealizada secGeneral = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("SG");
             // Add the bold name
             Chunk name = new Chunk(secGeneral.getFuncionario().getTraNombreSimple() + "\n", TNR_10B);
             signature.add(name);
+            signature.setLeading(12f);
 
             // Add the rest of the signature in normal font
-            signature.add(new Chunk(secGeneral.getLabel() + "\n(FAC. DELEGADA, FIRMA POR RES. EX. 1.118, DE 2025)\n\n\n\n", TNR_10));
+            signature.add(new Chunk(secGeneral.getLabel() + "\n(FAC. DELEGADA, FIRMA POR RES. EX. 1.118, DE 2025)\n", TNR_10));
             document.add(signature);
 
             Paragraph initials = new Paragraph(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados") + "\n", TNR_8);
             initials.setAlignment(Element.ALIGN_LEFT);
+            initials.setSpacingBefore(6);
             document.add(initials);
 
-            Paragraph distributionHeader = new Paragraph("Distribución:\n", TNR_8_UNDERLINED);
-            distributionHeader.setSpacingBefore(6);
+            Paragraph distributionHeader = new Paragraph("Distribución:\n", TNR_6_UNDERLINED);
             document.add(distributionHeader);
             AluCar aca = dummyExp.getAluCar();
             AluCarFunctionsView acaFuc = CommonAlumnoUtil.getAluCarFunction(aca);
@@ -271,7 +286,7 @@ public class TitulosyGradosNominaResolucionPrintService {
                     + "4.\tUnidad Títulos y Grados, utg@usach.cl;\n"
                     + "5.\tUnidad de Partes, Informaciones y Archivo, upia@usach.cl;\n"
                     + "Memorándum STD " + nomina + "/" + agno;
-            Paragraph distribution = new Paragraph(distributionText, TNR_8);
+            Paragraph distribution = new Paragraph(distributionText, TNR_6);
             //distribution.setIndentationLeft(10f);
             document.add(distribution);
 
@@ -289,7 +304,7 @@ public class TitulosyGradosNominaResolucionPrintService {
 
     private static void agregarCelda(PdfPTable table, String texto) {
         PdfPCell cell = new PdfPCell(new Phrase(texto, TNR_8));
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);  // Alineación centrada
+        cell.setHorizontalAlignment(Element.ALIGN_LEFT);  // Alineación centrada
         cell.setPadding(2);  // Agregar un poco de padding para mejorar la apariencia
         table.addCell(cell);
     }

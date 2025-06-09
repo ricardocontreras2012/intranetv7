@@ -476,8 +476,8 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     }
 
     @Override
-    public int getFlagPasswd(Integer rut, Integer carrera, Integer agnoIng, Integer semIng) {
-        return (Integer) getSession().createSQLQuery("select get_flag_ask_password(" + rut + "," + carrera + "," + agnoIng + "," + semIng + ") flag from dual").addScalar("flag", INTEGER).uniqueResult();
+    public int getFlagEmail(Integer rut, Integer carrera, Integer agnoIng, Integer semIng) {
+        return (Integer) getSession().createSQLQuery("select get_flag_ask_email(" + rut + "," + carrera + "," + agnoIng + "," + semIng + ") flag from dual").addScalar("flag", INTEGER).uniqueResult();
     }
 
     @Override
