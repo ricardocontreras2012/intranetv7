@@ -33,15 +33,15 @@ public class TitulosyGradosNominaResolucionPrintService {
     static Font TNR_6B = FontFactory.getFont(FontFactory.TIMES_BOLD, 6);
     static Font TNR_6_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6, Font.UNDERLINE);
     
+    static Font TNR_7 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 7);
     static Font TNR_8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8);
     
     static Font TNR_9 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9);
     static Font TNR_9B = FontFactory.getFont(FontFactory.TIMES_BOLD, 9);
-    static Font TNR_9B_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9, Font.UNDERLINE);
-    
-    
+    static Font TNR_9B_UNDERLINED =  FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.UNDERLINE);
+            
     static Font TNR_8_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8, Font.UNDERLINE);
-    static Font TNR_10 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
+    static Font TNR_10 =           FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
     static Font TNR_10B = FontFactory.getFont(FontFactory.TIMES_BOLD, 10);
     static Font TNR_11 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11);
     static Font TNR_11B = FontFactory.getFont(FontFactory.TIMES_BOLD, 11);
@@ -117,10 +117,11 @@ public class TitulosyGradosNominaResolucionPrintService {
             Paragraph headerBlock = new Paragraph(
                     "REPÚBLICA DE CHILE\n"
                     + "UNIVERSIDAD DE SANTIAGO DE CHILE\n"
-                    + "SECRETARÍA GENERAL", TNR_8
+                    + "SECRETARÍA GENERAL", TNR_7
             );
             headerBlock.setAlignment(Element.ALIGN_CENTER); // Centrado dentro del área
-            headerBlock.setSpacingBefore(10); // Espacio antes del bloque
+            headerBlock.setLeading(8f);
+            headerBlock.setSpacingBefore(0); // Espacio antes del bloque
 
             // Añadir el párrafo al área especificada
             columnText.addElement(headerBlock);
@@ -129,20 +130,31 @@ public class TitulosyGradosNominaResolucionPrintService {
             document.add(new Paragraph("\n"));
 
             // Fuente para el texto en negrita de la cabecera
-            Phrase headerPhrase = new Phrase("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + "\n", TNR_9B);
+            /*Phrase headerPhrase = new Phrase("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + "\n", TNR_9B);
             Phrase underlinedText = new Phrase("A PERSONAS QUE INDICA", TNR_9B_UNDERLINED);
             headerPhrase.add(underlinedText);
-            headerPhrase.add("\n\nSANTIAGO,\n\n");
+            Phrase stgo = new Phrase("\n\n", TNR_6);
+            headerPhrase.add(stgo);
+            headerPhrase.add("SANTIAGO,\n\n");
 
             // Crear párrafo para header2 con alineación a la derecha desde la mitad de la página
             Paragraph header2 = new Paragraph(headerPhrase);
-            header2.setAlignment(Element.ALIGN_LEFT);
-
-            // **Ajustamos la sangría para que empiece a partir del centro de la página**           
-            float leftIndent = PageSize.LETTER.getWidth() / 2 - margin;
-
-            header2.setIndentationLeft(leftIndent);
-            document.add(header2);
+            header2.setAlignment(Element.ALIGN_LEFT);*/
+            
+            float leftIndent = PageSize.LETTER.getWidth() / 2 - margin -12;
+            
+            Paragraph confHeader = new Paragraph("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + " A", TNR_9B);
+            Paragraph indicaHeader = new Paragraph("PERSONAS QUE INDICA", TNR_9B_UNDERLINED);
+            Paragraph stgoHeader = new Paragraph("SANTIAGO,",TNR_9B);
+            
+            confHeader.setIndentationLeft(leftIndent);
+            indicaHeader.setIndentationLeft(leftIndent);
+            stgoHeader.setIndentationLeft(leftIndent);
+            stgoHeader.setSpacingBefore(5.5f);
+            
+            document.add(confHeader);
+            document.add(indicaHeader);
+            document.add(stgoHeader);
 
             // VISTOS con sangría solo en la primera línea desde la mitad de la página
             Phrase vistosPhrase = new Phrase("VISTOS: ", TNR_9B);
@@ -152,6 +164,8 @@ public class TitulosyGradosNominaResolucionPrintService {
             ));
             
             Paragraph vistos = new Paragraph(vistosPhrase);
+            vistos.setSpacingBefore(12f);
+            
             // Sangría solo en la primera línea desde el centro de la página
             vistos.setFirstLineIndent(leftIndent); // Sangría en la primera línea
             vistos.setAlignment(Element.ALIGN_JUSTIFIED); // Justificado

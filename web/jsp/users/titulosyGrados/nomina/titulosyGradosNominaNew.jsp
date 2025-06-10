@@ -18,14 +18,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Creación de Nómina</title>
-        <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/bootstrap/5.3.0/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/dataTables/1.10.24/datatables.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-forms-validation.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/datePicker/gijgo-1.9.13.min.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/bootstrap/5.3.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/datatables.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
@@ -45,55 +45,73 @@
                 Nueva Nómina
             </div>
 
-            <table class="table" style="max-width: 50%">
-                <tr>
-                    <td style="width: 40%"><label for="tipo-select"><s:text name="label.nomina.tipo"/></label></td>
-                    <td><select id="tipo-select" name="tipo-select" class="form-control input-sm">
+            <!-- Contenedor alineado a la izquierda, sin margin auto -->
+            <div class="container" style="max-width: 600px; margin-left: 0;">
+                <!-- Tipo de Nómina -->
+                <div class="row mb-3">
+                    <label for="tipo-select" class="col-sm-4 col-form-label text-start">
+                        <s:text name="label.nomina.tipo"/>
+                    </label>
+                    <div class="col-sm-8">
+                        <select id="tipo-select" name="tipo-select" class="form-select form-select-sm">
                             <%
                                 List<Logro> logros = ContextUtil.getDAO().getLogroPersistence(ActionUtil.getDBUser()).find();
-
                                 for (Logro logro : logros) {
                                     out.println("<option value=" + logro.getLogrCod() + ">" + logro.getLogrDes() + "</option>");
                                 }
                             %>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="agno"><s:text name="label.year"/></label></td>
-                    <td><input type="text" id="agno" name="agno" value="<s:property value="agno"/>" maxlength="4" class="form-control input-sm input-agno"/></td>
-                </tr>
-                <tr>
-                    <td><label for="nomina"><s:text name="label.nomina.nro.nom"/></label></td>
-                    <td><input type="text" id="nomina" name="nomina" style="text-transform: uppercase;" value="<s:property value="nomina"/>" class="form-control input-sm"/></td>
-                </tr>
-                <tr>
-                    <td><label for="date-print"><s:text name="label.date"/></label></td>
-                    <td>
-                        <input id="fechaNomina" name="fechaNomina" value="<s:date name="#session.genericSession.lastLogin" format="dd/MM/yyyy"/>"/>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
 
-            <div class="container container-menu">
-                <div class="row">
-                    <div id="justified-button-bar" class="col-lg-12">
-                        <div class="btn-group">
-                            <div class="btn-group">
-                                <button id="add-button" title="Agregar Alumno" type="button" class="btn btn-light"  onclick="agregarAlumno(); return false;">
-                                    <span class="fa fa-plus"></span>&nbsp; <span class="hidden-xs">Alumno</span>
-                                </button>
-                            </div>
+                <!-- Año -->
+                <div class="row mb-3">
+                    <label for="agno" class="col-sm-4 col-form-label text-start">
+                        <s:text name="label.year"/>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="agno" name="agno" value="<s:property value='agno'/>" maxlength="4" class="form-control form-control-sm" />
+                    </div>
+                </div>
+
+                <!-- Número de Nómina -->
+                <div class="row mb-3">
+                    <label for="nomina" class="col-sm-4 col-form-label text-start">
+                        <s:text name="label.nomina.nro.nom"/>
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="text" id="nomina" name="nomina" style="text-transform: uppercase;" value="<s:property value='nomina'/>" class="form-control form-control-sm" />
+                    </div>
+                </div>
+
+                <!-- Fecha de Nómina -->
+                <div class="row mb-3">
+                    <label for="fechaNomina" class="col-sm-4 col-form-label text-start">
+                        <s:text name="label.date"/>
+                    </label>
+                    <div class="col-sm-8">
+                        <input id="fechaNomina" name="fechaNomina" value="<s:date name='#session.genericSession.lastLogin' format='dd/MM/yyyy'/>" class="form-control" />
+                    </div>
+                </div>
+
+                <!-- Botón de Agregar Alumno -->
+                <div class="container container-menu" style="padding-left: 0;">
+                    <div class="row">
+                        <div id="justified-button-bar" class="col-12 text-start">
+                            <button id="add-button" title="Agregar Alumno" type="button" class="btn btn-light" onclick="agregarAlumno(); return false;">
+                                <span class="fa fa-plus"></span>&nbsp; <span class="d-none d-sm-inline">Alumno</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="hidden-input-div">
-                <input type="hidden" id="key" name="key" value="<s:property value="key"/>" />
-                <input type="hidden" id="tipo" name="tipo" value="<s:property value="tipo"/>" />
-                <input type="hidden" id="pos" name="pos" value=""/>
-                <input type="hidden" id="rut" name="rut" value=""/>
+                <!-- Inputs Ocultos -->
+                <div id="hidden-input-div">
+                    <input type="hidden" id="key" name="key" value="<s:property value='key'/>" />
+                    <input type="hidden" id="tipo" name="tipo" value="<s:property value='tipo'/>" />
+                    <input type="hidden" id="pos" name="pos" value=""/>
+                    <input type="hidden" id="rut" name="rut" value=""/>
+                </div>
             </div>
         </s:form>
     </body>
