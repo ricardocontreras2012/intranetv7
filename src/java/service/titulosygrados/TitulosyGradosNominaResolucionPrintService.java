@@ -34,17 +34,15 @@ public class TitulosyGradosNominaResolucionPrintService {
     static Font TNR_6_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6, Font.UNDERLINE);
     
     static Font TNR_7 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 7);
+    
     static Font TNR_8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8);
     
     static Font TNR_9 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9);
     static Font TNR_9B = FontFactory.getFont(FontFactory.TIMES_BOLD, 9);
     static Font TNR_9B_UNDERLINED =  FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.UNDERLINE);
-            
-    static Font TNR_8_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8, Font.UNDERLINE);
+    
     static Font TNR_10 =           FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
     static Font TNR_10B = FontFactory.getFont(FontFactory.TIMES_BOLD, 10);
-    static Font TNR_11 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 11);
-    static Font TNR_11B = FontFactory.getFont(FontFactory.TIMES_BOLD, 11);
 
     public static ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
         InputStream input;
@@ -128,18 +126,6 @@ public class TitulosyGradosNominaResolucionPrintService {
             columnText.go();  // Establecer la zona para el texto
 
             document.add(new Paragraph("\n"));
-
-            // Fuente para el texto en negrita de la cabecera
-            /*Phrase headerPhrase = new Phrase("CONFIERE " + tlogro.getTloDesLargaPlural().toUpperCase() + "\n", TNR_9B);
-            Phrase underlinedText = new Phrase("A PERSONAS QUE INDICA", TNR_9B_UNDERLINED);
-            headerPhrase.add(underlinedText);
-            Phrase stgo = new Phrase("\n\n", TNR_6);
-            headerPhrase.add(stgo);
-            headerPhrase.add("SANTIAGO,\n\n");
-
-            // Crear párrafo para header2 con alineación a la derecha desde la mitad de la página
-            Paragraph header2 = new Paragraph(headerPhrase);
-            header2.setAlignment(Element.ALIGN_LEFT);*/
             
             float leftIndent = PageSize.LETTER.getWidth() / 2 - margin -12;
             
@@ -164,7 +150,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             ));
             
             Paragraph vistos = new Paragraph(vistosPhrase);
-            vistos.setSpacingBefore(12f);
+            vistos.setSpacingBefore(9f);
             
             // Sangría solo en la primera línea desde el centro de la página
             vistos.setFirstLineIndent(leftIndent); // Sangría en la primera línea
