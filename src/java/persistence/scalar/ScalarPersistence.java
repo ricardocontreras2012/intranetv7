@@ -199,6 +199,6 @@ public interface ScalarPersistence extends CrudGenericDAO<Object, Serializable> 
     String getNombreNormalizado(String str);
     String getCert(Integer cod);
     String getTramite(Integer cod);
-    int getFlagPasswd(Integer rut, Integer carrera, Integer agnoIng, Integer semIng);
+    int getFlagEmail(Integer rut, Integer carrera, Integer agnoIng, Integer semIng);
     String getEmailUsach(String email);
 }

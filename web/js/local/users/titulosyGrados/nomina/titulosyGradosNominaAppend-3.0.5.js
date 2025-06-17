@@ -1,5 +1,4 @@
 
-
 function expedienteAction(action)
 {
     $("#tipo").val($("select#tipo-select option").filter(":selected").val());
