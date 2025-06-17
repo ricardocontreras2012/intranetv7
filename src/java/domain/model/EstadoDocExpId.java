@@ -39,22 +39,53 @@ public class EstadoDocExpId implements Serializable {
         this.edeTdoc = edeTdoc;
     }
 
-    // Getters and Setters
-    public Integer getEdeRut() { return edeRut; }
-    public void setEdeRut(Integer edeRut) { this.edeRut = edeRut; }
+    public Integer getEdeRut() {
+        return edeRut;
+    }
 
-    public Integer getEdeCodCar() { return edeCodCar; }
-    public void setEdeCodCar(Integer edeCodCar) { this.edeCodCar = edeCodCar; }
+    public void setEdeRut(Integer edeRut) {
+        this.edeRut = edeRut;
+    }
 
-    public Integer getEdeAgnoIng() { return edeAgnoIng; }
-    public void setEdeAgnoIng(Integer edeAgnoIng) { this.edeAgnoIng = edeAgnoIng; }
+    public Integer getEdeCodCar() {
+        return edeCodCar;
+    }
 
-    public Integer getEdeSemIng() { return edeSemIng; }
-    public void setEdeSemIng(Integer edeSemIng) { this.edeSemIng = edeSemIng; }
+    public void setEdeCodCar(Integer edeCodCar) {
+        this.edeCodCar = edeCodCar;
+    }
 
-    public Integer getEdeCorrelLogro() { return edeCorrelLogro; }
-    public void setEdeCorrelLogro(Integer edeCorrelLogro) { this.edeCorrelLogro = edeCorrelLogro; }
+    public Integer getEdeAgnoIng() {
+        return edeAgnoIng;
+    }
 
-    public Integer getEdeTdoc() { return edeTdoc; }
-    public void setEdeTdoc(Integer edeTdoc) { this.edeTdoc = edeTdoc; }
+    public void setEdeAgnoIng(Integer edeAgnoIng) {
+        this.edeAgnoIng = edeAgnoIng;
+    }
+
+    public Integer getEdeSemIng() {
+        return edeSemIng;
+    }
+
+    public void setEdeSemIng(Integer edeSemIng) {
+        this.edeSemIng = edeSemIng;
+    }
+
+    public Integer getEdeCorrelLogro() {
+        return edeCorrelLogro;
+    }
+
+    public void setEdeCorrelLogro(Integer edeCorrelLogro) {
+        this.edeCorrelLogro = edeCorrelLogro;
+    }
+
+    public Integer getEdeTdoc() {
+        return edeTdoc;
+    }
+
+    public void setEdeTdoc(Integer edeTdoc) {
+        this.edeTdoc = edeTdoc;
+    }
+
+   
 }

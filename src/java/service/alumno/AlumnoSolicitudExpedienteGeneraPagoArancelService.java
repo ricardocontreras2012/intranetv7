@@ -38,7 +38,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         WorkSession ws = genericSession.getWorkSession(key);
         ExpedienteLogro expl = ws.getExpedienteLogro();
 
-        name = "PAGO_ARANCEL_xxx" + ".pdf";
+        name = "PAGO_ARANCEL_EXPEDIENTE" + ".pdf";
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name);
         

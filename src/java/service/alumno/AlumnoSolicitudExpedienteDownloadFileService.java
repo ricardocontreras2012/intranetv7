@@ -1,0 +1,76 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package service.alumno;
+
+import domain.model.SolicitudAttach;
+import infrastructure.util.ActionInputStreamUtil;
+import infrastructure.util.FormatUtil;
+import infrastructure.util.LogUtil;
+import infrastructure.util.common.CommonArchivoUtil;
+import java.io.InputStream;
+import session.GenericSession;
+import session.WorkSession;
+
+/**
+ *
+ * @author Alvaro
+ */
+public class AlumnoSolicitudExpedienteDownloadFileService {
+
+    public static ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
+        String name;
+        InputStream input;
+        String description;
+
+        WorkSession ws = genericSession.getWorkSession(key);
+
+        System.out.println("todc:" + tdoc);
+        System.out.println("size:" + ws.getEstadoDocExpList().size());
+
+        for (Integer i = 0; i < ws.getEstadoDocExpList().size(); i++) {
+            System.out.println("lisssst:" + ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod());
+            if (ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod().equals(tdoc)) {
+                System.out.println("fileName:" + ws.getEstadoDocExpList().get(i).getEdeFile());
+                name = ws.getEstadoDocExpList().get(i).getEdeFile();
+                input = CommonArchivoUtil.getFile(name, "tit");
+                description = FormatUtil.getMimeType(name);
+                return new ActionInputStreamUtil(name, description, input);
+            }
+        }
+        /*SolicitudAttach solicitudDocumento
+                = genericSession.getWorkSession(key).getSolicitud().getSolicitudAttachList().get(documento);
+        name = solicitudDocumento.getSolaAttachFile();     */
+        name = "cartacompromiso_SOL_0_618516.pdf";
+        input = CommonArchivoUtil.getFile(name, "tit");
+        description = FormatUtil.getMimeType(name);
+        //LogUtil.setLog(genericSession.getRut(),solicitudDocumento.getSolaAttachFile());
+        return new ActionInputStreamUtil(name, description, input);
+    }
+
+    // código nuevo que debo implementar
+    /*public static ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
+        String name = null;
+        InputStream input;
+        String description;
+
+        WorkSession ws = genericSession.getWorkSession(key);
+        for (Integer i = 0; i < ws.getEstadoDocExpList().size(); i++) {
+            if (ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod() == tdoc) {
+                name = ws.getEstadoDocExpList().get(i).getEdeFile();
+                break;
+
+            }
+        }
+
+        if (name == null) {
+            throw new IllegalArgumentException("No se encontró un archivo con el tdoc: " + tdoc);
+        }
+        
+       input = CommonArchivoUtil.getFile(name, "tit");
+        description = FormatUtil.getMimeType(name);
+        return new ActionInputStreamUtil(name, description, input);
+    }*/
+}

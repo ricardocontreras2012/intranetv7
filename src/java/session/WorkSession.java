@@ -80,6 +80,7 @@ import static infrastructure.util.common.CommonAsistenciaUtil.asiste;
 import domain.model.ActaNominaView;
 import domain.model.RespEnctaCursoView;
 import domain.model.RespEnctaAyuCursoView;
+import domain.model.EstadoDocExp;
 
 /**
  * Class description
@@ -226,6 +227,8 @@ public final class WorkSession {
     private List<Unidad> unidadList;
     private List<SolicitudJustificativo> justificativoList;
 
+    private EstadoDocExp estadoDocExp;
+    private List<EstadoDocExp> estadoDocExpList;
     /**
      *
      * @param type
@@ -2031,5 +2034,21 @@ public final class WorkSession {
 
     public void setJustificativoList(List<SolicitudJustificativo> justificativoList) {
         this.justificativoList = justificativoList;
+    }
+
+    public EstadoDocExp getEstadoDocExp() {
+        return estadoDocExp;
+    }
+
+    public void setEstadoDocExp(EstadoDocExp estadoDocExp) {
+        this.estadoDocExp = estadoDocExp;
+    }
+
+    public List<EstadoDocExp> getEstadoDocExpList() {
+        return estadoDocExpList;
+    }
+
+    public void setEstadoDocExpList(List<EstadoDocExp> estadoDocExpList) {
+        this.estadoDocExpList = estadoDocExpList;
     }
 }

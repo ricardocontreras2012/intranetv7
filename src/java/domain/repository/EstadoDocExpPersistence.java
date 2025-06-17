@@ -15,5 +15,6 @@ import java.util.List;
  */
 public interface EstadoDocExpPersistence {
     
-    List<EstadoDocExp> find(ExpedienteLogroId id);    
+    List<EstadoDocExp> find(ExpedienteLogroId id);
+    void updateFile(Integer rut, Integer cod_car, Integer agno_ing, Integer sem_ing, Integer correl_logro, Integer tdoc, String file);
 }

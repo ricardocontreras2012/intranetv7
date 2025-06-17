@@ -23,7 +23,7 @@ public class AlumnoSolicitudExpedienteNewAction extends ActionValidationPosSuppo
      */
     @Override
     public String action() {
-        return service(getGenericSession(), getPos(), getKey());
+        return service(this, getGenericSession(), getPos(), getKey());
     }
 
     /**

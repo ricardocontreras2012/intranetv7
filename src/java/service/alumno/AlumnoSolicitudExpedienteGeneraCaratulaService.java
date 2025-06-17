@@ -40,7 +40,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         WorkSession ws = genericSession.getWorkSession(key);
         ExpedienteLogro expl = ws.getExpedienteLogro();
 
-        name = "CARATULA_nnn_zzz" + ".pdf";
+        name = "CARATULA_EXPEDIENTE" + ".pdf";
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name, expl);
 

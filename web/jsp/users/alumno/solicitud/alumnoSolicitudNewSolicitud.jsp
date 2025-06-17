@@ -31,7 +31,7 @@
         </div>
 
         <form id="solicitud-form" action="#" method="post">
-            <table class="table table-striped"
+            <table class="table table-striped">
                 <s:iterator value="#session.genericSession.getWorkSession(key).tsolicitudList" status="row">
                     <tr>
                         <td>
