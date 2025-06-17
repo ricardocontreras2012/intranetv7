@@ -38,6 +38,7 @@ public class ExpedienteLogro implements java.io.Serializable {
     private String explGenero;
     private String explRol;
     private String explEstado;
+    private Integer explSol;
 
     /**
      *
@@ -222,4 +223,13 @@ public class ExpedienteLogro implements java.io.Serializable {
     public void setExplEstado(String explEstado) {
         this.explEstado = explEstado;
     }
+
+    public Integer getExplSol() {
+        return explSol;
+    }
+
+    public void setExplSol(Integer explSol) {
+        this.explSol = explSol;
+    }
+    
 }

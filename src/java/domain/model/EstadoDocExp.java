@@ -53,8 +53,6 @@ public class EstadoDocExp implements Serializable {
         this.tDocExpediente = tDocExpediente;
     }
 
-   
-
     public Integer getEdeEstado() {
         return edeEstado;
     }

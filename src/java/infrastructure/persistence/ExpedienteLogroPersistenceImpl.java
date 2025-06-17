@@ -106,6 +106,16 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
         return (ExpedienteLogro) criteria.uniqueResult();
     }
     
+    @Override
+    public ExpedienteLogro findBySolicitud(Integer rut, Integer solicitud) {
+        System.out.println("Persistence!!");
+        Criteria criteria = getSession().createCriteria(ExpedienteLogro.class);
+
+        criteria.add(eq("id.explRut", rut));
+        criteria.add(eq("explSol", solicitud));
+        return (ExpedienteLogro) criteria.uniqueResult();
+    }
+    
     /**
      * Method description
      *
@@ -187,6 +197,25 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
         query.setParameter("rol", rol, StandardBasicTypes.STRING);
         query.setParameter("resol", resol, StandardBasicTypes.INTEGER);
         query.setParameter("fecha", fecha, StandardBasicTypes.DATE);
+        
+        query.executeUpdate();
+    }
+    
+    @Override
+    public void saveExpedienteSolicitud(ExpedienteLogro expediente, Integer solicitud) {
+
+        String hql
+                = "update ExpedienteLogro SET "
+                + "expl_sol =:solicitud "
+                + "WHERE expl_rut=:rut AND expl_cod_car=:carrera AND expl_agno_ing=:agno AND expl_sem_ing=:sem AND expl_correl=:correl";
+        Query query = getSession().createQuery(hql);
+        
+        query.setParameter("rut", expediente.getId().getExplRut(), StandardBasicTypes.INTEGER);
+        query.setParameter("carrera", expediente.getId().getExplCodCar(), StandardBasicTypes.INTEGER);
+        query.setParameter("agno", expediente.getId().getExplAgnoIng(), StandardBasicTypes.INTEGER);
+        query.setParameter("sem", expediente.getId().getExplSemIng(), StandardBasicTypes.INTEGER);
+        query.setParameter("correl", expediente.getId().getExplCorrel(), StandardBasicTypes.INTEGER);
+        query.setParameter("solicitud", solicitud, StandardBasicTypes.INTEGER);
         
         query.executeUpdate();
     }

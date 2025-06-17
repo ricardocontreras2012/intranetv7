@@ -31,6 +31,7 @@ public interface ExpedienteLogroPersistence extends CrudGenericDAO<ExpedienteLog
     List<ExpedienteLogro> find(AluCar aca);
     List<ExpedienteLogro> findGeneradas(AluCar aca);
     ExpedienteLogro find(ExpedienteLogro exp);
+    ExpedienteLogro findBySolicitud(Integer rut, Integer solicitud);
 
 
     /**
@@ -57,6 +58,7 @@ public interface ExpedienteLogroPersistence extends CrudGenericDAO<ExpedienteLog
      */
     void saveExpediente(ExpedienteLogro expediente, Integer ne, String fe, String rol);
     void saveExpediente(ExpedienteLogro expediente, String rol, Integer resol, Date fecha);
+    void saveExpedienteSolicitud(ExpedienteLogro expediente, Integer solicitud);
     Date getFechaTramite(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer correl );
 
 }

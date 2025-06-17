@@ -96,5 +96,8 @@
         <property name="explRol" type="string">
             <column name="EXPL_ROL" length="10" />
         </property>
+        <property name="explSol" type="int">
+            <column name="EXPL_SOL" precision="4" scale="0" />
+        </property>
     </class>
 </hibernate-mapping>
