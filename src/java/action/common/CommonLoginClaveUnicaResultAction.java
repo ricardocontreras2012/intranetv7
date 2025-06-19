@@ -7,6 +7,7 @@ package action.common;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.action.ServletRequestAware;
@@ -15,6 +16,10 @@ import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonProfesorUtil;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  *
@@ -36,14 +41,47 @@ public class CommonLoginClaveUnicaResultAction implements ServletRequestAware, S
 
                 String data2 = jobj.get("data").toString();
                 JsonObject jobj2 = new Gson().fromJson(data2, JsonObject.class);
-                String user = jobj2.get("user").toString();
+
+                //// ANTIGUA FORMA
+                /*String user = jobj2.get("user").toString();
 
                 JsonObject jobj4 = new Gson().fromJson(user, JsonObject.class);
                 String RolUnico = jobj4.get("RolUnico").toString();
 
                 JsonObject jobj5 = new Gson().fromJson(RolUnico, JsonObject.class);
                 Integer rut = jobj5.get("numero").getAsInt();
+                 */
+                
+                //// NUEVA FORMA
+                
+                String token = jobj2.get("token").toString();
+                System.out.println("token: " + token);
+                
+                URL url = new URL("https://accounts.claveunica.gob.cl/openid/userinfo/");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
+                // Configurar método POST y cabecera
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Authorization", "Bearer "+token);
+                conn.setDoOutput(true);
+
+                // Leer la respuesta
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder jsonResponse = new StringBuilder();
+                while ((inputLine = in.readLine()) != null) {
+                    jsonResponse.append(inputLine);
+                }
+                in.close();
+
+                // Parsear JSON con Gson
+                JsonObject jsonObject = JsonParser.parseString(jsonResponse.toString()).getAsJsonObject();
+                JsonObject idPer = jsonObject.getAsJsonObject("RolUnico");
+                Integer rut = idPer.get("numero").getAsInt();
+
+                System.out.println("Numero: " + rut);
+                ///////////// FIN NUEVA FORMA
+                                
                 String meta = jobj2.get("metadata").toString();
                 JsonObject jobj6 = new Gson().fromJson(meta, JsonObject.class);
                 String userType = jobj6.get("userType").toString();
@@ -68,7 +106,6 @@ public class CommonLoginClaveUnicaResultAction implements ServletRequestAware, S
 
         return retValue ? "success" : "error";
     }
-    
 
     @Override
     public void withServletRequest(HttpServletRequest hsr) {
