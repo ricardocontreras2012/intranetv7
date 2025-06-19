@@ -6,7 +6,6 @@
 package infrastructure.persistence;
 
 import domain.model.EstadoDocExp;
-import domain.model.EstadoDocExpId;
 import domain.model.ExpedienteLogroId;
 import domain.repository.EstadoDocExpPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;

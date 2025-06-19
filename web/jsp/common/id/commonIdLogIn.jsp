@@ -77,7 +77,7 @@
                                     <s:actionerror/><s:actionmessage/><s:fielderror/>
                                 </div>
                             </s:if>
-                            <div class="card mt-5">
+                            <%--div class="card mt-5">
                                 <div class="card-body" style="text-align: center;">
                                     <h5 class="mb-3">Puedes ingresar usando tu ClaveÚnica</h5>
                                     <a class="btn-cu btn-m btn-color-estandar" onClick="getClaveUnica();" style="display: block; margin: 0 auto;">
@@ -85,7 +85,7 @@
                                         <span class="texto">Iniciar sesión</span>
                                     </a>
                                 </div>
-                            </div>                            
+                            </div--%>                            
                             <div id="hidden-input-div">
                                 <input type="hidden" id="rut" name="rut" value=""/>
                                 <input type="hidden" id="userType" name="userType"

@@ -1,7 +1,6 @@
 package infrastructure.util.common;
 
 import domain.model.EstadoDocExp;
-import domain.repository.EstadoDocExpPersistence;
 import domain.model.SolicitudAttach;
 import domain.model.SolicitudAttachId;
 import domain.model.TDocExpediente;

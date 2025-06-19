@@ -5,10 +5,8 @@
  */
 package service.alumno;
 
-import domain.model.SolicitudAttach;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.FormatUtil;
-import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonArchivoUtil;
 import java.io.InputStream;
 import session.GenericSession;
