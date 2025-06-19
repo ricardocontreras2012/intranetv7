@@ -201,4 +201,6 @@ public interface ScalarPersistence extends CrudGenericDAO<Object, Serializable> 
     String getTramite(Integer cod);
     int getFlagEmail(Integer rut, Integer carrera, Integer agnoIng, Integer semIng);
     String getEmailUsach(String email);
+    int getArancelLogro(int logro, int tprograma);
+    
 }

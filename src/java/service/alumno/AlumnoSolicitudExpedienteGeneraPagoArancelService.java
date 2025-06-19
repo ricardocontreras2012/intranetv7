@@ -9,9 +9,10 @@ import com.lowagie.text.pdf.*;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import domain.model.AluCar;
 import domain.model.Alumno;
-import domain.model.ExpedienteLogro;
 import domain.model.Unidad;
 import infrastructure.util.ActionInputStreamUtil;
+import infrastructure.util.ActionUtil;
+import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
 import static infrastructure.util.DateUtil.getSysdate;
 import infrastructure.util.FormatUtil;
@@ -34,9 +35,6 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         InputStream input;
         String name;
         String description;
-               
-        WorkSession ws = genericSession.getWorkSession(key);
-        ExpedienteLogro expl = ws.getExpedienteLogro();
 
         name = "PAGO_ARANCEL_EXPEDIENTE" + ".pdf";
         description = FormatUtil.getMimeType(name);
@@ -50,29 +48,15 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
             String key, String name)
             throws Exception {
     
-
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
         Alumno alumno = aca.getAlumno();
-                
-        int id = 1;
-        int codCar = 550;
-        int agnoIng = 2023;
-        int semIng = 1;
-        int codMen = 0;
-        int codPlan = 10;
         
-        //public void service(int id, int codCar, int agnoIng, int semIng, int codMen, int codPlan, int correl, double pago) throws Exception {
         float margin = 28.35f * 2;
-        Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);
-
-        //String filePath = "c:\\PagoArancel_" + id + "_" + codCar + "_" + agnoIng + "_" + semIng + "_" + codMen + "_" + codPlan + ".pdf";
-        //PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath));
-        
+        Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);      
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         PdfWriter writer = PdfWriter.getInstance(document, buffer);
                
-
         // Abrir el documento
         document.open();
         
@@ -114,8 +98,6 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
 
         String alumnoDoc = alumno.getAluRut()+"-"+alumno.getAluDv();
         String alumnoNombre = alumno.getAluPaterno()+" "+alumno.getAluMaterno()+", "+alumno.getAluNombre();
-        //String tipoLogro = ws.; 
-        String logro = "Título Profesional"; 
 
         document.add(new Paragraph("Cédula Nacional de Identidad N°.: " + alumnoDoc + "\n\n", fontRegular));
         document.add(new Paragraph("Nombre: " + alumnoNombre + "\n\n", fontRegular));
@@ -125,7 +107,8 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         document.add(new Paragraph("\n"));
 
         // Total a pagar
-        String pagoFormateado = String.format(Locale.forLanguageTag("es-CL"), "%,d", (int) ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrValor());
+        int valor = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getArancelLogro(ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrCod(), ws.getAluCar().getPlan().getMencion().getCarrera().getTprograma().getTprCod());
+        String pagoFormateado = String.format(Locale.forLanguageTag("es-CL"), "%,d", valor);
         document.add(new Paragraph("Total a pagar $ " + pagoFormateado, fontBold));
 
         document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n"));

@@ -14,8 +14,5 @@
         <many-to-one class="domain.model.Tlogro" fetch="select" insert="false" name="tlogro" update="false">
             <column name="LOGR_TLOGRO" not-null="true" precision="2" scale="0"/>
         </many-to-one>
-        <property name="logrValor" type="int">
-            <column name="LOGR_VALOR" precision="7" scale="0"/>
-        </property>
     </class>
 </hibernate-mapping>

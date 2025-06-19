@@ -8,7 +8,6 @@ package service.alumno;
 import com.opensymphony.xwork2.Action;
 import domain.model.Solicitud;
 import domain.model.ExpedienteLogro;
-import domain.model.ExpedienteLogroId;
 import infrastructure.support.SolicitudSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;

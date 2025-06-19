@@ -18,7 +18,6 @@ public class Logro implements Serializable {
     private Integer logrCod;
     private String logrDes;
     private Tlogro tlogro;
-    private Integer logrValor;
 
     public Logro() {
     }
@@ -45,13 +44,5 @@ public class Logro implements Serializable {
 
     public void setTlogro(Tlogro tlogro) {
         this.tlogro = tlogro;
-    }
-
-    public Integer getLogrValor() {
-        return logrValor;
-    }
-
-    public void setLogrValor(Integer logrValor) {
-        this.logrValor = logrValor;
     }    
 }

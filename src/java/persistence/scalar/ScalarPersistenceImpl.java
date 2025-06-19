@@ -484,4 +484,14 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     public String getEmailUsach(String email) {
         return getString("get_email_usach(:email)", new Object[]{email}, new String[]{"email"}, new Type[]{StandardBasicTypes.STRING});
     }
+    
+    @Override
+    public int getArancelLogro(int logro, int tprograma)
+    {
+        String sql = "select val_valor from valor_arancel_logro where val_logro= :logro AND val_tprog=:tprog";
+        return ((Number) getSession().createSQLQuery(sql)
+                .setParameter("logro", logro, StandardBasicTypes.INTEGER)
+                .setParameter("tprog", tprograma, StandardBasicTypes.INTEGER)
+                .uniqueResult()).intValue();
+    }
 }
