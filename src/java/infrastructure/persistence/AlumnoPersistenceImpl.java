@@ -238,7 +238,7 @@ public final class AlumnoPersistenceImpl extends CrudAbstractDAO<Alumno, Long> i
      */
     @Override
     public void setMisDatos(Integer rut, String email, String emailLaboral, String direccion, Integer comuna, String fono, Integer estadoCivil) {
-        String hql = "update Alumno set alu_email = :email, alu_email_laboral = :emailLaboral, alu_direc_alu = :direccion,"
+        String hql = "update Alumni set alu_email = :email, alu_email_laboral = :emailLaboral, alu_direc_alu = :direccion,"
                 + "alu_comuna_alu = :comuna, alu_fono_alu= :fono, alu_est_civ= :estadoCivil where alu_rut = :rut";
 
         Query query = getSession().createQuery(hql);

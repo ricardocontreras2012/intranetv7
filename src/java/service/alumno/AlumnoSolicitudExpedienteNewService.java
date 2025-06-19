@@ -7,6 +7,7 @@ package service.alumno;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import static com.opensymphony.xwork2.Action.ERROR;
+import domain.model.Alumno;
 import domain.repository.EstadoDocExpPersistence;
 import domain.model.ExpedienteLogro;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -33,6 +34,16 @@ public class AlumnoSolicitudExpedienteNewService {
             action.addActionMessage(action.getText("Solicitud por logro ya enviada"));
             return ERROR;
         }
+        
+        Alumno alumnoAux = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
+        Alumno alumno = genericSession.getWorkSession(key).getAluCar().getAlumno();
+        alumno.setAluEstCiv(alumnoAux.getAluEstCiv());
+        alumno.setComunaAlu(alumnoAux.getComunaAlu());
+        alumno.setAluDirecAlu(alumnoAux.getAluDirecAlu());
+        alumno.setAluFonoAlu(alumnoAux.getAluFonoAlu());
+        alumno.setAluFechaNac(alumnoAux.getAluFechaNac());
+        alumno.setAluEmail(alumnoAux.getAluEmail());
+        alumno.setAluEmailLaboral(alumnoAux.getAluEmailLaboral());
 
         try {
             ws.setEstadoDocExpList(

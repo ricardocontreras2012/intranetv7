@@ -73,6 +73,7 @@
     <package name="intranetAlumnoActions" extends="intranetAlumnoInterceptors">
         <result-types>
             <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
 
         <action name="AlumnoLogin" class="action.alumno.AlumnoLoginAction" method="execute">
@@ -764,13 +765,17 @@
             </result>
         </action>
         
-        
         <action name="AlumnoSolicitudExpedienteNew" class="action.alumno.AlumnoSolicitudExpedienteNewAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroNew.jsp
             </result>
             <result name="error">/jsp/message/messageActionMessage.jsp
             </result>
+        </action>
+        
+        <action name="AlumnoSolicitudExpedienteUpdatePersonales" class="action.alumno.AlumnoSolicitudExpedienteUpdatePersonalesAction" method="execute">
+            <result name="success" type="json"/>
+            <result name="error" type="json"/>
         </action>
 
         <action name="AlumnoSolicitudExpedienteAddSolicitud" class="action.alumno.AlumnoSolicitudExpedienteAddSolicitudAction" method="execute">            
