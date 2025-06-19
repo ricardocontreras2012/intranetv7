@@ -45,7 +45,7 @@ public class AlumnoSolicitudExpedienteUpdatePersonalesAction extends ActionCommo
 
         } catch (Exception e) {
             this.success = false;
-            this.message = "Error al guardar los datos: " + e.getMessage();
+            this.message = "Error al guardar los datos.";
             return SUCCESS; // No devolvemos ERROR, porque igual queremos enviar JSON 200
         }
     }
