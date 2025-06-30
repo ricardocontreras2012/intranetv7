@@ -8,7 +8,6 @@ package action.verificacioncertificado;
 
 import static org.apache.struts2.ServletActionContext.getRequest;
 import static service.verificacioncertificado.VerificacionCertificadoService.service;
-import session.VerificacionCertificadoSession;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 import static infrastructure.util.LogUtil.logInfo;
 
@@ -21,7 +20,6 @@ import static infrastructure.util.LogUtil.logInfo;
 public final class VerificacionCertificadoAction extends ActionPostCommonSupport {
 
     private Integer folio;
-    private VerificacionCertificadoSession verificacionCertificadoSession;
     private String verificador;
 
     /**
@@ -39,28 +37,10 @@ public final class VerificacionCertificadoAction extends ActionPostCommonSupport
     /**
      * Method description
      *
-     * @return
-     */
-    public Integer getFolio() {
-        return folio;
-    }
-
-    /**
-     * Method description
-     *
      * @param folio
      */
     public void setFolio(Integer folio) {
         this.folio = folio;
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public String getVerificador() {
-        return verificador;
     }
 
     /**
@@ -72,21 +52,11 @@ public final class VerificacionCertificadoAction extends ActionPostCommonSupport
         this.verificador = verificador;
     }
 
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public VerificacionCertificadoSession getVerificacionCertificadoSession() {
-        return verificacionCertificadoSession;
+    public Integer getFolio() {
+        return folio;
     }
 
-    /**
-     * Method description
-     *
-     * @param verificacionCertificadoSession
-     */
-    public void setVerificacionCertificadoSession(VerificacionCertificadoSession verificacionCertificadoSession) {
-        this.verificacionCertificadoSession = verificacionCertificadoSession;
+    public String getVerificador() {
+        return verificador;
     }
 }

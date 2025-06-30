@@ -8,7 +8,6 @@ package action.verificacioncertificado;
 
 import static org.apache.struts2.ServletActionContext.getRequest;
 import static service.verificacioncertificado.VerificacionCertificadoService.service;
-import session.VerificacionCertificadoSession;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.LogUtil.logInfo;
 
@@ -21,7 +20,6 @@ import static infrastructure.util.LogUtil.logInfo;
 public final class VerificacionCertificadoQRAction extends ActionCommonSupport {
 
     private Integer folio;
-    private VerificacionCertificadoSession verificacionCertificadoSession;
     private String verificador;
 
     /**
@@ -54,21 +52,11 @@ public final class VerificacionCertificadoQRAction extends ActionCommonSupport {
         this.verificador = verificador;
     }
 
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public VerificacionCertificadoSession getVerificacionCertificadoSession() {
-        return verificacionCertificadoSession;
+    public Integer getFolio() {
+        return folio;
     }
 
-    /**
-     * Method description
-     *
-     * @param verificacionCertificadoSession
-     */
-    public void setVerificacionCertificadoSession(VerificacionCertificadoSession verificacionCertificadoSession) {
-        this.verificacionCertificadoSession = verificacionCertificadoSession;
+    public String getVerificador() {
+        return verificador;
     }
 }

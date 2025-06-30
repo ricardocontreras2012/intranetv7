@@ -18,5 +18,4 @@ public class TitulosyGradosNominaNewAction extends ActionCommonSupport {
     public String action() throws Exception {
         return service(getGenericSession(),  getKey());
     }
-
 }

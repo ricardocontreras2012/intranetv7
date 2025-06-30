@@ -45,8 +45,6 @@ public class TitulosyGradosNominaRemoveAction extends ActionParameterAwareSuppor
         this.tipo = tipo;
     }
 
-
-
     public String getNomina() {
         return nomina;
     }

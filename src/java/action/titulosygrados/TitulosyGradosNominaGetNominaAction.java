@@ -29,41 +29,29 @@ public class TitulosyGradosNominaGetNominaAction extends ActionCommonSupport {
     @Override
     public String action() throws Exception {
         return service(getGenericSession(), tipo, StringUtils.upperCase(nomina), agno, getKey());
+    }    
+
+    public void setNomina(String nomina) {
+        this.nomina = nomina;
+    }    
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }   
+
+    public void setAgno(Integer agno) {
+        this.agno = agno;
+    }
+
+    public Integer getAgno() {
+        return agno;
     }
 
     public String getNomina() {
         return nomina;
     }
 
-    public void setNomina(String nomina) {
-        this.nomina = nomina;
-    }
-
     public Integer getTipo() {
         return tipo;
-    }
-
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @return
-     */
-    public Integer getAgno() {
-        return agno;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param agno
-     */
-    public void setAgno(Integer agno) {
-        this.agno = agno;
     }
 }
