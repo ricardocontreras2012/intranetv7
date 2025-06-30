@@ -5,7 +5,7 @@
  */
 package domain.model.comparator;
 
-import domain.model.CalificacionLogroAdicionalId;
+import domain.model.CalificacionLogroAdicional;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -16,22 +16,15 @@ import java.util.Comparator;
  * @version 7, 24/05/2012
  */
 public final class CalificacionLogroAdicionalComparable
-        implements Comparator<CalificacionLogroAdicionalId>, Serializable {
+        implements Comparator<CalificacionLogroAdicional>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * Method description
-     *
-     * @param c1
-     * @param c2
-     * @return
-     */
     @Override
-    public int compare(CalificacionLogroAdicionalId c1, CalificacionLogroAdicionalId c2) {
-        return Comparator.comparingInt(CalificacionLogroAdicionalId::getClaReq)
-                .thenComparingInt(CalificacionLogroAdicionalId::getClaAgno)
-                .thenComparingInt(CalificacionLogroAdicionalId::getClaSem)
+    public int compare(CalificacionLogroAdicional c1, CalificacionLogroAdicional c2) {
+        return Comparator.comparingInt((CalificacionLogroAdicional c) -> c.getId().getClaReq())
+                .thenComparingInt(c -> c.getId().getClaAgno())
+                .thenComparingInt(c -> c.getId().getClaSem())
                 .compare(c1, c2);
     }
 }
