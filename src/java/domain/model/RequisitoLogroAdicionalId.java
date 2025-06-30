@@ -17,7 +17,7 @@ public class RequisitoLogroAdicionalId implements Serializable {
     private Integer rlaCodCar;
     private Integer rlaCodMen;
     private Integer rlaCodPlan;
-     private Integer rlaCorrel;
+    private Integer rlaCorrel;
     private Integer rlaReq;
 
     /**

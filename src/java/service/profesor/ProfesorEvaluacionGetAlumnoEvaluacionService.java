@@ -34,8 +34,8 @@ public final class ProfesorEvaluacionGetAlumnoEvaluacionService {
         WorkSession ws = genericSession.getWorkSession(key);
         EvaluacionAlumnoPersistence evaluacionAlumnoPersistence
                 = ContextUtil.getDAO().getEvaluacionAlumnoPersistence(ActionUtil.getDBUser());
-        Evaluacion evaluacion = ws.getEvaluacionList().get(pos);
-      
+        Evaluacion evaluacion = ws.getEvaluacionList().get(pos);       
+        
         HibernateUtil.beginTransaction(ActionUtil.getDBUser());
         evaluacionAlumnoPersistence.sincronizaCurso(ws.getCurso().getId());
         HibernateUtil.commitTransaction();
@@ -44,6 +44,5 @@ public final class ProfesorEvaluacionGetAlumnoEvaluacionService {
         ws.setEvaluacionAlumno(evaluacionAlumnoPersistence.find(evaluacion));
 
         return SUCCESS;
-
     }
 }

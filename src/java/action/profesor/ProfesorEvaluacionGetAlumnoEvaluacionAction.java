@@ -5,8 +5,8 @@
  */
 package action.profesor;
 
+import infrastructure.support.action.ActionValidationPosSupport;
 import static service.profesor.ProfesorEvaluacionGetAlumnoEvaluacionService.service;
-import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
  * Procesa el action mapeado del request a la URL
@@ -15,10 +15,9 @@ import infrastructure.support.action.common.ActionCommonSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class ProfesorEvaluacionGetAlumnoEvaluacionAction extends ActionCommonSupport {
+public final class ProfesorEvaluacionGetAlumnoEvaluacionAction extends ActionValidationPosSupport {
 
     private static final long serialVersionUID = 1L;
-    private Integer pos;
 
     /**
      * Method description
@@ -28,24 +27,11 @@ public final class ProfesorEvaluacionGetAlumnoEvaluacionAction extends ActionCom
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), pos, getKey());
+        return service(getGenericSession(), getPos(), getKey());
     }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public Integer getPos() {
-        return pos;
-    }
-
-    /**
-     * Method description
-     *
-     * @param pos
-     */
-    public void setPos(Integer pos) {
-        this.pos = pos;
+    
+    @Override
+    public boolean isValidParam() throws IllegalArgumentException {
+        return isValidPos(getPos(), getGenericSession().getWorkSession(getKey()).getEvaluacionList());
     }
 }
