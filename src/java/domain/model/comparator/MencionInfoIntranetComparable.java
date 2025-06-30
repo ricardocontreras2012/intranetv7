@@ -28,7 +28,8 @@ public final class MencionInfoIntranetComparable implements Comparator<MencionIn
      */
     @Override
     public int compare(MencionInfoIntranet m1, MencionInfoIntranet m2) {
-        return Integer.compare(m1.getId().getMiniCodCar() * 10 + m1.getId().getMiniCodMen(),
-                m2.getId().getMiniCodCar() * 10 + m2.getId().getMiniCodMen());
+        return Comparator
+                .comparingInt((MencionInfoIntranet m) -> m.getId().getMiniCodCar())
+                .thenComparingInt(m -> m.getId().getMiniCodMen()).compare(m1, m2);
     }
 }

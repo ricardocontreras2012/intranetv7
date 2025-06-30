@@ -28,16 +28,10 @@ public final class RequisitoAdicionalTitPLanComparable implements Comparator<Req
      */
     @Override
     public int compare(RequisitoLogroAdicional cc1, RequisitoLogroAdicional cc2) {
-        return Integer.compare(
-                calculateComparisonValue(cc1),
-                calculateComparisonValue(cc2)
-        );
-    }
-
-    private int calculateComparisonValue(RequisitoLogroAdicional cc) {
-        return cc.getId().getRlaCodCar() * 1000
-                + cc.getId().getRlaCodMen() * 100
-                + cc.getId().getRlaCodPlan() * 10
-                + cc.getRlaOrder();
+        return Comparator
+                .comparing((RequisitoLogroAdicional r) -> r.getId().getRlaCodCar(), Comparator.nullsFirst(Integer::compareTo))
+                .thenComparing((RequisitoLogroAdicional r) -> r.getId().getRlaCodMen(), Comparator.nullsFirst(Integer::compareTo))
+                .thenComparing((RequisitoLogroAdicional r) -> r.getId().getRlaCodPlan(), Comparator.nullsFirst(Integer::compareTo))
+                .thenComparing((RequisitoLogroAdicional r) -> r.getRlaOrder(), Comparator.nullsFirst(Integer::compareTo)).compare(cc1, cc2);
     }
 }
