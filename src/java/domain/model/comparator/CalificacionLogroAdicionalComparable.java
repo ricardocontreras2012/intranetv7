@@ -5,7 +5,7 @@
  */
 package domain.model.comparator;
 
-import domain.model.CalificacionLogroAdicional;
+import domain.model.CalificacionLogroAdicionalId;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -16,7 +16,7 @@ import java.util.Comparator;
  * @version 7, 24/05/2012
  */
 public final class CalificacionLogroAdicionalComparable
-        implements Comparator<CalificacionLogroAdicional>, Serializable {
+        implements Comparator<CalificacionLogroAdicionalId>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -28,17 +28,10 @@ public final class CalificacionLogroAdicionalComparable
      * @return
      */
     @Override
-    public int compare(CalificacionLogroAdicional c1, CalificacionLogroAdicional c2) {
-        // Comparar por ClaReq
-        int cmpClaReq = Integer.compare(c1.getId().getClaReq(), c2.getId().getClaReq());
-        if (cmpClaReq != 0) {
-            return cmpClaReq;
-        }
-
-        // Comparar por ClaAgno y ClaSem
-        return Integer.compare(
-                10 * c1.getId().getClaAgno() + c1.getId().getClaSem(),
-                10 * c2.getId().getClaAgno() + c2.getId().getClaSem()
-        );
+    public int compare(CalificacionLogroAdicionalId c1, CalificacionLogroAdicionalId c2) {
+        return Comparator.comparingInt(CalificacionLogroAdicionalId::getClaReq)
+                .thenComparingInt(CalificacionLogroAdicionalId::getClaAgno)
+                .thenComparingInt(CalificacionLogroAdicionalId::getClaSem)
+                .compare(c1, c2);
     }
 }
