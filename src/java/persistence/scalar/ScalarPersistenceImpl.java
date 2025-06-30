@@ -9,6 +9,7 @@ import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.stream.IntStream;
 import org.hibernate.SQLQuery;
 import org.hibernate.type.StandardBasicTypes;
 import static org.hibernate.type.StandardBasicTypes.INTEGER;
@@ -37,9 +38,8 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
         SQLQuery query = getSession().createSQLQuery("SELECT " + sqlText + " val FROM dual");
 
         // Asignamos cada parámetro con su nombre y tipo correspondiente
-        for (int i = 0; i < params.length; i++) {
-            query.setParameter(paramNames[i], params[i], types[i]);  // Usamos el nombre del parámetro
-        }
+        IntStream.range(0, params.length)
+                .forEach(i -> query.setParameter(paramNames[i], params[i], types[i]));
 
         Object result = (String) query.addScalar("val", StandardBasicTypes.STRING).uniqueResult();
         return (result != null) ? (String) result : "";
@@ -337,12 +337,12 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     }
 
     @Override
-    public String getPuedePonerNotas(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {               
+    public String getPuedePonerNotas(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
         return getString("puede_poner_notas(:asign, :elect, :coord, :secc, :agno, :sem)",
                 new Object[]{asign, elect, coord, secc, agno, sem},
                 new String[]{"asign", "elect", "coord", "secc", "agno", "sem"},
                 new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.STRING, StandardBasicTypes.STRING, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER});
-        
+
     }
 
     @Override
@@ -455,13 +455,12 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     @Override
     public int getHorasCromoMalla(Integer carrera, Integer mencion, Integer plan) {
         return (Integer) getSession().createSQLQuery("select certificacion_pkg.get_horas_crono_malla(" + carrera + "," + mencion + "," + plan + " ) flag from dual").addScalar("flag", INTEGER).uniqueResult();
-    }    
-    
+    }
+
     @Override
     public String getNombreNormalizado(String str) {
-        return getString("util_pkg.normaliza_nombre(:str)",  new Object[]{str},new String[]{"str"}, new Type[]{StandardBasicTypes.STRING});
+        return getString("util_pkg.normaliza_nombre(:str)", new Object[]{str}, new String[]{"str"}, new Type[]{StandardBasicTypes.STRING});
     }
-        
 
     @Override
     public String getCert(Integer cod) {
@@ -484,10 +483,9 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     public String getEmailUsach(String email) {
         return getString("get_email_usach(:email)", new Object[]{email}, new String[]{"email"}, new Type[]{StandardBasicTypes.STRING});
     }
-    
+
     @Override
-    public int getArancelLogro(int logro, int tprograma)
-    {
+    public int getArancelLogro(int logro, int tprograma) {
         String sql = "select val_valor from valor_arancel_logro where val_logro= :logro AND val_tprog=:tprog";
         return ((Number) getSession().createSQLQuery(sql)
                 .setParameter("logro", logro, StandardBasicTypes.INTEGER)

@@ -72,7 +72,7 @@ public class CommonEncuestaPrintService {
                 addPdf(doc, ws, prof, curso);
             }
         }
-
+        
         doc.close();
         return new ByteArrayInputStream(buffer.toByteArray());
     }

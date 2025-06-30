@@ -58,7 +58,6 @@
                 <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
                 <input type="hidden" id="pos" name="pos" />
             </div>
-        </form>
-        
+        </form>        
     </body>
 </html>

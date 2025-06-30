@@ -6,7 +6,6 @@
 package service.common;
 
 import java.util.Map;
-import infrastructure.support.LoginSessionSupport;
 import static infrastructure.util.AppStaticsUtil.NORMAL_USERS;
 
 /**
@@ -20,12 +19,9 @@ public final class CommonLoginEnableFormService {
     /**
      * Habilita formulario de LogIn.
      *
-     * @param sesion Sesión de la aplicación.
+     * @return 
      */
-    public static void service(Map<String, Object> sesion) {
-        LoginSessionSupport lSession = new LoginSessionSupport();
-        lSession.setUserTypeMap(NORMAL_USERS);
-        sesion.clear();
-        sesion.put("loginSessionSupport", lSession);
+    public static Map<String, String> service() {
+        return NORMAL_USERS;        
     }
 }

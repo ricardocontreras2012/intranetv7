@@ -6,6 +6,7 @@
 package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.Mensaje;
 import java.util.Map;
 import domain.repository.MensajePersistence;
 import session.GenericSession;
@@ -15,7 +16,7 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 /**
  * Class description
@@ -43,18 +44,17 @@ public final class CommonMensajeRemoveSentMessagesService {
         MensajePersistence mensajePersistence
                 = ContextUtil.getDAO().getMensajePersistence(ActionUtil.getDBUser());
 
-        AtomicInteger index = new AtomicInteger(0);
         beginTransaction(ActionUtil.getDBUser());
-
-        ws.getSentMsgs().stream()
-                .filter(msg -> parameters.get("ck_" + index.getAndIncrement()) != null)
-                .forEach(msg -> {
+   
+        IntStream.range(0, ws.getSentMsgs().size())
+                .filter(i -> parameters.get("ck_" + i) != null)
+                .forEach(i -> {
+                    Mensaje msg = ws.getSentMsgs().get(i);
                     LogUtil.setLog(genericSession.getRut(), msg.getMsgCorrel());
                     mensajePersistence.setDeleteSentMessage(msg);
-                });
-
+                });       
+        
         commitTransaction();
-
         ws.setSentMsgs(mensajePersistence.find(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
 
         return SUCCESS;

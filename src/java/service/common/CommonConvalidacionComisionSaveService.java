@@ -5,12 +5,10 @@
  */
 package service.common;
 
-
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.ConvalidacionComision;
 import domain.model.ConvalidacionComisionProf;
 import domain.model.ConvalidacionComisionProfId;
-import domain.model.Profesor;
 import session.SecretariaSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -23,7 +21,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  */
 public class CommonConvalidacionComisionSaveService {
 
-    public static String service( SecretariaSession secreSession)
+    public static String service(SecretariaSession secreSession)
             throws Exception {
         String user = ActionUtil.getDBUser();
         Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaComision();
@@ -33,24 +31,24 @@ public class CommonConvalidacionComisionSaveService {
         beginTransaction(user);
         ContextUtil.getDAO().getConvalidacionComisionPersistence(user).makePersistent(comision);
 
-        for (Profesor profesor : secreSession.getComision()) {
+        secreSession.getComision().stream()
+                .forEach(profesor -> {
+                    ConvalidacionComisionProf comisionProf = new ConvalidacionComisionProf();
+                    ConvalidacionComisionProfId id = new ConvalidacionComisionProfId();
+                    id.setCcopCod(correl);
+                    id.setCcopRut(profesor.getProfRut());
 
-            ConvalidacionComisionProf comisionProf = new ConvalidacionComisionProf();
-            ConvalidacionComisionProfId id = new ConvalidacionComisionProfId();
-            id.setCcopCod(correl);
-            id.setCcopRut(profesor.getProfRut());
+                    comisionProf.setComision(comision);
+                    comisionProf.setId(id);
+                    comisionProf.setProfesor(profesor);
 
-            comisionProf.setComision(comision);
-            comisionProf.setId(id);
-            comisionProf.setProfesor(profesor);
+                    ContextUtil.getDAO()
+                            .getConvalidacionComisionProfPersistence(user)
+                            .makePersistent(comisionProf);
+                });
 
-
-            ContextUtil.getDAO().getConvalidacionComisionProfPersistence(user).makePersistent(comisionProf);
-
-        }
         commitTransaction();
 
         return SUCCESS;
-
     }
 }

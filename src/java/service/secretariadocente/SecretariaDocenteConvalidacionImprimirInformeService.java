@@ -57,6 +57,7 @@ import static infrastructure.util.SystemParametersUtil.PATH_ATTACH_MESSAGES;
 import static infrastructure.util.SystemParametersUtil.PATH_CERT;
 import infrastructure.util.common.CommonArchivoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -212,30 +213,29 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
 
     private static void putAsignaturas(String user, Document doc, AluCar aluCar, Integer correl) {
         List<ConvalidacionSolicitudAsign> lAsign = ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(user).getPorConvalidar(aluCar, correl);
-         PdfUtil.putBlank(doc);
+        PdfUtil.putBlank(doc);
         PdfPTable table = creaTabla();
 
-        Boolean par = false;
         Color myColorGris = new Color(240, 240, 240);
         Color myColorBlanco = new Color(255, 255, 255);
-        Color myColor;
 
-        for (ConvalidacionSolicitudAsign conv : lAsign) {
-            if (par) {
-                myColor = myColorGris;
-            } else {
-                myColor = myColorBlanco;
-            }
-            par = !par;
+        IntStream.range(0, lAsign.size())
+                .forEach(i -> {
+                    ConvalidacionSolicitudAsign conv = lAsign.get(i);
+                    Color myColor = (i % 2 == 0) ? myColorBlanco : myColorGris;
 
-            table.addCell(getPdfPCell(conv.getAsignatura().getAsiCod().toString(), Element.ALIGN_RIGHT, myColor));
-            table.addCell(getPdfPCell(conv.getAsignatura().getAsiNom(), Element.ALIGN_LEFT, myColor));
-            table.addCell(getPdfPCell(conv.getCsaElectivo(), Element.ALIGN_LEFT, myColor));
-            table.addCell(getPdfPCell(conv.getCsaCursada(), Element.ALIGN_LEFT, myColor));
-            table.addCell(getPdfPCell(conv.getCsaNota() == null ? "" : conv.getCsaNota().toString(), Element.ALIGN_RIGHT, myColor));
-            table.addCell(getPdfPCell("C".equals(conv.getCsaEstado()) ? "Conv" : "Rechazada", Element.ALIGN_RIGHT, myColor));
-            table.addCell(getPdfPCell(conv.getCsaObs(), Element.ALIGN_LEFT, myColor));
-        }
+                    table.addCell(getPdfPCell(conv.getAsignatura().getAsiCod().toString(), Element.ALIGN_RIGHT, myColor));
+                    table.addCell(getPdfPCell(conv.getAsignatura().getAsiNom(), Element.ALIGN_LEFT, myColor));
+                    table.addCell(getPdfPCell(conv.getCsaElectivo(), Element.ALIGN_LEFT, myColor));
+                    table.addCell(getPdfPCell(conv.getCsaCursada(), Element.ALIGN_LEFT, myColor));
+                    table.addCell(getPdfPCell(
+                            conv.getCsaNota() == null ? "" : conv.getCsaNota().toString(),
+                            Element.ALIGN_RIGHT, myColor));
+                    table.addCell(getPdfPCell(
+                            "C".equals(conv.getCsaEstado()) ? "Conv" : "Rechazada",
+                            Element.ALIGN_RIGHT, myColor));
+                    table.addCell(getPdfPCell(conv.getCsaObs(), Element.ALIGN_LEFT, myColor));
+                });
 
         doc.add(table);
     }
@@ -291,7 +291,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         table.setHeaderRows(1);
 
         return table;
-    }    
+    }
 
     public static class HeaderFooterPageEvent extends PdfPageEventHelper {
 
@@ -375,7 +375,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
                 totalPageCount.setBorder(Rectangle.NO_BORDER);
                 footer.addCell(totalPageCount);
 
-                PdfContentByte canvas = writer.getDirectContent();                
+                PdfContentByte canvas = writer.getDirectContent();
                 PdfName customTag = new PdfName("CustomTag");
                 canvas.beginMarkedContentSequence(customTag);
 

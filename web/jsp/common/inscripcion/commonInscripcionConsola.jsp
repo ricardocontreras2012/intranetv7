@@ -27,7 +27,6 @@
         </div>
 
         <form id="inscripcion-form" action="#" method="post" class="form-inline">
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 col-sm-6 order-1 order-sm-2" >
@@ -180,6 +179,5 @@
                 </div>
             </div>
         </div>            
-
     </body>
 </html>

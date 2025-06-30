@@ -36,12 +36,12 @@
                         </div>
                         <div class="card-body">
                             <s:form id="login-form" action="#" method="post" theme="bootstrap">
-                                <s:if test="#session != null && #session.loginSessionSupport != null && #session.loginSessionSupport.userTypeMap != null">
+                                
                                     <s:select name="usuarios"
                                               id="usuarios"
                                               headerKey=""
                                               headerValue="Seleccione Tipo de Usuario"
-                                              list="#session.loginSessionSupport.userTypeMap"
+                                              list="userTypeMap"
                                               />
                                     <div class="form-group mt-3">
                                         <div class="input-group">
@@ -66,10 +66,9 @@
                                     <div id="hidden-input-div">
                                         <input type="hidden" id="rut" name="rut" value=""/>
                                         <input type="hidden" id="userType" name="userType"
-                                               value="<s:property value="#session.loginSessionSupport.userType"/>"/>
+                                               value="<s:property value="userType"/>"/>
                                         <s:token name="token"></s:token>
                                     </div>
-                                </s:if>
                             </s:form>
                         </div>
                     </div>

@@ -39,7 +39,7 @@
                                   id="usuarios"
                                   headerKey="-1"
                                   headerValue="-- Seleccione Tipo de Usuario --"
-                                  list="#session.loginSessionSupport.userTypeMap"
+                                  list="userTypeMap"
                                   cssClass="input"
                                   />
                         <p>&nbsp;</p>
@@ -54,7 +54,7 @@
                     <div id="hidden-input-div">
                         <input type="hidden" id="rut" name="rut" value=""/>
                         <input type="hidden" id="userType" name="userType"
-                               value="<s:property value="#session.loginSessionSupport.userType"/>"/>
+                               value="<s:property value="userType"/>"/>
                     </div>
                 </form>
             </div>

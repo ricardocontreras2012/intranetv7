@@ -2,7 +2,6 @@ package service.alumno;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
@@ -34,8 +33,8 @@ public final class AlumnoLoginService {
      * 
      * @param action La instancia de `ActionCommonSupport` que invoca el servicio, utilizada para agregar 
      *               mensajes de error y recuperar configuraciones relacionadas con la acción.
-     * @param sesion El mapa que contiene los datos de la sesión del usuario, incluyendo el objeto 
-     *               `LoginSessionSupport` necesario para el inicio de sesión.
+     * @param rut
+     * @param passwd
      * @param key La clave de sesión utilizada para identificar y acceder a los datos de la sesión 
      *            del usuario de manera única.
      * @return El estado del intento de inicio de sesión: 
@@ -43,32 +42,24 @@ public final class AlumnoLoginService {
      *         - `"error"` si el inicio de sesión falló debido a credenciales incorrectas.
      *         - El resultado del método `retReLogin()` si la sesión o la clave son inválidas.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificación temprana para asegurarse de que la sesión y la clave no sean nulas.
         if (sesion == null || key == null) {
             return retReLogin(); 
         }
 
-        // Obtener el objeto LoginSessionSupport de la sesión, el cual contiene las credenciales del alumno.
-        LoginSessionSupport loginSessionSupport = (LoginSessionSupport) sesion.get("loginSessionSupport");
-
-        // Verificación temprana para asegurar que LoginSessionSupport no sea nulo.
-        if (loginSessionSupport == null) {
-            return retReLogin();
-        }
-
         try {
             // Intentar realizar el inicio de sesión utilizando las credenciales del alumno y la clave de sesión.
             boolean isLoginSuccessful = CommonAlumnoUtil.login(
-                loginSessionSupport.getRut(), 
-                loginSessionSupport.getPassword(), 
+                rut, 
+                passwd, 
                 key, 
                 sesion, 
                 SystemParametersUtil.INGRESO_REGULAR
             );
 
             // Si el inicio de sesión falla, agregar un mensaje de error y retornar el estado de error.
-            if (!isLoginSuccessful) {
+            if (!isLoginSuccessful) {                
                 action.addActionError(action.getText("error.rut.password"));
                 return retError(); 
             }

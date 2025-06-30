@@ -37,54 +37,51 @@
                         </div>
                         <div class="card-body">
                             <s:form id="login-form" action="#" method="post" theme="bootstrap">
-                                <s:if test="#session != null && #session.loginSessionSupport != null && #session.loginSessionSupport.userTypeMap != null">
-                                    <s:select name="usuarios"
-                                              id="usuarios"
-                                              headerKey=""
-                                              headerValue="Seleccione Tipo de Usuario"
-                                              list="#session.loginSessionSupport.userTypeMap"
-                                              />
-                                    <div class="form-group mt-3">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><span class="fa fa-user" aria-hidden="true"></span></span>
-                                            </div>
-                                            <input type="text" class="form-control" id="rutdv" name="rutdv" placeholder="RUN" required="required">
+
+                                <s:select name="usuarios"
+                                          id="usuarios"
+                                          headerKey=""
+                                          headerValue="Seleccione Tipo de Usuario"
+                                          list="userTypeMap"
+                                          />
+                                <div class="form-group mt-3">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fa fa-user" aria-hidden="true"></span></span>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><span class="fa fa-key" aria-hidden="true"></span></span>
-                                            </div>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
-                                        </div>
+                                        <input type="text" class="form-control" id="rutdv" name="rutdv" placeholder="RUN" required="required">
                                     </div>
                                 </div>
-                                <div class="card-footer">
-                                    <div class="d-block">
-                                        <button id="login-button" type="submit" class="btn btn-light"><span class="fa fa-unlock-alt" aria-hidden="true"></span>&nbsp;&nbsp;Ingresar</button>                                        
-                                    </div>
-                                    <div class="d-block mt-3">
-                                        <a href="/intranetv7/CommonLoginSolicitudPlusEnable"><s:text
-                                                name="label.olvide.password"/></a>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><span class="fa fa-key" aria-hidden="true"></span></span>
+                                        </div>
+                                        <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password" required="required">
                                     </div>
                                 </div>
                             </div>
-
-                            <s:if test="hasFieldErrors() || hasActionErrors() || hasActionMessages()">
-                                <div class="errorMessage">
-                                    <s:actionerror/><s:actionmessage/><s:fielderror/>
+                            <div class="card-footer">
+                                <div class="d-block">
+                                    <button id="login-button" type="submit" class="btn btn-light"><span class="fa fa-unlock-alt" aria-hidden="true"></span>&nbsp;&nbsp;Ingresar</button>                                        
                                 </div>
-                            </s:if>
-
-                            <div id="hidden-input-div">
-                                <input type="hidden" id="rut" name="rut" value=""/>
-                                <input type="hidden" id="userType" name="userType"
-                                       value="<s:property value="#session.loginSessionSupport.userType"/>"/>
-                                <s:token name="token"></s:token>
+                                <div class="d-block mt-3">
+                                    <a href="/intranetv7/CommonLoginSolicitudPlusEnable"><s:text
+                                            name="label.olvide.password"/></a>
                                 </div>
-                        </s:if>
+                            </div>
+                        </div>
+
+                        <div style="background:red; color:white;">
+                            <s:property value="err" />
+                        </div>
+
+                        <div id="hidden-input-div">
+                            <input type="hidden" id="rut" name="rut" value=""/>
+                            <input type="hidden" id="userType" name="userType"
+                                   value="<s:property value="userType"/>"/>
+                            <s:token name="token"></s:token>
+                        </div>
                     </s:form>                    
                 </div>
             </div>

@@ -5,12 +5,9 @@
  */
 package action.common;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.post.ActionPostCommonSupport;
-import infrastructure.util.ContextUtil;
-import infrastructure.util.FormatUtil;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
+import static service.common.CommonLoginService.*;
 
 /**
  * Procesa el action mapeado del request a la URL CommonLogin
@@ -22,9 +19,10 @@ public final class CommonLoginAction extends ActionPostCommonSupport {
 
     private static final long serialVersionUID = 1L;
     private String actionCall;
-    private String password;
+    private String passwd;
     private Integer rut;
     private String userType;
+    private String key;
 
     /**
      * Method description
@@ -34,36 +32,10 @@ public final class CommonLoginAction extends ActionPostCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        String retValue = "relogin";
- 
-        actionCall = ContextUtil.getDAO().getLogActionPersistence(userType).getActionLogin(userType);
-
-        LoginSessionSupport loginSessionSupport
-                = (LoginSessionSupport) getSesion().get("loginSessionSupport");
-
-        if (loginSessionSupport != null) {
-            setKey(getKeySession());
-
-            if (actionCall != null) {
-                loginSessionSupport.setUserType(userType);
-                loginSessionSupport.setRut(rut);
-                loginSessionSupport.setPassword(password);
-                retValue = SUCCESS;
-            }
-        } else {
-            SECONDS.sleep(5);
-            retValue = "denied";
-        }    
-        return retValue;
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public String getPassword() {
-        return password;
+        this.key = getKeySession();
+        actionCall = service(userType);
+        
+        return SUCCESS;
     }
 
     /**
@@ -71,19 +43,6 @@ public final class CommonLoginAction extends ActionPostCommonSupport {
      *
      * @param password
      */
-    public void setPassword(String password) {
-        this.password = FormatUtil.cleanPasswd(password);
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public Integer getRut() {
-        return rut;
-    }
-
     /**
      * Method description
      *
@@ -114,18 +73,30 @@ public final class CommonLoginAction extends ActionPostCommonSupport {
     /**
      * Method description
      *
-     * @return
-     */
-    public String getUserType() {
-        return userType;
-    }
-
-    /**
-     * Method description
-     *
      * @param userType
      */
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public Integer getRut() {
+        return rut;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 }

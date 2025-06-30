@@ -8,7 +8,6 @@ package action.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.PasswordTicket;
 import domain.repository.PasswordTicketPersistence;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupportDirect;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.ActionUtil.retError;
@@ -27,7 +26,7 @@ public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirec
     private static final long serialVersionUID = 1L;
     private Integer rut;
     private String userType;
-    private String password;
+    private String passwd;
     private String actionCall;
 
     /**
@@ -50,30 +49,19 @@ public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirec
 
         if (passwordTicket != null) {
             userType = passwordTicket.getPtUserType();
-            password = CommonRandomUtil.getRandomPassword(passwordTicket.getPtUserType());
+            passwd = CommonRandomUtil.getRandomPassword(passwordTicket.getPtUserType());
             actionCall = ContextUtil.getDAO().getLogActionPersistence(user).getActionLogin(userType);
-
-            LoginSessionSupport loginSessionSupport
-                    = (LoginSessionSupport) getSession().get("loginSessionSupport");
-
-            if (getSession().get("loginSessionSupport") == null) {
-                loginSessionSupport = new LoginSessionSupport();
-                getSession().put("loginSessionSupport", loginSessionSupport);
-            }
 
             setKey(getKeySession());
 
             if (actionCall != null) {
-                ContextUtil.getDAO().getDummyPersistence(user).setPasswordUser(rut, passwordTicket.getPtUserType(), password);
+                ContextUtil.getDAO().getDummyPersistence(user).setPasswordUser(rut, passwordTicket.getPtUserType(), passwd);
                 email = ContextUtil.getDAO().getDummyPersistence(user).getEmail(rut);
 
                 if (email != null) {
-                    sendNewPassword(email, password);
+                    sendNewPassword(email, passwd);
                     LogUtil.setLog(rut);
                 }
-                loginSessionSupport.setRut(rut);
-                loginSessionSupport.setPassword(password);
-                loginSessionSupport.setUserType(userType);
                 retValue = SUCCESS;
             }
 
@@ -88,10 +76,6 @@ public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirec
         this.rut = rut;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getActionCall() {
         return actionCall;
     }
@@ -104,7 +88,11 @@ public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirec
         return userType;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswd() {
+        return passwd;
     }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    } 
 }

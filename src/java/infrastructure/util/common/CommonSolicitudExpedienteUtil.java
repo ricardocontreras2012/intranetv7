@@ -3,7 +3,6 @@ package infrastructure.util.common;
 import domain.model.EstadoDocExp;
 import domain.model.SolicitudAttach;
 import domain.model.SolicitudAttachId;
-import domain.model.TDocExpediente;
 import domain.model.TdocumentoSolicitud;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
@@ -79,8 +78,8 @@ public class CommonSolicitudExpedienteUtil {
 
         List<EstadoDocExp> lista = ws.getEstadoDocExpList();
         String descripcion = obtenerDescripcionPorId(lista, tdoc);
-        
-        System.out.println("DESC:"+descripcion);
+
+        System.out.println("DESC:" + descripcion);
 
         List<SolicitudAttach> attachList = new ArrayList<>();
 
@@ -142,12 +141,11 @@ public class CommonSolicitudExpedienteUtil {
     }
 
     public static String obtenerDescripcionPorId(List<EstadoDocExp> lista, int idBuscado) {
-        for (EstadoDocExp estado : lista) {
-            TDocExpediente tipo = estado.gettDocExpediente();
-            if (tipo != null && tipo.getTdeCod() == idBuscado) {
-                return normalizaFileName(tipo.getTdeDes());
-            }
-        }
-        return null; // o algún valor por defecto
+        return lista.stream()
+                .map(EstadoDocExp::gettDocExpediente)
+                .filter(tipo -> tipo != null && tipo.getTdeCod() == idBuscado)
+                .map(tipo -> normalizaFileName(tipo.getTdeDes()))
+                .findFirst()
+                .orElse(null);
     }
 }

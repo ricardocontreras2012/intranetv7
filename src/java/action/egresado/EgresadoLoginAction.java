@@ -6,7 +6,6 @@
 package action.egresado;
 
 import static service.egresado.EgresadoLoginService.service;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -18,6 +17,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class EgresadoLoginAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
+            private Integer rut;
+private String passwd;
 
     /**
      * Method description
@@ -27,10 +28,26 @@ public final class EgresadoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        LoginSessionSupport loginSessionSupport
-                = (LoginSessionSupport) getSesion().get("loginSessionSupport");
-
-        return service(this, getSesion(), loginSessionSupport.getRut(),
-                loginSessionSupport.getPassword(), getKey());
+        
+        return service(this, getSesion(), rut,
+                passwd, getKey());
     }
+
+    public Integer getRut() {
+        return rut;
+    }
+
+    public void setRut(Integer rut) {
+        this.rut = rut;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+    
+    
 }

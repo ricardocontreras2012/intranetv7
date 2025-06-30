@@ -6,7 +6,6 @@
 package service.common;
 
 import java.util.Map;
-import infrastructure.support.LoginSessionSupport;
 import static infrastructure.util.AppStaticsUtil.PRIVILEGED_USERS;
 
 /**
@@ -20,12 +19,9 @@ public final class CommonLoginPlusEnableFormService {
     /**
      * Method description
      *
-     * @param sesion
+     * @return 
      */
-    public static void service(Map<String, Object> sesion) {
-        LoginSessionSupport loginSessionSupport = new LoginSessionSupport();
-        loginSessionSupport.setUserTypeMap(PRIVILEGED_USERS);
-        sesion.clear();
-        sesion.put("loginSessionSupport", loginSessionSupport);
+    public static Map<String, String> service() {
+        return PRIVILEGED_USERS;        
     }
 }

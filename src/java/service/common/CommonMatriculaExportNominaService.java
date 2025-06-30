@@ -35,6 +35,7 @@ import infrastructure.util.LogUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
 import infrastructure.util.common.CommonExcelUtil;
 import infrastructure.util.common.CommonFacultadUtil;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -241,60 +242,27 @@ public class CommonMatriculaExportNominaService {
      */
     private static void getGrid(List<MatriculaHistorico> nomina,
             XSSFSheet hoja, int fila) {
+        IntStream.range(0, nomina.size())
+                .forEach(i -> {
+                    MatriculaHistorico mat = nomina.get(i);
+                    AluCar aluCar = mat.getAluCar();
+                    Alumno alumno = aluCar.getAlumno();
 
-        int filaAux = fila;
+                    XSSFRow rowExcel = hoja.createRow(fila + i);
 
+                    rowExcel.createCell(0).setCellValue(alumno.getAluRut());
 
-        for (MatriculaHistorico mat : nomina) {
-            AluCar aluCar = mat.getAluCar();
-            Alumno alumno = aluCar.getAlumno();
-            XSSFRow rowExcel = hoja.createRow(filaAux);
+                    rowExcel.createCell(1).setCellValue(new XSSFRichTextString(alumno.getAluDv()));
+                    rowExcel.createCell(2).setCellValue(new XSSFRichTextString(alumno.getAluPaterno()));
+                    rowExcel.createCell(3).setCellValue(new XSSFRichTextString(alumno.getAluMaterno()));
+                    rowExcel.createCell(4).setCellValue(new XSSFRichTextString(alumno.getAluNombre()));
+                    rowExcel.createCell(5).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaCodCar().toString()));
+                    rowExcel.createCell(6).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaAgnoIng().toString()));
+                    rowExcel.createCell(7).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaSemIng().toString()));
+                    rowExcel.createCell(8).setCellValue(new XSSFRichTextString(DateUtil.getFormatedDate(mat.getMathFecha(), "dd-MM-yyyy")));
+                    rowExcel.createCell(9).setCellValue(new XSSFRichTextString(alumno.getAluEmailUsach()));
+                    rowExcel.createCell(10).setCellValue(new XSSFRichTextString(alumno.getAluEmail()));
+                });
 
-            XSSFCell celdaRut = rowExcel.createCell(0);
-            celdaRut.setCellValue(alumno.getAluRut());
-            //celdaRut.setCellType(CELL_TYPE_NUMERIC);
-
-            XSSFCell celdaDv = rowExcel.createCell(1);
-            XSSFRichTextString textoDv = new XSSFRichTextString(alumno.getAluDv());
-            celdaDv.setCellValue(textoDv);
-
-            XSSFCell celdaPaterno = rowExcel.createCell(2);
-            XSSFRichTextString textoPaterno = new XSSFRichTextString(alumno.getAluPaterno());
-            celdaPaterno.setCellValue(textoPaterno);
-
-            XSSFCell celdaMaterno = rowExcel.createCell(3);
-            XSSFRichTextString textoMaterno = new XSSFRichTextString(alumno.getAluMaterno());
-            celdaMaterno.setCellValue(textoMaterno);
-
-            XSSFCell celdaNombre = rowExcel.createCell(4);
-            XSSFRichTextString textoNombre = new XSSFRichTextString(alumno.getAluNombre());
-            celdaNombre.setCellValue(textoNombre);
-
-            XSSFCell celdaCarrera = rowExcel.createCell(5);
-            XSSFRichTextString textoCarrera = new XSSFRichTextString(aluCar.getId().getAcaCodCar().toString());
-            celdaCarrera.setCellValue(textoCarrera);
-            
-            XSSFCell celdaAgno = rowExcel.createCell(6);
-            XSSFRichTextString textoAgno = new XSSFRichTextString(aluCar.getId().getAcaAgnoIng().toString());
-            celdaAgno.setCellValue(textoAgno);
-            
-            XSSFCell celdaSem = rowExcel.createCell(7);
-            XSSFRichTextString textoSem = new XSSFRichTextString(aluCar.getId().getAcaSemIng().toString());
-            celdaSem.setCellValue(textoSem);
-            
-            XSSFCell celdaFecha = rowExcel.createCell(8);
-            XSSFRichTextString textoFecha = new XSSFRichTextString( DateUtil.getFormatedDate(mat.getMathFecha(),"dd-MM-yyyy"));
-            celdaFecha.setCellValue(textoFecha);
-            
-            XSSFCell celdaUsach = rowExcel.createCell(9);
-            XSSFRichTextString textoUsach = new XSSFRichTextString(alumno.getAluEmailUsach());
-            celdaUsach.setCellValue(textoUsach);
-            
-            XSSFCell celdaPersonal = rowExcel.createCell(10);
-            XSSFRichTextString textoPersonal = new XSSFRichTextString(alumno.getAluEmail());
-            celdaPersonal.setCellValue(textoPersonal);
-
-            filaAux++;
-        }
     }
 }

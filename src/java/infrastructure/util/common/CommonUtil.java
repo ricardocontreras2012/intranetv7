@@ -17,6 +17,21 @@ import infrastructure.util.ContextUtil;
  */
 public class CommonUtil {
 
+    public static void setAgnoSem(WorkSession ws, Integer agno, Integer sem) {
+        if (agno == null || sem == null) {
+            if (ws.getAgnoAct() == null || ws.getSemAct() == null) {
+                setAgnoSemAct(ws);
+                return;
+            } else {
+                agno = ws.getAgnoAct();
+                sem = ws.getSemAct();
+            }
+        }
+
+        ws.setAgnoAct(agno);
+        ws.setSemAct(sem);
+    }
+
     public static void setAgnoSemAct(WorkSession ws) {
         ParametroPersistence parametroPersistence = ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser());
 
@@ -26,6 +41,6 @@ public class CommonUtil {
 
     public static String getEmailUsach(String email) {
         String aux = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getEmailUsach(email);
-        return "null".equals(aux)?"":aux;
+        return "null".equals(aux) ? "" : aux;
     }
 }

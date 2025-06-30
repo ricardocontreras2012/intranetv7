@@ -7,7 +7,6 @@ import static org.apache.struts2.ServletActionContext.getRequest;
 import domain.repository.AdministrativoPersistence;
 import session.GenericSession;
 import session.WorkSession;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
@@ -27,27 +26,20 @@ public final class CommonAdministrativoLoginService {
      * 
      * @param action Clase que invoca al servicio.
      * @param sesion El contenedor de la sesión.
+     * @param rut
+     * @param passwd
+     * @param userType
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion,  Integer rut, String passwd, String userType, String key) {
         // Verificación de parámetros necesarios
         if (sesion == null || key == null) {
             return retReLogin();
         }
 
-        LoginSessionSupport loginSession = (LoginSessionSupport) sesion.get("loginSessionSupport");
-
-        if (loginSession == null) {
-            return retReLogin();
-        }
-
-        // Recuperamos los datos de la sesión
-        Integer rut = loginSession.getRut();
-        String password = loginSession.getPassword();
-        String userType = loginSession.getUserType();
         AdministrativoPersistence admPersistence = ContextUtil.getDAO().getAdministrativoPersistence(ActionUtil.getDBUser());
-        Administrativo administrativo = admPersistence.find(rut, password);
+        Administrativo administrativo = admPersistence.find(rut, passwd);
         
         // Verificamos si el administrativo existe
         if (administrativo == null) {
@@ -56,7 +48,7 @@ public final class CommonAdministrativoLoginService {
         }
 
         // Creamos la sesión de trabajo
-        GenericSession genericSession = new GenericSession(userType, rut, password, 0);
+        GenericSession genericSession = new GenericSession(userType, rut, passwd, 0);
         genericSession.setAdministrativo(administrativo);
         
         // Verificación de tipo de usuario

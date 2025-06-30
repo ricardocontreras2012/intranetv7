@@ -37,7 +37,7 @@ public final class CommonCursoUtil {
     public static List<Curso> getDistinctAsc(List<Curso> cursoList) {
         return cursoList.stream()
                 .distinct()
-                .sorted(new CursoComparable())
+                .sorted(Comparator.comparing(Curso::getId, new CursoComparable()))
                 .collect(Collectors.toList());
     }
 

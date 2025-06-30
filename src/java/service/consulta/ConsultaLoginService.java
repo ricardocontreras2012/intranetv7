@@ -13,7 +13,6 @@ import static org.apache.struts2.ServletActionContext.getRequest;
 import domain.repository.ExternoPersistence;
 import session.GenericSession;
 import session.WorkSession;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.ActionUtil.retError;
@@ -34,48 +33,40 @@ public final class ConsultaLoginService {
      *
      * @param action Clase(action) que invoca al servicio. param rut
      * @param sesion
+     * @param rut
+     * @param passwd
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         String retValue = SUCCESS;
 
         if (sesion != null && key != null) {
-            LoginSessionSupport loginSessionSupport
-                    = (LoginSessionSupport) sesion.get("loginSessionSupport");
+            ExternoPersistence externoPersistence
+                    = ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser());
+            Externo externo = externoPersistence.find(rut, passwd);
 
-            if (loginSessionSupport != null) {
-                Integer rut = loginSessionSupport.getRut();
-                String password = loginSessionSupport.getPassword();
-                ExternoPersistence externoPersistence
-                        = ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser());
-                Externo externo = externoPersistence.find(rut, password);
+            if (externo != null) {
+                GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, passwd, 0);
+                WorkSession ws = new WorkSession(ActionUtil.getDBUser());
+                genericSession.setLastLogin(externo.getExtLastLogin());
+                genericSession.setSessionMap(new HashMap<String, WorkSession>());
+                genericSession.getSessionMap().put(key, ws);
+                externoPersistence.setLastLogin(rut);
+                getComplemento(genericSession, externo);
 
-                if (externo != null) {
-                    GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, password, 0);
-                    WorkSession ws = new WorkSession(ActionUtil.getDBUser());
-                    genericSession.setLastLogin(externo.getExtLastLogin());
-                    genericSession.setSessionMap(new HashMap<String, WorkSession>());
-                    genericSession.getSessionMap().put(key, ws);
-                    externoPersistence.setLastLogin(rut);
-                    getComplemento(genericSession, externo);
+                getRequest().getSession().setMaxInactiveInterval(1800);
 
-                    getRequest().getSession().setMaxInactiveInterval(1800);
-
-                    //
-                    action.getSesion().put("genericSession", genericSession);
-                    LogUtil.setLog(rut);
-                } else {
-                    action.addActionError(action.getText("error.rut.password"));
-                    retValue = retError();
-                }
+                //
+                action.getSesion().put("genericSession", genericSession);
+                LogUtil.setLog(rut);
             } else {
-                retValue = retReLogin();
+                action.addActionError(action.getText("error.rut.password"));
+                retValue = retError();
             }
         } else {
             retValue = retReLogin();
         }
-
         return retValue;
     }
 

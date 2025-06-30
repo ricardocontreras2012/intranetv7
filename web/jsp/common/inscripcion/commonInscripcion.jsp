@@ -109,25 +109,25 @@
 
         <script>
             <s:if test="hasActionMessages()">
-            var msg = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
-            var ary = msg.split('ERROR');
-            var acum = "";
+                var msg = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
+                var ary = msg.split('ERROR');
+                var acum = "";
 
-            for (var i = 0; i < ary.length; i++) {
-                if (typeof ary[i] !== "undefined")
-                {
-                    acum += "<li><span>" + ary[i] + "</li></span>";
+                for (var i = 0; i < ary.length; i++) {
+                    if (typeof ary[i] !== "undefined")
+                    {
+                        acum += "<li><span>" + ary[i] + "</li></span>";
+                    }
                 }
-            }
 
-            $(window.parent.document).contents().find("#msg-confirmacion-div").html("<div class='actionError'>" + acum + "</div><div><p><s:text name="confirmation.inscripcion.jefe.carrera"/></div>");
-            window.parent.$('#msg-confirmacion').modal('show');
+                $(window.parent.document).contents().find("#msg-confirmacion-div").html("<div class='actionError'>" + acum + "</div><div><p><s:text name="confirmation.inscripcion.jefe.carrera"/></div>");
+                window.parent.$('#msg-confirmacion').modal('show');
 
             </s:if>
             <s:if test="hasActionErrors()">
-            var msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
-            $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
-            window.parent.$('#msg-error').modal('show');
+                var msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
+                $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
+                window.parent.$('#msg-error').modal('show');
             </s:if>
         </script>
 

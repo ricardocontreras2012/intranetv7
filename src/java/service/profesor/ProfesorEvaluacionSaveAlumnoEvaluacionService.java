@@ -1,7 +1,7 @@
 /*
  * @(#)ProfesorEvaluacionSaveAlumnoEvaluacionService.java
  *
- * Copyright (c) 2016 FAE-USACH
+ * Copyright (c) 2025 FAE-USACH
  */
 package service.profesor;
 
@@ -18,6 +18,8 @@ import static infrastructure.util.FormatUtil.isNotNull;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Class description
@@ -37,30 +39,27 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
      */
     public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        EvaluacionPersistence evaluacionPersistence
-                = ContextUtil.getDAO().getEvaluacionPersistence(ActionUtil.getDBUser());
+        String dbUser = ActionUtil.getDBUser();
+        EvaluacionPersistence evaluacionPersistence = ContextUtil.getDAO().getEvaluacionPersistence(dbUser);
 
-        beginTransaction(ActionUtil.getDBUser());
+        List<EvaluacionAlumno> alumnos = ws.getEvaluacionAlumno();
+        AtomicBoolean hayNotas = new AtomicBoolean(false);
 
-        EvaluacionAlumno evaluacionAlumno = null;
-        boolean hayNotas = false;
+        beginTransaction(dbUser);
 
-        for (EvaluacionAlumno evaluacionAlumno1 : ws.getEvaluacionAlumno()) {
-            evaluacionAlumno = evaluacionAlumno1;
-
+        alumnos.forEach(evaluacionAlumno -> {
             String[] tmpNotaRut = parameters.get("row_" + evaluacionAlumno.getAluCar().getId().getAcaRut());
 
             if (isNotNull(tmpNotaRut)) {
                 evaluacionAlumno.setEvaluNota(new BigDecimal(tmpNotaRut[0].trim()));
-                ContextUtil.getDAO().getEvaluacionAlumnoPersistence(ActionUtil.getDBUser()).makePersistent(evaluacionAlumno);
-                hayNotas = true;
+                ContextUtil.getDAO().getEvaluacionAlumnoPersistence(dbUser).makePersistent(evaluacionAlumno);
+                hayNotas.set(true);  // marcar que al menos una nota fue ingresada
             }
-        }
+        });
 
-        if (hayNotas) {
-            evaluacionPersistence.setStatusConNota(ws.getEvaluacion());
-
-            Evaluacion evaluacion = evaluacionAlumno.getEvaluacion();
+        if (hayNotas.get()) {
+            Evaluacion evaluacion = ws.getEvaluacion();
+            evaluacionPersistence.setStatusConNota(evaluacion);
 
             if (!"CN".equals(evaluacion.getEvalStatus())) {
                 evaluacion.setEvalStatus("CN");
@@ -69,8 +68,10 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
         }
 
         commitTransaction();
-        
+
         LogUtil.setLogCurso(genericSession.getRut(), ws.getEvaluacion().getCursoTevaluacion().getCurso());
-        return genericSession.getWorkSession(key).getCurso().getCurModalEval();
+
+        return ws.getCurso().getCurModalEval();
     }
+
 }

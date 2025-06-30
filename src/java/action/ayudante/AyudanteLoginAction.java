@@ -20,6 +20,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public final class AyudanteLoginAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
+    private Integer rut;
+private String passwd;
 
     /**
      * Method description
@@ -29,6 +31,24 @@ public final class AyudanteLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), getKey());
+        return service(this, getSesion(), rut, passwd, getKey());
     }
+
+    public Integer getRut() {
+        return rut;
+    }
+
+    public void setRut(Integer rut) {
+        this.rut = rut;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+    
+    
 }

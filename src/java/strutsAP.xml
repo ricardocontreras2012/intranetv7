@@ -58,7 +58,9 @@
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
             </result>
-            <result name="error">/jsp/common/id/commonIdLogIn.jsp
+            <result name="error" type="redirectAction">
+                <param name="actionName">CommonLoginEnableForm</param>
+                <param name="err">RUN/Password inválido</param>                
             </result>
             <result name="input">/jsp/common/id/commonIdLogIn.jsp
             </result>

@@ -42,7 +42,8 @@ public class CommonPracticaActaRectificatoriaEnableService {
             sem = ws.getSemAct();
             practica = ws.getAsignaturaList().get(0).getAsiCod();
         }
-
+       
+        
         ws.setPracticaList(ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getNominaxRectificar(practica, agno, sem));
 
         ws.setAgnoAct(agno);

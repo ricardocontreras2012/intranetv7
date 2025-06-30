@@ -14,7 +14,6 @@ import domain.repository.FuncionarioPersistence;
 import session.GenericSession;
 import session.TeleTrabajoSession;
 import session.WorkSession;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.ActionUtil.retError;
@@ -28,51 +27,43 @@ import infrastructure.util.LogUtil;
  */
 public class TeleTrabajoLoginService {
 
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         String retValue = SUCCESS;
 
         try {
             if (sesion != null && key != null) {
-                LoginSessionSupport loginSessionSupport
-                        = (LoginSessionSupport) sesion.get("loginSessionSupport");
 
-                if (loginSessionSupport != null) {
-                    Integer rut = loginSessionSupport.getRut();
-                    String password = loginSessionSupport.getPassword();
-                    FuncionarioPersistence funcionarioPersistence
-                            = ContextUtil.getDAO().getFuncionarioPersistence(ActionUtil.getDBUser());
+                FuncionarioPersistence funcionarioPersistence
+                        = ContextUtil.getDAO().getFuncionarioPersistence(ActionUtil.getDBUser());
 
-                    Funcionario funcionario = funcionarioPersistence.findTeletrabajo(rut, password);
+                Funcionario funcionario = funcionarioPersistence.findTeletrabajo(rut, passwd);
 
-                    if (funcionario != null) {
-                        GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, password, 0);
+                if (funcionario != null) {
+                    GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, passwd, 0);
 
-                        WorkSession ws = new WorkSession(ActionUtil.getDBUser());
+                    WorkSession ws = new WorkSession(ActionUtil.getDBUser());
 
-                        genericSession.setSessionMap(new HashMap<>());
-                        genericSession.getSessionMap().put(key, ws);
-                        genericSession.setDv(funcionario.getFunDv());
-                        genericSession.setPaterno(funcionario.getFunPaterno());
-                        genericSession.setMaterno(funcionario.getFunMaterno());
-                        genericSession.setNombres(funcionario.getFunNombre());
-                        genericSession.setNombre(funcionario.getNombre());
+                    genericSession.setSessionMap(new HashMap<>());
+                    genericSession.getSessionMap().put(key, ws);
+                    genericSession.setDv(funcionario.getFunDv());
+                    genericSession.setPaterno(funcionario.getFunPaterno());
+                    genericSession.setMaterno(funcionario.getFunMaterno());
+                    genericSession.setNombres(funcionario.getFunNombre());
+                    genericSession.setNombre(funcionario.getNombre());
 
-                        ServletActionContext.getRequest().getSession().setMaxInactiveInterval(1800);
+                    ServletActionContext.getRequest().getSession().setMaxInactiveInterval(1800);
 
-                        TeleTrabajoSession teleTrabajoSession = new TeleTrabajoSession();
-                        
-                        // Usuario validado y asignacion de su contexto de trabajo.
-                        sesion.put("genericSession", genericSession);
-                        sesion.put("teleTrabajoSession", teleTrabajoSession);
+                    TeleTrabajoSession teleTrabajoSession = new TeleTrabajoSession();
 
-                        LogUtil.setLog(rut);
+                    // Usuario validado y asignacion de su contexto de trabajo.
+                    sesion.put("genericSession", genericSession);
+                    sesion.put("teleTrabajoSession", teleTrabajoSession);
 
-                    } else {
-                        action.addActionError(action.getText("error.rut.password"));
-                        retValue = retError();
-                    }
+                    LogUtil.setLog(rut);
+
                 } else {
-                    retValue = retReLogin();
+                    action.addActionError(action.getText("error.rut.password"));
+                    retValue = retError();
                 }
             } else {
                 retValue = retReLogin();

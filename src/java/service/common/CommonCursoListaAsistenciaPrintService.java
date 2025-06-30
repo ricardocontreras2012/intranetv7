@@ -23,6 +23,7 @@ import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfTemplate;
 import com.lowagie.text.pdf.PdfWriter;
 import domain.model.AluCar;
+import domain.model.Alumno;
 import domain.model.Curso;
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
@@ -40,6 +41,8 @@ import infrastructure.util.SystemParametersUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
 import infrastructure.util.common.CommonArchivoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
+import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -126,7 +129,7 @@ public class CommonCursoListaAsistenciaPrintService {
                 cell.setBackgroundColor(lightGray);
             } else {
                 // No se aplica color de fondo a las columnas a partir de la sexta
-                cell.setBackgroundColor(Color.WHITE); 
+                cell.setBackgroundColor(Color.WHITE);
             }
 
             // Configuraciones comunes para todas las celdas
@@ -136,27 +139,28 @@ public class CommonCursoListaAsistenciaPrintService {
             table.addCell(cell);
         }
 
-        java.util.List<AluCar> nomina = curso.getNominaAlumnos();
-        Integer i = 1;
+        List<AluCar> nomina = curso.getNominaAlumnos();
 
-        for (AluCar aca : nomina) {                        
-            PdfPCell numCell = createCell(i.toString());
-            numCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            table.addCell(numCell);            
-            PdfPCell idCell = createCell(aca.getAlumno().getAluRut() + "-" + aca.getAlumno().getAluDv());
-            idCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-            idCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            table.addCell(idCell);
-            table.addCell(createCell(aca.getAlumno().getAluPaterno()));
-            table.addCell(createCell(aca.getAlumno().getAluMaterno()));
-            table.addCell(createCell(aca.getAlumno().getAluNombre()));
+        IntStream.range(0, nomina.size())
+                .forEach(i -> {
+                    AluCar aca = nomina.get(i);
+                    Alumno alumno = aca.getAlumno();
 
-            for (int j = 0; j <= 30; j++) {
-                table.addCell(createCell(" "));
-            }
+                    PdfPCell numCell = createCell(String.valueOf(i + 1));
+                    numCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    table.addCell(numCell);
 
-            i++;
-        }
+                    PdfPCell idCell = createCell(alumno.getAluRut() + "-" + alumno.getAluDv());
+                    idCell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                    idCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                    table.addCell(idCell);
+
+                    table.addCell(createCell(alumno.getAluPaterno()));
+                    table.addCell(createCell(alumno.getAluMaterno()));
+                    table.addCell(createCell(alumno.getAluNombre()));
+
+                    IntStream.rangeClosed(0, 30).forEach(j -> table.addCell(createCell(" ")));
+                });
 
         doc.add(table);
         doc.close();
@@ -170,9 +174,9 @@ public class CommonCursoListaAsistenciaPrintService {
     private PdfPCell createCell(String content) {
         PdfPCell cell = new PdfPCell(new Phrase(content != null ? content : "", fontSmall));
         cell.setBorder(PdfPCell.BOX);
-        cell.setVerticalAlignment(Element.ALIGN_MIDDLE); 
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setNoWrap(true);
-                
+
         return cell;
     }
 

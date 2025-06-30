@@ -8,6 +8,7 @@ package service.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Curso;
 import domain.model.CursoId;
+import domain.model.comparator.CursoComparable;
 import org.apache.commons.lang3.ObjectUtils;
 import session.GenericSession;
 import session.WorkSession;
@@ -16,6 +17,7 @@ import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
 import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonCursoUtil;
+import java.util.stream.IntStream;
 
 /**
  * Class description
@@ -44,11 +46,10 @@ public final class CommonCursoDefinicionAddCursoService {
      * @throws java.lang.Exception
      */
     public static String service(GenericSession genericSession, Integer asign, String elect, String electivo, String coord, Integer secc, Integer cupo, String inicio, String termino,
-            String diurno, String vesp, String key) throws Exception{
+            String diurno, String vesp, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        int pos = -1;
-
+        //int pos = -1;
         Curso curso = new Curso();
         CursoId id = new CursoId();
         id.setCurAsign(asign);
@@ -75,20 +76,11 @@ public final class CommonCursoDefinicionAddCursoService {
 
         CommonCursoUtil.getCursos(genericSession, "*", key); //Cerrados
         if ("OK".equals(result)) {
-            int largo = ws.getCursoList().size();
-            for (int i = 0; i < largo; i++) {
-                CursoId idList = ws.getCursoList().get(i).getId();
+            int pos = IntStream.range(0, ws.getCursoList().size())
+                    .filter(i -> new CursoComparable().compare(id, ws.getCursoList().get(i).getId()) == 0)
+                    .findFirst()
+                    .orElse(-1); // o valor por defecto
 
-                if (Integer.compare(id.getCurAsign(), idList.getCurAsign()) == 0) {
-                    String aux1 = id.getCurElect() + id.getCurCoord() + id.getCurSecc();
-                    String aux2 = idList.getCurElect() + idList.getCurCoord() + idList.getCurSecc();
-                    if (aux1.equals(aux2)) {
-                        pos = i;
-                        break;
-                    }
-                }
-
-            }
             ws.setPos(pos);
         }
 

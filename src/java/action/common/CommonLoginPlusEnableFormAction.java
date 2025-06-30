@@ -8,8 +8,9 @@
 package action.common;
 
 
-import static service.common.CommonLoginPlusEnableFormService.service;
 import infrastructure.support.action.common.ActionCommonSupport;
+import java.util.Map;
+import static service.common.CommonLoginPlusEnableFormService.service;
 
 
 /**
@@ -20,6 +21,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public final class CommonLoginPlusEnableFormAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
+    private Map<String, String> userTypeMap;
+    private String err;
 
     /**
      * Method description
@@ -29,8 +32,20 @@ public final class CommonLoginPlusEnableFormAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        service(getSesion());
+        userTypeMap = service();
 
         return SUCCESS;
     }
+
+    public Map<String, String> getUserTypeMap() {
+        return userTypeMap;
+    }
+
+    public String getErr() {
+        return err;
+    }
+
+    public void setErr(String err) {
+        this.err = err;
+    }    
 }

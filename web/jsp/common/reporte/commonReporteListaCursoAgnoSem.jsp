@@ -70,8 +70,7 @@
                     <tbody>
                         <s:iterator value="#session.genericSession.getWorkSession(key).cursoList" status="row">
                             <tr>
-
-                                        <td><a id="curso_<s:property value="#row.count -1"/>"><s:property value="id.curAsign"/>-<s:property value="id.curElect"/>&nbsp;<s:property
+                                <td><a id="curso_<s:property value="#row.count -1"/>"><s:property value="id.curAsign"/>-<s:property value="id.curElect"/>&nbsp;<s:property
                                             value="id.curCoord"/><s:property value="id.curSecc"/></a></td>
                                 <td><s:property value="curNombre"/></td>
                                 <td><s:property value="curProfesores"/></td>

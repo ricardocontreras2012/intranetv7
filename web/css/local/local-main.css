@@ -264,4 +264,10 @@ div#confirmacion, div#msg, div#confirmacion2, div#msg2 {
     list-style: none
 }
 
+.errorLogin {
+    background: red;
+    color: white !important;
+    list-style: none
+}
+
 iframe {border: 0;}

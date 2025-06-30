@@ -7,7 +7,6 @@ package service.ayudante;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
@@ -29,27 +28,23 @@ public final class AyudanteLoginService {
      *
      * @param action Clase que invoca al servicio, utilizada para gestionar mensajes y errores.
      * @param sesion Mapa que contiene la sesión del usuario.
+     * @param rut
+     * @param passwd
      * @param key Llave para acceder a los datos específicos de la sesión.
      * @return El estado de la acción: SUCCESS si la autenticación fue exitosa, o un código de error.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificar si la sesión y la clave son válidas
         if (action.getSesion().isEmpty() || key == null) {
             return retReLogin();
         }
 
-        // Obtener el objeto LoginSessionSupport de la sesión
-        LoginSessionSupport loginSessionSupport = (LoginSessionSupport) sesion.get("loginSessionSupport");
-
-        // Verificar si se encontró una sesión de login válida
-        if (loginSessionSupport == null) {
-            return retReLogin();
-        }
+        
 
         // Intentar realizar el inicio de sesión
         boolean loginExitoso = CommonAyudanteUtil.login(
-            loginSessionSupport.getRut(), 
-            loginSessionSupport.getPassword(), 
+            rut, 
+            passwd, 
             key, 
             sesion
         );

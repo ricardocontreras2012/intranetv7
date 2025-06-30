@@ -28,8 +28,9 @@ import infrastructure.util.common.CommonEncuestaUtil;
  * @version 7, 24/05/2012
  */
 public final class AlumnoEncuestaDocente5taSemanaService {
+
     public static String search(GenericSession genericSession, String key) {
-        return CommonAlumnoUtil.searchEncuestaDocente(genericSession,key,"V");
+        return CommonAlumnoUtil.searchEncuestaDocente(genericSession, key, "V");
     }
 
     /**
@@ -55,29 +56,29 @@ public final class AlumnoEncuestaDocente5taSemanaService {
      */
     public static String saveService(GenericSession genericSession, Map<String, String[]> parameters, AlumnoSession alumnoSession, String key) {
         Integer correl;
-      
+
         WorkSession ws = genericSession.getWorkSession(key);
         CursoProfesor cursoProfesor = ws.getCursoProfesor();
         alumnoSession.setBienvenida(false);
-        if (cursoProfesor == ws.getCursoProfesorList().get(0)) {
+        if (cursoProfesor == ws.getCursoProfesorList().get(0)) {            
             correl = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaEncuesta();
             beginTransaction(ActionUtil.getDBUser());
-            String[] tmp;
-            String field;
-            for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-                field = entry.getKey();
-                
-                if (field.startsWith("P_")) {
-                    tmp = parameters.get(field);
-                    int pos = field.lastIndexOf('_');
-                    int pregunta = parseInt(field.substring(pos + 1));
 
-                    if (tmp != null) {
-                        ContextUtil.getDAO().getRespuestaEncuestaDocentePersistence(ActionUtil.getDBUser()).doSaveEncuestaIntermedia(ws.getAluCar(), cursoProfesor, pregunta, valueOf(tmp[0]), correl);
-                    }
-                }
-            }
-            
+            parameters.entrySet().stream()
+                    .filter(entry -> entry.getKey().startsWith("P_"))
+                    .forEach(entry -> {
+                        String field = entry.getKey();
+                        String[] tmp = entry.getValue();
+                        int pos = field.lastIndexOf('_');
+                        int pregunta = parseInt(field.substring(pos + 1));
+
+                        if (tmp != null) {
+                            ContextUtil.getDAO()
+                                    .getRespuestaEncuestaDocentePersistence(ActionUtil.getDBUser())
+                                    .doSaveEncuestaIntermedia(ws.getAluCar(), cursoProfesor, pregunta, valueOf(tmp[0]), correl);
+                        }
+                    });
+
             String[] tmpPositivo = parameters.get("comentarioPositivo");
             String[] tmpMejora = parameters.get("comentarioMejora");
 
@@ -92,8 +93,8 @@ public final class AlumnoEncuestaDocente5taSemanaService {
                 if (tmpMejora != null) {
                     comen2 = tmpMejora[0];
                 }
-                
-                ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser()).doUpdate(genericSession.getRut(), cursoProfesor, encuesta, correl+ 100000, comen1, comen2);
+
+                ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser()).doUpdate(genericSession.getRut(), cursoProfesor, encuesta, correl + 100000, comen1, comen2);
             }
 
             commitTransaction();

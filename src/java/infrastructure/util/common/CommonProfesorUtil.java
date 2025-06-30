@@ -1,7 +1,7 @@
 /*
  * @(#)CommonProfesorUtil.java
  *
- * Copyright (c) 2016 FAE-USACH
+ * Copyright (c) 2025 FAE-USACH
  */
 package infrastructure.util.common;
 
@@ -119,9 +119,10 @@ public final class CommonProfesorUtil {
 
         if (ws.getCursosAutoEvaluacion().size() > 0) {
             //Evita Lazy
-            for (CursoProfesor cursoProf : ws.getCursosAutoEvaluacion()) {
-                System.out.println(">>>>>>> evita lazy " + cursoProf.getCurso());
-            }
+            ws.getCursosAutoEvaluacion().stream()
+                    .map(CursoProfesor::getCurso)
+                    .forEach(curso -> System.out.println(">>>>>>> evita lazy " + curso));
+
             retValue = SUCCESS;
         } else {
             retValue = "stack";

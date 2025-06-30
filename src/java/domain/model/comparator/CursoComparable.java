@@ -5,10 +5,9 @@
  */
 package domain.model.comparator;
 
-import domain.model.Curso;
+import domain.model.CursoId;
 import java.io.Serializable;
 import java.util.Comparator;
-import infrastructure.util.ContextUtil;
 
 /**
  * Class description
@@ -16,35 +15,52 @@ import infrastructure.util.ContextUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CursoComparable implements Comparator<Curso>, Serializable {
+public final class CursoComparable implements Comparator<CursoId>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * Method description
      *
-     * @param c1
-     * @param c2
+     * @param id1
+     * @param id2
      * @return
      */
     @Override
-    public int compare(Curso c1, Curso c2) {
-        // Comparar por Agno y Semestre
-        int retValue = Integer.compare(
-                10 * c1.getId().getCurAgno() + c1.getId().getCurSem(),
-                10 * c2.getId().getCurAgno() + c2.getId().getCurSem()
-        );
+    public int compare(CursoId id1, CursoId id2) {
+        int retValue;
+        
+        retValue = Integer.compare(id1.getCurAgno(), id2.getCurAgno());
+        if (retValue != 0) {
+            return retValue;
+        }
+        
+        retValue = Integer.compare(id1.getCurSem(), id2.getCurSem());
         if (retValue != 0) {
             return retValue;
         }
 
         // Comparar por Asignatura si Agno y Semestre son iguales
-        retValue = Integer.compare(c1.getId().getCurAsign(), c2.getId().getCurAsign());
+        retValue = Integer.compare(id1.getCurAsign(), id2.getCurAsign());
         if (retValue != 0) {
             return retValue;
         }
-
-        // Si Agno, Semestre y Asignatura son iguales, comparar por nombre completo
-        return ContextUtil.getCollator().compare(c1.getNombreFull(), c2.getNombreFull());
+        
+        retValue = id1.getCurElect().compareTo(id2.getCurElect());
+        if (retValue != 0) {
+            return retValue;
+        }
+        
+        retValue = id1.getCurCoord().compareTo(id2.getCurCoord());
+        if (retValue != 0) {
+            return retValue;
+        }
+        
+         retValue = Integer.compare(id1.getCurSecc(), id2.getCurSecc());
+        if (retValue != 0) {
+            return retValue;
+        }
+        
+        return 0;
     }
 }

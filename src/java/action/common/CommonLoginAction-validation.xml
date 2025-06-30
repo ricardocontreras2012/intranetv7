@@ -11,7 +11,7 @@
             <message key="error.value.parameter"/>
         </field-validator>
     </field>
-    <field name="password">
+    <field name="passwd">
         <field-validator type="requiredstring">
             <message key="error.required.parameter"/>
         </field-validator>

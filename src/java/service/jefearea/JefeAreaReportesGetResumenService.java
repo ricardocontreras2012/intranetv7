@@ -10,6 +10,7 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import infrastructure.util.common.CommonUtil;
 
 /**
  *
@@ -28,16 +29,9 @@ public class JefeAreaReportesGetResumenService {
     public static String service(GenericSession genericSession, String key, Integer agno, Integer sem) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        if (agno == null || sem == null) {
-            agno = ws.getAgnoAct();
-            sem = ws.getSemAct();
-        }
-
+        CommonUtil.setAgnoSem(ws, agno, sem);
         ws.setResumenCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findResumenReportes(
-                genericSession.getRut(), agno, sem));
-
-        ws.setAgnoAct(agno);
-        ws.setSemAct(sem);
+                genericSession.getRut(), ws.getAgnoAct(), ws.getSemAct()));
 
         return SUCCESS;
     }

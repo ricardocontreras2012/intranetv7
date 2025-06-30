@@ -1,7 +1,7 @@
 /*
  * @(#)ActionPostCommonSupport.java
  *
- * Copyright (c) 2016 FAE-USACH
+ * Copyright (c) 2025 FAE-USACH
  */
 package infrastructure.support.action.post;
 

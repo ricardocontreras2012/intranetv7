@@ -10,6 +10,7 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import infrastructure.util.common.CommonUtil;
 
 /**
  *
@@ -29,16 +30,9 @@ public class JefeAreaGetCursosService {
 
         WorkSession ws = genericSession.getWorkSession(key);
 
-        if (agno == null || sem == null) {
-            agno = ws.getAgnoAct();
-            sem = ws.getSemAct();
-        }
-
-        ws.setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findxPerfilPeriodo(agno, sem, genericSession.getRut(), genericSession.getUserType()
+        CommonUtil.setAgnoSem(ws, agno, sem);
+        ws.setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findxPerfilPeriodo(ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()
                          ));
-        ws.setAgnoAct(agno);
-        ws.setSemAct(sem);
-
         return SUCCESS;
     }
 }

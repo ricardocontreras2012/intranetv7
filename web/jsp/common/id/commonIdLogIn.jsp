@@ -38,61 +38,58 @@
             <div class="row justify-content-center my-3">
                 <div class="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3">
                     <s:form id="login-form" action="#" method="post" theme="bootstrap">
-                        <s:if test="#session != null && #session.loginSessionSupport != null && #session.loginSessionSupport.userTypeMap != null">
-                            <s:select name="usuarios"
-                                      id="usuarios"
-                                      headerKey=""
-                                      headerValue="Seleccione Tipo de Usuario"
-                                      list="#session.loginSessionSupport.userTypeMap"
-                                      />
-                            <div class="form-group mt-3 mb-0">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="rutdv" name="rutdv" placeholder="RUN" required="required">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
-                                </div>
-                            </div>
 
-                            <div class="d-block">
-                                <button id="login-button" type="submit" class="btn btn-warning w-100">Ingresar</button>
-
-                                <div class="alert alert-light mt-2 text-center">
-
-                                    <p style="color:red">Alumn@s nuev@s su clave es su RUN sin puntos ni dígito verificador.</p>
-                                    <p>Correo de Ayuda:</p>
-                                    <p>Alumn@s Facultad de Administración y Economía: <strong>ivan.jorquera@usach.cl</strong></p>
-                                    <p>Alumn@s Facultad de Derecho: <strong>karina.munoz@usach.cl</strong></p>
-                                </div>
+                        <s:select name="usuarios"
+                                  id="usuarios"
+                                  headerKey=""
+                                  headerValue="Seleccione Tipo de Usuario"
+                                  list="userTypeMap"
+                                  />
+                        <div class="form-group mt-3 mb-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="rutdv" name="rutdv" placeholder="RUN" required="required">
                             </div>
-                            <div class="d-block mt-3 text-center">
-                                <a href="/intranetv7/CommonLoginSolicitudEnable" style="color: #fff"><s:text
-                                        name="label.olvide.password"/></a>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="passwd" name="passwd" placeholder="Password" required="required">
                             </div>
+                        </div>
 
-                            <s:if test="hasFieldErrors() || hasActionErrors() || hasActionMessages()">
-                                <div class="errorMessage">
-                                    <s:actionerror/><s:actionmessage/><s:fielderror/>
-                                </div>
-                            </s:if>
-                            <div class="card mt-5">
-                                <div class="card-body" style="text-align: center;">
-                                    <h5 class="mb-3">Puedes ingresar usando tu ClaveÚnica</h5>
-                                    <a class="btn-cu btn-m btn-color-estandar" onClick="getClaveUnica();" style="display: block; margin: 0 auto;">
-                                        <span class="cl-claveunica"></span>
-                                        <span class="texto">Iniciar sesión</span>
-                                    </a>
-                                </div>
-                            </div>                            
-                            <div id="hidden-input-div">
-                                <input type="hidden" id="rut" name="rut" value=""/>
-                                <input type="hidden" id="userType" name="userType"
-                                       value="<s:property value="#session.loginSessionSupport.userType"/>"/>
-                                <s:token name="token"></s:token>
+                        <div class="d-block">
+                            <button id="login-button" type="submit" class="btn btn-warning w-100">Ingresar</button>
+
+                            <div class="alert alert-light mt-2 text-center">                                                                        
+                                <p style="color:red">Alumn@s nuev@s su clave es su RUN sin puntos ni dígito verificador.</p>                                                                       
+                                <p>Correo de Ayuda:</p>
+                                <p>Alumn@s Facultad de Administración y Economía: <strong>ivan.jorquera@usach.cl</strong></p>
+                                <p>Alumn@s Facultad de Derecho: <strong>karina.munoz@usach.cl</strong></p>
                             </div>
-                        </s:if>
+                        </div>
+                        <div class="d-block mt-3 text-center">
+                            <a href="/intranetv7/CommonLoginSolicitudEnable" style="color: #fff"><s:text
+                                    name="label.olvide.password"/></a>
+                        </div>
+
+                        <div style="background:red; color:white;">
+                            <s:property value="err" />
+                        </div>
+
+                        <div class="card mt-5">
+                            <div class="card-body" style="text-align: center;">
+                                <h5 class="mb-3">Puedes ingresar usando tu ClaveÚnica</h5>
+                                <a class="btn-cu btn-m btn-color-estandar" onClick="getClaveUnica();" style="display: block; margin: 0 auto;">
+                                    <span class="cl-claveunica"></span>
+                                    <span class="texto">Iniciar sesión</span>
+                                </a>
+                            </div>
+                        </div>                            
+                        <div id="hidden-input-div">
+                            <input type="hidden" id="rut" name="rut" value=""/>
+                            <input type="hidden" id="userType" name="userType"
+                                   value="<s:property value="userType"/>"/>
+                            <s:token name="token"></s:token>
+                            </div>
                     </s:form>
 
                     <form id="claveunica-form">

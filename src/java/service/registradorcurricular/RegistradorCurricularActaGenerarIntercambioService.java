@@ -7,7 +7,6 @@ package service.registradorcurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.EmisionNomina;
-import domain.model.Mencion;
 import domain.model.NominaCarrera;
 import domain.model.NominaCarreraId;
 import domain.repository.ActaCalificacionPersistence;
@@ -45,9 +44,9 @@ public class RegistradorCurricularActaGenerarIntercambioService {
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
-        
+
         ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(user).find(genericSession.getUserType(), genericSession.getRut()));
-        
+
         ActaCalificacionPersistence actaPersistence
                 = ContextUtil.getDAO().getActaCalificacionPersistence(user);
         ScalarPersistence nominaCarreraScalarPersistence
@@ -71,19 +70,20 @@ public class RegistradorCurricularActaGenerarIntercambioService {
         beginTransaction(user);
         emisionPersistence.save(emision);
 
-        for (int i = 0; i < ws.getMencionList().size(); i++) {
-            Mencion mencion = ws.getMencionList().get(i);
+        ws.getMencionList().forEach(mencion -> {
             NominaCarrera nominaCarrera = new NominaCarrera();
             NominaCarreraId nominaCarreraId = new NominaCarreraId();
 
             nominaCarreraId.setNcCodCar(mencion.getId().getMenCodCar());
             nominaCarreraId.setNcCodMen(mencion.getId().getMenCodMen());
             nominaCarreraId.setNcCorrel(folio);
+
             nominaCarrera.setId(nominaCarreraId);
             nominaCarrera.setNcAgno(agno);
             nominaCarrera.setNcSem(sem);
+
             nominaCarreraPersistence.save(nominaCarrera);
-        }
+        });
 
         commitTransaction();
         actaPersistence.generaActasxCarrera(agno, sem, folio, "I");

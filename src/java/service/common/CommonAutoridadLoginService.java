@@ -2,7 +2,6 @@ package service.common;
 
 import domain.model.Profesor;
 import session.*;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
@@ -32,25 +31,14 @@ public final class CommonAutoridadLoginService {
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String userType,  String key) {
         // Verificación de parámetros necesarios
         if (sesion == null || key == null) {
             return retReLogin();
         }
 
-        LoginSessionSupport loginSessionSupport = (LoginSessionSupport) sesion.get("loginSessionSupport");
-
-        if (loginSessionSupport == null) {
-            return retReLogin();
-        }
-
-        // Recuperamos los datos de la sesión
-        Integer rut = loginSessionSupport.getRut();
-        String password = loginSessionSupport.getPassword();
-        String userType = loginSessionSupport.getUserType();
-
         ProfesorPersistence profesorPersistence = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
-        Profesor profesor = profesorPersistence.find(rut, password);
+        Profesor profesor = profesorPersistence.find(rut, passwd);
 
         // Verificamos si el profesor existe
         if (profesor == null) {
@@ -59,7 +47,7 @@ public final class CommonAutoridadLoginService {
         }
 
         // Creamos la sesión de trabajo
-        GenericSession genericSession = new GenericSession(userType, rut, password, 0);
+        GenericSession genericSession = new GenericSession(userType, rut, passwd, 0);
         genericSession.setProfesor(profesor);
 
         // Verificación de permisos según el tipo de usuario

@@ -6,7 +6,6 @@
 package service.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.model.ActaCalificacion;
 import java.util.Map;
 import domain.repository.ActaCalificacionPersistence;
 import session.GenericSession;
@@ -15,6 +14,7 @@ import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
+import java.util.stream.IntStream;
 
 /**
  * Class description
@@ -34,18 +34,21 @@ public final class OficinaCurricularActaRecepcionarActasService {
      */
     public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ActaCalificacion acta;
         ActaCalificacionPersistence actaPersistence
                 = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
 
-        for (int i = 0; i < ws.getActas().size(); i++) {
-            if (parameters.get("ck_" + i) != null) {
-                acta = ws.getActas().get(i);
-                actaPersistence.recepcionarActa(acta.getId().getAcalAgno(), acta.getId().getAcalSem(), acta.getId().getAcalFolio());
-            }
-        }
+        IntStream.range(0, ws.getActas().size())
+                .filter(i -> parameters.get("ck_" + i) != null)
+                .mapToObj(i -> ws.getActas().get(i))
+                .forEach(acta -> {
+                    actaPersistence.recepcionarActa(
+                            acta.getId().getAcalAgno(),
+                            acta.getId().getAcalSem(),
+                            acta.getId().getAcalFolio()
+                    );
+                });
 
         commitTransaction();
         return SUCCESS;

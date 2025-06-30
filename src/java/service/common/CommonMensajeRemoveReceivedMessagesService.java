@@ -6,6 +6,7 @@
 package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.Mensaje;
 import java.util.Map;
 import domain.repository.MensajeDestinatarioPersistence;
 import session.GenericSession;
@@ -15,7 +16,7 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 /**
  * Class description
@@ -42,18 +43,17 @@ public final class CommonMensajeRemoveReceivedMessagesService {
         WorkSession ws = genericSession.getWorkSession(key);
         MensajeDestinatarioPersistence mensajeDestinatarioPersistence = ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser());
 
-        AtomicInteger index = new AtomicInteger(0);
         beginTransaction(ActionUtil.getDBUser());
 
-        ws.getReceivedMsgs().stream()
-                .filter(msg -> parameters.get("ck_" + index.getAndIncrement()) != null)
-                .forEach(msg -> {
-                    LogUtil.setLog(genericSession.getRut(), msg.getMensaje().getMsgCorrel());
-                    mensajeDestinatarioPersistence.setDeleteReceivedMessage(msg);
+        IntStream.range(0, ws.getReceivedMsgs().size())
+                .filter(i -> parameters.get("ck_" + i) != null)
+                .forEach(i -> {
+                    Mensaje msg = ws.getReceivedMsgs().get(i).getMensaje();
+                    LogUtil.setLog(genericSession.getRut(), msg.getMsgCorrel());
+                    mensajeDestinatarioPersistence.setDeleteReceivedMessage(ws.getReceivedMsgs().get(i));
                 });
 
-        commitTransaction();
-
+        commitTransaction();            
         ws.setReceivedMsgs(mensajeDestinatarioPersistence.findReceivedWithLimits(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
 
         return SUCCESS;

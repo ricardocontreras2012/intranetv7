@@ -2,7 +2,6 @@ package service.profesor;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import infrastructure.support.LoginSessionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
@@ -25,24 +24,16 @@ public final class ProfesorLoginService {
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificar si la sesión y la clave son válidas
         if (action.getSesion().isEmpty() || key == null) {
             return retReLogin();
         }
 
-        // Obtener el objeto LoginSessionSupport de la sesión
-        LoginSessionSupport loginSessionSupport = (LoginSessionSupport) sesion.get("loginSessionSupport");
-
-        // Verificar si se encontró una sesión de login válida
-        if (loginSessionSupport == null) {
-            return retReLogin();
-        }
-
         // Intentar realizar el inicio de sesión
         boolean loginExitoso = CommonProfesorUtil.login(
-            loginSessionSupport.getRut(), 
-            loginSessionSupport.getPassword(), 
+            rut, 
+            passwd, 
             key, 
             sesion, 
             SystemParametersUtil.INGRESO_REGULAR

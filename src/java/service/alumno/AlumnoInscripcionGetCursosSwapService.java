@@ -84,9 +84,7 @@ public class AlumnoInscripcionGetCursosSwapService {
         // Si se encuentra una inscripción seleccionada, actualiza la sesión de trabajo.
         selectedInscription.ifPresent(inscription -> {
             // Obtiene el ID del curso de la inscripción seleccionada.
-            CursoId id = inscription.getCurso().getId();
-
-            //System.out.println("curso====" + inscription.getCurso().getCodigo("-"));
+            CursoId id = inscription.getCurso().getId();            
 
             // Establece el curso de la sesión de trabajo con el curso de la inscripción seleccionada.
             ws.setCurso(inscription.getCurso());

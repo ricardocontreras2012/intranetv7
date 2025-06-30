@@ -7,6 +7,7 @@ package action.common;
 
 import static service.common.CommonLoginEnableFormService.service;
 import infrastructure.support.action.common.ActionCommonSupport;
+import java.util.Map;
 
 /**
  * Procesa el action mapeado del request a la URL CommonLoginEnableForm
@@ -17,6 +18,9 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class CommonLoginEnableFormAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
+    
+    private Map<String, String> userTypeMap;
+    private String err;
 
     /**
      * Method description
@@ -26,8 +30,20 @@ public final class CommonLoginEnableFormAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        service(getSesion());
+        userTypeMap = service();
 
         return SUCCESS;
+    }
+
+    public Map<String, String> getUserTypeMap() {
+        return userTypeMap;
+    }
+
+    public String getErr() {
+        return err;
+    }
+
+    public void setErr(String err) {
+        this.err = err;
     }
 }

@@ -105,21 +105,18 @@
             <result name="success">/jsp/common/id/commonIdLogIn.jsp
             </result>
         </action>
-
+        
         <action name="CommonLogin" class="action.common.CommonLoginAction" method="execute">
             <interceptor-ref name="tokenSession"/>
             <interceptor-ref name="IntranetStack"/>
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
                 <param name="key">${key}</param>
+                <param name="rut">${rut}</param>
+                <param name="passwd">${passwd}</param>
             </result>
             <result name="input">/jsp/common/id/commonIdLogIn.jsp
-            </result>
-            <result name="error">/jsp/common/id/commonIdLogIn.jsp
-            </result>
-            <result name="relogin" type="redirectAction">
-                <param name="actionName">CommonLoginEnableForm</param>
-            </result>
+            </result>            
             <result name="exception">/jsp/message/messageReload.jsp
             </result>
             <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
@@ -140,10 +137,14 @@
             <interceptor-ref name="IntranetStack"/>
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
+                <param name="rut">${rut}</param>
+                <param name="passwd">${passwd}</param>
+                <param name="userType">${userType}</param>
                 <param name="keyProf">${keyProf}</param>
                 <param name="key">${key}</param>
             </result>
-            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            <result name="input" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
             </result>
             <result name="relogin" type="redirectAction">
                 <param name="actionName">LoginPlusEnableForm</param>
@@ -153,12 +154,12 @@
             <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
         </action>
         
-        <action name="CommonLoginSolicitudEnable" class="action.common.CommonDummyAction" method="execute">
+        <action name="CommonLoginSolicitudEnable" class="action.common.CommonLoginEnableFormAction" method="execute">
             <result name="success">/jsp/common/id/commonIdSolicitudPassword.jsp
             </result>
         </action>
         
-        <action name="CommonLoginSolicitudPlusEnable" class="action.common.CommonDummyAction" method="execute">
+        <action name="CommonLoginSolicitudPlusEnable" class="action.common.CommonLoginPlusEnableFormAction" method="execute">
             <result name="success">/jsp/common/idPlus/commonIdPlusSolicitudPassword.jsp
             </result>
         </action>
@@ -177,9 +178,9 @@
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
-                <param name="user">${userType}</param>
+                <param name="userType">${userType}</param>
                 <param name="rut">${rut}</param>
-                <param name="password">${password}</param>
+                <param name="passwd">${passwd}</param>
                 <param name="key">${key}</param>
             </result>
             <result name="error">/jsp/common/id/commonIdSolicitudPassword.jsp
@@ -244,11 +245,18 @@
                 <param name="actionName">CoordinadorPracticaLogin</param>
                 <param name="key">${key}</param>
             </result>
-            <result name="error">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            <result name="error" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+                <param name="err">RUN/Password inválido</param>
             </result>
-            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            <result name="input" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
             </result>
             <result name="notAllow">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            </result>
+            <result name="notAllow" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+                <param name="err">Usuario no autorizado</param>
             </result>
         </action>
 
@@ -318,25 +326,30 @@
                 <param name="key">${key}</param>
             </result>
 
-            <result name="error">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            <result name="error" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+                <param name="err">RUN/Password inválido</param>
             </result>
-            <result name="input">/jsp/common/idPlus/commonIdPlusLogIn.jsp
+            <result name="input" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
             </result>
             <result name="notAllow">/jsp/common/idPlus/commonIdPlusLogIn.jsp
             </result>
-            <result name="exception">/jsp/message/messageReload.jsp
+            <result name="notAllow" type="redirectAction">
+                <param name="actionName">LoginPlusEnableForm</param>
+                <param name="err">Usuario no autorizado</param>
             </result>
         </action>
         
-        <action name="CommonLoginClaveUnicaResult" class="action.common.CommonLoginClaveUnicaResultAction" method="getValidacion">            
+        <action name="CommonLoginClaveUnicaResult" class="action.common.CommonLoginClaveUnicaResultAction" method="execute">            
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
             </result>
             <result name="error">/jsp/common/id/commonIdLogIn.jsp
-            </result>            
-        </action>         
-
+            </result>               
+        </action>
+                             
         <action name="CommonAdministrativoEmailSetEmail" class="action.common.CommonAdministrativoEmailSetEmailAction"
                 method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp</result>
@@ -2232,7 +2245,7 @@
         </action>
         <action name="CommonAlumnoPrintSituaciones" class="action.common.CommonAlumnoPrintSituacionesAction"
                 method="execute">
-           <result type="myStream"/>
+            <result type="myStream"/>
         </action>
        
         <action name="CommonAlumnoPrintCartola" class="action.common.CommonAlumnoPrintCartolaAction" method="execute">
