@@ -28,39 +28,12 @@ public final class CursoComparable implements Comparator<CursoId>, Serializable 
      */
     @Override
     public int compare(CursoId id1, CursoId id2) {
-        int retValue;
-        
-        retValue = Integer.compare(id1.getCurAgno(), id2.getCurAgno());
-        if (retValue != 0) {
-            return retValue;
-        }
-        
-        retValue = Integer.compare(id1.getCurSem(), id2.getCurSem());
-        if (retValue != 0) {
-            return retValue;
-        }
-
-        // Comparar por Asignatura si Agno y Semestre son iguales
-        retValue = Integer.compare(id1.getCurAsign(), id2.getCurAsign());
-        if (retValue != 0) {
-            return retValue;
-        }
-        
-        retValue = id1.getCurElect().compareTo(id2.getCurElect());
-        if (retValue != 0) {
-            return retValue;
-        }
-        
-        retValue = id1.getCurCoord().compareTo(id2.getCurCoord());
-        if (retValue != 0) {
-            return retValue;
-        }
-        
-         retValue = Integer.compare(id1.getCurSecc(), id2.getCurSecc());
-        if (retValue != 0) {
-            return retValue;
-        }
-        
-        return 0;
+        return Comparator.comparingInt(CursoId::getCurAgno)
+                .thenComparingInt(CursoId::getCurSem)
+                .thenComparingInt(CursoId::getCurAsign)
+                .thenComparing(CursoId::getCurElect)
+                .thenComparing(CursoId::getCurCoord)
+                .thenComparingInt(CursoId::getCurSecc)
+                .compare(id1, id2);
     }
 }
