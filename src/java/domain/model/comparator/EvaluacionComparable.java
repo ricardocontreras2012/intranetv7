@@ -28,9 +28,9 @@ public final class EvaluacionComparable implements Comparator<Evaluacion>, Seria
      */
     @Override
     public int compare(Evaluacion e1, Evaluacion e2) {
-        return Integer.compare(
-                e1.getId().getEvalTeva() * 10 + e1.getId().getEvalEval(),
-                e2.getId().getEvalTeva() * 10 + e2.getId().getEvalEval()
-        );
+        return Comparator
+                .comparingInt((Evaluacion e) -> e.getId().getEvalTeva())
+                .thenComparingInt(e -> e.getId().getEvalEval())
+                .compare(e1, e2);
     }
 }
