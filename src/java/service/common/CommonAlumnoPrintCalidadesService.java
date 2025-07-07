@@ -50,7 +50,7 @@ public class CommonAlumnoPrintCalidadesService extends CommonAlumnoPrintUtil {
             Stream.of(
                     calidad.getId().getCcaAgno().toString(),
                     calidad.getId().getCcaSem().toString(),
-                    calidad.getCcaFecha() == null ? "" : DateUtil.getFormatedDate(calidad.getCcaFecha(), "dd-MM-yyyy"),
+                    calidad.getCcaFecha() == null ? "" : DateUtil.getFormattedDate(calidad.getCcaFecha(), "dd-MM-yyyy"),
                     calidad.getTcalidad().getTcaDescrip()
             ).map(value -> getPdfPCell(value, Element.ALIGN_RIGHT, myColor))
                     .forEach(table::addCell);

@@ -17,7 +17,7 @@ import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.DateUtil.getFechaCiudad;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.DateUtil.getSysdate;
 import infrastructure.util.FormatUtil;
 import infrastructure.util.HibernateUtil;
@@ -119,9 +119,9 @@ public class AlumnoSolicitudProrrogaConstanciaService {
                 + alumno.getAluRut() + "-" + alumno.getAluDv()
                 + " de la carrera " + aluCar.getNombreCarrera() + "(" + aluCar.getId().getAcaCodCar() + ")"
                 + ", ha presentado solicitud de prórroga de período lectivo el "
-                + getFormatedDate(fecha, "dd/MM/yyyy")
+                + getFormattedDate(fecha, "dd/MM/yyyy")
                 + " del " + sem + "/" + agno
-                + " y ha sido aceptada con fecha " + getFormatedDate(fecha, "dd/MM/yyyy") + ".";
+                + " y ha sido aceptada con fecha " + getFormattedDate(fecha, "dd/MM/yyyy") + ".";
 
         return glosa;
     }

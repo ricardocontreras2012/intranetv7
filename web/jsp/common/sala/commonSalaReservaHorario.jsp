@@ -52,7 +52,7 @@
                     <%
                         ReservaSalaSupport[][] horarioMatrix = workSession.getHorarioSala();
                         for (int i = 0; i < nDias; i++) {
-                            out.println("<th style=\"width:50px\" scope=\"col\">" + DateUtil.getFormatedDate(horarioMatrix[0][i].getFecha(), SystemParametersUtil.DATE_FORMAT) + "</th>");
+                            out.println("<th style=\"width:50px\" scope=\"col\">" + DateUtil.getFormattedDate(horarioMatrix[0][i].getFecha(), SystemParametersUtil.DATE_FORMAT) + "</th>");
                         }
                     %>
             </tr>

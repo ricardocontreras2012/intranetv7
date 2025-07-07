@@ -108,10 +108,10 @@ public class CommonSolicitudSaveResolucionJustificativoService {
     private static void sendMessageProfesor(Solicitud sol, Curso curso) {
         Alumno alumno = sol.getAluCar().getAlumno();
         String subject = "Solicitud de Justificativo prueba PEP para el periodo "+
-                DateUtil.getFormatedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormatedDate(sol.getSolFechaTermino(),"dd-mm-yyyy");
+                DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy");
         String body = "La solicitud de justificación por inasistencia a PEP del curso " +curso.getNombreCorto()+ " "+
                 ("1".equals(alumno.getAluSexo())?" la alumna ":"del alumno ")+
-                alumno.getNombre() + " correspondiente al periodo del "+DateUtil.getFormatedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormatedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
+                alumno.getNombre() + " correspondiente al periodo del "+DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
 
         CommonCursoUtil.getProfesores(curso).stream()
                 .map(Profesor::getProfEmail)
@@ -125,6 +125,6 @@ public class CommonSolicitudSaveResolucionJustificativoService {
         String correo = alumno.getAluEmailUsach();
         
         
-        MailUtil.sendEmail(correo, "Solicitud de Justificativo prueba PEP para el periodo " + DateUtil.getFormatedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormatedDate(sol.getSolFechaTermino(),"dd-mm-yyyy"), "Estimado alumn@, su solicitud ha sido resuelta. Ver resultado en intranet");
+        MailUtil.sendEmail(correo, "Solicitud de Justificativo prueba PEP para el periodo " + DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy"), "Estimado alumn@, su solicitud ha sido resuelta. Ver resultado en intranet");
     }
 }

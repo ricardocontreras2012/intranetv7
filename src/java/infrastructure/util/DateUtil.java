@@ -1,160 +1,110 @@
 package infrastructure.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import static infrastructure.util.SystemParametersUtil.DATE_FORMAT;
-import java.time.LocalDate;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+import java.util.Locale;
+import static infrastructure.util.SystemParametersUtil.DATE_FORMAT;
 import java.time.temporal.TemporalAccessor;
 
 /**
- * Gestiona el tratamiento de las fechas en la aplicación.
- *
- * @author Ricardo Contreras S.
- * @version 7, 24/05/2012
+ * Utilidad para el tratamiento de fechas usando Java 8.
  */
 public class DateUtil {
 
-    // Usamos ThreadLocal para crear instancias de SimpleDateFormat de forma segura para hilos
-    private static final ThreadLocal<SimpleDateFormat> DATE_FORMATTER = 
-        ThreadLocal.withInitial(() -> new SimpleDateFormat(DATE_FORMAT, ContextUtil.getLocale()));
+    private static final Locale LOCALE = ContextUtil.getLocale();
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT, LOCALE);
 
-    /**
-     * Obtiene la fecha desde la base de datos del sistema.
-     *
-     * @return Fecha del sistema.
-     */
     public static Date getSysdate() {
         return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSysdate();
     }
 
-    /**
-     * Obtiene la fecha formateada del sistema.
-     *
-     * @param format Formato de la fecha.
-     * @return Fecha formateada.
-     */
     public static String getDate(String format) {
-        return new SimpleDateFormat(format, ContextUtil.getLocale()).format(getSysdate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, LOCALE);
+        return formatter.format(toLocalDateTime(getSysdate()));
     }
 
-    /**
-     * Convierte una fecha formateada (DATE_FORMAT) a un objeto Date.
-     *
-     * @param fecha Fecha formateada.
-     * @return Fecha convertida a Date.
-     */
+    public static LocalDateTime toLocalDateTime(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public static Date toDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
     public static Date stringToDate(String fecha) {
-        if (fecha == null || fecha.isEmpty()) {
-            return null;  // Retorna null si el valor es nulo o vacío.
+        if (fecha == null || fecha.trim().isEmpty()) {
+            return null;
         }
         try {
-            return DATE_FORMATTER.get().parse(fecha.replace("-", "/"));
-        } catch (ParseException e) {
-            // Aquí puedes lanzar una excepción personalizada si es necesario
+            LocalDate localDate = LocalDate.parse(fecha.replace("-", "/"), DATE_FORMATTER);
+            return toDate(localDate.atStartOfDay());
+        } catch (DateTimeParseException e) {
             return null;
         }
     }
 
-    /**
-     * Convierte una fecha en formato DATE_FORMAT a una cadena de texto en palabras.
-     *
-     * @param fecha Fecha formateada.
-     * @return Fecha en palabras.
-     */
-    private static String getFechaEnPalabras(String fecha) {
+    public static String getFechaEnPalabras(String fecha) {
         return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getFechaEnPalabras(fecha);
     }
 
-    /**
-     * Convierte una fecha de tipo Date a una cadena en palabras.
-     *
-     * @param fecha Fecha a convertir.
-     * @return Fecha en palabras.
-     */
     public static String getFechaEnPalabras(Date fecha) {
-        return getFechaEnPalabras(getFormatedDate(fecha, DATE_FORMAT));
+        return getFechaEnPalabras(getFormattedDate(fecha, DATE_FORMAT));
     }
 
-    /**
-     * Convierte una fecha de tipo Date a una cadena formateada.
-     *
-     * @param fecha Fecha a convertir.
-     * @param format Formato de la fecha.
-     * @return Fecha formateada.
-     */
-    public static String getFormatedDate(Date fecha, String format) {
+    public static String getFormattedDate(Date fecha, String format) {
         if (fecha == null) {
-            return "";  // Si la fecha es nula, se retorna una cadena vacía.
+            return "";
         }
-        return new SimpleDateFormat(format, ContextUtil.getLocale()).format(fecha);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format, LOCALE);
+        return formatter.format(toLocalDateTime(fecha));
     }
 
-    /**
-     * Genera una copia defensiva de la fecha para los getters/setters de la aplicación.
-     *
-     * @param fecha Fecha a copiar.
-     * @return Copia defensiva de la fecha.
-     */
     public static Date getDateGetterSetter(Date fecha) {
         return (fecha != null) ? new Date(fecha.getTime()) : null;
     }
 
-    /**
-     * Retorna la fecha en formato Ciudad, Ejemplo: "Santiago, <fecha en palabras>"
-     *
-     * @param fecha Fecha a convertir.
-     * @return Fecha en formato ciudad.
-     */
     public static String getFechaCiudad(Date fecha) {
         return "Santiago, " + getFechaEnPalabras(fecha);
     }
 
-    /**
-     * Convierte una fecha de un formato a otro.
-     *
-     * @param fecha Fecha a convertir.
-     * @param formatOri Formato original.
-     * @param formatDest Formato destino.
-     * @return Fecha transformada.
-     * @throws ParseException Si la conversión falla.
-     */
-    public static String transform(String fecha, String formatOri, String formatDest) throws ParseException {
-        if (fecha == null || fecha.isEmpty()) {
-            return "";  // Si la fecha es nula o vacía, se retorna una cadena vacía.
+    public static String transform(String fecha, String formatOri, String formatDest) {
+        if (fecha == null || fecha.trim().isEmpty()) {
+            return "";
         }
-        SimpleDateFormat originalFormat = new SimpleDateFormat(formatOri);
-        SimpleDateFormat destinationFormat = new SimpleDateFormat(formatDest);
-        Date parsedDate = originalFormat.parse(fecha);
-        return destinationFormat.format(parsedDate);
+        DateTimeFormatter oriFormatter = DateTimeFormatter.ofPattern(formatOri, LOCALE);
+        DateTimeFormatter destFormatter = DateTimeFormatter.ofPattern(formatDest, LOCALE);
+        try {
+            TemporalAccessor parsed = oriFormatter.parse(fecha);
+            return destFormatter.format(parsed);
+        } catch (DateTimeParseException e) {
+            return "";
+        }
     }
 
-    /**
-     * Parsea una cadena de texto a un objeto Date con formato "yyyy-MM-dd".
-     *
-     * @param dateStr Cadena con la fecha a parsear.
-     * @return Fecha convertida.
-     */
     public static Date parseDate(String dateStr) {
-        if (dateStr == null || dateStr.isEmpty()) {
+        if (dateStr == null || dateStr.trim().isEmpty()) {
             return null;
         }
         try {
-            return new SimpleDateFormat("yyyy-MM-dd").parse(dateStr);
-        } catch (ParseException e) {
-            return null;  // Retorna null si no se puede parsear la fecha.
+            LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("yyyy-MM-dd", LOCALE));
+            return java.sql.Date.valueOf(date);
+        } catch (DateTimeParseException e) {
+            return null;
         }
     }
-    
+
     public static Date stringToDate(String fechaStr, String formato) {
-        // Crear un DateTimeFormatter con el formato proporcionado
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato);
-
-        // Convertir el String en un LocalDate utilizando el DateTimeFormatter
-        TemporalAccessor temporal = formatter.parse(fechaStr);
-
-        // Convertir LocalDate a Date
-        return java.sql.Date.valueOf(LocalDate.from(temporal)); // Si solo necesitas la fecha sin hora
+        if (fechaStr == null || fechaStr.trim().isEmpty()) {
+            return null;
+        }
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(formato, LOCALE);
+            LocalDate date = LocalDate.parse(fechaStr, formatter);
+            return java.sql.Date.valueOf(date);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
     }
 }

@@ -100,7 +100,7 @@ public final class MensajeDestinatarioPersistenceImpl extends CrudAbstractDAO<Me
                 case "mensaje.subjectShort":
                     variableAOrdenar = "mensaje.msgSubject";
                     break;
-                case "mensaje.formatedFullDate":
+                case "mensaje.formattedFullDate":
                     variableAOrdenar = "mensaje.msgFecha";
                     break;
                 case "mensaje.paratShort":

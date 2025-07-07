@@ -184,11 +184,11 @@ public class AlumnoPracticaAutorizacionPrintService {
         String parrafo3 = "La fecha de inicio de la práctica será a contar de "
                 + ContextUtil.getDAO().getScalarPersistence(
                         ActionUtil.getDBUser()).getFechaEnPalabras(
-                        DateUtil.getFormatedDate(practica.getPraFechaInicio(), SystemParametersUtil.DATE_FORMAT)) + " y "
+                        DateUtil.getFormattedDate(practica.getPraFechaInicio(), SystemParametersUtil.DATE_FORMAT)) + " y "
                 + "finalizará el "
                 + ContextUtil.getDAO().getScalarPersistence(
                         ActionUtil.getDBUser()).getFechaEnPalabras(
-                        DateUtil.getFormatedDate(practica.getPraFechaTermino(), SystemParametersUtil.DATE_FORMAT)) + '.';
+                        DateUtil.getFormattedDate(practica.getPraFechaTermino(), SystemParametersUtil.DATE_FORMAT)) + '.';
 
         Paragraph p3 = new Paragraph(parrafo3, font);
         p3.setAlignment(Element.ALIGN_JUSTIFIED);

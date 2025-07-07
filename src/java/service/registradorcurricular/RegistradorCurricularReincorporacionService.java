@@ -41,7 +41,7 @@ import infrastructure.util.ActionUtil;
 import static infrastructure.util.BarCodeUtil.putBarCode;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.DateUtil.getFechaCiudad;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
@@ -323,7 +323,7 @@ public class RegistradorCurricularReincorporacionService {
                         + alumno.getAluRut() + "-" + alumno.getAluDv() + ", ha sido " + prefijoEliminado
                         + " por causal académica de la carrera de " + aluCar.getNombreCarrera() + " el " + sem + "/" + agno
                         + " y que ha sido " + prefijoReincorporado + " automáticamente por primera vez a partir del " + semReinc + "/"
-                        + agnoReinc + " con fecha " + getFormatedDate(fecha, "dd/MM/yyyy")
+                        + agnoReinc + " con fecha " + getFormattedDate(fecha, "dd/MM/yyyy")
                         + " debido a que cumple los requisitos de reincorporación establecidos en el Reglamento Complementario al Reglamento General del Régimen de Estudios de Pregrado, por lo que no debe presentar solicitud.";
                 break;
             case 2:
@@ -331,7 +331,7 @@ public class RegistradorCurricularReincorporacionService {
                         + alumno.getAluRut() + "-" + alumno.getAluDv() + ", ha sido " + prefijoEliminado
                         + " por causal académica de la carrera de " + aluCar.getNombreCarrera() + " el " + sem + "/" + agno
                         + " y que ha sido " + prefijoReincorporado + " automáticamente por segunda vez a partir del " + semReinc + "/"
-                        + agnoReinc + " con fecha " + getFormatedDate(fecha, "dd/MM/yyyy")
+                        + agnoReinc + " con fecha " + getFormattedDate(fecha, "dd/MM/yyyy")
                         + " debido a que cumple los requisitos de reincorporación establecidos en el Reglamento Complementario al Reglamento General del Régimen de Estudios de Pregrado, por lo que no debe presentar solicitud.";
                 break;
             case 3:
@@ -339,7 +339,7 @@ public class RegistradorCurricularReincorporacionService {
                         + alumno.getAluRut() + "-" + alumno.getAluDv() + ", ha sido " + prefijoEliminado
                         + " por causal académica(progresión) de la carrera de " + aluCar.getNombreCarrera() + " el " + sem + "/" + agno
                         + " y que ha sido " + prefijoReincorporado + " automáticamente a partir del " + semReinc + "/"
-                        + agnoReinc + " con fecha " + getFormatedDate(fecha, "dd/MM/yyyy")
+                        + agnoReinc + " con fecha " + getFormattedDate(fecha, "dd/MM/yyyy")
                         + " debido a que cumple con el Reglamento Complementario de la Facultad, por lo que no debe presentar solicitud.";
                 break;
             case 4:
@@ -347,7 +347,7 @@ public class RegistradorCurricularReincorporacionService {
                         + alumno.getAluRut() + "-" + alumno.getAluDv() + ", ha sido " + prefijoEliminado
                         + " por causal académica de la carrera de " + aluCar.getNombreCarrera() + " el " + sem + "/" + agno
                         + " y que ha sido " + prefijoReincorporado + " automáticamente a partir del " + semReinc + "/"
-                        + agnoReinc + " con fecha " + getFormatedDate(fecha, "dd/MM/yyyy")
+                        + agnoReinc + " con fecha " + getFormattedDate(fecha, "dd/MM/yyyy")
                         + ".";
                 break;
         }

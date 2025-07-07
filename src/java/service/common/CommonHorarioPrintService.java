@@ -42,7 +42,7 @@ public class CommonHorarioPrintService {
      */
     public ActionInputStreamUtil service(GenericSession genericSession,
             String id, String key) throws Exception {
-
+  
         WorkSession ws = genericSession.getWorkSession(key);
         Integer rut;
 
@@ -65,7 +65,7 @@ public class CommonHorarioPrintService {
         String name = "horario_" + rut + ".pdf";
         String description = FormatUtil.getMimeType(name);
 
-        return new ActionInputStreamUtil(name, description, getInput(name, id, genericSession.getRut(), ws.getType(), rut, ws.getNombre(), ws.getModuloHorarioList(), ws.getCursoList()));
+        return new ActionInputStreamUtil(name, description, getInput(name, id, genericSession.getRut(), ws.getType(), rut, ws.getNombre(), ws.getModuloHorarioList(), ws.getCursoList()));                
     }
 
     public InputStream getInput(String name, String id, Integer genera, String userType, Integer rut, String userName, List<ModuloHorario> modList, List<Curso> cursoList) throws Exception {

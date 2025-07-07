@@ -14,7 +14,7 @@ import infrastructure.support.MensajeSenderSupport;
 import infrastructure.support.MensajeSupport;
 import infrastructure.thread.MailMensajeSenderThread;
 import static infrastructure.util.ActionUtil.getURL;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.SystemParametersUtil.DATE_FULL_FORMAT;
 
@@ -49,7 +49,7 @@ public final class CommonMensajeSendFwdMessageService {
 
         String msg = "Original enviado por: " + mensajeFwd.getMsgNombreEnv() + '\n';
 
-        msg += "Fecha: " + getFormatedDate(mensajeFwd.getMsgFecha(), DATE_FULL_FORMAT)
+        msg += "Fecha: " + getFormattedDate(mensajeFwd.getMsgFecha(), DATE_FULL_FORMAT)
                 + "\n\n";
         msg += "----------Mensaje Original---------\n\n";
         msg += mensajeFwd.getMsgMsg();

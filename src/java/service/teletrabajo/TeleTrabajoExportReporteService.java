@@ -25,7 +25,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import session.GenericSession;
 import infrastructure.util.ContextUtil;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import infrastructure.util.FormatUtil;
 import static infrastructure.util.SystemParametersUtil.DATE_FORMAT;
 import infrastructure.util.common.CommonExcelUtil;
@@ -192,7 +192,7 @@ public final class TeleTrabajoExportReporteService {
             XSSFRow rowExcel = hoja.createRow(filaAux);
             
             XSSFCell celdaFecha = rowExcel.createCell(0);
-            XSSFRichTextString textoFecha = new XSSFRichTextString(getFormatedDate(actividad.getId().getAtelFecha(), DATE_FORMAT));
+            XSSFRichTextString textoFecha = new XSSFRichTextString(getFormattedDate(actividad.getId().getAtelFecha(), DATE_FORMAT));
             celdaFecha.setCellValue(textoFecha);
 
             XSSFCell celdaRutJefe = rowExcel.createCell(1);

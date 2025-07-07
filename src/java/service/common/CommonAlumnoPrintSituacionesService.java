@@ -52,7 +52,7 @@ public final class CommonAlumnoPrintSituacionesService extends CommonAlumnoPrint
             Stream.of(
                     sit.getSacAgnoInic().toString(),
                     sit.getSacSemInic().toString(),
-                    sit.getSacFechaAcep() == null ? "" : DateUtil.getFormatedDate(sit.getSacFechaAcep(), "dd-MM-yyyy"),
+                    sit.getSacFechaAcep() == null ? "" : DateUtil.getFormattedDate(sit.getSacFechaAcep(), "dd-MM-yyyy"),
                     sit.getTsacademica().getTsaDescrip()
             ).map(value -> getPdfPCell(value, Element.ALIGN_RIGHT, myColor))
                     .forEach(table::addCell);

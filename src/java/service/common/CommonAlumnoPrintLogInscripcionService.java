@@ -55,7 +55,7 @@ public final class CommonAlumnoPrintLogInscripcionService extends CommonAlumnoPr
                     log.getLogTipoMod(),
                     log.getProcesoInscripcion().getPinsDes(),
                     log.getLogUser() == null ? "" : log.getLogUser() + " " + (log.getLogRutReali() == null ? "" : log.getLogRutReali().toString()),
-                    DateUtil.getFormatedDate(log.getLogFecha(), "dd-MM-yyyy hh:mm:ss")
+                    DateUtil.getFormattedDate(log.getLogFecha(), "dd-MM-yyyy hh:mm:ss")
             ).map(value -> getPdfPCell(value, Element.ALIGN_RIGHT, myColor))
                     .forEach(table::addCell);
         });

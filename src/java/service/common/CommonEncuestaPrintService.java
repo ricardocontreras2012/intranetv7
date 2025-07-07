@@ -103,7 +103,7 @@ public class CommonEncuestaPrintService {
         facultyParagraph.setSpacingAfter(2); // Espacio entre párrafos
         doc.add(facultyParagraph);
 
-        Paragraph fechaParagraph = new Paragraph(DateUtil.getFormatedDate(fecha, "dd-MM-yyyy hh:mm:ss"), smalFont);
+        Paragraph fechaParagraph = new Paragraph(DateUtil.getFormattedDate(fecha, "dd-MM-yyyy hh:mm:ss"), smalFont);
         fechaParagraph.setAlignment(Element.ALIGN_RIGHT);
         fechaParagraph.setSpacingAfter(30);
         doc.add(fechaParagraph);

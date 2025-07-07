@@ -106,7 +106,7 @@
                                         <span style="display:none;">
                                             <s:property value="solFecha.getTime()"/>
                                         </span>
-                                        <s:property value="getFormatedFullDate()"/>
+                                        <s:property value="getFormattedFullDate()"/>
                                     </a>
                                 </td>
                                 <td>

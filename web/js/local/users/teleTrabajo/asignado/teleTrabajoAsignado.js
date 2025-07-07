@@ -18,7 +18,7 @@ $(document).ready(function () {
                 {
                     $(td).css('font-weight', 'normal');
                 }},
-            { targets: 1, data: "id.formatedStandardDate", title: "Fecha", orderable: false, render: function(data, type)
+            { targets: 1, data: "id.formattedStandardDate", title: "Fecha", orderable: false, render: function(data, type)
                 {
                     return type === 'display'
                     ? '<a>' + data + '</a>'

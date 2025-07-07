@@ -12,7 +12,7 @@ import domain.model.Tlogro;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import infrastructure.util.FormatUtil;
 import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonAlumnoUtil;
@@ -205,7 +205,7 @@ public class TitulosyGradosNominaResolucionPrintService {
 
                 String logro = logro1 + " " + logro2;
                 //String rol = exp.getExplRol();
-                String fecha = getFormatedDate(exp.getExplFecLogroAdm(), "dd-MM-yyyy");
+                String fecha = getFormattedDate(exp.getExplFecLogroAdm(), "dd-MM-yyyy");
 
                 agregarCelda(table, String.valueOf(index.getAndIncrement()));
                 agregarCelda(table, nombre);

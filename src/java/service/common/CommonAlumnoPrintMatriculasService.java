@@ -52,7 +52,7 @@ public final class CommonAlumnoPrintMatriculasService extends CommonAlumnoPrintU
             Stream.of(
                     mat.getId().getMathAgno().toString(),
                     mat.getId().getMathSem().toString(),
-                    mat.getMathFecha() == null ? "" : DateUtil.getFormatedDate(mat.getMathFecha(), "dd-MM-yyyy")
+                    mat.getMathFecha() == null ? "" : DateUtil.getFormattedDate(mat.getMathFecha(), "dd-MM-yyyy")
             ).map(value -> getPdfPCell(value, Element.ALIGN_RIGHT, myColor))
                     .forEach(table::addCell);
         });

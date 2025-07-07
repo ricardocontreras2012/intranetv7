@@ -208,7 +208,7 @@ public final class CommonAsistenciaExportPlanillaService {
         asistenciaAlumnoList.forEach(asistenciaAlumno -> {
             hoja.setColumnWidth(cellNum[0], CommonExcelUtil.calculateColWidth(length));
             XSSFCell celdaEval = cabecera.createCell(cellNum[0]);
-            celdaEval.setCellValue(DateUtil.getFormatedDate(asistenciaAlumno.getAsaFecha(), "dd/MM"));
+            celdaEval.setCellValue(DateUtil.getFormattedDate(asistenciaAlumno.getAsaFecha(), "dd/MM"));
             celdaEval.setCellStyle(estiloCabecera);
             cellNum[0]++;
         });

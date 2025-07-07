@@ -147,7 +147,7 @@ public abstract class CommonAlumnoPrintUtil {
 
             // Asegúrate de agregar el encabezado completo
             PdfPTable header = createTable(1, new float[]{100}, 562);  // Ajusta el tamaño según sea necesario
-            addCell(header, DateUtil.getFormatedDate(DateUtil.getSysdate(), "dd-MM-yyyy hh:mm:ss"), fontSmall, Element.ALIGN_RIGHT);
+            addCell(header, DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd-MM-yyyy hh:mm:ss"), fontSmall, Element.ALIGN_RIGHT);
             addCell(header, "UNIVERSIDAD DE SANTIAGO DE CHILE", fontBig, Element.ALIGN_CENTER);
             addCell(header, aluCar.getAluCarFunction().getNombreFacultad().toUpperCase(ContextUtil.getLocale()), fontBig, Element.ALIGN_CENTER);  // Cambia esto si es necesario
             addCell(header, " ", fontBig, Element.ALIGN_CENTER); // Celda vacía

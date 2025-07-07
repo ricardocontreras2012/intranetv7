@@ -21,7 +21,7 @@ import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
@@ -74,25 +74,25 @@ public class ViceDecanoSolicitudSaveResolucionService {
         switch (ws.getSolicitud().getTsolicitud().getTsolCodigo()) {
             case 11:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormatedDate(fecha, "dd/MM/yyyy"));
+                    ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"));
                 }
                 saveRetiro(genericSession, ws, key, aluCar, fecha, fechaString, solicitud, folio, verificador);
                 break;
             case 25:
                 if ("A".equals(resolucion) || "AE".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionEliminacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormatedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionEliminacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionEliminacion(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;
             case 30:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionAbandono(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormatedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionAbandono(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionAbandono(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;
             case 35:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionNoTitulacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormatedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionNoTitulacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionNoTitulacion(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;
@@ -126,7 +126,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
     private static void saveReincorporacionEliminacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
-        String fecha = getFormatedDate(getSysdate(), "dd/MM/yyyy");
+        String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
         String fechaString = DateUtil.getFechaCiudad(getSysdate());
         String status = "";
         String glosaIntermedia = " para el " + ws.getSemAct() + "/" + ws.getAgnoAct();
@@ -177,7 +177,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
     private static void saveReincorporacionAbandono(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
-        String fecha = getFormatedDate(getSysdate(), "dd/MM/yyyy");
+        String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
         String fechaString = DateUtil.getFechaCiudad(getSysdate());
         String status = "";
         String glosaIntermedia = " para el " + ws.getSemAct() + "/" + ws.getAgnoAct();
@@ -219,7 +219,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
     private static void saveReincorporacionNoTitulacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
-        String fecha = getFormatedDate(getSysdate(), "dd/MM/yyyy");
+        String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
         String fechaString = DateUtil.getFechaCiudad(getSysdate());
         String status = "";
         String glosaIntermedia = " para el " + ws.getSemAct() + "/" + ws.getAgnoAct();

@@ -27,7 +27,7 @@ $(document).ready(function () {
                 {
                     $(td).css('font-weight', 'normal');
                 }},
-            { targets: 4, data: "formatedFullDate", title: $("#date").val(), orderable: true, createdCell: function(td, cellData, rowData, row, col)
+            { targets: 4, data: "formattedFullDate", title: $("#date").val(), orderable: true, createdCell: function(td, cellData, rowData, row, col)
                 {
                     $(td).css('text-align', 'center');
                     $(td).css('width', '15%');

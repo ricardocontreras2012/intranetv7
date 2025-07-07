@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import static infrastructure.util.DateUtil.getDateGetterSetter;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.SystemParametersUtil.DATE_FULL_FORMAT;
 
 //Generated 24-mar-2009 15:19:39 by Hibernate Tools 3.2.1.GA
@@ -213,8 +213,8 @@ public class Mensaje implements Serializable {
      *
      * @return
      */
-    public String getFormatedFullDate() {
-        return getFormatedDate(msgFecha, DATE_FULL_FORMAT);
+    public String getFormattedFullDate() {
+        return getFormattedDate(msgFecha, DATE_FULL_FORMAT);
     }
 
     /**

@@ -48,7 +48,7 @@
                     <%
                         TeleTrabajoSupport[] horario = teleSession.getHorarioFuncionario();
                         for (int i = (inicioPos-1); i < (nDias + terminoPos -7); i++) {
-                            out.println("<th style=\"width:50px\" scope=\"col\">" + DateUtil.getFormatedDate(horario[i].getFecha(), SystemParametersUtil.DATE_FORMAT) + "</th>");
+                            out.println("<th style=\"width:50px\" scope=\"col\">" + DateUtil.getFormattedDate(horario[i].getFecha(), SystemParametersUtil.DATE_FORMAT) + "</th>");
                         }
                     %>
             </tr>
@@ -77,7 +77,7 @@
                             TeleTrabajoSupport support = horario[j];
                             if (support != null) {
                                 if (support.getEstado() != null) {
-                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormatedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
+                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormattedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
                                 } else {
                                     if (flag == 1 && !teleSession.getFuncionarioTeletrabajo().getFtelType().equals("S")){
                                         out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:red\">");
@@ -100,7 +100,7 @@
                             TeleTrabajoSupport support = horario[j];
                             if (support != null) {
                                 if (support.getEstado() != null) {
-                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormatedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
+                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormattedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
                                 } else {
                                     if (flag == 1 && !teleSession.getFuncionarioTeletrabajo().getFtelType().equals("S")){
                                         out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:red\">");
@@ -123,7 +123,7 @@
                             TeleTrabajoSupport support = horario[j];
                             if (support != null) {
                                 if (support.getEstado() != null) {
-                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormatedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
+                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormattedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
                                 } else {
                                     if (flag == 1 && !teleSession.getFuncionarioTeletrabajo().getFtelType().equals("S")){
                                         out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:red\">");
@@ -146,7 +146,7 @@
                             TeleTrabajoSupport support = horario[j];
                             if (support != null) {
                                 if (support.getEstado() != null) {
-                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormatedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
+                                    out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:#eee\">" + "<a onclick=showActividad('" + DateUtil.getFormattedDate(support.getFecha(), SystemParametersUtil.DATE_FORMAT) + "')>" + support.getEstado() + "</a></td>");
                                 } else {
                                     if (flag == 1 && !teleSession.getFuncionarioTeletrabajo().getFtelType().equals("S")){
                                         out.println("<td id='c_" + pos + "_" + count + "' style=\"background-color:red\">");

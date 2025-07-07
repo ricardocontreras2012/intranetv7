@@ -2,7 +2,7 @@ package domain.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.SystemParametersUtil.DATE_FORMAT;
 
 public class ActividadTeletrabajoId implements Serializable {
@@ -26,8 +26,8 @@ public class ActividadTeletrabajoId implements Serializable {
         this.atelFecha = atelFecha;
     }
     
-    public String getFormatedStandardDate() {
-        return getFormatedDate(this.atelFecha, DATE_FORMAT);
+    public String getFormattedStandardDate() {
+        return getFormattedDate(this.atelFecha, DATE_FORMAT);
     }
     
 }

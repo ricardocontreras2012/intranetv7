@@ -1,6 +1,6 @@
-<%--
+<%-- 
     Document   : alumnoEncuestaDocente
-    Created on : 03-09-2013, 13:05:12 PM
+    Created on : 07-07-2025, 12:03:31
     Author     : Ricardo Contreras S.
 --%>
 <!DOCTYPE html>
@@ -10,165 +10,236 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Formulario de Respuesta de Encuesta Docente</title>
-        <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
+        <title>Cuestionario de Evaluación de la Docencia</title>
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />        
         <link rel="stylesheet" href="/intranetv7/css/local/local-encuesta.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.validate.1.19.5.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.messages_es.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/encuesta/alumnoEncuestaDocente-3.0.4.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/encuesta/alumnoEncuestaDocente-3.0.5.js"></script>
     </head>
-    <body class="inner-body">
-        <div id="title-div" class="middle-top" style="background-color:#F7EDD8;height: 20px">
-            <s:text name="label.title.encuesta.docente"/> <s:property
-                value="#session.genericSession.getWorkSession(key).getCursoProfesor().getCurso().getNombreFull()"/> (<s:property
-                value="#session.genericSession.getWorkSession(key).getCursoProfesor().getProfesor().getNombre()"/>)
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #222;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+        .titulo-bg {
+            padding: 10px 0px;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+            border-bottom: solid 4px #ea7600;
+            color: #ea7600;
+        }
+        h3.section-title {
+            background-color: #00a499;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 4px;
+            margin-top: 30px;
+            margin-bottom: 18px;
+            font-size: 1.15em;
+            font-weight: bold;
+        }
+        .intro-text {
+            margin-bottom: 30px;
+            font-style: italic;
+            color: #444;
+            background: #e8f5ee;
+            border-left: 5px solid #00a499;
+            padding: 10px 18px;
+            border-radius: 4px;
+        }
+        fieldset {
+            border: 1px solid #00a499;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 15px;
+        }
+        legend {
+            font-weight: bold;
+            color: #00a499;
+            padding: 0 10px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+        }
+        input[type="radio"] {
+            accent-color: #00a499;
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        th {
+            background-color: #00a49950;
+            color: #394049;
+            text-align: center;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        td:not(:first-child) {
+            text-align: center;
+            width: 50px;
+        }
+        .scale-info {
+            font-style: italic;
+            color: #00a499;
+            margin-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 8px;
+            resize: vertical;
+            font-size: 1em;
+        }
+        button[type="submit"], .btn-encuesta {
+            background: #00a499;
+            color: #fff;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 28px;
+            font-size: 1.15em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 16px rgba(0, 164, 153, 0.08);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+            margin-top: 24px;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        button[type="submit"]:hover, .btn-encuesta:hover {
+            background: #00a499;
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(234, 118, 0, 0.15);
+        }
+        button[type="submit"]:active, .btn-encuesta:active {
+            transform: scale(0.98);
+        }
+
+    </style>
+</head>
+<body>       
+    <div class="container">
+        <div class="titulo-bg">
+            CUESTIONARIO DE EVALUACIÓN DE LA DOCENCIA 
+
         </div>
+        <h3 class="section-title">
+            <s:property
+                value="#session.genericSession.getWorkSession(key).getCursoProfesor().getCurso().getNombreFull()"/>
+            <br>
+            <s:property
+                value="#session.genericSession.getWorkSession(key).getCursoProfesor().getProfesor().getNombre()"/>
+        </h3>
+        <form id="encuesta-form">
+            <h3 class="section-title">I. Aspectos generales</h3>
+            <fieldset>
+                <legend>¿Cuál es su género?</legend>
+                <label><input type="radio" name="P_1_1" value="1"> Masculino</label>
+                <label><input type="radio" name="P_1_1" value="2"> Femenino</label>
+                <label><input type="radio" name="P_1_1" value="3"> Otro</label>
+                <label><input type="radio" name="P_1_1" value="4"> No lo quiero decir</label>
+            </fieldset>
+            <fieldset>
+                <legend>¿A qué porcentaje de las clases de esta asignatura asistió Ud. durante el semestre?</legend>
+                <label><input type="radio" name="P_1_2" value="1"> Entre 0% y 25%</label>
+                <label><input type="radio" name="P_1_2" value="2"> Entre 26% y 50%</label>
+                <label><input type="radio" name="P_1_2" value="3"> Entre 51% y 74%</label>
+                <label><input type="radio" name="P_1_2" value="4"> Entre 75% y 100%</label>
+            </fieldset>
+            <fieldset>
+                <legend>¿Con qué frecuencia cumplió Ud. con las actividades académicas y obligaciones de esta asignatura?</legend>
+                <label><input type="radio" name="P_1_3" value="1"> Nunca o casi nunca</label>
+                <label><input type="radio" name="P_1_3" value="2"> Frecuentemente</label>
+                <label><input type="radio" name="P_1_3" value="3"> A veces</label>
+                <label><input type="radio" name="P_1_3" value="4"> Siempre o casi siempre</label>
+            </fieldset>
+            <fieldset>
+                <legend>Sin considerar las horas de clases, ¿cuántas horas a la semana, aproximadamente, dedicó Ud. a la preparación y estudio de esta asignatura?</legend>
+                <label><input type="radio" name="P_1_4" value="1"> Entre 0 y 1 hora a la semana</label>
+                <label><input type="radio" name="P_1_4" value="2"> Entre 2 y 3 horas a la semana</label>
+                <label><input type="radio" name="P_1_4" value="3"> Entre 4 y 5 horas a la semana</label>
+                <label><input type="radio" name="P_1_4" value="4"> Entre 6 y 7 horas a la semana</label>
+                <label><input type="radio" name="P_1_4" value="5"> Entre 8 y 9 horas a la semana</label>
+                <label><input type="radio" name="P_1_4" value="6"> 10 o más horas a la semana</label>
+            </fieldset>
 
-        <div id="central-div" style="width: 90%; padding: 20px;">
-            <div id="content-div">
-                <form id="encuesta-form" accept-charset="UTF-8" action="#" method="post">                    
-                     <p class="apartado"><b>I. AUTOEVALUACIÓN DEL ESTUDIANTE</b></p>
+            <h3 class="section-title">II. Señale con qué frecuencia se realizan las siguientes actividades en la asignatura:</h3>
+            <p class="scale-info">1 - Nunca o casi nunca / 2 - A veces / 3 - Frecuentemente / 4 - Siempre o casi siempre / 5 - No aplica</p>
+            <div style="overflow: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Preguntas</th>
+                            <th>1</th>
+                            <th>2</th>
+                            <th>3</th>
+                            <th>4</th>
+                            <th>5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                    <p>Este apartado pretende evaluar brevemente su propio desempeño global durante el desarrollo de esta asignatura. Seleccione su grado de acuerdo respecto a los siguientes indicadores y estime su tiempo total de trabajo destinado a la asignatura.</p>
-                    <p><b>Opciones de respuesta:</b></p>
-                    <p>1: Muy en desacuerdo 2: En desacuerdo 3: Ni acuerdo, ni desacuerdo 4: De acuerdo 5: Muy de acuerdo</p>
-
-                    <table border="1" cellpadding="0" cellspacing="0" class="table table-striped">
-                        <tbody>
+                        <s:iterator value="#session.genericSession.getWorkSession(key).preguntasEncuesta" status="row">
                             <tr>
-                                <td class="pregunta"> </td>
-                                <td class="respuesta"><p><b>1</b></p></td>
-                                <td class="respuesta"><p><b>2</b></p></td>
-                                <td class="respuesta"><p><b>3</b></p></td>
-                                <td class="respuesta"><p><b>4</b></p></td>
-                                <td class="respuesta"><p><b>5</b></p></td>
+                                <td><s:property value="id.pregNro"/>.&nbsp;<s:property value="pregDes"/></td>
+                                <td><input type="radio" name="P_2_<s:property value="#row.count"/>" value="1"></td>
+                                <td><input type="radio" name="P_2_<s:property value="#row.count"/>" value="2"></td>
+                                <td><input type="radio" name="P_2_<s:property value="#row.count"/>" value="3"></td>
+                                <td><input type="radio" name="P_2_<s:property value="#row.count"/>" value="4"></td>
+                                <td><input type="radio" name="P_2_<s:property value="#row.count"/>" value="0"></td>
                             </tr>
-
-                            <tr>
-                                <td class="pregunta"><p>1. Asistí regularmente a las clases presenciales</p></td>
-                                <td class="respuesta"><input type="radio" name="P_1_1" value="1"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_1" value="2"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_1" value="3"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_1" value="4"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_1" value="5"/> </td>
-                            </tr>
-
-                            <tr>
-                                <td class="pregunta"><p>2. Desarrollé oportunamente las distintas actividades planificadas para la asignatura (estudio, lecturas, trabajos y/o ejercicios).</p></td>
-                                <td class="respuesta"><input type="radio" name="P_1_2" value="1"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_2" value="2"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_2" value="3"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_2" value="4"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_2" value="5"/> </td>
-                            </tr>
-
-                            <tr>
-                                <td class="pregunta"><p>3. Participé activamente del desarrollo de las clases realizando preguntas, comentarios y/o sugerencias.</p></td>
-                                <td class="respuesta"><input type="radio" name="P_1_3" value="1"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_3" value="2"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_3" value="3"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_3" value="4"/> </td>
-                                <td class="respuesta"><input type="radio" name="P_1_3" value="5"/> </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <p>Marca solo una respuesta:</p>
-
-                    <table border="1" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td class="pregunta"><p>4. Considerando la carga de trabajo en clases y fuera de clases, ¿cuánto tiempo dedicó semanalmente en promedio a esta asignatura?</p></td>
-                                <td class="respuesta"><p>Menos de 3 hrs</p><input type="radio" name="P_1_4" value="1"/></td>
-                                <td class="respuesta"><p>Entre 3 y 5 hrs</p><input type="radio" name="P_1_4" value="2"/></td>
-                                <td class="respuesta"><p>Entre 6 y 8 hrs</p><input type="radio" name="P_1_4" value="3"/></td>
-                                <td class="respuesta"><p>Entre 9 y 11 hrs</p><input type="radio" name="P_1_4" value="4"/></td>
-                                <td class="respuesta"><p>Entre 12 y 15 hrs</p><input type="radio" name="P_1_4" value="5"/></td>
-                                <td class="respuesta"><p>Más de 15 hrs</p><input type="radio" name="P_1_4" value="6"/></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                    <p><b></b></p>
-                    <p class="apartado"><b>II. EVALUACIÓN AL DOCENTE</b></p>
-
-                    
-                    <p><b>Opciones de respuesta:</b></p>
-                    <p>1: Muy en desacuerdo, 2: En desacuerdo, 3: Ni acuerdo ni desacuerdo, 4: De acuerdo, 5: Muy de acuerdo,  NA: No aplica o No corresponde </p>
-                    <p>Marca solo una respuesta:</p>
-
-                    <table border="1" cellpadding="0" cellspacing="0" class="table table-striped">
-                        <tbody>
-                            <tr>
-                                <td class="dimension"><p><b></b></p></td>
-                                <td class="respuesta"><p><b>1</b></p></td>
-                                <td class="respuesta"><p><b>2</b></p></td>
-                                <td class="respuesta"><p><b>3</b></p></td>
-                                <td class="respuesta"><p><b>4</b></p></td>
-                                <td class="respuesta"><p><b>5</b></p></td>
-                                <td class="respuesta"><p><b>NA</b></p></td>
-                            </tr>
-                            <s:iterator value="#session.genericSession.getWorkSession(key).preguntasEncuesta" status="row">
-                                <tr>
-                                    <td><s:property value="id.pregNro"/>.&nbsp;<s:property value="pregDes"/></td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="1"/> </td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="2"/> </td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="3"/> </td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="4"/> </td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="5"/> </td>
-                                    <td class="respuesta"><input type="radio" name="P_2_<s:property value="#row.count"/>" value="0"/> </td>
-                                </tr>
-                            </s:iterator>
-                        </tbody>
-                    </table>
-
-                    <p><b>PREGUNTAS ABIERTAS</b></p>
-
-                    <div style="width: 99%">
-                        <p>- 1.	Señale brevemente algunos aspectos que considere positivos en el desarrollo de la asignatura.</p><label for="comentarioPositivo"></label><textarea
-                            id="comentarioPositivo" name="comentarioPositivo"
-                            cols="100" rows="5" maxlength="500"></textarea>&nbsp;&nbsp;
-                    </div>
-                    <div style="width: 99%">
-                        <p>- 2.	Señale brevemente algunos aspectos que considere que podrían mejorar en el desarrollo de la asignatura.</p><label for="comentarioMejora"></label><textarea
-                            id="comentarioMejora" name="comentarioMejora"
-                            cols="100" rows="5" maxlength="500"></textarea>&nbsp;&nbsp;
-                    </div>
-                    <div id="hidden-input-div">
-                        <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
-                        <input type="hidden" id="nPregDummy" name="nPregDummy"
-                               value="<s:property value="#session.genericSession.getWorkSession(key).preguntasEncuesta.size"/>"/>
-                        <input type="hidden" id="carreraDummy" name="carreraDummy"
-                               value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.id.acaCodCar"/>"/>
-                    </div>
-                </form>
-
-                <button id="save-button" title="Grabar" type="button" class="btn btn-light" ><span class="fa fa-save" aria-hidden="true"></span>
-                    &nbsp; <span class="hidden-xs"><s:text name="label.button.save"/></span>
-                </button>
-
-                <div class="modal fade" id="msg" tabindex="-1" role="dialog" aria-labelledby="msgModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="msgModalLabel">Error</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="msg-div"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </s:iterator>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </body>
+
+            <fieldset>
+                <legend>14. En su opinión, ¿cuáles fueron los aspectos positivos de la docencia en la asignatura?</legend>
+                <textarea name="comentarioPositivo" rows="3" style="width:100%; padding:10px; box-sizing: border-box"></textarea>
+            </fieldset>
+            <fieldset>
+                <legend>15. En su opinión, ¿cuáles son los aspectos por mejorar de la docencia en la asignatura?</legend>
+                <textarea name="comentarioMejora" rows="3" style="width:100%; padding:10px; box-sizing: border-box"></textarea>
+            </fieldset>
+            <div style="text-align: center;">
+                <button class="btn-encuesta" type="button" onclick="saveEncuesta();">Enviar evaluación</button>
+            </div>
+
+            <div id="hidden-input-div">
+                <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
+                <input type="hidden" id="nPregDummy" name="nPregDummy"
+                       value="<s:property value="#session.genericSession.getWorkSession(key).preguntasEncuesta.size"/>"/>
+                <input type="hidden" id="carreraDummy" name="carreraDummy"
+                       value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.id.acaCodCar"/>"/>
+            </div>
+        </form>
+    </div>
+</body>
 </html>

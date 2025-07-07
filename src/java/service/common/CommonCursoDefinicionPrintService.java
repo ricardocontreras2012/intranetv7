@@ -73,7 +73,7 @@ public class CommonCursoDefinicionPrintService {
     public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file) throws Exception {
 
         Integer genera = genericSession.getRut();
-        String fecha = DateUtil.getFormatedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
+        String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
 
         // Crear el documento PDF con tamaño Letter rotado y márgenes personalizados
         Document doc = new Document(PageSize.LETTER.rotate(), 50, 50, 150, 50);

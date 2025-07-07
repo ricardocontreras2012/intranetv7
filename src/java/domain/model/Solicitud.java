@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import infrastructure.support.SolicitudSupport;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.SystemParametersUtil.DATE_FULL_FORMAT;
 import infrastructure.util.common.CommonSolicitudUtil;
 
@@ -259,8 +259,8 @@ public class Solicitud implements Serializable {
         this.solFecha = solFecha;
     }
 
-    public String getFormatedFullDate() {
-        return getFormatedDate(solFecha, DATE_FULL_FORMAT);
+    public String getFormattedFullDate() {
+        return getFormattedDate(solFecha, DATE_FULL_FORMAT);
     }
 
     public Date getSolFechaInicio() {

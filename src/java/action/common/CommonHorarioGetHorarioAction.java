@@ -31,5 +31,9 @@ public final class CommonHorarioGetHorarioAction extends ActionCommonSupport {
     
     public void setId(String id) {
         this.id = id;
-    }    
+    }
+
+    public String getId() {
+        return id;
+    }
 }

@@ -18,7 +18,7 @@ import java.util.Date;
 import session.GenericSession;
 import session.WorkSession;
 import static infrastructure.util.DateUtil.getFechaCiudad;
-import static infrastructure.util.DateUtil.getFormatedDate;
+import static infrastructure.util.DateUtil.getFormattedDate;
 import static infrastructure.util.DateUtil.getSysdate;
 import infrastructure.util.HibernateUtil;
 import static infrastructure.util.common.CommonArchivoUtil.getAttachFileName;
@@ -124,9 +124,9 @@ public class AlumnoSolicitudRetiroConstanciaService {
                 + alumno.getAluRut() + "-" + alumno.getAluDv()
                 + " de la carrera " + aluCar.getNombreCarrera() + "(" + aluCar.getId().getAcaCodCar() + ")"
                 + ", ha presentado solicitud de retiro temporal " + (tipo == 10 ? "sin" : "con") + " expresión de causa el "
-                + getFormatedDate(fecha, "dd/MM/yyyy")
+                + getFormattedDate(fecha, "dd/MM/yyyy")
                 + " del " + sem + "/" + agno
-                + " y ha sido aceptada con fecha " + getFormatedDate(fecha, "dd/MM/yyyy") + ".";
+                + " y ha sido aceptada con fecha " + getFormattedDate(fecha, "dd/MM/yyyy") + ".";
 
         return glosa;
     }

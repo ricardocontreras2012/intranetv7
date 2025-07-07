@@ -49,7 +49,7 @@ public class RegistradorCurricularSolicitudReprintService {
             Date fecha = sol.getSolFecha();
             
             HibernateUtil.beginTransaction(user);
-            ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), sol.getSolAgno(), sol.getSolSem(), solicitud, DateUtil.getFormatedDate(fecha,"dd/MM/yyyy"));
+            ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), sol.getSolAgno(), sol.getSolSem(), solicitud, DateUtil.getFormattedDate(fecha,"dd/MM/yyyy"));
             HibernateUtil.commitTransaction();
                         
             String verificador = CommonCertificacionUtil.getVerificador(folio);

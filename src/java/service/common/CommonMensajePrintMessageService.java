@@ -167,7 +167,7 @@ public final class CommonMensajePrintMessageService {
 
         PdfPCell tfecha = new PdfPCell(new Phrase("Fecha:", font));
         tfecha.setBorder(Rectangle.NO_BORDER);
-        PdfPCell fecha = new PdfPCell(new Phrase(msg.getFormatedFullDate(), font));
+        PdfPCell fecha = new PdfPCell(new Phrase(msg.getFormattedFullDate(), font));
         fecha.setBorder(Rectangle.NO_BORDER);
 
         PdfPCell tasunto = new PdfPCell(new Phrase("Asunto:", font));

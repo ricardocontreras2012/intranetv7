@@ -259,7 +259,7 @@ public class CommonMatriculaExportNominaService {
                     rowExcel.createCell(5).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaCodCar().toString()));
                     rowExcel.createCell(6).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaAgnoIng().toString()));
                     rowExcel.createCell(7).setCellValue(new XSSFRichTextString(aluCar.getId().getAcaSemIng().toString()));
-                    rowExcel.createCell(8).setCellValue(new XSSFRichTextString(DateUtil.getFormatedDate(mat.getMathFecha(), "dd-MM-yyyy")));
+                    rowExcel.createCell(8).setCellValue(new XSSFRichTextString(DateUtil.getFormattedDate(mat.getMathFecha(), "dd-MM-yyyy")));
                     rowExcel.createCell(9).setCellValue(new XSSFRichTextString(alumno.getAluEmailUsach()));
                     rowExcel.createCell(10).setCellValue(new XSSFRichTextString(alumno.getAluEmail()));
                 });

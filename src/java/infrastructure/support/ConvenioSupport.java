@@ -100,8 +100,8 @@ public class ConvenioSupport {
         administrado = convenio.getProyecto().getProyAdministrado();
         nombreProyecto = convenio.getProyecto().getProyNom();
         codigoProyecto = convenio.getProyecto().getProyCodOfi();
-        fechaInicio = DateUtil.getFormatedDate(convenio.getConvFechaIni(), "dd-MM-yyyy");
-        fechaTermino = DateUtil.getFormatedDate(convenio.getConvFechaTer(), "dd-MM-yyyy");
+        fechaInicio = DateUtil.getFormattedDate(convenio.getConvFechaIni(), "dd-MM-yyyy");
+        fechaTermino = DateUtil.getFormattedDate(convenio.getConvFechaTer(), "dd-MM-yyyy");
         funcion = convenio.getConvFuncion();
         monto = convenio.getConvMonto();
         montoFormateado = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNumeroEnPalabras(monto);
@@ -118,7 +118,7 @@ public class ConvenioSupport {
         nombrePrestador = convenio.getFuncionario().getNombre();
         dirPrestador = convenio.getFuncionario().getFunDireccion();
 
-        switch (DateUtil.getFormatedDate(convenio.getConvFecha(), "yyyy")) {
+        switch (DateUtil.getFormattedDate(convenio.getConvFecha(), "yyyy")) {
             case "2020":
                 retencion = "10,75";
                 break;
