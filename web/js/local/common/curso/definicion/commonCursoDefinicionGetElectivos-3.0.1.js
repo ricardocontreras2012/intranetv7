@@ -40,7 +40,7 @@ function show(asign, elect, electivo, minor, area)
     $("#minorMod").val(minor).change();
     $("#electivoMod").val(electivo);
 
-    var valor = $('#areaMod option').filter(function () {
+    const valor = $('#areaMod option').filter(function () {
         return $(this).text() === area;
     }).val();
 
@@ -62,7 +62,7 @@ $(document).ready(function () {
     });
 
     $("#minorMod").change(function () {
-        var txt = "";
+        let txt = "";
         if ($("#minorMod option:selected").val() > 0)
         {
             txt = $("#minorMod option:selected").text();

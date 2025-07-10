@@ -46,7 +46,7 @@ $(document).ready(function () {
     $("#print-button").click(printSolicitudes);
     $("#del-button").click(deleteSolicitudes);
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         viewSolicitud(fieldName.substr(fieldName.indexOf("_") + 1));
     });
 

@@ -31,22 +31,6 @@ public final class CommonAlumnoGetLogInscripcionService {
      * @param agno
      * @return Action status.
      */
-    /*public static String service(GenericSession genericSession, String key, Integer sem, Integer agno) {
-        WorkSession ws = genericSession.getWorkSession(key);
-        if(sem != null && agno != null)
-        {
-            ws.setSemAct(sem);
-            ws.setAgnoAct(agno);
-            ws.setLogInscripcionList(ContextUtil.getDAO().getLogInscripcionPersistence(ActionUtil.getDBUser()).findAgnoSem(ws.getAluCar(), sem, agno));
-        }
-        else
-        {
-            CommonUtil.setAgnoSemAct(ws);
-            ws.setLogInscripcionList(ContextUtil.getDAO().getLogInscripcionPersistence(ActionUtil.getDBUser()).find(ws.getAluCar()));
-        }
-        LogUtil.setLog(genericSession.getRut(), ws.getAluCar().getId().getAcaRut());       
-        return SUCCESS;
-    }*/
     public static String service(GenericSession genericSession, String key, Integer sem, Integer agno) {
         WorkSession ws = genericSession.getWorkSession(key);
 
@@ -74,5 +58,4 @@ public final class CommonAlumnoGetLogInscripcionService {
         LogUtil.setLog(genericSession.getRut(), ws.getAluCar().getId().getAcaRut());
         return SUCCESS;
     }
-
 }

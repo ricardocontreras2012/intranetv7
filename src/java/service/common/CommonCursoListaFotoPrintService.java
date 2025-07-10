@@ -19,6 +19,7 @@ import infrastructure.util.common.CommonArchivoUtil;
 import domain.model.Curso;
 import org.apache.struts2.ServletActionContext;
 import infrastructure.util.DateUtil;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
 import infrastructure.util.common.CommonUsersUtil;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -89,7 +90,7 @@ public class CommonCursoListaFotoPrintService {
 
             table.addCell(createCell(aca.getAlumno().getAluPaterno()));
             table.addCell(createCell(aca.getAlumno().getAluMaterno()));
-            table.addCell(createCell(aca.getAlumno().getAluNombre()));
+            table.addCell(createCell(CommonAlumnoUtil.getNombreSocial(aca.getAlumno())));
 
             try {
                 Image alumnoImage = Image.getInstance(CommonUsersUtil.getPathFoto(aca.getAlumno().getAluRut(), aca.getAlumno().getAluDv()));

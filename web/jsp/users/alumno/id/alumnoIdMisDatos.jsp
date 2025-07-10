@@ -76,7 +76,7 @@
                                           list="#session.genericSession.getListaEstadoCivil()"
                                           listKey="ecivCod"
                                           listValue="ecivDes"
-                                          cssClass="form-control"/>
+                                          cssClass="form-select"/>
 
 
                                 <%--s:select id="estadoCivil"
@@ -114,7 +114,7 @@
                                           list="#session.genericSession.getListaRegion()"
                                           listKey="regCod"
                                           listValue="regNom"
-                                          cssClass="form-control"/>
+                                          cssClass="form-select"/>
                             </div>
                         </div>
                         <div class="mb-3 row">

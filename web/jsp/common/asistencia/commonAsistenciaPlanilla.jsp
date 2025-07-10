@@ -69,7 +69,12 @@
                                     <s:property value="alumno.aluMaterno"/>
                                 </td>
                                 <td>
-                                    <s:property value="alumno.aluNombre"/>
+                                    <s:if test="alumno.aluNombreSocial != null && alumno.aluNombreSocial.trim() != ''">
+                                        <s:property value="alumno.aluNombreSocial"/>
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="alumno.aluNombre"/>
+                                    </s:else>
                                 </td>
                                 <td style="text-align: center">
                                     <img height="60" width="50" id="foto<s:property value="#rowNomina.count"/>"

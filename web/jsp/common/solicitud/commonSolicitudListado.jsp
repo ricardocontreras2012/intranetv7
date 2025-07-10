@@ -26,7 +26,7 @@
         <script type="text/javascript" src="/intranetv7/js/datePicker/gijgo-messages.es-es.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/common/solicitud/commonSolicitudListado-3.0.3.js"></script>
     </head>
-    <body class="inner-body" onload="blockBack();onLoad();">
+    <body class="inner-body" onload="onLoad();">
         <div class="title-div">
             <s:text name="label.title.solicitudes"/>
         </div>

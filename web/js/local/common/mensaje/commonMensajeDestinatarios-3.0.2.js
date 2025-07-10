@@ -15,9 +15,9 @@ function checkedBody() {
 }
 
 function nextDestiny() {
-    
-    var listaBody = $("#largoLista").val();
-    var listaBarra = $("#largoBarra").val();
+
+    const listaBody = $("#largoLista").val();
+    const listaBarra = $("#largoBarra").val();
     if (listaBarra > 0) {
         if (!checkedBar()) {
             showAvisoBarra();
@@ -30,8 +30,8 @@ function nextDestiny() {
             return false;
         }
     }
-    
-    var dataString = $("#destinatarios-form").serialize();
+
+    const dataString = $("#destinatarios-form").serialize();
     $('#message-iframe', window.parent.document).attr("src", 'CommonMensajeReceiveLista?' + dataString);    
 
     //blockPage();

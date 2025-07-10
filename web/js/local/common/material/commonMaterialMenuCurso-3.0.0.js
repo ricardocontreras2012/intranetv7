@@ -9,7 +9,7 @@ function closeMsg()
 }
 function executeGetMaterial(a, tipoMat) {
     closeMsg();
-    var b = {key: $("#keyDummy").val(), tipo: tipoMat};
+    const b = {key: $("#keyDummy").val(), tipo: tipoMat};
     jQuery.ajax({url: a, type: "POST", data: b, success: function (a) {
             $("#menu-inner-iframe").attr("srcdoc", a);
         }, async: !1});

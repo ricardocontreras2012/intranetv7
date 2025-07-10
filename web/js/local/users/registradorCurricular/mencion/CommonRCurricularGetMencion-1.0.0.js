@@ -79,14 +79,14 @@ function showModalEditMencion(menCodCar, menCodMen, menNom, menPrefijo, menPlanC
 }
 
 function addMencion() {
-    var data_string = {
+    const data_string = {
         'key': $("#key").val(),
         'menCodCar': $("#addMencion_menCodCar").val(),
         'menPrefijo': $("#addMencion_menPrefijo").val(),
         'menPlanComun': $("#addMencion_menPlanComun").val(),
         'menNom': $("#addMencion_menNom").val()
     };
-    
+
     jQuery.ajax({
         url: "CommonRCurricularCreateMencion",
         type: "POST",
@@ -125,15 +125,15 @@ function addMencion() {
 }
 
 function editMencion() {
-    var data_string = {
+    const data_string = {
         key: $("#key").val(),
         menCodCar: $("#actual_menCodCar").val(),
         menCodMen: $("#actual_menCodMen").val(),
-        menPrefijo:  $("#editMencion_menPrefijo").val(),
+        menPrefijo: $("#editMencion_menPrefijo").val(),
         menPlanComun: $("#editMencion_menPlanComun").val(),
         menNom: $("#editMencion_menNom").val()
     };
-    
+
     jQuery.ajax({
         url: "CommonRCurricularEditMencion",
         type: "POST",
@@ -173,7 +173,7 @@ function editMencion() {
 
 function addUnidad()
 {
-    var data_string = {
+    const data_string = {
         key: $("#key").val(),
         uniCod: $("#addUnidad_uniCod").val(),
         uniNom: $("#addUnidad_uniNom").val(),
@@ -189,7 +189,7 @@ function addUnidad()
         menCodMen: $("#actual_menCodMen").val(),
         duty: 'create'
     };
-    
+
     jQuery.ajax({
         url: "CommonRCurricularAddUnidad",
         type: "POST",
@@ -244,7 +244,7 @@ function addUnidad()
 
 function editUnidad()
 {
-    var data_string = {
+    const data_string = {
         key: $("#key").val(),
         uniCod: $("#editUnidad_uniCod").val(),
         uniNom: $("#editUnidad_uniNom").val(),
@@ -260,7 +260,7 @@ function editUnidad()
         menCodMen: $("#actual_menCodMen").val(),
         duty: 'update'
     };
-    
+
     jQuery.ajax({
         url: "CommonRCurricularAddUnidad",
         type: "POST",
@@ -314,14 +314,14 @@ function editUnidad()
 }
 
 function desligarUnidad(){
-    var data_string = {
+    const data_string = {
         key: $("#key").val(),
         menCodCar: $("#actual_menCodCar").val(),
         menCodMen: $("#actual_menCodMen").val(),
         uniCod: $("#editUnidad_uniCod").val(),
         duty: "Desligar"
     };
-    
+
     jQuery.ajax({
         url: "CommonRCurricularDeleteUnidad",
         type: "POST",
@@ -438,5 +438,5 @@ $(document).ready(function () {
         }
     });
     
-    unblockPage();
+    
 });

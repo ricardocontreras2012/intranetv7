@@ -64,7 +64,7 @@ public class AlumnoSolicitudProrrogaConstanciaService {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         Solicitud solicitud = ws.getSolicitud();
-        Integer sol = ws.getSolicitud().getSolFolio();
+        Integer sol = solicitud.getSolFolio();
         new SolicitudSupport(solicitud).setAprobada();
         String user = ActionUtil.getDBUser();
         CommonUtil.setAgnoSemAct(ws);
@@ -97,8 +97,6 @@ public class AlumnoSolicitudProrrogaConstanciaService {
         CommonAlumnoUtil.resetWorkSession(genericSession, sesionAlumno, key, ActionUtil.getDBUser());
 
         return CommonArchivoUtil.getFile(fileCopia, "sit");
-
-        //ws.setLogCertificacion(new LogCertificacion());
     }
 
     /**

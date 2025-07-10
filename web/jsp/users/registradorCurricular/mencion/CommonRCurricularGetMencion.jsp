@@ -27,7 +27,7 @@
         <script type="text/javascript" src="/intranetv7/js/datePicker/gijgo-messages.es-es.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/registradorCurricular/mencion/CommonRCurricularGetMencion-1.0.0.js"></script>
     </head>
-    <body class="inner-body" onload="blockBack();onLoad();">
+    <body class="inner-body" onload="onLoad();">
         <div class="title-div">
             <p>Menciones</p>
         </div>
@@ -168,7 +168,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="addMencion_menNom">Nombre de la mención</label>
-                                    <textarea name="addMencion_menNom" id="addMencion_menNom" class="form-control" maxlength="300" rows="5" /></textarea>
+                                    <textarea name="addMencion_menNom" id="addMencion_menNom" class="form-control" maxlength="300" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>

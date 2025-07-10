@@ -24,15 +24,15 @@ function reservar()
 }
 
 function showReservar(celda) {
-    var celdaAux = celda.substr(2);
-    var pos = celdaAux.indexOf("_");
-    var modulo = celdaAux.substr(0, pos);
+    const celdaAux = celda.substr(2);
+    const pos = celdaAux.indexOf("_");
+    const modulo = celdaAux.substr(0, pos);
     var dia = parseInt(celdaAux.substr(pos+1))+1;
-    var fecha = $("table#horario thead tr th").eq(dia).html();
-    var parts = fecha.split("/");
-    var dt = new Date(parseInt(parts[2], 10),
-                  parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));
+    const fecha = $("table#horario thead tr th").eq(dia).html();
+    const parts = fecha.split("/");
+    const dt = new Date(parseInt(parts[2], 10),
+        parseInt(parts[1], 10) - 1,
+        parseInt(parts[0], 10));
     var dia = ["D","L","M","W","J","V","S"][dt.getDay()];
     
     
@@ -71,7 +71,7 @@ $(document).ready(function () {
         }
     });
 
-    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
     $('#inicio').datepicker({
         uiLibrary: 'bootstrap4',

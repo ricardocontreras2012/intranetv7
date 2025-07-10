@@ -11,30 +11,34 @@ function grabarResolucion() {
     }
 }
 
-function validForm()
-{
+function validForm() {
+    const $respuesta = $("#respuesta");
     const resolucion = $("#resolucion").val();
-    const respuesta = $("#respuesta").val().trim();
+    const respuesta = $respuesta.val().trim();
     const tipo = $("#tipo").val();
 
     if (!resolucion) {
-        return alert('Falta ingresar resolución'), false;
+        alert('Falta ingresar resolución');
+        return false;
     }
 
     if (!respuesta) {
         if (resolucion === "A" && tipo !== "40") {
-            $("#respuesta").val("Aprobada");
+            $respuesta.val("Aprobada");
         } else if (resolucion === "TR") {
-            $("#respuesta").val("En Trámite");
+            $respuesta.val("En Trámite");
         } else if (tipo === "40") {
-            return alert('Falta ingresar fecha plazo de matrícula'), false;
+            alert('Falta ingresar fecha plazo de matrícula');
+            return false;
         } else {
-            return alert('Falta ingresar respuesta'), false;
+            alert('Falta ingresar respuesta');
+            return false;
         }
     }
 
     return true;
 }
+
 
 $(document).ready(function () {
     $("#save-button").click(grabarResolucion);

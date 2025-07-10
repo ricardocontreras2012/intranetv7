@@ -25,7 +25,7 @@ $(document).ready(function () {
     $("#delete-button").click(eliminar);
 
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         getSolicitud(field_name.substr(field_name.indexOf("_") + 1));
     });
 });

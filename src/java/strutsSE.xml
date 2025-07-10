@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 
 <!--
     Document   : strutsSecretario.xml
@@ -12,7 +12,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 

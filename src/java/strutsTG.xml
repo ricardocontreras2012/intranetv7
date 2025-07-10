@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 
 <!--
     Document   : strutsTitulosyGrados.xml
@@ -12,7 +12,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -60,7 +62,8 @@
     <package name="intranetTitulosyGradosActions" extends="intranetTitulosyGradosInterceptors">
 
         <result-types>
-            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="myStream" default="false"
+                         class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
         <action name="TitulosyGradosLogin" class="action.titulosygrados.TitulosyGradosLoginAction" method="execute">
@@ -76,27 +79,28 @@
         <action name="TitulosyGradosLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
             <result name="success">/jsp/users/titulosyGrados/id/titulosyGradosIdBienvenida.jsp
             </result>
-        </action>                
-        
+        </action>
+
         <action name="TitulosyGradosAlumnoInformeCalificacionesPrint"
                 class="action.titulosygrados.TitulosyGradosAlumnoInformeCalificacionesPrintAction" method="execute">
-            <result type="myStream"/>                        
+            <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
-        </action>   
-             
+        </action>
+
         <action name="TitulosyGradosAlumnoGetLogros"
                 class="action.titulosygrados.TitulosyGradosAlumnoGetLogrosAction" method="execute">
             <result name="success">/jsp/users/titulosyGrados/titulosyGradosAlumnoGetLogros.jsp
             </result>
         </action>
-        
+
         <action name="TitulosyGradosAlumnoCertificadoPrint"
                 class="action.titulosygrados.TitulosyGradosAlumnoCertificadoPrintAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
-        </action>              
-        
-        <action name="TitulosyGradosNominaResolucionPrint" class="action.titulosygrados.TitulosyGradosNominaResolucionPrintAction" method="execute">
+        </action>
+
+        <action name="TitulosyGradosNominaResolucionPrint"
+                class="action.titulosygrados.TitulosyGradosNominaResolucionPrintAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -105,8 +109,9 @@
             </result>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
-        
-        <action name="TitulosyGradosNominaGetNomina" class="action.titulosygrados.TitulosyGradosNominaGetNominaAction" method="execute">
+
+        <action name="TitulosyGradosNominaGetNomina" class="action.titulosygrados.TitulosyGradosNominaGetNominaAction"
+                method="execute">
             <result name="success">/jsp/users/titulosyGrados/nomina/titulosyGradosNominaShow.jsp
             </result>
         </action>
@@ -115,24 +120,28 @@
             <result name="success">/jsp/users/titulosyGrados/nomina/titulosyGradosNominaSearch.jsp
             </result>
         </action>
-        <action name="TitulosyGradosNominaNew" class="action.titulosygrados.TitulosyGradosNominaNewAction" method="execute">
+        <action name="TitulosyGradosNominaNew" class="action.titulosygrados.TitulosyGradosNominaNewAction"
+                method="execute">
             <result name="success">/jsp/users/titulosyGrados/nomina/titulosyGradosNominaNew.jsp
             </result>
         </action>
 
-        <action name="TitulosyGradosNominaSetNomina" class="action.titulosygrados.TitulosyGradosNominaSetNominaAction" method="execute">
+        <action name="TitulosyGradosNominaSetNomina" class="action.titulosygrados.TitulosyGradosNominaSetNominaAction"
+                method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${url}</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="TitulosyGradosNominaAddAlumno" class="action.titulosygrados.TitulosyGradosNominaAddAlumnoAction" method="execute">
+        <action name="TitulosyGradosNominaAddAlumno" class="action.titulosygrados.TitulosyGradosNominaAddAlumnoAction"
+                method="execute">
             <result name="success">/jsp/users/titulosyGrados/nomina/titulosyGradosNominaAppend.jsp</result>
             <result name="error">/jsp/users/titulosyGrados/nomina/titulosyGradosNominaConsola.jsp</result>
-        </action>        
+        </action>
 
-        <action name="TitulosyGradosNominaRemove" class="action.titulosygrados.TitulosyGradosNominaRemoveAction" method="execute">
+        <action name="TitulosyGradosNominaRemove" class="action.titulosygrados.TitulosyGradosNominaRemoveAction"
+                method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">TitulosyGradosNominaGetNomina</param>
                 <param name="key">${key}</param>
@@ -142,7 +151,8 @@
             </result>
         </action>
 
-        <action name="TitulosyGradosNominaSaveNomina" class="action.titulosygrados.TitulosyGradosNominaSaveNominaAction" method="execute">
+        <action name="TitulosyGradosNominaSaveNomina" class="action.titulosygrados.TitulosyGradosNominaSaveNominaAction"
+                method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">TitulosyGradosNominaGetNomina</param>
                 <param name="key">${key}</param>

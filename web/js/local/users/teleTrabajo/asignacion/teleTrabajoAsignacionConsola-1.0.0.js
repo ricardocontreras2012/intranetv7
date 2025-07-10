@@ -1,9 +1,9 @@
 function setSemanas() {
-    
-    var parts = $("#inicio").val().split("-");
-    var dt = new Date(parseInt(parts[2], 10),
-                  parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));                
+
+    let parts = $("#inicio").val().split("-");
+    let dt = new Date(parseInt(parts[2], 10),
+        parseInt(parts[1], 10) - 1,
+        parseInt(parts[0], 10));
     $("#inicioPos").val(dt.getDay());
     
     if(dt.getDay() === 0){
@@ -11,11 +11,11 @@ function setSemanas() {
         dt.setDate(dt.getDate() - 7);
     }
     dt.setDate(dt.getDate() - dt.getDay() +1);
-    
-    var yyyy = dt.getFullYear();
-    var mm = dt.getMonth() + 1;
-    var dd = dt.getDate();
-    
+
+    let yyyy = dt.getFullYear();
+    let mm = dt.getMonth() + 1;
+    let dd = dt.getDate();
+
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
     
@@ -71,15 +71,15 @@ function asignarActividad()
 }
 
 function showAsignarActividad(celda) {
-    var celdaAux = celda.substr(2);
-    var pos = celdaAux.indexOf("_");
-    var modulo = celdaAux.substr(0, pos);
+    const celdaAux = celda.substr(2);
+    const pos = celdaAux.indexOf("_");
+    const modulo = celdaAux.substr(0, pos);
     var dia = parseInt(celdaAux.substr(pos+1))+1;
-    var fecha = $("table#horario thead tr th").eq(dia).html();
-    var parts = fecha.split("/");
-    var dt = new Date(parseInt(parts[2], 10),
-                  parseInt(parts[1], 10) - 1,
-                  parseInt(parts[0], 10));
+    const fecha = $("table#horario thead tr th").eq(dia).html();
+    const parts = fecha.split("/");
+    const dt = new Date(parseInt(parts[2], 10),
+        parseInt(parts[1], 10) - 1,
+        parseInt(parts[0], 10));
     var dia = ["D","L","M","W","J","V","S"][dt.getDay()];
     
     $("#dia").val(dia);
@@ -111,7 +111,7 @@ $(document).ready(function () {
         }
     });
 
-    var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    const today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
 
     $('#inicio').datepicker({
         uiLibrary: 'bootstrap4',

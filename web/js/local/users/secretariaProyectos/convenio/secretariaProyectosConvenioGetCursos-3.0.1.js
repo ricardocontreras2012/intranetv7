@@ -1,11 +1,17 @@
 function verificaTopeHorarioCurso()
 {
-    var curso = $("#idCurso").val();
-    var rut = $("#rut").val();
-    var inicio = $("#fechaInicio").val();
-    var termino = $("#fechaTermino").val();
+    const curso = $("#idCurso").val();
+    const rut = $("#rut").val();
+    const inicio = $("#fechaInicio").val();
+    const termino = $("#fechaTermino").val();
 
-    var dataString = {'key': $("#key").val(), 'rut': rut, 'curso': curso, 'fechaInicio': inicio, 'fechaTermino': termino};
+    const dataString = {
+        'key': $("#key").val(),
+        'rut': rut,
+        'curso': curso,
+        'fechaInicio': inicio,
+        'fechaTermino': termino
+    };
     jQuery.ajax({
         url: "SecretariaProyectosConvenioTopeHorarioCurso",
         type: "GET",
@@ -16,7 +22,7 @@ function verificaTopeHorarioCurso()
         async: false
     });
 
-    var str = $("#result-status-div").html().trim();
+    const str = $("#result-status-div").html().trim();
     if (str === "Error")
     {
         $("#error-div").html("<p>" + $("#result-error-div").html().replaceAll("#", "</p>"));
@@ -26,7 +32,7 @@ function verificaTopeHorarioCurso()
     }
     else
     {
-        var funcion;
+        let funcion;
         if ($("#tipoContrato").find("option:selected").val()==="DOC")
         {
             funcion="Relator";

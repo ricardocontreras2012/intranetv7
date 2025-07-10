@@ -3,7 +3,7 @@ function showNotas(asignatura, nombre, electiva) {
     $("#asignatura").val(asignatura);
     $("#nombre").val(nombre);
     $("#electiva").val(electiva);
-    var data_string = $("#malla-form").serialize();
+    const data_string = $("#malla-form").serialize();
     jQuery.ajax({
         url: "CommonAlumnoGetNotasAsignatura",
         type: "POST",
@@ -21,7 +21,7 @@ function showNotas(asignatura, nombre, electiva) {
 function showAdicionales(adicional, nombre) {
     $("#adicional").val(adicional);
     $("#nombre").val(nombre);
-    var data_string = $("#malla-form").serialize();
+    const data_string = $("#malla-form").serialize();
     jQuery.ajax({
         url: "CommonAlumnoGetNotasAdicional",
         type: "POST",

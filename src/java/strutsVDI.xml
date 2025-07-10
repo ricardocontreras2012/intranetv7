@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 <!--
     Document   : strutsViceDecanoInvestigacion.xml
     Created on : 2 de marzo de 2009, 04:26 PM
@@ -11,7 +11,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -58,7 +60,8 @@
             </result>
         </action>
 
-        <action name="ViceDecanoInvestigacionGetKeyProfesor" class="action.common.CommonGetKeyProfesorAction" method="execute">
+        <action name="ViceDecanoInvestigacionGetKeyProfesor" class="action.common.CommonGetKeyProfesorAction"
+                method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">ViceDecanoInvestigacionLoginHome</param>
                 <param name="key">${key}</param>

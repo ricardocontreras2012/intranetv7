@@ -1,7 +1,7 @@
 function getTareas(pos)
 {
     $("#pos").val(pos);
-    var dataString = $("#actividades-form").serialize();
+    const dataString = $("#actividades-form").serialize();
     $("#main-content-iframe", window.parent.document).attr("src", "TeleTrabajoGetMisTareas?" + dataString);
 }
 
@@ -44,7 +44,7 @@ $(document).ready(function () {
     $("#botonRechazo").click(rechazarActividad);
 
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         getTareas(fieldName.substr(fieldName.indexOf("_") + 1));
     });
     

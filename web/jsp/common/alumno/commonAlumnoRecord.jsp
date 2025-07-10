@@ -147,7 +147,12 @@
                         <div class="form-group">
                             <label for="nombre" class="col-lg-1 col-sm-1 control-label"><s:text name="label.name"/></label>
                             <div class="col-lg-8 col-sm-6">
-                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" maxlength="150" value="<s:property value="#session.genericSession.getWorkSession(key).alumno.aluNombre"/>">
+                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" maxlength="150" value="<s:if test="#session.genericSession.getWorkSession(key).alumno.aluNombreSocial != null && #session.genericSession.getWorkSession(key).alumno.aluNombreSocial.trim() != ''">
+                                <s:property value="#session.genericSession.getWorkSession(key).alumno.aluNombreSocial"/>
+                            </s:if>
+                            <s:else>
+                                <s:property value="#session.genericSession.getWorkSession(key).alumno.aluNombre"/>
+                            </s:else>">
                             </div>
                         </div>
                         <div id="hidden-input-div">

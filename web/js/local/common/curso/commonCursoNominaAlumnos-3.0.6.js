@@ -25,7 +25,7 @@ $(document).ready(function () {
     $("#export-button").click(exportLista);
     $("#foto-button").click(fotoLista);
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         searchAlumno(field_name.substr(field_name.indexOf("_") + 1));
     });
 });

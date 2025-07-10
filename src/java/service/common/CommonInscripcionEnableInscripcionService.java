@@ -12,6 +12,7 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import infrastructure.util.common.CommonAlumnoUtil;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CommonInscripcionEnableInscripcionService {
                 aluCar.setAlumno(ws.getAlumno());
                 aluCar.setInitValues();
                 ws.setAluCar(aluCar);
-                ws.setNombre(aluCar.getAlumno().getNombre());
+                ws.setNombre(CommonAlumnoUtil.getNombreSocial(ws.getAluCar().getAlumno()));
 
                 ws.setAgnoAct(aluCar.getParametros().getAgnoIns());
                 ws.setSemAct(aluCar.getParametros().getSemIns());

@@ -30,7 +30,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetCursos-3.2.2.js"></script>
     </head>
 
-    <body class="inner-body" style="overflow: hidden" onload="blockBack();">
+    <body class="inner-body" style="overflow: hidden">
         <div class="container-fluid d-flex flex-column vh-100">
             <row>
                 <div class="navbar-brand container-fluid">
@@ -292,7 +292,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Sección</td>
-                                                        <td id="seccId"></td></td>
+                                                        <td id="seccId"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Cupo</td>

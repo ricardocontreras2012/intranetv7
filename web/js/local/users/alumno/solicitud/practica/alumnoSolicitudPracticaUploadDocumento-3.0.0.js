@@ -1,6 +1,6 @@
 function upload() {
     $("#solicitud-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("upload")) {
             $(this).removeAttr('id');
         }

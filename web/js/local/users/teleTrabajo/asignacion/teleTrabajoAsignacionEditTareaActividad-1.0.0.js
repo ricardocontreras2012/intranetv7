@@ -1,8 +1,8 @@
 function saveSolicitud() {
-    var rowCount = $('#solicitud-table tr').length;
+    const rowCount = $('#solicitud-table tr').length;
     if (rowCount > 0) {
 
-        var data_string = $("#solicitud-form").serialize();
+        const data_string = $("#solicitud-form").serialize();
         jQuery.ajax({
             url: "TeleTrabajoAsignarSaveEditTarea",
             type: "POST",

@@ -11,6 +11,7 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import infrastructure.util.common.CommonAlumnoUtil;
 
 /**
  * Class description
@@ -36,7 +37,7 @@ public final class CommonAlumnoGetAlumnoService {
                             ws.getAlumnoList().get(pos).getAluRut());
 
             ws.setAlumno(alumno);
-            ws.setNombre(alumno.getNombre());
+            ws.setNombre(CommonAlumnoUtil.getNombreSocial(alumno));
         }
 
         return SUCCESS;

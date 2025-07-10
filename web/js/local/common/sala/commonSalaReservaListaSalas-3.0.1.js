@@ -1,6 +1,6 @@
 
 $("a").click(function () {
-    var field_name = $(this).attr("id");    
+    const field_name = $(this).attr("id");
     $("#title_sala_div").html("SALA: "+$("#"+field_name).html());
     getHorario(field_name.substr(field_name.indexOf("_") + 1));
 });

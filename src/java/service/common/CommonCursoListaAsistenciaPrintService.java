@@ -39,6 +39,7 @@ import infrastructure.util.LogUtil;
 import infrastructure.util.PdfUtil;
 import infrastructure.util.SystemParametersUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonArchivoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
 import java.util.List;
@@ -157,7 +158,7 @@ public class CommonCursoListaAsistenciaPrintService {
 
                     table.addCell(createCell(alumno.getAluPaterno()));
                     table.addCell(createCell(alumno.getAluMaterno()));
-                    table.addCell(createCell(alumno.getAluNombre()));
+                    table.addCell(createCell(CommonAlumnoUtil.getNombreSocial(alumno)));
 
                     IntStream.rangeClosed(0, 30).forEach(j -> table.addCell(createCell(" ")));
                 });

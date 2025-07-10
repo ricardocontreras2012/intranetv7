@@ -1,345 +1,366 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OficinaCurricularActa" pageWidth="572" pageHeight="752" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4b10542f-7b7f-43ce-a70c-8e844289b4c1">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="37"/>
-	<property name="ireport.y" value="0"/>
-	<style name="alternateStyle" backcolor="#EEEEEE">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
-			<style backcolor="#FFFFFF"/>
-		</conditionalStyle>
-	</style>
-	<style name="acta">
-		<box leftPadding="1" rightPadding="1">
-			<pen lineWidth="0.15"/>
-			<topPen lineWidth="0.15"/>
-			<leftPen lineWidth="0.15"/>
-			<bottomPen lineWidth="0.15"/>
-			<rightPen lineWidth="0.15"/>
-		</box>
-	</style>
-	<parameter name="fecha" class="java.lang.String"/>
-	<parameter name="logoUsach" class="java.lang.String"/>
-	<parameter name="profesor" class="java.lang.String"/>
-	<parameter name="nombreCurso" class="java.lang.String"/>
-	<parameter name="folio" class="java.lang.Integer"/>
-	<parameter name="tipoActa" class="java.lang.String"/>
-	<parameter name="semAgno" class="java.lang.String"/>
-	<parameter name="facultad" class="java.lang.String"/>
-	<field name="id.cacRut" class="java.lang.Integer"/>
-	<field name="aluCar.alumno.aluPaterno" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluMaterno" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluNombre" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluDv" class="java.lang.String"/>
-	<field name="id.cacCodCar" class="java.lang.Integer"/>
-	<field name="nota" class="java.lang.String"/>
-	<field name="situacion" class="java.lang.String"/>
-	<field name="aluCar.alumno.nombre" class="java.lang.String"/>
-	<variable name="aprobados" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[($F{situacion}.equals("A")?1:0)]]></variableExpression>
-	</variable>
-	<variable name="reprobados" class="java.lang.Integer" calculation="Sum">
-		<variableExpression><![CDATA[(($F{situacion}.trim()).equals("R")?1:0)]]></variableExpression>
-	</variable>
-	<variable name="promedio" class="java.lang.Float" calculation="Average">
-		<variableExpression><![CDATA[Float.valueOf($F{nota}.replace(",",".")).floatValue()]]></variableExpression>
-	</variable>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="1" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="185" splitType="Stretch">
-			<rectangle radius="0">
-				<reportElement uuid="464e0b58-88e9-433e-bf15-e5d1b2423491" x="59" y="84" width="467" height="20"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement uuid="5fb16f0f-b70f-4130-93c0-dc61396f2e6a" x="54" y="5" width="229" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<text><![CDATA[UNIVERSIDAD DE SANTIAGO DE CHILE ]]></text>
-			</staticText>
-			<image>
-				<reportElement uuid="dcb09518-925f-4707-9e90-f85245ba3517" x="14" y="7" width="40" height="41"/>
-				<imageExpression><![CDATA[$P{logoUsach}]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement uuid="eef5099b-8958-4778-85ea-45bedf2b6faa" x="59" y="107" width="48" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PROFESOR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="af4ae208-c588-4540-8018-c3c1fd897fae" x="208" y="61" width="124" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ACTA DE CALIFICACION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="4561a464-7487-44c6-a238-8017cc98eaeb" x="54" y="34" width="193" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[REGISTRO CURRICULAR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="46f334b5-27c5-4d32-9968-b3998253605a" x="65" y="84" width="32" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CURSO]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="d4428874-f135-4d9e-8a98-9b82d0d1d4f5" x="98" y="84" width="416" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{nombreCurso}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="ebfb0950-a75e-47f5-890a-9e85ff890eca" x="108" y="107" width="419" height="20"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{profesor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="6bf4f11c-72e1-45f1-86ce-a158bb5edec7" x="484" y="5" width="43" height="14"/>
-				<textElement textAlignment="Right">
-					<font fontName="Tahoma" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{folio}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="e78f2f18-5824-453e-aa0b-b98d421cf169" x="274" y="162" width="253" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[Firma Profesor o Jefe de Carrera]]></text>
-			</staticText>
-			<line>
-				<reportElement uuid="9f2a177d-bb47-4f78-9b1c-ca451657f428" x="274" y="161" width="253" height="1"/>
-			</line>
-			<textField>
-				<reportElement uuid="484f0aee-747d-4a9a-aff8-69515893d0ac" x="332" y="61" width="115" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{tipoActa}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="f151b0eb-f098-4201-8b7b-6a54304f1592" x="455" y="5" width="29" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Folio]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="9b9972a8-402e-434c-aa83-6cc05c260dae" x="287" y="34" width="240" height="14"/>
-				<textElement textAlignment="Right">
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{semAgno}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="c1f4a15b-233f-4ccd-a914-2cbd44ec058a" x="54" y="22" width="229" height="14"/>
-				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{facultad}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="43" splitType="Stretch">
-			<rectangle radius="0">
-				<reportElement uuid="d10f086f-33bb-4fc5-8f0e-b24ec65f668b" x="59" y="2" width="468" height="40"/>
-				<graphicElement>
-					<pen lineWidth="0.5"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement uuid="7ae82d5f-ce53-42e2-916b-9879c1ffc865" style="acta" mode="Transparent" x="328" y="2" width="68" height="40" forecolor="#000000" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[RUT]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="e790a80f-14dc-4110-ab30-e4bdd90488c1" style="acta" x="396" y="2" width="49" height="40"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CARRERA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="6fc35e77-51d0-4fc9-accb-d10493db72f1" style="acta" x="445" y="2" width="82" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CALIFICACION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="e9d417dc-02eb-4daf-8027-c0ac5d4e4cbd" style="acta" x="445" y="22" width="29" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[FINAL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="66360897-0108-4c48-a095-1dcddf833d24" style="acta" x="474" y="22" width="53" height="20"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[CONDICION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="b01c7d09-3480-463b-a667-1025c813b562" style="acta" mode="Transparent" x="59" y="2" width="269" height="40" backcolor="#FFFFFF"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[NOMBRE]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="14" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="fa3896c8-e8c8-444a-aae5-89b7e406e6fe" x="382" y="1" width="4" height="12"/>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[-]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="0999cd76-cc54-4c5e-9b72-af9a0296f1d5" style="acta" x="59" y="1" width="16" height="12"/>
-				<textElement textAlignment="Right">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="a31a9ab6-6e0e-4a40-9385-4ca2cc2f31c3" style="acta" x="329" y="1" width="52" height="12"/>
-				<textElement textAlignment="Right">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{id.cacRut}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="f27cfa1c-2ddc-44c8-9746-03d9701ca16a" style="acta" x="387" y="1" width="8" height="12"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{aluCar.alumno.aluDv}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="4731960d-3f01-4fcc-8865-a4795fba1b8d" style="acta" x="397" y="1" width="47" height="12"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{id.cacCodCar}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="f174db50-d5db-4c91-bc9e-04bf599bb547" style="acta" x="446" y="1" width="27" height="12"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="94ec5fce-89ed-49d5-9007-ac3a26c6e9d5" style="acta" x="475" y="1" width="52" height="12"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{situacion}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="a04404b8-390c-430d-a37a-9f7a56e48183" style="acta" x="77" y="1" width="250" height="12"/>
-				<textElement>
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{aluCar.alumno.nombre}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band height="3" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="28">
-			<textField>
-				<reportElement uuid="a7ace0dc-c75b-4d1d-839a-68fd99d8e135" x="398" y="2" width="129" height="14"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement uuid="dc31d78a-0229-41d5-a901-2b686decb6c0" x="99" y="2" width="13" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="a0067bed-81db-4b12-ae37-5e88d27666d4" x="59" y="2" width="38" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
-	<summary>
-		<band height="31" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="37d341aa-0233-4cfb-9463-1da053a7f652" x="214" y="9" width="60" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[REPROBADOS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement uuid="81911da6-1a78-4f41-8ac6-c1db6a030717" x="392" y="9" width="52" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[PROMEDIO]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="87023688-d7be-4b8b-80ef-ec992a158abd" style="acta" x="123" y="9" width="20" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{aprobados}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="f3cabcc7-17ad-4d63-a4d7-6b884d36205c" style="acta" x="446" y="9" width="27" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{promedio}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="bc366134-659e-4c7e-bb52-6680b778170f" x="59" y="9" width="62" height="14"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[APROBADOS]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="dc1bd80b-812f-4407-b239-d0d8746afe2f" style="acta" x="276" y="9" width="20" height="14"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{reprobados}]]></textFieldExpression>
-			</textField>
-		</band>
-	</summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="OficinaCurricularActa" pageWidth="572" pageHeight="752" whenNoDataType="AllSectionsNoDetail"
+              columnWidth="572" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0"
+              uuid="4b10542f-7b7f-43ce-a70c-8e844289b4c1">
+    <property name="ireport.zoom" value="3.0"/>
+    <property name="ireport.x" value="37"/>
+    <property name="ireport.y" value="0"/>
+    <style name="alternateStyle" backcolor="#EEEEEE">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+            <style backcolor="#FFFFFF"/>
+        </conditionalStyle>
+    </style>
+    <style name="acta">
+        <box leftPadding="1" rightPadding="1">
+            <pen lineWidth="0.15"/>
+            <topPen lineWidth="0.15"/>
+            <leftPen lineWidth="0.15"/>
+            <bottomPen lineWidth="0.15"/>
+            <rightPen lineWidth="0.15"/>
+        </box>
+    </style>
+    <parameter name="fecha" class="java.lang.String"/>
+    <parameter name="logoUsach" class="java.lang.String"/>
+    <parameter name="profesor" class="java.lang.String"/>
+    <parameter name="nombreCurso" class="java.lang.String"/>
+    <parameter name="folio" class="java.lang.Integer"/>
+    <parameter name="tipoActa" class="java.lang.String"/>
+    <parameter name="semAgno" class="java.lang.String"/>
+    <parameter name="facultad" class="java.lang.String"/>
+    <field name="id.cacRut" class="java.lang.Integer"/>
+    <field name="aluCar.alumno.aluPaterno" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluMaterno" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluNombre" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluDv" class="java.lang.String"/>
+    <field name="id.cacCodCar" class="java.lang.Integer"/>
+    <field name="nota" class="java.lang.String"/>
+    <field name="situacion" class="java.lang.String"/>
+    <field name="aluCar.alumno.nombre" class="java.lang.String"/>
+    <variable name="aprobados" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[($F{situacion}.equals("A")?1:0)]]></variableExpression>
+    </variable>
+    <variable name="reprobados" class="java.lang.Integer" calculation="Sum">
+        <variableExpression><![CDATA[(($F{situacion}.trim()).equals("R")?1:0)]]></variableExpression>
+    </variable>
+    <variable name="promedio" class="java.lang.Float" calculation="Average">
+        <variableExpression><![CDATA[Float.valueOf($F{nota}.replace(",",".")).floatValue()]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="1" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="185" splitType="Stretch">
+            <rectangle radius="0">
+                <reportElement uuid="464e0b58-88e9-433e-bf15-e5d1b2423491" x="59" y="84" width="467" height="20"/>
+                <graphicElement>
+                    <pen lineWidth="0.5"/>
+                </graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement uuid="5fb16f0f-b70f-4130-93c0-dc61396f2e6a" x="54" y="5" width="229" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" isBold="true"/>
+                </textElement>
+                <text><![CDATA[UNIVERSIDAD DE SANTIAGO DE CHILE ]]></text>
+            </staticText>
+            <image>
+                <reportElement uuid="dcb09518-925f-4707-9e90-f85245ba3517" x="14" y="7" width="40" height="41"/>
+                <imageExpression><![CDATA[$P{logoUsach}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement uuid="eef5099b-8958-4778-85ea-45bedf2b6faa" x="59" y="107" width="48" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[PROFESOR]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="af4ae208-c588-4540-8018-c3c1fd897fae" x="208" y="61" width="124" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ACTA DE CALIFICACION]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="4561a464-7487-44c6-a238-8017cc98eaeb" x="54" y="34" width="193" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[REGISTRO CURRICULAR]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="46f334b5-27c5-4d32-9968-b3998253605a" x="65" y="84" width="32" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CURSO]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="d4428874-f135-4d9e-8a98-9b82d0d1d4f5" x="98" y="84" width="416" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{nombreCurso}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="ebfb0950-a75e-47f5-890a-9e85ff890eca" x="108" y="107" width="419" height="20"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{profesor}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="6bf4f11c-72e1-45f1-86ce-a158bb5edec7" x="484" y="5" width="43" height="14"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Tahoma" size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{folio}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="e78f2f18-5824-453e-aa0b-b98d421cf169" x="274" y="162" width="253" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <text><![CDATA[Firma Profesor o Jefe de Carrera]]></text>
+            </staticText>
+            <line>
+                <reportElement uuid="9f2a177d-bb47-4f78-9b1c-ca451657f428" x="274" y="161" width="253" height="1"/>
+            </line>
+            <textField>
+                <reportElement uuid="484f0aee-747d-4a9a-aff8-69515893d0ac" x="332" y="61" width="115" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{tipoActa}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="f151b0eb-f098-4201-8b7b-6a54304f1592" x="455" y="5" width="29" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Folio]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="9b9972a8-402e-434c-aa83-6cc05c260dae" x="287" y="34" width="240" height="14"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Tahoma" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{semAgno}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="c1f4a15b-233f-4ccd-a914-2cbd44ec058a" x="54" y="22" width="229" height="14"/>
+                <textElement>
+                    <font fontName="Tahoma" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{facultad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="43" splitType="Stretch">
+            <rectangle radius="0">
+                <reportElement uuid="d10f086f-33bb-4fc5-8f0e-b24ec65f668b" x="59" y="2" width="468" height="40"/>
+                <graphicElement>
+                    <pen lineWidth="0.5"/>
+                </graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement uuid="7ae82d5f-ce53-42e2-916b-9879c1ffc865" style="acta" mode="Transparent" x="328" y="2"
+                               width="68" height="40" forecolor="#000000" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[RUT]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="e790a80f-14dc-4110-ab30-e4bdd90488c1" style="acta" x="396" y="2" width="49"
+                               height="40"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CARRERA]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="6fc35e77-51d0-4fc9-accb-d10493db72f1" style="acta" x="445" y="2" width="82"
+                               height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CALIFICACION]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="e9d417dc-02eb-4daf-8027-c0ac5d4e4cbd" style="acta" x="445" y="22" width="29"
+                               height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[FINAL]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="66360897-0108-4c48-a095-1dcddf833d24" style="acta" x="474" y="22" width="53"
+                               height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CONDICION]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="b01c7d09-3480-463b-a667-1025c813b562" style="acta" mode="Transparent" x="59" y="2"
+                               width="269" height="40" backcolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[NOMBRE]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="14" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="fa3896c8-e8c8-444a-aae5-89b7e406e6fe" x="382" y="1" width="4" height="12"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <text><![CDATA[-]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="0999cd76-cc54-4c5e-9b72-af9a0296f1d5" style="acta" x="59" y="1" width="16"
+                               height="12"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="a31a9ab6-6e0e-4a40-9385-4ca2cc2f31c3" style="acta" x="329" y="1" width="52"
+                               height="12"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id.cacRut}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="f27cfa1c-2ddc-44c8-9746-03d9701ca16a" style="acta" x="387" y="1" width="8"
+                               height="12"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{aluCar.alumno.aluDv}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="4731960d-3f01-4fcc-8865-a4795fba1b8d" style="acta" x="397" y="1" width="47"
+                               height="12"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id.cacCodCar}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="f174db50-d5db-4c91-bc9e-04bf599bb547" style="acta" x="446" y="1" width="27"
+                               height="12"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="94ec5fce-89ed-49d5-9007-ac3a26c6e9d5" style="acta" x="475" y="1" width="52"
+                               height="12"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{situacion}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="a04404b8-390c-430d-a37a-9f7a56e48183" style="acta" x="77" y="1" width="250"
+                               height="12"/>
+                <textElement>
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{aluCar.alumno.nombre}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="3" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="28">
+            <textField>
+                <reportElement uuid="a7ace0dc-c75b-4d1d-839a-68fd99d8e135" x="398" y="2" width="129" height="14"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement uuid="dc31d78a-0229-41d5-a901-2b686decb6c0" x="99" y="2" width="13" height="14"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="a0067bed-81db-4b12-ae37-5e88d27666d4" x="59" y="2" width="38" height="14"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="31" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="37d341aa-0233-4cfb-9463-1da053a7f652" x="214" y="9" width="60" height="14"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[REPROBADOS]]></text>
+            </staticText>
+            <staticText>
+                <reportElement uuid="81911da6-1a78-4f41-8ac6-c1db6a030717" x="392" y="9" width="52" height="14"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[PROMEDIO]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="87023688-d7be-4b8b-80ef-ec992a158abd" style="acta" x="123" y="9" width="20"
+                               height="14"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{aprobados}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="f3cabcc7-17ad-4d63-a4d7-6b884d36205c" style="acta" x="446" y="9" width="27"
+                               height="14"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{promedio}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="bc366134-659e-4c7e-bb52-6680b778170f" x="59" y="9" width="62" height="14"/>
+                <textElement verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[APROBADOS]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="dc1bd80b-812f-4407-b239-d0d8746afe2f" style="acta" x="276" y="9" width="20"
+                               height="14"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="Tahoma" size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{reprobados}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
 </jasperReport>

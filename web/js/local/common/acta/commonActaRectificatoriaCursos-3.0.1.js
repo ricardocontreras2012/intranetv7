@@ -6,14 +6,14 @@ function getActa(pos)
 }
 
 $(document).ready(function () {
-    var msgError = $("#msg-dummy-error-div").text().replace(/(\r\n|\n|\r)/g, "");
+    const msgError = $("#msg-dummy-error-div").text().replace(/(\r\n|\n|\r)/g, "");
     if (msgError !== '')
     {
         $("#msg-result-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
         $("#result").modal('show');
     }
 
-    var msgOK = $("#msg-dummy-ok-div").text().replace(/(\r\n|\n|\r)/g, "");
+    const msgOK = $("#msg-dummy-ok-div").text().replace(/(\r\n|\n|\r)/g, "");
     if (msgOK !== '')
     {
         $("#msg-result-div").html("<div class='actionMessage'><ul><li><span>" + msgOK + "</li></ul></span></div>");

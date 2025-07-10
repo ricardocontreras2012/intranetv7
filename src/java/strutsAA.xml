@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 
 <!--
     Document   : strutsAreaApoyo.xml
@@ -12,7 +12,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -59,7 +61,8 @@
     <package name="intranetAreaApoyoActions" extends="intranetAreaApoyoInterceptors">
 
         <result-types>
-            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="myStream" default="false"
+                         class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
         <action name="AreaApoyoLogin" class="action.areaapoyo.AreaApoyoLoginAction" method="execute">
@@ -75,6 +78,6 @@
         <action name="AreaApoyoLoginBienvenida" class="action.common.CommonDummyAction" method="execute">
             <result name="success">/jsp/users/areaApoyo/id/areaApoyoIdBienvenida.jsp
             </result>
-        </action>        
+        </action>
     </package>
 </struts>

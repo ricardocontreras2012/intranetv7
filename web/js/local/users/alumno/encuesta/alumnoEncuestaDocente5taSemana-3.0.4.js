@@ -2,7 +2,7 @@
 
 function validaEncuesta() {
 
-    var seleccionado = true, pregunta;
+    let seleccionado = true, pregunta;
 
     $("#encuesta-form input[type=radio]").each(function() {
         if ($(this).attr("name").startsWith("P_")) {
@@ -15,7 +15,7 @@ function validaEncuesta() {
     });
 
     if (!seleccionado) {
-        var pos = pregunta.lastIndexOf("_");
+        const pos = pregunta.lastIndexOf("_");
 
         $("#msg-div").html('Falta responder pregunta ' + pregunta.substring(pos + 1));
         $("#msg").modal('show');

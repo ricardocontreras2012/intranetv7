@@ -53,24 +53,24 @@ $(document).ready(function () {
 
     $("#rutdvEmpleador").change(changeRutEmpleador);
     jQuery.validator.addMethod("rutdvEmpleador", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutdvEmpleador", "rut"));
     }, "RUN-DV inválido.");
 
 
     $("#rutdvEmpleador").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
     
     $("#rutdvAutoriza").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
 
     $("#rutdvAutoriza").change(changeRutAutoriza);
     jQuery.validator.addMethod("rutdvAutoriza", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutdvAutoriza", "rut"));
     }, "RUN-DV inválido.");
 

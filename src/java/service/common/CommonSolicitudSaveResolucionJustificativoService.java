@@ -20,6 +20,7 @@ import infrastructure.util.HibernateUtil;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
 import infrastructure.util.MailUtil;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCursoUtil;
 import java.util.Map;
 import java.util.Set;
@@ -111,7 +112,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
                 DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy");
         String body = "La solicitud de justificación por inasistencia a PEP del curso " +curso.getNombreCorto()+ " "+
                 ("1".equals(alumno.getAluSexo())?" la alumna ":"del alumno ")+
-                alumno.getNombre() + " correspondiente al periodo del "+DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
+                CommonAlumnoUtil.getNombreSocial(alumno) + " correspondiente al periodo del "+DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
 
         CommonCursoUtil.getProfesores(curso).stream()
                 .map(Profesor::getProfEmail)

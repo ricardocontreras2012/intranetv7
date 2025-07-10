@@ -1,6 +1,5 @@
 function showConfirm()
-{
-    
+{    
     if ($("#certificacion-form").validate().form() === true)
     {   
         $("#tram-div").html($("#tramite option:selected").text());

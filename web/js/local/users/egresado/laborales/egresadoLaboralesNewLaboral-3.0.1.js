@@ -19,7 +19,7 @@ function  modalEmpleadores() {
 
 function modalEmpleadoresAceptar()
 {
-    var $aux = $("input[name='aemCorrel']:checked").val();
+    const $aux = $("input[name='aemCorrel']:checked").val();
     $("#correlAluEmp").val($aux);
     $("#rutEmpleador").val($("#rut_" + $aux).val());
     $("#desdeMesEmpresa").val($("#dme_" + $aux).val());
@@ -55,7 +55,7 @@ function infoEmpleador() {
 
 $(document).ready(function () {
 
-    var aux = $(".aemCorrel");
+    const aux = $(".aemCorrel");
     if (aux.length >= 1)
         modalEmpleadores();
     //Handlers
@@ -65,8 +65,8 @@ $(document).ready(function () {
     //$("#open-modal-button").click(modalEmpleador);
     //$("#search-name-button").click(buscarNombre);
 
-    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    for (var month = 0; month < monthNames.length; month++) {
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    for (let month = 0; month < monthNames.length; month++) {
         $('#desdeMesEmpresa').append('<option value="' + parseInt(month + 1) + '">' + monthNames[month] + '</option>');
         $('#hastaMesEmpresa').append('<option value="' + parseInt(month + 1) + '">' + monthNames[month] + '</option>');
         $('#desdeMes').append('<option value="' + parseInt(month + 1) + '">' + monthNames[month] + '</option>');
@@ -103,7 +103,7 @@ $(document).ready(function () {
     });
 
     $("#rutEmpleador").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
     
@@ -196,7 +196,7 @@ $(document).ready(function () {
         }
     }
     $.validator.addMethod("rutdv", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutEmpleador", "rut"));
     }, "Rut-Dv inválido");
     $.validator.addMethod("rutEmpleadorCorrecta", rutEmpleadorCorrecta, "Campo obligatorio.");

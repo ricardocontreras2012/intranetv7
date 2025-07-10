@@ -1,46 +1,57 @@
 function showActividad(pos) {
     $("#pos").val(pos);
-    var dataString = $("#actividades-form").serialize();
+    const dataString = $("#actividades-form").serialize();
     $('#main-content-iframe', window.parent.document).attr("src", 'TeleTrabajoGetTareas?'+ dataString);
 }
 
 $(document).ready(function () {
-    
-    var dt = $("#actividades-table").DataTable({
-        ajax: 'TeleTrabajoDataTableActividades?key='+$("#key").val(),
+
+    const dt = $("#actividades-table").DataTable({
+        ajax: 'TeleTrabajoDataTableActividades?key=' + $("#key").val(),
         columnDefs: [
-            { targets: 0, data: null, defaultContent: "Tiene una actividad programada para: ", title: "Actividades:", orderable: false, render: function(data, type)
-                {
+            {
+                targets: 0,
+                data: null,
+                defaultContent: "Tiene una actividad programada para: ",
+                title: "Actividades:",
+                orderable: false,
+                render: function (data, type) {
                     return type === 'display'
-                    ? '<a>' + 'Tiene una actividad programada para: ' + '</a>'
-                    : data;
-                }, createdCell: function(td, cellData, rowData, row, col)
-                {
+                        ? '<a>' + 'Tiene una actividad programada para: ' + '</a>'
+                        : data;
+                },
+                createdCell: function (td, cellData, rowData, row, col) {
                     $(td).css('font-weight', 'normal');
-                }},
-            { targets: 1, data: "id.formattedStandardDate", title: "Fecha", orderable: false, render: function(data, type)
-                {
+                }
+            },
+            {
+                targets: 1,
+                data: "id.formattedStandardDate",
+                title: "Fecha",
+                orderable: false,
+                render: function (data, type) {
                     return type === 'display'
-                    ? '<a>' + data + '</a>'
-                    : data;
-                }, createdCell: function(td, cellData, rowData, row, col)
-                {
+                        ? '<a>' + data + '</a>'
+                        : data;
+                },
+                createdCell: function (td, cellData, rowData, row, col) {
                     $(td).css('font-weight', 'normal');
-                }},
-            { targets: 2, data: "atelEstado", title: "Estado", orderable: false}
+                }
+            },
+            {targets: 2, data: "atelEstado", title: "Estado", orderable: false}
         ],
         processing: true,
         serverSide: true,
         drawCallback: function (settings) {
-            var api = new $.fn.dataTable.Api(settings);
-            var data = api.ajax.json();
+            const api = new $.fn.dataTable.Api(settings);
+            const data = api.ajax.json();
 
-            var length = data.length;
-            var start = data.start;
-            var searchValue = data.searchValue;
-            var tipoOrder = data.tipoOrder;
-            var nombreDataColumnaActual = data.nombreDataColumnaActual;
-            
+            const length = data.length;
+            const start = data.start;
+            const searchValue = data.searchValue;
+            const tipoOrder = data.tipoOrder;
+            const nombreDataColumnaActual = data.nombreDataColumnaActual;
+
             $("#length").val(length);
             $("#start").val(start);
             $("#searchValue").val(searchValue);
@@ -48,10 +59,10 @@ $(document).ready(function () {
             $("#nombreDataColumnaActual").val(nombreDataColumnaActual);
         }
     });
-    
-    
+
+
     $('#actividades-table tbody').on('click', 'a', function () {
-        var pos = dt.row($(this).parents('tr')).index(); // $(this).text();
+        const pos = dt.row($(this).parents('tr')).index(); // $(this).text();
         showActividad(pos);
     });
 });

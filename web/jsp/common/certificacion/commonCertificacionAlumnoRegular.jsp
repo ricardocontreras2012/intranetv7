@@ -40,7 +40,7 @@
         <s:form id="certificacion-form" action="#" method="post" theme="bootstrap">
             <table>
                 <tr>
-                    <td align="left">
+                    <td style="text-align: left;">
                         <select id="periodo" name="periodo" class="form-control">
                             <s:iterator value="#session.genericSession.getWorkSession(key).matriculaList" status="row">
                                 <option value="<s:property value="#row.count -1"/>" class="form-control"><s:property value="id.mathSem"/>/<s:property value="id.mathAgno"/></option>
@@ -50,7 +50,7 @@
                 </tr>
 
                 <tr>
-                    <td align="left">
+                    <td style="text-align: left;">
                         <s:select id="tramite"
                                   name="tramite"
                                   headerKey=""

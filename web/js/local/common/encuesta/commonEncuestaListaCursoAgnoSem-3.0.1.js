@@ -40,7 +40,7 @@ $(document).ready(function () {
     $("#all-button").click(printAll);
     $("#search-button").click(searchCursos);
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         showEncuesta(field_name.substr(field_name.indexOf("_") + 1));
     });
     //

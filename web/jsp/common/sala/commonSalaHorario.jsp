@@ -24,7 +24,7 @@
 %>
 
 <div class="title-div">
-    <s:text name="label.title.sala"/> <%=sala.getSalaNum() + " (" + sem + '/' + agno + ')'%>
+    <s:text name="label.title.sala"/> <%=sala.getSalaNum() + " (" + sem + "/" + agno + ")"%>
 </div>
 
 <button id="print-button" title="Imprimir" type="button" class="btn btn-light" ><span class="fa fa-print" aria-hidden="true"></span>

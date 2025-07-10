@@ -38,8 +38,8 @@ function deleteMessage() {
 
 function removeMsgs() {
     $.blockUI();
-    var form = $("#message-iframe").contents().find("#received-messages-form");
-    var actionName = "CommonMensajeRemoveReceivedMessages";
+    let form = $("#message-iframe").contents().find("#received-messages-form");
+    let actionName = "CommonMensajeRemoveReceivedMessages";
 
     if ($("#message-iframe").contents().find("#tipo").val() === "S") {
         actionName = "CommonMensajeRemoveSentMessages";

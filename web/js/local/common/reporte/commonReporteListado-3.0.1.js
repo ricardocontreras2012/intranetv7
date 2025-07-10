@@ -42,7 +42,7 @@ $(document).ready(function () {
     $("#export-button").click(exportReports);
     $("#delete-button").click(deleteReports);
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         viewReport(fieldName.substr(fieldName.indexOf("_") + 1));
     });
 

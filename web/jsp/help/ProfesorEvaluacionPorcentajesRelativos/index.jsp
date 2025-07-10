@@ -4,9 +4,8 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <meta charset="utf-8" />      <title>Porcentajes Relativos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">     
+        <title>Porcentajes Relativos</title>
         <link rel="stylesheet" href="/intranetv7/css/local/local-help.css">
         <link rel="stylesheet" href="/intranetv7/css/lightbox/lightbox.min.css">
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
@@ -38,6 +37,7 @@
             <p>Ud. puede cambiar su estructura las veces que estime conveniente e incluso cambiar a la modalidad relativa presionando el botón Relativa</p>
             <p>Puede agregar por ejemplo un nuevo control presionando el botón Nuevo dentro de la sección Control de su estructura de evaluaciones.</p>
             <p>El botón Planilla le permite obtener una visión completa de todas las evaluaciones con las respectivas calificaciones de los alumnos del curso.</p>
+        </div>
     </body>
     <script type="text/javascript" src="/intranetv7/js/lightbox/lightbox.js"></script>
 </html>

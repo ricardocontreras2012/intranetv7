@@ -42,7 +42,7 @@ $(document).ready(function () {
     $("#close-button").click(noTerminarActividad);
 
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         getTareas(fieldName.substr(fieldName.indexOf("_") + 1));
     });
     

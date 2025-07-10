@@ -1,7 +1,7 @@
 
 function getHorario(posValue) {
-    var agno = $("#agno").val();
-    var sem = $("#sem").val();
+    const agno = $("#agno").val();
+    const sem = $("#sem").val();
 
     $.get('CommonSalaGetHorario', {
         'key': $("#key").val(),

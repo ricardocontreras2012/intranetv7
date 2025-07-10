@@ -26,7 +26,7 @@ $(document).ready(function () {
     $("#delete-button").click(confirmar);
  
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         getConvenio(field_name.substr(field_name.indexOf("_") + 1));
     });
 

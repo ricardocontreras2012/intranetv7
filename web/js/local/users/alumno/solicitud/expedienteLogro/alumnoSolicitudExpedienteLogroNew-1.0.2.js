@@ -10,10 +10,12 @@ $(document).ready(function () {
     $("#save-button").click(grabar);
     $("#save-personales-button").click(savePersonales);
     $("#caratula-button").click(generaCaratula);
+    $("#genero-button").click(generaGenero);
     $("#pago-arancel-button").click(generaPagoArancel);
-    $("#aceptarRevision").change(function () {
-        $("#expediente-fieldset").prop("disabled", !this.checked);
-    });
+    $("#aceptarRevision").change(activarSavePersonales);
+    /*$("#aceptarRevision").change(function () {
+     $("#expediente-fieldset").prop("disabled", !this.checked);
+     });*/
 
     $("#personales-form").validate({
         rules: {
@@ -64,6 +66,25 @@ $(document).ready(function () {
                 alert("Archivo subido exitosamente.");
                 $(fileInput).attr("data-upload-success", "true");
                 $(fileInput).addClass("is-valid");
+
+                /* verifico si activo boton*/
+                let allUploaded = true;
+                $(".upload-input").each(function () {
+                    const isUploaded = $(this).attr("data-upload-success") === "true";
+                    if (!isUploaded) {
+                        allUploaded = false;
+                        return false; // corta el loop si encuentra uno sin subir
+                    }
+                });
+                if (!allUploaded) {
+                    console.log("Disabled: true");
+                } else {
+                    console.log("Disabled: false");
+                    $('#btn-next-step-4').prop('disabled', false);
+                }
+                /* fin verificacion */
+
+
             },
             error: function () {
                 $(fileInput).attr("data-upload-success", "false");
@@ -72,35 +93,11 @@ $(document).ready(function () {
         });
     });
 
-    $('#personales-form').on('submit', function (e) {
-        e.preventDefault(); // Evita el envío tradicional
-
-        // Validar usando jQuery Validate
-        if ($(this).validate().form()) {
-            // Tomar datos del formulario
-            var formData = $(this).serialize(); // Codifica los campos del form (como query string)
-
-            $.ajax({
-                url: 'AlumnoMisDatosSave', // URL de destino
-                type: 'POST', // Método HTTP
-                data: formData, // Datos del formulario
-                success: function (respuesta) {
-                    // Aquí haces algo con la respuesta del servidor
-                    console.log('Enviado correctamente');
-                    console.log(respuesta);
-                    alert('Datos guardados correctamente');
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error en la solicitud AJAX:', error);
-                    alert('Ocurrió un error al guardar los datos');
-                }
-            });
-        }
-    });
 
     function mostrarPaso(n) {
         $('.paso').removeClass('activo');
         $('.paso[data-step="' + n + '"]').addClass('activo');
+        window.scrollTo(0, 0);
     }
 
     $('.siguiente').click(function () {
@@ -115,15 +112,18 @@ $(document).ready(function () {
 });
 
 function generaCaratula() {
-    $("#expediente-form").attr("action", "AlumnoSolicitudExpedienteGeneraCaratula");
-    $("#expediente-form").submit();
+    $("#get-docs-form").attr("action", "AlumnoSolicitudExpedienteGeneraCaratula");
+    $("#get-docs-form").submit();
 }
 
 function generaPagoArancel() {
-    $("#expediente-form").attr("action", "AlumnoSolicitudExpedienteGeneraPagoArancel");
-    $("#expediente-form").submit();
+    $("#get-docs-form").attr("action", "AlumnoSolicitudExpedienteGeneraPagoArancel");
+    $("#get-docs-form").submit();
 }
-
+function generaGenero() {
+    $("#get-docs-form").attr("action", "AlumnoSolicitudExpedienteGeneraSolicitudGenero");
+    $("#get-docs-form").submit();
+}
 function grabar() {
     let allUploaded = true;
 
@@ -138,9 +138,17 @@ function grabar() {
     if (!allUploaded) {
         alert("Debes subir todos los documentos requeridos antes de continuar.");
         return;
+    } else {
+        //console.log("Disabled: false");
+        $('#btn-next-step-4').prop('disabled', false);
     }
 
     $("#solicitud-form").attr("action", "AlumnoSolicitudExpedienteAddSolicitud").attr("target", "_self").submit();
+}
+
+function activarSavePersonales() {
+    //console.log('Grabar');
+    $("#save-personales-button").prop("disabled", !this.checked);
 }
 
 function savePersonales() {
@@ -164,10 +172,11 @@ function savePersonales() {
                 if (respuesta.success) {
                     alert('Formulario enviado correctamente');
                     console.log('Respuesta del servidor:', respuesta);
-                    // Aquí puedes actualizar la UI, redirigir, etc.
+                    $('#btn-next-step-2').prop('disabled', false);
                 } else {
                     alert('Error: ' + respuesta.message);
                     console.warn('Respuesta del servidor:', respuesta);
+                    $('#btn-next-step-2').prop('disabled', true);
                 }
             },
             error: function (xhr, status, error) {

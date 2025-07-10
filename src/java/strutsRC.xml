@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 
 <!--
     Document   : strutsRegistradorCurricular.xml
@@ -12,7 +12,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -54,14 +56,16 @@
     <package name="intranetRegistradorCurricularActions" extends="intranetRegistradorCurricularInterceptors">
 
         <result-types>
-            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="myStream" default="false"
+                         class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="RegistradorCurricularLogin" class="action.registradorcurricular.RegistradorCurricularLoginAction" method="execute">
+        <action name="RegistradorCurricularLogin" class="action.registradorcurricular.RegistradorCurricularLoginAction"
+                method="execute">
             <result name="success" type="redirectAction">
-            <param name="actionName">CommonLoginStack</param>
-            <param name="key">${key}</param>
-        </result>
+                <param name="actionName">CommonLoginStack</param>
+                <param name="key">${key}</param>
+            </result>
         </action>
         <action name="RegistradorCurricularLoginHome" class="action.common.CommonDummyAction" method="execute">
             <result name="success">/jsp/users/registradorCurricular/id/registradorCurricularIdHomePage.jsp
@@ -79,48 +83,49 @@
                 /jsp/users/registradorCurricular/certificacion/registradorCurricularCertificadosGetGlosa.jsp
             </result>
         </action>
-        
+
         <action name="RegistradorCurricularCertificadosEmitirGlosa"
-                class="action.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaAction" method="execute">
+                class="action.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaAction"
+                method="execute">
             <result name="C1" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirAlumnoRegular</param>
-                <param name="correl">${correl}</param>              
+                <param name="correl">${correl}</param>
             </result>
             <result name="C2" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirNoImpedimentos</param>
-                <param name="correl">${correl}</param>              
-            </result>             
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C3" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirAlumnoEgresado</param>
-                <param name="correl">${correl}</param>              
-            </result>            
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C4" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
-                <param name="correl">${correl}</param>              
-            </result>            
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C5" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
-                <param name="correl">${correl}</param>              
-            </result> 
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C6" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirRankEgresado</param>
-                <param name="correl">${correl}</param>              
-            </result> 
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C7" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirRankRegular</param>
-                <param name="correl">${correl}</param>              
-            </result>            
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C8" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
-                <param name="correl">${correl}</param>              
-            </result>            
+                <param name="correl">${correl}</param>
+            </result>
             <result name="C9" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirLogroEnTramite</param>
-                <param name="correl">${correl}</param>              
-            </result>            
+                <param name="correl">${correl}</param>
+            </result>
             <result name="I3" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirInformeCalificaciones</param>
-                <param name="correl">${correl}</param>              
+                <param name="correl">${correl}</param>
             </result>
         </action>
 
@@ -204,7 +209,7 @@
             <result name="success">
                 /jsp/users/registradorCurricular/reincorporacion/registradorCurricularReincorporacionNomina.jsp
             </result>
-        </action>       
+        </action>
 
         <action name="RegistradorCurricularReincorporacionEliminadoReprintForm"
                 class="action.common.CommonDummyAction" method="execute">
@@ -213,53 +218,62 @@
             </result>
         </action>
         <action name="RegistradorCurricularReincorporacionEliminadoReprint"
-                class="action.registradorcurricular.RegistradorCurricularReincorporacionEliminadoReprintAction" method="execute">
+                class="action.registradorcurricular.RegistradorCurricularReincorporacionEliminadoReprintAction"
+                method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp</result>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
-        <action name="RegistradorCurricularCertificacionEmitirISO27001" class="action.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Action" method="execute">
+        <action name="RegistradorCurricularCertificacionEmitirISO27001"
+                class="action.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Action"
+                method="execute">
             <result type="myStream"/>
         </action>
 
         <action name="RegistradorCurricularGetCartola" class="action.common.CommonAlumnoGetCalificacionesAction"
                 method="execute">
-            <result name="success">/jsp/users/registradorCurricular/calificacion/registradorCurricularCalificacionesCartola.jsp
+            <result name="success">
+                /jsp/users/registradorCurricular/calificacion/registradorCurricularCalificacionesCartola.jsp
             </result>
         </action>
-        
+
         <action name="RegistradorCurricularAddEquivalencia" class="action.common.CommonDummyAction" method="execute">
             <result name="success">
                 /jsp/users/registradorCurricular/equivalencia/registradorCurricularEquivalenciaConsola.jsp
             </result>
         </action>
-        
+
         <action name="RegistradorCurricularSolicitudReprintForm"
                 class="action.common.CommonDummyAction" method="execute">
             <result name="success">
                 /jsp/users/registradorCurricular/solicitud/registradorCurricularSolicitudReprint.jsp
             </result>
         </action>
-        <action name="RegistradorCurricularSolicitudReprint" class="action.registradorcurricular.RegistradorCurricularSolicitudReprintAction"
+        <action name="RegistradorCurricularSolicitudReprint"
+                class="action.registradorcurricular.RegistradorCurricularSolicitudReprintAction"
                 method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp</result>
         </action>
-        
-        <action name="RegistradorCurricularMencionGet" class="action.registradorcurricular.RegistradorCurricularMencionGetAction"
+
+        <action name="RegistradorCurricularMencionGet"
+                class="action.registradorcurricular.RegistradorCurricularMencionGetAction"
                 method="execute">
             <result name="success">/jsp/users/registradorCurricular/mencion/registradorCurricularMencionGet.jsp</result>
         </action>
-        
-        <action name="RegistradorCurricularParametrosxMencionGet" class="action.registradorcurricular.RegistradorCurricularParametrosxMencionGetAction"
+
+        <action name="RegistradorCurricularParametrosxMencionGet"
+                class="action.registradorcurricular.RegistradorCurricularParametrosxMencionGetAction"
                 method="execute">
-            <result name="success">/jsp/users/registradorCurricular/mencion/registradorCurricularMencionView.jsp</result>
+            <result name="success">/jsp/users/registradorCurricular/mencion/registradorCurricularMencionView.jsp
+            </result>
         </action>
-        
-        <action name="RegistradorCurricularParametrosxMencionSave" class="action.registradorcurricular.RegistradorCurricularParametrosxMencionSaveAction"
+
+        <action name="RegistradorCurricularParametrosxMencionSave"
+                class="action.registradorcurricular.RegistradorCurricularParametrosxMencionSaveAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">RegistradorCurricularMencionGet</param>
                 <param name="key">${key}</param>
-                <param name="actionCall">RegistradorCurricularParametrosxMencionGet</param>              
+                <param name="actionCall">RegistradorCurricularParametrosxMencionGet</param>
             </result>
         </action>
 

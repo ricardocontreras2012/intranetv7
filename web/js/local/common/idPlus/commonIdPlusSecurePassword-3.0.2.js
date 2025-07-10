@@ -1,6 +1,4 @@
-
-
-var regex = new RegExp("^[a-zA-Z0-9@#\$%&+=_\-]$");
+const regex = new RegExp("^[a-zA-Z0-9@#\$%&+=_\-]$");
 
 function changePassword() {
     if (validatePwdStrength()) {
@@ -15,33 +13,33 @@ function changePassword() {
 
 function validatePwdStrength()
 {
-    var pwd = $('#passwdNueva').val();
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%&+=_\-])(?=.{10,})");
+    const pwd = $('#passwdNueva').val();
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%&+=_\-])(?=.{10,})");
     return strongRegex.test(pwd);
 }
 
 $(document).ready(function () {
     $("#save-button").click(changePassword);
 
-    $('#passwdNueva').bind("keypress", function (event) {
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    const regex = /^[a-zA-Z0-9@#$%&*]+$/; // Ejemplo de regex, ajusta según tus reglas
+
+    function validarEntrada(event) {
+        const key = event.key;
         if (!regex.test(key)) {
             event.preventDefault();
             return false;
         }
-    });
+        return true;
+    }
 
-    $('#passwdConfirm').bind("keypress", function (event) {
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
+    // Aplicar a ambos campos
+    $('#passwdNueva, #passwdConfirm').on('keypress', validarEntrada);
 
-    $('#passwdConfirm').bind('copy paste', function (e) {
+
+    $('#passwdNueva, #passwdConfirm').on('copy paste', function (e) {
         e.preventDefault();
     });
+
 
     $("#cambioPassword-form").validate({
         event: "blur",

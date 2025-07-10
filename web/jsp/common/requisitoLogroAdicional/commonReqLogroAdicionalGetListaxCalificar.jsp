@@ -47,7 +47,7 @@
                 <form id="acta-form" action="#" method="post">
                     <table style="width: 10%">
                         <tr>
-                            <td align="left">
+                            <td style="text-align: left;">
                                 <s:select id="trequisitoLogroAdicional"
                                           name="trequisitoLogroAdicional"
                                           headerKey="0"

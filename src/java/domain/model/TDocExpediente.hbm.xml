@@ -14,5 +14,8 @@
         <property name="tdeUser" type="string">
             <column name="TDE_USER" length="2"/>
         </property>
+        <property name="tdeTexto" type="string">
+            <column name="TDE_TEXTO" length="500"/>
+        </property>
     </class>
 </hibernate-mapping>

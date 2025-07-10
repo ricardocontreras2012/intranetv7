@@ -1,112 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Template" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b1fada0-5419-48f9-8234-c18266376a7c">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<style name="alternateStyle" backcolor="#EEEEEE">
-		<conditionalStyle>
-			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
-			<style backcolor="#FFFFFF"/>
-		</conditionalStyle>
-	</style>
-	<parameter name="nombreCurso" class="java.lang.String"/>
-	<parameter name="fecha" class="java.lang.String"/>
-	<parameter name="logoUsach" class="java.lang.String"/>
-	<parameter name="profesor" class="java.lang.String"/>
-	<parameter name="horario" class="java.lang.String"/>
-	<parameter name="salas" class="java.lang.String"/>
-	<parameter name="facultad" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluRut" class="java.lang.Integer"/>
-	<field name="aluCar.alumno.aluPaterno" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluMaterno" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluNombre" class="java.lang.String"/>
-	<field name="aluCar.alumno.aluDv" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="8" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band height="112" splitType="Stretch">
-			<staticText>
-				<reportElement uuid="f8455119-61ec-4d11-8b78-b843c1ea0d45" x="14" y="45" width="83" height="20"/>
-				<textElement>
-					<font fontName="Tahoma"/>
-				</textElement>
-				<text><![CDATA[Curso]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="68a536ed-a6c1-4832-b6dc-e059208fe9da" x="97" y="45" width="374" height="20"/>
-				<textElement>
-					<font fontName="Tahoma"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{nombreCurso}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="d3871ab8-cdbf-427a-864e-f1bcbf8fc3e9" x="693" y="14" width="45" height="14"/>
-				<textElement textAlignment="Right">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
-			</textField>
-			<textField evaluationTime="Report">
-				<reportElement uuid="83001cc4-4573-4663-b798-92f4c045b861" x="738" y="14" width="13" height="14"/>
-				<textElement textAlignment="Right">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement uuid="b3e12c04-5c86-47d8-a285-1773b44dce23" x="54" y="0" width="232" height="20"/>
-				<textElement>
-					<font fontName="Tahoma" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Universidad de Santiago de Chile]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="ba084781-2262-4208-9c71-265eea644829" x="618" y="0" width="133" height="14"/>
-				<textElement textAlignment="Right">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
-			</textField>
-			<image>
-				<reportElement uuid="7d53f6f4-e173-4d5d-b406-14087e741136" x="14" y="0" width="40" height="41"/>
-				<imageExpression><![CDATA[$P{logoUsach}]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement uuid="5f2aa491-e014-41d2-a633-48fc536dd829" x="14" y="65" width="83" height="20"/>
-				<textElement/>
-				<text><![CDATA[Profesor]]></text>
-			</staticText>
-			<textField>
-				<reportElement uuid="7c1e83b8-7a5c-4cf5-9b31-174bfce02234" x="97" y="65" width="374" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$P{profesor}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement uuid="0a173b97-d1bd-42a6-8b55-bcfcb1af7d42" x="54" y="20" width="232" height="21"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{facultad}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageHeader>
-	<columnHeader>
-		<band height="38" splitType="Stretch"/>
-	</columnHeader>
-	<detail>
-		<band height="12" splitType="Stretch"/>
-	</detail>
-	<columnFooter>
-		<band height="16" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="4" splitType="Stretch"/>
-	</pageFooter>
-	<summary>
-		<band height="6" splitType="Stretch"/>
-	</summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="Template" pageWidth="792" pageHeight="612" orientation="Landscape"
+              whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20"
+              bottomMargin="20" uuid="9b1fada0-5419-48f9-8234-c18266376a7c">
+    <property name="ireport.zoom" value="2.0"/>
+    <property name="ireport.x" value="0"/>
+    <property name="ireport.y" value="0"/>
+    <style name="alternateStyle" backcolor="#EEEEEE">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2 == 0)]]></conditionExpression>
+            <style backcolor="#FFFFFF"/>
+        </conditionalStyle>
+    </style>
+    <parameter name="nombreCurso" class="java.lang.String"/>
+    <parameter name="fecha" class="java.lang.String"/>
+    <parameter name="logoUsach" class="java.lang.String"/>
+    <parameter name="profesor" class="java.lang.String"/>
+    <parameter name="horario" class="java.lang.String"/>
+    <parameter name="salas" class="java.lang.String"/>
+    <parameter name="facultad" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluRut" class="java.lang.Integer"/>
+    <field name="aluCar.alumno.aluPaterno" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluMaterno" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluNombre" class="java.lang.String"/>
+    <field name="aluCar.alumno.aluDv" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="8" splitType="Stretch"/>
+    </title>
+    <pageHeader>
+        <band height="112" splitType="Stretch">
+            <staticText>
+                <reportElement uuid="f8455119-61ec-4d11-8b78-b843c1ea0d45" x="14" y="45" width="83" height="20"/>
+                <textElement>
+                    <font fontName="Tahoma"/>
+                </textElement>
+                <text><![CDATA[Curso]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="68a536ed-a6c1-4832-b6dc-e059208fe9da" x="97" y="45" width="374" height="20"/>
+                <textElement>
+                    <font fontName="Tahoma"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{nombreCurso}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="d3871ab8-cdbf-427a-864e-f1bcbf8fc3e9" x="693" y="14" width="45" height="14"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" de "]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement uuid="83001cc4-4573-4663-b798-92f4c045b861" x="738" y="14" width="13" height="14"/>
+                <textElement textAlignment="Right">
+                    <font fontName="Tahoma" size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement uuid="b3e12c04-5c86-47d8-a285-1773b44dce23" x="54" y="0" width="232" height="20"/>
+                <textElement>
+                    <font fontName="Tahoma" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Universidad de Santiago de Chile]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="ba084781-2262-4208-9c71-265eea644829" x="618" y="0" width="133" height="14"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement uuid="7d53f6f4-e173-4d5d-b406-14087e741136" x="14" y="0" width="40" height="41"/>
+                <imageExpression><![CDATA[$P{logoUsach}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement uuid="5f2aa491-e014-41d2-a633-48fc536dd829" x="14" y="65" width="83" height="20"/>
+                <textElement/>
+                <text><![CDATA[Profesor]]></text>
+            </staticText>
+            <textField>
+                <reportElement uuid="7c1e83b8-7a5c-4cf5-9b31-174bfce02234" x="97" y="65" width="374" height="20"/>
+                <textElement/>
+                <textFieldExpression><![CDATA[$P{profesor}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement uuid="0a173b97-d1bd-42a6-8b55-bcfcb1af7d42" x="54" y="20" width="232" height="21"/>
+                <textElement>
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{facultad}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="38" splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="12" splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band height="16" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="4" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="6" splitType="Stretch"/>
+    </summary>
 </jasperReport>

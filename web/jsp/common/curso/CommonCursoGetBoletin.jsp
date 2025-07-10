@@ -24,7 +24,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/common/curso/CommonCursoGetBoletin-1.0.0.js"></script>
     </head>
-    <body class="inner-body" onload="blockBack();onLoad();">
+    <body class="inner-body" onload="onLoad();">
         <div class="data-tables-container" style="margin-top: 10px; line-height: 1;">
             <table id="alumnosBoletin-table" class="table table-striped table-bordered dataTable" style="width:100%">
                 <thead>
@@ -63,9 +63,14 @@
                             </td>
                             <td>
                                 <a id="alumnoBoletin04_<s:property value="#row.count -1"/>">
-                                    <s:property value="alumno.aluNombre"/>
+                                    <s:if test="alumno.aluNombreSocial != null && alumno.aluNombreSocial.trim() != ''">
+                                        <s:property value="alumno.aluNombreSocial"/>
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="alumno.aluNombre"/>
+                                    </s:else>
                                 </a>
-                            </td>
+                            </td>                                                        
                         </tr>
                     </s:iterator>
                 </tbody>

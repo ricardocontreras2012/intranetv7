@@ -59,11 +59,7 @@ public final class CommonSolicitudViewSolicitudService {
                 retValue = "matricula";
                 break;
             case "EXP":
-                //Agregar lectura de estadoDocExpediente
-                System.out.println("FOLIO view"+folio);
-                System.out.println("RUT view:"+ws.getAluCar().getAlumno().getAluRut());
                 ws.setExpedienteLogro(ContextUtil.getDAO().getExpedienteLogroPersistence(user).findBySolicitud(ws.getAluCar().getAlumno().getAluRut(), folio));
-                //ws.getExpedienteLogro().getId()
                 ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpPersistence(user).find(ws.getExpedienteLogro().getId()));
                 retValue = "expediente";
                 break;

@@ -119,7 +119,7 @@
 
         <script>           
             <s:if test="hasActionErrors()">
-            var msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
+            const msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
             $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
             window.parent.$('#msg-error').modal('show');
             </s:if>

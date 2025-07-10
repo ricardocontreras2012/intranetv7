@@ -32,6 +32,7 @@ public class Alumno implements Serializable {
     private String aluMaterno;
     private Integer aluNacionalidad;
     private String aluNombre;
+    private String aluNombreSocial;
     private String aluPaterno;
     private Integer aluRut;
     private String aluSexo;
@@ -529,6 +530,16 @@ public class Alumno implements Serializable {
         return CommonUsersUtil.getNombreConSeparador(this.aluPaterno, this.aluMaterno, this.aluNombre);
     }
 
+    public String getAluNombreSocial() {
+        return aluNombreSocial;
+    }
+
+    public void setAluNombreSocial(String aluNombreSocial) {
+        this.aluNombreSocial = aluNombreSocial;
+    }
+    
+    
+
     /**
      * Method description
      *
@@ -536,6 +547,10 @@ public class Alumno implements Serializable {
      */
     public String getNombreStd() {
         return CommonUsersUtil.getNombreStd(this.aluPaterno, this.aluMaterno, this.aluNombre);
+    }
+    
+    public String getNombreSocialStd() {
+        return CommonUsersUtil.getNombreStd(this.aluPaterno, this.aluMaterno, this.aluNombreSocial==null?this.aluNombre:this.aluNombreSocial);
     }
 
     /**

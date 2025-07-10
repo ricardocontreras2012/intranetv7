@@ -30,7 +30,6 @@ import java.util.stream.Stream;
 public class AluCar implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Set<Inscripcion> inscripcions = new HashSet<>(0);
     private Aaingreso aaingreso;
     private Integer acaAsigR2da;
     private BigDecimal acaFaAnt;
@@ -390,24 +389,6 @@ public class AluCar implements Serializable {
 
     public void setInsList(List<Inscripcion> insList) {
         this.insList = insList;
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public Set<Inscripcion> getInscripcions() {
-        return this.inscripcions;
-    }
-
-    /**
-     * Method description
-     *
-     * @param inscripcions
-     */
-    public void setInscripcions(Set<Inscripcion> inscripcions) {
-        this.inscripcions = inscripcions;
     }
 
     /**

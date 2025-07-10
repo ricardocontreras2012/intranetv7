@@ -33,6 +33,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import session.GenericSession;
 import infrastructure.util.LogUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonExcelUtil;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -228,7 +229,7 @@ public final class CommonInscripcionResumenExportService {
             crearCelda(rowExcel, 1, alumno.getAluDv());
             crearCelda(rowExcel, 2, alumno.getAluPaterno());
             crearCelda(rowExcel, 3, alumno.getAluMaterno());
-            crearCelda(rowExcel, 4, alumno.getAluNombre());
+            crearCelda(rowExcel, 4, CommonAlumnoUtil.getNombreSocial(alumno));
             crearCelda(rowExcel, 5, alumno.getAluEmailUsach());
         });
     }

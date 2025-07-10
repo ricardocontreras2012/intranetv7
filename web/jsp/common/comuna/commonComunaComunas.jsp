@@ -14,4 +14,4 @@
         listValue="comNom"
         headerKey=""
         headerValue="Seleccione Comuna"
-        cssClass="form-control"/>
+        cssClass="form-select"/>

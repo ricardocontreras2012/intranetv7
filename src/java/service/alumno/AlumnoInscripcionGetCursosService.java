@@ -44,7 +44,6 @@ public final class AlumnoInscripcionGetCursosService {
             retValue = "cambioMencion";
         }
 
-        return retValue;   
-        
+        return retValue;        
     }
 }

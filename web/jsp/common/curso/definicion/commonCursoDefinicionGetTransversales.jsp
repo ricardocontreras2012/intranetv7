@@ -24,7 +24,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetTransversales-3.0.0.js"></script>
     </head>
-    <body class="inner-body" style="overflow: hidden" onload="blockBack();">
+    <body class="inner-body" style="overflow: hidden">
         <div class="container-fluid d-flex flex-column vh-100">
             <row>
                 <div class="navbar-brand container-fluid">

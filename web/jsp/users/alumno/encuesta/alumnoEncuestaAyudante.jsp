@@ -36,7 +36,7 @@
         </style>
         <script>
             $(document).on('click', '.panel-heading span.clickable', function (e) {
-                var $this = $(this);
+                const $this = $(this);
                 if (!$this.hasClass('panel-collapsed')) {
                     $this.parents('.panel').find('.panel-body').slideUp();
                     $this.addClass('panel-collapsed');

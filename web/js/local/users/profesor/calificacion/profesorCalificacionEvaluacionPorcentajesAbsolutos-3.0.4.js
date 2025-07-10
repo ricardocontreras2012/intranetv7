@@ -2,26 +2,26 @@
 
 function forceNumber(row)
 {
-    var x = document.getElementById(row);
+    const x = document.getElementById(row);
     x.value = x.value.replace('.', ',');
 }
 
 function sortEvaluacionesTable() {
 
-    var rows = $('#evaluaciones-table tbody  tr').get();
+    const rows = $('#evaluaciones-table tbody  tr').get();
 
     rows.sort(function (a, b) {
-        var aAux = $(a).children('td').eq(0).html();
-        var bAux = $(b).children('td').eq(0).html();
+        const aAux = $(a).children('td').eq(0).html();
+        const bAux = $(b).children('td').eq(0).html();
 
-        var aAux2 = $(aAux).val();
-        var bAux2 = $(bAux).val();
+        const aAux2 = $(aAux).val();
+        const bAux2 = $(bAux).val();
 
-        var aAux3 = aAux2.split('_');
-        var bAux3 = bAux2.split('_');
+        const aAux3 = aAux2.split('_');
+        const bAux3 = bAux2.split('_');
 
-        var aAux4 = 100 * parseInt(aAux3[0]) + parseInt(aAux3[1]);
-        var bAux4 = 100 * parseInt(bAux3[0]) + parseInt(bAux3[1]);
+        const aAux4 = 100 * parseInt(aAux3[0]) + parseInt(aAux3[1]);
+        const bAux4 = 100 * parseInt(bAux3[0]) + parseInt(bAux3[1]);
 
         if (aAux4 < bAux4) {
             return -1;
@@ -35,8 +35,8 @@ function sortEvaluacionesTable() {
 
     });
 
-    var table = $('#evaluaciones-table');
-   
+    const table = $('#evaluaciones-table');
+
     //table.children('tbody').html("");
         
     $.each(rows, function (index, row) {
@@ -45,23 +45,23 @@ function sortEvaluacionesTable() {
 }
 
 function agregar()
-{        
-    var medioCode = $("#tipoEval_list").val();
+{
+    const medioCode = $("#tipoEval_list").val();
     if (medioCode > 0)
     {
-        var n = 0;
+        let n = 0;
         $("#evaluaciones-form :input").each(function () {
-            var fieldName = $(this).attr("id");
+            const fieldName = $(this).attr("id");
             if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("rowCorrel_" + medioCode + "_")) {
                 n++;
             }
         });
         n++;
-        var fila = medioCode + "_" + n;
-        var medioNew = $("#tipoEval_list option:selected").text();
-        var porc = $("#porc").val();        
-        
-        var row = newRow(fila, medioNew, n, porc, '');
+        const fila = medioCode + "_" + n;
+        const medioNew = $("#tipoEval_list option:selected").text();
+        const porc = $("#porc").val();
+
+        const row = newRow(fila, medioNew, n, porc, '');
         $("#evaluaciones-tbody").append(row);
 
         sortEvaluacionesTable();
@@ -72,8 +72,8 @@ function agregar()
 
 function addEvaluacion() {
 
-    var medio = $("#medio-div").html().replace("tipoEvaluacion", "tipoEval_list").replace("tipoEvaluacion", "tipoEval_list");
-    var porc = '<input id="porc" name="porc" value="0">';
+    const medio = $("#medio-div").html().replace("tipoEvaluacion", "tipoEval_list").replace("tipoEvaluacion", "tipoEval_list");
+    const porc = '<input id="porc" name="porc" value="0">';
 
     $("#new-evaluacion-div").html("<table><tr><td>Evaluación</td><td>" + medio + "</td></tr><tr><td>Porcentaje</td><td>" + porc + "</td></tr></table>");
     $("#new-evaluacion").modal('show');
@@ -103,10 +103,10 @@ function confirmarEmision()
 function deleteRows() {
     //Eliminar filas
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("ck_")) {
             if ($("#" + fieldName).is(':checked')) {
-                var row = "#" + fieldName.replace("ck_", "row_");
+                const row = "#" + fieldName.replace("ck_", "row_");
                 $(row).remove();
             }
         }
@@ -117,20 +117,20 @@ function deleteRows() {
 
 function reIndex()
 {
-    var newTable = '<tbody id="evaluaciones-tbody">';
-    var tipo = 0;
-    var correl = 0;
-    var fila;
-    var arr;
-    var tipoAux;
-    var correlAux;
-    var oldId;
-    var newId;
-    var medioNew;
-    var porc;
+    let newTable = '<tbody id="evaluaciones-tbody">';
+    let tipo = 0;
+    let correl = 0;
+    let fila;
+    let arr;
+    let tipoAux;
+    let correlAux;
+    let oldId;
+    let newId;
+    let medioNew;
+    let porc;
 
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined) {
             if (fieldName.startsWith("sort_")) {
                 fila = $(this).val();
@@ -165,11 +165,11 @@ function newRow(fila, medio, n, porc, label)
 }
 
 function validateFull() {
-    var individuales = true;
-    var porc;
+    let individuales = true;
+    let porc;
     //Validar individual
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_")) {
             if ($(this).val() <= 0)
             {
@@ -188,10 +188,10 @@ function validateFull() {
         return false;
     }
 
-    var sumMedios = 0;
+    let sumMedios = 0;
     //Validar el total
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_")) {
             sumMedios += parseFloat($(this).val().replace(",", "."));
         }
@@ -208,7 +208,7 @@ function validateFull() {
 
 function errorPorcentajes() {
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_")) {
             $(this).css('background-color', 'red');
             $(this).css('color', 'white');
@@ -243,7 +243,7 @@ function changeModalidad() {
 function showNominaCurso(pos) {
     //if (validateFull()) {
     $("#pos").val(pos);
-    var dataString = $("#evaluaciones-form").serialize();
+    const dataString = $("#evaluaciones-form").serialize();
     jQuery.ajax({
         url: "ProfesorEvaluacionSavePorcentajesAbsolutos",
         type: "POST",
@@ -256,5 +256,5 @@ function showNominaCurso(pos) {
 }
 
 $(document).ready(function () {
-    unblockPage();
+    
 });

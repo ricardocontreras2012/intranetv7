@@ -36,21 +36,28 @@
                 </tr>
             </thead>
             <tbody class="dragFrameBodyDer dropFrameBodyDer">
-            <s:iterator value="#session.jefeCarreraSession.nominaCursoAdmDer" status="row">
-                <s:if test="#row.count <= #session.jefeCarreraSession.cursoAdmDer.curCupoIni">
-                <tr id = "row" >
-                </s:if>
-                <s:else>
-                <tr id = "row" class="sobreCupo" >
-                </s:else>                        
-                    <td><s:property value="#row.count"/></td>
-                    <td><s:property value="alumno.aluRut"/>-<s:property value="alumno.aluDv"/></td>
-                    <td><s:property value="alumno.aluPaterno"/></td>
-                    <td><s:property value="alumno.aluMaterno"/></td>
-                    <td><s:property value="alumno.aluNombre"/></td>
-                    <td><s:property value="acaRanking"/></td>    
-                </tr>
-            </s:iterator>
+                <s:iterator value="#session.jefeCarreraSession.nominaCursoAdmDer" status="row">
+                    <s:if test="#row.count <= #session.jefeCarreraSession.cursoAdmDer.curCupoIni">
+                        <tr id = "row" >
+                        </s:if>
+                        <s:else>
+                        <tr id = "row" class="sobreCupo" >
+                        </s:else>                        
+                        <td><s:property value="#row.count"/></td>
+                        <td><s:property value="alumno.aluRut"/>-<s:property value="alumno.aluDv"/></td>
+                        <td><s:property value="alumno.aluPaterno"/></td>
+                        <td><s:property value="alumno.aluMaterno"/></td>
+                        <td>
+                            <s:if test="alumno.aluNombreSocial != null && alumno.aluNombreSocial.trim() != ''">
+                                <s:property value="alumno.aluNombreSocial"/>
+                            </s:if>
+                            <s:else>
+                                <s:property value="alumno.aluNombre"/>
+                            </s:else>
+                        </td>
+                        <td><s:property value="acaRanking"/></td>    
+                    </tr>
+                </s:iterator>
             </tbody>
         </table>
         <div id="msg-dummy" name="msg-dummy" style="display: none;"><s:actionerror/><s:actionmessage/></div>

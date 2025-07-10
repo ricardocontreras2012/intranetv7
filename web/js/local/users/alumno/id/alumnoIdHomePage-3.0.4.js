@@ -9,26 +9,21 @@ function getMalla() {
     $("#alumno-form").submit();
 }
 
-function incripcionAdicionalSinRequisito() {
-    $("#msg-div").dialog("open");
-    return false;
-}
-
 function showCalendario()
 {
-    var url = $("#urlCalendario").val();
+    const url = $("#urlCalendario").val();
     window.open(url, "Calendario", "width=700,height=550,scrollbars=yes");
 }
 
 function showNormativa()
 {
-    var url = $("#urlNormativa").val();
+    const url = $("#urlNormativa").val();
     window.open(url, "Normativa", "width=700,height=550,scrollbars=yes");
 }
 
 function recargaListaCursos()
 {
-   var dataString = {'key': $("#keyDummy").val()};
+    const dataString = {'key': $("#keyDummy").val()};
 
     jQuery.ajax({
         url: "AlumnoMisCursos",
@@ -42,7 +37,7 @@ function recargaListaCursos()
 }
 
 $(document).ready(function () {
-    unblockPage();
+    
     showAlertMessages();
     loadIframeCentral();
 });

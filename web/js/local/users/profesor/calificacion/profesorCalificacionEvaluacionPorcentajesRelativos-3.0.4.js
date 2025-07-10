@@ -31,7 +31,7 @@ function saveForm() {
 function showNominaCurso(pos) {
     if (validateFull()) {
         $("#pos").val(pos);
-        var dataString = $("#evaluaciones-form").serialize();
+        const dataString = $("#evaluaciones-form").serialize();
         jQuery.ajax({
             url: "ProfesorEvaluacionSavePorcentajesRelativos",
             type: "POST",
@@ -45,25 +45,25 @@ function showNominaCurso(pos) {
 }
 
 function addTipoEvaluacion() {
-    var tipos = $("#tipos").html();
-    var htmlNew = '<form id="new-evaluaciones-form" onsubmit="return false;">' +
-            '<table>' +
-            '<tr style="padding:50px;">' +
-            '<td>Medio de Evaluación&nbsp;&nbsp;</td>' +
-            '<td>% Nota Final&nbsp;&nbsp;</td>' +
-            '<td># Evaluaciones&nbsp;&nbsp;</td>' +
-            '<td></td><td></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td>' + tipos +
-            '</td>' +
-            '<td><input id="porc" name="porc" type="text" size="4"/></td>' +
-            '<td><input id="cant" name="cant" type="text" size="4"/></td>' +
-            '<td><input id="porcTotal" name="porcTotal" type="hidden" value="0"/></td>' +
-            '<td><div class="buttons-div"><button id="add-button" title="Agregar Tipo de Evaluación" type="button" class="btn btn-default" data-toggle="tooltip" onclick="getTipoEvaluacion();"><span class="fa fa-plus"></span>&nbsp; <span class="hidden-xs">Agregar</span></button></div></td>' +
-            '</tr>' +
-            '</table>' +
-            '</form>';
+    const tipos = $("#tipos").html();
+    const htmlNew = '<form id="new-evaluaciones-form" onsubmit="return false;">' +
+        '<table>' +
+        '<tr style="padding:50px;">' +
+        '<td>Medio de Evaluación&nbsp;&nbsp;</td>' +
+        '<td>% Nota Final&nbsp;&nbsp;</td>' +
+        '<td># Evaluaciones&nbsp;&nbsp;</td>' +
+        '<td></td><td></td>' +
+        '</tr>' +
+        '<tr>' +
+        '<td>' + tipos +
+        '</td>' +
+        '<td><input id="porc" name="porc" type="text" size="4"/></td>' +
+        '<td><input id="cant" name="cant" type="text" size="4"/></td>' +
+        '<td><input id="porcTotal" name="porcTotal" type="hidden" value="0"/></td>' +
+        '<td><div class="buttons-div"><button id="add-button" title="Agregar Tipo de Evaluación" type="button" class="btn btn-default" data-toggle="tooltip" onclick="getTipoEvaluacion();"><span class="fa fa-plus"></span>&nbsp; <span class="hidden-xs">Agregar</span></button></div></td>' +
+        '</tr>' +
+        '</table>' +
+        '</form>';
 
     $("#new").html(htmlNew);
     $("#new").show("slow");
@@ -75,34 +75,34 @@ function addTbody(tipoEvaluacion, codigo, porc) {
 
 function addTableTbody(jQtable, tipoEvaluacion, codigo, porc) {
     jQtable.each(function () {
-        var tBody =
-                '<table width="100%" style="background-color:#BDE5F8;">' +
-                '<tr><td style="text-align: center; background-color: #679FD2; color:white" valign="top" colspan="2">' + tipoEvaluacion + '</td></tr>' +
-                '<tr>' +
-                '<td style="width:30%" colspan="2">' +
-                '<div class="container container-menu"><div class="row"><div id="justified-button-bar" class="col-lg-12">' +
-                '<div class="btn-group">' +
-                '<div class="btn-group">' +
-                '<button id="add-button" title="Nueva" type="button" class="btn btn-default" data-toggle="tooltip" onclick="addRow(' + codigo + ',\'' + tipoEvaluacion + '\',\'\'); return false;">' +
-                '<span class="fa fa-plus"></span>&nbsp; <span class="hidden-xs">Nueva Evaluación</span>' +
-                '</button></div> ' +
-                '<div class="btn-group">' +
-                '<button id="del-button" title="Eliminar" type="button" class="btn btn-default" data-toggle="tooltip" onclick="deleteEvaluaciones(' + codigo + '); return false;">' +
-                '<span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs">Eliminar</span>' +
-                '</button></div></div></div></div></div>' +
-                '</td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td style="width:20%">' +
-                '<input name="nom_tbody_' + codigo + '" id="nom_tbody_' + codigo + '" type="hidden" value="' + tipoEvaluacion + '"/>' +
-                '% de la Nota Final&nbsp;<input class="" name="porcTbody_' + codigo + '" id="porcTbody_' + codigo + '" type="text" value="' + porc + '" size="3" style="text-align: right"/>' +
-                '</td>' +
-                '<td style="width:80%">' +
-                '</td>' +
-                '</tr>' +
-                '</table>' +
-                '<table id="evaluaciones-table_' + codigo + '" width="100%" style="background-color:#BDE5F8;">' +
-                '<tbody id="tbody_' + codigo + '"></tbody></table>';
+        const tBody =
+            '<table width="100%" style="background-color:#BDE5F8;">' +
+            '<tr><td style="text-align: center; background-color: #679FD2; color:white" valign="top" colspan="2">' + tipoEvaluacion + '</td></tr>' +
+            '<tr>' +
+            '<td style="width:30%" colspan="2">' +
+            '<div class="container container-menu"><div class="row"><div id="justified-button-bar" class="col-lg-12">' +
+            '<div class="btn-group">' +
+            '<div class="btn-group">' +
+            '<button id="add-button" title="Nueva" type="button" class="btn btn-default" data-toggle="tooltip" onclick="addRow(' + codigo + ',\'' + tipoEvaluacion + '\',\'\'); return false;">' +
+            '<span class="fa fa-plus"></span>&nbsp; <span class="hidden-xs">Nueva Evaluación</span>' +
+            '</button></div> ' +
+            '<div class="btn-group">' +
+            '<button id="del-button" title="Eliminar" type="button" class="btn btn-default" data-toggle="tooltip" onclick="deleteEvaluaciones(' + codigo + '); return false;">' +
+            '<span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs">Eliminar</span>' +
+            '</button></div></div></div></div></div>' +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td style="width:20%">' +
+            '<input name="nom_tbody_' + codigo + '" id="nom_tbody_' + codigo + '" type="hidden" value="' + tipoEvaluacion + '"/>' +
+            '% de la Nota Final&nbsp;<input class="" name="porcTbody_' + codigo + '" id="porcTbody_' + codigo + '" type="text" value="' + porc + '" size="3" style="text-align: right"/>' +
+            '</td>' +
+            '<td style="width:80%">' +
+            '</td>' +
+            '</tr>' +
+            '</table>' +
+            '<table id="evaluaciones-table_' + codigo + '" width="100%" style="background-color:#BDE5F8;">' +
+            '<tbody id="tbody_' + codigo + '"></tbody></table>';
 
         $(this).append(tBody);
         $("#porcTbody_" + codigo).rules("add", {
@@ -117,11 +117,11 @@ function addTableTbody(jQtable, tipoEvaluacion, codigo, porc) {
     });
 }
 
-var addRow = function (codigo, descripcion) {
-    var porc = 0;
+const addRow = function (codigo, descripcion) {
+    const porc = 0;
 
-    var rowNum = 0;
-    var row = "";
+    let rowNum = 0;
+    let row = "";
     $('#evaluaciones-table_' + codigo).each(function () {
         rowNum = $('#evaluaciones-table_' + codigo + " > tbody > tr").length + 1;
         row = '<tr id="row_' + codigo + '_' + rowNum + '"><td style="width:5%"><input type="checkbox" id="ck_' + codigo + '_' + rowNum + '" name="ck_' + codigo + '_' + rowNum + '"/></td><td style="width:40%">' + descripcion + '<input readonly="readonly" id="rowCorrel_' + codigo + '_' + rowNum + '" name="rowCorrel_' + codigo + '_' + rowNum + '"type="text" size="3" style="text-align: right" value="' + rowNum + '"/></td><td><s:text name="label.porcentaje"/><input class="" type="text" size="3" style="text-align: right" id="porc_' + codigo + '_' + rowNum + '" name="porc_' + codigo + '_' + rowNum + '" value="' + porc + '"/>%</td><td></td></tr>';
@@ -135,30 +135,31 @@ var addRow = function (codigo, descripcion) {
                 required: jQuery.validator.messages.required,
                 min: jQuery.validator.messages.min(1),
                 max: jQuery.validator.messages.max(100)
-            }});
+            }
+        });
 
     });
 
-    var porcAux = Math.floor(100 / rowNum);
-    for (var i = 1; i < rowNum; i++) {
+    const porcAux = Math.floor(100 / rowNum);
+    for (let i = 1; i < rowNum; i++) {
         $("#porc_" + codigo + "_" + i).val(porcAux);
     }
     $("#porc_" + codigo + "_" + rowNum).val(100 - (porcAux * (rowNum - 1)));
 };
 
 function getTipoEvaluacion() {
-    var tipoEvaluacion = $("#tipoEvaluacion :selected").text();
-    var codigo = $("#tipoEvaluacion").val();
-    var cantidad = $("#cant").val();
-    var porc = $("#porc").val();
-    var total = $("#porcTotal").val();
+    const tipoEvaluacion = $("#tipoEvaluacion :selected").text();
+    const codigo = $("#tipoEvaluacion").val();
+    const cantidad = $("#cant").val();
+    const porc = $("#porc").val();
+    const total = $("#porcTotal").val();
 
     if (codigo > 0 && cantidad > 0 && porc > 0) {
         if (parseFloat(porc) + parseFloat(total) <= 100) {
             $('#tipoEvaluacion').find("option[value='" + codigo + "']").remove();
             addTbody(tipoEvaluacion, codigo, porc);
 
-            for (var i = 1; i <= cantidad; i++) {
+            for (let i = 1; i <= cantidad; i++) {
                 addRow(codigo, tipoEvaluacion);
             }
             $("#cant").val("");
@@ -178,13 +179,13 @@ function getTipoEvaluacion() {
 }
 
 function validateFull() {
-    var sumMedios = 0;
-    var medios = [];
-    var index = 0;
+    let sumMedios = 0;
+    const medios = [];
+    let index = 0;
 
     //Validar la ponderación de los medios
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porcTbody_")) {
             sumMedios += parseFloat($(this).val());
             medios[index++] = fieldName.substr(10, fieldName.length);//11=largo de "porcTbody_"
@@ -192,11 +193,11 @@ function validateFull() {
     });
     if (sumMedios <= 100.001 && sumMedios >= 99.999) {
         //Validar la ponderación interna
-        for (var i = 0; i < index; i++) {
+        for (let i = 0; i < index; i++) {
             sumMedios = 0;
-            var esta = false;
+            let esta = false;
             $("#evaluaciones-form :input").each(function () {
-                var fieldName = $(this).attr("id");
+                const fieldName = $(this).attr("id");
                 if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_" + medios[i])) {
                     sumMedios += parseFloat($(this).val());
                     esta = true;
@@ -221,7 +222,7 @@ function validateFull() {
 
 function errorBodyPorc() {
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porcTbody_")) {
             $(this).attr('class', 'errorPond');
         }
@@ -230,7 +231,7 @@ function errorBodyPorc() {
 
 function errorRowPorc(type) {
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_" + type)) {
             $(this).attr('class', 'errorPond');
         }
@@ -246,15 +247,15 @@ function deleteEvaluaciones(tipo) {
 function deleteRows() {
 
     $("#confirmacion-del").modal('hide');
-    var type = $("#tipoTmp").val();
-    var initialRows = parseInt($("#num_rows_" + type).val(), 10);
+    const type = $("#tipoTmp").val();
+    let initialRows = parseInt($("#num_rows_" + type).val(), 10);
 
     //Eliminar filas
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("ck_" + type + "_")) {
             if ($("#" + fieldName).is(':checked')) {
-                var row = "#" + fieldName.replace("ck_", "row_");
+                const row = "#" + fieldName.replace("ck_", "row_");
                 $(row).remove();
                 initialRows -= 1;
             }
@@ -263,18 +264,18 @@ function deleteRows() {
 
     //Reasignar numeros de evaluaciones-form en la cabecera y porcentajes en cada fila de evaluacion
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("num_rows_" + type)) {
             $(this).val(parseInt(initialRows, 10));
         }
     });
 
     //Reasignar los identificadores de fila (1ra parte)
-    var index_porc = 1;
-    var index_check = 1;
-    var index_rowCorrel = 1;
+    let index_porc = 1;
+    let index_check = 1;
+    let index_rowCorrel = 1;
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined) {
             if (fieldName.startsWith("porc_" + type + "_")) {
                 $(this).attr('id', 'porc_' + type + '_' + index_porc);
@@ -299,9 +300,9 @@ function deleteRows() {
 
     //Reasignar los identificadores de fila (2da parte)
 
-    var index_row = 1;
+    let index_row = 1;
     $("#evaluaciones-form tr").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("row_" + type + "_")) {
             $(this).attr('id', 'row_' + type + '_' + index_row);
             $(this).attr('name', 'row_' + type + '_' + index_row);
@@ -309,8 +310,8 @@ function deleteRows() {
         }
     });
 
-    var porc = Math.round(100 / initialRows);
-    for (var i = 1; i < initialRows; i++) {
+    const porc = Math.round(100 / initialRows);
+    for (let i = 1; i < initialRows; i++) {
         $("#porc_" + type + "_" + i).val(porc);
     }
     $("#porc_" + type + "_" + initialRows).val(100 - (porc * (initialRows - 1)));
@@ -348,7 +349,7 @@ $(document).ready(function () {
     });
 
     $("#evaluaciones-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         if (fieldName !== null && fieldName !== undefined && fieldName.startsWith("porc_")) {
             $(this).rules("add", {
                 required: true,

@@ -1,12 +1,12 @@
 function searchMessageAyudante() {
-    var data_string = $("#ayudante-search-form").serialize();
+    const data_string = $("#ayudante-search-form").serialize();
     $('#search-content-iframe').attr("src", 'CommonMensajeAyudanteSearch?' + data_string);
 }
 
 $(document).ready(function () {
    $("#rutdv").keypress(function (e) {
         if (enterKey(e)) {
-            var rut = formatear($(this).val(), true);           
+            const rut = formatear($(this).val(), true);
             $(this).val(rut);
             validateRutDv("rutdv", "rut")
             searchMessageAyudante();
@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
 
     $("#rutdv").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
 
@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     jQuery.validator.addMethod("rutdv", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutdv", "rut"));
     }, "Rut-Dv inválido");
 

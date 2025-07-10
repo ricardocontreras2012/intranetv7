@@ -25,18 +25,18 @@ function downloadFileToRow(fila)
 
 function addEvidencia()
 {
-    var id = 0;
-    var fila = document.getElementById("evidenciaRow_" + id);
+    const id = 0;
+    const fila = document.getElementById("evidenciaRow_" + id);
     if(fila)
     {
         
     }
     else
     {
-        var otro = '<form id="descripcion' + id + '-form" action="#" method="post" accept-charset="UTF-8"><input type="text" id="otro_' + id + '" name="descripcionEvidencia" class="form-control" maxlength="200"/></form>';
-        var upload = '<button id="upload-button_' + id + '" title="Subir evidencia" type="button" onClick="uploadFileToRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-upload"></span>&nbsp; <span class="hidden-xs"></span></button>';
-        var del = '<button id="delete-button_' + id + '" title="Eliminar" type="button" onClick="delRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs"></span></button>';
-        var row = "<tr id=\"evidenciaRow_" + id + "\" ><td>" + otro + "</td><td></td><td>" + upload + del + "</td></tr>";
+        const otro = '<form id="descripcion' + id + '-form" action="#" method="post" accept-charset="UTF-8"><input type="text" id="otro_' + id + '" name="descripcionEvidencia" class="form-control" maxlength="200"/></form>';
+        const upload = '<button id="upload-button_' + id + '" title="Subir evidencia" type="button" onClick="uploadFileToRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-upload"></span>&nbsp; <span class="hidden-xs"></span></button>';
+        const del = '<button id="delete-button_' + id + '" title="Eliminar" type="button" onClick="delRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs"></span></button>';
+        const row = "<tr id=\"evidenciaRow_" + id + "\" ><td>" + otro + "</td><td></td><td>" + upload + del + "</td></tr>";
         $('#evidencia-table > tbody:last-child').append(row);
     }
 }
@@ -61,14 +61,14 @@ $(document).ready(function () {
             reloadPage();
         }
     });
-    
-    var isAdvancedUpload = function() {
-    var div = document.createElement('div');
-    return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+
+    const isAdvancedUpload = function () {
+        const div = document.createElement('div');
+        return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
     }();
-    
-    var $input = $('#form_dragndropFiles').find('input[type="file"]');
-    var $label = $('#form_dragndropFiles').find('label');
+
+    const $input = $('#form_dragndropFiles').find('input[type="file"]');
+    const $label = $('#form_dragndropFiles').find('label');
     showFiles = function(files) {
         $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace('{count}', files.length) : files[0].name);
     };
@@ -108,15 +108,15 @@ $(document).ready(function () {
         if (isAdvancedUpload) {
             e.preventDefault();
 
-            var ajaxData = new FormData($('#form_dragndropFiles').get(0));
+            const ajaxData = new FormData($('#form_dragndropFiles').get(0));
 
             if (droppedFiles) {
                 $.each(droppedFiles, function(i, file) {
                     ajaxData.append($input.attr('name'), file);
                 });
             }
-            
-            var data_string = $("#descripcion" + $("#formEscogido").val() + "-form").serialize();
+
+            let data_string = $("#descripcion" + $("#formEscogido").val() + "-form").serialize();
             data_string = data_string + '&' + $("#form_dragndropFiles").serialize();
 
             $.ajax({
@@ -145,14 +145,14 @@ $(document).ready(function () {
             });
         }
         else {
-            var iframeName  = 'uploadiframe' + new Date().getTime();
+            const iframeName = 'uploadiframe' + new Date().getTime();
             $iframe   = $('<iframe name="' + iframeName + '" style="display: none;"></iframe>');
 
             $('body').append($iframe);
             $('#form_dragndropFiles').attr('target', iframeName);
 
             $iframe.one('load', function() {
-                var data = JSON.parse($iframe.contents().find('body' ).text());
+                const data = JSON.parse($iframe.contents().find('body').text());
                 $('#form_dragndropFiles')
                     .removeClass('is-uploading')
                     .addClass(data.success === true ? 'is-success' : 'is-error')

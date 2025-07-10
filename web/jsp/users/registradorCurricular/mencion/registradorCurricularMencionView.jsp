@@ -3,7 +3,6 @@
     Created on : 11-12-2024, 13:14:36
     Author     : Usach
 --%>
-
 <!DOCTYPE html>
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -155,6 +154,7 @@
                                 <input type="hidden" id="pmenCodCar" name="pmenCodCar" value="<s:property value="#session.registradorSession.mencion.id.menCodCar"/>"/>
                                 <input type="hidden" id="pmenCodMen" name="pmenCodMen" value="<s:property value="#session.registradorSession.mencion.id.menCodMen"/>"/>
                             </div>
+                        </div>
                     </form>
                 </div>
             </div>

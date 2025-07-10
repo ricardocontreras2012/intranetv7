@@ -53,7 +53,15 @@
                             <td style="text-align: right"><s:property value="aluCar.alumno.aluRut"/>-<s:property
                                     value="aluCar.alumno.aluDv"/>&nbsp;&nbsp;</td>
                             <td><s:property value="aluCar.alumno.aluPaterno"/> <s:property
-                                    value="aluCar.alumno.aluMaterno"/> <s:property value="aluCar.alumno.aluNombre"/></td>
+                                    value="aluCar.alumno.aluMaterno"/> 
+                                <s:if test="aluCar.alumno.aluNombreSocial != null && aluCar.alumno.aluNombreSocial.trim() != ''">
+                                    <s:property value="aluCar.alumno.aluNombreSocial"/>
+                                </s:if>
+                                <s:else>
+                                    <s:property value="aluCar.alumno.aluNombre"/>
+                                </s:else>
+
+                            </td>
                             <td style="width:10%; text-align:center">
                                 <s:if test="evaluNota == null">
                                     <input size="3"

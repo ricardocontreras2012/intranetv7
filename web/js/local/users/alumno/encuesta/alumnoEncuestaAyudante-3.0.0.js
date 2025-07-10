@@ -1,27 +1,26 @@
 
 
 function validaEncuesta() {
-    var seleccionado = true, pregunta;
+    const radios = $("#encuesta-form input[type=radio][name^='P_']");
+    const preguntasRevisadas = new Set();
 
-    $("#encuesta-form input[type=radio]").each(function() {
-        if ($(this).attr("name").startsWith("P_")) {
-            pregunta = $(this).attr("name");
-            if ($("input:radio[name=" + pregunta + "]:checked").length === 0) {
-                seleccionado = false;
-                return false;
-            }
+    for (const radio of radios) {
+        const name = radio.name;
+        if (preguntasRevisadas.has(name)) continue;
+
+        preguntasRevisadas.add(name);
+        if (!$(`input[name="${name}"]:checked`).length) {
+            const pos = name.lastIndexOf("_");
+            const numeroPregunta = name.substring(pos + 1);
+            $("#msg-div").html(`Falta responder pregunta ${numeroPregunta}`);
+            $("#msg").modal('show');
+            return false;
         }
-    });
-
-    if (!seleccionado) {
-        var pos = pregunta.lastIndexOf("_");
-
-        $("#msg-div").html('Falta responder pregunta ' + pregunta.substring(pos + 1));
-        $("#msg").modal('show');
-        return false;
     }
+
     return true;
 }
+
 
 function saveEncuesta() {
     if (validaEncuesta() === true) {

@@ -30,7 +30,7 @@
                         <th scope="col"><s:text name="label.elect"/></th>
                         <th scope="col"><s:text name="label.coordinacion"/></th>
                         <th scope="col"><s:text name="label.secc"/></th>
-                        <th scope="col"<s:text name="label.year"/></th>
+                        <th scope="col"><s:text name="label.year"/></th>
                         <th scope="col"><s:text name="label.term.short"/></th>
                         <th scope="col"><s:text name="label.asignatura"/></th>
                         <th scope="col"><s:text name="label.nota"/></th>

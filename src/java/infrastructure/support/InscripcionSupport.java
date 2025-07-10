@@ -417,9 +417,8 @@ public final class InscripcionSupport {
     private String puedeInscribirCoordinador(String userType, ActionCommonSupport action, Curso curso,
             DerechoCoordinadorSupport derecho, Integer carrera, Integer mencion) {
 
-        String retValue = ERROR;
         String tope = topeHorario(curso);
-        String actionMessage = "";
+        StringBuilder actionMessage = new StringBuilder();
         Integer tipoDerecho = 0;
 
         switch (userType) {
@@ -432,41 +431,39 @@ public final class InscripcionSupport {
         }
 
         if (sobrepasaMaxSct(tipoDerecho, derecho.getDerSct())) {
-            actionMessage += " " + action.getText("error.excede.maximo.sct");
+            actionMessage.append(" ").append(action.getText("error.excede.maximo.sct"));
         }
 
         if (sobrepasaMaxAsign(tipoDerecho)) {
-            actionMessage += " " + action.getText("error.excede.maximo.inscripciones");
+            actionMessage.append(" ").append(action.getText("error.excede.maximo.inscripciones"));
         }
 
         if (sobrepasaMaxNivel(tipoDerecho, derecho.getDerNivel())) {
-            actionMessage += " " + action.getText("error.excede.maximo.nivel");
+            actionMessage.append(" ").append(action.getText("error.excede.maximo.nivel"));
         }
 
         if (sobrepasaCreditosNivel(curso, tipoDerecho)) {
-            actionMessage += " " + action.getText("error.excede.maximo.creditos");
+            actionMessage.append(" ").append(action.getText("error.excede.maximo.creditos"));
         }
 
         if (noTieneRequisitosElectivo(curso)) {
-            actionMessage += " " + action.getText("error.sin.requisitos");
+            actionMessage.append(" ").append(action.getText("error.sin.requisitos"));
         }
 
-        if (tope != null && !"".equals(tope)) {
-            actionMessage += " " + action.getText("error.tope.horario") + " " + tope;
+        if (tope != null && !tope.isEmpty()) {
+            actionMessage.append(" ").append(action.getText("error.tope.horario")).append(" ").append(tope);
         }
 
         if (noHayCupo(curso, carrera, mencion)) {
-            actionMessage += " " + action.getText("error.sin.cupos");
+            actionMessage.append(" ").append(action.getText("error.sin.cupos"));
         }
 
-        if (actionMessage.isEmpty()) {
-            retValue = SUCCESS;
+        if (actionMessage.length() == 0) {
+            return SUCCESS;
         } else {
-            action.addActionMessage(actionMessage);
+            action.addActionMessage(actionMessage.toString().trim());
+            return ERROR;
         }
-
-        return retValue;
-
     }
 
     /**

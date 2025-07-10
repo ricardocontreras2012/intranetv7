@@ -14,7 +14,7 @@ function esFechaValida(fechaStr) {
 }
 
 function saveSolicitud() {
-    var rowCount = $('#solicitud-table tr').length;
+    const rowCount = $('#solicitud-table tr').length;
 
     // Validación de cantidad de filas
     if (rowCount <= 1) {
@@ -34,7 +34,7 @@ function saveSolicitud() {
     }
 
     // Envío de solicitud
-    var data_string = $("#solicitud-form").serialize();
+    const data_string = $("#solicitud-form").serialize();
     jQuery.ajax({
         url: "AlumnoSolicitudSolicitudJustificativoPEPAdd",
         type: "POST",
@@ -59,7 +59,7 @@ function delRow(fila)
 
 function getNewRowId()
 {
-    var ret = $("#id-row").val();
+    let ret = $("#id-row").val();
     ret++;
     $("#id-row").val(ret);
     return ret;
@@ -67,11 +67,11 @@ function getNewRowId()
 
 function addCurso()
 {
-    var id = getNewRowId();
-    var lcSelect = '<select id="curso_' + id + '" name="curso_' + id + '" class="form-control">';
-    var lcOption = $("#options-curso-div").html();
-    var del = '<button id="delete-button" title="Curso" type="button" onClick="delRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs"></span></button>';
-    var row = "<tr><td>" + lcSelect + lcOption + "</option></td><td>" + del + "</td></tr>";
+    let id = getNewRowId();
+    const lcSelect = '<select id="curso_' + id + '" name="curso_' + id + '" class="form-control">';
+    const lcOption = $("#options-curso-div").html();
+    const del = '<button id="delete-button" title="Curso" type="button" onClick="delRow(' + id + ')" class="btn btn-light" data-toggle="tooltip"><span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs"></span></button>';
+    const row = "<tr><td>" + lcSelect + lcOption + "</option></td><td>" + del + "</td></tr>";
     $('#solicitud-table > tbody:last-child').append(row);
     $("#id-row").val(id++);
 }

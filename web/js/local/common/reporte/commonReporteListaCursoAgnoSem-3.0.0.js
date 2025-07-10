@@ -13,7 +13,7 @@ $(document).ready(function () {
     //Handlers
     $("#search-button").click(searchCursos);
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         showDetail(field_name.substr(field_name.indexOf("_") + 1));
     });
     //

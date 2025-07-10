@@ -7,5 +7,5 @@ $(document).ready(function () {
     jQuery("textarea").each(function () {
         $(this).val(jQuery.trim($(this).val()));
     });
-    //unblockPage();
+    //
 });

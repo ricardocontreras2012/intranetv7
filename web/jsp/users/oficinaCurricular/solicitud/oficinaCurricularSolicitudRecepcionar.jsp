@@ -55,7 +55,7 @@
                 $("#upload-button").click(uploadDocumento);
                 $("#delete-button").click(deleteDocumentos);
                 $("a").click(function () {
-                    var fieldName = $(this).attr("id");
+                    const fieldName = $(this).attr("id");
                     downLoadDocumento(fieldName.substr(fieldName.indexOf("_") + 1));
                 });
 

@@ -87,7 +87,8 @@ jQuery.fn.resetForm = function () {
 };
 
 function blink(target, backgroundColor, interval, times) {
-    var existingBgColor = target.css('background-color'), i;
+    const existingBgColor = target.css('background-color');
+    let i;
 
     for (i = 0; i !== times; ++i) {
         setTimeout(function () {
@@ -107,7 +108,7 @@ function loadIframeCentral() {
 
 function loadSearch(typeSearch, action, pos, key)
 {
-    var dest;
+    let dest;
     if (typeSearch === "F") {
         dest = "#main-content-iframe";
     } else {
@@ -127,7 +128,7 @@ function unblockPage()
 }
 
 function randomString(length, chars) {
-    var mask = '';
+    let mask = '';
     if (chars.indexOf('a') > -1)
         mask += 'abcdefghijklmnopqrstuvwxyz';
     if (chars.indexOf('A') > -1)
@@ -136,46 +137,9 @@ function randomString(length, chars) {
         mask += '0123456789';
     if (chars.indexOf('!') > -1)
         mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
-    var result = '';
-    for (var i = length; i > 0; --i)
+    let result = '';
+    for (let i = length; i > 0; --i)
         result += mask[Math.floor(Math.random() * mask.length)];
     return result;
 }
 
-
-function browser()
-{
-    var userAgent = navigator.userAgent;
-    var browserName;
-
-    if (userAgent.match(/chrome|chromium|crios/i)) {
-        browserName = "chrome";
-    } else if (userAgent.match(/firefox|fxios/i)) {
-        browserName = "firefox";
-    } else if (userAgent.match(/safari/i)) {
-        browserName = "safari";
-    } else if (userAgent.match(/opr\//i)) {
-        browserName = "opera";
-    } else if (userAgent.match(/edg/i)) {
-        browserName = "edge";
-    } else {
-        browserName = "No browser detection";
-    }
-
-    return browserName;
-}
-
-function blockBack()
-{
-    /*var navegador = browser();
-
-    history.pushState(null, null, location.href);
-    if (!(navegador === "firefox"))
-    {
-        history.back();
-    }
-    history.forward();
-    window.onpopstate = function () {
-        history.go(1);
-    };*/
-}

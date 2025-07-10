@@ -6,4 +6,8 @@
     }
 }
 
+.modal-md-custom {
+  max-width: 600px; /* Puedes ajustar según lo necesites */
+}
+
 .error {color:red}

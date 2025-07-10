@@ -43,6 +43,7 @@ import infrastructure.util.ContextUtil;
 import infrastructure.util.FormatUtil;
 import infrastructure.util.LogUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCursoUtil;
 import infrastructure.util.common.CommonExcelUtil;
 import static infrastructure.util.common.CommonFacultadUtil.getNombrexAsign;
@@ -388,7 +389,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
             celdaMaterno.setCellValue(textoMaterno);
 
             XSSFCell celdaNombre = rowExcel.createCell(4);
-            XSSFRichTextString textoNombre = new XSSFRichTextString(alumno.getAluNombre());
+            XSSFRichTextString textoNombre = new XSSFRichTextString(CommonAlumnoUtil.getNombreSocial(alumno));
             celdaNombre.setCellValue(textoNombre);
 
             int col = 5;
@@ -445,29 +446,22 @@ public final class ProfesorEvaluacionExportPlanillaService {
      * @return
      */
     private static String getEvaluacion(Evaluacion evaluacion, List<EvaluacionAlumno> planilla, Alumno alumno) {
-        String retValue = "";
-
-        for (EvaluacionAlumno evaluacionAlumno : planilla) {
-            if (evaluacionAlumno.getAluCar().getAlumno() == alumno
-                    && evaluacionAlumno.getEvaluacion() == evaluacion) {
-                retValue = (evaluacionAlumno.getEvaluNota() == null)
-                        ? "1,0"
-                        : new DecimalFormat("#.0").format(evaluacionAlumno.getEvaluNota()).replace(".", ",");
-
-                break;
-            }
-        }
-
-        return retValue;
+        return planilla.stream()
+                .filter(ea -> Objects.equals(ea.getAluCar().getAlumno(), alumno)
+                && Objects.equals(ea.getEvaluacion(), evaluacion))
+                .findFirst()
+                .map(ea -> {
+                    BigDecimal nota = ea.getEvaluNota();
+                    return (nota == null)
+                            ? "1,0"
+                            : new DecimalFormat("#.0").format(nota).replace(".", ",");
+                })
+                .orElse("");
     }
 
     private static int getNumEvaluaciones(List<Evaluacion> lEvaluacion, int tipo) {
-        int accum = 0;
-        for (Evaluacion evaluacion : lEvaluacion) {
-            if (evaluacion.getId().getEvalTeva() == tipo) {
-                accum++;
-            }
-        }
-        return accum;
+        return (int) lEvaluacion.stream()
+                .filter(e -> e.getId().getEvalTeva() == tipo)
+                .count();
     }
 }

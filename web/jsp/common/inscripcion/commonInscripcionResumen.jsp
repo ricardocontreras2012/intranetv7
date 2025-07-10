@@ -121,7 +121,7 @@
                     <script type="text/javascript">
 
                         function decodeHtml(html) {
-                            var txt = document.createElement("textarea");
+                            const txt = document.createElement("textarea");
                             txt.innerHTML = html;
                             return txt.value;
                         }
@@ -169,9 +169,9 @@
                                     info: false,
                                     lengthChange: false,
                                     drawCallback: function () {
-                                        var api = this.api();
+                                        const api = this.api();
                                         api.rows({page: 'current'}).every(function (rowIdx, tableLoop, rowLoop) {
-                                            var row = this.node();
+                                            const row = this.node();
                                             $(row).find('td').eq(0).html(rowLoop + 1);
                                         });
                                         $('#tablaNomina tbody tr').css('height', '13px');

@@ -66,7 +66,7 @@
                     <tbody>
                         <s:iterator value="#session.genericSession.getWorkSession(key).nominaCurso" status="row">
                             <tr>
-                                    <td style="text-align: right">
+                                <td style="text-align: right">
                                     <s:property value="#row.count"/>&nbsp;&nbsp;&nbsp;
                                 </td>
                                 <td>
@@ -85,7 +85,12 @@
                                     <s:property value="alumno.aluMaterno"/>
                                 </td>
                                 <td>
-                                    <s:property value="alumno.aluNombre"/>
+                                    <s:if test="alumno.aluNombreSocial != null && alumno.aluNombreSocial.trim() != ''">
+                                        <s:property value="alumno.aluNombreSocial"/>
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="alumno.aluNombre"/>
+                                    </s:else>
                                 </td>
                                 <td style="text-align: center">
                                     <img height="60" width="50" id="foto<s:property value="#row.count"/>"

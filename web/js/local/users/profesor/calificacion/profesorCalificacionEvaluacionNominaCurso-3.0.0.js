@@ -17,8 +17,8 @@ $(document).ready(function () {
     $("#nomina-form :input").keydown(function (e) {
         if (enterKey(e)) {
             $("#nomina-form").valid();
-            var fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
-            var index = fields.index(this);
+            const fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
+            const index = fields.index(this);
             if (index > -1 && ( index + 1 ) < fields.length) {
                 fields.eq(index + 1).focus();
             }
@@ -28,9 +28,9 @@ $(document).ready(function () {
     $("#nomina-form").validate({
         validationEventTriggers: "blur",
         success: function (label) {
-            var id = label.attr("for");
-            var input = $("#" + id);
-            var value = input.val();
+            const id = label.attr("for");
+            const input = $("#" + id);
+            const value = input.val();
 
             (value < 4) ? input.attr("class", "reprobado") : input.attr("class", "aprobado");
         },
@@ -40,7 +40,7 @@ $(document).ready(function () {
     });
 
     $("#nomina-form :input").each(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         if (field_name.startsWith("row_")) {
             $(this).rules("add", {
                 formatoNota: true

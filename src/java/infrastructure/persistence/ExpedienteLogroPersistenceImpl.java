@@ -108,9 +108,11 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
     
     @Override
     public ExpedienteLogro findBySolicitud(Integer rut, Integer solicitud) {
-        System.out.println("Persistence!!");
         Criteria criteria = getSession().createCriteria(ExpedienteLogro.class);
 
+        criteria.createAlias("logro.tlogro", "tlogro");
+        criteria.createAlias("planLogro.logro", "logro");
+        criteria.createAlias("planLogro", "planLogro");
         criteria.add(eq("id.explRut", rut));
         criteria.add(eq("explSol", solicitud));
         return (ExpedienteLogro) criteria.uniqueResult();

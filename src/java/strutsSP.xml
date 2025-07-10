@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 
 <!--
     Document   : strutsSecretariaProyectos.xml
@@ -12,7 +12,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -55,10 +57,12 @@
 
     <package name="intranetSecretariaProyectosActions" extends="intranetSecretariaProyectosInterceptors">
         <result-types>
-            <result-type name="myStream" default="false" class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
+            <result-type name="myStream" default="false"
+                         class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="SecretariaProyectosLogin" class="action.secretariaproyectos.SecretariaProyectosLoginAction" method="execute">
+        <action name="SecretariaProyectosLogin" class="action.secretariaproyectos.SecretariaProyectosLoginAction"
+                method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
@@ -75,53 +79,73 @@
         </action>
 
 
-        <action name="SecretariaProyectosConvenioPrint" class="action.secretariaproyectos.SecretariaProyectosConvenioPrintAction" method="execute">
+        <action name="SecretariaProyectosConvenioPrint"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioPrintAction" method="execute">
             <result type="myStream"/>
         </action>
 
-        <action name="SecretariaProyectosConvenioGetConvenios" class="action.secretariaproyectos.SecretariaProyectosConvenioGetConveniosAction">
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetConvenios.jsp</result>
+        <action name="SecretariaProyectosConvenioGetConvenios"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioGetConveniosAction">
+            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetConvenios.jsp
+            </result>
         </action>
 
-        <action name="SecretariaProyectosConvenioShowConvenio" class="action.secretariaproyectos.SecretariaProyectosConvenioShowConvenioAction">
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioShowConvenio.jsp</result>
+        <action name="SecretariaProyectosConvenioShowConvenio"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioShowConvenioAction">
+            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioShowConvenio.jsp
+            </result>
         </action>
-        <action name="SecretariaProyectosConvenioRemoveConvenios" class="action.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosAction">
+        <action name="SecretariaProyectosConvenioRemoveConvenios"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosAction">
             <result name="success" type="redirectAction">
                 <param name="actionName">SecretariaProyectosConvenioGetConvenios</param>
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="SecretariaProyectosConvenioNewConvenio" class="action.secretariaproyectos.SecretariaProyectosConvenioNewConvenioAction">
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioNewConvenio.jsp</result>
-        </action>        
-        <action name="SecretariaProyectosConvenioSaveConvenio" class="action.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioAction" method="execute">           
+        <action name="SecretariaProyectosConvenioNewConvenio"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioNewConvenioAction">
+            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioNewConvenio.jsp
+            </result>
+        </action>
+        <action name="SecretariaProyectosConvenioSaveConvenio"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioAction" method="execute">
             <result type="myStream"/>
-        </action>        
-        <action name="SecretariaProyectosConvenioFuncionarioSearch" class="action.common.CommonFuncionarioSearchAction" method="execute">            
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioSearchFuncionario.jsp</result>
         </action>
-        <action name="SecretariaProyectosConvenioGetCursos" class="action.secretariaproyectos.SecretariaProyectosConvenioGetCursosAction">
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetCursos.jsp</result>
+        <action name="SecretariaProyectosConvenioFuncionarioSearch" class="action.common.CommonFuncionarioSearchAction"
+                method="execute">
+            <result name="success">
+                /jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioSearchFuncionario.jsp
+            </result>
         </action>
-        <action name="SecretariaProyectosConvenioGetCursosAyudante" class="action.secretariaproyectos.SecretariaProyectosConvenioGetCursosAyudanteAction">
-            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetCursos.jsp</result>
+        <action name="SecretariaProyectosConvenioGetCursos"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioGetCursosAction">
+            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetCursos.jsp
+            </result>
         </action>
-        <action name="SecretariaProyectosConvenioTopeHorario" class="action.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioAction">
+        <action name="SecretariaProyectosConvenioGetCursosAyudante"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioGetCursosAyudanteAction">
+            <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetCursos.jsp
+            </result>
+        </action>
+        <action name="SecretariaProyectosConvenioTopeHorario"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioAction">
             <result name="success">/jsp/common/action/commonActionResult.jsp
             </result>
         </action>
-        <action name="SecretariaProyectosConvenioTopeHorarioCurso" class="action.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioCursoAction">
+        <action name="SecretariaProyectosConvenioTopeHorarioCurso"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioCursoAction">
             <result name="success">/jsp/common/action/commonActionResult.jsp
             </result>
         </action>
-        <action name="SecretariaProyectosConvenioGetProyecto" class="action.secretariaproyectos.SecretariaProyectosConvenioGetProyectoAction">
+        <action name="SecretariaProyectosConvenioGetProyecto"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioGetProyectoAction">
             <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetProyecto.jsp
-            </result>          
+            </result>
         </action>
-        <action name="SecretariaProyectosConvenioGetProfesor" class="action.secretariaproyectos.SecretariaProyectosConvenioGetProfesorAction">
+        <action name="SecretariaProyectosConvenioGetProfesor"
+                class="action.secretariaproyectos.SecretariaProyectosConvenioGetProfesorAction">
             <result name="success">/jsp/users/secretariaProyectos/convenio/secretariaProyectosConvenioGetProfesor.jsp
-            </result>          
+            </result>
         </action>
     </package>
 </struts>

@@ -6,6 +6,8 @@
 package service.alumno;
 
 import infrastructure.util.ActionInputStreamUtil;
+import infrastructure.util.ActionUtil;
+import infrastructure.util.ContextUtil;
 import infrastructure.util.FormatUtil;
 import infrastructure.util.common.CommonArchivoUtil;
 import java.io.InputStream;
@@ -24,14 +26,12 @@ public class AlumnoSolicitudExpedienteDownloadFileService {
         String description;
 
         WorkSession ws = genericSession.getWorkSession(key);
-
-        System.out.println("todc:" + tdoc);
-        System.out.println("size:" + ws.getEstadoDocExpList().size());
+        String user = ActionUtil.getDBUser(); //<-- chequear
+        ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpPersistence(user).find(ws.getExpedienteLogro().getId())); //<-- chequear
 
         for (Integer i = 0; i < ws.getEstadoDocExpList().size(); i++) {
-            System.out.println("lisssst:" + ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod());
             if (ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod().equals(tdoc)) {
-                System.out.println("fileName:" + ws.getEstadoDocExpList().get(i).getEdeFile());
+                //System.out.println("fileName:" + ws.getEstadoDocExpList().get(i).getEdeFile());
                 name = ws.getEstadoDocExpList().get(i).getEdeFile();
                 input = CommonArchivoUtil.getFile(name, "tit");
                 description = FormatUtil.getMimeType(name);

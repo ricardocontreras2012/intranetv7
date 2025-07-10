@@ -38,8 +38,8 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         String description;
 
         WorkSession ws = genericSession.getWorkSession(key);
-        ExpedienteLogro expl = ws.getExpedienteLogro();
 
+        ExpedienteLogro expl = ws.getExpedienteLogro();
         name = "CARATULA_EXPEDIENTE" + ".pdf";
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name, expl);
@@ -50,7 +50,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
     private static InputStream getInput(GenericSession genericSession,
             String key, String name, ExpedienteLogro expl)
             throws Exception {
-
+        
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
         Alumno alumno = aca.getAlumno();
@@ -148,86 +148,8 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         titulo.setAlignment(Element.ALIGN_CENTER);
         document.add(titulo);
 
-        // Cuadro derecho
-        /*float cuadroX = margin + colWidth * 7;
-        float cuadroY = document.getPageSize().getHeight() - margin - 180;
-        float cuadroWidth = colWidth * 5;
-        float cuadroHeight = 90;
-        cb.rectangle(cuadroX, cuadroY, cuadroWidth, cuadroHeight);
-        cb.stroke();*/
-
-        // Nombre del alumno
-        /*Paragraph nombre = new Paragraph(alumno.getNombreStd(), fontBold);
-        nombre.setSpacingBefore(140);
-        nombre.setAlignment(Element.ALIGN_CENTER);
-        document.add(nombre);*/
-
-        // Línea bajo el nombre
-        /*cb.moveTo(margin * 1.25f, cuadroY - 20);
-        cb.lineTo(pageWidth - margin * 1.25f, cuadroY - 20);
-        cb.stroke();*/
-
-        // Subtítulo bajo nombre
-        /*Font fontSmall = new Font(Font.HELVETICA, 9, Font.NORMAL);
-        Paragraph subtituloNombre = new Paragraph("Apellidos y Nombres Completos", fontSmall);
-        subtituloNombre.setAlignment(Element.ALIGN_CENTER);
-        document.add(subtituloNombre);*/
-
-        // Dirección
-        /*Paragraph direccion = new Paragraph(alumno.getAluDirecAlu().toUpperCase(), fontNormal);
-        direccion.setAlignment(Element.ALIGN_CENTER);
-        document.add(direccion);
-
-        // Línea bajo dirección
-        cb.moveTo(margin * 1.25f, cuadroY - 40);
-        cb.lineTo(pageWidth - margin * 1.25f, cuadroY - 40);
-        cb.stroke();
-
-        Paragraph subtituloDireccion = new Paragraph("Domicilio", fontSmall);
-        subtituloDireccion.setAlignment(Element.ALIGN_CENTER);
-        document.add(subtituloDireccion);
-
-        // Firma interesado
-        Paragraph firma = new Paragraph("FIRMA INTERESADO", fontSmall);
-        firma.setAlignment(Element.ALIGN_RIGHT);
-        firma.setIndentationRight(colWidth * 2);
-        document.add(firma);
-
-        cb.moveTo(margin + colWidth * 8, cuadroY - 10);
-        cb.lineTo(margin + colWidth * 11, cuadroY - 10);
-        cb.stroke();
-
-        // Datos adicionales
-        Paragraph rut = new Paragraph("CÉDULA DE IDENTIDAD: " + FormatUtil.getRutFormateado(alumno.getAluRut()), fontNormal);
-        rut.setAlignment(Element.ALIGN_LEFT);
-        document.add(rut);
-
-        Paragraph telefono = new Paragraph("TELÉFONO: " + alumno.getAluFonoAlu(), fontNormal);
-        telefono.setAlignment(Element.ALIGN_LEFT);
-        document.add(telefono);
-
-        Paragraph email = new Paragraph("E-MAIL: " + ((alumno.getAluEmail() == null || alumno.getAluEmail().isEmpty()) ? alumno.getAluEmailUsach() : alumno.getAluEmailUsach() + "," + alumno.getAluEmail()), fontNormal);
-        email.setAlignment(Element.ALIGN_LEFT);
-        document.add(email);
-
-        Paragraph solicita = new Paragraph("SOLICITA: " + expl.getPlanLogro().getPlalNomLogro().toUpperCase(), fontNormal);
-        solicita.setAlignment(Element.ALIGN_LEFT);
-        document.add(solicita);
-
-        Paragraph especialidad = new Paragraph("ESPECIALIDAD: " + (aca.getPlan().getMencion().getMenNom() == null ? "====================================" : aca.getPlan().getMencion().getMenNom().toUpperCase()), fontNormal);
-        especialidad.setAlignment(Element.ALIGN_LEFT);
-        document.add(especialidad);
-
-        Paragraph facultad = new Paragraph(aca.getAluCarFunction().getNombreFacultad().toUpperCase(), fontNormal);
-        facultad.setAlignment(Element.ALIGN_LEFT);
-        document.add(facultad);*/
-
-        // Cuadro para datos del alumno
-        /*cb.rectangle(margin, cuadroY - 140, colWidth * 12, 120);
-        cb.stroke();*/
-
         Font fontSmall = new Font(Font.HELVETICA, 9, Font.NORMAL);
-        
+
         PdfPTable tablaPersonales = new PdfPTable(3);
         float[] columnPersonalesWidths = {65f, 30f, 5f};
         tablaPersonales.setWidths(columnPersonalesWidths);
@@ -301,9 +223,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaPerf10c1.setBorder(Rectangle.NO_BORDER);
         tablaPersonales.addCell(celdaPerf10c1);
 
-
-
-
         //cuadrado
         PdfPTable cuadro = new PdfPTable(1);
         cuadro.setTotalWidth(14f); // Ancho físico de 1 cm
@@ -315,8 +234,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         cuadro.addCell(cuadradoCell);
 
         //document.add(cuadro);
-
-
         PdfPTable tablaTitulosGrados = new PdfPTable(6);
         float[] columnTitulosGradosWidths = {18f, 27f, 5f, 25f, 5f, 20f};
         tablaTitulosGrados.setWidths(columnTitulosGradosWidths);
@@ -332,7 +249,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdah4.setBorder(Rectangle.NO_BORDER);
         celdah4.setHorizontalAlignment(Element.ALIGN_CENTER);
         tablaTitulosGrados.addCell(celdah4);
-
 
         // fila 1
         PdfPCell celdaf1c1 = new PdfPCell(new Phrase("Solicitud", fontNormal));
@@ -434,7 +350,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaf5c6.setBorder(Rectangle.BOTTOM);
         tablaTitulosGrados.addCell(celdaf5c6);
 
-
         // fila 6
         PdfPCell celdaf6c1 = new PdfPCell(new Phrase("OBSERVACIONES", new Font(Font.HELVETICA, 10, Font.BOLD)));
         celdaf6c1.setColspan(3);
@@ -450,7 +365,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         PdfPCell celdaf6c6 = new PdfPCell(new Phrase(" ", fontNormal));
         celdaf6c6.setBorder(Rectangle.BOTTOM);
         tablaTitulosGrados.addCell(celdaf6c6);
-
 
         // fila 7
         PdfPCell celdaf7c1 = new PdfPCell(new Phrase(" ", fontNormal));
@@ -516,7 +430,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaf10c6.setBorder(Rectangle.BOTTOM);
         tablaTitulosGrados.addCell(celdaf10c6);
 
-
         LaborRealizada jtg = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("JTG");
 
         // fila nombre
@@ -541,9 +454,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaf13c4.setColspan(3);
         celdaf13c4.setBorder(Rectangle.NO_BORDER);
         tablaTitulosGrados.addCell(celdaf13c4);
-        
-
-
 
         PdfPTable tablaGeneral = new PdfPTable(2);
         float[] columnGeneralWidths = {60f, 40f};
@@ -567,36 +477,31 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaGen_f2c1.setBorder(Rectangle.NO_BORDER);
         celdaGen_f2c1.setColspan(2);
         tablaGeneral.addCell(celdaGen_f2c1);
-        
+
         PdfPCell celdaGen_f3c1 = new PdfPCell(tablaPersonales);
         celdaGen_f3c1.setColspan(2);
         celdaGen_f3c1.setPadding(10f);
         tablaGeneral.addCell(celdaGen_f3c1);
 
-        PdfPCell celdaGen_f4c1 = new PdfPCell(new Phrase ("USO EXCLUSIVO DE TÍTULOS Y GRADOS", new Font(Font.HELVETICA, 10, Font.BOLD)));
+        PdfPCell celdaGen_f4c1 = new PdfPCell(new Phrase("USO EXCLUSIVO DE TÍTULOS Y GRADOS", new Font(Font.HELVETICA, 10, Font.BOLD)));
         celdaGen_f4c1.setColspan(2);
         celdaGen_f4c1.setPadding(5f);
         celdaGen_f4c1.setBorder(Rectangle.NO_BORDER);
         celdaGen_f4c1.setHorizontalAlignment(Element.ALIGN_CENTER);
         tablaGeneral.addCell(celdaGen_f4c1);
-        
+
         PdfPCell celdaGen_f5c1 = new PdfPCell(tablaTitulosGrados);
         celdaGen_f5c1.setColspan(2);
         celdaGen_f5c1.setPadding(10f);
         tablaGeneral.addCell(celdaGen_f5c1);
-        
+
         document.add(tablaGeneral);
 
-
         //document.add(tablaTitulosGrados);
-
         // Firma jefe de títulos y grados
-        
         /*cb.moveTo(margin * 1.25f, document.getPageSize().getHeight() - margin * 5.5f);
         cb.lineTo(margin * 1.25f + colWidth * 5, document.getPageSize().getHeight() - margin * 5.5f);
         cb.stroke();*/
-
-
         // Cerrar documento
         document.close();
 

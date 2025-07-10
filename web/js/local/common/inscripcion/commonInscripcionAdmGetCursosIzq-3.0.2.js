@@ -1,6 +1,6 @@
 function getCursoIzq(posVal) {
-        
-    var dataString = {'key': $("#key").val(), 'pos': posVal, 'actionCall': 'CommonInscripcionAdmGetNominaIzq'};
+
+    const dataString = {'key': $("#key").val(), 'pos': posVal, 'actionCall': 'CommonInscripcionAdmGetNominaIzq'};
     jQuery.ajax({
         url: "CommonCursoGetCursoAdmInscripcionIzq",
         type: "POST",
@@ -33,9 +33,9 @@ function getCursoIzq(posVal) {
 }
 
 function showProfesor(profesor, pos, source) {
-    
-    var random_number = Math.floor(Math.random() * 10000);
-    var html_text = "<div><img width=\"70\" height=\"80\" alt=\" \" src=\"dummy/" + random_number + "/intranetv7/CommonInscripcionGetFotoProfesor?key=" + $("#key").val() + "&pos=" + pos + "&source=" + source + "\"/><p>" + profesor.replace('/0/g', ' ') + "</p></div>";
+
+    const random_number = Math.floor(Math.random() * 10000);
+    const html_text = "<div><img width=\"70\" height=\"80\" alt=\" \" src=\"dummy/" + random_number + "/intranetv7/CommonInscripcionGetFotoProfesor?key=" + $("#key").val() + "&pos=" + pos + "&source=" + source + "\"/><p>" + profesor.replace('/0/g', ' ') + "</p></div>";
 
     $("#profesor-div").html(html_text);
     $("#profesor").modal('show');
@@ -43,7 +43,7 @@ function showProfesor(profesor, pos, source) {
 }
 
 $("a").click(function () {
-    var fieldName = $(this).attr("id");
+    const fieldName = $(this).attr("id");
     getCursoIzq(fieldName.substr(fieldName.indexOf("_") + 1));
 });
 
@@ -87,11 +87,11 @@ $("#cursos-izq-table").dataTable({
 });
 
 $(document).ready(function () {
-    var pos = $("#pos").val();
-    
+    let pos = $("#pos").val();
+
     if (pos !== null && pos > 0)
     {
-        var rows = document.querySelectorAll('#cursos-izq-table tr');
+        const rows = document.querySelectorAll('#cursos-izq-table tr');
         pos++;
         rows[pos].scrollIntoView({
             behavior: 'auto',

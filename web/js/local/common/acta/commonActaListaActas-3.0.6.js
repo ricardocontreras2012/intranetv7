@@ -13,7 +13,7 @@ $(document).ready(function() {
     
     //Handler
     $("a").click(function () {
-        var fieldName = $(this).attr("id");  
+        const fieldName = $(this).attr("id");
         getActa(fieldName.substr(fieldName.indexOf("_") + 1));
     });
     

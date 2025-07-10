@@ -56,17 +56,11 @@ public final class AlumnoEncuestaDocenteService {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         CursoProfesor cursoProfesor = ws.getCursoProfesor();
-        
-System.out.println("oka");        
-        
 
         if (cursoProfesor.equals(ws.getCursoProfesorList().get(0))) {
             beginTransaction(user);
             int correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaEncuesta();
-
-            
-System.out.println(correl);            
-            
+    
             parameters.entrySet().stream()
                     .filter(entry -> entry.getKey().startsWith("P_"))
                     .forEach(entry -> {
@@ -77,10 +71,6 @@ System.out.println(correl);
                         try {
                             int apartado = Integer.parseInt(field.substring(2, pos));
                             int pregunta = Integer.parseInt(field.substring(pos + 1));
-                            
-                            
-System.out.println(apartado);
-System.out.println(pregunta); 
 
                             Optional.ofNullable(values)
                                     .filter(val -> val.length > 0)

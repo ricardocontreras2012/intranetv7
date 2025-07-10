@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     });
 
-    var today;
+    let today;
     today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
     $('#fechaAsistencia').datepicker({
         uiLibrary: 'bootstrap4',

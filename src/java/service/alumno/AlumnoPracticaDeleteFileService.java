@@ -29,7 +29,7 @@ public class AlumnoPracticaDeleteFileService {
         beginTransaction(user);
         ContextUtil.getDAO().getSolicitudAttachPersistence(user).deleteAttach(solicitud.getSolFolio(), doc);
         commitTransaction();
-        ws.getSolicitud().setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(user).find(solicitud));
+        solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(user).find(solicitud));
 
         return SUCCESS;
     }

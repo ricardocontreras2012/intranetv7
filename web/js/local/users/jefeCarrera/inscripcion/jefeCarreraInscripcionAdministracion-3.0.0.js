@@ -26,12 +26,12 @@
 
 $("#table1 .childgrid tr, #table2 .childgrid tr").draggable({
       helper: function(){
-          var selected = $('.childgrid tr.selectedRow');
-        if (selected.length === 0) {
+          let selected = $('.childgrid tr.selectedRow');
+          if (selected.length === 0) {
           selected = $(this).addClass('selectedRow');
         }
-        var container = $('<div/>').attr('id', 'draggingContainer');
-    container.append(selected.clone().removeClass("selectedRow"));
+          const container = $('<div/>').attr('id', 'draggingContainer');
+          container.append(selected.clone().removeClass("selectedRow"));
     return container;
       }
  });

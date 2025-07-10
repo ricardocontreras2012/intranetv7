@@ -1,6 +1,6 @@
 function getCursoDer(posVal) {
 
-    var dataString = {'key': $("#key").val(), 'pos': posVal, 'actionCall': 'CommonInscripcionAdmGetNominaDer'};
+    const dataString = {'key': $("#key").val(), 'pos': posVal, 'actionCall': 'CommonInscripcionAdmGetNominaDer'};
     jQuery.ajax({
         url: "CommonCursoGetCursoAdmInscripcionDer",
         type: "POST",
@@ -13,7 +13,7 @@ function getCursoDer(posVal) {
 }
 
 $("#cursos-der-table a").click(function () {
-    var fieldName = $(this).attr("id");
+    const fieldName = $(this).attr("id");
     getCursoDer(fieldName.substr(fieldName.indexOf("_") + 1));
 });
 

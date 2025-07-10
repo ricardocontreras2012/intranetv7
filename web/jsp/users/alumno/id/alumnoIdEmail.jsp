@@ -47,7 +47,7 @@
                                         <label for="email">Ingrese Correo Electrónico</label><br>                                       
                                     </div>
                                     <div class="input-group">                                        
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="" required="required" value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmail"/>" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off ><br>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="" required="required" value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmail"/>" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="off" ><br>
                                     </div>
                                 </div>
                                 <div class="form-group mt-5">
@@ -55,7 +55,7 @@
                                         <label for="emailConfirm">Reingrese Correo Electrónico</label><br>                                        
                                     </div>
                                     <div class="input-group">                                        
-                                        <input type="email" class="form-control" id="emailConfirm" name="emailConfirm" placeholder="" required="required" value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmail"/>" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off >
+                                        <input type="email" class="form-control" id="emailConfirm" name="emailConfirm" placeholder="" required="required" value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmail"/>" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete="off" >
                                     </div>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@ function getCursos(posValue) {
 $(document).ready(function () {
     //Handlers
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         getCursos(field_name.substr(field_name.indexOf("_") + 1));
     });
     //

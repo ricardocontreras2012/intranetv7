@@ -35,6 +35,9 @@
         <property name="aluNombre" type="string">
             <column length="50" name="ALU_NOMBRE"/>
         </property>
+        <property name="aluNombreSocial" type="string">
+            <column length="50" name="ALU_NOMBRE_SOCIAL"/>
+        </property>
         <property name="aluSexo" type="string">
             <column length="1" name="ALU_SEXO"/>
         </property>

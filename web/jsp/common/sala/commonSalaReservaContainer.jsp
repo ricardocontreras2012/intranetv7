@@ -114,7 +114,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="motivo">Motivo de la Reserva</label>
-                                            <textarea name="motivo" id="motivo" class="form-control" rows="10" /></textarea>
+                                            <textarea name="motivo" id="motivo" class="form-control" rows="10"></textarea>
                                         </div>
                                     </div>
                                 </div>

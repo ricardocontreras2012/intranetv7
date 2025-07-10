@@ -6,7 +6,7 @@ function executeAction(posValue) {
 
 $(document).ready(function () {
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         executeAction(field_name.substr(field_name.indexOf("_") + 1));
     });
     
@@ -29,5 +29,5 @@ $(document).ready(function () {
         order: [[0, 'asc']]
     });
     
-    unblockPage();
+    
 });

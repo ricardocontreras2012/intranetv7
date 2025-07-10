@@ -23,7 +23,7 @@
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroGetLogros-3.0.1.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroGetLogros-3.0.2.js"></script>
     </head>
     <body>
         <form id="solicitudes-form" action="#">
@@ -35,18 +35,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- expediente logro != GE -->
+                        <!-- o que expediente logro expl_sol != null -->
                         <s:iterator value="#session.genericSession.getWorkSession(key).expedienteLogroList" status="row">
-                            <tr>
-                            <s:if test="#session.genericSession.getWorkSession(key).aluCar.alumno.aluSexo == \"1\"">
-                                <td><a id="expl_<s:property value="#row.count -1"/>">
-                                <s:property value="planLogro.plalLin1F"/> <s:property value="planLogro.plalLin2F"/></a>
+                            <tr data-estado="<s:property value="explEstado"/>" data-solicitud="<s:property value="explSol"/>" data-logro="<s:property value="planLogro.logro.logrCod"/>">
+                                <td>
+                                    <a id="expl_<s:property value="#row.count -1"/>"><s:property value="planLogro.plalNomLogro"/></a>
                                 </td>
-                            </s:if>
-                            <s:else>
-                                <td><a id="expl_<s:property value="#row.count -1"/>">
-                                <s:property value="planLogro.plalLin1M"/> <s:property value="planLogro.plalLin2M"/></a>
-                                </td>
-                            </s:else>    
                             </tr>
                         </s:iterator>
                     </tbody>

@@ -26,7 +26,7 @@ function saveNomina() {
 function validNomina()
 {
     $("#nomina-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
 
         if (fieldName !== undefined && fieldName !== null)
         {
@@ -73,7 +73,7 @@ $(document).ready(function () {
     });
 
     $("#nomina-form :input").each(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
 
         if (fieldName !== undefined && fieldName !== null)
         {

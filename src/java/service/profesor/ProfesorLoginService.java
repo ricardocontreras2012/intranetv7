@@ -21,6 +21,8 @@ public final class ProfesorLoginService {
      * 
      * @param action Clase que invoca al servicio.
      * @param sesion El contenedor de la sesión.
+     * @param rut
+     * @param passwd
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */

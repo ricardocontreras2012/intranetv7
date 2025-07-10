@@ -12,9 +12,14 @@
         <meta charset="UTF-8">
         <title>Seguimiento de Documentación</title>
         <link rel="stylesheet" href="/intranetv7/css/bootstrap/5.3.0/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
+        <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/popper/2.11.8/popper.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/5.3.0/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroView-1.0.3.js"></script>
         <style>
-            .step {
+
+            .step, .owner {
                 text-align: center;
                 position: relative;
                 flex: 1;
@@ -39,7 +44,7 @@
             .step::after {
                 content: '';
                 position: absolute;
-                top: 20px;
+                top: 25px;
                 left: 50%;
                 width: 100%;
                 height: 2px;
@@ -62,26 +67,39 @@
     </head>
     <body>
         <div class="container py-5">
-            <h2 class="mb-4 text-center">Seguimiento de Documentación</h2>
+            <!--h2 class="mb-4 text-center">Seguimiento de Documentación</h2-->
 
             <!-- Progress bar -->
-            <div class="d-flex justify-content-between mb-5">
-                <div class="step completed">
-                    <div class="circle">1</div>
-                    <div class="label">Envío Documentación</div>
+            <div class="d-flex justify-content-between mb-3" style="background: #00a499; color: white; border-radius: 10px;">
+                <div class="owner">
+                    <div>Alumno</div>
                 </div>
-                <!-- validar que todos los documentos AL, su estado = 2 -->
-                <div class="step">
-                    <div class="circle">2</div>
-                    <div class="label">Solicitudes Internas</div>
+                <div class="owner">
+                    <div>Registro Curricular</div>
                 </div>
-                <div class="step">
-                    <div class="circle">3</div>
+                <div class="owner">
+                    <div>Registro Curricular</div>
+                </div>
+                <div class="owner">
+                    <div>Títulos y Grados USACH</div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between mb-3">
+                <div class="step completed" id="step-1">
+                    <div class="circle" onclick="abrirPaso(1)" style="cursor: pointer">1</div>
+                    <div class="label">Envío de Documentación</div>
+                </div>
+                <div class="step" id="step-2">
+                    <div class="circle" onclick="abrirPaso(2)" style="cursor: pointer">2</div>
                     <div class="label">Verificación</div>
                 </div>
-                <div class="step">
-                <!-- Si expediente logro = TR -->
-                    <div class="circle">4</div>
+                <div class="step" id="step-3">
+                    <div class="circle" onclick="abrirPaso(3)" style="cursor: pointer">3</div>
+                    <div class="label">Solicitud de Constancias</div>
+                </div>
+                <div class="step" id="step-4">
+                    <div class="circle" onclick="abrirPaso(4)" style="cursor: pointer">4</div>
                     <div class="label">Despacho Expediente</div>
                 </div>
             </div>
@@ -90,74 +108,142 @@
             <div class="accordion" id="accordionSteps">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading1">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true">
-                            Paso 1: Envío Documentación Alumno
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false">
+                            Paso 1: Envío de Documentación
                         </button>
                     </h2>
-                    <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#accordionSteps">
+                    <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
                         <div class="accordion-body">
-                            <table class="table">
-                                <tbody>
-                                <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
-                                    <s:if test="tDocExpediente.tdeUser == 'AL'">
-                                        <tr>
-                                            <td>
-                                                <s:if test="edeEstado == 1">
-                                                    Enviado
-                                                </s:if>
-                                                <s:elseif test="edeEstado == 2">
-                                                    Aceptado
-                                                </s:elseif>
-                                                <s:elseif test="edeEstado == 3">
-                                                    Observado
-                                                </s:elseif>
-                                                <s:elseif test="edeEstado == 4">
-                                                    Rechazado
-                                                </s:elseif>
-                                            </td>
-                                            <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>
-                                            <td><a class="link" href="AlumnoSolicitudExpedienteDownloadFile?tdoc=<s:property value="id.edeTdoc"/>&amp;key=<s:property value="key"/>"><s:property value="edeFile" /></a></td>
-                                            <td><s:property value="edeObservacion"/></td>
-                                        </tr>
-                                    </s:if>
-                                </s:iterator>
-                                </tbody>
-                            </table>
+                            <p>Alumno envió la documentación requerida.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading2">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                            Paso 2: Solicitud de Constancias Internas
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false"> 
+                            Paso 2: Verificación
                         </button>
                     </h2>
                     <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
                         <div class="accordion-body">
+                            <form id="expediente-form" action="#">
+                                <table class="table">
+                                    <tbody>
+                                        <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
+                                            <s:if test="tDocExpediente.tdeUser == 'AL'">
+                                                <tr>
+                                                    <td>
+                                                        <s:if test="edeEstado == null">
+                                                            <span data-estado-al="0"></span>
+                                                        </s:if>
+                                                        <s:if test="edeEstado == 1">
+                                                            <span data-estado-al="1" class="badge text-bg-primary">Enviado</span>
+                                                        </s:if>
+                                                        <s:elseif test="edeEstado == 2">
+                                                            <span data-estado-al="2" class="badge text-bg-success">Aceptado</span>
+                                                        </s:elseif>
+                                                        <s:elseif test="edeEstado == 3">
+                                                            <button type="button" class="btn btn-link text-danger" style="padding: 0px; text-decoration: none;"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top"
+                                                                    data-bs-custom-class="custom-tooltip"
+                                                                    data-bs-html="true"
+                                                                    data-bs-title="<s:property value="edeObservacion"/>. <br/><strong>Vuelva a subir su documento.</strong>">
+                                                                <span data-estado-al="3" class="badge text-bg-danger">Observado</span>
+                                                                <span class="fa fa-info-circle" aria-hidden="true"></span>
+                                                            </button>
+                                                        </s:elseif>
+                                                        <s:elseif test="edeEstado == 4">
+                                                            <span data-estado-al="4" class="badge text-bg-danger">Rechazado</span>
+                                                        </s:elseif>
+                                                    </td>
+                                                    <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>
+                                                    <td>
+                                                        <a class="link" href="AlumnoSolicitudExpedienteDownloadFile?tdoc=<s:property value="id.edeTdoc"/>&amp;key=<s:property value="key"/>"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <s:if test="edeEstado == 3">
+                                                            <s:if test="id.edeTdoc == 10 ">
+                                                                <button id="caratula-button" title="<s:property value="tDocExpediente.tdeTexto" />" type="button" class="btn btn-light" >
+                                                                    <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
+                                                                </button>
+                                                            </s:if>
+                                                            <s:if test="id.edeTdoc == 30">
+                                                                <a href="https://www.registrocivil.cl/" title="<s:property value="tDocExpediente.tdeTexto" />" target="_blank" class="btn btn-light" >
+                                                                    <span class="fa fa-globe"></span>&nbsp; <span class="hidden-xs"><s:text name="Registro Civil"/></span>
+                                                                </a>
+                                                            </s:if>
+                                                            <s:if test="id.edeTdoc == 100">
+                                                                <a href="https://fae.usach.cl/fae/docs/intranet/solicitud-de-genero.pdf" title="<s:property value="tDocExpediente.tdeTexto" />" target="_blank" class="btn btn-light" >
+                                                                    <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
+                                                                </a>
+                                                            </s:if>
+                                                            <s:if test="id.edeTdoc == 110">
+                                                                <button id="pago-arancel-button" title="<s:property value="tDocExpediente.tdeTexto" />" type="button" class="btn btn-light" >
+                                                                    <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
+                                                                </button>
+                                                            </s:if>
+                                                            <s:if test="id.edeTdoc == 120">
+                                                                <a href="mailto:ingresoderequerimientosefusach@usach.cl" title="<s:property value="tDocExpediente.tdeTexto" />" target="_blank" class="btn btn-light" >
+                                                                    <span class="fa fa-envelope-o"></span>&nbsp; <span class="hidden-xs">Escribir</span>
+                                                                </a>
+                                                            </s:if>
+                                                        </s:if>
+                                                    </td>
+                                                    <td>
+                                                        <s:if test="edeEstado == 3">
+                                                            <input type="file" title="Subir Documento" name="upload-<s:property value="tDocExpediente.tdeCod" />" id="upload-<s:property value="tDocExpediente.tdeCod" />" data-upload-id="<s:property value="tDocExpediente.tdeCod" />" class="form-control upload-input" />
+                                                        </s:if>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
+                                        </s:iterator>
+                                    </tbody>
+                                </table>
+                                <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false">
+                            Paso 3: Solicitud de Constancias
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
+                        <div class="accordion-body">
                             <table class="table">
                                 <tbody>
-                                <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
-                                    <s:if test="tDocExpediente.tdeUser == 'US'">
-                                        <tr>
-                                            <td>
-                                                <s:if test="edeEstado == 1">
-                                                    Enviado
-                                                </s:if>
-                                                <s:elseif test="edeEstado == 2">
-                                                    Aceptado
-                                                </s:elseif>
-                                                <s:elseif test="edeEstado == 3">
-                                                    Observado
-                                                </s:elseif>
-                                                <s:elseif test="edeEstado == 4">
-                                                    Rechazado
-                                                </s:elseif>
-                                            </td>
-                                            <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>
-                                        </tr>
-                                    </s:if>
-                                </s:iterator>
+                                    <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
+                                        <s:if test="tDocExpediente.tdeUser == 'US'">
+                                            <tr>
+                                                <td>
+                                                    <s:if test="edeEstado == null">
+                                                        <span data-estado-us="0"></span>
+                                                    </s:if>
+                                                    <s:if test="edeEstado == 1">
+                                                        <span data-estado-us="1" class="badge text-bg-primary">Enviado</span>
+                                                    </s:if>
+                                                    <s:elseif test="edeEstado == 2">
+                                                        <span data-estado-us="2" class="badge text-bg-success">Aceptado</span>
+                                                    </s:elseif>
+                                                    <s:elseif test="edeEstado == 3">
+                                                        <span data-estado-us="3" class="badge text-bg-warning">Observado</span>
+                                                    </s:elseif>
+                                                    <s:elseif test="edeEstado == 4">
+                                                        <span data-estado-us="4" class="badge text-bg-danger">Rechazado</span>
+                                                    </s:elseif>
+                                                    <s:elseif test="edeEstado == 5">
+                                                        <span data-estado-us="5" class="badge text-bg-primary">Solicitado</span>
+                                                    </s:elseif>
+                                                </td>
+                                                <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>
+                                            </tr>
+                                        </s:if>
+                                    </s:iterator>
                                 </tbody>
                             </table>
                             <p><strong>Plazo de respuesta:</strong> 20 días hábiles</p>
@@ -166,34 +252,15 @@
                 </div>
 
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading3">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                            Paso 3: Verificación
-                        </button>
-                    </h2>
-                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
-                        <div class="accordion-body">
-                            <ul>
-                                <li>Carátula de expediente firmada</li>
-                                <li>Certificado de nacimiento</li>
-                                <li>Solicitud de género, marcar su preferencia y firmar</li>
-                                <li>Comprobante de pago arancel</li>
-                                <li>Certificado de título anterior (con código de verificación) - para prosecución o bachillerato</li>
-                                <li>Constancia de Pago (solicitar a SDT) - para prosecución</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
                     <h2 class="accordion-header" id="heading4">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false">
                             Paso 4: Despacho de Expediente
                         </button>
                     </h2>
                     <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
                         <div class="accordion-body">
                             <p>Una vez verificado, el expediente será enviado a la <strong>Unidad de Títulos y Grados</strong> para el trámite final.</p>
+                            <input type="hidden" name="exp-estado" id="exp-estado" value="<s:property value="#session.genericSession.getWorkSession(key).expedienteLogro.explEstado" />" />
                         </div>
                     </div>
                 </div>

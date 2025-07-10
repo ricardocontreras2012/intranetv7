@@ -21,7 +21,6 @@
         <script type="text/javascript" src="/intranetv7/js/local/users/alumno/examen/alumnoExamenAPMostrar-3.0.0.js"></script>
     </head>
     <body class="inner-body">
-
         <div class="title-div">
             Resultado Tres Sorteos Examen de Grado
         </div>
@@ -46,8 +45,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p><div id="err-div">Estos son los cursos que debe estudiar para su examen de grado</div></p>
+                        <div id="err-div">Estos son los cursos que debe estudiar para su examen de grado</div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                     </div>

@@ -33,10 +33,10 @@ $(document).ready(function () {
 
     $.validator.addMethod("fechaActual",
             function (value, element) {
-                var dArr = value.split("/");
-                var dArrActual = $("#fechaActual").val().split("/");
-                var d = new Date(dArr[2], dArr[1] - 1, dArr[0]);
-                var dActual = new Date(dArrActual[2], dArrActual[1] - 1, dArrActual[0]);
+                const dArr = value.split("/");
+                const dArrActual = $("#fechaActual").val().split("/");
+                const d = new Date(dArr[2], dArr[1] - 1, dArr[0]);
+                const dActual = new Date(dArrActual[2], dArrActual[1] - 1, dArrActual[0]);
 
                 return this.optional(element) || ((d <= dActual));
             }
@@ -44,10 +44,10 @@ $(document).ready(function () {
 
     $.validator.addMethod("recuperacion",
             function (value, element) {
-                var dArr = value.split("/");
-                var dArrActual = $("#recuperacion").val().split("/");
-                var d = new Date(dArr[2], dArr[1] - 1, dArr[0]);
-                var dActual = new Date(dArrActual[2], dArrActual[1] - 1, dArrActual[0]);
+                const dArr = value.split("/");
+                const dArrActual = $("#recuperacion").val().split("/");
+                const d = new Date(dArr[2], dArr[1] - 1, dArr[0]);
+                const dActual = new Date(dArrActual[2], dArrActual[1] - 1, dArrActual[0]);
 
                 return this.optional(element) || ((d <= dActual));
             }

@@ -109,11 +109,11 @@
 
         <script>
             <s:if test="hasActionMessages()">
-                var msg = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
-                var ary = msg.split('ERROR');
-                var acum = "";
+            const msg = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
+            const ary = msg.split('ERROR');
+            let acum = "";
 
-                for (var i = 0; i < ary.length; i++) {
+            for (let i = 0; i < ary.length; i++) {
                     if (typeof ary[i] !== "undefined")
                     {
                         acum += "<li><span>" + ary[i] + "</li></span>";
@@ -125,8 +125,8 @@
 
             </s:if>
             <s:if test="hasActionErrors()">
-                var msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
-                $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
+            const msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
+            $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
                 window.parent.$('#msg-error').modal('show');
             </s:if>
         </script>

@@ -75,7 +75,12 @@
                                 <s:property value="aluCar.alumno.aluMaterno"/>
                             </td>
                             <td>
-                                <s:property value="aluCar.alumno.aluNombre"/>
+                                <s:if test="aluCar.alumno.aluNombreSocial != null && aluCar.alumno.aluNombreSocial.trim() != ''">
+                                    <s:property value="aluCar.alumno.aluNombreSocial"/>
+                                </s:if>
+                                <s:else>
+                                    <s:property value="aluCar.alumno.aluNombre"/>
+                                </s:else>
                             </td>
                             <%--td align="center">
                                 <img height="80" id="foto<s:property value="#row.count"/>" src="CommonCursoGetFotoAlumno?pos=<s:property value="#row.count -1"/>&key=<s:property value="key"/>" alt=""/>

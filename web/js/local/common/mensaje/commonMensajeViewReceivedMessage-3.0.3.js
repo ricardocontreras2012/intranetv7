@@ -7,7 +7,7 @@ function replyMessage() {
 }
 
 function forwardMessage() {
-    var dataString = $("#view-received-message-form").serialize();
+    const dataString = $("#view-received-message-form").serialize();
     $('#message-iframe', window.parent.document).attr("src", 'CommonMensajeEnableFwd?' + dataString);    
 }
 

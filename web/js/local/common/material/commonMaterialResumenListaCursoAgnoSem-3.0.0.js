@@ -12,7 +12,7 @@ function getMateriales(pos)
 
 $(document).ready(function () {
     $("a").click(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         getMateriales(field_name.substr(field_name.indexOf("_") + 1));
     });
 

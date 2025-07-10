@@ -7,7 +7,7 @@ function getActividades(pos)
 $(document).ready(function () {
     
     $("a").click(function () {
-        var fieldName = $(this).attr("id");  
+        const fieldName = $(this).attr("id");
         getActividades(fieldName.substr(fieldName.indexOf("_") + 1));
     });
 });

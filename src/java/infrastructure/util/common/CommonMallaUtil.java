@@ -299,8 +299,7 @@ public final class CommonMallaUtil {
                 .map(obj -> {
                     Calificacion calificacion = new Calificacion();
                     CalificacionId id = new CalificacionId();
-                    ProcedenciaCalificacion procedencia = new ProcedenciaCalificacion();
-
+                    ProcedenciaCalificacion procedencia = new ProcedenciaCalificacion();                  
                     calificacion.setId(id);
                     calificacion.setAluCar(aluCar);
                     id.setCalRut(aluCar.getId().getAcaRut());
@@ -319,7 +318,7 @@ public final class CommonMallaUtil {
                     procedencia.setProcCod((String) obj[9]);
                     calificacion.setProcedenciaCalificacion(procedencia);
                     calificacion.setNombreFull((String) obj[10]);
-
+                    
                     return calificacion;
                 })
                 .collect(Collectors.toList());

@@ -18,9 +18,9 @@ $(document).ready(function () {
     $("#acta-form").validate({
         validationEventTriggers: "blur",
         success: function (label) {
-            var id = label.attr("for");
-            var input = $("#" + id);
-            var value = input.val().toUpperCase();
+            const id = label.attr("for");
+            const input = $("#" + id);
+            const value = input.val().toUpperCase();
 
             ((value === "AD") || (value === "A") || (value === "B")) ? input.attr("class", "aprobado") : input.attr("class", "reprobado");
         },
@@ -43,7 +43,7 @@ function exportActa() {
 }
 
 function printActa() {
-    var contentDisposition = $("#contentDisposition").val();
+    const contentDisposition = $("#contentDisposition").val();
     $("#contentDisposition").val("");
     $("#format").val("PDF");
     $("#acta-form").attr("action", "ProfesorActaExportActa");

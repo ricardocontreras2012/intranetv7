@@ -25,7 +25,7 @@
         <script type="text/javascript" src="/intranetv7/js/datePicker/gijgo-1.9.13.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/datePicker/gijgo-messages.es-es.js"></script>
     </head>
-    <body class="inner-body" onload="blockBack();onLoad();">
+    <body class="inner-body">
         <div class="title-div">
             <s:text name="label.title.solicitudes"/> de Justificativo Prueba PEP
         </div>

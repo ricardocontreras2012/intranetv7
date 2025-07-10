@@ -20,13 +20,25 @@ function showReserva(reserva)
         $("#detail").modal('show');
     });
 }
-function getContrastYIQ(hexcolor){
-	var r = parseInt(hexcolor.substr(0,2),16);
-	var g = parseInt(hexcolor.substr(2,2),16);
-	var b = parseInt(hexcolor.substr(4,2),16);
-	var yiq = ((r*299)+(g*587)+(b*114))/1000;
-	return (yiq >= 128) ? 'black' : 'white';
+
+function getContrastYIQ(hex) {
+    // Elimina el "#" si está presente
+    hex = hex.replace(/^#/, "");
+
+    // Valida que tenga 6 caracteres
+    if (hex.length !== 6) {
+        console.warn("Color hexadecimal inválido:", hex);
+        return "black"; // Valor por defecto
+    }
+
+    const r = parseInt(hex.slice(0, 2), 16);
+    const g = parseInt(hex.slice(2, 4), 16);
+    const b = parseInt(hex.slice(4, 6), 16);
+
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    return yiq >= 128 ? "black" : "white";
 }
+
 
 $(document).ready(function () {
     //$("#print-button").click(printHorario);

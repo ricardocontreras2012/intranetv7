@@ -7,7 +7,7 @@ function executeActionDummy() {
 
 function generaActas()
 {
-    var flag="";
+    let flag = "";
     if ($("#ck_r").prop('checked'))
     {
         flag ="R";

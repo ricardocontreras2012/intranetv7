@@ -1,5 +1,5 @@
 <!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
-  		"/WEB-INF/classes/xwork-validator-1.0.3.dtd">
+        "/WEB-INF/classes/xwork-validator-1.0.3.dtd">
 <validators>
     <field name="largoLista">
         <field-validator type="required">

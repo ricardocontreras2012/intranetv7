@@ -34,10 +34,6 @@ public final class AlumnoInscripcionRemoveInscripcionService {
         int retValue = genericSession.getWorkSession(key).getAluCar().removeInscripcionAlumno(action,
                 genericSession, parameters);
 
-        if (retValue == 0) {
-            return SUCCESS;
-        } else {
-            return "acta_emitida";
-        }
+        return retValue == 0 ? SUCCESS : "acta_emitida";
     }
 }

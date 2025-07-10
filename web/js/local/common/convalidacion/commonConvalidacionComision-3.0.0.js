@@ -14,5 +14,5 @@ function grabarComision(){
 $(document).ready(function() {
     $("#save-button").click(grabarComision);
     $("#add-button").click(getProfesor);
-    unblockPage();
+    
 });

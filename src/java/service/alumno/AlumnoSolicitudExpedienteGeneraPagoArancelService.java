@@ -79,8 +79,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
 
         // Añadir texto
         Paragraph paragraph = new Paragraph("REPUBLICA DE CHILE\nUNIVERSIDAD DE SANTIAGO DE CHILE\nFACULTAD DE ADMINISTRACIÓN Y ECONOMÍA\nREGISTRO CURRICULAR", fontCondensed);
-        paragraph.setAlignment(Element.ALIGN_LEFT);
-        paragraph.setIndentationLeft(90f);
+        paragraph.setAlignment(Element.ALIGN_CENTER);
         document.add(paragraph);
 
         document.add(new Paragraph("\n\n\n"));
@@ -94,7 +93,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         title2.setAlignment(Element.ALIGN_CENTER);
         document.add(title2);
 
-        document.add(new Paragraph("\n\n\n"));
+        document.add(new Paragraph("\n\n"));
 
         String alumnoDoc = alumno.getAluRut()+"-"+alumno.getAluDv();
         String alumnoNombre = alumno.getAluPaterno()+" "+alumno.getAluMaterno()+", "+alumno.getAluNombre();
@@ -111,14 +110,21 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         String pagoFormateado = String.format(Locale.forLanguageTag("es-CL"), "%,d", valor);
         document.add(new Paragraph("Total a pagar $ " + pagoFormateado, fontBold));
 
-        document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n"));
+        document.add(new Paragraph("\n\n\n\n\n\n\n\n\n"));
 
         // Fecha
         document.add(new Paragraph(DateUtil.getFechaCiudad(getSysdate()), fontRegular));
 
-        // Pie de página
-        document.add(new Paragraph("\nDESTINO: Cajas del departamento de Finanzas. Al pagar exija el comprobante de Ingreso, el cual debe entregar en el Registro Curricular de su Facultad para que lo adjunten al Expediente de Título y/o Grado.", fontSmall));
         document.add(new Chunk(new LineSeparator()));
+        // Pie de página
+        document.add(new Paragraph("Datos de Transferencia:", fontRegular));
+        document.add(new Paragraph("\nNombre de la Institución: Universidad de Santiago de Chile\n" +
+        "Rut USACH: 60.911.000-7\n" +
+        "Banco: Banco Santander\n" +
+        "Número de cuenta corriente: 0-000-1903580-8\n" +
+        "Correo electrónico envío transferencia: recaudación.tesoreria@usach.cl\n" +
+        "IMPORTANTE. Motivo: Título o Grado", fontSmall));
+        
 
         // Logo arriba a la izquierda
         float pageHeight = document.getPageSize().getHeight();
@@ -137,7 +143,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         logo.scalePercent(20f);
         float firmaWidth = firma.getScaledWidth();
         float firmaPosX = pageWidth - margin - firmaWidth; // derecha
-        float firmaPosY = margin + 200; // abajo
+        float firmaPosY = margin + 220; // abajo
         firma.setAbsolutePosition(firmaPosX, firmaPosY);
         document.add(firma);
 

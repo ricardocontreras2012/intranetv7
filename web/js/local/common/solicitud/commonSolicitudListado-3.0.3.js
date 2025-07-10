@@ -12,8 +12,8 @@ function viewSolicitud(pos) {
 
 function verSolicitudes() {
     blockPage();
-    var e = document.getElementById("estadoList");
-    var value = e.options[e.selectedIndex].value;
+    const e = document.getElementById("estadoList");
+    const value = e.options[e.selectedIndex].value;
     $("#estado").val(value);
     $("#solicitudes-form").attr("action", "CommonSolicitudGetSolicitudes");
     $("#solicitudes-form").attr("target", "_self");
@@ -29,7 +29,7 @@ function reloadPage()
 $(document).ready(function () {
     //Handlers
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         viewSolicitud(fieldName.substr(fieldName.indexOf("_") + 1));
     });
     
@@ -76,5 +76,5 @@ $(document).ready(function () {
         order: [[0, 'asc']]
     });
     
-    unblockPage();
+    
 });

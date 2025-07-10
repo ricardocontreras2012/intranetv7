@@ -8,5 +8,5 @@ function activateBlink()
 $(document).ready(function () {
     $("#navbarDropdown_utilidades").click(activateBlink);
     showAlertMessages();
-    unblockPage();
+    
 });

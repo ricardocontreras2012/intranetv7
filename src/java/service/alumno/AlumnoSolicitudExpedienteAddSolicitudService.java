@@ -29,23 +29,10 @@ public class AlumnoSolicitudExpedienteAddSolicitudService {
         String user = ActionUtil.getDBUser();
         Solicitud solicitud = ws.getSolicitud();
         solicitud.setSolMotivo(StringUtils.abbreviate("Expediente", 2000));
+        solicitud.setSolSolicita(ws.getExpedienteLogro().getPlanLogro().getPlalNomLogro());
         new SolicitudSupport(solicitud).setGenerada();
 
-        //completar expedienteId        
-        /*ExpedienteLogroId expedienteId = new ExpedienteLogroId();
-        expedienteId.setExplAgnoIng(2021);
-        expedienteId.setExplCodCar(3711);
-        expedienteId.setExplRut(20790190);
-        expedienteId.setExplSemIng(1);
-        expedienteId.setExplCorrel(1);*/
-        // Crear el objeto principal y asignar el ID
-        //ExpedienteLogro expediente = new ExpedienteLogro();
-        //expediente.setId(expedienteId);
-
         ExpedienteLogro expLogro = ws.getExpedienteLogro();
-        
-        
-        System.out.println("Folio:" + solicitud.getSolFolio());
 
         try {
             ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).saveExpedienteSolicitud(expLogro, solicitud.getSolFolio());

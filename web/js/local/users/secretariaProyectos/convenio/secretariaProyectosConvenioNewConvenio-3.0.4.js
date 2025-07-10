@@ -82,7 +82,7 @@ function searchRut()
     $("#nombres").html("");
     $("#direccion").val("");
 
-    var dataString = $("#convenio-form").serialize();
+    const dataString = $("#convenio-form").serialize();
     jQuery.ajax({
         url: "SecretariaProyectosConvenioFuncionarioSearch",
         type: "POST",
@@ -104,7 +104,7 @@ function searchPaterno()
     $("#nombres").html("");
     $("#direccion").val("");
 
-    var dataString = $("#convenio-form").serialize();
+    const dataString = $("#convenio-form").serialize();
     jQuery.ajax({
         url: "SecretariaProyectosConvenioFuncionarioSearch",
         type: "POST",
@@ -120,7 +120,7 @@ function searchPaterno()
 
 function addFuncionarioList(rutdv, paterno, materno, nombres, direccion)
 {
-    var rut = rutdv.substring(0, rutdv.length - 2);
+    const rut = rutdv.substring(0, rutdv.length - 2);
     $("#rutdv").val(rutdv);
     $("#rut").val(rut);
     $("#paterno").val(paterno);
@@ -141,15 +141,23 @@ function validateHorario()
 {
     if ($("#timeInicio").val() !== "" && $("#timeTermino").val() !== "")
     {
-        var rut = $("#rut").val();
-        var dia = $("#dia").find("option:selected").val();
-        var inicio = $("#fechaInicio").val();
-        var termino = $("#fechaTermino").val();
-        var hrInicio = $("#timeInicio").val();
-        var hrTermino = $("#timeTermino").val();
+        const rut = $("#rut").val();
+        const dia = $("#dia").find("option:selected").val();
+        const inicio = $("#fechaInicio").val();
+        const termino = $("#fechaTermino").val();
+        const hrInicio = $("#timeInicio").val();
+        const hrTermino = $("#timeTermino").val();
         $("#add-horario-modal").modal('hide');
 
-        var dataString = {'key': $("#key").val(), 'rut': rut, 'dia': dia, 'fechaInicio': inicio, 'fechaTermino': termino, 'horaInicio': hrInicio, 'horaTermino': hrTermino};
+        const dataString = {
+            'key': $("#key").val(),
+            'rut': rut,
+            'dia': dia,
+            'fechaInicio': inicio,
+            'fechaTermino': termino,
+            'horaInicio': hrInicio,
+            'horaTermino': hrTermino
+        };
         jQuery.ajax({
             url: "SecretariaProyectosConvenioTopeHorario",
             type: "POST",
@@ -160,7 +168,7 @@ function validateHorario()
             async: false
         });
 
-        var str = $("#result-status-div").html().trim();
+        const str = $("#result-status-div").html().trim();
         if (str === "Error")
         {
             $("#error-div").html("<p>" + $("#result-error-div").html().replaceAll("#", "</p>"));
@@ -170,7 +178,7 @@ function validateHorario()
         {
             addHorario();
 
-            var rowCount = $('#horario-table tr').length;
+            const rowCount = $('#horario-table tr').length;
             if (rowCount === 2)
             {
                 switch ($("#tipoContrato").find("option:selected").val()) {
@@ -199,7 +207,7 @@ function validateHorario()
 
 function getNewRowId()
 {
-    var ret = $("#newRow").val();
+    let ret = $("#newRow").val();
     ret++;
     $("#newRow").val(ret);
     return ret;
@@ -207,14 +215,14 @@ function getNewRowId()
 
 function addHorario()
 {
-    var dia = $("#dia").find("option:selected").val();
-    var inicio = $("#timeInicio").val();
-    var termino = $("#timeTermino").val();
-    var fila = getNewRowId();
-    var col1 = '<td><input type="text" id="dia_' + fila + '" name="dia_' + fila + '" class="form-control" value="' + dia + '"/></td>';
-    var col2 = '<td><input type="text" id="inicio_' + fila + '" name="inicio_' + fila + '" class="form-control" value="' + inicio + '"/></td>';
-    var col3 = '<td><input type="text" id="termino_' + fila + '" name="termino_' + fila + '" class="form-control" value="' + termino + '"/></td>';
-    var row = "<tr>" + col1 + col2 + col3 + "</tr>";
+    const dia = $("#dia").find("option:selected").val();
+    const inicio = $("#timeInicio").val();
+    const termino = $("#timeTermino").val();
+    const fila = getNewRowId();
+    const col1 = '<td><input type="text" id="dia_' + fila + '" name="dia_' + fila + '" class="form-control" value="' + dia + '"/></td>';
+    const col2 = '<td><input type="text" id="inicio_' + fila + '" name="inicio_' + fila + '" class="form-control" value="' + inicio + '"/></td>';
+    const col3 = '<td><input type="text" id="termino_' + fila + '" name="termino_' + fila + '" class="form-control" value="' + termino + '"/></td>';
+    const row = "<tr>" + col1 + col2 + col3 + "</tr>";
 
     $("#timeInicio").val("");
     $("#timeTermino").val("");
@@ -223,13 +231,13 @@ function addHorario()
 
 function getCursos()
 {
-    var agno = $("#agno").val();
-    var sem = $("#sem").val();
-    var proyecto = $("#proyecto option:selected").val();
-    var rut = $("#rut").val();
-    var tipo = $('#tipoContrato').find("option:selected").val();
+    const agno = $("#agno").val();
+    const sem = $("#sem").val();
+    const proyecto = $("#proyecto option:selected").val();
+    const rut = $("#rut").val();
+    const tipo = $('#tipoContrato').find("option:selected").val();
 
-    var action;
+    let action;
 
     if (tipo === "DOC")
     {
@@ -239,7 +247,7 @@ function getCursos()
         action = "SecretariaProyectosConvenioGetCursosAyudante";
     }
 
-    var dataString = {'key': $("#key").val(), 'rut': rut, 'agno': agno, 'sem': sem, 'proyecto': proyecto};
+    const dataString = {'key': $("#key").val(), 'rut': rut, 'agno': agno, 'sem': sem, 'proyecto': proyecto};
     jQuery.ajax({
         url: action,
         type: "GET",
@@ -253,9 +261,9 @@ function getCursos()
 
 function clearBasic()
 {
-    var proyecto = $("#proyecto option:selected").val();
+    const proyecto = $("#proyecto option:selected").val();
 
-    var dataString = {'key': $("#key").val(), 'proyecto': proyecto};
+    const dataString = {'key': $("#key").val(), 'proyecto': proyecto};
     jQuery.ajax({
         url: "SecretariaProyectosConvenioGetProyecto",
         type: "GET",
@@ -267,7 +275,7 @@ function clearBasic()
     });
 
     $("#rutdvFirma").val($("#dummy-rut-jefe-div").html());
-    var rut = $("#rutdvFirma").val();
+    const rut = $("#rutdvFirma").val();
     $("#rutFirma").val(rut.substring(0, rut.length - 2));
     $("#nombre-firmma-div").html($("#dummy-nombre-jefe-div").html());
 
@@ -278,8 +286,8 @@ function clearBasic()
 
 function changeFirma()
 {
-    var rut = $("#rutFirma").val();
-    var dataString = {'key': $("#key").val(), 'rut': rut};
+    const rut = $("#rutFirma").val();
+    const dataString = {'key': $("#key").val(), 'rut': rut};
     jQuery.ajax({
         url: "SecretariaProyectosConvenioGetProfesor",
         type: "GET",
@@ -322,28 +330,28 @@ $(document).ready(function () {
     $("#accept-horario-button").click(acceptHorario);
 
     jQuery.validator.addMethod("rutdv", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
-        var aux = element.name === "rutdv" ? "rut" : "rutFirma";
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const aux = element.name === "rutdv" ? "rut" : "rutFirma";
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv(element.name, aux));
     }, "Rut-Dv inválido");
 
     $("#rutdv").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
 
     $("#rutdv").blur(function () {
-        var validator = $("#convenio-form").validate();
+        const validator = $("#convenio-form").validate();
         validator.element("#rutdv");
     });
 
     $("#rutdvFirma").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
 
     $("#rutdvFirma").blur(function () {
-        var validator = $("#convenio-form").validate();
+        const validator = $("#convenio-form").validate();
         validator.element("#rutdvFirma");
     });
 
@@ -358,10 +366,10 @@ $(document).ready(function () {
     $("#timeTermino").mask("99:99");
 
     $("#timeInicio").blur(function () {
-        var inicio = $(this).val();
+        const inicio = $(this).val();
         if (inicio !== "")
         {
-            var pattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
+            const pattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
             if (!pattern.test(inicio)) {
                 alert('valor' + inicio + ' es inválido');
                 $("#timeInicio").val("");
@@ -371,10 +379,10 @@ $(document).ready(function () {
     });
 
     $("#timeTermino").blur(function () {
-        var termino = $(this).val();
+        const termino = $(this).val();
         if (termino !== "")
         {
-            var pattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
+            const pattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]/;
             if (!pattern.test(termino)) {
                 alert('valor' + termino + ' es inválido');
                 $("#timeTermino").val("");
@@ -427,35 +435,29 @@ $(document).ready(function () {
     $("#funcion").prop("disabled", true);
 
     $('#tipoContrato').on('change', function () {
-        var optionSelected = $(this).find("option:selected").val();
-        $("#funcion").val("");
+        const tipo = $(this).val();
+        const $funcion = $("#funcion");
+        const $horarioDiv = $("#horario-div");
 
-        switch (optionSelected) {
-            case 'DOC':
-                $("#funcion").prop("disabled", true);
-                $("#horario-div").val("");
-                $("#horario-div").css("visibility", "hidden");
-                $("#curso-search-modal").modal('show');
-                getCursos();
-                break;
-            case 'AYU':
-                $("#funcion").prop("disabled", true);
-                $("#horario-div").val("");
-                $("#horario-div").css("visibility", "hidden");
-                $("#curso-search-modal").modal('show');
-                getCursos();
-                break;
-            case 'SER':
-            case 'SEC':
-            case 'DPG':
-                $("#horario-table-div").html('<table id="horario-table" class="table"><tr><th>Día</th><th>Hora Inicio</th><th>Hora Término</th></tr></table>');
-                $("#horario-modal").modal('show');
-                break;
-            case 'EXT':
-                $("#funcion").prop("disabled", false);
-            default:
+        $funcion.val(""); // Reinicia campo "funcion"
+
+        if (tipo === "DOC" || tipo === "AYU") {
+            $funcion.prop("disabled", true);
+            $horarioDiv.val("").css("visibility", "hidden");
+            $("#curso-search-modal").modal("show");
+            getCursos();
+        } else if (["SER", "SEC", "DPG"].includes(tipo)) {
+            $("#horario-table-div").html(`
+            <table id="horario-table" class="table">
+                <tr><th>Día</th><th>Hora Inicio</th><th>Hora Término</th></tr>
+            </table>
+        `);
+            $("#horario-modal").modal("show");
+        } else if (tipo === "EXT") {
+            $funcion.prop("disabled", false);
         }
     });
+
 
     $("#convenio-form").validate({
         rules: {

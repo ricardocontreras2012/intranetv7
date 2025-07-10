@@ -115,7 +115,7 @@ $(document).ready(function () {
     });
 
     $("#rutEmpleador").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
     
@@ -226,7 +226,7 @@ $(document).ready(function () {
         }
     }
     $.validator.addMethod("rutdv", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutEmpleador", "rut"));
     }, "Rut-Dv inválido");
     $.validator.addMethod("rutEmpleadorCorrecta", rutEmpleadorCorrecta, "Campo obligatorio.");

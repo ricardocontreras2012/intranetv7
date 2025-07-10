@@ -1,6 +1,6 @@
 function showCambioMencionDialog()
 {
-    var data_string = $("#inscripcion-form").serialize();
+    const data_string = $("#inscripcion-form").serialize();
     //var menDivValue = "";
     jQuery.ajax({
         url: "AlumnoInscripcionCambioMencionGetMencion",
@@ -31,15 +31,15 @@ function removeInscripcion() {
     $("#confirmacion").modal('hide');
 
     // Serializa los datos del formulario para enviarlos como parámetros en la URL
-    var data_string = $("#inscripcion-iframe").contents().find("#inscripcion-form").serialize();
+    const data_string = $("#inscripcion-iframe").contents().find("#inscripcion-form").serialize();
 
     // Obtiene los elementos iframe correspondientes
-    var inscripcionIframe = $('#inscripcion-iframe');
+    const inscripcionIframe = $('#inscripcion-iframe');
 
     if (inscripcionIframe.length > 0) {
         // Establece un listener para cuando el iframe termine de cargar su nuevo contenido.
         inscripcionIframe.one('load', function () {
-            var derechosIframe = $('#derechos-iframe');
+            const derechosIframe = $('#derechos-iframe');
 
             if (derechosIframe.length > 0) {
                 derechosIframe.attr("src", 'AlumnoInscripcionGetDerechos?key=' + $("#key").val());
@@ -58,8 +58,8 @@ function removeInscripcion() {
 }
 
 function showProfesor(profesor, pos, source) {
-    var random_number = Math.floor(Math.random() * 10000);
-    var html_text = "<div><img width=\"70\" height=\"80\" alt=\" \" src=\"dummy/" + random_number + "/intranetv7/CommonInscripcionGetFotoProfesor?key=" + $("#key").val() + "&pos=" + pos + "&source=" + source + "\"/><p>" + profesor.replace('/0/g', ' ') + "</p></div>";
+    const random_number = Math.floor(Math.random() * 10000);
+    const html_text = "<div><img width=\"70\" height=\"80\" alt=\" \" src=\"dummy/" + random_number + "/intranetv7/CommonInscripcionGetFotoProfesor?key=" + $("#key").val() + "&pos=" + pos + "&source=" + source + "\"/><p>" + profesor.replace('/0/g', ' ') + "</p></div>";
 
     parent.$("#profesor-div").html(html_text);
     parent.$("#profesor").modal('show');
@@ -68,7 +68,7 @@ function showProfesor(profesor, pos, source) {
 
 function getInscripcion()
 {
-    var data_string = $("#inscripcion-form").serialize();
+    const data_string = $("#inscripcion-form").serialize();
     $("#inscripcion-iframe").attr("src", 'AlumnoInscripcionGetInscripcion?' + data_string);
 }
 

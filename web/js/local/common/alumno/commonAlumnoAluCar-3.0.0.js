@@ -6,7 +6,7 @@ function searchCarrera(posValue) {
 
 $(document).ready(function () {
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         searchCarrera(fieldName.substr(fieldName.indexOf("_") + 1));
     });
 });

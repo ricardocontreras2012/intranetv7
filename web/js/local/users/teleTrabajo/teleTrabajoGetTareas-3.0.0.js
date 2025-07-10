@@ -1,6 +1,6 @@
 function showEvidencia(pos) {
     $("#pos").val(pos);
-    var dataString = $("#tareas-form").serialize();
+    const dataString = $("#tareas-form").serialize();
     $('#main-content-iframe', window.parent.document).attr("src", 'TeleTrabajoGetEvidencia?'+ dataString);
     //$('#main-content-iframe', window.parent.document).attr("action", "TeleTrabajoGetEvidencia").attr("target", "_self").submit();
 }
@@ -34,7 +34,7 @@ $(document).ready(function () {
     $("#edit-button").click(editTarea);
     $("#delete-button").click(deleteTarea);
     $("a").click(function () {
-        var fieldName = $(this).attr("id");
+        const fieldName = $(this).attr("id");
         showEvidencia(fieldName.substr(fieldName.indexOf("_") + 1));
     });
 });

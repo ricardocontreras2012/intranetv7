@@ -125,6 +125,13 @@ public final class CommonAlumnoUtil {
         return InscripcionSupport.getCursoList(insSup.getInscripcionFull(aluCar.getParametros().getAgnoAct(), aluCar.getParametros().getSemAct()));
     }
 
+    public static String getNombreSocial(Alumno alumno) {
+        String nombreSocial = alumno.getAluNombreSocial();
+        return (nombreSocial != null && !nombreSocial.trim().isEmpty())
+                ? nombreSocial
+                : alumno.getAluNombre();
+    }
+
     /**
      *
      * @param aluCar
@@ -225,7 +232,7 @@ public final class CommonAlumnoUtil {
 
         Alumno alumno = alumnoSession.getAlumno();
         aluCar.setAlumno(alumno);
-        ws.setNombre(alumno.getNombre());
+        ws.setNombre(getNombreSocial(alumno));
 
         ws.setTmaterialSelectOption(ContextUtil.getTipoMaterialMap().get("AL"));
         setTipoCursos(ws);
@@ -259,7 +266,7 @@ public final class CommonAlumnoUtil {
             genericSession.setPaterno(alumno.getAluPaterno());
             genericSession.setMaterno(alumno.getAluMaterno());
             genericSession.setNombres(alumno.getAluNombre());
-            genericSession.setNombre(alumno.getNombreStd());
+            genericSession.setNombre(alumno.getNombreSocialStd());
             genericSession.setEmail(alumno.getAluEmailUsach());
             genericSession.setNombreMensaje(alumno.getNombreMensaje());
 

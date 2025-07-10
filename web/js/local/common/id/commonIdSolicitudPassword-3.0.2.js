@@ -16,12 +16,12 @@ $(document).ready(function () {
     //Handler
     $("#send-button").click(submitLogin);
     $("#rutdv").keyup(function () {
-        var rut = formatear($(this).val(), true);
+        const rut = formatear($(this).val(), true);
         $(this).val(rut);
     });
     //
     jQuery.validator.addMethod("rutdv", function (value, element) {
-        var regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
+        const regExp = new RegExp("^[0-9.]+-?(\\d{1}|[Kk])$");
         return this.optional(element) || (regExp.test(jQuery.trim(value)) && validateRutDv("rutdv", "rut"));
     }, "Rut-Dv inválido.");
 

@@ -1,6 +1,6 @@
 function removeInscripcion() {
     $("#confirmacion-elimina").modal('hide');
-    var data_string = $("#inscripcion-iframe").contents().find("#inscripcion-form").serialize();
+    const data_string = $("#inscripcion-iframe").contents().find("#inscripcion-form").serialize();
     $('#inscripcion-iframe').attr("src", 'CommonInscripcionRemoveInscripcion?' + data_string);
 
 }
@@ -14,7 +14,7 @@ function inscribir()
 
 function getInscripcion()
 {
-    var data_string = $("#inscripcion-form").serialize();
+    const data_string = $("#inscripcion-form").serialize();
     $("#inscripcion-iframe").attr("src", 'CommonInscripcionGetInscripcion?' + data_string);
 }
 

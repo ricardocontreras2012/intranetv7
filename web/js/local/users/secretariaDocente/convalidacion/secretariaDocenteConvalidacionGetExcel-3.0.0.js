@@ -2,7 +2,7 @@
 
 function importar()
 {
-    var data = new FormData($("#upload-form")[0]);
+    const data = new FormData($("#upload-form")[0]);
     jQuery.ajax({
         url: "SecretariaDocenteConvalidacionGetExcel",
         data: data,

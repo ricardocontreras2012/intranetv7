@@ -12,8 +12,8 @@ function generarActa() {
 }
 
 $(document).ready(function () {
-    var check;
-    var pos;
+    let check;
+    let pos;
 
     $("#emitir-button").click(generarActa);
 
@@ -39,8 +39,8 @@ $(document).ready(function () {
     $("#convalidacion-form :input").keydown(function (e) {
         if (enterKey(e)) {
             $("#convalidacion-form").valid();
-            var fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
-            var index = fields.index(this);
+            const fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
+            const index = fields.index(this);
             if (index > -1 && (index + 1) < fields.length) {
                 fields.eq(index + 1).focus();
             }
@@ -89,15 +89,15 @@ $(document).ready(function () {
 
 function formularioEsValido()
 {
-    var errStr = "";
-    var retValue = false;
-    var notChecked = true;
+    let errStr = "";
+    let retValue = false;
+    let notChecked = true;
 
     $("#convalidacion-form :input").each(function () {
-        var field_name = $(this).attr("id");
-        var pos;
-        var nota;
-        var cursada;
+        const field_name = $(this).attr("id");
+        let pos;
+        let nota;
+        let cursada;
 
         if (errStr.length === 0 && field_name.startsWith("ck_") && $("#" + field_name).prop("checked")) {
             if (notChecked)

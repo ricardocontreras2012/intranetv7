@@ -1,6 +1,6 @@
 <!DOCTYPE struts PUBLIC
-	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
-	"/WEB-INF/classes/struts-2.3.dtd">
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "/WEB-INF/classes/struts-2.3.dtd">
 <!--
     Document   : strutsEgresado.xml
     Created on : 25 de enero de 2012, 04:26 PM
@@ -11,7 +11,9 @@
         <interceptors>
             <interceptor-stack name="secureDefaultStack">
                 <interceptor-ref name="defaultStack">
-                    <param name="params.excludeParams">(.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*</param>
+                    <param name="params.excludeParams">
+                        (.*\.|^|.*|\[('|"))(c|C)lass(\.|('|")]|\[).*,^dojo\..*,^struts\..*,^session\..*,^request\..*,^application\..*,^servlet(Request|Response)\..*,^parameters\..*,^action:.*,^method:.*
+                    </param>
                 </interceptor-ref>
             </interceptor-stack>
 
@@ -62,7 +64,7 @@
             </result>
             <result name="error" type="redirectAction">
                 <param name="actionName">CommonLoginEnableForm</param>
-                <param name="err">RUN/Password inválido</param>                
+                <param name="err">RUN/Password inválido</param>
             </result>
             <result name="input">/jsp/common/id/commonIdLogIn.jsp
             </result>
@@ -88,62 +90,73 @@
             <result name="error">/jsp/users/egresado/id/egresadoIdMisDatos.jsp</result>
         </action>
 
-<!-- Laborales -->
-        <action name="EgresadoLaboralesGetMisDatos" class="action.egresado.EgresadoLaboralesGetMisDatosAction" method="execute">
+        <!-- Laborales -->
+        <action name="EgresadoLaboralesGetMisDatos" class="action.egresado.EgresadoLaboralesGetMisDatosAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp
             </result>
         </action>
-        <action name="EgresadoLaboralesViewLaboral" class="action.egresado.EgresadoLaboralesViewLaboralAction" method="execute">
+        <action name="EgresadoLaboralesViewLaboral" class="action.egresado.EgresadoLaboralesViewLaboralAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesViewLaboral.jsp</result>
             <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
         </action>
-        <action name="EgresadoLaboralesNewLaboral" class="action.egresado.EgresadoLaboralesNewLaboralAction" method="execute">
+        <action name="EgresadoLaboralesNewLaboral" class="action.egresado.EgresadoLaboralesNewLaboralAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/laborales/egresadoLaboralesNewLaboral.jsp</result>
             <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
         </action>
-        <action name="EgresadoLaboralesUpdateLaboral" class="action.egresado.EgresadoLaboralesUpdateLaboralAction" method="execute">
+        <action name="EgresadoLaboralesUpdateLaboral" class="action.egresado.EgresadoLaboralesUpdateLaboralAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
             <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
         </action>
-        <action name="EgresadoLaboralesSaveLaboral" class="action.egresado.EgresadoLaboralesSaveLaboralAction" method="execute">
+        <action name="EgresadoLaboralesSaveLaboral" class="action.egresado.EgresadoLaboralesSaveLaboralAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
             <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
         </action>
-        <action name="EgresadoLaboralesDeleteLaboral" class="action.egresado.EgresadoLaboralesDeleteLaboralAction" method="execute">
+        <action name="EgresadoLaboralesDeleteLaboral" class="action.egresado.EgresadoLaboralesDeleteLaboralAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="error">/jsp/users/egresado/laborales/egresadoLaboralesMisDatos.jsp</result>
         </action>
 
-<!-- Estudios -->
-        <action name="EgresadoEstudiosGetMisDatos" class="action.egresado.EgresadoEstudiosGetMisDatosAction" method="execute">
+        <!-- Estudios -->
+        <action name="EgresadoEstudiosGetMisDatos" class="action.egresado.EgresadoEstudiosGetMisDatosAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp
             </result>
         </action>
-        <action name="EgresadoEstudiosViewEstudio" class="action.egresado.EgresadoEstudiosViewEstudioAction" method="execute">
+        <action name="EgresadoEstudiosViewEstudio" class="action.egresado.EgresadoEstudiosViewEstudioAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosViewEstudio.jsp</result>
             <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
         </action>
-        <action name="EgresadoEstudiosNewEstudio" class="action.egresado.EgresadoEstudiosNewEstudioAction" method="execute">
+        <action name="EgresadoEstudiosNewEstudio" class="action.egresado.EgresadoEstudiosNewEstudioAction"
+                method="execute">
             <result name="success">/jsp/users/egresado/estudios/egresadoEstudiosNewEstudio.jsp</result>
             <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
         </action>
-        <action name="EgresadoEstudiosUpdateEstudio" class="action.egresado.EgresadoEstudiosUpdateEstudioAction" method="execute">
+        <action name="EgresadoEstudiosUpdateEstudio" class="action.egresado.EgresadoEstudiosUpdateEstudioAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
             <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
         </action>
-        <action name="EgresadoEstudiosSaveEstudio" class="action.egresado.EgresadoEstudiosSaveEstudioAction" method="execute">
+        <action name="EgresadoEstudiosSaveEstudio" class="action.egresado.EgresadoEstudiosSaveEstudioAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
             <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
         </action>
-        <action name="EgresadoEstudiosDeleteEstudio" class="action.egresado.EgresadoEstudiosDeleteEstudioAction" method="execute">
+        <action name="EgresadoEstudiosDeleteEstudio" class="action.egresado.EgresadoEstudiosDeleteEstudioAction"
+                method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="error">/jsp/users/egresado/estudios/egresadoEstudiosMisDatos.jsp</result>
         </action>
-
 
 
     </package>

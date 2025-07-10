@@ -1,6 +1,4 @@
-
-
-var regex = new RegExp("^[a-zA-Z0-9@#\$%&+=_\-]$");
+const regex = new RegExp("^[a-zA-Z0-9@#\$%&+=_\-]$");
 
 function changePassword() {
     if ($("#cambioPassword-form").validate().form() === true)
@@ -18,8 +16,8 @@ function changePassword() {
 
 function validatePwdStrength()
 {
-    var pwd = $('#passwdNueva').val();
-    var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%&+=_\-])(?=.{8,})");
+    const pwd = $('#passwdNueva').val();
+    const strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#\$%&+=_\-])(?=.{8,})");
     return strongRegex.test(pwd);
 }
 
@@ -27,7 +25,7 @@ $(document).ready(function () {
     $("#save-button").click(changePassword);
 
     $('#passwdNueva').bind("keypress", function (event) {
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
             event.preventDefault();
             return false;
@@ -35,7 +33,7 @@ $(document).ready(function () {
     });
 
     $('#passwdConfirm').bind("keypress", function (event) {
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
         if (!regex.test(key)) {
             event.preventDefault();
             return false;

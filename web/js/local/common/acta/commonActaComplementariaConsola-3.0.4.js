@@ -13,58 +13,69 @@ $(document).ready(function () {
     $("#emitir-button").click(emitirActa);
     $("#search-button").click(getCursos);
 
-    var msgError = $("#msg-dummy-error-div").text().replace(/(\r\n|\n|\r)/g, "");
+    const msgError = $("#msg-dummy-error-div").text().replace(/(\r\n|\n|\r)/g, "");
     if (msgError !== '')
     {
         $("#msg-result-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
         $("#result").modal('show');
     }
 
-    var msgOK = $("#msg-dummy-ok-div").text().replace(/(\r\n|\n|\r)/g, "");
+    const msgOK = $("#msg-dummy-ok-div").text().replace(/(\r\n|\n|\r)/g, "");
     if (msgOK !== '')
     {
         $("#msg-result-div").html("<div class='actionMessage'><ul><li><span>" + msgOK + "</li></ul></span></div>");
         $("#result").modal('show');
     }
-    
+
     $("#cursos-form :input").keydown(function (e) {
         if (enterKey(e)) {
             $("#cursos-form").valid();
-            var fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
-            var index = fields.index(this);
+            const fields = $(this).parents('form:eq(0),body').find('button,input,textarea,select');
+            const index = fields.index(this);
             if (index > -1 && (index + 1) < fields.length) {
                 fields.eq(index + 1).focus();
             }
         }
     });
-    
+
     $("#cursos-form").validate({
-        validationEventTriggers: "blur",        
+        validationEventTriggers: "blur",
         event: "blur",
         rules: {},
         messages: {}
     });
 
     $("#cursos-form :input").each(function () {
-        var field_name = $(this).attr("id");
+        const field_name = $(this).attr("id");
         if (field_name.startsWith("nota_")) {
             $(this).rules("add", {
                 formatoNota: true
             });
         }
     });
-    
-     $("#cursos-form :input").change(function () {
-        var field_name = $(this).attr("id");
-        if (field_name.startsWith("nota_")) {
-             var value = $("#"+field_name).val().replace(",",".");         
-             if (value > 10)
-             {
-                 value = value/10;
-             }
-            (value < 4) ? $("#"+field_name).attr("class", "form-control no-padding col-lg-6 col-sm-12 reprobado") : $("#"+field_name).attr("class", "form-control no-padding col-lg-6 col-sm-12 aprobado");
+
+    $("#cursos-form :input").on("change", function () {
+        const $field = $(this);
+        const fieldId = $field.attr("id");
+
+        if (fieldId.startsWith("nota_")) {
+            let value = $field.val().replace(",", ".");
+            value = parseFloat(value);
+
+            if (value > 10) {
+                value /= 10;
+            }
+
+            const newClass = value < 4
+                    ? "reprobado"
+                    : "aprobado";
+
+            $field
+                    .val(value) // Actualiza el valor si fue modificado
+                    .attr("class", `form-control no-padding col-lg-6 col-sm-12 ${newClass}`);
         }
     });
+
 
 });
 

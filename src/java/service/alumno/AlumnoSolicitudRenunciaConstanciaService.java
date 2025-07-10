@@ -70,7 +70,7 @@ public class AlumnoSolicitudRenunciaConstanciaService {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         Solicitud solicitud = ws.getSolicitud();                
-        Integer solFolio = ws.getSolicitud().getSolFolio();
+        Integer solFolio = solicitud.getSolFolio();
         solicitud.setSolMotivo(StringUtils.abbreviate(motivo, 2000));
         new SolicitudSupport(solicitud).setAprobada();
         

@@ -40,8 +40,8 @@ public final class AlumnoPracticaAddAttachFileService {
         Solicitud solicitud = ws.getSolicitud();
 
         try {
-            new SolicitudSupport(ws.getSolicitud()).doNewFile(action, tipo, upload, uploadFileName, "");
-            ws.getSolicitud().setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).find(solicitud));
+            new SolicitudSupport(solicitud).doNewFile(action, tipo, upload, uploadFileName, "");
+            solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).find(solicitud));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -19,6 +19,7 @@ public class TDocExpediente implements Serializable {
     private Integer tdeCod;
     private String tdeDes;
     private String tdeUser;
+    private String tdeTexto;
 
     /**
      *
@@ -49,5 +50,12 @@ public class TDocExpediente implements Serializable {
     public void setTdeUser(String tdeUser) {
         this.tdeUser = tdeUser;
     }
-    
+
+    public String getTdeTexto() {
+        return tdeTexto;
+    }
+
+    public void setTdeTexto(String tdeTexto) {
+        this.tdeTexto = tdeTexto;
+    }
 }

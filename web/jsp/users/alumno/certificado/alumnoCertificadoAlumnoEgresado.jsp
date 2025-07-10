@@ -39,7 +39,7 @@
         <s:form id="certificacion-form" action="#" method="post" theme="bootstrap">
             <table>                
                 <tr>
-                    <td align="left">
+                    <td style="text-align: left;">
                         <s:select id="tramite"
                                   name="tramite"
                                   headerKey=""

@@ -13,7 +13,7 @@ function executeAction(posValue) {
 }
 
 function executeBatch() {
-    var fila;
+    let fila;
     $("#actas-form input[type=checkbox]").each(function () {
         if ($(this).attr("id").startsWith("ck")) {
             if ($(this).is(":checked")) {

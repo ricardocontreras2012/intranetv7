@@ -1,34 +1,28 @@
 
-
-function formatear(rut, digitoVerificador)
-{
-    var sRut = new String(rut.replace(/[^0-9\Kk]/g, ''));
-    var sRutFormateado = '';
+function formatear(rut, digitoVerificador) {
+    let sRut = rut.replace(/[^0-9\Kk]/g, '');
+    let sRutFormateado = '';
 
     if (digitoVerificador) {
         var sDV = sRut.charAt(sRut.length - 1);
         sRut = sRut.substring(0, sRut.length - 1);
     }
-    while (sRut.length > 3)
-    {
+    while (sRut.length > 3) {
         sRutFormateado = "." + sRut.substr(sRut.length - 3) + sRutFormateado;
         sRut = sRut.substring(0, sRut.length - 3);
     }
     sRutFormateado = sRut + sRutFormateado;
-    if (sRutFormateado !== "" && digitoVerificador)
-    {
+    if (sRutFormateado !== "" && digitoVerificador) {
         sRutFormateado += "-" + sDV;
-    } else if (digitoVerificador)
-    {
+    } else if (digitoVerificador) {
         sRutFormateado += sDV;
     }
 
     return sRutFormateado;
 }
 
-
 function checkDv(crut) {
-    var largo, rut, suma, mul, res, dv, dvi, dvr, i;
+    let largo, rut, suma, mul, res, dv, dvi, dvr, i;
 
     largo = crut.length;
     dvr = '0';
@@ -70,7 +64,7 @@ function checkDv(crut) {
 }
 
 function validateRutDv(input, output) {
-    var tmpstr, rutdv, i, rut, largo;
+    let tmpstr, rutdv, i, rut, largo;
 
     tmpstr = "";
     rutdv = $("#" + input).val();

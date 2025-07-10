@@ -1,7 +1,7 @@
 
 function getClaveUnica()
 {
-    var userType = $("#usuarios option:selected").val();
+    const userType = $("#usuarios option:selected").val();
     if (userType.length > 0)
     {
         callClaveUnica(userType);
@@ -18,7 +18,7 @@ function getUser()
 
 function callClaveUnica(userType)
 {
-    var meta = JSON.stringify({"userType": userType});
+    const meta = JSON.stringify({"userType": userType});
     window.location = "https://services.usach.cl/clave-unica/authenticate?client_id=IrGzw7upcClM3hpnPTv9apNqkHAy5SzL&metadata=" + meta;
     target = "_self";
 }

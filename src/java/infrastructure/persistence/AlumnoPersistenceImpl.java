@@ -43,7 +43,7 @@ public final class AlumnoPersistenceImpl extends CrudAbstractDAO<Alumno, Long> i
         criteria.add(idEq(rut));
         criteria.add(sqlRestriction("valid_user_alumno(alu_rut, (?))=1", password, new StringType()));
 
-        return (Alumno) criteria.uniqueResult(); 
+        return (Alumno) criteria.uniqueResult();
     }
 
     /**
@@ -89,10 +89,15 @@ public final class AlumnoPersistenceImpl extends CrudAbstractDAO<Alumno, Long> i
     @SuppressWarnings("unchecked")
     @Override
     public List<Alumno> find(String paterno, String materno, String nombre) {
-        String sql = "SELECT * FROM alumno WHERE (normaliza_string(upper(alu_paterno)) LIKE  normaliza_string(:paterno)||'%') AND "
-                + "((alu_materno IS NULL AND :materno IS NULL) OR  (normaliza_string(upper(alu_materno)) LIKE normaliza_string(:materno)||'%')) AND "
-                + "(normaliza_string(upper(alu_nombre)) LIKE '%'||normaliza_string(:nombre)||'%') ORDER BY normaliza_string(upper(alu_paterno)), normaliza_string(upper(alu_materno)), alu_nombre";
-        
+        String sql = "SELECT * FROM alumno "
+                + "WHERE normaliza_string(upper(alu_paterno)) LIKE normaliza_string(:paterno) || '%' "
+                + "AND ((alu_materno IS NULL AND :materno IS NULL) OR "
+                + "     normaliza_string(upper(alu_materno)) LIKE normaliza_string(:materno) || '%') "
+                + "AND normaliza_string(upper(CASE WHEN alu_nombre_social IS NOT NULL THEN alu_nombre_social ELSE alu_nombre END)) LIKE '%' || normaliza_string(:nombre) || '%' "
+                + "ORDER BY normaliza_string(upper(alu_paterno)), "
+                + "         normaliza_string(upper(alu_materno)), "
+                + "         normaliza_string(upper(CASE WHEN alu_nombre_social IS NOT NULL THEN alu_nombre_social ELSE alu_nombre END))";
+
         SQLQuery query = getSession().createSQLQuery(sql).addEntity("alumno", Alumno.class);
         query.setParameter("paterno", paterno.toUpperCase(ContextUtil.getLocale()), StandardBasicTypes.STRING);
         query.setParameter("materno", materno.toUpperCase(ContextUtil.getLocale()), StandardBasicTypes.STRING);

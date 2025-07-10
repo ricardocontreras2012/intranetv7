@@ -119,8 +119,8 @@ function validateCurso()
         msg = "Fecha de inicio debe ser menor o igual la de término";
     }
 
-    if (!flag && msg !=="")
-    {       
+    if (!flag && msg !== "")
+    {
         $("#error-div").html(msg);
         $("#error-modal").modal('show').css('z-index', 1051);
     }
@@ -544,7 +544,7 @@ function addProfesorEstricto()
 }
 
 function saveProfesor()
-{    
+{
     $("#save-profesor-modal").modal('hide');
     $("#profesor-search-modal").modal('hide');
     $("#modal-profesor").modal('hide');
@@ -1091,45 +1091,34 @@ $(document).ready(function () {
             return false;
         }
     });
+    
+    function validarFecha(inputId) {
+        const str = $(`#${inputId}`).val();
+        const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
 
-    jQuery('#inicio').blur(function (e) {
-        var str = $(this).val();
-        var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-        if (re.test(str)) {
-            var adata = str.split('/');
-            var dd = parseInt(adata[0], 10);
-            var mm = parseInt(adata[1], 10);
-            var yyyy = parseInt(adata[2], 10);
-            var xdata = new Date(yyyy, mm - 1, dd);
-
-            if ((xdata.getFullYear() === yyyy) && (xdata.getMonth() === mm - 1) && (xdata.getDate() === dd)) {
-                return true;
-            } else {
-                $('#inicio').val('');
-                return false;
-            }
+        if (!re.test(str)) {
+            $(`#${inputId}`).val('');
+            return false;
         }
-    });
 
-    jQuery('#termino').blur(function (e) {
-        var str = $(this).val();
-        var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
-        if (re.test(str)) {
-            var adata = str.split('/');
-            var dd = parseInt(adata[0], 10);
-            var mm = parseInt(adata[1], 10);
-            var yyyy = parseInt(adata[2], 10);
-            var xdata = new Date(yyyy, mm - 1, dd);
+        const [dd, mm, yyyy] = str.split('/').map(n => parseInt(n, 10));
+        const fecha = new Date(yyyy, mm - 1, dd);
 
-            if ((xdata.getFullYear() === yyyy) && (xdata.getMonth() === mm - 1) && (xdata.getDate() === dd)) {
-                return true;
-            } else {
-                $('#termino').val('');
-                return false;
-            }
+        const isValid =
+                fecha.getFullYear() === yyyy &&
+                fecha.getMonth() === mm - 1 &&
+                fecha.getDate() === dd;
+
+        if (!isValid) {
+            $(`#${inputId}`).val('');
+            return false;
         }
-    });
 
+        return true;
+    }
+
+    $('#inicio').blur(() => validarFecha('inicio'));
+    $('#termino').blur(() => validarFecha('termino'));
 
     $("#cursos-table").dataTable({
         "sPaginationType": "full_numbers",

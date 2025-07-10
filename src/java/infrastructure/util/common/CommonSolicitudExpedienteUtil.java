@@ -3,6 +3,7 @@ package infrastructure.util.common;
 import domain.model.EstadoDocExp;
 import domain.model.SolicitudAttach;
 import domain.model.SolicitudAttachId;
+import domain.model.TDocExpediente;
 import domain.model.TdocumentoSolicitud;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
@@ -65,22 +66,6 @@ public class CommonSolicitudExpedienteUtil {
     private static List<SolicitudAttach> getAttachFiles(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        //ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).findGeneradas(ws.getAluCar()));
-        //EstadoDocExpPersistence estadoDocExpPersistence = ContextUtil.getDAO().getEstadoDocExpPersistence(key);
-        //ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).setMisDatos();
-        System.out.println(ws.getEstadoDocExpList().get(0).getId().getEdeRut());
-        System.out.println(ws.getEstadoDocExpList().get(0).getId().getEdeCodCar());
-        System.out.println(ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng());
-        System.out.println(ws.getEstadoDocExpList().get(0).getId().getEdeSemIng());
-        System.out.println(ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro());
-        System.out.println(tdoc);
-        System.out.println(ws.getEstadoDocExpList().get(0).gettDocExpediente().getTdeDes());
-
-        List<EstadoDocExp> lista = ws.getEstadoDocExpList();
-        String descripcion = obtenerDescripcionPorId(lista, tdoc);
-
-        System.out.println("DESC:" + descripcion);
-
         List<SolicitudAttach> attachList = new ArrayList<>();
 
         try {
@@ -101,14 +86,8 @@ public class CommonSolicitudExpedienteUtil {
                 // aca llamar a el nombre del documento
                 IntStream.range(0, attachList.size()).forEach(i -> {
                     SolicitudAttach attach = attachList.get(i);
-                    System.out.println("attach:" + attach.getSolaAttachFile());
                     String nombre = getAttachFileName(attach.getSolaAttachFile(), "_SOL_" + i, folio);
-                    /*String nombre = getAttachFileName(ws.getEstadoDocExpList().get(0).getId().getEdeRut() + "_" +
-                        ws.getEstadoDocExpList().get(0).getId().getEdeCodCar() + "_" +
-                        ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng() + "_" +
-                        ws.getEstadoDocExpList().get(0).getId().getEdeSemIng() + "_" +
-                        ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro() + "_" +
-                            tdoc , "¿?" , folio);*/
+
                     try {
                         ContextUtil.getDAO().getEstadoDocExpPersistence(ActionUtil.getDBUser()).updateFile(ws.getEstadoDocExpList().get(0).getId().getEdeRut(), ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(), ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(), ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(), ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(), tdoc, nombre);
                     } catch (IndexOutOfBoundsException e) {
@@ -141,11 +120,12 @@ public class CommonSolicitudExpedienteUtil {
     }
 
     public static String obtenerDescripcionPorId(List<EstadoDocExp> lista, int idBuscado) {
-        return lista.stream()
-                .map(EstadoDocExp::gettDocExpediente)
-                .filter(tipo -> tipo != null && tipo.getTdeCod() == idBuscado)
-                .map(tipo -> normalizaFileName(tipo.getTdeDes()))
-                .findFirst()
-                .orElse(null);
+        for (EstadoDocExp estado : lista) {
+            TDocExpediente tipo = estado.gettDocExpediente();
+            if (tipo != null && tipo.getTdeCod() == idBuscado) {
+                return normalizaFileName(tipo.getTdeDes());
+            }
+        }
+        return null; // o algún valor por defecto
     }
 }

@@ -20,24 +20,24 @@ function enableRowSelection(tableSelector) {
 function removeIzqInscripcion() {
     $("#confirmacionLeft").modal('hide');
 
-    var selectedRows = [];
+    const selectedRows = [];
 
     $('#nomina-izq-table tbody tr.selected').each(function () {
-        var rowData = {
+        const rowData = {
             idRow: $(this).find('td').eq(0).text()
         };
         selectedRows.push(rowData);
     });
     $("#listaIzq").val(JSON.stringify(selectedRows));
 
-    var dataString = $("#lista-izq-form").serialize();
+    const dataString = $("#lista-izq-form").serialize();
     $.ajax({
         url: "CommonInscripcionAdmRemoveNominaIzq",
         type: "POST",
         data: dataString,
         async: false
     });
-    var data_string = {'key': $("#key").val()};
+    const data_string = {'key': $("#key").val()};
     jQuery.ajax({
         url: "CommonInscripcionAdmGetCursosDer",
         type: "POST",
@@ -78,23 +78,23 @@ function removeIzqInscripcion() {
 
 function removeDerInscripcion() {
     $("#confirmacionRight").modal('hide');
-    var selectedRows = [];
+    const selectedRows = [];
     $('#nomina-der-table tbody tr.selected').each(function () {
-        var rowData = {
+        const rowData = {
             idRow: $(this).find('td').eq(0).text()
         };
         selectedRows.push(rowData);
     });
     $("#listaDer").val(JSON.stringify(selectedRows));
 
-    var dataString = $("#lista-der-form").serialize();
+    const dataString = $("#lista-der-form").serialize();
     $.ajax({
         url: "CommonInscripcionAdmRemoveNominaDer",
         type: "POST",
         data: dataString,
         async: false
     });
-    var data_string = {'key': $("#key").val()};
+    const data_string = {'key': $("#key").val()};
     jQuery.ajax({
         url: "CommonInscripcionAdmGetCursosDer",
         type: "POST",
@@ -134,16 +134,16 @@ function removeDerInscripcion() {
 }
 
 function traspasarInscripcionDer() {
-    var selectedRows = [];
+    const selectedRows = [];
     $('#nomina-izq-table tbody tr.selected').each(function () {
-        var rowData = {
+        const rowData = {
             idRow: $(this).find('td').eq(0).text()
         };
         selectedRows.push(rowData);
     });
     $("#listaIzq").val(JSON.stringify(selectedRows));
 
-    var dataString = $("#lista-izq-form").serialize();
+    const dataString = $("#lista-izq-form").serialize();
     $.ajax({
         url: "CommonInscripcionAdmChangeNominaDer",
         type: "POST",
@@ -166,7 +166,7 @@ function traspasarInscripcionDer() {
         async: false
     });
 
-    var data_string = {'key': $("#key").val()};
+    const data_string = {'key': $("#key").val()};
     jQuery.ajax({
         url: "CommonInscripcionAdmGetCursosDer",
         type: "POST",
@@ -206,17 +206,17 @@ function traspasarInscripcionDer() {
 }
 
 function traspasarInscripcionIzq() {
-    var selectedRows = [];
+    const selectedRows = [];
 
     $('#nomina-der-table tbody tr.selected').each(function () {
-        var rowData = {
+        const rowData = {
             idRow: $(this).find('td').eq(0).text()
         };
         selectedRows.push(rowData);
     });
     $("#listaDer").val(JSON.stringify(selectedRows));
 
-    var dataString = $("#lista-der-form").serialize();
+    const dataString = $("#lista-der-form").serialize();
     $.ajax({
         url: "CommonInscripcionAdmChangeNominaIzq",
         type: "POST",
@@ -239,7 +239,7 @@ function traspasarInscripcionIzq() {
         async: false
     });
 
-    var data_string = {'key': $("#key").val()};
+    const data_string = {'key': $("#key").val()};
     jQuery.ajax({
         url: "CommonInscripcionAdmGetCursosDer",
         type: "POST",
@@ -279,7 +279,7 @@ function traspasarInscripcionIzq() {
 }
 
 $(document).ready(function () {
-    var dataString = $("#adm-ins-form").serialize();
+    const dataString = $("#adm-ins-form").serialize();
     jQuery.ajax({
         url: "CommonInscripcionAdmGetCursosIzq",
         type: "POST",
