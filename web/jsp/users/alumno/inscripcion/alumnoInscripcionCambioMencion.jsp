@@ -18,7 +18,14 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.1.js"></script>
+        <script>
+            window.addEventListener('load', () => {
+                if (parent?.showCambioMencionDialog) {
+                    parent.showCambioMencionDialog();
+                }
+            });
+        </script>
     </head>
-    <body onload="parent.showCambioMencionDialog()">        
+    <body>        
     </body>
 </html>

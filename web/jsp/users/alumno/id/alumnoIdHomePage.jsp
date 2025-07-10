@@ -106,8 +106,8 @@
 
         <div class="container-fluid text-center no-padding" style="width: 100vw;height: 90vh;">
             <div class="row content no-padding">
-                <div class="col-xs-12 col-sm-12 col-md-12 home-iframe no-padding" style="width: 100vw;height: 90vh;">
-                    <iframe id="main-content-iframe" style="width: 100vw;height: 90vh;position: relative;" src="" frameborder="0" allowfullscreen></iframe>
+                <div class="col-xs-12 col-sm-12 col-md-12 home-iframe no-padding" style="width: 100vw;height: 90vh;">                    
+                    <iframe id="main-content-iframe" src="" style="width: 100%; height: 90vh; border: none;" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>

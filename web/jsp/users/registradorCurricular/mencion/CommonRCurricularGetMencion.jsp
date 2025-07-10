@@ -236,7 +236,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="editMencion_menNom">Nombre de la mención</label>
-                                    <textarea name="editMencion_menNom" id="editMencion_menNom" class="form-control" maxlength="300" rows="5" /></textarea>
+                                    <textarea name="editMencion_menNom" id="editMencion_menNom" class="form-control" maxlength="300" rows="5"></textarea>
                                 </div>
                             </div>
                         </div>

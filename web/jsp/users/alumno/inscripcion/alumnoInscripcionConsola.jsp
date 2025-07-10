@@ -30,18 +30,16 @@
             <div class="container-fluid">
                 <div class="row" style="height: 50vh; overflow: hidden;">
                     <div class="col-12">
-                        <iframe id="inscripcion-iframe" class="embed-responsive-item"
-                                allowfullscreen style="height: 50vh; width: 100%; overflow: auto; border:0"></iframe>
+                        <iframe id="inscripcion-iframe" class="embed-responsive-item" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
                 <div class="row" style="overflow: hidden;">    
                     <div class="col-12 col-md-6">
-                        <iframe id="derechos-iframe" class="embed-responsive-item" src="AlumnoInscripcionGetDerechos?key=<s:property value="key"/>"
-                                allowfullscreen style="height: 50vh; width: 100%;overflow: auto; border:0"></iframe>
+                        <iframe id="derechos-iframe" class="embed-responsive-item" src="AlumnoInscripcionGetDerechos?key=<s:property value='key'/>" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe>                       
                     </div>
                     <div class="col-12 col-md-6">
-                        <iframe id="cursos-iframe" class="embed-responsive-item" 
-                                allowfullscreen style="height: 50vh; width: 100%;overflow: auto; border:0"></iframe>
+                        <div class="col-12 col-md-6">                            
+                        <iframe id="cursos-iframe" class="embed-responsive-item" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe></div>
                     </div>
                 </div> 
             </div>
@@ -125,7 +123,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <iframe id="swap-iframe" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <iframe id="swap-iframe" width="640" height="360" style="border: none;" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
@@ -227,7 +225,6 @@
                     </div>
                 </div>
             </div>
-        </div>                
-
+        </div>
     </body>
 </html>
