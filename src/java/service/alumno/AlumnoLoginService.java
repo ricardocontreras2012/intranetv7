@@ -7,6 +7,8 @@ import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
 import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonAlumnoUtil;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Servicio encargado de manejar las acciones relacionadas con el inicio de sesión de los estudiantes.
@@ -33,6 +35,7 @@ public final class AlumnoLoginService {
      * 
      * @param action La instancia de `ActionCommonSupport` que invoca el servicio, utilizada para agregar 
      *               mensajes de error y recuperar configuraciones relacionadas con la acción.
+     * @param sesion
      * @param rut
      * @param passwd
      * @param key La clave de sesión utilizada para identificar y acceder a los datos de la sesión 
@@ -44,8 +47,8 @@ public final class AlumnoLoginService {
      */
     public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificación temprana para asegurarse de que la sesión y la clave no sean nulas.
-        if (sesion == null || key == null) {
-            return retReLogin(); 
+        if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
+            return retReLogin();
         }
 
         try {

@@ -11,6 +11,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
 import infrastructure.util.common.CommonAyudanteUtil;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Servicio encargado de manejar el proceso de login del ayudante, validando las credenciales
@@ -35,11 +37,9 @@ public final class AyudanteLoginService {
      */
     public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificar si la sesión y la clave son válidas
-        if (action.getSesion().isEmpty() || key == null) {
+        if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
             return retReLogin();
         }
-
-        
 
         // Intentar realizar el inicio de sesión
         boolean loginExitoso = CommonAyudanteUtil.login(

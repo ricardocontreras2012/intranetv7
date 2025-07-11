@@ -76,9 +76,10 @@
                     <thead>
                         <tr>
                             <th scope="col" style="width:5%"><s:text name="label.nro"/></th>
-                            <th scope="col" style="width:40%"><s:text name="label.name"/></th>
-                            <th scope="col" style="width:435%"><s:text name="label.solicita"/></th>
-                            <th scope="col" style="width:435%"><s:text name="label.date"/></th>
+                            <th scope="col" style="width:30%"><s:text name="label.name"/></th>
+                            <th scope="col" style="width:5%"><s:text name="label.carrera"/></th>
+                            <th scope="col" style="width:35%"><s:text name="label.solicita"/></th>
+                            <th scope="col" style="width:5%"><s:text name="label.date"/></th>
                             <th scope="col" style="width:10%"><s:text name="label.estado"/></th>
                             <th scope="col" style="width:10%"><s:text name="label.resolucion"/></th>
                         </tr>
@@ -96,6 +97,13 @@
                                         <s:property value="aluCar.alumno.getNombre()"/>
                                     </a>
                                 </td>
+
+                                <td>
+                                    <a id="sol1_<s:property value="#row.count -1"/>">
+                                        <s:property value="aluCar.id.acaCodCar"/>
+                                    </a>
+                                </td>
+
                                 <td>
                                     <a id="sol2_<s:property value="#row.count -1"/>">
                                         <s:property value="solSolicita"/>

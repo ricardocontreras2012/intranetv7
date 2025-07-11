@@ -90,9 +90,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
     Font TA_7 = fontsUtil.crearFont("tahoma", 7, Font.NORMAL);
     Font TA_8 = fontsUtil.crearFont("tahoma", 8, Font.NORMAL);
     Font TA_8_5 = fontsUtil.crearFont("tahoma", 8.5f, Font.NORMAL);
-    Font TA_8_5B = fontsUtil.crearFont("tahoma", 8.5f, Font.BOLD);
     Font TA_12 = fontsUtil.crearFont("tahoma", 12, Font.NORMAL);
-    Font TNR_14 = fontsUtil.crearFont("times", 14, Font.BOLD);
 
     /**
      * Method description

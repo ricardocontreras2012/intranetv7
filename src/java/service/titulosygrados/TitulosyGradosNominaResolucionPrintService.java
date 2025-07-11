@@ -30,17 +30,12 @@ import session.WorkSession;
 public class TitulosyGradosNominaResolucionPrintService {
 
     static Font TNR_6 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6);
-    static Font TNR_6B = FontFactory.getFont(FontFactory.TIMES_BOLD, 6);
-    static Font TNR_6_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6, Font.UNDERLINE);
-    
-    static Font TNR_7 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 7);
-    
-    static Font TNR_8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8);
-    
+    static Font TNR_6_UNDERLINED = FontFactory.getFont(FontFactory.TIMES_ROMAN, 6, Font.UNDERLINE);    
+    static Font TNR_7 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 7);    
+    static Font TNR_8 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 8);    
     static Font TNR_9 = FontFactory.getFont(FontFactory.TIMES_ROMAN, 9);
     static Font TNR_9B = FontFactory.getFont(FontFactory.TIMES_BOLD, 9);
-    static Font TNR_9B_UNDERLINED =  FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.UNDERLINE);
-    
+    static Font TNR_9B_UNDERLINED =  FontFactory.getFont(FontFactory.TIMES_BOLD, 9, Font.UNDERLINE);    
     static Font TNR_10 =           FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
     static Font TNR_10B = FontFactory.getFont(FontFactory.TIMES_BOLD, 10);
 
@@ -62,7 +57,7 @@ public class TitulosyGradosNominaResolucionPrintService {
     private static InputStream getInput(GenericSession genericSession, String nomina, Integer agno,
             String key)
             throws Exception {
-
+   
         WorkSession ws = genericSession.getWorkSession(key);
         ExpedienteLogro dummyExp = ws.getExpedienteLogroList().get(0);
         Tlogro tlogro = dummyExp.getPlanLogro().getLogro().getTlogro();
@@ -299,7 +294,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             e.printStackTrace();
         }
 
-        return pdfStream;
+        return pdfStream;        
     }
 
     private static void agregarCelda(PdfPTable table, String texto) {

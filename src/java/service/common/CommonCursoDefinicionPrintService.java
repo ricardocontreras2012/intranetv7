@@ -148,7 +148,7 @@ public class CommonCursoDefinicionPrintService {
      * Clase interna para manejar los encabezados y pies de página del documento
      * PDF.
      */
-    private class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private static class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private final String name;
         private final Integer agno;

@@ -68,9 +68,10 @@
                     <tbody>
                         <s:iterator value="#session.genericSession.getWorkSession(key).solicitudList" status="row">
                             <tr>
-                                <td style="width:5%;" align="center"><input style="height: 12px" type="checkbox"
-                                                                            id="ck_<s:property value="#row.count -1"/>"
-                                                                            name="ck_<s:property value="#row.count -1"/>"/></td>
+                                <td style="width: 5%; text-align: center;">
+                                    <input style="height: 12px" type="checkbox"
+                                           id="ck_<s:property value="#row.count -1"/>"
+                                           name="ck_<s:property value="#row.count -1"/>"/></td>
 
                                 <td><a id="sol2_<s:property value="#row.count -1"/>"><s:property
                                             value="tsolicitud.tsolDescrip"/></a></td>

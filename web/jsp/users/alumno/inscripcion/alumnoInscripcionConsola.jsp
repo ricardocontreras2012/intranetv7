@@ -21,7 +21,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionConsola-3.0.12.js"></script>
     </head>
-    <body class="inner-body" style="font-size: 16px;">
+    <body class="inner-body" style="font-size: 14px;">
         <div class="title-div">
             <s:text name="label.title.inscripcion.asignaturas"/>  <s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.getNombreStd()"/>
         </div>

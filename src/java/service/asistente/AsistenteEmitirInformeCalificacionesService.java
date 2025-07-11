@@ -63,7 +63,6 @@ public final class AsistenteEmitirInformeCalificacionesService {
 
     static Font fontBig = PdfUtil.getFont("tahoma", 12.0f, NORMAL);
     static Font fontSmall = PdfUtil.getFont("tahoma", 7.0f, NORMAL);
-    static Font fontMed = PdfUtil.getFont("tahoma", 8.0f, NORMAL);
     static Font font = PdfUtil.getFont("tahoma", 8.5f, NORMAL);
 
     /**

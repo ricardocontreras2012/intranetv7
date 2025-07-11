@@ -15,6 +15,8 @@ import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getRequest;
 import domain.repository.ProfesorPersistence;
 import infrastructure.support.LaborSupport;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Servicio para gestionar el inicio de sesión de la autoridad.
@@ -28,12 +30,15 @@ public final class CommonAutoridadLoginService {
      *
      * @param action Clase que invoca al servicio.
      * @param sesion El contenedor de la sesión.
+     * @param rut
+     * @param passwd
+     * @param userType
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String userType,  String key) {
+    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String userType, String key) {
         // Verificación de parámetros necesarios
-        if (sesion == null || key == null) {
+        if (Stream.of(sesion, key, rut, passwd, userType).anyMatch(Objects::isNull)) {
             return retReLogin();
         }
 
@@ -53,7 +58,7 @@ public final class CommonAutoridadLoginService {
         // Verificación de permisos según el tipo de usuario
         String retValue = ACTION_NOTALLOW; // Aseguramos que retValue se inicialice correctamente
 
-        if (rut != null && userType != null && LaborSupport.is(rut, userType)) {
+        if (LaborSupport.is(rut, userType)) {
             switch (userType) {
                 case "JC": {
                     sesion.put("jefeCarreraSession", new JefeCarreraSession());
@@ -62,7 +67,7 @@ public final class CommonAutoridadLoginService {
                 }
                 default:
             }
-            
+
             retValue = userType;
 
         } else {

@@ -59,8 +59,6 @@ public final class CommonMensajePrintMessageService {
      * @return
      */
     static Font fontBig = PdfUtil.getFont("tahoma", 12.0f, NORMAL);
-    static Font fontSmall = PdfUtil.getFont("tahoma", 6.5f, NORMAL);
-    static Font fontMed = PdfUtil.getFont("tahoma", 7.5f, NORMAL);
     static Font font = PdfUtil.getFont("tahoma", 8.0f, NORMAL);
 
     public ActionInputStreamUtil service(GenericSession genericSession, Integer pos, String tipo, String key) throws Exception {

@@ -26,7 +26,14 @@ public class DateUtil {
     }
 
     public static LocalDateTime toLocalDateTime(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        if (date instanceof java.sql.Date) {
+            // Convertimos java.sql.Date a java.util.Date
+            date = new Date(date.getTime());
+        }
+
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
     }
 
     public static Date toDate(LocalDateTime localDateTime) {

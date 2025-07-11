@@ -7,6 +7,8 @@ import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
 import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonProfesorUtil;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Servicio para gestionar el inicio de sesión de los profesores.
@@ -28,7 +30,7 @@ public final class ProfesorLoginService {
      */
     public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificar si la sesión y la clave son válidas
-        if (action.getSesion().isEmpty() || key == null) {
+        if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
             return retReLogin();
         }
 

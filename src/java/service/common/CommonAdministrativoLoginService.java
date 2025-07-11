@@ -12,7 +12,10 @@ import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.ActionUtil.retReLogin;
 import static infrastructure.util.AppStaticsUtil.ACTION_NOTALLOW;
 import infrastructure.util.ActionUtil;
+import static infrastructure.util.ActionUtil.retReLogin;
 import infrastructure.util.ContextUtil;
+import java.util.Objects;
+import java.util.stream.Stream;
 
 /**
  * Servicio para gestionar el inicio de sesión del administrativo.
@@ -34,7 +37,7 @@ public final class CommonAdministrativoLoginService {
      */
     public static String service(ActionCommonSupport action, Map<String, Object> sesion,  Integer rut, String passwd, String userType, String key) {
         // Verificación de parámetros necesarios
-        if (sesion == null || key == null) {
+        if (Stream.of(sesion, key, rut, passwd, userType).anyMatch(Objects::isNull)) {
             return retReLogin();
         }
 

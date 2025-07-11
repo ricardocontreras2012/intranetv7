@@ -29,7 +29,6 @@ public class CommonCursoListaFotoPrintService {
 
     static Font fontBig = PdfUtil.getFont("times", 12.0f, Font.BOLD);
     static Font fontSmall = PdfUtil.getFont("tahoma", 7.0f, Font.NORMAL);
-    static Font fontMed = PdfUtil.getFont("tahoma", 8.0f, Font.NORMAL);
     static Font font = PdfUtil.getFont("tahoma", 8.5f, Font.NORMAL);
     private static final String LOGO_PATH = ServletActionContext.getServletContext().getRealPath(SystemParametersUtil.UNIVERSITY_LOGO_PATH3);
     private static Image logo;
@@ -128,7 +127,7 @@ public class CommonCursoListaFotoPrintService {
         return cell;
     }
 
-    private class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private static class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

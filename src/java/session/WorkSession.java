@@ -238,74 +238,45 @@ public final class WorkSession {
         this.nuevosMensajes = 0L;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public List<ActaCalificacion> getActas() {
         return actas;
     }
 
-    /**
-     *
-     * @param actas
-     */
+
     public void setActas(List<ActaCalificacion> actas) {
         this.actas = actas;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getActionCall() {
         return actionCall;
     }
 
-    /**
-     *
-     * @param actionCall
-     */
+
     public void setActionCall(String actionCall) {
         this.actionCall = actionCall;
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String getActionNested() {
         return actionNested;
     }
 
-    /**
-     *
-     * @param actionNested
-     */
+
     public void setActionNested(String actionNested) {
         this.actionNested = actionNested;
     }
 
-    /**
-     *
-     * @return
-     */
+ 
     public Integer getAgnoAct() {
         return agnoAct;
     }
 
-    /**
-     *
-     * @param agnoAct
-     */
     public void setAgnoAct(Integer agnoAct) {
         this.agnoAct = agnoAct;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public AluCar getAluCar() {
         return aluCar;
     }
@@ -318,482 +289,246 @@ public final class WorkSession {
         this.aluCar = aluCar;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public List<AluCar> getAluCarList() {
         return aluCarList;
     }
 
-    /**
-     *
-     * @param aluCarList
-     */
     public void setAluCarList(List<AluCar> aluCarList) {
         this.aluCarList = aluCarList;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public Alumno getAlumno() {
         return alumno;
     }
 
-    /**
-     *
-     * @param alumno
-     */
+
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Alumno> getAlumnoList() {
         return alumnoList;
     }
 
-    /**
-     *
-     * @param alumnoList
-     */
     public void setAlumnoList(List<Alumno> alumnoList) {
         this.alumnoList = alumnoList;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public List<Asignatura> getAsignaturaList() {
         return asignaturaList;
     }
 
-    /**
-     *
-     * @param asignaturaList
-     */
     public void setAsignaturaList(List<Asignatura> asignaturaList) {
         this.asignaturaList = asignaturaList;
     }
 
-    /**
-     *
-     * @return
-     */
     public AsistenciaAlumno getAsistenciaAlumno() {
         return asistenciaAlumno;
     }
 
-    /**
-     *
-     * @param asistenciaAlumno
-     */
     public void setAsistenciaAlumno(AsistenciaAlumno asistenciaAlumno) {
         this.asistenciaAlumno = asistenciaAlumno;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<AsistenciaAlumno> getAsistenciaAlumnoList() {
         return asistenciaAlumnoList;
     }
 
-    /**
-     *
-     * @param asistenciaAlumnoList
-     */
     public void setAsistenciaAlumnoList(List<AsistenciaAlumno> asistenciaAlumnoList) {
         this.asistenciaAlumnoList = asistenciaAlumnoList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<AsistenciaAlumnoNomina> getAsistenciaAlumnoNominaList() {
         return asistenciaAlumnoNominaList;
     }
 
-    /**
-     *
-     * @param asistenciaAlumnoNominaList
-     */
     public void setAsistenciaAlumnoNominaList(List<AsistenciaAlumnoNomina> asistenciaAlumnoNominaList) {
         this.asistenciaAlumnoNominaList = asistenciaAlumnoNominaList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Ayudante getAyudante() {
         return ayudante;
     }
 
-    /**
-     *
-     * @param ayudante
-     */
     public void setAyudante(Ayudante ayudante) {
         this.ayudante = ayudante;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Ayudante> getAyudanteList() {
         return ayudanteList;
     }
 
-    /**
-     *
-     * @param ayudanteList
-     */
     public void setAyudanteList(List<Ayudante> ayudanteList) {
         this.ayudanteList = ayudanteList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public boolean isBlinkMensajes() {
         return blinkMensajes;
     }
 
-    /**
-     *
-     * @param blinkMensajes
-     */
     public void setBlinkMensajes(boolean blinkMensajes) {
         this.blinkMensajes = blinkMensajes;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<CalificacionAdicionalLogroxInscribirSupport> getCalificacionRequisitoAdicionalLogroxInscribirList() {
         return calificacionRequisitoAdicionalLogroxInscribirList;
     }
 
-    /**
-     *
-     * @param calificacionRequisitoAdicionalLogroxInscribirList
-     */
     public void setCalificacionRequisitoAdicionalLogroxInscribirList(List<CalificacionAdicionalLogroxInscribirSupport> calificacionRequisitoAdicionalLogroxInscribirList) {
         this.calificacionRequisitoAdicionalLogroxInscribirList = calificacionRequisitoAdicionalLogroxInscribirList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Calificacion> getCalificaciones() {
         return calificaciones;
     }
 
-    /**
-     *
-     * @param calificaciones
-     */
     public void setCalificaciones(List<Calificacion> calificaciones) {
         this.calificaciones = calificaciones;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Ccalidad getCcalidad() {
         return ccalidad;
     }
 
-    /**
-     *
-     * @param ccalidad
-     */
     public void setCcalidad(Ccalidad ccalidad) {
         this.ccalidad = ccalidad;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ComentarioEncuestaDocente> getComentarioEncuestaDocenteList() {
         return comentarioEncuestaDocenteList;
     }
 
-    /**
-     *
-     * @param comentarioEncuestaDocenteList
-     */
     public void setComentarioEncuestaDocenteList(List<ComentarioEncuestaDocente> comentarioEncuestaDocenteList) {
         this.comentarioEncuestaDocenteList = comentarioEncuestaDocenteList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ComentarioEncuestaAyudante> getComentarioEncuestaAyudanteList() {
         return comentarioEncuestaAyudanteList;
     }
 
-    /**
-     *
-     * @param comentarioEncuestaAyudanteList
-     */
     public void setComentarioEncuestaAyudanteList(List<ComentarioEncuestaAyudante> comentarioEncuestaAyudanteList) {
         this.comentarioEncuestaAyudanteList = comentarioEncuestaAyudanteList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ActaConsultaSupport> getActaConsultaSupportList() {
         return actaConsultaSupportList;
     }
 
-    /**
-     *
-     * @param actaConsultaSupportList
-     */
     public void setActaConsultaSupportList(List<ActaConsultaSupport> actaConsultaSupportList) {
         this.actaConsultaSupportList = actaConsultaSupportList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public MiCarreraSupport getMiCarreraSupport() {
         return miCarreraSupport;
     }
 
-    /**
-     *
-     * @param miCarreraSupport
-     */
     public void setMiCarreraSupport(MiCarreraSupport miCarreraSupport) {
         this.miCarreraSupport = miCarreraSupport;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<MiCarreraSupport> getMiCarreraSupportList() {
         return miCarreraSupportList;
     }
 
-    /**
-     *
-     * @param miCarreraSupportList
-     */
     public void setMiCarreraSupportList(List<MiCarreraSupport> miCarreraSupportList) {
         this.miCarreraSupportList = miCarreraSupportList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Comuna> getComunaList() {
         return comunaList;
     }
 
-    /**
-     *
-     * @param comunaList
-     */
     public void setComunaList(List<Comuna> comunaList) {
         this.comunaList = comunaList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Mensaje getCurrentMsg() {
         return currentMsg;
     }
 
-    /**
-     *
-     * @param currentMsg
-     */
     public void setCurrentMsg(Mensaje currentMsg) {
         this.currentMsg = currentMsg;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Curso getCurso() {
         return curso;
     }
 
-    /**
-     *
-     * @param curso
-     */
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Curso> getCursoList() {
         return cursoList;
     }
 
-    /**
-     *
-     * @param cursoList
-     */
     public void setCursoList(List<Curso> cursoList) {
         this.cursoList = cursoList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public boolean isCursoPregrado() {
         return cursoPregrado;
     }
 
-    /**
-     *
-     * @param cursoPregrado
-     */
     public void setCursoPregrado(boolean cursoPregrado) {
         this.cursoPregrado = cursoPregrado;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public CursoAyudante getCursoAyudante() {
         return cursoAyudante;
     }
 
-    /**
-     *
-     * @param cursoAyudante
-     */
     public void setCursoAyudante(CursoAyudante cursoAyudante) {
         this.cursoAyudante = cursoAyudante;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public CursoProfesor getCursoProfesor() {
         return cursoProfesor;
     }
 
-    /**
-     *
-     * @param cursoProfesor
-     */
     public void setCursoProfesor(CursoProfesor cursoProfesor) {
         this.cursoProfesor = cursoProfesor;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public boolean isCursoPrograma() {
         return cursoPrograma;
     }
 
-    /**
-     *
-     * @param cursoPrograma
-     */
     public void setCursoPrograma(boolean cursoPrograma) {
         this.cursoPrograma = cursoPrograma;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<CursoTevaluacion> getCursoTevaluacion() {
         return cursoTevaluacion;
     }
 
-    /**
-     *
-     * @param cursoTevaluacion
-     */
     public void setCursoTevaluacion(List<CursoTevaluacion> cursoTevaluacion) {
         this.cursoTevaluacion = cursoTevaluacion;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<CursoAyudante> getCursosEncuestaAyudante() {
         return cursosEncuestaAyudante;
     }
 
-    /**
-     *
-     * @param cursosEncuestaAyudante
-     */
     public void setCursosEncuestaAyudante(List<CursoAyudante> cursosEncuestaAyudante) {
         this.cursosEncuestaAyudante = cursosEncuestaAyudante;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Derecho getDerecho() {
         return derecho;
     }
 
-    /**
-     *
-     * @param derecho
-     */
     public void setDerecho(Derecho derecho) {
         this.derecho = derecho;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public DerechoCoordinadorSupport getDerechoCoordinador() {
         return derechoCoordinador;
     }
 
-    /**
-     *
-     * @param derechoCoordinador
-     */
     public void setDerechoCoordinador(DerechoCoordinadorSupport derechoCoordinador) {
         this.derechoCoordinador = derechoCoordinador;
     }
@@ -806,114 +541,61 @@ public final class WorkSession {
         this.persona = persona;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public Empleador getEmpleador() {
         return empleador;
     }
 
-    /**
-     *
-     * @param empleador
-     */
     public void setEmpleador(Empleador empleador) {
         this.empleador = empleador;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public List<Empleador> getEmpleadorList() {
         return empleadorList;
     }
 
-    /**
-     *
-     * @param empleadorList
-     */
     public void setEmpleadorList(List<Empleador> empleadorList) {
         this.empleadorList = empleadorList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public EncuestaDocente getEncuestaDocente() {
         return encuestaDocente;
     }
 
-    /**
-     *
-     * @param encuestaDocente
-     */
     public void setEncuestaDocente(EncuestaDocente encuestaDocente) {
         this.encuestaDocente = encuestaDocente;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public EncuestaAyudante getEncuestaAyudante() {
         return encuestaAyudante;
     }
 
-    /**
-     *
-     * @param encuestaAyudante
-     */
     public void setEncuestaAyudante(EncuestaAyudante encuestaAyudante) {
         this.encuestaAyudante = encuestaAyudante;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Evaluacion getEvaluacion() {
         return evaluacion;
     }
 
-    /**
-     *
-     * @param evaluacion
-     */
     public void setEvaluacion(Evaluacion evaluacion) {
         this.evaluacion = evaluacion;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<EvaluacionAlumno> getEvaluacionAlumno() {
         return evaluacionAlumno;
     }
 
-    /**
-     *
-     * @param evaluacionAlumno
-     */
     public void setEvaluacionAlumno(List<EvaluacionAlumno> evaluacionAlumno) {
         this.evaluacionAlumno = evaluacionAlumno;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Evaluacion> getEvaluacionList() {
         return evaluacionList;
     }
 
-    /**
-     *
-     * @param evaluacionList
-     */
     public void setEvaluacionList(List<Evaluacion> evaluacionList) {
         this.evaluacionList = evaluacionList;
     }
@@ -925,35 +607,19 @@ public final class WorkSession {
     public void setExpedienteLogro(ExpedienteLogro expedienteLogro) {
         this.expedienteLogro = expedienteLogro;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ExpedienteLogro> getExpedienteLogroList() {
         return expedienteLogroList;
     }
 
-    /**
-     *
-     * @param expedienteLogroList
-     */
     public void setExpedienteLogroList(List<ExpedienteLogro> expedienteLogroList) {
         this.expedienteLogroList = expedienteLogroList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getFechaActual() {
         return fechaActual;
     }
 
-    /**
-     *
-     * @param fechaActual
-     */
     public void setFechaActual(String fechaActual) {
         this.fechaActual = fechaActual;
     }
@@ -966,246 +632,122 @@ public final class WorkSession {
         this.moduloHorarioList = moduloHorarioList;
     }
 
-    /**
-     * Method description
-     *
-     * @return a defensive copy of the field. The caller may change the state of
-     * the returned object in any way, without affecting the internals of this
-     * class.
-     */
     public Horario[][] getHorario() {
         return copyOf(horario, horario.length);
     }
 
-    /**
-     * Method description
-     *
-     * @param horario
-     */
     public void setHorario(Horario[][] horario) {
         this.horario = copyOf(horario, horario.length);
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<InscripcionAdicionalLogro> getInscripcionAdicionalLogroList() {
         return inscripcionRequisitoAdicionalLogroList;
     }
 
-    /**
-     *
-     * @param inscripcionRequisitoAdicionalLogroList
-     */
     public void setInscripcionAdicionalLogroList(List<InscripcionAdicionalLogro> inscripcionRequisitoAdicionalLogroList) {
         this.inscripcionRequisitoAdicionalLogroList = inscripcionRequisitoAdicionalLogroList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public InscripcionAdicionalLogro getInscripcionAdicionalLogro() {
         return inscripcionRequisitoAdicionalLogro;
     }
 
-    /**
-     *
-     * @param inscripcionRequisitoAdicionalLogro
-     */
     public void setInscripcionAdicionalLogro(InscripcionAdicionalLogro inscripcionRequisitoAdicionalLogro) {
         this.inscripcionRequisitoAdicionalLogro = inscripcionRequisitoAdicionalLogro;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getKeyParent() {
         return keyParent;
     }
 
-    /**
-     *
-     * @param keyParent
-     */
     public void setKeyParent(String keyParent) {
         this.keyParent = keyParent;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public LogCertificacion getLogCertificacion() {
         return logCertificacion;
     }
 
-    /**
-     *
-     * @param logCertificacion
-     */
     public void setLogCertificacion(LogCertificacion logCertificacion) {
         this.logCertificacion = logCertificacion;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<LogInscripcion> getLogInscripcionList() {
         return logInscripcionList;
     }
 
-    /**
-     *
-     * @param logInscripcionList
-     */
     public void setLogInscripcionList(List<LogInscripcion> logInscripcionList) {
         this.logInscripcionList = logInscripcionList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public MaterialApoyo getMaterial() {
         return material;
     }
 
-    /**
-     *
-     * @param material
-     */
     public void setMaterial(MaterialApoyo material) {
         this.material = material;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public MencionInfoIntranet getMencionInfoIntranet() {
         return mencionInfoIntranet;
     }
 
-    /**
-     *
-     * @param mencionInfoIntranet
-     */
     public void setMencionInfoIntranet(MencionInfoIntranet mencionInfoIntranet) {
         this.mencionInfoIntranet = mencionInfoIntranet;
     }    
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Mencion> getMencionList() {
         return mencionList;
     }
 
-    /**
-     *
-     * @param mencionList
-     */
     public void setMencionList(List<Mencion> mencionList) {
         this.mencionList = mencionList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public MensajeSupport getMensajeSupport() {
         return mensajeSupport;
     }
 
-    /**
-     *
-     * @param mensajeSupport
-     */
     public void setMensajeSupport(MensajeSupport mensajeSupport) {
         this.mensajeSupport = mensajeSupport;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Mensaje getMensajeFwd() {
         return mensajeFwd;
     }
 
-    /**
-     *
-     * @param mensajeFwd
-     */
     public void setMensajeFwd(Mensaje mensajeFwd) {
         this.mensajeFwd = mensajeFwd;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<String> getModulos() {
         return modulos;
     }
 
-    /**
-     *
-     * @param modulos
-     */
     public void setModulos(List<String> modulos) {
         this.modulos = modulos;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     *
-     * @param nombre
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getNombreCarrera() {
         return nombreCarrera;
     }
 
-    /**
-     *
-     * @param nombreCarrera
-     */
     public void setNombreCarrera(String nombreCarrera) {
         this.nombreCarrera = nombreCarrera;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ActaNominaView> getNominaActa() {
         return nominaActa;
     }
 
-    /**
-     *
-     * @param nominaActa
-     */
     public void setNominaActa(List<ActaNominaView> nominaActa) {
         this.nominaActa = nominaActa;
     }
@@ -1217,179 +759,91 @@ public final class WorkSession {
     public void setNominaCurso(List<AluCar> nominaCurso) {
         this.nominaCurso = nominaCurso;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Long getNuevosMensajes() {
         return nuevosMensajes;
     }
 
-    /**
-     *
-     * @param nuevosMensajes
-     */
     public void setNuevosMensajes(Long nuevosMensajes) {
         this.nuevosMensajes = nuevosMensajes;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Tmaterial> getOtrosTmaterial() {
         return otrosTmaterial;
     }
 
-    /**
-     *
-     * @param otrosTmaterial
-     */
     public void setOtrosTmaterial(List<Tmaterial> otrosTmaterial) {
         this.otrosTmaterial = otrosTmaterial;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Practica getPractica() {
         return practica;
     }
 
-    /**
-     *
-     * @param practica
-     */
     public void setPractica(Practica practica) {
         this.practica = practica;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Practica> getPracticaList() {
         return practicaList;
     }
 
-    /**
-     *
-     * @param practicaList
-     */
     public void setPracticaList(List<Practica> practicaList) {
         this.practicaList = practicaList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<PregEncta> getPreguntasEncuesta() {
         return preguntasEncuesta;
     }
 
-    /**
-     *
-     * @param preguntasEncuesta
-     */
     public void setPreguntasEncuesta(List<PregEncta> preguntasEncuesta) {
         this.preguntasEncuesta = preguntasEncuesta;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Profesor getProfesor() {
         return profesor;
     }
 
-    /**
-     *
-     * @param profesor
-     */
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Profesor> getProfesorList() {
         return profesorList;
     }
 
-    /**
-     *
-     * @param profesorList
-     */
     public void setProfesorList(List<Profesor> profesorList) {
         this.profesorList = profesorList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public boolean isPuedeEmitir() {
         return puedeEmitir;
     }
 
-    /**
-     *
-     * @param puedeEmitir
-     */
     public void setPuedeEmitir(boolean puedeEmitir) {
         this.puedeEmitir = puedeEmitir;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<MensajeDestinatario> getReceivedMsgs() {
         return receivedMsgs;
     }
 
-    /**
-     *
-     * @param receivedMsgs
-     */
     public void setReceivedMsgs(List<MensajeDestinatario> receivedMsgs) {
         this.receivedMsgs = receivedMsgs;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public ReporteClase getReporte() {
         return reporte;
     }
 
-    /**
-     *
-     * @param reporte
-     */
     public void setReporte(ReporteClase reporte) {
         this.reporte = reporte;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<ReporteClase> getReportes() {
         return reportes;
     }
 
-    /**
-     *
-     * @param reportes
-     */
     public void setReportes(List<ReporteClase> reportes) {
         this.reportes = reportes;
     }
@@ -1409,131 +863,67 @@ public final class WorkSession {
     public void setTrequisitoLogroAdicionalList(List<TrequisitoLogroAdicional> trequisitoLogroAdicionalList) {
         this.trequisitoLogroAdicionalList = trequisitoLogroAdicionalList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<RespEnctaCursoView> getRespEncta() {
         return respEncta;
     }
 
-    /**
-     *
-     * @param respEncta
-     */
     public void setRespEncta(List<RespEnctaCursoView> respEncta) {
         this.respEncta = respEncta;
     }
-
-    /**
-     *
-     * @return
-     */
+ 
     public List<CursoResumenSupport> getResumenCurso() {
         return resumenCurso;
     }
-
-    /**
-     *
-     * @param resumenCurso
-     */
+    
     public void setResumenCurso(List<CursoResumenSupport> resumenCurso) {
         this.resumenCurso = resumenCurso;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Sala getSala() {
         return sala;
     }
 
-    /**
-     *
-     * @param sala
-     */
     public void setSala(Sala sala) {
         this.sala = sala;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Sala> getSalaList() {
         return salaList;
     }
 
-    /**
-     *
-     * @param salaList
-     */
     public void setSalaList(List<Sala> salaList) {
         this.salaList = salaList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Integer getSemAct() {
         return semAct;
     }
 
-    /**
-     *
-     * @param semAct
-     */
     public void setSemAct(Integer semAct) {
         this.semAct = semAct;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Mensaje> getSentMsgs() {
         return sentMsgs;
     }
 
-    /**
-     *
-     * @param sentMsgs
-     */
     public void setSentMsgs(List<Mensaje> sentMsgs) {
         this.sentMsgs = sentMsgs;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public Solicitud getSolicitud() {
         return solicitud;
     }
 
-    /**
-     *
-     * @param solicitud
-     */
     public void setSolicitud(Solicitud solicitud) {
         this.solicitud = solicitud;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Solicitud> getSolicitudList() {
         return solicitudList;
     }
 
-    /**
-     *
-     * @param solicitudList
-     */
     public void setSolicitudList(List<Solicitud> solicitudList) {
         this.solicitudList = solicitudList;
     }
@@ -1546,184 +936,93 @@ public final class WorkSession {
         this.solicitudInscripcionList = solicitudInscripcionList;
     }
 
-    /**
-     *
-     * @return
-     */
+    
     public List<TdocumentoSolicitud> getTdocumentoSolicitudList() {
         return tdocumentoSolicitudList;
     }
 
-    /**
-     *
-     * @param tdocumentoSolicitudList
-     */
     public void setTdocumentoSolicitudList(List<TdocumentoSolicitud> tdocumentoSolicitudList) {
         this.tdocumentoSolicitudList = tdocumentoSolicitudList;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public List<Tevaluacion> getTevaluacion() {
         return tevaluacion;
     }
 
-    /**
-     *
-     * @param tevaluacion
-     */
     public void setTevaluacion(List<Tevaluacion> tevaluacion) {
         this.tevaluacion = tevaluacion;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getTipoCalificacion() {
         return tipoCalificacion;
     }
 
-    /**
-     *
-     * @param tipoCalificacion
-     */
     public void setTipoCalificacion(String tipoCalificacion) {
         this.tipoCalificacion = tipoCalificacion;
     }
-
-    /**
-     *
-     * @return
-     */
+    
     public String getTipoMaterial() {
         return tipoMaterial;
     }
 
-    /**
-     *
-     * @param tipoMaterial
-     */
     public void setTipoMaterial(String tipoMaterial) {
         this.tipoMaterial = tipoMaterial;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Tmaterial> getTmaterial() {
         return tmaterial;
     }
 
-    /**
-     *
-     * @param tmaterial
-     */
     public void setTmaterial(List<Tmaterial> tmaterial) {
         this.tmaterial = tmaterial;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Tmaterial> getTmaterialSelectOption() {
         return tmaterialSelectOption;
     }
 
-    /**
-     *
-     * @param tmaterialSelectOption
-     */
     public void setTmaterialSelectOption(List<Tmaterial> tmaterialSelectOption) {
         this.tmaterialSelectOption = tmaterialSelectOption;
     }
 
-    /**
-     *
-     * @return
-     */
     public List<Tsolicitud> getTsolicitudList() {
         return tsolicitudList;
     }
 
-    /**
-     *
-     * @param tsolicitudList
-     */
     public void setTsolicitudList(List<Tsolicitud> tsolicitudList) {
         this.tsolicitudList = tsolicitudList;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getType() {
         return type;
     }
 
-    /**
-     *
-     * @param type
-     */
     public void setType(String type) {
         this.type = type;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getTypeSearch() {
         return typeSearch;
     }
 
-    /**
-     *
-     * @param typeSearch
-     */
     public void setTypeSearch(String typeSearch) {
         this.typeSearch = typeSearch;
     }
 
-    /*
-     *
-     *
-     */
-    /**
-     *
-     * @return
-     */
     public List<Curso> getCarga() {
         return this.cursoList;
     }
 
-    /**
-     *
-     * @param correl
-     * @param rut
-     * @return
-     */
     public boolean asisteClases(Integer correl, Integer rut) {
         return asiste(this, correl, rut);
     }
 
-    /**
-     *
-     * @return
-     */
+
     public List<LogSolicitud> getLogSolicitudList() {
         return logSolicitudList;
     }
 
-    /**
-     *
-     * @param logSolicitudList
-     */
+
     public void setLogSolicitudList(List<LogSolicitud> logSolicitudList) {
         this.logSolicitudList = logSolicitudList;
     }
@@ -1775,22 +1074,6 @@ public final class WorkSession {
     public void setRespEnctaAyu(List<RespEnctaAyuCursoView> respEnctaAyu) {
         this.respEnctaAyu = respEnctaAyu;
     }
-
-   /* public Justificativo getJustificativo() {
-        return justificativo;
-    }
-
-    public void setJustificativo(Justificativo justificativo) {
-        this.justificativo = justificativo;
-    }
-
-    public List<Justificativo> getJustificativoList() {
-        return justificativoList;
-    }
-
-    public void setJustificativoList(List<Justificativo> justificativoList) {
-        this.justificativoList = justificativoList;
-    }*/
 
     public String getPdfTempFile() {
         return pdfTempFile;
