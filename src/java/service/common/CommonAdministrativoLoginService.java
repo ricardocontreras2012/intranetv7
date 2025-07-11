@@ -9,7 +9,6 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.ActionUtil.retError;
-import static infrastructure.util.ActionUtil.retReLogin;
 import static infrastructure.util.AppStaticsUtil.ACTION_NOTALLOW;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.ActionUtil.retReLogin;

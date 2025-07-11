@@ -4,7 +4,6 @@ import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
 
 import javax.servlet.ServletContext;
-import java.io.IOException;
 import java.nio.file.*;
 import java.util.Collections;
 import java.util.HashMap;
