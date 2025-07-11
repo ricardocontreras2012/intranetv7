@@ -26,7 +26,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 color1">
-                        <p><s:text name="label.title.bienvenido"/>&nbsp;<s:property value="#session.genericSession.nombre"/></p>
+                        <p><s:if test="#session.genericSession.profesor.profSexo==1">
+                        BIENVENIDA
+                        </s:if>
+                        <s:else>
+                        BIENVENIDO
+                        </s:else>                        
+                        &nbsp;<s:property value="#session.genericSession.nombre"/></p>
                     </div>                    
                 </div>
             </div>

@@ -145,6 +145,7 @@ public final class CommonProfesorUtil {
 
             ProfesorSession profesorSession = new ProfesorSession();
             genericSession.setProfesorSession(profesorSession);
+            genericSession.setProfesor(profesor);
 
             profesorSession.setProfesor(profesor);
             profesor.setCarga();

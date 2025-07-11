@@ -25,8 +25,14 @@
         <header class="header-home">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 color1">
-                        <p><s:text name="label.title.bienvenido"/>&nbsp;<s:property value="#session.genericSession.nombre"/></p>
+                    <div class="col-lg-8 color1">                        
+                        <p><s:if test="#session.genericSession.getWorkSession(key).aluCar.alumno.aluSexo==1">
+                        BIENVENIDA
+                        </s:if>
+                        <s:else>
+                        BIENVENIDO
+                        </s:else>                        
+                        &nbsp;<s:property value="#session.genericSession.nombre"/></p>
                     </div>
                 </div>
             </div>
