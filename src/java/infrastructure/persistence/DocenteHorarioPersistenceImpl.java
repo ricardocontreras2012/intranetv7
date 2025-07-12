@@ -37,13 +37,13 @@ public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<Docente
         criteria.setFetchMode("curso", JOIN);
         criteria.add(eq("curso.id", cursoId));
         criteria.add(eq("dhorTipo", tipo));
-        
+
         return criteria.list();
     }
 
     @Override
-    public void addDocente(CursoId id, Integer rut, String horario, String tipo) {        
-        
+    public void addDocente(CursoId id, Integer rut, String horario, String tipo) {
+
         Query query = getSession().getNamedQuery("AddDocenteFunction");
 
         query.setParameter(0, id.getCurAsign(), StandardBasicTypes.INTEGER);
@@ -53,16 +53,15 @@ public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<Docente
         query.setParameter(4, id.getCurAgno(), StandardBasicTypes.INTEGER);
         query.setParameter(5, id.getCurSem(), StandardBasicTypes.INTEGER);
         query.setParameter(6, id.getCurComp(), StandardBasicTypes.STRING);
-        query.setParameter(7, rut, StandardBasicTypes.INTEGER);        
+        query.setParameter(7, rut, StandardBasicTypes.INTEGER);
         query.setParameter(8, tipo, StandardBasicTypes.STRING);
-        query.setParameter(9, ("".equals(horario) ? "NULL" : horario.substring(0, 1)), StandardBasicTypes.STRING);
-        query.setParameter(10, ("".equals(horario) ? -1 : Integer.valueOf( horario.substring(1, 2))), StandardBasicTypes.INTEGER);
-
+        query.setParameter(9, "".equals(horario) ? "NULL" : horario.substring(0, 1), StandardBasicTypes.STRING);
+        query.setParameter(10, "".equals(horario) ? Integer.valueOf(-1) : Integer.valueOf(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
         query.executeUpdate();
     }
 
     @Override
-    public void removeDocente(CursoId id, Integer rut, String horario, String tipo) {              
+    public void removeDocente(CursoId id, Integer rut, String horario, String tipo) {
         Query query = getSession().getNamedQuery("RemoveDocenteFunction");
 
         query.setParameter(0, id.getCurAsign(), StandardBasicTypes.INTEGER);
@@ -72,11 +71,11 @@ public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<Docente
         query.setParameter(4, id.getCurAgno(), StandardBasicTypes.INTEGER);
         query.setParameter(5, id.getCurSem(), StandardBasicTypes.INTEGER);
         query.setParameter(6, id.getCurComp(), StandardBasicTypes.STRING);
-        query.setParameter(7, rut, StandardBasicTypes.INTEGER);        
+        query.setParameter(7, rut, StandardBasicTypes.INTEGER);
         query.setParameter(8, tipo, StandardBasicTypes.STRING);
-        query.setParameter(9, ("".equals(horario) ? "NULL" : horario.substring(0, 1)), StandardBasicTypes.STRING);
-        query.setParameter(10, ("".equals(horario) ? -1 : Integer.valueOf( horario.substring(1, 2))), StandardBasicTypes.INTEGER);
-        
-        query.executeUpdate();        
+        query.setParameter(9, "".equals(horario) ? "NULL" : horario.substring(0, 1), StandardBasicTypes.STRING);
+        query.setParameter(10, "".equals(horario) ? Integer.valueOf(-1) : Integer.valueOf(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
+
+        query.executeUpdate();
     }
 }

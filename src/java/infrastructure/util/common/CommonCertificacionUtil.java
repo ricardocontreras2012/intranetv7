@@ -207,16 +207,19 @@ public class CommonCertificacionUtil {
     }
 
     public static void writeFile(ByteArrayOutputStream buffer, String file) throws Exception {
-        InputStream pdfStream = new ByteArrayInputStream(buffer.toByteArray());
+        byte[] bufferByte = buffer.toByteArray();
 
-        byte[] bufferByte = new byte[pdfStream.available()];
-        pdfStream.read(bufferByte);
+        try (InputStream pdfStream = new ByteArrayInputStream(bufferByte);
+                OutputStream outStream = new FileOutputStream(file)) {
 
-        File targetFile = new File(file);
-        targetFile.setReadable(true, false);
-        OutputStream outStream = new FileOutputStream(targetFile);
-        outStream.write(bufferByte);
-        outStream.close();
+            byte[] temp = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = pdfStream.read(temp)) != -1) {
+                outStream.write(temp, 0, bytesRead);
+            }
+        }
+        
+        new File(file).setReadable(true, false);
     }
 
     public static Paragraph newParrafo(int posX, int spaceBefore) {
@@ -228,7 +231,7 @@ public class CommonCertificacionUtil {
 
         return parrafo;
     }
-    
+
     public static Paragraph newParrafo(int posX, int spaceBefore, Font font) {
         Paragraph parrafo = new Paragraph("", font);
 
@@ -285,12 +288,12 @@ public class CommonCertificacionUtil {
     }
 
     public static Map<String, String> getParams(Integer correl) {
-                
+
         Object[] obj = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getCertificado(correl);
 
         String params = (String) obj[2];
         params = params.substring(1, params.length() - 1);
-                      
+
         return getMap(params);
     }
 

@@ -55,7 +55,7 @@ public final class CommonAlumnoPrintCartolaService extends CommonAlumnoPrintUtil
         // Procesar la lista y añadir filas a la tabla
         IntStream.range(0, lista.size()).forEach(i -> {
             CartolaView cartola = lista.get(i);
-            Color myColor = COLORS[i % 2]; // Alternar entre blanco y gris
+            Color myColor = COLORS.get(i % 2); // Alternar entre blanco y gris
 
             // Añadir celdas a la tabla
             Stream.of(

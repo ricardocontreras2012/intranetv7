@@ -57,7 +57,7 @@ import session.WorkSession;
  */
 public class TitulosyGradosAlumnoCertificadoPrintService {
 
-    final int TCERT = 40;
+    static final int TCERT = 40;
 
     FontsPDFUtil fontsUtil = (FontsPDFUtil) getServletContext().getAttribute("fontsUtil");
 

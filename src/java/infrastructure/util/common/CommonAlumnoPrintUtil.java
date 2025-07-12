@@ -33,16 +33,22 @@ import session.WorkSession;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.FormatUtil;
 import static infrastructure.util.FormatUtil.normalizaFileName;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class CommonAlumnoPrintUtil {
 
-    public static Font fontBig = PdfUtil.getFont("tahoma", 12.0f, Font.NORMAL);
-    public static Font fontSmall = PdfUtil.getFont("tahoma", 6.5f, Font.NORMAL);
-    public static Font fontMed = PdfUtil.getFont("tahoma", 7.5f, Font.NORMAL);
-    public static Font font = PdfUtil.getFont("tahoma", 8.0f, Font.NORMAL);
+    public final static Font FONTBIG = PdfUtil.getFont("tahoma", 12.0f, Font.NORMAL);
+    public final static Font FONTSMALL = PdfUtil.getFont("tahoma", 6.5f, Font.NORMAL);
+    public final static Font FONTMED = PdfUtil.getFont("tahoma", 7.5f, Font.NORMAL);
+    public final static Font FONT = PdfUtil.getFont("tahoma", 8.0f, Font.NORMAL);
 
-    public static final Color[] COLORS = {new Color(255, 255, 255), new Color(240, 240, 240)};
-    
+    public static final List<Color> COLORS = Collections.unmodifiableList(Arrays.asList(
+            new Color(255, 255, 255),
+            new Color(240, 240, 240)
+    ));
+
     AluCar aluCar;
 
     public static PdfPTable getTableTwoCols() {
@@ -79,24 +85,24 @@ public abstract class CommonAlumnoPrintUtil {
 
     // Método auxiliar para agregar una fila (dos celdas) a una tabla
     protected static void addRow(PdfPTable table, String label, String value) {
-        addCell(table, label, font, Element.ALIGN_LEFT);
-        addCell(table, value, font, Element.ALIGN_LEFT);
+        addCell(table, label, FONT, Element.ALIGN_LEFT);
+        addCell(table, value, FONT, Element.ALIGN_LEFT);
     }
 
     protected static void addEmptyRow(PdfPTable table) {
-        addCell(table, " ", font, Element.ALIGN_LEFT);
-        addCell(table, " ", font, Element.ALIGN_LEFT);
+        addCell(table, " ", FONT, Element.ALIGN_LEFT);
+        addCell(table, " ", FONT, Element.ALIGN_LEFT);
     }
 
     protected static PdfPCell getPdfPCell(String txt, int align, Color bgColor) {
-        PdfPCell cell = new PdfPCell(new Phrase(txt, fontSmall));
+        PdfPCell cell = new PdfPCell(new Phrase(txt, FONTSMALL));
         cell.setHorizontalAlignment(align);
         cell.setBorder(Rectangle.NO_BORDER);
         cell.setBackgroundColor(bgColor);
         return cell;
     }
 
-    public  class HeaderFooterPageEvent extends PdfPageEventHelper {
+    public class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;
@@ -147,11 +153,11 @@ public abstract class CommonAlumnoPrintUtil {
 
             // Asegúrate de agregar el encabezado completo
             PdfPTable header = createTable(1, new float[]{100}, 562);  // Ajusta el tamaño según sea necesario
-            addCell(header, DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd-MM-yyyy hh:mm:ss"), fontSmall, Element.ALIGN_RIGHT);
-            addCell(header, "UNIVERSIDAD DE SANTIAGO DE CHILE", fontBig, Element.ALIGN_CENTER);
-            addCell(header, aluCar.getAluCarFunction().getNombreFacultad().toUpperCase(ContextUtil.getLocale()), fontBig, Element.ALIGN_CENTER);  // Cambia esto si es necesario
-            addCell(header, " ", fontBig, Element.ALIGN_CENTER); // Celda vacía
-            addCell(header, getDocumentTitle().toUpperCase(), fontBig, Element.ALIGN_CENTER);  // Ajusta el título según sea necesario
+            addCell(header, DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd-MM-yyyy hh:mm:ss"), FONTSMALL, Element.ALIGN_RIGHT);
+            addCell(header, "UNIVERSIDAD DE SANTIAGO DE CHILE", FONTBIG, Element.ALIGN_CENTER);
+            addCell(header, aluCar.getAluCarFunction().getNombreFacultad().toUpperCase(ContextUtil.getLocale()), FONTBIG, Element.ALIGN_CENTER);  // Cambia esto si es necesario
+            addCell(header, " ", FONTBIG, Element.ALIGN_CENTER); // Celda vacía
+            addCell(header, getDocumentTitle().toUpperCase(), FONTBIG, Element.ALIGN_CENTER);  // Ajusta el título según sea necesario
             header.writeSelectedRows(0, -1, 0, 750, canvas);  // Ajusta las coordenadas se
 
             PdfPTable tHeader = getTableTwoCols();
@@ -176,12 +182,12 @@ public abstract class CommonAlumnoPrintUtil {
         }
 
         private void addFooter(PdfWriter writer) {
-            CommonPDFUtil.addFooter(writer, font, total);
+            CommonPDFUtil.addFooter(writer, FONT, total);
         }
 
         @Override
         public void onCloseDocument(PdfWriter writer, Document document) {
-            CommonPDFUtil.onCloseDocument(writer, document, template, font);
+            CommonPDFUtil.onCloseDocument(writer, document, template, FONT);
         }
     }
 

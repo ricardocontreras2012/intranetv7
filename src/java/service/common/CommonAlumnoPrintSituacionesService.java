@@ -46,7 +46,7 @@ public final class CommonAlumnoPrintSituacionesService extends CommonAlumnoPrint
         // Procesar la lista y añadir filas a la tabla
         IntStream.range(0, lista.size()).forEach(i -> {
             Sacarrera sit = lista.get(i);
-            Color myColor = COLORS[i % 2]; // Alternar entre blanco y gris
+            Color myColor = COLORS.get(i % 2); // Alternar entre blanco y gris
 
             // Añadir celdas a la tabla
             Stream.of(

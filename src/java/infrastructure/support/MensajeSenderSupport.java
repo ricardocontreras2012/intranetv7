@@ -427,7 +427,7 @@ public class MensajeSenderSupport {
                                             case "N10":
                                             case "N11":
                                             case "N12":
-                                                sendMsgAlumnosCarreraNivel(carrera, mencion, valueOf(ca.getId().substring(1)));
+                                                sendMsgAlumnosCarreraNivel(carrera, mencion, Integer.parseInt(ca.getId().substring(1)));
                                                 logInfo(prefixLog + ca.getId() + carrera + ' '
                                                         + mencion);
                                                 break;

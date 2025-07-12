@@ -19,10 +19,8 @@ import com.lowagie.text.alignment.HorizontalAlignment;
 import com.lowagie.text.pdf.PdfPageEventHelper;
 import com.lowagie.text.pdf.PdfWriter;
 import static com.lowagie.text.pdf.PdfWriter.getInstance;
-
 import domain.model.Convenio;
 import domain.model.Unidad;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -88,14 +86,13 @@ public class ConvenioSupport {
 
         folioConvenio = folio.toString();
         name = nameFile;
-        
+
         unidadMayorInitCap = unidad.getUniMayor().getUniNom();
         unidadMayor = unidadMayorInitCap.toUpperCase(ContextUtil.getLocale());
-        
-        if ("FACULTAD DE ADMINISTRACIÓN Y ECONOMÍA".equals(unidadMayor))
-        {
-            unidadMayor="DECANATO";
-        }        
+
+        if ("FACULTAD DE ADMINISTRACIÓN Y ECONOMÍA".equals(unidadMayor)) {
+            unidadMayor = "DECANATO";
+        }
 
         administrado = convenio.getProyecto().getProyAdministrado();
         nombreProyecto = convenio.getProyecto().getProyNom();
@@ -142,7 +139,7 @@ public class ConvenioSupport {
                 break;
             case "2027":
                 retencion = "16,00";
-                break;            
+                break;
             default:
                 retencion = "17,00";
         }
@@ -220,48 +217,47 @@ public class ConvenioSupport {
             String p8, String p8_a, String p8_b, String p9) {
 
         try {
-
             CommonArchivoUtil.deleteFile(SystemParametersUtil.PATH_CONV + name);
-
-            Document doc = new Document(LETTER);
-            doc.addCreator("Intranet FAE: " + fecha);
-            doc.addTitle("CONTRATO PRESTACIÓN DE SERVICIOS");
-            doc.addAuthor("FAE-USACH");
-            doc.addSubject("Contrato: " + folioConvenio);
-            doc.setMargins(50.0f, 50.0f, 100.0f, 50.0f);
-
+            
+            // Preparar recursos
             String path = getServletContext().getRealPath("/fonts/local/bookos.ttf");
             register(path, "bookos_font");
             normalFont = getFont("bookos_font", 10f, NORMAL);
             boldFont = getFont("bookos_font", 10f, BOLD);
 
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            PdfWriter writer = getInstance(doc, buffer);
-            MyHeaderFooter hf = new MyHeaderFooter();
-            writer.setPageEvent(hf);
+            // Salida temporal en memoria
+            try (ByteArrayOutputStream buffer = new ByteArrayOutputStream()) {
 
-            doc.open();
-            putHeader(doc);
-            putBody(doc, cab, p1, p2, p3, p4, p4_a, p4_b, p4_c, p4_d, p5, p5_a, p5_b, p5_c, p6, p7, p8, p8_a, p8_b, p9);
-            putFooter(doc);
-            doc.close();
+                Document doc = new Document(LETTER);
+                PdfWriter writer = getInstance(doc, buffer);
+                writer.setPageEvent(new MyHeaderFooter());
 
-            InputStream pdfStream = new ByteArrayInputStream(buffer.toByteArray());
-            byte[] bufferByte = new byte[pdfStream.available()];
-            pdfStream.read(bufferByte);
-            File targetFile = new File(SystemParametersUtil.PATH_CONV + name);
-            OutputStream outStream = new FileOutputStream(targetFile);
-            outStream.write(bufferByte);
-            outStream.close();
-            buffer.close();
+                doc.addCreator("Intranet FAE: " + fecha);
+                doc.addTitle("CONTRATO PRESTACIÓN DE SERVICIOS");
+                doc.addAuthor("FAE-USACH");
+                doc.addSubject("Contrato: " + folioConvenio);
+                doc.setMargins(50.0f, 50.0f, 100.0f, 50.0f);
 
-            return CommonArchivoUtil.getFile(name, "conv");
+                doc.open();
+                putHeader(doc);
+                putBody(doc, cab, p1, p2, p3, p4, p4_a, p4_b, p4_c, p4_d, p5, p5_a, p5_b, p5_c, p6, p7, p8, p8_a, p8_b, p9);
+                putFooter(doc);
+                doc.close();
+
+                // Guardar a archivo físico
+                File targetFile = new File(SystemParametersUtil.PATH_CONV + name);
+                try (OutputStream outStream = new FileOutputStream(targetFile)) {
+                    buffer.writeTo(outStream);
+                }
+
+                // Retornar InputStream del archivo guardado
+                return CommonArchivoUtil.getFile(name, "conv");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
     }
 
     private void putHeader(Document doc) throws Exception {
@@ -272,7 +268,7 @@ public class ConvenioSupport {
         top.setWidth(100);
         top.setPadding(0);
         top.setBorder(0);
-        
+
         Paragraph p1 = newParagraph("FACULTAD DE ADMINISTRACIÓN Y ECONOMÍA", 0, Element.ALIGN_LEFT, normalFont);
         Paragraph p2 = newParagraph(unidadMayor, 0, Element.ALIGN_LEFT, normalFont);
         Paragraph p3 = newParagraph(codigoProyecto, 0, Element.ALIGN_LEFT, normalFont);
@@ -285,7 +281,7 @@ public class ConvenioSupport {
         top.addCell(cell1);
 
         Paragraph p4 = newParagraph(folioConvenio, 0, Element.ALIGN_LEFT, normalFont);
-        Cell cell2 = new Cell();        
+        Cell cell2 = new Cell();
         cell2.add(p4);
         cell2.setBorder(0);
         cell2.setHorizontalAlignment(HorizontalAlignment.RIGHT);

@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,9 +57,10 @@ public class CommonLoginClaveUnicaResultService {
 
                 BufferedReader reader;
                 if (status >= 200 && status < 300) {
-                    reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                    reader = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
+
                 } else {
-                    reader = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                    reader = new BufferedReader(new InputStreamReader(con.getErrorStream(), StandardCharsets.UTF_8));
                 }
 
                 String line;

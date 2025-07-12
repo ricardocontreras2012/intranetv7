@@ -16,6 +16,7 @@ import infrastructure.support.PagoSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.FormatUtil;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -23,13 +24,13 @@ import infrastructure.util.FormatUtil;
  */
 public class AlumnoCertificacionGetBotonPagoService {
 
-    public static String service(AlumnoSession as) {        
-        
+    public static String service(AlumnoSession as) {
+
         try {
-            
-            URL url = new URL("https://services.usach.cl/api/newTransaction?amount="+as.getMontoCert()+"&store=Certificados%20en%20linea&url_callback=https://"+ServletActionContext.getRequest().getServerName()+"/intranetv7/AlumnoCertificacionGetConfirmacionPago"); 
-            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();           
-            
+
+            URL url = new URL("https://services.usach.cl/api/newTransaction?amount=" + as.getMontoCert() + "&store=Certificados%20en%20linea&url_callback=https://" + ServletActionContext.getRequest().getServerName() + "/intranetv7/AlumnoCertificacionGetConfirmacionPago");
+            HttpURLConnection httpConn = (HttpURLConnection) url.openConnection();
+
             httpConn.setRequestMethod("POST");
 
             httpConn.setRequestProperty("Accept", "application/json");
@@ -38,9 +39,9 @@ public class AlumnoCertificacionGetBotonPagoService {
             InputStream responseStream = httpConn.getResponseCode() / 100 == 2
                     ? httpConn.getInputStream()
                     : httpConn.getErrorStream();
-            Scanner s = new Scanner(responseStream).useDelimiter("\\A");
-            String response = s.hasNext() ? s.next() : "";
 
+            Scanner s = new Scanner(responseStream, StandardCharsets.UTF_8.name()).useDelimiter("\\A");
+            String response = s.hasNext() ? s.next() : "";
             response = response.replace("\\/", "/");
 
             Gson gson = new Gson();
@@ -49,7 +50,7 @@ public class AlumnoCertificacionGetBotonPagoService {
             Integer idTran = FormatUtil.Base64toInt(pago.getTransaction_number());
 
             ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).createPago(as.getCorrelCert(), idTran);
-          
+
             return pago.getUrl_payment();
         } catch (Exception e) {
             e.printStackTrace();

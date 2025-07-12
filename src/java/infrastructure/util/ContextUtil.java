@@ -79,77 +79,87 @@ public final class ContextUtil {
         return InstanceHolder.INSTANCE;
     }
 
-    // Métodos seguros que devuelven copias inmutables
+    // Getters seguros con copia defensiva
 
     public static List<Comuna> getComunaList() {
-        return comunaList;
+        return new ArrayList<>(comunaList);
     }
 
     public static Map<Integer, List<Comuna>> getComunaMap() {
-        return comunaMap;
+        return new HashMap<>(comunaMap);
     }
 
     public static List<Dia> getDiaList() {
-        return diaList;
+        return new ArrayList<>(diaList);
     }
 
     public static Map<String, Integer> getDiaMap() {
-        return diaMap;
+        return new HashMap<>(diaMap);
     }
 
+    /**
+     * Devuelve instancia de uso interno. No debe ser modificada desde fuera.
+     */
     public static FactoryConcreteDAO getDAO() {
-        return dao;
+        return dao; // ⚠️ se asume uso de solo lectura/controlado internamente
     }
 
     public static List<ParamArchivosWeb> getParamArchivosWebList() {
-        return paramArchivosWebList;
+        return new ArrayList<>(paramArchivosWebList);
     }
 
     public static List<Region> getRegionList() {
-        return regionList;
+        return new ArrayList<>(regionList);
     }
 
     public static List<Tevaluacion> getTevaluacionList() {
-        return tevaluacionList;
+        return new ArrayList<>(tevaluacionList);
     }
 
     public static Map<String, List<Tmaterial>> getTipoMaterialMap() {
-        return tipoMaterialMap;
+        return new HashMap<>(tipoMaterialMap);
     }
 
     public static List<Tramite> getTramiteList() {
-        return tramiteList;
+        return new ArrayList<>(tramiteList);
     }
 
     public static Map<Integer, Tramite> getTramiteMap() {
-        return tramiteMap;
+        return new HashMap<>(tramiteMap);
     }
 
+    /**
+     * Devuelve un clon para evitar modificar el collator interno.
+     */
     public static Collator getCollator() {
-        return collator;
+        return (Collator) collator.clone();
     }
 
+    /**
+     * Devuelve una copia defensiva del locale.
+     */
     public static Locale getLocale() {
-        return locale;
+        return new Locale(locale.getLanguage(), locale.getCountry());
     }
 
     public static List<EstadoCivil> getEstadoCivilList() {
-        return estadoCivilList;
+        return new ArrayList<>(estadoCivilList);
     }
 
     public static List<AreaTrabajo> getAreaTrabajoList() {
-        return areaTrabajoList;
+        return new ArrayList<>(areaTrabajoList);
     }
 
     public static List<EstadoSolicitud> getEstadoSolicitudList() {
-        return estadoSolicitudList;
+        return new ArrayList<>(estadoSolicitudList);
     }
 
     public static List<TmotivoSolicitudInscripcion> getTmotivoSolicitudInscripcion() {
-        return tmotivoList;
+        return new ArrayList<>(tmotivoList);
     }
 
-    // Métodos auxiliares para hacer defensiva la inmutabilidad
+    // Métodos auxiliares para protección defensiva
+
     private static <T> List<T> safeList(List<T> list) {
         return list != null ? Collections.unmodifiableList(new ArrayList<>(list)) : Collections.emptyList();
     }

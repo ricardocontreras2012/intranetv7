@@ -44,7 +44,7 @@ public class CommonAlumnoPrintCalidadesService extends CommonAlumnoPrintUtil {
         // Procesar la lista y añadir filas a la tabla
         IntStream.range(0, lista.size()).forEach(i -> {
             Ccalidad calidad = lista.get(i);
-            Color myColor = COLORS[i % 2]; // Alternar entre blanco y gris
+            Color myColor = COLORS.get(i % 2);
 
             // Añadir celdas a la tabla
             Stream.of(

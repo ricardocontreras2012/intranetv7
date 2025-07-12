@@ -9,6 +9,7 @@ import java.util.List;
 import static service.common.CommonInscripcionAdmChangeNominaIzqService.service;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
+import java.util.Collection;
 
 /**
  *
@@ -17,8 +18,8 @@ import infrastructure.support.action.ActionParameterAwareSupport;
 public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAwareSupport {
     private static final long serialVersionUID = 1L;
     private String retValue;
-    private List<String> errors;
-    private List<String> errorMessages;
+   private Collection<String> errors;
+    private Collection<String> errorMessages;
 
     /**
      * Method description
@@ -29,8 +30,8 @@ public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAw
     @Override
     public String action() throws Exception {
         retValue = service(this, getGenericSession(), Manager.getJefeCarreraSession(sesion) , getMapParameters(), getKey());
-        errors = (List<String>) this.getActionErrors();
-        errorMessages = (List<String>) this.getActionMessages();
+        errors = this.getActionErrors();
+        errorMessages = this.getActionMessages();
         return retValue;
     }
 
@@ -42,15 +43,15 @@ public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAw
         this.retValue = retValue;
     }
 
-    public List<String> getErrors() {
-        return errors;
-    }
-
     public void setErrors(List<String> errors) {
         this.errors = errors;
     }
 
-    public List<String> getErrorMessages() {
+    public Collection<String> getErrors() {
+        return errors;
+    }
+
+    public Collection<String> getErrorMessages() {
         return errorMessages;
     }
 

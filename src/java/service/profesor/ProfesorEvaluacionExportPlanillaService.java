@@ -13,7 +13,6 @@ import domain.model.EvaluacionAlumno;
 import domain.model.CursoTevaluacion;
 import domain.model.comparator.EvaluacionComparable;
 import java.io.*;
-import static java.lang.Double.valueOf;
 import java.math.BigDecimal;
 import static java.math.BigInteger.ZERO;
 import java.math.MathContext;
@@ -402,7 +401,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
                 String nota = getEvaluacion(evaluacion, planilla, alumno);
 
                 if (nota != null && !"".equals(nota)) {
-                    celdaEval.setCellValue(valueOf(nota.replace(",", ".")));
+                    celdaEval.setCellValue(Double.parseDouble(nota.replace(",", ".")));
                     celdaEval.setCellStyle(estiloNota);
 
                     if ("R".equals(modalidad)) {
@@ -426,15 +425,12 @@ public final class ProfesorEvaluacionExportPlanillaService {
             if (notasFinales) {
                 XSSFCell celdaFinal = rowExcel.createCell(col);
                 MathContext mathContext = new MathContext(2);
-
-                //celdaFinal.setCellType(CELL_TYPE_NUMERIC);
-                celdaFinal.setCellValue(valueOf(acum.round(mathContext).toString().replace(",", ".")));
+                celdaFinal.setCellValue(Double.parseDouble(acum.round(mathContext).toString().replace(",", ".")));
                 celdaFinal.setCellStyle(estiloNota);
             }
 
             filaAux++;
         }
-
     }
 
     /**
