@@ -145,9 +145,26 @@
     </style>
     <body>       
         <div class="container">
+            <div class="header-logo">
+                <!-- Aquí puedes agregar el logo de la universidad -->
+                <h1>Universidad de Santiago de Chile</h1>
+            </div>
+
+            <div class="intro-text">
+                <p>Estimado/a estudiante:</p>
+                <p>Como todos los semestres, la Universidad de Santiago realiza una evaluación de la docencia 
+                    en las asignaturas de todas sus facultades y carreras, que tiene como propósito conocer la 
+                    percepción de los/as estudiantes sobre su proceso formativo.</p>
+                <p>Este año se aplicará una nueva versión del cuestionario que le tomará menos de cinco 
+                    minutos responder. Las respuestas son confidenciales y las de desarrollo podrán ser leídas 
+                    en forma anónima por sus docentes y autoridades.</p>
+                <p>Unidad de Evaluación<br>
+                    Vicerrectoría Académica<br>
+                    Universidad de Santiago de Chile</p>
+            </div>
+
             <div class="titulo-bg">
                 CUESTIONARIO DE EVALUACIÓN DE LA DOCENCIA 
-
             </div>
             <h3 class="section-title">
                 <s:property
@@ -174,9 +191,9 @@
                 </fieldset>
                 <fieldset>
                     <legend>¿Con qué frecuencia cumplió Ud. con las actividades académicas y obligaciones de esta asignatura?</legend>
-                    <label><input type="radio" name="P_1_3" value="1"> Nunca o casi nunca</label>
-                    <label><input type="radio" name="P_1_3" value="2"> Frecuentemente</label>
-                    <label><input type="radio" name="P_1_3" value="3"> A veces</label>
+                    <label><input type="radio" name="P_1_3" value="1"> Nunca o casi nunca</label>                    
+                    <label><input type="radio" name="P_1_3" value="2"> A veces</label>
+                    <label><input type="radio" name="P_1_3" value="3"> Frecuentemente</label>
                     <label><input type="radio" name="P_1_3" value="4"> Siempre o casi siempre</label>
                 </fieldset>
                 <fieldset>

@@ -22,23 +22,25 @@ public class CommonMensajeGetPageService {
      * @param url
      * @param key
      * @return
-     */
+     */    
     public static InputStream service(GenericSession genericSession, String url, String key) {
         try {
             URL page = new URL(url);
-            BufferedReader in = new BufferedReader(new InputStreamReader(page.openStream(), "UTF-8"));
-
-            String inputLine;
             StringBuilder stringBuilder = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
-                stringBuilder.append(inputLine);
+
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(page.openStream(), Charset.forName("UTF-8")))) {
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    stringBuilder.append(inputLine);
+                }
             }
+
             byte[] bytes = stringBuilder.toString().getBytes(Charset.forName("UTF-8"));
-            in.close();
             return new ByteArrayInputStream(bytes);
 
         } catch (Exception e) {
-            e.printStackTrace(); return null;
+            e.printStackTrace();
+            return null;
         }
     }
 }

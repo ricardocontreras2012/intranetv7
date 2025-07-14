@@ -4,6 +4,8 @@ import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
 
 import javax.servlet.ServletContext;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.nio.file.*;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +13,6 @@ import java.util.Map;
 
 public class FontsPDFUtil {
 
-    // Constantes para las claves
     private static final String FUENTE_TAHOMA = "tahoma";
     private static final String FUENTE_TIMES = "times";
 
@@ -51,8 +52,19 @@ public class FontsPDFUtil {
         }
 
         if (Files.exists(ruta)) {
-            BaseFont bf = BaseFont.createFont(ruta.toString(), BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            mapaFuentes.put(clave, bf);
+            try (InputStream in = Files.newInputStream(ruta);
+                 ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+                byte[] buffer = new byte[4096];
+                int bytesRead;
+                while ((bytesRead = in.read(buffer)) != -1) {
+                    baos.write(buffer, 0, bytesRead);
+                }
+
+                byte[] bytes = baos.toByteArray();
+                BaseFont bf = BaseFont.createFont(nombreArchivo, BaseFont.IDENTITY_H, BaseFont.EMBEDDED, false, bytes, null);
+                mapaFuentes.put(clave, bf);
+            }
         }
     }
 

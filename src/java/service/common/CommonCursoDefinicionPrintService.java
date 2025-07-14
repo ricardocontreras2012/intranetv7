@@ -37,7 +37,7 @@ public class CommonCursoDefinicionPrintService {
 
     // Ruta al logo de la universidad.
     private static final String LOGO_PATH = ServletActionContext.getServletContext().getRealPath(SystemParametersUtil.UNIVERSITY_LOGO_PATH3);
-    private static Image logo;
+   
 
     /**
      * Servicio para generar el archivo PDF con la definición de cursos de la
@@ -73,6 +73,11 @@ public class CommonCursoDefinicionPrintService {
     public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file) throws Exception {
 
         Integer genera = genericSession.getRut();
+        Image logo;
+        // Cargar el logo de la universidad
+        logo = Image.getInstance(LOGO_PATH);
+        logo.scaleToFit(60, 60); // Ajustar tamaño del logo
+        
         String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
 
         // Crear el documento PDF con tamaño Letter rotado y márgenes personalizados
@@ -81,12 +86,8 @@ public class CommonCursoDefinicionPrintService {
         PdfWriter writer = PdfWriter.getInstance(doc, buffer);
 
         // Crear evento para manejar encabezados y pies de página
-        HeaderFooterPageEvent event = new HeaderFooterPageEvent(name, ws.getSemAct(), ws.getAgnoAct(), fecha);
+        HeaderFooterPageEvent event = new HeaderFooterPageEvent(name, ws.getSemAct(), ws.getAgnoAct(), fecha, logo);
         writer.setPageEvent(event);
-
-        // Cargar el logo de la universidad
-        logo = Image.getInstance(LOGO_PATH);
-        logo.scaleToFit(60, 60); // Ajustar tamaño del logo
 
         doc.open();
 
@@ -156,8 +157,9 @@ public class CommonCursoDefinicionPrintService {
         private PdfTemplate template;
         private Image total;
         private final String fecha;
+        private Image logo;
 
-        HeaderFooterPageEvent(String name, Integer sem, Integer agno, String fecha) {
+        HeaderFooterPageEvent(String name, Integer sem, Integer agno, String fecha, Image logo) {
             this.name = name;
             this.sem = sem;
             this.agno = agno;

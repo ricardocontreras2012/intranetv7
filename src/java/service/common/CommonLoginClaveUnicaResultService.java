@@ -13,6 +13,7 @@ import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonProfesorUtil;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ricardo
  */
 public class CommonLoginClaveUnicaResultService {
+
     public static String service(HttpServletRequest request, Map<String, Object> sesion, String key) {
 
         String token;
@@ -39,10 +41,10 @@ public class CommonLoginClaveUnicaResultService {
 
                 String data2 = jobj.get("data").toString();
                 JsonObject jobj2 = new Gson().fromJson(data2, JsonObject.class);
-                token = jobj2.get("token").toString().replace("\"", "");
+                token = jobj2.get("token").getAsString();
                 String meta = jobj2.get("metadata").toString();
                 JsonObject jobj6 = new Gson().fromJson(meta, JsonObject.class);
-                userType = jobj6.get("userType").toString().replace("\"", "");
+                userType = jobj6.get("userType").getAsString();
 
                 URL url = new URL("https://accounts.claveunica.gob.cl/openid/userinfo/");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -55,26 +57,21 @@ public class CommonLoginClaveUnicaResultService {
                 // Obtener código de respuesta
                 int status = con.getResponseCode();
 
-                BufferedReader reader;
-                if (status >= 200 && status < 300) {
-                    reader = new BufferedReader(new InputStreamReader(con.getInputStream(), StandardCharsets.UTF_8));
-
-                } else {
-                    reader = new BufferedReader(new InputStreamReader(con.getErrorStream(), StandardCharsets.UTF_8));
-                }
-
-                String line;
+                InputStream is = (status >= 200 && status < 300) ? con.getInputStream() : con.getErrorStream();
                 StringBuilder response = new StringBuilder();
-                while ((line = reader.readLine()) != null) {
-                    response.append(line).append("\n");
+
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        response.append(line).append("\n");
+                    }
                 }
-                reader.close();
 
                 // Parsear JSON con Gson
                 JsonObject jsonObject = JsonParser.parseString(response.toString()).getAsJsonObject();
                 JsonObject idPer = jsonObject.getAsJsonObject("RolUnico");
                 Integer rut = idPer.get("numero").getAsInt();
-                
+
                 switch (userType) {
                     case "AL":
                         retValue = CommonAlumnoUtil.login(rut, "", key, sesion, SystemParametersUtil.INGRESO_CLAVE_UNICA);
@@ -83,7 +80,8 @@ public class CommonLoginClaveUnicaResultService {
                         retValue = CommonProfesorUtil.login(rut, "", key, sesion, SystemParametersUtil.INGRESO_CLAVE_UNICA);
                         break;
                     default:
-                    // code block
+                        // Tipo de usuario no reconocido
+                        break;
                 }
 
                 LogUtil.setLog(rut);
@@ -91,7 +89,7 @@ public class CommonLoginClaveUnicaResultService {
 
         } catch (Exception e) {
             e.printStackTrace();
-           //NO borrar capta errores en ClaveUnica
+            // NO borrar, capta errores en ClaveÚnica
         }
 
         return retValue ? "success" : "error";

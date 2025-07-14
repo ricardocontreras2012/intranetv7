@@ -10,7 +10,6 @@ import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
 import domain.model.Derecho;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -93,8 +92,7 @@ public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long>
     @SuppressWarnings("unchecked")
     @Override
     public List<DerechoCoordinadorSupport> getDerechoCoordinador(AluCar aluCar, Integer rut, String userType) {
-
-        List<DerechoCoordinadorSupport> lDerecho = new ArrayList<>();
+        
         Query query = getSession().getNamedQuery("DerechoCoordinadorFunction");
         AluCarId id = aluCar.getId();
 
@@ -134,7 +132,7 @@ public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long>
     @SuppressWarnings("unchecked")
     @Override
     public List<DerechoCoordinadorSupport> getDerechoCoordinadorLibre(AluCar aluCar, Integer rut) {
-        List<DerechoCoordinadorSupport> lDerecho = new ArrayList<>();
+
         Query query = getSession().getNamedQuery("DerechoCoordinadorLibreFunction");
         AluCarId id = aluCar.getId();
 
@@ -170,7 +168,7 @@ public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long>
     @SuppressWarnings("unchecked")
     @Override
     public List<DerechoCoordinadorSupport> getDerechoFI(AluCar aluCar, Integer rut, String userType) {
-        List<DerechoCoordinadorSupport> lDerecho = new ArrayList<>();
+ 
         Query query = getSession().getNamedQuery("DerechoFIFunction");
         AluCarId id = aluCar.getId();
 

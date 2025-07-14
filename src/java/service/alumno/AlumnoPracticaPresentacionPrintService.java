@@ -11,7 +11,6 @@ import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfWriter;
-import static com.lowagie.text.pdf.PdfWriter.getInstance;
 import domain.model.AluCar;
 import com.lowagie.text.Image;
 import com.lowagie.text.Paragraph;
@@ -76,7 +75,7 @@ public class AlumnoPracticaPresentacionPrintService {
         doc.addCreationDate();
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        PdfWriter writer = getInstance(doc, buffer);
+        PdfWriter.getInstance(doc, buffer);
 
         doc.open();
 

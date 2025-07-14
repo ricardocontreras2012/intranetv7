@@ -1,14 +1,8 @@
-
-
 /**
  *
- * @author Usach
+ * @author Ricardo Contreras S.
  */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package infrastructure.dispatcher;
 
 import com.opensymphony.xwork2.config.entities.ActionConfig;
@@ -32,22 +26,28 @@ public class ActionMenuBuilderListener implements ServletContextListener, Dispat
     @Override
     public void dispatcherInitialized(Dispatcher du) {
         Map<String, Map<String, ActionConfig>> configs = du
-                .getConfigurationManager().getConfiguration().getRuntimeConfiguration()
+                .getConfigurationManager()
+                .getConfiguration()
+                .getRuntimeConfiguration()
                 .getActionConfigs();
 
-        for (String name : configs.keySet()) {
+        for (Map.Entry<String, Map<String, ActionConfig>> outerEntry : configs.entrySet()) {
+            Map<String, ActionConfig> innerMap = outerEntry.getValue();
 
-            for (String n2 : configs.get(name).keySet()) {
-                System.out.println("action=" + configs.get(name).get(n2).getName()+"-->"+configs.get(name).get(n2).getPackageName());
+            for (Map.Entry<String, ActionConfig> innerEntry : innerMap.entrySet()) {
+                ActionConfig actionConfig = innerEntry.getValue();
+                System.out.println("action=" + actionConfig.getName() + "-->" + actionConfig.getPackageName());
             }
         }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
+        // No se necesita implementación específica en este caso
     }
 
     @Override
     public void dispatcherDestroyed(Dispatcher d) {
+        // No se necesita implementación específica en este caso
     }
 }

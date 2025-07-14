@@ -50,9 +50,7 @@ public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSuppo
      *
      * @return
      */
-    public String save() {
-        
-System.out.println("ok 1111111111111");         
+    public String save() {         
         return saveService(getGenericSession(), getMapParameters(), getKey());
     }
 }

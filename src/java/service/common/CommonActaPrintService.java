@@ -15,7 +15,6 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import static com.lowagie.text.pdf.PdfWriter.getInstance;
 import domain.model.Curso;
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
@@ -71,8 +70,8 @@ public class CommonActaPrintService {
         doc.addCreationDate();
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        PdfWriter writer = getInstance(doc, buffer);
-
+        PdfWriter.getInstance(doc, buffer);
+       
         doc.open();
 
         // Agregar logo
