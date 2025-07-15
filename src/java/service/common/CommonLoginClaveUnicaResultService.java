@@ -40,11 +40,12 @@ public class CommonLoginClaveUnicaResultService {
             if (jobj.get("success").getAsBoolean()) {
 
                 String data2 = jobj.get("data").toString();
-                JsonObject jobj2 = new Gson().fromJson(data2, JsonObject.class);
-                token = jobj2.get("token").getAsString();
+                JsonObject jobj2 = new Gson().fromJson(data2, JsonObject.class);                
+                token = jobj2.get("token").toString().replace("\"", "");
+
                 String meta = jobj2.get("metadata").toString();
                 JsonObject jobj6 = new Gson().fromJson(meta, JsonObject.class);
-                userType = jobj6.get("userType").getAsString();
+                userType = jobj6.get("userType").toString().replace("\"", "");
 
                 URL url = new URL("https://accounts.claveunica.gob.cl/openid/userinfo/");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
