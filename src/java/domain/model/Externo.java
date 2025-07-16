@@ -148,9 +148,9 @@ public class Externo implements Serializable {
      * class.
      */
     public Date getExtLastLogin() {
-        return ((this.extLastLogin != null)
+        return this.extLastLogin != null
                 ? new Date(this.extLastLogin.getTime())
-                : null);
+                : null;
     }
 
     /**

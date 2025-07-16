@@ -68,7 +68,7 @@ public class CommonCursoDefinicionAyudanteSaveService {
                     if (!"".equals(horario)) {
                         // Separar el día y el módulo del horario.
                         String dia = horario.substring(0, 1);  // El primer carácter es el día.
-                        int modulo = Integer.parseInt(horario.substring(1));  // El resto es el módulo.
+                        int modulo = parseInt(horario.substring(1));  // El resto es el módulo.
 
                         // Verificar si el docente ya está asignado con el mismo RUT y horario.
                         if (dh.getAyudante().getAyuRut() == rut
@@ -118,7 +118,7 @@ public class CommonCursoDefinicionAyudanteSaveService {
 
                     // Separar el día y el módulo.
                     String dia = horario.substring(0, 1);  // El primer carácter es el día.
-                    int modulo = Integer.parseInt(horario.substring(1));  // El resto es el módulo.
+                    int modulo = parseInt(horario.substring(1));  // El resto es el módulo.
 
                     // Verificar si ya existe un docente con el mismo RUT y horario.
                     docenteExistente = ws.getDocenteHorarioList().stream()

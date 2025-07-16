@@ -134,8 +134,7 @@ public final class MensajeDestinatarioPersistenceImpl extends CrudAbstractDAO<Me
 
         criteria.add(ne("msgdEstado", "D"));
         criteria.add(eq("id.msgdRutDest", rut));
-        Integer totalResult = ((Number) criteria.setProjection(rowCount()).uniqueResult()).intValue();
-        return totalResult;
+        return ((Number) criteria.setProjection(rowCount()).uniqueResult()).intValue();
     }
 
     /**

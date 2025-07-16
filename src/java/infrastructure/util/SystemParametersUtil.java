@@ -84,7 +84,6 @@ public class SystemParametersUtil {
     public static final String PATH_SITUACIONES = getParam("pathSituaciones");
     public static final String PATH_CONV = getParam("pathConvenios");
     public static final String PATH_PROG = getParam("pathProgramas");
-    public static final String PATH_TELE_TRABAJO = getParam("pathTeleTrabajo");
     public static final String PATH_TITULACION = getParam("pathTitulacion");
 
     /*

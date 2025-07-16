@@ -20,9 +20,9 @@ public interface CursoEspejoPersistence extends CrudGenericDAO<CursoEspejo, Long
 
     List<CursoEspejo> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String tipo);
 
-    void add(Integer asign_tr, String elect_tr, String coord_tr, Integer secc_tr, Integer agno_tr, Integer sem_tr,
+    void add(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,
             Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);
 
-    void remove(Integer asign_tr, String elect_tr, String coord_tr, Integer secc_tr, Integer agno_tr, Integer sem_tr,
+    void remove(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,
             Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);
 }

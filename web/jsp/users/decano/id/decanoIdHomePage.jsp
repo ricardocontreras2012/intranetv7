@@ -87,9 +87,6 @@
                             <a href="#" class="dropdown-item" onclick="executeAction('CommonSalaEnable')">
                                 <s:text name="label.salas"/>
                             </a>
-                            <%--a href="#" class="dropdown-item" id="solictFirma" onclick="executeAction('CommonDecanoSolicitudPAF')">
-                                Solicitud de firma
-                            </a--%>
                         </div>
                     </li>                   
                 </ul>

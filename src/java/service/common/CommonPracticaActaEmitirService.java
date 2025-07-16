@@ -68,9 +68,9 @@ public class CommonPracticaActaEmitirService {
         }
     }
 
-    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porc_emp, Integer porc_coord) {
+    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porc_emp, porc_coord, "N");
+        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord, "N");
 
         return folio;
     }

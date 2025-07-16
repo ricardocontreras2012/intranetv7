@@ -56,7 +56,7 @@ public class CommonActaExportService {
         CommonExcelUtil.putLogo(workbook, sheet);
 
         // Agregar las filas de título, facultad y fecha
-        createTitleRow(sheet, titleStyle, curso);
+        createTitleRow(sheet, titleStyle);
         createFacultyRow(sheet, titleStyle, curso);
         createDateRow(sheet, smallCellStyle);
 
@@ -82,7 +82,7 @@ public class CommonActaExportService {
         sheet.setColumnWidth(7, CommonExcelUtil.calculateColWidth(6));
     }
 
-    private void createTitleRow(XSSFSheet sheet, CellStyle style, Curso curso) {
+    private void createTitleRow(XSSFSheet sheet, CellStyle style) {
         Row titleRow = sheet.createRow(0);
         Cell titleCell = titleRow.createCell(2);
         titleCell.setCellValue(TITLE);

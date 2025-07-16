@@ -77,16 +77,16 @@ public class CursoEspejoPersistenceImpl extends CrudAbstractDAO<CursoEspejo, Lon
     }
 
     @Override
-    public void add(Integer asign_tr, String elect_tr, String coord_tr, Integer secc_tr, Integer agno_tr, Integer sem_tr,
+    public void add(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,
             Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
         Query query = getSession().getNamedQuery("AddCursoEspejoFunction");
 
-        query.setParameter(0, asign_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(1, elect_tr, StandardBasicTypes.STRING);
-        query.setParameter(2, coord_tr, StandardBasicTypes.STRING);
-        query.setParameter(3, secc_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(4, agno_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(5, sem_tr, StandardBasicTypes.INTEGER);
+        query.setParameter(0, asignTr, StandardBasicTypes.INTEGER);
+        query.setParameter(1, electTr, StandardBasicTypes.STRING);
+        query.setParameter(2, coordTr, StandardBasicTypes.STRING);
+        query.setParameter(3, seccTr, StandardBasicTypes.INTEGER);
+        query.setParameter(4, agnoTr, StandardBasicTypes.INTEGER);
+        query.setParameter(5, semTr, StandardBasicTypes.INTEGER);
         query.setParameter(6, asign, StandardBasicTypes.INTEGER);
         query.setParameter(7, elect, StandardBasicTypes.STRING);
         query.setParameter(8, coord, StandardBasicTypes.STRING);
@@ -98,17 +98,17 @@ public class CursoEspejoPersistenceImpl extends CrudAbstractDAO<CursoEspejo, Lon
     }
 
     @Override
-    public void remove(Integer asign_tr, String elect_tr, String coord_tr, Integer secc_tr, Integer agno_tr, Integer sem_tr,
+    public void remove(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,
             Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
 
         Query query = getSession().getNamedQuery("RemoveCursoEspejoFunction");
 
-        query.setParameter(0, asign_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(1, elect_tr, StandardBasicTypes.STRING);
-        query.setParameter(2, coord_tr, StandardBasicTypes.STRING);
-        query.setParameter(3, secc_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(4, agno_tr, StandardBasicTypes.INTEGER);
-        query.setParameter(5, sem_tr, StandardBasicTypes.INTEGER);
+        query.setParameter(0, asignTr, StandardBasicTypes.INTEGER);
+        query.setParameter(1, electTr, StandardBasicTypes.STRING);
+        query.setParameter(2, coordTr, StandardBasicTypes.STRING);
+        query.setParameter(3, seccTr, StandardBasicTypes.INTEGER);
+        query.setParameter(4, agnoTr, StandardBasicTypes.INTEGER);
+        query.setParameter(5, semTr, StandardBasicTypes.INTEGER);
         query.setParameter(6, asign, StandardBasicTypes.INTEGER);
         query.setParameter(7, elect, StandardBasicTypes.STRING);
         query.setParameter(8, coord, StandardBasicTypes.STRING);

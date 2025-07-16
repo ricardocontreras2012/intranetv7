@@ -12,9 +12,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
-import static org.hibernate.criterion.Restrictions.idEq;
-import static org.hibernate.criterion.Restrictions.sqlRestriction;
-import org.hibernate.type.StringType;
 import org.hibernate.type.StandardBasicTypes;
 import infrastructure.util.FormatUtil;
 
@@ -73,50 +70,5 @@ public class FuncionarioPersistenceImpl extends CrudAbstractDAO<Funcionario, Lon
         query.setParameter("rut", rut, StandardBasicTypes.INTEGER);
 
         query.executeUpdate();
-    }
-
-    @Override
-    public Funcionario findTeletrabajo(Integer rut, String password) {
-        Criteria criteria = getSession().createCriteria(Funcionario.class);
-
-        criteria.add(idEq(rut));
-        criteria.add(sqlRestriction("valid_user_tele_trabajo(fun_rut, (?))=1", password, new StringType()));
-
-        return (Funcionario) criteria.uniqueResult();
-    }
-
-    @Override
-    public Funcionario findTeleTrabajoJefe(Integer rut) {
-        Criteria criteria = getSession().createCriteria(Funcionario.class);
-
-        String filter = "EXISTS (select * from funcionario_teletrabajo where "
-                + "fun_rut = ftel_rut_jefe AND fun_rut= " + rut + ")";
-
-        criteria.add(sqlRestriction(filter));
-
-        return (Funcionario) criteria.uniqueResult();
-    }
-
-    @Override
-    public Funcionario findTeleTrabajo(Integer rut) {
-        Criteria criteria = getSession().createCriteria(Funcionario.class);
-
-        String filter = "EXISTS (select * from funcionario_teletrabajo where "
-                + "fun_rut = ftel_rut AND fun_rut= " + rut + ")";
-
-        criteria.add(sqlRestriction(filter));
-
-        return (Funcionario) criteria.uniqueResult();
-    }
-
-    @Override
-    public Funcionario findSuperTeleTrabajo(Integer rut) {
-        Criteria criteria = getSession().createCriteria(Funcionario.class);
-
-        String filter = "fun_rut = " + rut + " AND FUN_REPORTE_TELETRABAJO = 'S'";
-
-        criteria.add(sqlRestriction(filter));
-
-        return (Funcionario) criteria.uniqueResult();
     }
 }

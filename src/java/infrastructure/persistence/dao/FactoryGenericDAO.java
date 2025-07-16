@@ -53,7 +53,6 @@ import domain.repository.SacarreraPersistence;
 import domain.repository.ModuloHorarioPersistence;
 import domain.repository.EncuestaAyudantePersistence;
 import domain.repository.UserLoginActionStackPersistence;
-import domain.repository.EvidenciaTareaActTeletrabajoPersistence;
 import domain.repository.InscripcionPersistence;
 import domain.repository.CarreraPersistence;
 import domain.repository.PregEnctaPersistence;
@@ -70,7 +69,6 @@ import domain.repository.ComentarioEncuestaAyudantePersistence;
 import domain.repository.TmensajeDestinoPersistence;
 import domain.repository.ActaConvalidacionPersistence;
 import domain.repository.SolicitudInscripcionPersistence;
-import domain.repository.FuncionarioTeletrabajoPersistence;
 import domain.repository.RequisitoGradoTituloAdicPersistence;
 import domain.repository.PersonaPersistence;
 import domain.repository.CursoEspejoPersistence;
@@ -92,7 +90,6 @@ import domain.repository.RespEnctaAyuCursoPersistence;
 import domain.repository.ParametroPersistence;
 import domain.repository.DiaPersistence;
 import domain.repository.MensajePersistence;
-import domain.repository.ActividadTeletrabajoPersistence;
 import domain.repository.MensajeAttachPersistence;
 import domain.repository.ExternoPersistence;
 import domain.repository.TmaterialPerfilPersistence;
@@ -101,7 +98,6 @@ import domain.repository.ActaConvalidacionAsignaturaPersistence;
 import domain.repository.ReincorporacionPersistence;
 import domain.repository.ConvalidacionComisionPersistence;
 import domain.repository.LogSolicitudPersistence;
-import domain.repository.TareaActividadTeletrabajoPersistence;
 import domain.repository.ParametroMencionPersistence;
 import domain.repository.MencionPersistence;
 import domain.repository.SolicitudAttachPersistence;
@@ -973,17 +969,7 @@ abstract class FactoryGenericDAO {
     public abstract AlumnoEmpleadorPersistence getAlumnoEmpleadorPersistence(String userType);
 
     public abstract SolicitudCertificadoCarritoPersistence getSolicitudCertificadoCarritoPersistence(String userType);
-    
-    
 
-    public abstract ActividadTeletrabajoPersistence getActividadTeletrabajoPersistence(String userType);
-
-    public abstract FuncionarioTeletrabajoPersistence getFuncionarioTeletrabajoPersistence(String userType);
-
-    public abstract EvidenciaTareaActTeletrabajoPersistence getEvidenciaTarActTeletrabajoPersistence(String userType);
-
-    public abstract TareaActividadTeletrabajoPersistence getTareaActividadTeletrabajoPersistence(String userType);
-    
     /**
      * Method description
      *

@@ -9,10 +9,7 @@ package service.consulta;
 
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.model.Externo;
 import session.GenericSession;
-import infrastructure.util.ActionUtil;
-import infrastructure.util.ContextUtil;
 
 
 /**
@@ -30,10 +27,6 @@ public final class ConsultaMisDatosGetMisDatosService {
      * @return Action status.
      */
     public static String service(GenericSession genericSession) {
-        Externo externo = ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser()).find(genericSession.getRut());
-
-        //externo.setExtEmail(externo.getExtEmail());
-
         return SUCCESS;
     }
 }

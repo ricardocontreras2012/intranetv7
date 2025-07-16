@@ -115,7 +115,7 @@ public final class CommonHorarioUtil {
         image.setAbsolutePosition(40, doc.getPageSize().getHeight() - image.getScaledHeight() - 20);
         doc.add(image); // Agregar la imagen al documento
 
-        Horario[][] horarioMatrix = CommonHorarioUtil.getHorario(id, modList, cursoList, userType);
+        Horario[][] horarioMatrix = getHorario(id, modList, cursoList, userType);
         String hor;
 
         Paragraph p1 = new Paragraph("UNIVERSIDAD DE SANTIAGO DE CHILE\n", fontTitle);

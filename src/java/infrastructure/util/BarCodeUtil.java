@@ -72,7 +72,7 @@ public class BarCodeUtil {
         bc.N = 3;
 
         // create rbarcode image
-        java.awt.image.BufferedImage bImage = new java.awt.image.BufferedImage(bc.getSize().width,
+        BufferedImage bImage = new BufferedImage(bc.getSize().width,
                 bc.getSize().height, TYPE_BYTE_INDEXED);
         java.awt.Graphics imgGraphics = bImage.createGraphics();
 

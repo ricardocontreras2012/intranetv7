@@ -25,8 +25,4 @@ public interface FuncionarioPersistence extends CrudGenericDAO<Funcionario, Long
     Funcionario find(Integer rut);
     void creaFuncionario(Integer rut);
     void modify(Integer rut, String direccion);
-    Funcionario findTeletrabajo(Integer rut, String password);
-    Funcionario findTeleTrabajo(Integer rut);
-    Funcionario findTeleTrabajoJefe(Integer rut);
-    Funcionario findSuperTeleTrabajo(Integer rut);
 }

@@ -51,5 +51,4 @@
     <include file="strutsDCO.xml"/>
     <include file="strutsCFI.xml"/>
     <include file="strutsSAD.xml"/>
-    <include file="strutsTT.xml"/>
 </struts>

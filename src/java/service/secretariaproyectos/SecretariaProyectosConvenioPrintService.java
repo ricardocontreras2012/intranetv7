@@ -29,7 +29,7 @@ public class SecretariaProyectosConvenioPrintService {
         Integer folio=ps.getConvenio().getConvNro();
         
         name = "Contrato_" + folio + ".pdf";
-        input = getInput(ps, name, key);
+        input = getInput(ps, name);
         ais = new ActionInputStreamUtil(name, AppStaticsUtil.PDF_MIME, input);
         LogUtil.setLog(genericSession.getRut(),folio);
 
@@ -47,9 +47,8 @@ public class SecretariaProyectosConvenioPrintService {
      *
      * @return
      */
-    private static InputStream getInput(ProyectoSession ps, String name, String key) {
+    private static InputStream getInput(ProyectoSession ps, String name) {
         ConvenioSupport convenioSupport = new ConvenioSupport();
         return convenioSupport.print(ps.getConvenio().getConvNro(), name);
-
     }
 }

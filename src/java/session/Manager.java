@@ -46,10 +46,5 @@ public class Manager {
     public static ProfesorSession getProfesorSession(Map<String, Object> sesion)
     {
         return (ProfesorSession)sesion.get("profesorSession");
-    }
-    
-    public static TeleTrabajoSession getTeleTrabajoSession(Map<String, Object> sesion)
-    {
-        return (TeleTrabajoSession)sesion.get("teleTrabajoSession");
     } 
 }

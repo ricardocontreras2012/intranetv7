@@ -148,8 +148,7 @@ public final class MensajePersistenceImpl extends CrudAbstractDAO<Mensaje, Long>
 
         criteria.add(eq("msgRutEnv", rut));
         criteria.add(ne("msgEstado", "D"));
-        Integer totalResult = ((Number) criteria.setProjection(rowCount()).uniqueResult()).intValue();
-        return totalResult;
+        return ((Number) criteria.setProjection(rowCount()).uniqueResult()).intValue();
     }
 
     /**

@@ -295,9 +295,9 @@ public class Curso implements Serializable {
      * class.
      */
     public Date getCurFechaInicio() {
-        return ((this.curFechaInicio != null)
+        return this.curFechaInicio != null
                 ? new Date(this.curFechaInicio.getTime())
-                : null);
+                : null;
     }
 
     /**
@@ -319,9 +319,9 @@ public class Curso implements Serializable {
      * class.
      */
     public Date getCurFechaTermino() {
-        return ((this.curFechaTermino != null)
+        return this.curFechaTermino != null
                 ? new Date(this.curFechaTermino.getTime())
-                : null);
+                : null;
     }
 
     /**

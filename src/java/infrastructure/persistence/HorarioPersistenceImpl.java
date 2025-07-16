@@ -267,8 +267,7 @@ return Action.SUCCESS;
 
         try {
             Clob resultClob = (Clob) query.uniqueResult();
-            String resultString = resultClob.getSubString(1, (int) resultClob.length());
-            return resultString;
+            return resultClob.getSubString(1, (int) resultClob.length());
 
         } catch (Exception e) {
             e.printStackTrace();

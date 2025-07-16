@@ -59,9 +59,9 @@ public class CommonPracticaActaRectificatoriaEmitirService {
         return retValue;
     }
 
-    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porc_emp, Integer porc_coord) {
+    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porc_emp, porc_coord,"R");
+        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord,"R");
 
         return folio;
     }

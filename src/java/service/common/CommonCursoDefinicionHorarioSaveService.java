@@ -42,7 +42,7 @@ public class CommonCursoDefinicionHorarioSaveService {
                     String modulo = parameters.get("mod_" + id)[0];
                     String sala = parameters.get("sala_" + id)[0].toUpperCase(ContextUtil.getLocale());
                     String tipo = parameters.get("tipo_" + id)[0];
-                    return new HorarioSupport(dia, Integer.parseInt(modulo), sala, tipo);
+                    return new HorarioSupport(dia, parseInt(modulo), sala, tipo);
                 })
                 .collect(Collectors.toList());
 

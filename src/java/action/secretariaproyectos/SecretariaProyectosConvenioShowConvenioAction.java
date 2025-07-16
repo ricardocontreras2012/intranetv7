@@ -29,6 +29,6 @@ public class SecretariaProyectosConvenioShowConvenioAction extends ActionValidat
 
     @Override
     public boolean isValidParam() throws IllegalArgumentException {
-        return isValidPos(getPos(), (Manager.getProyectoSession(sesion)).getConvenioList());
+        return isValidPos(getPos(), Manager.getProyectoSession(sesion).getConvenioList());
     }
 }

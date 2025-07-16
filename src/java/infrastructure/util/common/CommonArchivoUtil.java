@@ -182,8 +182,6 @@ public final class CommonArchivoUtil {
                 return PATH_CONV;
             case "prog":
                 return PATH_PROG;
-            case "tele":
-                return PATH_TELE_TRABAJO;
             case "tit":
                 return PATH_TITULACION;
             default:

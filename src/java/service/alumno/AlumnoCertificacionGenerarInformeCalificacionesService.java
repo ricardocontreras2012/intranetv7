@@ -33,7 +33,7 @@ public class AlumnoCertificacionGenerarInformeCalificacionesService {
         String name = CommonCertificacionUtil.getNameFile(genericSession.getWorkSession(key).getAluCar(), folio, I3);
 
         Gson gson = new Gson();
-        Type typeObject = CommonCertificacionUtil.getTypeToken();;
+        Type typeObject = CommonCertificacionUtil.getTypeToken();
 
         Map<String, String> pMap = new HashMap<>();
         pMap.put("tramite", codTramite.toString());

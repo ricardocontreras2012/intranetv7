@@ -275,7 +275,7 @@ public class MensajeSenderSupport {
                             int nodeSizeFac = nodoDest.getNodeList().size();
                             for (int nc = 1; nc <= nodeSizeFac; nc++) {
                                 MensajeNodeSupport nodeFac = nodoDest.getNodeList().get(nc - 1);
-                                int facultad = Integer.parseInt(nodeFac.getId());
+                                int facultad = parseInt(nodeFac.getId());
                                 int nodeSize = nodoDest.getNodeListBar().size();
                                 for (int i = 1; i <= nodeSize; i++) {
                                     MensajeNodeSupport ca = nodoDest.getNodeListBar().get(i - 1);
@@ -427,7 +427,7 @@ public class MensajeSenderSupport {
                                             case "N10":
                                             case "N11":
                                             case "N12":
-                                                sendMsgAlumnosCarreraNivel(carrera, mencion, Integer.parseInt(ca.getId().substring(1)));
+                                                sendMsgAlumnosCarreraNivel(carrera, mencion, parseInt(ca.getId().substring(1)));
                                                 logInfo(prefixLog + ca.getId() + carrera + ' '
                                                         + mencion);
                                                 break;

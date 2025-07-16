@@ -96,9 +96,6 @@
                             <a href="#" class="dropdown-item" onclick="executeActionNested('CommonProfesorSearchEnable?actionCall=CommonReporteGetCargaHistorica&typeSearch=F&key=<s:property value="key"/>')">
                                 <s:text name="label.menu.otros.reportes"/>
                             </a>
-                            <%--a href="#" class="dropdown-item" id="solictFirma" onclick="executeAction('CommonProfesorSolicitudPAF')">
-                                Solicitud de firma
-                            </a--%>
                         </div>
                     </li>
 

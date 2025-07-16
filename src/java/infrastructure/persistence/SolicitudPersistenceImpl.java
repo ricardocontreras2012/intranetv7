@@ -172,7 +172,7 @@ public final class SolicitudPersistenceImpl extends CrudAbstractDAO<Solicitud, L
         criteria.add(le("solFecha", fechaFinal));
 
         if (estado == 10) {
-            criteria.addOrder(asc("solFolio"));;
+            criteria.addOrder(asc("solFolio"));
         } else {
             criteria.addOrder(desc("solFolio"));
         }

@@ -16,7 +16,6 @@ import domain.model.Inscripcion;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.ArrayList;
-import java.util.Arrays;
 import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
@@ -533,7 +532,9 @@ public final class InscripcionSupport {
     }
 
     public void setSctNivel() {
-        if (("SI".equals(aluCar.getParametros().getPuedeInscribirMalla()) || "SI".equals(aluCar.getParametros().getPuedeModificar()) || asList("JC", "SP").contains(genericSession.getUserType()))) {
+        if ("SI".equals(aluCar.getParametros().getPuedeInscribirMalla())
+                || "SI".equals(aluCar.getParametros().getPuedeModificar())
+                || asList("JC", "SP").contains(genericSession.getUserType())) {
 
             MallaPersistence mallaPersistence = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser());
 
@@ -730,7 +731,7 @@ public final class InscripcionSupport {
      */
     private boolean asignaturaInscrita(Curso curso) {
         return this.aluCar.getInsList().stream()
-                .anyMatch(insAux -> Arrays.asList(16, 20, 33, 35).contains(aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip())
+                .anyMatch(insAux -> asList(16, 20, 33, 35).contains(aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip())
                 ? insAux.getId().getInsAsign().equals(curso.getId().getCurAsign())
                 && insAux.getId().getInsElect().trim().equals(curso.getId().getCurElect().trim())
                 : insAux.getId().getInsAsign().equals(curso.getId().getCurAsign()));

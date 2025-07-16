@@ -23,10 +23,8 @@ public class ProfesorSolicitudGetJustificativosCursoAction extends ActionCommonS
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception {
-        String retValue = service(getGenericSession(), getKey());
-        
-        return retValue;
+    public String action() throws Exception { 
+        return service(getGenericSession(), getKey());
     }
 }
 

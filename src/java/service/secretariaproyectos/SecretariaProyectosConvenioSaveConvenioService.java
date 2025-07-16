@@ -86,7 +86,7 @@ public class SecretariaProyectosConvenioSaveConvenioService {
                         .forEach(entry -> {
                             String field = entry.getKey();
                             String dia = entry.getValue()[0];
-                            int row = Integer.parseInt(field.substring(field.lastIndexOf('_') + 1));
+                            int row = parseInt(field.substring(field.lastIndexOf('_') + 1));
                             String inicio = parameters.get("inicio_" + row)[0];
                             String termino = parameters.get("termino_" + row)[0];
 

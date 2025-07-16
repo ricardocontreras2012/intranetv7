@@ -159,9 +159,6 @@
                                 <s:text name="label.salas"/>
                             </a>
                             <a href="#" class="dropdown-item" id="mensajes-li"></a>
-                            <%--a href="#" class="dropdown-item" id="solictPAF" onclick="executeAction('CommonJefeCarreraSolicitudPAF')">
-                                Solicitar PAF
-                            </a--%>
                         </div>
                     </li>
                 </ul>

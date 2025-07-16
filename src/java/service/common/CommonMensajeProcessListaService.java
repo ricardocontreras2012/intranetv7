@@ -580,7 +580,7 @@ public final class CommonMensajeProcessListaService {
         String userType = genericSession.getUserType();
 
         // Dependiendo del tipo de usuario, obtenemos el Stream de cursos adecuado
-        Stream<Curso> cursoStream = Arrays.asList("AL", "AY", "PR").contains(userType)
+        Stream<Curso> cursoStream = asList("AL", "AY", "PR").contains(userType)
                 ? ws.getCursoList().stream()
                 : ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
                         .findxUser(genericSession.getRut(), userType).stream();

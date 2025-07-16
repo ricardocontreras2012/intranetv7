@@ -75,7 +75,7 @@ public final class CommonMensajePrintMessageService {
                 : genericSession.getWorkSession(key).getSentMsgs().get(pos);
 
             name = "email_" + mensaje.getMsgCorrel() + ".pdf";
-            input = getInput(genericSession, key, name, mensaje);
+            input = getInput(genericSession, name, mensaje);
             description = FormatUtil.getMimeType(name);
             return new ActionInputStreamUtil(name, description, input );
 
@@ -87,7 +87,7 @@ public final class CommonMensajePrintMessageService {
     }
 
     private static InputStream getInput(GenericSession genericSession,
-            String key, String name, Mensaje msg)
+            String name, Mensaje msg)
             throws Exception {
         
         Date fecha = getSysdate();

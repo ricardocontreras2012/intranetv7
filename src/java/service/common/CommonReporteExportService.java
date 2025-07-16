@@ -49,7 +49,7 @@ public class CommonReporteExportService {
         String fileName = "REPORTES_DE_CLASES_" + ws.getCurso().getNombreNormalizado() + "_" + CommonSequenceUtil.getDocumentSeq() + ".xlsx";
 
         // Obtiene el flujo de entrada con el archivo Excel
-        InputStream input = getInput(fileName, ws, parameters, key);
+        InputStream input = getInput(fileName, ws, parameters);
 
         // Obtiene la descripción MIME del archivo
         String description = FormatUtil.getMimeType(fileName);
@@ -67,7 +67,7 @@ public class CommonReporteExportService {
      * @return El flujo de entrada del archivo Excel generado.
      * @throws Exception Si ocurre algún error al generar el archivo.
      */
-    private static InputStream getInput(String file, WorkSession ws, Map<String, String[]> parameters, String key) throws Exception {
+    private static InputStream getInput(String file, WorkSession ws, Map<String, String[]> parameters) throws Exception {
         Curso curso = ws.getCursoList().get(0); // Solo el primer curso
 
         // Crea un nuevo libro de trabajo Excel
@@ -87,8 +87,7 @@ public class CommonReporteExportService {
 
         // Estilos de celdas para el contenido
         XSSFCellStyle headerStyle = createCellStyle(workbook, font);
-        XSSFCellStyle horizontalCenterStyle = createCellStyle(workbook, font, HorizontalAlignment.CENTER);
-
+        
         // Inserta la cabecera con el nombre de la facultad
         CommonExcelUtil.putCabeceraFacultad(workbook, sheet, font, headerStyle, headerStyle, workbook.getStylesSource().getIndexedColors(), getNombrexAsign(curso.getId().getCurAsign()));
 
@@ -101,7 +100,7 @@ public class CommonReporteExportService {
         insertHeaders(sheet, rowNum++, headerStyle);
 
         // Inserta los datos de los cursos en el archivo Excel
-        insertReportsData(sheet, parameters, ws, rowNum, horizontalCenterStyle);
+        insertReportsData(sheet, parameters, ws, rowNum);
 
         // Genera el archivo Excel y lo guarda en un flujo de entrada
         return saveWorkbookToInputStream(workbook, file);
@@ -204,7 +203,7 @@ public class CommonReporteExportService {
      * @param horizontalCenterStyle El estilo de la celda con alineación
      * central.
      */
-    private static void insertReportsData(XSSFSheet sheet, Map<String, String[]> parameters, WorkSession ws, int rowNum, XSSFCellStyle horizontalCenterStyle) {
+    private static void insertReportsData(XSSFSheet sheet, Map<String, String[]> parameters, WorkSession ws, int rowNum) {
 
         // Filtra los reportes seleccionados con stream y los agrega a la lista "nomina"
         List<ReporteClase> nomina = IntStream.range(0, ws.getReportes().size())

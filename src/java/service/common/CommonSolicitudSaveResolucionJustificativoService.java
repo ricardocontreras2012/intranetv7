@@ -99,7 +99,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
         ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).saveResolucion(folio, resolucion, respuesta, 40);
         commitTransaction();
 
-        sendMessageAlumno(ws.getSolicitud(), respuesta);
+        sendMessageAlumno(ws.getSolicitud());
         
         LogUtil.setLog(genericSession.getRut(), folio + " > " + resolucion);
 
@@ -121,11 +121,10 @@ public class CommonSolicitudSaveResolucionJustificativoService {
                 .forEach(email -> MailUtil.sendEmail(email, subject, body));
     }
 
-    private static void sendMessageAlumno(Solicitud sol, String resolucion) {
+    private static void sendMessageAlumno(Solicitud sol) {
         Alumno alumno = sol.getAluCar().getAlumno();
         String correo = alumno.getAluEmailUsach();
-        
-        
+                
         MailUtil.sendEmail(correo, "Solicitud de Justificativo prueba PEP para el periodo " + DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy"), "Estimado alumn@, su solicitud ha sido resuelta. Ver resultado en intranet");
     }
 }

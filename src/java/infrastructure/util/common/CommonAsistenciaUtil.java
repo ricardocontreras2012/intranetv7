@@ -29,7 +29,7 @@ public final class CommonAsistenciaUtil {
      * @return
      */
     public static boolean asiste(WorkSession ws, Integer correl, Integer rut) {
-        return (findAsistencia(ws.getAsistenciaAlumnoNominaList(), correl, rut) == 1);
+        return findAsistencia(ws.getAsistenciaAlumnoNominaList(), correl, rut) == 1;
     }
 
     /**

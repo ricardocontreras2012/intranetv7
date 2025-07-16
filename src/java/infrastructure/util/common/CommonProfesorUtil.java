@@ -188,7 +188,7 @@ public final class CommonProfesorUtil {
         genericSession.setNombreMensaje(profesor.getNombreMensaje());
 
         if ("PR".equals(genericSession.getUserType())) {
-            CommonProfesorUtil.getAutoevaluacion(ws, genericSession.getRut());
+            getAutoevaluacion(ws, genericSession.getRut());
         }
 
         ws.setTmaterialSelectOption(ContextUtil.getTipoMaterialMap().get("PR"));

@@ -116,9 +116,7 @@ public final class CommonUsersUtil {
      * @return
      */
     private static String getMaterno(String materno) {
-        return ((materno == null)
-                ? ""
-                : ' ' + materno);
+        return (materno == null || materno.trim().isEmpty()) ? "" : " " + materno.trim();
     }
 
     /**
@@ -187,7 +185,7 @@ public final class CommonUsersUtil {
         return getFileFoto(getRutFotoProfesor(rut, dv));
     }
 
-    private static InputStream getFileFoto(String rut) {       
+    private static InputStream getFileFoto(String rut) {
         try {
             return openInputStream(new File(getPathFoto(rut)));
         } catch (Exception e) {

@@ -50,10 +50,8 @@ import infrastructure.persistence.EstadoSolicitudPersistenceImpl;
 import infrastructure.persistence.ActaConvalidacionAsignaturaPersistenceImpl;
 import infrastructure.persistence.SolicitudInscripcionPersistenceImpl;
 import infrastructure.persistence.EmpleadorPersistenceImpl;
-import infrastructure.persistence.FuncionarioTeletrabajoPersistenceImpl;
 import infrastructure.persistence.RespEnctaAyuCursoPersistenceImpl;
 import infrastructure.persistence.DerechoPersistenceImpl;
-import infrastructure.persistence.TareaActividadTeletrabajoPersistenceImpl;
 import infrastructure.persistence.SolicitudJustificativoPersistenceImpl;
 import infrastructure.persistence.FuncionarioPersistenceImpl;
 import infrastructure.persistence.ExpedienteLogroPersistenceImpl;
@@ -131,8 +129,6 @@ import infrastructure.persistence.EstadoCivilPersistenceImpl;
 import infrastructure.persistence.ComentarioEncuestaDocentePersistenceImpl;
 import infrastructure.persistence.DummyPersistenceImpl;
 import infrastructure.persistence.FichaEstudioPersistenceImpl;
-import infrastructure.persistence.EvidenciaTareaActTeletrabajoPersistenceImpl;
-import infrastructure.persistence.ActividadTeletrabajoPersistenceImpl;
 import domain.repository.SalaPersistence;
 import domain.repository.EmpleadorPersistence;
 import domain.repository.PreguntaAutoEvaluacionPersistence;
@@ -174,7 +170,6 @@ import domain.repository.SacarreraPersistence;
 import domain.repository.ModuloHorarioPersistence;
 import domain.repository.EncuestaAyudantePersistence;
 import domain.repository.UserLoginActionStackPersistence;
-import domain.repository.EvidenciaTareaActTeletrabajoPersistence;
 import domain.repository.InscripcionPersistence;
 import domain.repository.CarreraPersistence;
 import domain.repository.PregEnctaPersistence;
@@ -191,7 +186,6 @@ import domain.repository.ComentarioEncuestaAyudantePersistence;
 import domain.repository.TmensajeDestinoPersistence;
 import domain.repository.ActaConvalidacionPersistence;
 import domain.repository.SolicitudInscripcionPersistence;
-import domain.repository.FuncionarioTeletrabajoPersistence;
 import domain.repository.RequisitoGradoTituloAdicPersistence;
 import domain.repository.PersonaPersistence;
 import domain.repository.CursoEspejoPersistence;
@@ -213,7 +207,6 @@ import domain.repository.RespEnctaAyuCursoPersistence;
 import domain.repository.ParametroPersistence;
 import domain.repository.DiaPersistence;
 import domain.repository.MensajePersistence;
-import domain.repository.ActividadTeletrabajoPersistence;
 import domain.repository.MensajeAttachPersistence;
 import domain.repository.ExternoPersistence;
 import domain.repository.TmaterialPerfilPersistence;
@@ -223,7 +216,6 @@ import domain.repository.ReincorporacionPersistence;
 import domain.repository.RegionPersistence;
 import domain.repository.ConvalidacionComisionPersistence;
 import domain.repository.LogSolicitudPersistence;
-import domain.repository.TareaActividadTeletrabajoPersistence;
 import domain.repository.ParametroMencionPersistence;
 import domain.repository.MencionPersistence;
 import domain.repository.SolicitudAttachPersistence;
@@ -1559,28 +1551,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
     @Override
     public AlumnoEmpleadorPersistence getAlumnoEmpleadorPersistence(String userType) {
         return (AlumnoEmpleadorPersistence) instantiateDAO(AlumnoEmpleadorPersistenceImpl.class, userType);
-    }       
-    
-    @Override
-    public ActividadTeletrabajoPersistence getActividadTeletrabajoPersistence(String userType) {
-        return (ActividadTeletrabajoPersistence) instantiateDAO(ActividadTeletrabajoPersistenceImpl.class, userType);
     }
-    
-    @Override
-    public FuncionarioTeletrabajoPersistence getFuncionarioTeletrabajoPersistence(String userType) {
-        return (FuncionarioTeletrabajoPersistence) instantiateDAO(FuncionarioTeletrabajoPersistenceImpl.class, userType);
-    }
-    
-    @Override
-    public EvidenciaTareaActTeletrabajoPersistence getEvidenciaTarActTeletrabajoPersistence(String userType) {
-        return (EvidenciaTareaActTeletrabajoPersistence) instantiateDAO(EvidenciaTareaActTeletrabajoPersistenceImpl.class, userType);
-    }
-    
-    @Override
-    public TareaActividadTeletrabajoPersistence getTareaActividadTeletrabajoPersistence(String userType) {
-        return (TareaActividadTeletrabajoPersistence) instantiateDAO(TareaActividadTeletrabajoPersistenceImpl.class, userType);
-    }
-    
+        
     /**
      * Method description
      *
