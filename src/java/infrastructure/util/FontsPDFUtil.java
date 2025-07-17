@@ -68,7 +68,7 @@ public class FontsPDFUtil {
         }
     }
 
-    public Font crearFont(String nombreFuente, float tamaño, int estilo) {
+    public Font crearFont(String nombreFuente, float size, int estilo) {
         if (nombreFuente == null || nombreFuente.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre de la fuente no puede estar vacío.");
         }
@@ -78,6 +78,6 @@ public class FontsPDFUtil {
             throw new IllegalArgumentException("Fuente no soportada: " + nombreFuente);
         }
 
-        return new Font(bf, tamaño, estilo);
+        return new Font(bf, size, estilo);
     }
 }

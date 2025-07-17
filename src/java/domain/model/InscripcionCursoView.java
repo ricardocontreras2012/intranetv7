@@ -5,9 +5,6 @@
  */
 package domain.model;
 
-import domain.model.AluCar;
-import domain.model.Curso;
-import domain.model.InscripcionId;
 import java.io.Serializable;
 
 //Generated 24-mar-2009 15:19:39 by Hibernate Tools 3.2.1.GA

@@ -24,8 +24,6 @@ public class JefeBibliotecaLoginService {
      * @throws Exception
      */
     public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) throws Exception {
-        String retValue = SUCCESS;
-
-        return retValue;
+        return SUCCESS;
     }
 }

@@ -208,9 +208,9 @@ public final class PracticaPersistenceImpl extends CrudAbstractDAO<Practica, Lon
     }
 
     @Override
-    public void crearActa(Integer folio, Integer practica, Integer agno, Integer sem, Integer porc_emp, Integer porc_coord, String tipo) {
+    public void crearActa(Integer folio, Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord, String tipo) {
         String sql = "insert into acta_practica (apra_folio,apra_asign,apra_agno,apra_sem,apra_porc_emp,apra_porc_coord,apra_estado, apra_tipo) VALUES("
-                + folio + "," + practica + "," + agno + "," + sem + "," + porc_emp + "," + porc_coord + ",'E','" + tipo + "')";
+                + folio + "," + practica + "," + agno + "," + sem + "," + porcEmp + "," + porcCoord + ",'E','" + tipo + "')";
 
         Query query = getSession().createSQLQuery(sql);
 
@@ -218,9 +218,9 @@ public final class PracticaPersistenceImpl extends CrudAbstractDAO<Practica, Lon
     }
 
     @Override
-    public void agregarNomina(AluCarId id, Integer folio, BigDecimal nota_emp, BigDecimal nota_coord) {
+    public void agregarNomina(AluCarId id, Integer folio, BigDecimal notaEmp, BigDecimal notaCoord) {
         String sql = "insert into acta_practica_nomina (apran_folio,apran_rut,apran_cod_car,apran_agno_ing,apran_sem_ing,apran_nota_emp,apran_nota_coord) VALUES("
-                + folio + "," + id.getAcaRut() + "," + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + "," + id.getAcaSemIng() + "," + nota_emp + "," + nota_coord + ")";
+                + folio + "," + id.getAcaRut() + "," + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + "," + id.getAcaSemIng() + "," + notaEmp + "," + notaCoord + ")";
 
         Query query = getSession().createSQLQuery(sql);
 

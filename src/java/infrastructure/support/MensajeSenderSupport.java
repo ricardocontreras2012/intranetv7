@@ -548,21 +548,15 @@ public class MensajeSenderSupport {
     }
 
     private void sendRUNFile(MensajeNodeSupport nodoDest) {
-        try {
-            File file = new File(PATH_TEMP_FILES + nodoDest.getValue());
+        File file = new File(PATH_TEMP_FILES + nodoDest.getValue());
 
-            Scanner inputStream = new Scanner(file, "UTF-8");
-            // hashNext() loops line-by-line
+        try (Scanner inputStream = new Scanner(file, "UTF-8")) {
             while (inputStream.hasNext()) {
-                //read single line, put in string
                 String rut = inputStream.next();
                 addDestinatario(valueOf(rut));
             }
-            inputStream.close();
-
         } catch (FileNotFoundException e) {
-
-            e.printStackTrace();
+            e.printStackTrace(); // En producción sería mejor usar un logger
         }
     }
 

@@ -5,7 +5,6 @@
  */
 package domain.model;
 
-import domain.model.MencionInfoIntranetId;
 import java.io.Serializable;
 
 /**

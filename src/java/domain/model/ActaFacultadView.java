@@ -5,7 +5,6 @@
  */
 package domain.model;
 
-import domain.model.ActaCalificacionId;
 import java.io.Serializable;
 import infrastructure.support.ActaConsultaSupport;
 import infrastructure.util.common.CommonActaUtil;

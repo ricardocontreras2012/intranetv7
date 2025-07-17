@@ -23,7 +23,6 @@ public class CommonRCurricularGetMencionAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        String retValue = service(getGenericSession(), getKey());
-        return retValue;
+        return service(getGenericSession(), getKey());
     }
 }

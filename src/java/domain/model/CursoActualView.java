@@ -7,7 +7,6 @@ package domain.model;
 
 //Generated 24-mar-2009 15:19:39 by Hibernate Tools 3.2.1.GA
 
-import domain.model.CursoId;
 import java.io.Serializable;
 
 /**

@@ -218,7 +218,7 @@ public class CommonCertificacionUtil {
                 outStream.write(temp, 0, bytesRead);
             }
         }
-        
+
         new File(file).setReadable(true, false);
     }
 
@@ -271,9 +271,8 @@ public class CommonCertificacionUtil {
         return gson.fromJson(json, Map.class);
     }
 
-    @SuppressWarnings("rawtypes")
     public static Type getTypeToken() {
-        return new TypeToken<HashMap>() {
+        return new TypeToken<Map<String, Object>>() {
         }.getType();
     }
 

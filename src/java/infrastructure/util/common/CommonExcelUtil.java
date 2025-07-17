@@ -34,27 +34,26 @@ import static infrastructure.util.SystemParametersUtil.UNIVERSITY_LOGO_PATH3;
  * @author Ricardo
  */
 public class CommonExcelUtil {
+
     public static void putLogo(XSSFWorkbook libro, XSSFSheet hoja) throws Exception {
+        try (InputStream inputStream = new FileInputStream(getServletContext().getRealPath(UNIVERSITY_LOGO_PATH3))) {
+            byte[] imageBytes = IOUtils.toByteArray(inputStream);
+            int pictureureIdx = libro.addPicture(imageBytes, PICTURE_TYPE_JPEG);
 
-        InputStream inputStream = new FileInputStream(getServletContext().getRealPath(UNIVERSITY_LOGO_PATH3));
-        byte[] imageBytes = IOUtils.toByteArray(inputStream);
-        int pictureureIdx = libro.addPicture(imageBytes, PICTURE_TYPE_JPEG);
-        inputStream.close();
+            CreationHelper helper = libro.getCreationHelper();
+            ClientAnchor anchor = helper.createClientAnchor();
 
-        CreationHelper helper = libro.getCreationHelper();
-        ClientAnchor anchor = helper.createClientAnchor();
+            anchor.setCol1(0); // Column A
+            anchor.setRow1(0); // Row 1
+            anchor.setCol2(2); // Column C
+            anchor.setRow2(5); // Row 5
 
-        anchor.setCol1(0); //Column A
-        anchor.setRow1(0); //Row 1
-        anchor.setCol2(2); //Column C
-        anchor.setRow2(5); //Row 4
-
-        Picture pict = hoja.createDrawingPatriarch().createPicture(anchor, pictureureIdx);
-        pict.resize(0.70, 0.90);
-
+            Picture pict = hoja.createDrawingPatriarch().createPicture(anchor, pictureureIdx);
+            pict.resize(0.70, 0.90);
+        }
     }
 
-     public static int calculateColWidth(int width) {
+    public static int calculateColWidth(int width) {
         if (width > 254) {
             return 65280;    // Maximum allowed column width.
         }
@@ -68,9 +67,8 @@ public class CommonExcelUtil {
             return 450;    // default to column size 1 if zero, one or
         }
     }
-     
-    public static void putCabeceraFacultad(XSSFWorkbook libro, XSSFSheet hoja, XSSFFont fuente,  XSSFCellStyle estiloCabecera, XSSFCellStyle estiloCabecera2, IndexedColorMap colorMap, String facultadName)
-    {
+
+    public static void putCabeceraFacultad(XSSFWorkbook libro, XSSFSheet hoja, XSSFFont fuente, XSSFCellStyle estiloCabecera, XSSFCellStyle estiloCabecera2, IndexedColorMap colorMap, String facultadName) {
         XSSFCellStyle estiloMembrete = libro.createCellStyle();
         estiloMembrete.setFont(fuente);
         estiloMembrete.setAlignment(HorizontalAlignment.CENTER);

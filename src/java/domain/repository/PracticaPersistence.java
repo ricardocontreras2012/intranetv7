@@ -29,6 +29,6 @@ public interface PracticaPersistence extends CrudGenericDAO<Practica, Long> {
     List<Practica> getNominaxRectificar(Integer asign, Integer agno, Integer sem);
     List<Asignatura> getPracticasCoordinador(Integer rut);
     List<Asignatura> getPracticasSecretaria(Integer rut);
-    void crearActa(Integer folio, Integer practica, Integer agno, Integer sem, Integer porc_emp, Integer porc_coord, String tipo);
-    void agregarNomina(AluCarId aluCarId, Integer folio, BigDecimal nota_emp,  BigDecimal nota_coord);
+    void crearActa(Integer folio, Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porc_Coord, String tipo);
+    void agregarNomina(AluCarId aluCarId, Integer folio, BigDecimal notaEmp,  BigDecimal notaCoord);
 }
