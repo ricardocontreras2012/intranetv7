@@ -270,7 +270,7 @@ public final class CommonAsistenciaExportPlanillaService {
             // Calcular el porcentaje de asistencia y escribirlo en la celda
             int totalClasses = asistencia.size();
             if (totalClasses > 0) {
-                float attendancePercentage = (100f * attendedClasses) / totalClasses;
+                float attendancePercentage = 100f * attendedClasses / totalClasses;
                 XSSFCell celdaPorc = rowExcel.createCell(colIndex.get(), CellType.NUMERIC);
                 celdaPorc.setCellStyle(decimalStyle);
                 celdaPorc.setCellValue(Float.parseFloat(df.format(attendancePercentage).replace(",", ".")));

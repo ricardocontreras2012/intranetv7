@@ -170,7 +170,7 @@ public class AlumnoPracticaAutorizacionPrintService {
         doc.add(new Chunk("\n"));
 
         String parrafo2 = "Autorizo a " + aca.getAlumno().getNombreStd() + ", "
-                + (("2".equals(aca.getAlumno().getAluSexo()))
+                + ("2".equals(aca.getAlumno().getAluSexo())
                 ? "alumno"
                 : "alumna") + " en práctica, para  desempeñarse en "
                 + practica.getEmpleador().getEmpNombre()
