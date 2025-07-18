@@ -18,7 +18,7 @@ import static infrastructure.util.MailUtil.sendNewPassword;
  */
 public class CommonPasswordSavePasswordService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String passwdActual, String passwdNueva) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String passwdActual, String passwdNueva) {
        
         String retValue = SUCCESS;
         String email;

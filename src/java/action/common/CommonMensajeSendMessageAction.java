@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.File;
-import static service.common.CommonMensajeSendMessageService.service;
+import service.common.CommonMensajeSendMessageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -36,7 +36,7 @@ public final class CommonMensajeSendMessageAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), tipo, subject, messageText, messageHtml, url, upload,
+        return new CommonMensajeSendMessageService().service(this, getGenericSession(), tipo, subject, messageText, messageHtml, url, upload,
                 uploadFileName, imagen, imagenFileName, getKey());
     }
 

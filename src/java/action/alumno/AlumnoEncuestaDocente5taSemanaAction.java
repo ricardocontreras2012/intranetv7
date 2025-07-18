@@ -5,10 +5,8 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoEncuestaDocente5taSemanaService.search;
+import service.alumno.AlumnoEncuestaDocente5taSemanaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
-import static service.alumno.AlumnoEncuestaDocente5taSemanaService.saveService;
-import static service.alumno.AlumnoEncuestaDocente5taSemanaService.showFormService;
 import session.Manager;
 
 /**
@@ -19,6 +17,7 @@ import session.Manager;
  */
 public final class AlumnoEncuestaDocente5taSemanaAction extends ActionParameterAwareSupport {
     private static final long serialVersionUID = 1L;
+    private AlumnoEncuestaDocente5taSemanaService svc = new AlumnoEncuestaDocente5taSemanaService();
 
     /**
      * Method description
@@ -32,7 +31,7 @@ public final class AlumnoEncuestaDocente5taSemanaAction extends ActionParameterA
     }
     
     public String searchEncuesta() {
-        return search(getGenericSession(), getKey());
+        return svc.search(getGenericSession(), getKey());
     }
 
     /**
@@ -41,7 +40,7 @@ public final class AlumnoEncuestaDocente5taSemanaAction extends ActionParameterA
      * @return
      */
     public String showForm() {
-        return showFormService(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return svc.showFormService(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 
     /**
@@ -50,6 +49,6 @@ public final class AlumnoEncuestaDocente5taSemanaAction extends ActionParameterA
      * @return
      */
     public String save() {
-        return saveService(getGenericSession(), getMapParameters(), Manager.getAlumnoSession(sesion), getKey());
+        return svc.saveService(getGenericSession(), getMapParameters(), Manager.getAlumnoSession(sesion), getKey());
     }
 }

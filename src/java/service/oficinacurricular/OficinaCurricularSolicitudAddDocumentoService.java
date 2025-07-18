@@ -34,7 +34,7 @@ public final class OficinaCurricularSolicitudAddDocumentoService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer tipoDocumento, File upload, String uploadFileName, String caption, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);

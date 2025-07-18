@@ -34,7 +34,7 @@ public final class AlumnoPracticaAddAttachFileService {
      * @param tipo
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key, File upload, String uploadFileName, Integer tipo) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key, File upload, String uploadFileName, Integer tipo) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Solicitud solicitud = ws.getSolicitud();

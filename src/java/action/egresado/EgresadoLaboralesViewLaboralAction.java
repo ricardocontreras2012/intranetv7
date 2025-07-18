@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLaboralesViewLaboralService.service;
+import service.egresado.EgresadoLaboralesViewLaboralService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -25,7 +25,7 @@ public class EgresadoLaboralesViewLaboralAction extends ActionValidationPosSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getEgresadoSession(sesion), getPos(), getKey());
+        return new EgresadoLaboralesViewLaboralService().service(getGenericSession(), Manager.getEgresadoSession(sesion), getPos(), getKey());
     }
 
     @Override

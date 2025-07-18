@@ -30,7 +30,7 @@ public final class CommonInscripcionAddInscripcionService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key)
             throws Exception {     
 

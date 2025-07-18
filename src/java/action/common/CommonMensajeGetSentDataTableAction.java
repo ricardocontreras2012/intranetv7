@@ -9,7 +9,7 @@ import domain.model.Mensaje;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
-import static service.common.CommonMensajeGetSentDataTableService.service;
+import service.common.CommonMensajeGetSentDataTableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -47,7 +47,7 @@ public class CommonMensajeGetSentDataTableAction extends ActionCommonSupport  {
         this.direccion = Integer.parseInt(request.getParameter("order[0][column]"));
         this.nombreDataColumnaActual = request.getParameter("columns[" + this.direccion + "][data]");
         
-        String retValue = service(getGenericSession(), getKey(), start, length, searchValue, tipoOrder, nombreDataColumnaActual);
+        String retValue = new CommonMensajeGetSentDataTableService().service(getGenericSession(), getKey(), start, length, searchValue, tipoOrder, nombreDataColumnaActual);
         
         this.data = getGenericSession().getWorkSession(getKey()).getSentMsgs();
         this.recordsTotal = getGenericSession().getWorkSession(getKey()).getCantMsgsSended();

@@ -126,7 +126,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         }
     }
 
-    private static void putHeader(Document doc, PdfWriter writer, AluCar aluCar, String facultad) {
+    private void putHeader(Document doc, PdfWriter writer, AluCar aluCar, String facultad) {
 
         Alumno alumno = aluCar.getAlumno();
         Integer agno = aluCar.getCartolaView().get(0).getId().getCartAgno();
@@ -204,7 +204,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         doc.add(table);
     }
 
-    private static void putCalificacionesPrimer(Document doc, AluCar aluCar) {
+    private void putCalificacionesPrimer(Document doc, AluCar aluCar) {
         List<CartolaView> cartola = aluCar.getCartolaView();
         List<CartolaView> cartolaPrimer = new ArrayList<>();
         cartolaPrimer = setSemestre(cartola, cartolaPrimer, 1);
@@ -216,7 +216,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
 
     }
 
-    private static void putCalificacionesSegundo(Document doc, AluCar aluCar) {
+    private void putCalificacionesSegundo(Document doc, AluCar aluCar) {
         List<CartolaView> cartola = aluCar.getCartolaView();
         List<CartolaView> cartolaSegundo = new ArrayList<>();
         cartolaSegundo = setSemestre(cartola, cartolaSegundo, 2);
@@ -228,7 +228,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         }
     }
 
-    private static void putFooter(Document doc, Date fecha) throws Exception {
+    private void putFooter(Document doc, Date fecha) throws Exception {
         float[] columnWidths = {60};
         PdfPTable table = new PdfPTable(1);
         table.setTotalWidth(512);
@@ -244,7 +244,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         doc.add(table);
     }
 
-    private static PdfPCell getPdfPCell(String txt, int align, Color bgColor) {
+    private PdfPCell getPdfPCell(String txt, int align, Color bgColor) {
         PdfPCell cell = new PdfPCell(new Phrase(txt, font));
         cell.setHorizontalAlignment(align);
         cell.setBorder(Rectangle.NO_BORDER);
@@ -252,7 +252,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         return cell;
     }
 
-    private static PdfPTable creaTabla() {
+    private PdfPTable creaTabla() {
         float[] columnWidths = {18, 70, 8, 14, 14, 16};
 
         PdfPTable table = new PdfPTable(6);
@@ -274,7 +274,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         return table;
     }
    
-    private static void putLista(Document doc, List<CartolaView> lista) {
+    private void putLista(Document doc, List<CartolaView> lista) {
         PdfUtil.putBlank(doc);
 
         PdfPTable table = creaTabla();
@@ -326,7 +326,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         }
     }
 
-    private static List<CartolaView> setSemestre(List<CartolaView> lista, List<CartolaView> newLista, Integer sem) {
+    private List<CartolaView> setSemestre(List<CartolaView> lista, List<CartolaView> newLista, Integer sem) {
         newLista.addAll(
                 lista.stream()
                         .filter(cartola -> sem.equals(cartola.getId().getCartSem()))
@@ -335,7 +335,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         return newLista;
     }
 
-    private static String setPromedio(List<CartolaView> lista) {
+    private String setPromedio(List<CartolaView> lista) {
         DecimalFormat df = new DecimalFormat("#.#");
 
         double promedio = lista.stream()
@@ -348,7 +348,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         return df.format(promedio);
     }
 
-    public static class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

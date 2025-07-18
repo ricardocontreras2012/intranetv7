@@ -29,7 +29,7 @@ public class CommonAlumnoGetAlumnoCarreraService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         String retValue = "";
         WorkSession ws = genericSession.getWorkSession(key);
         List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());

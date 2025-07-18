@@ -31,7 +31,7 @@ public final class CommonAlumnoRecordEnableService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key) {
         String retValue = "";
         WorkSession ws = genericSession.getWorkSession(key);
 

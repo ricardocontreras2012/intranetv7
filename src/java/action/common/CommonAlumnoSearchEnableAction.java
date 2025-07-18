@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAlumnoSearchEnableService.service;
+import service.common.CommonAlumnoSearchEnableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -33,7 +33,7 @@ public final class CommonAlumnoSearchEnableAction extends ActionCommonSupport {
         String keyParent = getKey();
         setKey(getKeySession());
 
-        return service(getGenericSession(), actionCall, actionNested, typeSearch,
+        return new CommonAlumnoSearchEnableService().service(getGenericSession(), actionCall, actionNested, typeSearch,
                 getKey(), keyParent);
     }
 

@@ -8,7 +8,7 @@
 package action.common;
 
 
-import static service.common.CommonMensajeAddAyudanteService.service;
+import service.common.CommonMensajeAddAyudanteService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 
@@ -33,6 +33,6 @@ public final class CommonMensajeAddAyudanteAction extends ActionCommonSupport {
 
         setKey(getGenericSession().getWorkSession(getKey()).getKeyParent());
 
-        return service(getGenericSession(), getKey(), keyAux);
+        return new CommonMensajeAddAyudanteService().service(getGenericSession(), getKey(), keyAux);
     }
 }

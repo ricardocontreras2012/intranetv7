@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAyudanteRecordEnableService.service;
+import service.common.CommonAyudanteRecordEnableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonAyudanteRecordEnableAction extends ActionCommonSupport 
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonAyudanteRecordEnableService().service(getGenericSession(), getKey());
     }
 }

@@ -37,7 +37,7 @@ import infrastructure.util.common.CommonConstanciaUtil;
  */
 public class AlumnoSolicitudProrrogaConstanciaService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String key) throws Exception {
 
         String name;
         InputStream input;
@@ -59,7 +59,7 @@ public class AlumnoSolicitudProrrogaConstanciaService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String key) throws Exception {
+    private InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String key) throws Exception {
                
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
@@ -107,7 +107,7 @@ public class AlumnoSolicitudProrrogaConstanciaService {
      * @param fecha
      * @return
      */
-    public static String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha) {
+    private String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha) {
         String glosa;
         Alumno alumno = aluCar.getAlumno();
 

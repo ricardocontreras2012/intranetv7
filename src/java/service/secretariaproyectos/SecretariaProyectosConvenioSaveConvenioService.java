@@ -27,7 +27,7 @@ import infrastructure.util.LogUtil;
  */
 public class SecretariaProyectosConvenioSaveConvenioService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
 
         ActionInputStreamUtil ais = null;
         String name;
@@ -44,7 +44,7 @@ public class SecretariaProyectosConvenioSaveConvenioService {
         return ais;
     }
 
-    private static InputStream getInput(GenericSession genericSession, Map<String, String[]> parameters, String user, Integer folio, String name, String key) {
+    private InputStream getInput(GenericSession genericSession, Map<String, String[]> parameters, String user, Integer folio, String name, String key) {
 
         Integer rut = parseInt(parameters.get("rutAux")[0]);
         Integer rutFirma = parseInt(parameters.get("rutFirmaAux")[0]);

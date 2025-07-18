@@ -46,7 +46,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      * 
      * @return El estado de la acción. Siempre retorna el valor de éxito (SUCCESS).
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> map, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> map, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         AluCarPersistence persistence = ContextUtil.getDAO().getAluCarPersistence(user);
@@ -99,7 +99,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      * @param alumnoIntercambio Lista de calificaciones de alumnos de Intercambio.
      * @param alumnoRegular Lista de calificaciones de alumnos Regulares.
      */
-    private static void categorizarAlumno(String tipoAlumno, Calificacion calificacion,
+    private void categorizarAlumno(String tipoAlumno, Calificacion calificacion,
                                           List<Calificacion> alumnoBachiller, List<Calificacion> alumnoMovilidad,
                                           List<Calificacion> alumnoIntercambio, List<Calificacion> alumnoRegular) {
         Consumer<Calificacion> addCalificacion = cal -> {
@@ -132,7 +132,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      * @param nomina La lista de calificaciones de alumnos de un tipo específico.
      * @param user El usuario que realiza la operación, utilizado para acceder a la base de datos.
      */
-    private static void procesarListas(CursoId id, String tipo, List<Calificacion> nomina, String user) {
+    private void procesarListas(CursoId id, String tipo, List<Calificacion> nomina, String user) {
         if (!nomina.isEmpty()) {
             int folio = createActa(id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
                                    id.getCurSecc(), id.getCurAgno(), id.getCurSem(), id.getCurComp(),
@@ -155,7 +155,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      * @param user El usuario que realiza la operación.
      * @return El número de folio del acta creada.
      */
-    private static int createActa(Integer asign, String elect, String coord, Integer secc,
+    private int createActa(Integer asign, String elect, String coord, Integer secc,
                                   Integer agno, Integer sem, String tel, String tipo, String user) {
         Integer folio = CommonActaUtil.getFolio(user);
         ContextUtil.getDAO().getActaCalificacionPersistence(user)
@@ -170,7 +170,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      * @param calificacion La calificación a insertar en el acta.
      * @param user El usuario que realiza la operación.
      */
-    private static void crearCalificacionActa(Integer folio, Calificacion calificacion, String user) {
+    private void crearCalificacionActa(Integer folio, Calificacion calificacion, String user) {
         CalificacionId calificacionId = calificacion.getId();
         ContextUtil.getDAO().getActaCalificacionNominaPersistence(user)
                    .insertCalificacion(folio, calificacionId.getCalAgno(), calificacionId.getCalSem(),

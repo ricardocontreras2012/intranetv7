@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoGetCursoAdmInscripcionDerService.service;
+import service.common.CommonCursoGetCursoAdmInscripcionDerService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -26,7 +26,7 @@ public class CommonCursoGetCursoAdmInscripcionDerAction extends ActionValidation
      */
     @Override
     public String action() throws Exception { 
-        return service(getGenericSession(), Manager.getJefeCarreraSession(sesion), getPos(), getKey());
+        return new CommonCursoGetCursoAdmInscripcionDerService().service(getGenericSession(), Manager.getJefeCarreraSession(sesion), getPos(), getKey());
     }
 
     @Override

@@ -7,7 +7,7 @@ package action.secretariaproyectos;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioService.*;
+import service.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -29,7 +29,7 @@ public class SecretariaProyectosConvenioSaveConvenioAction extends ActionParamet
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), getMapParameters(), getKey());
+            ais = new SecretariaProyectosConvenioSaveConvenioService().service(getGenericSession(), getMapParameters(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

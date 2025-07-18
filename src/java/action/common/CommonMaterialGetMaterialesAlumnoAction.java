@@ -8,7 +8,7 @@
 package action.common;
 
 
-import static service.common.CommonMaterialGetMaterialesAlumnoService.service;
+import service.common.CommonMaterialGetMaterialesAlumnoService;
 import infrastructure.support.action.post.ActionPostValidationSupport;
 
 
@@ -27,7 +27,7 @@ public class CommonMaterialGetMaterialesAlumnoAction extends ActionPostValidatio
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getKey(), getPos());
+        return new CommonMaterialGetMaterialesAlumnoService().service(this, getGenericSession(), getKey(), getPos());
     }
 
     /**

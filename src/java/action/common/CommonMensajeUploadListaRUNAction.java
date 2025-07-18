@@ -1,7 +1,7 @@
 package action.common;
 
 import java.io.File;
-import static service.common.CommonMensajeUploadListaRUNService.service;
+import service.common.CommonMensajeUploadListaRUNService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -16,7 +16,7 @@ public class CommonMensajeUploadListaRUNAction extends ActionPostCommonSupport {
 
     @Override
     public String action() throws Exception {        
-        return service(this, getGenericSession(), upload, uploadFileName, getKey());
+        return new CommonMensajeUploadListaRUNService().service(this, getGenericSession(), upload, uploadFileName, getKey());
     }
 
     /**

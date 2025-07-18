@@ -33,7 +33,7 @@ public final class CommonMensajeReplyMessageService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, Integer pos, String key) {
+    public String service(GenericSession genericSession, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         MensajeSupport mensajeSupport = new MensajeSupport(genericSession.getEmail());
         MensajeNodeSupport rootNode = new MensajeNodeSupport();

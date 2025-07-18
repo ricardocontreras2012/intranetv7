@@ -5,7 +5,7 @@
  */
 package action.consulta;
 
-import static service.consulta.ConsultaLoginService.service;
+import service.consulta.ConsultaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -17,8 +17,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class ConsultaLoginAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-                private Integer rut;
-private String passwd;
+    private Integer rut;
+    private String passwd;
 
     /**
      * Method description
@@ -28,7 +28,7 @@ private String passwd;
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), rut, passwd, getKey());
+        return new ConsultaLoginService().service(this, getSesion(), rut, passwd, getKey());
     }
 
     public Integer getRut() {
@@ -46,6 +46,5 @@ private String passwd;
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
-    
-    
+
 }

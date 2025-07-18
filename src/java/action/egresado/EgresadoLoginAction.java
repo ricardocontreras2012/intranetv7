@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLoginService.service;
+import service.egresado.EgresadoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ private String passwd;
     @Override
     public String action() throws Exception {
         
-        return service(this, getSesion(), rut,
+        return new EgresadoLoginService().service(this, getSesion(), rut,
                 passwd, getKey());
     }
 

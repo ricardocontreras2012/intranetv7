@@ -14,8 +14,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Date;
-import static service.alumno.AlumnoSolicitudRetiroConstanciaService.getGlosaFinal;
-import static service.alumno.AlumnoSolicitudRetiroConstanciaService.getGlosaPrincipal;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -32,6 +30,7 @@ import infrastructure.util.common.CommonCertificacionUtil;
 import infrastructure.util.common.CommonConstanciaUtil;
 import infrastructure.util.common.CommonSimpleMessageUtil;
 import infrastructure.util.common.CommonUtil;
+import service.alumno.AlumnoSolicitudRetiroConstanciaService;
 
 /**
  *
@@ -39,7 +38,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class ViceDecanoSolicitudSaveResolucionService {
 
-    public static String service(GenericSession genericSession, String key, String resolucion, String respuesta) throws Exception {
+    public String service(GenericSession genericSession, String key, String resolucion, String respuesta) throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Integer folio = ws.getSolicitud().getSolFolio();
@@ -104,10 +103,11 @@ public class ViceDecanoSolicitudSaveResolucionService {
         return SUCCESS;
     }
 
-    private static void saveRetiro(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Date fecha, String fechaString, Integer solicitud, Integer folio, String verificador) throws Exception {
+    private void saveRetiro(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Date fecha, String fechaString, Integer solicitud, Integer folio, String verificador) throws Exception {
 
-        String glosaPrincipal = getGlosaPrincipal(aluCar, ws.getAgnoAct(), ws.getSemAct(), fecha, 11);
-        String glosaFinal = getGlosaFinal(aluCar);
+        AlumnoSolicitudRetiroConstanciaService svc  = new AlumnoSolicitudRetiroConstanciaService();
+        String glosaPrincipal = svc.getGlosaPrincipal(aluCar, ws.getAgnoAct(), ws.getSemAct(), fecha, 11);
+        String glosaFinal = svc.getGlosaFinal(aluCar);
 
         String file = "Constancia_Retiro_Con_Expresion_Causa_" + aluCar.getId().getAcaRut() + "_" + solicitud + ".pdf";
 
@@ -123,7 +123,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
         LogUtil.setLog(genericSession.getRut(), folio);
     }
 
-    private static void saveReincorporacionEliminacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
+    private void saveReincorporacionEliminacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
         String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
@@ -174,7 +174,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
         LogUtil.setLog(genericSession.getRut(), folio);
     }
 
-    private static void saveReincorporacionAbandono(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
+    private void saveReincorporacionAbandono(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
         String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
@@ -216,7 +216,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
         LogUtil.setLog(genericSession.getRut(), folio);
     }
 
-    private static void saveReincorporacionNoTitulacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
+    private void saveReincorporacionNoTitulacion(GenericSession genericSession, WorkSession ws, String key, AluCar aluCar, Integer solicitud, String estado, Integer folio, String verificador) throws Exception {
         Alumno alumno = aluCar.getAlumno();
         String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
         String fecha = getFormattedDate(getSysdate(), "dd/MM/yyyy");
@@ -258,7 +258,7 @@ public class ViceDecanoSolicitudSaveResolucionService {
         LogUtil.setLog(genericSession.getRut(), folio);
     }
 
-    private static void saveMatricula(GenericSession genericSession, String key, AluCar aluCar, String respuesta, String resolucion) throws Exception {
+    private void saveMatricula(GenericSession genericSession, String key, AluCar aluCar, String respuesta, String resolucion) throws Exception {
 
         String glosaFinal = "\n\nCarolina Nicolas\n"
                 + "Vicedecana de Docencia\n"

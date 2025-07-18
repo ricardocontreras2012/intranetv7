@@ -30,7 +30,7 @@ public final class AyudanteEmailSetEmailService {
      * @param email
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String email) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String email) {
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).setEmail(genericSession.getRut(), emailNormalizado(email));
         commitTransaction();

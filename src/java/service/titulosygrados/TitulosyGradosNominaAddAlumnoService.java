@@ -33,7 +33,7 @@ public class TitulosyGradosNominaAddAlumnoService {
      *
      * @throws Exception
      */
-    public static String service(GenericSession genericSession,
+    public String service(GenericSession genericSession,
             String key)
             throws Exception {
 

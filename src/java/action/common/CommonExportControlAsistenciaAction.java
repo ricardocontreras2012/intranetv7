@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonExportControlAsistenciaService.service;
+import service.common.CommonExportControlAsistenciaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import static infrastructure.util.common.CommonMaterialUtil.getContentDispositionSemAgno;
@@ -38,7 +38,7 @@ public final class CommonExportControlAsistenciaAction extends ActionCommonSuppo
         
         description = AppStaticsUtil.XLS_MIME;
         contentDisposition = getContentDispositionSemAgno(getGenericSession(), getKey(), "CONTROL_ASISTENCIA");
-        excelFile = service(getGenericSession(), getKey(), contentDisposition, agno, sem);
+        excelFile = new CommonExportControlAsistenciaService().service(getGenericSession(), getKey(), contentDisposition, agno, sem);
 
         return SUCCESS;
     }

@@ -25,7 +25,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AlumnoSolicitudSaveMatriculaService {
     
-     public static String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String causa, String key) {
+     public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String causa, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();

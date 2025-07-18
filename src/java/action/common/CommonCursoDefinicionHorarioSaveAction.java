@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionHorarioSaveService.service;
+import service.common.CommonCursoDefinicionHorarioSaveService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,7 +24,7 @@ public class CommonCursoDefinicionHorarioSaveAction extends ActionParameterAware
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonCursoDefinicionHorarioSaveService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }
 

@@ -6,7 +6,7 @@
 package action.profesor;
 
 
-import static service.profesor.ProfesorAutoEvaluacionService.*;
+import service.profesor.ProfesorAutoEvaluacionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -17,9 +17,11 @@ import infrastructure.support.action.ActionParameterAwareSupport;
  * @author Ricardo Contreras S.
  */
 public final class ProfesorAutoEvaluacionAction extends ActionParameterAwareSupport {
+    
+    private ProfesorAutoEvaluacionService svc = new ProfesorAutoEvaluacionService();
 
     public String search() {
-        return searchAction(getGenericSession(), getKey());
+        return svc.searchAction(getGenericSession(), getKey());
     }
    /**
      * Method description
@@ -38,7 +40,7 @@ public final class ProfesorAutoEvaluacionAction extends ActionParameterAwareSupp
      * @return
      */
     public String showForm() {
-        return showFormService(getGenericSession(), getKey());
+        return svc.showFormService(getGenericSession(), getKey());
     }
 
     /**
@@ -47,10 +49,10 @@ public final class ProfesorAutoEvaluacionAction extends ActionParameterAwareSupp
      * @return
      */
     public String save() {
-        return saveService(getGenericSession(), getMapParameters(), getKey());
+        return svc.saveService(getGenericSession(), getMapParameters(), getKey());
     }
 
     public String remove() {
-        return removeService(getGenericSession());
+        return svc.removeService(getGenericSession());
     }
 }

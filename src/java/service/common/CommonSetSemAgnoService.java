@@ -26,7 +26,7 @@ public final class CommonSetSemAgnoService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer sem, Integer agno, String key) {
+    public String service(GenericSession genericSession, Integer sem, Integer agno, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setSemAct(sem);
         ws.setAgnoAct(agno);

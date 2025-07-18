@@ -13,7 +13,7 @@ import session.AlumnoSession;
  * @author Ricardo
  */
 public class AlumnoCertificacionCheckLogroEnTramiteService {
-     public static String service(AlumnoSession alumnoSession, Integer pos) {
+     public String service(AlumnoSession alumnoSession, Integer pos) {
         alumnoSession.setTipoCert(alumnoSession.getCertList().get(pos));        
        
         return SUCCESS;

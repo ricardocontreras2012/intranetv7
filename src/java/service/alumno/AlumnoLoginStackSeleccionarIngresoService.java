@@ -40,7 +40,7 @@ public class AlumnoLoginStackSeleccionarIngresoService {
      *         - `"stack"` si se encontró un solo registro y el inicio de sesión se realizó con éxito.
      *         - `"multiplesIngresos"` si se encontraron varios registros, y el alumno debe elegir uno.
      */
-    public static String service(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
+    public String service(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
         // Inicializar el valor de retorno como "stack", que indica que se procederá con un solo registro de matrícula
         String retValue = "stack";
 

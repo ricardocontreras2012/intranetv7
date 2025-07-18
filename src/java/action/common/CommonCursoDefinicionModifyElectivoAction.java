@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionModifyElectivoService.service;
+import service.common.CommonCursoDefinicionModifyElectivoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -15,11 +15,11 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    Integer asignMod;
-    String electMod;
-    String electivoMod;
-    Integer minorMod;
-    Integer areaMod;
+    private Integer asignMod;
+    private String electMod;
+    private String electivoMod;
+    private Integer minorMod;
+    private Integer areaMod;
     /**
      * Method description
      *
@@ -28,7 +28,7 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, getKey());
+        return new CommonCursoDefinicionModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, getKey());
     }
 
     public void setAsignMod(Integer asignMod) {

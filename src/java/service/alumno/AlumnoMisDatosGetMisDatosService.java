@@ -27,7 +27,7 @@ public final class AlumnoMisDatosGetMisDatosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         Alumno alumnoAux = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
         Alumno alumno = genericSession.getWorkSession(key).getAluCar().getAlumno();
 

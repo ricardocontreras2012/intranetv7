@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
  */
 public class SecretariaProyectosConvenioRemoveConveniosService {
 
-    public static String service(GenericSession genericSession, ProyectoSession ps,
+    public String service(GenericSession genericSession, ProyectoSession ps,
             Map<String, String[]> parameters, String key) {
 
         List<Convenio> lista = ps.getConvenioList();

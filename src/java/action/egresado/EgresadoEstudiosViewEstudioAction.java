@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoEstudiosViewEstudioService.service;
+import service.egresado.EgresadoEstudiosViewEstudioService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -27,7 +27,7 @@ public class EgresadoEstudiosViewEstudioAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getEgresadoSession(sesion), correl, getKey());
+        return new EgresadoEstudiosViewEstudioService().service(getGenericSession(), Manager.getEgresadoSession(sesion), correl, getKey());
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaService.service;
+import service.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -21,7 +21,7 @@ public class RegistradorCurricularCertificadosEmitirGlosaAction extends ActionCo
 
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), Manager.getRegistradorSession(sesion), pos, glosa);
+        return new RegistradorCurricularCertificadosEmitirGlosaService().service(this, getGenericSession(), Manager.getRegistradorSession(sesion), pos, glosa);
     }
 
     public void setPos(Integer pos) {

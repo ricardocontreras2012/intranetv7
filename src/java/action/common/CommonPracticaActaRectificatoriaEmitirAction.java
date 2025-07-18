@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonPracticaActaRectificatoriaEmitirService.service;
+import service.common.CommonPracticaActaRectificatoriaEmitirService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,6 +24,6 @@ public class CommonPracticaActaRectificatoriaEmitirAction extends ActionParamete
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getMapParameters(), getKey());
+        return new CommonPracticaActaRectificatoriaEmitirService().service(this, getGenericSession(), getMapParameters(), getKey());
     }
 }

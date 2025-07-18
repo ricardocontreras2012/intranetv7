@@ -16,7 +16,7 @@ import infrastructure.support.InscripcionSupport;
  * @author Ricardo
  */
 public class CommonInscripcionGetInscripcionInnerService {
-     public static String service(GenericSession genericSession,
+     public String service(GenericSession genericSession,
             String key) {
       
         WorkSession ws = genericSession.getWorkSession(key);

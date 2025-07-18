@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonAyudanteGetFotoService.service;
+import service.common.CommonAyudanteGetFotoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -19,7 +19,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public final class CommonAyudanteGetFotoAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -28,7 +28,7 @@ public final class CommonAyudanteGetFotoAction extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        ais = service(getGenericSession(), getKey());
+        ais = new CommonAyudanteGetFotoService().service(getGenericSession(), getKey());
         return SUCCESS;
     }
 

@@ -13,9 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Date;
-import static service.alumno.AlumnoSolicitudRetiroConstanciaService.getGlosaFinal;
-import static service.alumno.AlumnoSolicitudRetiroConstanciaService.getGlosaPrincipal;
-
 import session.GenericSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -27,13 +24,15 @@ import static infrastructure.util.common.CommonArchivoUtil.getAttachFileName;
 import infrastructure.util.common.CommonCertificacionUtil;
 import infrastructure.util.common.CommonConstanciaUtil;
 import infrastructure.util.common.CommonSimpleMessageUtil;
+import service.alumno.AlumnoSolicitudRetiroConstanciaService;
 
 /**
  *
  * @author Ricardo
  */
 public class RegistradorCurricularSolicitudReprintService {
- public static String service(GenericSession genericSession, String key, Integer folio) throws Exception {
+ public String service(GenericSession genericSession, String key, Integer folio) throws Exception {
+     AlumnoSolicitudRetiroConstanciaService svc = new AlumnoSolicitudRetiroConstanciaService();
         
         Solicitud sol = ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).find(folio);
 
@@ -56,9 +55,9 @@ public class RegistradorCurricularSolicitudReprintService {
 
             String fechaString =  DateUtil.getFechaCiudad(fecha);
             String glosaPrincipal;
-            String glosaFinal = getGlosaFinal(aluCar);
+            String glosaFinal = svc.getGlosaFinal(aluCar);
 
-            glosaPrincipal = getGlosaPrincipal(aluCar, sol.getSolAgno(), sol.getSolSem(), fecha, 11);
+            glosaPrincipal = svc.getGlosaPrincipal(aluCar, sol.getSolAgno(), sol.getSolSem(), fecha, 11);
 
             String file = "Constancia_Retiro_Con_Expresion_Causa_" + aluCar.getId().getAcaRut() + "_" + solicitud + ".pdf";
 

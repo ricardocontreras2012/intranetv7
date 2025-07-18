@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import static service.secretariaproyectos.SecretariaProyectosConvenioShowConvenioService.service;
+import service.secretariaproyectos.SecretariaProyectosConvenioShowConvenioService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -24,7 +24,7 @@ public class SecretariaProyectosConvenioShowConvenioAction extends ActionValidat
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getProyectoSession(sesion), getPos(), getKey());
+        return new SecretariaProyectosConvenioShowConvenioService().service(getGenericSession(), Manager.getProyectoSession(sesion), getPos(), getKey());
     }
 
     @Override

@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  * @author rcontreras
  */
 public class CommonSalaReservaGetCursoService {
-    public static String service(GenericSession genericSession, String cursoStr, String key) {
+    public String service(GenericSession genericSession, String cursoStr, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = new Curso(cursoStr);

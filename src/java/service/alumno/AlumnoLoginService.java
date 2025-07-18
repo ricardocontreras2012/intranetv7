@@ -45,7 +45,7 @@ public final class AlumnoLoginService {
      *         - `"error"` si el inicio de sesión falló debido a credenciales incorrectas.
      *         - El resultado del método `retReLogin()` si la sesión o la clave son inválidas.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificación temprana para asegurarse de que la sesión y la clave no sean nulas.
         if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
             return retReLogin();

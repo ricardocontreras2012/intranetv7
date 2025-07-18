@@ -28,7 +28,7 @@ public final class CommonAsistenciaGetAsistenciaService {
      * @param pos Numero del registro seleccionado en el formulario.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, Integer pos) {
+    public String service(GenericSession genericSession, String key, Integer pos) {
         WorkSession ws = genericSession.getWorkSession(key);
         AsistenciaAlumno asistenciaAlumno = ws.getAsistenciaAlumnoList().get(pos);
 

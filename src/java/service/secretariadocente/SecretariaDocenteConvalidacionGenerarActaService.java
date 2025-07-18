@@ -43,7 +43,7 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, SecretariaSession secreSession, Map<String, String[]> parameters, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, SecretariaSession secreSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         ConvalidacionSolicitud solicitud = secreSession.getConvalidacion();
@@ -86,7 +86,7 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
         return retValue;
     }
 
-    private static Integer crearActa(AluCar aluCar, Integer agno, Integer sem, String user) {
+    private Integer crearActa(AluCar aluCar, Integer agno, Integer sem, String user) {
         Integer folio = CommonActaUtil.getFolio(user);
         ContextUtil.getDAO().getActaConvalidacionPersistence(user).crearActa(folio, agno, sem, aluCar.getId());
 

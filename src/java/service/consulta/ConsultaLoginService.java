@@ -38,7 +38,7 @@ public final class ConsultaLoginService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         String retValue = SUCCESS;
 
         if (sesion != null && key != null) {
@@ -75,7 +75,7 @@ public final class ConsultaLoginService {
      *
      * @param genericSession Sesion de trabajo.
      */
-    private static void getComplemento(GenericSession genericSession, Externo externo) {
+    private void getComplemento(GenericSession genericSession, Externo externo) {
         genericSession.setDv(externo.getExtDv());
         genericSession.setPaterno(externo.getExtPaterno());
         genericSession.setMaterno(externo.getExtMaterno());

@@ -1,7 +1,7 @@
 
 package action.common;
 
-import static service.common.CommonLoginStackService.service;
+import service.common.CommonLoginStackService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -22,7 +22,7 @@ public class CommonLoginStackAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        action =  service(getGenericSession(), getKey());
+        action =  new CommonLoginStackService().service(getGenericSession(), getKey());
 
         return SUCCESS;
     }

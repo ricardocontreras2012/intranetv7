@@ -29,7 +29,7 @@ public final class CommonAlumnoSearchEnableService {
      * @param keyParent
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String actionCall, String actionNested,
+    public String service(GenericSession genericSession, String actionCall, String actionNested,
             String typeSearch, String key, String keyParent) {
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
 

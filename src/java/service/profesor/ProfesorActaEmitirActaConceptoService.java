@@ -39,7 +39,7 @@ public final class ProfesorActaEmitirActaConceptoService {
      * @param key Llave para acceder a los datos de la sesión.
      * @return El estado de la acción, indicando si el proceso fue exitoso.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> map, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> map, String key) {
         int nActa = -1; // Variable para almacenar el número de acta actualizado
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();

@@ -23,7 +23,7 @@ public final class CommonAsistenciaRemoveAsistenciaService {
      * @param key Llave para acceder a los datos de la sesión.
      * @return Estado de la acción.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession workSession = genericSession.getWorkSession(key);
 
         AsistenciaAlumnoPersistence asistenciaAlumnoPersistence = ContextUtil.getDAO()

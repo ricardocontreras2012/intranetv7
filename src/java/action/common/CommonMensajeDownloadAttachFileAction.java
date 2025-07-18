@@ -3,7 +3,7 @@ package action.common;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.InputStream;
-import static service.common.CommonMensajeDownloadAttachFileService.service;
+import service.common.CommonMensajeDownloadAttachFileService;
 import infrastructure.util.ActionInputStreamUtil;
 
 /**
@@ -31,7 +31,7 @@ public final class CommonMensajeDownloadAttachFileAction extends ActionSupport {
     public String execute() {
         String retValue = SUCCESS;
         try {  
-            ais = service(correl, name, key);
+            ais = new CommonMensajeDownloadAttachFileService().service(correl, name, key);
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));

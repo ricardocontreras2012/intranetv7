@@ -43,7 +43,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * generado.
      * @throws Exception Si ocurre algún error al generar el archivo Excel.
      */
-    public static ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
         String name = "asistencia_" + CommonCursoUtil.getNombreFile(genericSession.getWorkSession(key).getCurso()) + ".xlsx";
         InputStream input = getInput(genericSession, name, key);
         String description = FormatUtil.getMimeType(name);
@@ -62,7 +62,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @return El flujo de entrada del archivo Excel generado.
      * @throws Exception Si ocurre algún error al generar el archivo.
      */
-    private static InputStream getInput(GenericSession genericSession, String file, String key) throws Exception {
+    private InputStream getInput(GenericSession genericSession, String file, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = genericSession.getCurso(key);
 
@@ -99,7 +99,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param libro El libro de trabajo de Excel donde se aplicará el estilo.
      * @return El estilo de celda configurado para decimales.
      */
-    private static CellStyle createDecimalCellStyle(XSSFWorkbook libro) {
+    private CellStyle createDecimalCellStyle(XSSFWorkbook libro) {
         CellStyle decimalStyle = libro.createCellStyle();
         DataFormat format = libro.createDataFormat();
         decimalStyle.setDataFormat(format.getFormat("0.0"));
@@ -112,7 +112,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param libro El libro de trabajo de Excel donde se aplicará la fuente.
      * @return La fuente creada con tamaño 9.
      */
-    private static XSSFFont createFont(XSSFWorkbook libro) {
+    private XSSFFont createFont(XSSFWorkbook libro) {
         XSSFFont font = libro.createFont();
         font.setFontHeightInPoints((short) 9);
         return font;
@@ -126,7 +126,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param font La fuente a utilizar para los títulos.
      * @return El estilo de celda para los títulos.
      */
-    private static XSSFCellStyle createTitleStyle(XSSFWorkbook libro, XSSFFont font) {
+    private XSSFCellStyle createTitleStyle(XSSFWorkbook libro, XSSFFont font) {
         XSSFCellStyle style = libro.createCellStyle();
         style.setFont(font);
         return style;
@@ -138,7 +138,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param libro El libro de trabajo de Excel donde se aplicará el estilo.
      * @return El estilo de celda para las cabeceras.
      */
-    private static XSSFCellStyle createHeaderStyle(XSSFWorkbook libro) {
+    private XSSFCellStyle createHeaderStyle(XSSFWorkbook libro) {
         return libro.createCellStyle();
     }
 
@@ -148,7 +148,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param libro El libro de trabajo de Excel donde se aplicará el estilo.
      * @return El estilo de celda adicional para las cabeceras.
      */
-    private static XSSFCellStyle createHeaderStyle2(XSSFWorkbook libro) {
+    private XSSFCellStyle createHeaderStyle2(XSSFWorkbook libro) {
         return libro.createCellStyle();
     }
 
@@ -161,7 +161,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param curso El curso cuyo nombre se mostrará en la planilla.
      * @return El número de la siguiente fila a crear.
      */
-    private static int createTitleRows(XSSFSheet hoja, XSSFCellStyle estiloTitulo, Curso curso) {
+    private int createTitleRows(XSSFSheet hoja, XSSFCellStyle estiloTitulo, Curso curso) {
         int fila = 5;
 
         // Crear fila de título de la planilla
@@ -192,7 +192,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * crear las columnas correspondientes.
      * @return El número de la siguiente fila después de agregar las cabeceras.
      */
-    private static int createHeaderRow(XSSFSheet hoja, int fila, XSSFCellStyle estiloCabecera, List<AsistenciaAlumno> asistenciaAlumnoList) {
+    private int createHeaderRow(XSSFSheet hoja, int fila, XSSFCellStyle estiloCabecera, List<AsistenciaAlumno> asistenciaAlumnoList) {
         XSSFRow cabecera = hoja.createRow(fila);
 
         // Crear las celdas de cabecera
@@ -227,7 +227,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param value El valor que contendrá la celda.
      * @param estiloCabecera El estilo que se aplicará a la celda.
      */
-    private static void createHeaderCell(XSSFRow cabecera, int col, String value, XSSFCellStyle estiloCabecera) {
+    private void createHeaderCell(XSSFRow cabecera, int col, String value, XSSFCellStyle estiloCabecera) {
         XSSFCell cell = cabecera.createCell(col);
         cell.setCellValue(new XSSFRichTextString(value));
         cell.setCellStyle(estiloCabecera);
@@ -241,7 +241,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param decimalStyle El estilo de celda para los valores decimales.
      * @param fila El número de fila donde se comenzarán a insertar los datos.
      */
-    private static void getGrid(WorkSession ws, XSSFSheet hoja, CellStyle decimalStyle, int fila) {
+    private void getGrid(WorkSession ws, XSSFSheet hoja, CellStyle decimalStyle, int fila) {
         List<AluCar> nomina = ws.getNominaCurso();
         List<AsistenciaAlumno> asistencia = ws.getAsistenciaAlumnoList();
         DecimalFormat df = new DecimalFormat("0.0");
@@ -287,7 +287,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @param alumno El objeto `Alumno` que contiene la información del
      * estudiante.
      */
-    private static void createStudentRow(XSSFRow row, Alumno alumno) {
+    private void createStudentRow(XSSFRow row, Alumno alumno) {
         row.createCell(0).setCellValue(alumno.getAluRut());
         row.createCell(1).setCellValue(new XSSFRichTextString(alumno.getAluDv()));
         row.createCell(2).setCellValue(new XSSFRichTextString(alumno.getAluPaterno()));
@@ -304,7 +304,7 @@ public final class CommonAsistenciaExportPlanillaService {
      * @return El flujo de entrada del archivo Excel.
      * @throws IOException Si ocurre un error al escribir el archivo.
      */
-    private static InputStream writeWorkbookToInputStream(XSSFWorkbook libro, String file) throws IOException {
+    private InputStream writeWorkbookToInputStream(XSSFWorkbook libro, String file) throws IOException {
         try (FileOutputStream fileOut = new FileOutputStream(PATH_TEMP_FILES + file)) {
             libro.write(fileOut);
             fileOut.flush();

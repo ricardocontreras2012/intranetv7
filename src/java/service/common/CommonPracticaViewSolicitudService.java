@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
  */
 public class CommonPracticaViewSolicitudService {
 
-    public static String service(GenericSession genericSession, String key, Integer pos) {
+    public String service(GenericSession genericSession, String key, Integer pos) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         Solicitud sol = ws.getSolicitudList().get(pos);

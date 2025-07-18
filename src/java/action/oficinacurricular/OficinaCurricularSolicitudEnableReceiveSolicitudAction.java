@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import static service.oficinacurricular.OficinaCurricularSolicitudEnableReceiveSolicitudService.service;
+import service.oficinacurricular.OficinaCurricularSolicitudEnableReceiveSolicitudService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class OficinaCurricularSolicitudEnableReceiveSolicitudAction extend
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new OficinaCurricularSolicitudEnableReceiveSolicitudService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

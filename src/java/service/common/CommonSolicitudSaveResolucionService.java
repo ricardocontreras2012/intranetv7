@@ -28,7 +28,7 @@ public class CommonSolicitudSaveResolucionService {
      * @return
      * @throws Exception
      */
-    public static String service(GenericSession genericSession, String key, String resolucion, String respuesta) throws Exception {
+    public String service(GenericSession genericSession, String key, String resolucion, String respuesta) throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
 

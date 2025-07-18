@@ -31,7 +31,7 @@ public final class CommonMaterialGetMaterialesCursoService {
      * @return
      * @throws Exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String key, String tipoMaterial)
             throws Exception {
 

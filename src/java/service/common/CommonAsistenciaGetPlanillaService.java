@@ -24,7 +24,7 @@ public final class CommonAsistenciaGetPlanillaService {
      * @param key Llave para acceder a los datos de la sesión.
      * @return Acción de estado.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Obtener la lista de AsistenciaAlumnoNomina y setearla en el WorkSession
@@ -48,7 +48,7 @@ public final class CommonAsistenciaGetPlanillaService {
      * @param lAsistenciaAlumnoNomina Lista de AsistenciaAlumnoNomina.
      * @return Lista de AsistenciaAlumno procesada y ordenada.
      */
-    private static List<AsistenciaAlumno> getAsistencia(List<AsistenciaAlumnoNomina> lAsistenciaAlumnoNomina) {
+    private List<AsistenciaAlumno> getAsistencia(List<AsistenciaAlumnoNomina> lAsistenciaAlumnoNomina) {
         if (lAsistenciaAlumnoNomina == null) {
             return Collections.emptyList(); // Devuelve una lista vacía
         }

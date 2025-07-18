@@ -5,7 +5,7 @@
  */
 package action.postgrado;
 
-import static service.postgrado.DirectorPostgradoLoginService.service;
+import service.postgrado.DirectorPostgradoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class DirectorPostgradoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new DirectorPostgradoLoginService().service(getGenericSession(), getKey());
     }
 }

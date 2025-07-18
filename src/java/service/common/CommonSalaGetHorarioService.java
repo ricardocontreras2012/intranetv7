@@ -30,7 +30,7 @@ public final class CommonSalaGetHorarioService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer pos, Integer agno, Integer sem, String key) {      
+    public String service(GenericSession genericSession, Integer pos, Integer agno, Integer sem, String key) {      
 
         WorkSession ws = genericSession.getWorkSession(key);
         Sala sala = ws.getSalaList().get(pos);

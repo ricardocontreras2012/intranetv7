@@ -32,7 +32,7 @@ public final class AlumnoSolicitudRemoveSolicitudService {
      * @param key La clave para acceder a la sesión de trabajo.
      * @return El estado de la acción (SUCCESS si el proceso fue exitoso).
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         // Recupera la sesión de trabajo del alumno
         WorkSession ws = genericSession.getWorkSession(key);
 

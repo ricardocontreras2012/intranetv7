@@ -27,7 +27,7 @@ public final class CommonCursoGetFotoAlumnoService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static InputStream service(GenericSession genericSession, Integer pos, String key) throws Exception {
+    public InputStream service(GenericSession genericSession, Integer pos, String key) throws Exception {
         AluCar aluCar = genericSession.getWorkSession(key).getNominaCurso().get(pos);
 
         return getFoto(aluCar.getId().getAcaRut(), aluCar.getAlumno().getAluDv());

@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonCursoListaExportService.service;
+import service.common.CommonCursoListaExportService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import static infrastructure.util.common.CommonMaterialUtil.getContentDispositionCurso;
@@ -35,7 +35,7 @@ public final class CommonCursoListaExportAction extends ActionCommonSupport {
     public String action() throws Exception {        
         description = AppStaticsUtil.XLS_MIME;
         contentDisposition = getContentDispositionCurso(getGenericSession(), getKey(),"NOMINA_CURSO");
-        excelFile = service(getGenericSession(), contentDisposition,
+        excelFile = new CommonCursoListaExportService().service(getGenericSession(), contentDisposition,
                 getKey());
 
         return SUCCESS;

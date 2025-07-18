@@ -22,7 +22,7 @@ public class DirectorPostgradoLoginService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         return SUCCESS;
     }
 }

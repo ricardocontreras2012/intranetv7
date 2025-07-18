@@ -20,7 +20,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  */
 public class AlumnoPracticaDeleteFileService {
 
-    public static String service(GenericSession genericSession, Integer attach, String key) {
+    public String service(GenericSession genericSession, Integer attach, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         Solicitud solicitud = ws.getSolicitud();
         String user = ActionUtil.getDBUser();

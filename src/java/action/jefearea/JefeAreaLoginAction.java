@@ -5,7 +5,7 @@
  */
 package action.jefearea;
 
-import static service.jefearea.JefeAreaLoginService.service;
+import service.jefearea.JefeAreaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class JefeAreaLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new JefeAreaLoginService().service(getGenericSession(), getKey());
     }
 }

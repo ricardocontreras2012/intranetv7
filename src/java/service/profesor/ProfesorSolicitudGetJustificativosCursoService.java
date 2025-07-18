@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  */
 public class ProfesorSolicitudGetJustificativosCursoService {
 
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
         List<Solicitud> lSol = ContextUtil.getDAO()

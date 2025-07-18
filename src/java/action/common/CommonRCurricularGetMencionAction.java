@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import static service.common.CommonRCurricularGetMencionService.service;
+import service.common.CommonRCurricularGetMencionService;
 
 /**
  *
@@ -23,6 +23,6 @@ public class CommonRCurricularGetMencionAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonRCurricularGetMencionService().service(getGenericSession(), getKey());
     }
 }

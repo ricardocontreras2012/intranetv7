@@ -65,7 +65,7 @@ public class RegistradorCurricularReincorporacionService {
      * @param tipoReinc
      * @param key
      */
-    public static void service(GenericSession genericSession, String tipoReinc, String key) {
+    public void service(GenericSession genericSession, String tipoReinc, String key) {
         String user = ActionUtil.getDBUser();
         try {
             WorkSession ws = genericSession.getWorkSession(key);
@@ -161,7 +161,7 @@ public class RegistradorCurricularReincorporacionService {
      * @param fechaString
      * @throws Exception
      */
-    public static void writePdf(String file, Integer solicitud, AluCar aluCar, String glosaPrincipal,
+    public void writePdf(String file, Integer solicitud, AluCar aluCar, String glosaPrincipal,
             String glosaFinal, String fechaString)
             throws Exception {
         Document document = new Document(LETTER);
@@ -208,7 +208,7 @@ public class RegistradorCurricularReincorporacionService {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
             Integer solicitud, String facultad)
             throws Exception {
         Paragraph parrafo1 = newParrafo(149, 80);
@@ -260,7 +260,7 @@ public class RegistradorCurricularReincorporacionService {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String glosaPrincipal, String glosaFinal,
+    private void putBody(Document document, Font normal, String glosaPrincipal, String glosaFinal,
             String fechaString)
             throws Exception {
         Paragraph parrafo1 = newParrafo(0, 40);
@@ -291,7 +291,7 @@ public class RegistradorCurricularReincorporacionService {
      * @param tipo
      * @return
      */
-    public static String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha, Integer tipo) {
+    public String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha, Integer tipo) {
         String glosa = null;
         Alumno alumno = aluCar.getAlumno();
         Integer agnoReinc;
@@ -358,11 +358,11 @@ public class RegistradorCurricularReincorporacionService {
      *
      * @return
      */
-    public static String getGlosaFinal() {
+    public String getGlosaFinal() {
         return "Esta reincorporación quedará registrada en su hoja de vida como una oportunidad. Revise su situación en Mis Datos Curriculares de la Intranet Académica.";
     }    
 
-    private static void marcarProcesado(List<Reincorporacion> reincorporacionList) {
+    private void marcarProcesado(List<Reincorporacion> reincorporacionList) {
         ReincorporacionPersistence reincorporacionPersistence
                 = ContextUtil.getDAO().getReincorporacionPersistence(ActionUtil.getDBUser());
 

@@ -27,7 +27,7 @@ public final class ApoyoLoginService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(Map<String, Object> session, String key) throws Exception {
+    public String service(Map<String, Object> session, String key) throws Exception {
         SecretariaSession secreSession = new SecretariaSession();
         GenericSession genericSession = (GenericSession)session.get("genericSession");
         Administrativo administrativo = genericSession.getAdministrativo();

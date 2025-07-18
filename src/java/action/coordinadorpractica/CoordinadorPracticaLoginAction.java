@@ -5,7 +5,7 @@
  */
 package action.coordinadorpractica;
 
-import static service.coordinadorpractica.CoordinadorPracticaLoginService.service;
+import service.coordinadorpractica.CoordinadorPracticaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -23,6 +23,6 @@ public class CoordinadorPracticaLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CoordinadorPracticaLoginService().service(getGenericSession(), getKey());
     }
 }

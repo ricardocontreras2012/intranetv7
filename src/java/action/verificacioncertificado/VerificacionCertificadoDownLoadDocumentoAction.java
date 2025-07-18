@@ -7,7 +7,7 @@ package action.verificacioncertificado;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.verificacioncertificado.VerificacionCertificadoDownLoadDocumentoService.service;
+import service.verificacioncertificado.VerificacionCertificadoDownLoadDocumentoService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -17,7 +17,7 @@ import infrastructure.util.ActionInputStreamUtil;
  */
 public class VerificacionCertificadoDownLoadDocumentoAction extends ActionPostCommonSupport {
 
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -29,7 +29,7 @@ public class VerificacionCertificadoDownLoadDocumentoAction extends ActionPostCo
         String retValue = SUCCESS;
 
         try {
-            ais = service(getSesion());
+            ais = new VerificacionCertificadoDownLoadDocumentoService().service(getSesion());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));

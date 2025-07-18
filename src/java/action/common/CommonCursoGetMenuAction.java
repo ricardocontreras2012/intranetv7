@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoGetMenuService.service;
+import service.common.CommonCursoGetMenuService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonCursoGetMenuAction extends ActionValidationPosSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonCursoGetMenuService().service(getGenericSession(), getPos(), getKey());
     }
     
     @Override

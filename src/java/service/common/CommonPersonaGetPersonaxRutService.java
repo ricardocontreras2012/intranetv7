@@ -26,7 +26,7 @@ public final class CommonPersonaGetPersonaxRutService {
      * @param rut
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, Integer rut) {
+    public String service(GenericSession genericSession, String key, Integer rut) {
         genericSession.getWorkSession(key).setPersona(ContextUtil.getDAO().getPersonaPersistence(ActionUtil.getDBUser()).find(rut));
 
         return SUCCESS;

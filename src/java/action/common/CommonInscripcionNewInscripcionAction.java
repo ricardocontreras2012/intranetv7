@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonInscripcionNewInscripcionService.service;
+import service.common.CommonInscripcionNewInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,6 +28,6 @@ public final class CommonInscripcionNewInscripcionAction extends ActionCommonSup
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonInscripcionNewInscripcionService().service(getGenericSession(), getKey());
     }
 }

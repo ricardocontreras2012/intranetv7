@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoPracticaSavePracticaService.service;
+import service.alumno.AlumnoPracticaSavePracticaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -39,7 +39,7 @@ public final class AlumnoPracticaSavePracticaAction extends ActionCommonSupport 
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), rutEmp, fonoEmp, labor, comuna,
+        return new AlumnoPracticaSavePracticaService().service(this, getGenericSession(), rutEmp, fonoEmp, labor, comuna,
                 direccion,rutAut, fonoAut, email, calidad, inicio, termino, getKey());
     }
 

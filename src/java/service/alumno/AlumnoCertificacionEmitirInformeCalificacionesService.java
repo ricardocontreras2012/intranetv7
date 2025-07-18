@@ -422,7 +422,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
         table.addCell(getPdfPCell(calValues.get("calProc"), Element.ALIGN_CENTER, color));
     }
 
-    private static Map<String, String> extractCalificacionValues(CalificacionCertificacionSupport cal) {
+    private Map<String, String> extractCalificacionValues(CalificacionCertificacionSupport cal) {
         Map<String, String> values = new HashMap<>();
         values.put("calNombre", cal.getCalNombre());
         values.put("calNota", cal.getCalNota());
@@ -457,7 +457,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
      * @param lista
      * @return
      */
-    private static List<CalificacionCertificacionSupport> delExentos(List<CalificacionCertificacionSupport> lista) {
+    private List<CalificacionCertificacionSupport> delExentos(List<CalificacionCertificacionSupport> lista) {
         Iterator<CalificacionCertificacionSupport> iter = lista.iterator();
 
         while (iter.hasNext()) {

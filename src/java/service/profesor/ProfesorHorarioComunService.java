@@ -21,7 +21,7 @@ import session.WorkSession;
  */
 public class ProfesorHorarioComunService {
 
-    public static String service(GenericSession genericSession, ProfesorSession ps, String key)
+    public String service(GenericSession genericSession, ProfesorSession ps, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

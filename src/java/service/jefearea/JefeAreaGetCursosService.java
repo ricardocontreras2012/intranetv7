@@ -26,7 +26,7 @@ public class JefeAreaGetCursosService {
      * @param sem
      * @return
      */
-    public static String service(GenericSession genericSession, String key, Integer agno, Integer sem) {
+    public String service(GenericSession genericSession, String key, Integer agno, Integer sem) {
 
         WorkSession ws = genericSession.getWorkSession(key);
 

@@ -28,7 +28,7 @@ import static java.lang.Integer.valueOf;
  */
 public class AlumnoSolicitudEnableFormService {
 
-    public static String service(GenericSession genericSession, String key, Integer tipo) {
+    public String service(GenericSession genericSession, String key, Integer tipo) {
         String retValue = null;
 
         WorkSession ws = genericSession.getWorkSession(key);

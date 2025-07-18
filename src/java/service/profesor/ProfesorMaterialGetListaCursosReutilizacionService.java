@@ -34,7 +34,7 @@ public final class ProfesorMaterialGetListaCursosReutilizacionService {
      * @param keyParent
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, String keyParent) {
+    public String service(GenericSession genericSession, String key, String keyParent) {
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
         ws.setKeyParent(keyParent);
         genericSession.getSessionMap().put(key, ws);
@@ -51,7 +51,7 @@ public final class ProfesorMaterialGetListaCursosReutilizacionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    private static Integer getMinAgno(GenericSession genericSession, String key) {
+    private Integer getMinAgno(GenericSession genericSession, String key) {
         return genericSession.getWorkSession(key).getCarga().stream()
                 .mapToInt(curso -> curso.getId().getCurAgno())
                 .min()
@@ -65,7 +65,7 @@ public final class ProfesorMaterialGetListaCursosReutilizacionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    private static List<Curso> getLista(GenericSession genericSession, String key) {   
+    private List<Curso> getLista(GenericSession genericSession, String key) {   
         CursoId cursoActualId = genericSession.getWorkSession(key).getCurso().getId();
         Integer agnoInicio = getMinAgno(genericSession, key) - 4;
         List<Curso> cursoList = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).findCursosMaterialHistorico(

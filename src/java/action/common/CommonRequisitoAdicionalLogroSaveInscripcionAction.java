@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRequisitoAdicionalLogroSaveInscripcionService.service;
+import service.common.CommonRequisitoAdicionalLogroSaveInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -30,7 +30,7 @@ public final class CommonRequisitoAdicionalLogroSaveInscripcionAction extends Ac
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), tema, fecha, getKey());
+        return new CommonRequisitoAdicionalLogroSaveInscripcionService().service(getGenericSession(), tema, fecha, getKey());
     }
 
     /**

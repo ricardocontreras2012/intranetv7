@@ -21,7 +21,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public final class CommonSolicitudDownLoadFileService {
     
-    public static ActionInputStreamUtil service(GenericSession genericSession, Integer documento, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, Integer documento, String key) throws Exception {
         String name;
         InputStream input;
         String description;

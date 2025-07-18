@@ -28,7 +28,7 @@ public class JefeAreaLoginService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         CommonUtil.setAgnoSemAct(ws);
         ws.setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findxUser(genericSession.getRut(), genericSession.getUserType()));

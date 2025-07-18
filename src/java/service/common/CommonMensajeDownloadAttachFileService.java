@@ -19,7 +19,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  * @version 7, 24/05/2012
  */
 public final class CommonMensajeDownloadAttachFileService {        
-    public static ActionInputStreamUtil service(Integer correl, String file, String key) throws Exception
+    public ActionInputStreamUtil service(Integer correl, String file, String key) throws Exception
     {
         InputStream input;
         String contentType;

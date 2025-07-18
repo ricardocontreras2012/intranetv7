@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorActaGetActaService.service;
+import service.profesor.ProfesorActaGetActaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class ProfesorActaGetActaAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getKey());
+        return new ProfesorActaGetActaService().service(this, getGenericSession(), getKey());
     }
 }

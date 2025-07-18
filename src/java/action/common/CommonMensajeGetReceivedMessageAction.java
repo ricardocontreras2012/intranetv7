@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeGetReceivedMessageService.service;
+import service.common.CommonMensajeGetReceivedMessageService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 
@@ -28,7 +28,7 @@ public final class CommonMensajeGetReceivedMessageAction extends ActionValidatio
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonMensajeGetReceivedMessageService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

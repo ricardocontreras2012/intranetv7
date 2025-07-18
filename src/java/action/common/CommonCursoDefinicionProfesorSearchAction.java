@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionProfesorSearchService.service;
+import service.common.CommonCursoDefinicionProfesorSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -14,7 +14,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public class CommonCursoDefinicionProfesorSearchAction extends ActionCommonSupport {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     private String materno;
     private String nombre;
     private String paterno;
@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), rut, paterno, materno, nombre, getKey());
+        return new CommonCursoDefinicionProfesorSearchService().service(getGenericSession(), rut, paterno, materno, nombre, getKey());
     }
 
     public void setMaterno(String materno) {
@@ -45,5 +45,5 @@ private static final long serialVersionUID = 1L;
 
     public void setRut(Integer rut) {
         this.rut = rut;
-    }    
+    }
 }

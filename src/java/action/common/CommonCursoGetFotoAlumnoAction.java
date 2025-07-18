@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonCursoGetFotoAlumnoService.service;
+import service.common.CommonCursoGetFotoAlumnoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonCursoGetFotoAlumnoAction extends ActionValidationPosSup
      */
     @Override
     public String action() throws Exception {
-        image = service(getGenericSession(), getPos(), getKey());
+        image = new CommonCursoGetFotoAlumnoService().service(getGenericSession(), getPos(), getKey());
 
         return SUCCESS;
     }

@@ -29,7 +29,7 @@ import infrastructure.util.common.CommonEncuestaUtil;
  */
 public final class AlumnoEncuestaDocente5taSemanaService {
 
-    public static String search(GenericSession genericSession, String key) {
+    public  String search(GenericSession genericSession, String key) {
         return CommonAlumnoUtil.searchEncuestaDocente(genericSession, key, "V");
     }
 
@@ -41,7 +41,7 @@ public final class AlumnoEncuestaDocente5taSemanaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String showFormService(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
+    public  String showFormService(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
         return CommonEncuestaUtil.showFormService(genericSession, alumnoSession, key);
     }
 
@@ -54,7 +54,7 @@ public final class AlumnoEncuestaDocente5taSemanaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String saveService(GenericSession genericSession, Map<String, String[]> parameters, AlumnoSession alumnoSession, String key) {
+    public  String saveService(GenericSession genericSession, Map<String, String[]> parameters, AlumnoSession alumnoSession, String key) {
         Integer correl;
 
         WorkSession ws = genericSession.getWorkSession(key);

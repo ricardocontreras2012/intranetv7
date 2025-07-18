@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoInscripcionAddInscripcionService.service;
+import service.alumno.AlumnoInscripcionAddInscripcionService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class AlumnoInscripcionAddInscripcionAction extends ActionValidatio
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getPos(), getKey());
+        return new AlumnoInscripcionAddInscripcionService().service(this, getGenericSession(), getPos(), getKey());
     }
 
     /**

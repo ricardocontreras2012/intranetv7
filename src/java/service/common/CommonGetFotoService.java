@@ -23,7 +23,7 @@ public final class CommonGetFotoService {
      * @param genericSession Sesion de trabajo.
      * @return
      */
-    public static InputStream service(GenericSession genericSession) {
+    public InputStream service(GenericSession genericSession) {
 
         return getFoto(genericSession.getRut(), genericSession.getDv());
     }

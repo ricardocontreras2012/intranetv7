@@ -7,10 +7,8 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonMensajeDownLoadImgService.getFileServiceAction;
-import static service.common.CommonMensajeDownLoadImgService.getNameServiceAction;
 import infrastructure.support.action.common.ActionCommonSupport;
-import infrastructure.util.FormatUtil;
+import service.common.CommonMensajeDownLoadImgService;
 
 /**
  * Procesa el action mapeado del request a la URL CommonMensajeDownLoadFile
@@ -36,9 +34,7 @@ public final class CommonMensajeDownLoadImgAction extends ActionCommonSupport {
         String retValue = SUCCESS;
         
         try {
-            name = getNameServiceAction(getGenericSession(), getKey());
-            contentType = FormatUtil.getMimeType(name);
-            inputStream = getFileServiceAction(name);
+            inputStream = new CommonMensajeDownLoadImgService().service(this, getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));
@@ -68,4 +64,12 @@ public final class CommonMensajeDownLoadImgAction extends ActionCommonSupport {
     public String getName() {
         return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    } 
 }

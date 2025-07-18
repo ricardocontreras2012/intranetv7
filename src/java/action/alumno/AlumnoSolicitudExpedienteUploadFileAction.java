@@ -2,7 +2,7 @@ package action.alumno;
 
 import infrastructure.support.action.post.ActionPostCommonSupport;
 import java.io.File;
-import static service.alumno.AlumnoSolicitudExpedienteUploadFileService.service;
+import service.alumno.AlumnoSolicitudExpedienteUploadFileService;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +30,7 @@ public class AlumnoSolicitudExpedienteUploadFileAction extends ActionPostCommonS
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
+        return new AlumnoSolicitudExpedienteUploadFileService().service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
     }
 
     public File[] getUpload() {

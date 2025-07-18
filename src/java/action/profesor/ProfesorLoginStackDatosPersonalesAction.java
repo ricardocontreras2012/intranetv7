@@ -1,7 +1,7 @@
 
 package action.profesor;
 
-import static service.profesor.ProfesorLoginStackDatosPersonalesService.service;
+import service.profesor.ProfesorLoginStackDatosPersonalesService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -21,6 +21,6 @@ public class ProfesorLoginStackDatosPersonalesAction  extends ActionCommonSuppor
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getProfesorSession(sesion), getKey());
+        return new ProfesorLoginStackDatosPersonalesService().service(getGenericSession(), Manager.getProfesorSession(sesion), getKey());
     }    
 }

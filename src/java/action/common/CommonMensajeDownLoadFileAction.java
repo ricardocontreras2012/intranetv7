@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonMensajeDownLoadFileService.service;
+import service.common.CommonMensajeDownLoadFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -21,7 +21,7 @@ public final class CommonMensajeDownLoadFileAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
     private Integer file;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
 
     /**
@@ -34,7 +34,7 @@ public final class CommonMensajeDownLoadFileAction extends ActionCommonSupport {
                 
         String retValue = SUCCESS;
         try { 
-        ais = service(getGenericSession(), file, getKey());
+        ais = new CommonMensajeDownLoadFileService().service(getGenericSession(), file, getKey());
 
        } catch (Exception e) {
             retValue = "exception";

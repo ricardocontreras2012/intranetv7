@@ -32,7 +32,7 @@ public class CommonCursoDefinicionModifyCursoService {
      * @return Action status
      * @throws java.lang.Exception
      */
-    public static String service(GenericSession genericSession, Integer pos, Integer cupo, String inicio, String termino,
+    public String service(GenericSession genericSession, Integer pos, Integer cupo, String inicio, String termino,
             String diurno, String vesp, String key) throws Exception{
         WorkSession ws = genericSession.getWorkSession(key);
 

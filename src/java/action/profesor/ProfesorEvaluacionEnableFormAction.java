@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorEvaluacionEnableFormService.service;
+import service.profesor.ProfesorEvaluacionEnableFormService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class ProfesorEvaluacionEnableFormAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new ProfesorEvaluacionEnableFormService().service(getGenericSession(), getKey());
     }
 }

@@ -28,7 +28,7 @@ public final class CommonAlumnoGetCarreraService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(CommonAlumnoGetCarreraAction action, GenericSession gs, Integer pos,
+    public String service(CommonAlumnoGetCarreraAction action, GenericSession gs, Integer pos,
             String key)
             {
                 

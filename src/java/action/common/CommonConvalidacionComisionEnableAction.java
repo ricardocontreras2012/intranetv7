@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonConvalidacionComisionEnableService.service;
+import service.common.CommonConvalidacionComisionEnableService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -26,6 +26,6 @@ public class CommonConvalidacionComisionEnableAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return service(Manager.getSecretariaSession(sesion));
+        return new CommonConvalidacionComisionEnableService().service(Manager.getSecretariaSession(sesion));
     }
 }

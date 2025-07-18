@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRCurricularCreateMencionService.service;
+import service.common.CommonRCurricularCreateMencionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public class CommonRCurricularCreateMencionAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        retValue = service(getGenericSession(), getKey(), menCodCar, menPrefijo, menPlanComun, menNom);
+        retValue = new CommonRCurricularCreateMencionService().service(getGenericSession(), getKey(), menCodCar, menPrefijo, menPlanComun, menNom);
         return retValue;
     }
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonInscripcionAdmRemoveNominaDerService.service;
+import service.common.CommonInscripcionAdmRemoveNominaDerService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -25,6 +25,6 @@ public class CommonInscripcionAdmRemoveNominaDerAction extends ActionParameterAw
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getJefeCarreraSession(sesion) , getMapParameters(), getKey());
+        return new CommonInscripcionAdmRemoveNominaDerService().service(getGenericSession(), Manager.getJefeCarreraSession(sesion) , getMapParameters(), getKey());
     }
 }

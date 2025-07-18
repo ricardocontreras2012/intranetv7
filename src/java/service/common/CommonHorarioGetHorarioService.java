@@ -21,7 +21,7 @@ import static infrastructure.util.common.CommonHorarioUtil.getHorario;
  */
 public final class CommonHorarioGetHorarioService {
 
-    public static String service(GenericSession genericSession, String id, String key) {
+    public String service(GenericSession genericSession, String id, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioList(ws.getCursoList()));

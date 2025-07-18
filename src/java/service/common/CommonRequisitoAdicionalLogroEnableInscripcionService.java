@@ -33,7 +33,7 @@ public final class CommonRequisitoAdicionalLogroEnableInscripcionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer pos, Integer agno, Integer sem, String key) {
+    public String service(GenericSession genericSession, Integer pos, Integer agno, Integer sem, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setTrequisitoLogroAdicional(null);
@@ -62,7 +62,7 @@ public final class CommonRequisitoAdicionalLogroEnableInscripcionService {
      *
      * @return
      */
-    private static List<TrequisitoLogroAdicional> getListaTrequisitoLogroAdicional(
+    private List<TrequisitoLogroAdicional> getListaTrequisitoLogroAdicional(
             List<RequisitoLogroAdicional> lTrequisitoLogroAdicionalPlan) {
         Set<TrequisitoLogroAdicional> sTrequisitoLogroAdicional = new HashSet<>(0);
 

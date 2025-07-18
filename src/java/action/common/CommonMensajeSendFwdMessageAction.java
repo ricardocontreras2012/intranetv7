@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeSendFwdMessageService.service;
+import service.common.CommonMensajeSendFwdMessageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonMensajeSendFwdMessageAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonMensajeSendFwdMessageService().service(getGenericSession(), getKey());
     }
 }

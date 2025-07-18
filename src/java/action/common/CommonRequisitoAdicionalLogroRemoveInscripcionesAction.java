@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRequisitoAdicionalLogroRemoveInscripcionesService.service;
+import service.common.CommonRequisitoAdicionalLogroRemoveInscripcionesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonRequisitoAdicionalLogroRemoveInscripcionesAction extend
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonRequisitoAdicionalLogroRemoveInscripcionesService().service(getGenericSession(), getMapParameters(), getKey());
     }
 
     /**

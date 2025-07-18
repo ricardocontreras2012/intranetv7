@@ -24,7 +24,7 @@ public class CommonRCurricularGetMencionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).findAll());
         ws.setUnidadList(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).findAll());

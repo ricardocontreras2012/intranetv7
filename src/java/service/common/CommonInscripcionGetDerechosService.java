@@ -24,7 +24,7 @@ public final class CommonInscripcionGetDerechosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
 
         aluCar.setIsAlumnoPropio(genericSession);       

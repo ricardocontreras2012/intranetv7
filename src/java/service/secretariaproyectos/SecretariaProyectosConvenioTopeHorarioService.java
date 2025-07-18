@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
  */
 public class SecretariaProyectosConvenioTopeHorarioService {
 
-    public static String service(GenericSession genericSession, Integer rut, String dia,
+    public String service(GenericSession genericSession, Integer rut, String dia,
             String fechaInicio, String fechaTermino,
             String horaInicio, String horaTermino, String key) {
         

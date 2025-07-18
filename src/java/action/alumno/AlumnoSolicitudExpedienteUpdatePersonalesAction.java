@@ -27,7 +27,7 @@ public class AlumnoSolicitudExpedienteUpdatePersonalesAction extends ActionCommo
     @Override
     public String action() {
         try {
-            AlumnoSolicitudExpedienteUpdatePersonalesService.service(
+            new AlumnoSolicitudExpedienteUpdatePersonalesService().service(
                     this, getGenericSession(), this.email, this.emailLaboral,
                     this.direccion, this.comuna, this.fono, this.estadoCivil
             );

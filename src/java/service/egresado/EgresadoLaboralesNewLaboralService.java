@@ -33,7 +33,7 @@ public class EgresadoLaboralesNewLaboralService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, EgresadoSession es, String key) {
+    public String service(GenericSession genericSession, EgresadoSession es, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         es.setAreaTrabajoList(ContextUtil.getAreaTrabajoList());
         AlumnoEmpleadorPersistence alumnoEmpleadorPersistence

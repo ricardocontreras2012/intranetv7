@@ -52,7 +52,7 @@ public class CommonMatriculaExportNominaService {
      * @return
      * @throws java.lang.Exception
      */
-    public static InputStream service(GenericSession genericSession, String content, String key) throws Exception {
+    public InputStream service(GenericSession genericSession, String content, String key) throws Exception {
 
         InputStream retValue = null;
         String file;

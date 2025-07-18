@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAlumnoGetLogInscripcionService.service;
+import service.common.CommonAlumnoGetLogInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonAlumnoGetLogInscripcionAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {              
-        return service(getGenericSession(), getKey(), this.sem, this.agno);
+        return new CommonAlumnoGetLogInscripcionService().service(getGenericSession(), getKey(), this.sem, this.agno);
     }
 
     public void setSem(Integer sem) {

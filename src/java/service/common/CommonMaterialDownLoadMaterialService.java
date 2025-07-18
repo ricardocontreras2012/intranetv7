@@ -24,7 +24,7 @@ import static infrastructure.util.common.CommonMaterialUtil.getMaterial;
  */
 public final class CommonMaterialDownLoadMaterialService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, List<Tmaterial> lista, Integer tipo,
+    public ActionInputStreamUtil service(GenericSession genericSession, List<Tmaterial> lista, Integer tipo,
             Integer material, String key)
             throws Exception {
         String name;

@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  */
 public class CommonCursoDefinicionSaveTransversalesService {
 
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Obtener la lista de cursos
@@ -67,7 +67,7 @@ public class CommonCursoDefinicionSaveTransversalesService {
      * transversales.
      * @param action La operación a realizar (agregar o eliminar transversal).
      */
-    private static void procesarTransversales(List<Curso> cursoList, Map<String, String[]> parameters,
+    private void procesarTransversales(List<Curso> cursoList, Map<String, String[]> parameters,
             boolean agregar, Consumer<CursoId> action) {
         cursoList.stream()
                 .filter(curso -> (agregar && parameters.get("ck_" + cursoList.indexOf(curso)) != null)

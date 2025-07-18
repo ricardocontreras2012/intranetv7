@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonEncuestaGetCursosService.service;
+import service.common.CommonEncuestaGetCursosService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonEncuestaGetCursosAction extends ActionCommonAgnoSemSupp
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getAgno(), getSem(), pos, getKey());
+        return new CommonEncuestaGetCursosService().service(getGenericSession(), getAgno(), getSem(), pos, getKey());
     }
 
     /**

@@ -16,7 +16,7 @@ import infrastructure.util.common.CommonRandomUtil;
  */
 public class CommonGetKeyProfesorService {
 
-    public static String service(GenericSession genericSession) { 
+    public String service(GenericSession genericSession) { 
         String keyProf = CommonRandomUtil.getKeySession();
         WorkSession wsProfesor = new WorkSession(genericSession.getUserType());
 

@@ -32,7 +32,7 @@ public final class CommonRequisitoAdicionalLogroRemoveInscripcionesService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         InscripcionAdicionalLogroPersistence inscripcionAdicionalPersistence
                 = ContextUtil.getDAO().getInscripcionAdicionalLogroPersistence(ActionUtil.getDBUser());

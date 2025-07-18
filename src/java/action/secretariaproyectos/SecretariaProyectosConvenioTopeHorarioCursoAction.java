@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import static service.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioCursoService.service;
+import service.secretariaproyectos.SecretariaProyectosConvenioTopeHorarioCursoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public class SecretariaProyectosConvenioTopeHorarioCursoAction extends ActionCom
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), rut, curso, fechaInicio, fechaTermino, getKey());
+        return new SecretariaProyectosConvenioTopeHorarioCursoService().service(getGenericSession(), rut, curso, fechaInicio, fechaTermino, getKey());
     }
 
     public void setRut(Integer rut) {

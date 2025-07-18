@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoPracticaDeleteFileService.service;
+import service.alumno.AlumnoPracticaDeleteFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -15,12 +15,11 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public class AlumnoPracticaDeleteFileAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-
     private Integer doc;
 
     @Override
     public String action() {
-        return service( getGenericSession(), doc, getKey());
+        return new AlumnoPracticaDeleteFileService().service( getGenericSession(), doc, getKey());
     }    
 
     public void setDoc(Integer doc) {

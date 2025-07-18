@@ -29,7 +29,7 @@ public final class CommonAlumnoGetAsistenciaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String retValue = SUCCESS;
 

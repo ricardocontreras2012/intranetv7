@@ -17,7 +17,7 @@ import static infrastructure.util.common.CommonHorarioUtil.getHorario;
  * @author Javier Frez V.
  */
 public class CommonCursoGetBoletinHorarioService {
-    public static String service(GenericSession genericSession, String key, Integer pos) {
+    public String service(GenericSession genericSession, String key, Integer pos) {
         WorkSession ws = genericSession.getWorkSession(key);
         CommonAlumnoUtil.loadAluCar(genericSession, ws, ws.getAluCarList().get(pos));
         ws.setNombre(CommonAlumnoUtil.getNombreSocial(ws.getAluCar().getAlumno()));

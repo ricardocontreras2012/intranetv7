@@ -38,7 +38,7 @@ public final class ProfesorMaterialReuseMaterialesService {
      * @return El estado de la acción (SUCCESS si el proceso fue exitoso).
      * @throws Exception Si ocurre algún error durante el servicio.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key, String keyParent)
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key, String keyParent)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = genericSession.getWorkSession(keyParent).getCurso();
@@ -75,7 +75,7 @@ public final class ProfesorMaterialReuseMaterialesService {
      * @param curso El curso al que se va a asociar el material.
      * @param materialPersistence La persistencia para almacenar el material.
      */
-    private static void doReuse(MaterialApoyo materialBase, String userTypeShort, Curso curso,
+    private void doReuse(MaterialApoyo materialBase, String userTypeShort, Curso curso,
             MaterialApoyoPersistence materialPersistence) {
         Integer folio = CommonSequenceUtil.getDocumentSeq();
         MaterialApoyo material = new MaterialApoyo();

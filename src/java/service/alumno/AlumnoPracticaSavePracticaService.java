@@ -48,7 +48,7 @@ public final class AlumnoPracticaSavePracticaService {
      * @return Action status.
      * @throws java.lang.Exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer rutEmp, String fonoEmp, String labor, Integer comuna,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer rutEmp, String fonoEmp, String labor, Integer comuna,
             String direccion, Integer rutAut, String fonoAut, String email, String calidad, String inicio, String termino, String key) throws Exception {
 
             WorkSession ws = genericSession.getWorkSession(key);

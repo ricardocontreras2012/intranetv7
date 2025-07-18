@@ -21,7 +21,7 @@ public final class CommonSessionHelpService {
      * @param genericSession
      * @return
      */
-    public static String service(GenericSession genericSession) {
+    public String service(GenericSession genericSession) {
         String ret;
 
         out.println("En help====>>" + genericSession.getCurrentAction());

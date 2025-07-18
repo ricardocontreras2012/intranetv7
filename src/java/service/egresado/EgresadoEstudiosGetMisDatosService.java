@@ -33,7 +33,7 @@ public final class EgresadoEstudiosGetMisDatosService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, EgresadoSession es, String key) {
+    public String service(GenericSession genericSession, EgresadoSession es, String key) {
         WorkSession             ws             = genericSession.getWorkSession(key);
         FichaEstudioPersistence fichaEstudioPersistence =
             ContextUtil.getDAO().getFichaEstudioPersistence(ActionUtil.getDBUser());

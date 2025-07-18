@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeReceiveListaService.service;
+import service.common.CommonMensajeReceiveListaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonMensajeReceiveListaAction extends ActionParameterAwareS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonMensajeReceiveListaService().service(getGenericSession(), getMapParameters(), getKey());
     }
 
     /**

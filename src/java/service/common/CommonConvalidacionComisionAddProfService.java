@@ -18,7 +18,7 @@ import session.WorkSession;
  */
 public class CommonConvalidacionComisionAddProfService {
 
-    public static void service(GenericSession genericSession, SecretariaSession secreSession, String key)
+    public void service(GenericSession genericSession, SecretariaSession secreSession, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

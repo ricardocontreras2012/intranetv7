@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoGetCursosxAgnoSemEncuestaService.service;
+import service.common.CommonCursoGetCursosxAgnoSemEncuestaService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**
@@ -26,7 +26,7 @@ public class CommonCursoGetCursosxAgnoSemEncuestaAction extends ActionValidation
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new CommonCursoGetCursosxAgnoSemEncuestaService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
     }
 
     /**

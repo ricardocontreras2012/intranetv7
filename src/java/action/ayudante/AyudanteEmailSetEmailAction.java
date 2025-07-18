@@ -5,7 +5,7 @@
  */
 package action.ayudante;
 
-import static service.ayudante.AyudanteEmailSetEmailService.service;
+import service.ayudante.AyudanteEmailSetEmailService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class AyudanteEmailSetEmailAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), email);
+        return new AyudanteEmailSetEmailService().service(this, getGenericSession(), email);
     }
 
     /**

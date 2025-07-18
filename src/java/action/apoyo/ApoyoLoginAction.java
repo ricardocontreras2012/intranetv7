@@ -5,7 +5,7 @@
  */
 package action.apoyo;
 
-import static service.apoyo.ApoyoLoginService.service;
+import service.apoyo.ApoyoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class ApoyoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getSesion(), getKey());
+        return new ApoyoLoginService().service(getSesion(), getKey());
     }
 }

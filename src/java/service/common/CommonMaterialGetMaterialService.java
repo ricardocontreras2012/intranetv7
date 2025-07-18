@@ -29,7 +29,7 @@ public final class CommonMaterialGetMaterialService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(GenericSession genericSession, Integer tipo, Integer material, String key)
+    public String service(GenericSession genericSession, Integer tipo, Integer material, String key)
             throws Exception {
         
         WorkSession ws = genericSession.getWorkSession(key);

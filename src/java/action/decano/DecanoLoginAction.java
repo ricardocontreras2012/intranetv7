@@ -5,7 +5,7 @@
  */
 package action.decano;
 
-import static service.decano.DecanoLoginService.service;
+import service.decano.DecanoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class DecanoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {  
-        return service(getGenericSession(), getKey());
+        return new DecanoLoginService().service(getGenericSession(), getKey());
     }
 }

@@ -16,7 +16,7 @@ import infrastructure.util.ContextUtil;
  */
 public class SecretariaProyectosConvenioGetCursosService {
 
-    public static String service(GenericSession genericSession, Integer rut,
+    public String service(GenericSession genericSession, Integer rut,
             Integer agno, Integer sem, String proyecto, String key) {
         genericSession.getWorkSession(key).setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(rut, agno, sem, proyecto));
      

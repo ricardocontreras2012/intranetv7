@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoSolicitudEnableFormService.service;
+import service.alumno.AlumnoSolicitudEnableFormService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,7 +25,7 @@ public class AlumnoSolicitudEnableFormAction  extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), tipo);
+        return new AlumnoSolicitudEnableFormService().service(getGenericSession(), getKey(), tipo);
     }
    
     public void setTipo(Integer tipo) {

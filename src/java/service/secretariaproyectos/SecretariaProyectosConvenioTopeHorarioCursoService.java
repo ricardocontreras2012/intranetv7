@@ -20,7 +20,7 @@ import infrastructure.util.ContextUtil;
  */
 public class SecretariaProyectosConvenioTopeHorarioCursoService {
 
-    public static String service(GenericSession genericSession, Integer rut, Integer pos, String inicio, String termino, String key) {
+    public String service(GenericSession genericSession, Integer rut, Integer pos, String inicio, String termino, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ActionResultSupport actionSupport = new ActionResultSupport();
         Curso curso = ws.getCursoList().get(pos);

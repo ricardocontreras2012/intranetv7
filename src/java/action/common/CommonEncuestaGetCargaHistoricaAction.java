@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonEncuestaGetCargaHistoricaService.service;
+import service.common.CommonEncuestaGetCargaHistoricaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonEncuestaGetCargaHistoricaAction extends ActionCommonSup
      */
     @Override
     public String action() throws Exception {        
-        return service(getGenericSession(), getKey());
+        return new CommonEncuestaGetCargaHistoricaService().service(getGenericSession(), getKey());
     }
 
     public String getTipo() {

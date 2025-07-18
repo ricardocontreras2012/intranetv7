@@ -25,7 +25,7 @@ public final class CommonAsignaturaGetAsignaturasService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         genericSession.getWorkSession(key).setAsignaturaList(ContextUtil.getDAO().getAsignaturaPersistence(ActionUtil.getDBUser()).find("P"));
 
         return SUCCESS;

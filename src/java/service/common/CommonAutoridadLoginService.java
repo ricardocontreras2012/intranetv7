@@ -36,7 +36,7 @@ public final class CommonAutoridadLoginService {
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String userType, String key) {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String userType, String key) {
         // Verificación de parámetros necesarios
         if (Stream.of(sesion, key, rut, passwd, userType).anyMatch(Objects::isNull)) {
             return retReLogin();
@@ -92,7 +92,7 @@ public final class CommonAutoridadLoginService {
      * @param key La clave de sesión.
      * @param profesorPersistence El objeto de persistencia de profesor.
      */
-    private static void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorPersistence profesorPersistence) {
+    private void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorPersistence profesorPersistence) {
         WorkSession ws = new WorkSession(userType);
 
         genericSession.setSessionMap(new HashMap<>());

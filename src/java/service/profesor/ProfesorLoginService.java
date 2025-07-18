@@ -28,7 +28,7 @@ public final class ProfesorLoginService {
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificar si la sesión y la clave son válidas
         if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
             return retReLogin();

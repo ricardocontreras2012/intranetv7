@@ -8,7 +8,7 @@
 package action.common;
 
 
-import static service.common.CommonMaterialRemoveMaterialesService.service;
+import service.common.CommonMaterialRemoveMaterialesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 
@@ -32,7 +32,7 @@ public final class CommonMaterialRemoveMaterialesAction extends ActionParameterA
     public String action() throws Exception {
         tipoMaterial = getGenericSession().getWorkSession(getKey()).getTipoMaterial();
 
-        return service(this.getGenericSession(), getMapParameters(), getKey());
+        return new CommonMaterialRemoveMaterialesService().service(this.getGenericSession(), getMapParameters(), getKey());
     }
 
     /**

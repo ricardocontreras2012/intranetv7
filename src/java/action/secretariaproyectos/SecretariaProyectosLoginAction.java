@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import static service.secretariaproyectos.SecretariaProyectosLoginService.service;
+import service.secretariaproyectos.SecretariaProyectosLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class SecretariaProyectosLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getSesion());
+        return new SecretariaProyectosLoginService().service(getSesion());
     }
 }

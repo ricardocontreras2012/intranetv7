@@ -54,7 +54,7 @@ public final class ProfesorReporteSaveNewReporteService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String fecha, String horario, String objetivos, String contenido,
             String observaciones, String metodo, File upload, String uploadFileName,
             String recupera, String key)

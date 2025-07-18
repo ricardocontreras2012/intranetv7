@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorMaterialGetListaCursosReutilizacionService.service;
+import service.profesor.ProfesorMaterialGetListaCursosReutilizacionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -31,6 +31,6 @@ public final class ProfesorMaterialGetListaCursosReutilizacionAction extends Act
         String keyParent = getKey();
 
         setKey(getKeySession());
-        return service(getGenericSession(), getKey(), keyParent);
+        return new ProfesorMaterialGetListaCursosReutilizacionService().service(getGenericSession(), getKey(), keyParent);
     }
 }

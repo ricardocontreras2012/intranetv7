@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonProfesorGetProfesorService.service;
+import service.common.CommonProfesorGetProfesorService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonProfesorGetProfesorAction extends ActionValidationPosSu
     @Override
     public String action() throws Exception {
         actionCall = getGenericSession().getWorkSession(getKey()).getActionCall();
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonProfesorGetProfesorService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

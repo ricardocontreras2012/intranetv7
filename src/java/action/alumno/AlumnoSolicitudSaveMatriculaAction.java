@@ -6,7 +6,7 @@
 package action.alumno;
 
 import java.io.File;
-import static service.alumno.AlumnoSolicitudSaveMatriculaService.service;
+import service.alumno.AlumnoSolicitudSaveMatriculaService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public class AlumnoSolicitudSaveMatriculaAction extends ActionPostCommonSupport{
      */
     @Override
     public String action() throws Exception {            
-        return service(this, getGenericSession(), upload,  uploadFileName, causa, getKey());
+        return new AlumnoSolicitudSaveMatriculaService().service(this, getGenericSession(), upload,  uploadFileName, causa, getKey());
     } 
 
     public void setUpload(File[] upload) {

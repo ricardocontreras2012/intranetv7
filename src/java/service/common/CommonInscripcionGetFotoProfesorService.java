@@ -25,7 +25,7 @@ import static infrastructure.util.common.CommonUsersUtil.getFotoProfesor;
  */
 public final class CommonInscripcionGetFotoProfesorService {
 
-     public static ActionInputStreamUtil service(GenericSession genericSession, Integer pos, String source, String key) {
+     public ActionInputStreamUtil service(GenericSession genericSession, Integer pos, String source, String key) {
         return new ActionInputStreamUtil("1.jpg", "image/jpeg", getInput(genericSession, pos, source, key));
     }
 
@@ -39,7 +39,7 @@ public final class CommonInscripcionGetFotoProfesorService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(GenericSession genericSession, Integer pos, String source, String key) {
+    private InputStream getInput(GenericSession genericSession, Integer pos, String source, String key) {
         Curso curso;
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
 

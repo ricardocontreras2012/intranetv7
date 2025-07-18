@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
  */
 public class RegistradorCurricularCertificadosEmitirGlosaService {
 
-    public static String service(RegistradorCurricularCertificadosEmitirGlosaAction action, GenericSession genericSession, RegistradorSession rs, Integer pos, String glosa) {
+    public String service(RegistradorCurricularCertificadosEmitirGlosaAction action, GenericSession genericSession, RegistradorSession rs, Integer pos, String glosa) {
         rs.setCertificadoList(ContextUtil.getDAO().getSolicitudCertificadoCarritoPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
 
         SolicitudCertificadoCarrito csc = rs.getCertificadoList().get(pos);

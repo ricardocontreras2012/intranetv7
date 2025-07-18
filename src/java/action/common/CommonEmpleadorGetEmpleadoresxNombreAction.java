@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonEmpleadorGetEmpleadoresxNombreService.service;
+import service.common.CommonEmpleadorGetEmpleadoresxNombreService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,7 +25,7 @@ public class CommonEmpleadorGetEmpleadoresxNombreAction extends ActionCommonSupp
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), nombre);
+        return new CommonEmpleadorGetEmpleadoresxNombreService().service(getGenericSession(), getKey(), nombre);
     }
 
     /**

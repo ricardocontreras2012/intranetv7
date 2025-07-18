@@ -42,7 +42,7 @@ public final class EgresadoLoginService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String password,
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String password,
             String key) {
         String retValue = SUCCESS;
         String user = ActionUtil.getDBUser();
@@ -102,7 +102,7 @@ public final class EgresadoLoginService {
      * @param aluCar
      * @param key LLave para acceder a los datos de la sesion.
      */
-    public static void getComplemento(GenericSession genericSession, AluCar aluCar, String key) {
+    public void getComplemento(GenericSession genericSession, AluCar aluCar, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         Alumno alumno = aluCar.getAlumno();
 

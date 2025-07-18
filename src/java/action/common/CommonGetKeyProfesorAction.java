@@ -24,7 +24,7 @@ public final class CommonGetKeyProfesorAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        keyProf = CommonGetKeyProfesorService.service(getGenericSession());
+        keyProf = new CommonGetKeyProfesorService().service(getGenericSession());
               
         return SUCCESS;
     }

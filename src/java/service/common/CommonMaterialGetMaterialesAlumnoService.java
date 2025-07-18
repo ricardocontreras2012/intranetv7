@@ -33,7 +33,7 @@ public class CommonMaterialGetMaterialesAlumnoService {
      *
      * @throws Exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key, Integer pos)
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key, Integer pos)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();

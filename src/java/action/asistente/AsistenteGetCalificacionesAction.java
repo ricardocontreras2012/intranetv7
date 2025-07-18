@@ -5,7 +5,7 @@
  */
 package action.asistente;
 
-import static service.asistente.AsistenteGetCalificacionesService.service;
+import service.asistente.AsistenteGetCalificacionesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,7 +26,7 @@ public class AsistenteGetCalificacionesAction extends ActionParameterAwareSuppor
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new AsistenteGetCalificacionesService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }
 

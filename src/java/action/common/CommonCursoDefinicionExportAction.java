@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonCursoDefinicionExportService.service;
+import service.common.CommonCursoDefinicionExportService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -18,13 +18,13 @@ import infrastructure.util.ActionInputStreamUtil;
 public class CommonCursoDefinicionExportAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     @Override
     public String action() throws Exception {                
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), getKey());                       
+            ais = new CommonCursoDefinicionExportService().service(getGenericSession(), getKey());                       
             
         } catch (Exception e) {
             retValue = "exception";

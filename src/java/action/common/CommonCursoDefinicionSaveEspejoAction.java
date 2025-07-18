@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionSaveEspejoService.service;
+import service.common.CommonCursoDefinicionSaveEspejoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -20,7 +20,7 @@ public class CommonCursoDefinicionSaveEspejoAction extends ActionCommonSupport {
 
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), transversal, cerrado, getKey());
+        return new CommonCursoDefinicionSaveEspejoService().service(getGenericSession(), transversal, cerrado, getKey());
     }
 
     public void setTransversal(Integer transversal) {

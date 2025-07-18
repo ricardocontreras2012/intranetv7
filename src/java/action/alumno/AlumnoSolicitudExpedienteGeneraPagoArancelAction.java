@@ -17,9 +17,7 @@ import service.alumno.AlumnoSolicitudExpedienteGeneraPagoArancelService;
  */
 public class AlumnoSolicitudExpedienteGeneraPagoArancelAction extends  ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-     AlumnoSolicitudExpedienteGeneraPagoArancelService cert = new AlumnoSolicitudExpedienteGeneraPagoArancelService();
-
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -31,7 +29,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelAction extends  ActionCom
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = cert.service(getGenericSession(), getKey());
+            ais = new AlumnoSolicitudExpedienteGeneraPagoArancelService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

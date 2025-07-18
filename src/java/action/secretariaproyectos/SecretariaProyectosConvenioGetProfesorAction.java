@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import static service.secretariaproyectos.SecretariaProyectosConvenioGetProfesorService.service;
+import service.secretariaproyectos.SecretariaProyectosConvenioGetProfesorService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,7 +26,7 @@ public class SecretariaProyectosConvenioGetProfesorAction extends ActionCommonSu
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), rut, getKey());
+        return new SecretariaProyectosConvenioGetProfesorService().service(getGenericSession(), rut, getKey());
     }
 
     public void setRut(Integer rut) {

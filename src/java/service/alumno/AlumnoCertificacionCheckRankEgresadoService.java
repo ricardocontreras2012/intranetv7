@@ -20,7 +20,7 @@ import infrastructure.util.ContextUtil;
  */
 public class AlumnoCertificacionCheckRankEgresadoService {
 
-    public static String service(GenericSession genericSession, AlumnoSession as,
+    public String service(GenericSession genericSession, AlumnoSession as,
             String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);

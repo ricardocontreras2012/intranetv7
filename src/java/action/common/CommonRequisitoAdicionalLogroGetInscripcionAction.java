@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRequisitoAdicionalLogroGetInscripcionService.service;
+import service.common.CommonRequisitoAdicionalLogroGetInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonRequisitoAdicionalLogroGetInscripcionAction extends Act
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), pos, getKey());
+        return new CommonRequisitoAdicionalLogroGetInscripcionService().service(getGenericSession(), pos, getKey());
     }
 
     /**

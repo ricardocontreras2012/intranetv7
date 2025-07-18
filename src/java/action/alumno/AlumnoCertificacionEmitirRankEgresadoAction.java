@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class AlumnoCertificacionEmitirRankEgresadoAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    AlumnoCertificacionEmitirRankEgresadoService serviceCert = new AlumnoCertificacionEmitirRankEgresadoService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
     private Integer correl;
 
     /**
@@ -31,7 +30,7 @@ public class AlumnoCertificacionEmitirRankEgresadoAction extends ActionCommonSup
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = serviceCert.service(correl);
+            ais = new AlumnoCertificacionEmitirRankEgresadoService().service(correl);
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

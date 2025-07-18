@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoMisDatosSaveService.service;
+import service.alumno.AlumnoMisDatosSaveService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -31,7 +31,7 @@ public final class AlumnoMisDatosSaveAction extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        return service(this, getGenericSession(), this.email,  this.emailLaboral, this.direccion,
+        return new AlumnoMisDatosSaveService().service(this, getGenericSession(), this.email,  this.emailLaboral, this.direccion,
                 this.comuna, this.fono, this.estadoCivil);
     }
 

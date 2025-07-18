@@ -5,7 +5,7 @@
  */
 package action.jefearea;
 
-import static service.jefearea.JefeAreaGetCursosService.service;
+import service.jefearea.JefeAreaGetCursosService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**
@@ -15,7 +15,7 @@ import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 public class JefeAreaGetCursosAction extends ActionCommonAgnoSemSupport {
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getAgno(), getSem());
+        return new JefeAreaGetCursosService().service(getGenericSession(), getKey(), getAgno(), getSem());
     }
 
 }

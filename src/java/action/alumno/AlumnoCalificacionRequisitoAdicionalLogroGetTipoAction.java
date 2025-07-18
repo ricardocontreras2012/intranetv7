@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCalificacionRequisitoAdicionalLogroGetTipoService.service;
+import  service.alumno.AlumnoCalificacionRequisitoAdicionalLogroGetTipoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class AlumnoCalificacionRequisitoAdicionalLogroGetTipoAction extend
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getPos(), getKey());
+        return new AlumnoCalificacionRequisitoAdicionalLogroGetTipoService().service(this, getGenericSession(), getPos(), getKey());
     }
 
     /**

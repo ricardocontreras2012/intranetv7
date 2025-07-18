@@ -5,7 +5,7 @@
  */
 package action.consulta;
 
-import static service.consulta.ConsultaMisDatosGetMisDatosService.service;
+import service.consulta.ConsultaMisDatosGetMisDatosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class ConsultaMisDatosGetMisDatosAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession());
+        return new ConsultaMisDatosGetMisDatosService().service(getGenericSession());
     }
 }

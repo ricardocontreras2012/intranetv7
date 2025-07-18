@@ -26,7 +26,7 @@ public class AlumnoInscripcionSwapInscripcionService {
      * @param key
      * @return
      */
-    public static String service(GenericSession genericSession, AlumnoSession as, Integer pos, String key) {
+    public String service(GenericSession genericSession, AlumnoSession as, Integer pos, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();

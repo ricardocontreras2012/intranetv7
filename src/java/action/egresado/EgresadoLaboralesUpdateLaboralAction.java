@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLaboralesUpdateLaboralService.service;
+import service.egresado.EgresadoLaboralesUpdateLaboralService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -48,7 +48,7 @@ public class EgresadoLaboralesUpdateLaboralAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), this.correlAluEmp, this.correlFicha, this.dependiente,
+        return new EgresadoLaboralesUpdateLaboralService().service(this, getGenericSession(), this.correlAluEmp, this.correlFicha, this.dependiente,
                 this.rutEmpleador, this.tipoEmpleador, this.indepActividadEconomica, this.areaTrabajo, this.lugar,
                 this.region, this.comuna, this.otroLugar, this.cargo, this.tipoTrabajo, this.sueldo,
                 this.desdeAgno, this.desdeMes, this.hastaAgno, this.hastaMes,

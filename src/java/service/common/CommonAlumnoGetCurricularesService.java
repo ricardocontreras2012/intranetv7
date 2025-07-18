@@ -28,7 +28,7 @@ public final class CommonAlumnoGetCurricularesService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         ws.setCcalidad(ContextUtil.getDAO().getCcalidadPersistence(ActionUtil.getDBUser()).findxCalidad(

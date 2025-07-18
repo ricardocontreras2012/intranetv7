@@ -63,7 +63,7 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
      *
      * @return
      */
-    public ActionInputStreamUtil service(Integer correl){
+    public ActionInputStreamUtil service(Integer correl) {
 
         Map<String, String> mapParams = CommonCertificacionUtil.getParams(correl);
 
@@ -82,7 +82,7 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
         return new ActionInputStreamUtil(name, description, getInput(correl, genera, type, session, tramite, agno, sem, obs, folio, name, CommonCertificacionUtil.getPagoString(monto)));
     }
 
-    public static InputStream getInput(Integer correl, Integer genera, String type, String session, Integer codTramite, Integer agnoCert, Integer semCert, String obs,
+    private InputStream getInput(Integer correl, Integer genera, String type, String session, Integer codTramite, Integer agnoCert, Integer semCert, String obs,
             Integer folio, String name, String pagado) {
 
         try {
@@ -99,7 +99,7 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
                 Unidad facultad = aluCar.getUnidadFacultad();
                 String urlWeb = facultad.getUniUrl();
                 Date fecha = getSysdate();
-                String fechaString =  DateUtil.getFechaCiudad(fecha);
+                String fechaString = DateUtil.getFechaCiudad(fecha);
 
                 if (fecha != null) {
                     Tramite tramite = ContextUtil.getTramiteMap().get(codTramite);
@@ -164,8 +164,8 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
                         //// 
 
                         Files.createSymbolicLink(Paths.get(PATH_ATTACH_MESSAGES + name), Paths.get(PATH_CERT + name));
-                        
-                        CommonSimpleMessageUtil.send(name, session, aluCar.getAlumno().getAluRut(), aluCar.getAlumno().getNombreMensaje(), genera, "Registrador Curricular", "RC","",
+
+                        CommonSimpleMessageUtil.send(name, session, aluCar.getAlumno().getAluRut(), aluCar.getAlumno().getNombreMensaje(), genera, "Registrador Curricular", "RC", "",
                                 "", "C2", "CERTIFICADO NO IMPEDIMENTO ACADÉMICO", "TM_CERT");
 
                         // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
@@ -197,9 +197,8 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
-            Integer folio, String codigo, String facultad)
-            {
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
+            Integer folio, String codigo, String facultad) {
 
         Paragraph parrafo1 = newParrafo(149, 80);
         parrafo1.setAlignment(ALIGN_LEFT);
@@ -249,8 +248,7 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
-            {
+    private void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web) {
         Paragraph parrafo1 = newParrafo(0, 40);
 
         parrafo1.setAlignment(ALIGN_JUSTIFIED);
@@ -273,6 +271,6 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
         parrafo4.setAlignment(ALIGN_LEFT);
         parrafo4.add(new Chunk(fecha, normal));
         document.add(parrafo4);
-    }  
+    }
 
 }

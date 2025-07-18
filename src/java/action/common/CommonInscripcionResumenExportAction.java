@@ -10,7 +10,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import static infrastructure.util.common.CommonMaterialUtil.getContentDispositionSemAgno;
 import java.io.InputStream;
-import static service.common.CommonInscripcionResumenExportService.service;
+import service.common.CommonInscripcionResumenExportService;
 
 
 public final class CommonInscripcionResumenExportAction extends ActionCommonSupport {
@@ -30,7 +30,7 @@ public final class CommonInscripcionResumenExportAction extends ActionCommonSupp
     public String action() throws Exception {        
         description = AppStaticsUtil.XLS_MIME;
         contentDisposition = getContentDispositionSemAgno(getGenericSession(), getKey(), "RESUMEN_INSCRIPCION");
-        excelFile = service(getGenericSession(), contentDisposition,
+        excelFile = new CommonInscripcionResumenExportService().service(getGenericSession(), contentDisposition,
                 getKey());
 
         return SUCCESS;

@@ -40,7 +40,7 @@ public final class CommonMaterialModifyMaterialService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
             String uploadFileName, String caption, String key)
             throws Exception {   
         
@@ -67,7 +67,7 @@ public final class CommonMaterialModifyMaterialService {
      * @param key LLave para aceder a los datos de la sesion.
      * @throws Exception
      */
-    private static void doChangeFile(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
+    private void doChangeFile(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
             String uploadFileName, String caption, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
@@ -93,7 +93,7 @@ public final class CommonMaterialModifyMaterialService {
      * @param caption
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void doUpdate(GenericSession genericSession, Integer tipo, String caption, String key) {
+    private void doUpdate(GenericSession genericSession, Integer tipo, String caption, String key) {
         MaterialApoyo materialApoyo = genericSession.getWorkSession(key).getMaterial();
 
         if (materialApoyo != null

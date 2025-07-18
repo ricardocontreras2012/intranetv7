@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
  */
 public class ProfesorActaRectificatoriaGetNominaService {
 
-    public static String service(GenericSession genericSession, String key)
+    public String service(GenericSession genericSession, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

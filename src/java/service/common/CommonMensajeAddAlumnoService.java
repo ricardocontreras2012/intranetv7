@@ -28,7 +28,7 @@ public final class CommonMensajeAddAlumnoService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String keyParent, String key) {
+    public String service(GenericSession genericSession, String keyParent, String key) {
         Alumno alumno = genericSession.getWorkSession(key).getAlumno();
         MensajeNodeSupport newNode = new MensajeNodeSupport();
 

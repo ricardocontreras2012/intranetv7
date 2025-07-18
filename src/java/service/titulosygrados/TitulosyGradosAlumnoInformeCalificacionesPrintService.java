@@ -317,7 +317,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
      * @param lista
      * @return
      */
-    private static List<CalificacionCertificacionSupport> delExentos(List<CalificacionCertificacionSupport> lista) {
+    private List<CalificacionCertificacionSupport> delExentos(List<CalificacionCertificacionSupport> lista) {
         /*Iterator<CalificacionCertificacionSupport> iter = lista.iterator();
 
         while (iter.hasNext()) {

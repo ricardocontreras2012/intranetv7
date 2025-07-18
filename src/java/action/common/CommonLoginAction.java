@@ -7,7 +7,7 @@ package action.common;
 
 import infrastructure.support.action.post.ActionPostCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
-import static service.common.CommonLoginService.*;
+import service.common.CommonLoginService;
 
 /**
  * Procesa el action mapeado del request a la URL CommonLogin
@@ -33,7 +33,7 @@ public final class CommonLoginAction extends ActionPostCommonSupport {
     @Override
     public String action() throws Exception {
         this.key = getKeySession();
-        actionCall = service(userType);
+        actionCall = new CommonLoginService().service(userType);
         
         return SUCCESS;
     }

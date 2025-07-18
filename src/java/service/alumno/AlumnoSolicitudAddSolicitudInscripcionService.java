@@ -50,7 +50,7 @@ public final class AlumnoSolicitudAddSolicitudInscripcionService {
      * @return El resultado de la operación, en este caso siempre devuelve
      * SUCCESS.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         // Obtener la sesión de trabajo para acceder a los datos actuales del usuario
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
@@ -105,7 +105,7 @@ public final class AlumnoSolicitudAddSolicitudInscripcionService {
      * @return La descripción del motivo correspondiente al código
      * proporcionado.
      */
-    private static String getMotivoDes(WorkSession ws, int codigo) {
+    private String getMotivoDes(WorkSession ws, int codigo) {
         Optional<TmotivoSolicitudInscripcion> motivoOpt = ws.getTmotivoSolicitudInscripcionList().stream()
                 .filter(tmotivo -> tmotivo.getTmsiCod() == codigo)
                 .findFirst();

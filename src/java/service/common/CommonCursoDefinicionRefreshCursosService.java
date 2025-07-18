@@ -26,7 +26,7 @@ public final class CommonCursoDefinicionRefreshCursosService {
      * @param key
      * @return Action status
      */
-    public static String service(GenericSession genericSession,
+    public String service(GenericSession genericSession,
             Map<String, String[]> parameters, String key) {
 
         CommonCursoUtil.getCursos(genericSession, "*", key); //Cerrados, Transversales y Espejos

@@ -37,7 +37,7 @@ public class CommonInscripcionAdmChangeNominaIzqService {
         * @param key LLave para acceder a los datos de la sesion.
         * @return Action status
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, JefeCarreraSession jcSession, Map<String, String[]> parameters, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, JefeCarreraSession jcSession, Map<String, String[]> parameters, String key) {
         int retValue = 0;
         String result;
         WorkSession ws = genericSession.getWorkSession(key);

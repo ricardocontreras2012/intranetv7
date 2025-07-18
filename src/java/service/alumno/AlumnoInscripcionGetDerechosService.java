@@ -23,7 +23,7 @@ public final class AlumnoInscripcionGetDerechosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         genericSession.getWorkSession(key).getAluCar().setDerechosAlumno();
 
         return SUCCESS;

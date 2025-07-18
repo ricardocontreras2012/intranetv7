@@ -5,8 +5,7 @@
  */
 package action.common;
 
-import static java.lang.System.out;
-import static service.common.CommonSessionHelpService.service;
+import service.common.CommonSessionHelpService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,8 +27,7 @@ public final class CommonSessionHelpAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        page = service(getGenericSession());
-        out.println("page=" + page);
+        page = new CommonSessionHelpService().service(getGenericSession());
         return SUCCESS;
     }
 

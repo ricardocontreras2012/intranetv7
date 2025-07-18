@@ -33,7 +33,7 @@ public final class VerificacionCertificadoService {
      * @param verificador
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesionMap, Integer folio,
+    public String service(ActionCommonSupport action, Map<String, Object> sesionMap, Integer folio,
             String verificador) {
 
         VerificacionCertificadoSession session;       

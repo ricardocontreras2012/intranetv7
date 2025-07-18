@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonInscripcionAdministracionGetNominaIzqService.service;
+import service.common.CommonInscripcionAdministracionGetNominaIzqService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -24,8 +24,7 @@ public class CommonInscripcionAdministracionGetNominaIzqAction extends ActionCom
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception { 
-        
-        return service(Manager.getJefeCarreraSession(sesion));
+    public String action() throws Exception {       
+        return new CommonInscripcionAdministracionGetNominaIzqService().service(Manager.getJefeCarreraSession(sesion));
     }
 }

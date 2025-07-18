@@ -14,7 +14,7 @@ import session.WorkSession;
  * @author rcontreras
  */
 public class TitulosyGradosNominaNewService {
-    public static String service(GenericSession genericSession,
+    public String service(GenericSession genericSession,
            String key)
             throws Exception {
 

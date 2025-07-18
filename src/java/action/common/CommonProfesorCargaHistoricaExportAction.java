@@ -7,7 +7,7 @@ package action.common;
 
 import java.io.InputStream;
 
-import static service.common.CommonProfesorCargaHistoricaExportService.service;
+import service.common.CommonProfesorCargaHistoricaExportService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.common.CommonMaterialUtil;
@@ -37,7 +37,7 @@ public final class CommonProfesorCargaHistoricaExportAction extends ActionCommon
     public String action() throws Exception {
         description = AppStaticsUtil.XLS_MIME;
         contentDisposition = CommonMaterialUtil.getContentDispositionProfesor(getGenericSession(), getKey(),"CARGA HISTÓRICA");
-        excelFile = service(getGenericSession(), contentDisposition, getKey());
+        excelFile = new CommonProfesorCargaHistoricaExportService().service(getGenericSession(), contentDisposition, getKey());
         return SUCCESS;
     }
    

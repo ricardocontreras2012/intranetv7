@@ -40,7 +40,7 @@ public class RegistradorCurricularActaGenerarIntercambioService {
      * @return
      * @throws Exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer sem, Integer agno, String key)
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer sem, Integer agno, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();

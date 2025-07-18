@@ -58,7 +58,7 @@ public class AlumnoSolicitudExpedienteGeneraSolicitudGeneroService {
         return new ActionInputStreamUtil(name, description, input);
     }
     
-    private static InputStream getInput(GenericSession genericSession,
+    private InputStream getInput(GenericSession genericSession,
             String key, String name)
             throws Exception {
     

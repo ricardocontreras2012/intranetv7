@@ -81,7 +81,7 @@ public final class AlumnoCertificacionEmitirLogroEnTramiteService {
         return new ActionInputStreamUtil(name, description, getInput(correl, tCert, genera, type, session, tramite, obs, folio, name, desPrint, logro, certCorrel, CommonCertificacionUtil.getPagoString(monto)));
     }
 
-    public static InputStream getInput(Integer correl, Integer tCert, Integer genera, String type, String session, Integer codTramite, String obs,
+    private InputStream getInput(Integer correl, Integer tCert, Integer genera, String type, String session, Integer codTramite, String obs,
             Integer folio, String name, String desPrint, String logro, Integer certCorrel, String pagado) {
 
         try {
@@ -178,7 +178,7 @@ public final class AlumnoCertificacionEmitirLogroEnTramiteService {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
             Integer folio, String codigo, String facultad)
             {
 
@@ -230,7 +230,7 @@ public final class AlumnoCertificacionEmitirLogroEnTramiteService {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
+    private void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
             {
         Paragraph parrafo1 = newParrafo(0, 40);
         parrafo1.setAlignment(ALIGN_JUSTIFIED);

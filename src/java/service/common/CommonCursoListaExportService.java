@@ -49,7 +49,7 @@ public final class CommonCursoListaExportService {
      * @return
      * @throws java.lang.Exception
      */
-    public static InputStream service(GenericSession genericSession, String content, String key) throws Exception {
+    public InputStream service(GenericSession genericSession, String content, String key) throws Exception {
 
         InputStream retValue = null;
         String file;
@@ -209,7 +209,7 @@ public final class CommonCursoListaExportService {
      * @param fila
      * @param notasFinales
      */
-    private static void getGrid(Curso curso, XSSFSheet hoja, int fila) {        
+    private void getGrid(Curso curso, XSSFSheet hoja, int fila) {        
         List<AluCar> nomina = curso.getNominaAlumnos();
         AtomicInteger filaAux = new AtomicInteger(fila);  // Usamos AtomicInteger para poder incrementarlo dentro de la lambda
 
@@ -228,7 +228,7 @@ public final class CommonCursoListaExportService {
         });
     }
 
-    private static void crearCelda(XSSFRow rowExcel, int columna, String valor) {
+    private void crearCelda(XSSFRow rowExcel, int columna, String valor) {
         XSSFCell celda = rowExcel.createCell(columna);
         XSSFRichTextString texto = new XSSFRichTextString(valor);
         celda.setCellValue(texto);

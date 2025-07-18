@@ -39,7 +39,7 @@ public class TitulosyGradosNominaResolucionPrintService {
     static Font TNR_10 =           FontFactory.getFont(FontFactory.TIMES_ROMAN, 10);
     static Font TNR_10B = FontFactory.getFont(FontFactory.TIMES_BOLD, 10);
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
         InputStream input;
         String name;
         String description;
@@ -54,7 +54,7 @@ public class TitulosyGradosNominaResolucionPrintService {
         return new ActionInputStreamUtil(name, description, input);
     }
 
-    private static InputStream getInput(GenericSession genericSession, String nomina, Integer agno,
+    private InputStream getInput(GenericSession genericSession, String nomina, Integer agno,
             String key)
             throws Exception {
    
@@ -297,7 +297,7 @@ public class TitulosyGradosNominaResolucionPrintService {
         return pdfStream;        
     }
 
-    private static void agregarCelda(PdfPTable table, String texto) {
+    private void agregarCelda(PdfPTable table, String texto) {
         PdfPCell cell = new PdfPCell(new Phrase(texto, TNR_8));
         cell.setHorizontalAlignment(Element.ALIGN_LEFT);  // Alineación centrada
         cell.setPadding(2);  // Agregar un poco de padding para mejorar la apariencia

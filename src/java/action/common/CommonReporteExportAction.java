@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonReporteExportService.service;
+import service.common.CommonReporteExportService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -29,7 +29,7 @@ public class CommonReporteExportAction extends ActionParameterAwareSupport {
     public String action() throws Exception {        
          String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), getMapParameters(),getKey());
+            ais = new CommonReporteExportService().service(getGenericSession(), getMapParameters(),getKey());
         
         } catch (Exception e) {
             retValue = "exception";

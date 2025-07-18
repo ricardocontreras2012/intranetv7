@@ -24,7 +24,7 @@ public class CommonEncuestaGetCargaHistoricaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setCursoProfesorList(ContextUtil.getDAO().getCursoProfesorPersistence(ActionUtil.getDBUser()).getCursosEncuesta(ws.getProfesor().getProfRut()));

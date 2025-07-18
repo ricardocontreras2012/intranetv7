@@ -26,7 +26,7 @@ public class AlumnoExamenAPMostrarService {
      * @param key La clave para acceder a la sesión de trabajo específica.
      * @return El resultado de la acción (SUCCESS si el proceso fue exitoso).
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         // Recupera la sesión de trabajo usando la clave proporcionada
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();

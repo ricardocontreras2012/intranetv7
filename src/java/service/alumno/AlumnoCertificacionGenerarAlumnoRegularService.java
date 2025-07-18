@@ -25,7 +25,7 @@ import infrastructure.util.common.CommonCertificacionUtil;
  */
 public class AlumnoCertificacionGenerarAlumnoRegularService {
 
-    public static String service(AlumnoCertificacionGenerarAlumnoRegularAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, Integer periodo, String obs, String key) {
+    public String service(AlumnoCertificacionGenerarAlumnoRegularAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, Integer periodo, String obs, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         MatriculaHistoricoId id = ws.getMatriculaList().get(periodo).getId();
         String obsAux = (obs == null) ? "" : obs;

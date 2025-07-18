@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  */
 public class AlumnoCertificacionGetConfirmacionPagoService {
 
-    public static String service(AlumnoCertificacionGetConfirmacionPagoAction action, String transaction, Integer amount, String payment_method, String isApproved) {
+    public String service(AlumnoCertificacionGetConfirmacionPagoAction action, String transaction, Integer amount, String payment_method, String isApproved) {
         String vRet = "error";
         String obs;
         String estado;

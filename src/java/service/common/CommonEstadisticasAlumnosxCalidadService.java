@@ -32,7 +32,7 @@ public final class CommonEstadisticasAlumnosxCalidadService {
      * @param calidad
      * @return
      */
-    public static List<Ccalidad> service(Map<String, Object> report, Integer agno, Integer calidad){
+    public List<Ccalidad> service(Map<String, Object> report, Integer agno, Integer calidad){
         CcalidadPersistence ccalidadPersistence
                 = ContextUtil.getDAO().getCcalidadPersistence(ActionUtil.getDBUser());
         List<Ccalidad> nomina = ccalidadPersistence.findxCalidad(agno, calidad);

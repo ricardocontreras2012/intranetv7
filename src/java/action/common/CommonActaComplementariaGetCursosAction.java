@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonActaComplementariaGetCursosService.service;
+import service.common.CommonActaComplementariaGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonActaComplementariaGetCursosAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getKey(), agnoCal,
+        return new CommonActaComplementariaGetCursosService().service(this, getGenericSession(), getKey(), agnoCal,
                 semCal);
     }
 

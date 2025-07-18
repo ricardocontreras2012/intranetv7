@@ -6,7 +6,7 @@
 package action.common;
 
 import java.util.List;
-import static service.common.CommonInscripcionAdmChangeNominaDerService.service;
+import service.common.CommonInscripcionAdmChangeNominaDerService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import java.util.Collection;
@@ -30,7 +30,7 @@ public class CommonInscripcionAdmChangeNominaDerAction extends ActionParameterAw
      */
     @Override
     public String action() throws Exception {
-        retValue = service(this, getGenericSession(), Manager.getJefeCarreraSession(sesion), getMapParameters(), getKey());
+        retValue = new CommonInscripcionAdmChangeNominaDerService().service(this, getGenericSession(), Manager.getJefeCarreraSession(sesion), getMapParameters(), getKey());
         errors = this.getActionErrors();
         errorMessages = this.getActionMessages();
         return retValue;

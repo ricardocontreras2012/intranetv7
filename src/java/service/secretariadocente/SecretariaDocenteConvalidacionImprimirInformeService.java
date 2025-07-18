@@ -82,7 +82,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         return new ActionInputStreamUtil(name, description, input);
     }
 
-    private static InputStream getInput(GenericSession genericSession, SecretariaSession secreSession,
+    private InputStream getInput(GenericSession genericSession, SecretariaSession secreSession,
             String key, String name, Integer folio)
             throws Exception {
 
@@ -134,7 +134,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         return CommonArchivoUtil.getFile(name, "cert");
     }
 
-    private static void putHeader(Document doc, PdfWriter writer, AluCar aluCar) {
+    private void putHeader(Document doc, PdfWriter writer, AluCar aluCar) {
 
         Alumno alumno = aluCar.getAlumno();
 
@@ -211,7 +211,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         doc.add(table);
     }
 
-    private static void putAsignaturas(String user, Document doc, AluCar aluCar, Integer correl) {
+    private void putAsignaturas(String user, Document doc, AluCar aluCar, Integer correl) {
         List<ConvalidacionSolicitudAsign> lAsign = ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(user).getPorConvalidar(aluCar, correl);
         PdfUtil.putBlank(doc);
         PdfPTable table = creaTabla();
@@ -240,7 +240,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         doc.add(table);
     }
 
-    private static void putComision(String user, Document doc, Integer correl) {
+    private void putComision(String user, Document doc, Integer correl) {
         List<ConvalidacionComisionProf> lProf = ContextUtil.getDAO().getConvalidacionComisionProfPersistence(user).find(correl);
 
         Paragraph dummy = new Paragraph("\n\n");
@@ -261,7 +261,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         }
     }
 
-    private static PdfPCell getPdfPCell(String txt, int align, Color bgColor) {
+    private PdfPCell getPdfPCell(String txt, int align, Color bgColor) {
         PdfPCell cell = new PdfPCell(new Phrase(txt, fontSmall));
         cell.setHorizontalAlignment(align);
         cell.setBorder(Rectangle.NO_BORDER);
@@ -269,7 +269,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         return cell;
     }
 
-    private static PdfPTable creaTabla() {
+    private PdfPTable creaTabla() {
         float[] columnWidths = {6, 25, 12, 10, 3, 7, 30};
 
         PdfPTable table = new PdfPTable(7);
@@ -293,7 +293,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         return table;
     }
 
-    public static class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

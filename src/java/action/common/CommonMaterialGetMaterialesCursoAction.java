@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMaterialGetMaterialesCursoService.service;
+import service.common.CommonMaterialGetMaterialesCursoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonMaterialGetMaterialesCursoAction extends ActionCommonSu
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getKey(), tipoMaterial);
+        return new CommonMaterialGetMaterialesCursoService().service(this, getGenericSession(), getKey(), tipoMaterial);
     }
 
     /**

@@ -55,7 +55,7 @@ import static infrastructure.util.common.CommonFacultadUtil.getNombrexAsign;
  */
 public final class ProfesorEvaluacionExportPlanillaService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, String key)
+    public ActionInputStreamUtil service(GenericSession genericSession, String key)
             throws Exception {
         String name;
         InputStream input;
@@ -75,7 +75,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
      * @return
      * @throws java.lang.Exception
      */
-    public static InputStream getInput(GenericSession genericSession, String name, String key) throws Exception {
+    public InputStream getInput(GenericSession genericSession, String name, String key) throws Exception {
 
         try {
             InputStream retValue = null;
@@ -346,7 +346,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
      * @param fila
      * @param notasFinales
      */
-    private static void getGrid(List<Evaluacion> evaluaciones, List<EvaluacionAlumno> planilla, XSSFWorkbook libro,
+    private void getGrid(List<Evaluacion> evaluaciones, List<EvaluacionAlumno> planilla, XSSFWorkbook libro,
             XSSFSheet hoja, int fila, boolean notasFinales, String modalidad) {
 
         Set<Alumno> nominaSet = new HashSet<>();
@@ -441,7 +441,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
      * @param alumno
      * @return
      */
-    private static String getEvaluacion(Evaluacion evaluacion, List<EvaluacionAlumno> planilla, Alumno alumno) {
+    private String getEvaluacion(Evaluacion evaluacion, List<EvaluacionAlumno> planilla, Alumno alumno) {
         return planilla.stream()
                 .filter(ea -> Objects.equals(ea.getAluCar().getAlumno(), alumno)
                 && Objects.equals(ea.getEvaluacion(), evaluacion))
@@ -455,7 +455,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
                 .orElse("");
     }
 
-    private static int getNumEvaluaciones(List<Evaluacion> lEvaluacion, int tipo) {
+    private int getNumEvaluaciones(List<Evaluacion> lEvaluacion, int tipo) {
         return (int) lEvaluacion.stream()
                 .filter(e -> e.getId().getEvalTeva() == tipo)
                 .count();

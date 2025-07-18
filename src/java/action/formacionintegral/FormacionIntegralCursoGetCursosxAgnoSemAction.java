@@ -5,7 +5,7 @@
  */
 package action.formacionintegral;
 
-import static service.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemService.service;
+import service.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**
@@ -23,7 +23,7 @@ public class FormacionIntegralCursoGetCursosxAgnoSemAction extends ActionCommonA
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getAgno(), getSem());
+        return new FormacionIntegralCursoGetCursosxAgnoSemService().service(getGenericSession(), getKey(), getAgno(), getSem());
     }   
 
     public String getActionCall() {

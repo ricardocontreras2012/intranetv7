@@ -49,7 +49,7 @@ public final class CommonMensajeSendMessageService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String tipo, String subject, String messageText, String page, String url,
             File[] upload, String[] uploadFileName,
             File imagen, String imagenFileName,
@@ -115,7 +115,7 @@ public final class CommonMensajeSendMessageService {
      * @param uploadFileName
      * @param mensaje
      */
-    private static void getAttachFiles(ActionCommonSupport action, File[] upload, String[] uploadFileName, Mensaje mensaje) throws Exception {
+    private void getAttachFiles(ActionCommonSupport action, File[] upload, String[] uploadFileName, Mensaje mensaje) throws Exception {
         mensaje.setMsgAttach("N");
 
         if (upload == null || upload.length == 0) {
@@ -151,7 +151,7 @@ public final class CommonMensajeSendMessageService {
         mensaje.setMensajeAttachList(attachList); // Establecer la lista de archivos adjuntos en el mensaje
     }
 
-    private static void getImageFile(ActionCommonSupport action, File imagen, String imagenFileName, Mensaje mensaje) {
+    private void getImageFile(ActionCommonSupport action, File imagen, String imagenFileName, Mensaje mensaje) {
 
         if (imagen != null) {
             Integer folio = CommonSequenceUtil.getDocumentSeq();

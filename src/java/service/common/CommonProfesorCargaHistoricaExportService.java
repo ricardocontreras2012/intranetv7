@@ -49,7 +49,7 @@ public final class CommonProfesorCargaHistoricaExportService {
      * @return
      * @throws java.lang.Exception
      */
-    public static InputStream service(GenericSession genericSession, String content, String key) throws Exception {
+    public InputStream service(GenericSession genericSession, String content, String key) throws Exception {
 
         Profesor prof = genericSession.getWorkSession(key).getProfesor();
         InputStream retValue = null;
@@ -189,7 +189,7 @@ public final class CommonProfesorCargaHistoricaExportService {
      * @param fila
      * @param notasFinales
      */
-    private static void getGrid(List<Curso> nomina, XSSFSheet hoja, int fila) {
+    private void getGrid(List<Curso> nomina, XSSFSheet hoja, int fila) {
         AtomicInteger filaAux = new AtomicInteger(fila);
 
         nomina.forEach(curso -> {

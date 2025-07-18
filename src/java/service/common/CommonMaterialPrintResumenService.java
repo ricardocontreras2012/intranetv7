@@ -34,7 +34,7 @@ public final class CommonMaterialPrintResumenService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return
      */
-    public static List<CursoResumenSupport> service(GenericSession genericSession,
+    public List<CursoResumenSupport> service(GenericSession genericSession,
             Map<String, Object> report, String format, String key) {
         WorkSession ws= genericSession.getWorkSession(key);
         List<CursoResumenSupport> nomina = ws.getResumenCurso();

@@ -39,7 +39,7 @@ public final class ProfesorMisDatosSaveService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, ProfesorSession ps, String emailUsach, String email,
+    public String service(ActionCommonSupport action, GenericSession genericSession, ProfesorSession ps, String emailUsach, String email,
             String fechaNac, String direccion, Integer comuna, String fono, String key)
             throws Exception {       
       

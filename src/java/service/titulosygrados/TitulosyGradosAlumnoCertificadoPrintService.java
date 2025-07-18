@@ -246,7 +246,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
         doc.add(firmaLinea3);               
     }
 
-    public static String formatearConPuntos(int numero) {
+    private String formatearConPuntos(int numero) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
         symbols.setGroupingSeparator('.');
         symbols.setDecimalSeparator(','); // aunque no se usa decimal aquí, es buena práctica setearlo

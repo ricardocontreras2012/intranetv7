@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeGetNumMessagesService.service;
+import service.common.CommonMensajeGetNumMessagesService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonMensajeGetNumMessagesAction extends ActionPostCommonSup
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonMensajeGetNumMessagesService().service(getGenericSession(), getKey());
     }
 }

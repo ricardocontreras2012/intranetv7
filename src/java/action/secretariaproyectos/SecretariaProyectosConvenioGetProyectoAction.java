@@ -6,7 +6,7 @@
 package action.secretariaproyectos;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import static service.secretariaproyectos.SecretariaProyectosConvenioGetProyectoService.service;
+import service.secretariaproyectos.SecretariaProyectosConvenioGetProyectoService;
 import session.Manager;
 
 /**
@@ -27,7 +27,7 @@ public class SecretariaProyectosConvenioGetProyectoAction  extends ActionCommonS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getProyectoSession(sesion), proyecto, getKey());
+        return new SecretariaProyectosConvenioGetProyectoService().service(getGenericSession(), Manager.getProyectoSession(sesion), proyecto, getKey());
     }   
 
     public void setProyecto(String proyecto) {

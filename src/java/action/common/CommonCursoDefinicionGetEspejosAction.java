@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionGetEspejosService.service;
+import service.common.CommonCursoDefinicionGetEspejosService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**
@@ -25,7 +25,7 @@ public class CommonCursoDefinicionGetEspejosAction extends ActionValidationAgnoS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos(), getAgno(), getSem(), actionCall);
+        return new CommonCursoDefinicionGetEspejosService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem(), actionCall);
     }
 
     /**

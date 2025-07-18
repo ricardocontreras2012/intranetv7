@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLoginSeleccionarIngresoService.service;
+import service.egresado.EgresadoLoginSeleccionarIngresoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class EgresadoLoginSeleccionarIngresoAction extends ActionValidatio
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new EgresadoLoginSeleccionarIngresoService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

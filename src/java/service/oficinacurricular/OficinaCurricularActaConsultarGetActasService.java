@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
  */
 public class OficinaCurricularActaConsultarGetActasService {
 
-    public static String service(GenericSession genericSession, String key)
+    public String service(GenericSession genericSession, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         ActaCalificacionPersistence actaPersistence

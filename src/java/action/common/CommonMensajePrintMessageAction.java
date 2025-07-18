@@ -21,8 +21,7 @@ public final class CommonMensajePrintMessageAction extends ActionPostValidationS
 
     private static final long serialVersionUID = 1L;
     private String tipo;
-    CommonMensajePrintMessageService service = new CommonMensajePrintMessageService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -33,7 +32,7 @@ public final class CommonMensajePrintMessageAction extends ActionPostValidationS
     public String action() {
         String retValue = SUCCESS; 
         try {
-            ais = service.service(getGenericSession(), getPos(), tipo, getKey());
+            ais = new CommonMensajePrintMessageService().service(getGenericSession(), getPos(), tipo, getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

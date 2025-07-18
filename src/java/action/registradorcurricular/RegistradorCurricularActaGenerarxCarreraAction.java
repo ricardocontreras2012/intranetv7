@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularActaGenerarxCarreraService.service;
+import service.registradorcurricular.RegistradorCurricularActaGenerarxCarreraService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -30,7 +30,7 @@ public final class RegistradorCurricularActaGenerarxCarreraAction extends Action
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), agno, sem,
+        return new RegistradorCurricularActaGenerarxCarreraService().service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), agno, sem,
                 getKey());
     }
 

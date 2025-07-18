@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionCheckLogroEnTramiteService.service;
+import service.alumno.AlumnoCertificacionCheckLogroEnTramiteService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -24,7 +24,7 @@ public class AlumnoCertificacionCheckLogroEnTramiteAction extends ActionValidati
      */
     @Override
     public String action() {   
-        return service(Manager.getAlumnoSession(sesion), getPos());
+        return new AlumnoCertificacionCheckLogroEnTramiteService().service(Manager.getAlumnoSession(sesion), getPos());
     }
 
     @Override

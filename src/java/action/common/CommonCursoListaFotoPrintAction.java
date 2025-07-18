@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class CommonCursoListaFotoPrintAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    CommonCursoListaFotoPrintService report = new CommonCursoListaFotoPrintService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -30,7 +29,7 @@ public class CommonCursoListaFotoPrintAction extends ActionCommonSupport {
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = report.service(getGenericSession(), getKey());
+            ais = new CommonCursoListaFotoPrintService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

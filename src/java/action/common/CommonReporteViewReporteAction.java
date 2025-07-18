@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.profesor.ProfesorReporteModifyReporteService.service;
+import service.profesor.ProfesorReporteModifyReporteService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonReporteViewReporteAction extends ActionValidationPosSup
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), sesionReporte, getKey());
+        return new ProfesorReporteModifyReporteService().service(getGenericSession(), sesionReporte, getKey());
     }
 
     /**

@@ -48,7 +48,7 @@ public final class CommonActaGetActasCarreraService {
      * @return El estado de la acción, indicando si se ejecutó correctamente.
      *         En este caso, siempre devuelve el valor de éxito (SUCCESS).
      */
-    public static String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
+    public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
 
         // Recupera la sesión de trabajo utilizando la llave proporcionada
         WorkSession ws = genericSession.getWorkSession(key);

@@ -6,7 +6,7 @@
 package action.alumno;
 
 import infrastructure.support.action.post.ActionPostCommonSupport;
-import static service.alumno.AlumnoSolicitudExpedienteAddSolicitudService.service;
+import service.alumno.AlumnoSolicitudExpedienteAddSolicitudService;
 
 /**
  *
@@ -26,7 +26,7 @@ public class AlumnoSolicitudExpedienteAddSolicitudAction extends ActionPostCommo
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getKey());
+        return new AlumnoSolicitudExpedienteAddSolicitudService().service(this, getGenericSession(), getKey());
     } 
 
    /*public void setCausa(String causa) {

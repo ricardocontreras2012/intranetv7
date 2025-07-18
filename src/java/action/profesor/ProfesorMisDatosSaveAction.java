@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorMisDatosSaveService.service;
+import service.profesor.ProfesorMisDatosSaveService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -33,7 +33,7 @@ public final class ProfesorMisDatosSaveAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), Manager.getProfesorSession(sesion), emailUsach, email, fechaNac, direccion, comuna, fono, getKey());
+        return new ProfesorMisDatosSaveService().service(this, getGenericSession(), Manager.getProfesorSession(sesion), emailUsach, email, fechaNac, direccion, comuna, fono, getKey());
     }
 
     public void setComuna(Integer comuna) {

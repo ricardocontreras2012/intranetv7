@@ -34,7 +34,7 @@ public class EgresadoEstudiosViewEstudioService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, EgresadoSession es, Integer correl, String key) {
+    public String service(GenericSession genericSession, EgresadoSession es, Integer correl, String key) {
         WorkSession             ws             = genericSession.getWorkSession(key);
         FichaEstudioPersistence fichaEstudioPersistence =
             ContextUtil.getDAO().getFichaEstudioPersistence(ActionUtil.getDBUser());

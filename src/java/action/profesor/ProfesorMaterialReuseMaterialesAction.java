@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorMaterialReuseMaterialesService.service;
+import service.profesor.ProfesorMaterialReuseMaterialesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -33,7 +33,7 @@ public final class ProfesorMaterialReuseMaterialesAction extends ActionParameter
 
         setKey(getGenericSession().getWorkSession(getKey()).getKeyParent());
 
-        return service(getGenericSession(), getMapParameters(), keyAux, getKey());
+        return new ProfesorMaterialReuseMaterialesService().service(getGenericSession(), getMapParameters(), keyAux, getKey());
     }
 
     /**

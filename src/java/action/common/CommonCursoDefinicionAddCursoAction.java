@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionAddCursoService.service;
+import service.common.CommonCursoDefinicionAddCursoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -36,7 +36,7 @@ public final class CommonCursoDefinicionAddCursoAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), asign, elect, electivo, coord, secc, cupo, inicio, termino, diurno, vespertino, getKey());
+        return new CommonCursoDefinicionAddCursoService().service(getGenericSession(), asign, elect, electivo, coord, secc, cupo, inicio, termino, diurno, vespertino, getKey());
     }
 
     public void setAsign(Integer asign) {

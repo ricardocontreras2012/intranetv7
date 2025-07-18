@@ -19,7 +19,7 @@ import static infrastructure.util.common.CommonUsersUtil.getFoto;
  */
 public final class CommonAyudanteGetFotoService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, String key) {
+    public ActionInputStreamUtil service(GenericSession genericSession, String key) {
         InputStream input;
         WorkSession ws = genericSession.getWorkSession(key);
         input = getFoto(ws.getAyudante().getAyuRut(), ws.getAyudante().getAyuDv());

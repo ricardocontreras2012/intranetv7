@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularLoginService.service;
+import service.registradorcurricular.RegistradorCurricularLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class RegistradorCurricularLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getSesion(), getKey());
+        return new RegistradorCurricularLoginService().service(getSesion(), getKey());
     }
 }

@@ -19,7 +19,7 @@ import infrastructure.util.common.CommonCursoUtil;
  */
 public class CommonCursoDefinicionSaveEspejoService {
 
-    public static String service(GenericSession genericSession, Integer transversal, Integer cerrado, String key) {
+    public String service(GenericSession genericSession, Integer transversal, Integer cerrado, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         CursoId ct = ws.getCursoTransversalList().get(transversal).getId();

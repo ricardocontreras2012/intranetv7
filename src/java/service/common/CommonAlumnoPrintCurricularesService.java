@@ -29,7 +29,7 @@ public final class CommonAlumnoPrintCurricularesService extends CommonAlumnoPrin
         putHeader2(document, aluCar);
     }
 
-    private static void putHeader2(Document doc, AluCar aluCar) throws DocumentException {
+    private void putHeader2(Document doc, AluCar aluCar) throws DocumentException {
         PdfPTable table = getTableTwoCols();
         // Datos académicos adicionales
         addRow(table, "Calidad:", aluCar.getTcalidad().getTcaDescrip());

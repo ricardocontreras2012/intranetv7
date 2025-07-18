@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAsistenciaSaveNewAsistenciaService.service;
+import service.common.CommonAsistenciaSaveNewAsistenciaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonAsistenciaSaveNewAsistenciaAction extends ActionParamet
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey(),
+        return new CommonAsistenciaSaveNewAsistenciaService().service(getGenericSession(), getMapParameters(), getKey(),
                 fechaAsistencia);
     }
 

@@ -16,7 +16,7 @@ import infrastructure.util.common.CommonCursoUtil;
  * @author Administrador
  */
 public class CommonCursoGetCursosxAgnoSemEncuestaService {
-    public static String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
+    public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);

@@ -18,7 +18,7 @@ import static infrastructure.util.common.CommonAyudanteUtil.getAyudantePersona;
  */
 public class CommonCursoDefinicionAyudanteSearchService {
 
-    public static String service(GenericSession genericSession, Integer rut, String paterno, String materno,
+    public String service(GenericSession genericSession, Integer rut, String paterno, String materno,
             String nombre, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         List<Ayudante> nomina = getAyudantePersona(rut, paterno, materno, nombre);

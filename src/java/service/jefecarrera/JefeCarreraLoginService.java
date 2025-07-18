@@ -24,7 +24,7 @@ public class JefeCarreraLoginService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         LogUtil.setLog(genericSession.getRut());
         return SUCCESS;
     }

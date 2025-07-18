@@ -25,7 +25,7 @@ public class CommonMensajeUploadListaRUNService {
      * @return
      * @throws Exception
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, File upload,
+    public String service(ActionCommonSupport action, GenericSession genericSession, File upload,
             String uploadFileName, String key)
             throws Exception {
 

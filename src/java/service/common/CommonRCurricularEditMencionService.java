@@ -32,7 +32,7 @@ public class CommonRCurricularEditMencionService {
      * @param menNom
      * @return
      */
-    public static String service(GenericSession genericSession, String key, Integer menCodCar, Integer menCodMen, String menPrefijo, String menPlanComun, String menNom) {
+    public String service(GenericSession genericSession, String key, Integer menCodCar, Integer menCodMen, String menPrefijo, String menPlanComun, String menNom) {
         String retValue = SUCCESS;
         Mencion mencionActual = MencionSupport.getMencion(menCodCar, menCodMen); 
         

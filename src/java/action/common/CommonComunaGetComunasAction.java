@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonComunaGetComunasService.service;
+import service.common.CommonComunaGetComunasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonComunaGetComunasAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), region);
+        return new CommonComunaGetComunasService().service(getGenericSession(), getKey(), region);
     }
 
     /**

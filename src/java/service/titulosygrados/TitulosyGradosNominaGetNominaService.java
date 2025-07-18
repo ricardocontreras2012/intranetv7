@@ -30,7 +30,7 @@ public class TitulosyGradosNominaGetNominaService {
      *
      * @throws Exception
      */
-    public static String service(GenericSession genericSession, Integer tipo, String nomina, Integer agno, String key)
+    public String service(GenericSession genericSession, Integer tipo, String nomina, Integer agno, String key)
             throws Exception {
         genericSession.getWorkSession(key).setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).find(nomina, agno, tipo));
 

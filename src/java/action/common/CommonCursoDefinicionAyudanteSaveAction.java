@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionAyudanteSaveService.service;
+import service.common.CommonCursoDefinicionAyudanteSaveService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -15,6 +15,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
 public class CommonCursoDefinicionAyudanteSaveAction extends ActionParameterAwareSupport {
 
     private static final long serialVersionUID = 1L;
+    private CommonCursoDefinicionAyudanteSaveService svc = new CommonCursoDefinicionAyudanteSaveService();
 
     /**
      * Method description
@@ -25,6 +26,6 @@ public class CommonCursoDefinicionAyudanteSaveAction extends ActionParameterAwar
     @Override
     public String action() throws Exception {
 
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonCursoDefinicionAyudanteSaveService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

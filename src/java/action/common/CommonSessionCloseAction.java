@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonSessionCloseService.service;
+import service.common.CommonSessionCloseService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonSessionCloseAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        urlRedirect= service(getSesion(), getKey());
+        urlRedirect= new CommonSessionCloseService().service(getSesion(), getKey());
 
         return SUCCESS;
     }

@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class AlumnoCertificacionGetBotonPagoService {
 
-    public static String service(AlumnoSession as) {
+    public String service(AlumnoSession as) {
 
         try {
 

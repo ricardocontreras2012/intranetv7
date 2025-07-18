@@ -39,7 +39,7 @@ public final class CommonMensajeRemoveSentMessagesService {
      * @param nombreDataColumnaActual
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
         WorkSession ws = genericSession.getWorkSession(key);
         MensajePersistence mensajePersistence
                 = ContextUtil.getDAO().getMensajePersistence(ActionUtil.getDBUser());

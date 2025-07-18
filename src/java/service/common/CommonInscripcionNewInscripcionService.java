@@ -27,7 +27,7 @@ public final class CommonInscripcionNewInscripcionService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession,
+    public String service(GenericSession genericSession,
             String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);

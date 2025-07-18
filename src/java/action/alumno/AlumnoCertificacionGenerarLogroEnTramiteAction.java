@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGenerarLogroEnTramiteService.service;
+import service.alumno.AlumnoCertificacionGenerarLogroEnTramiteService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -27,7 +27,7 @@ public class AlumnoCertificacionGenerarLogroEnTramiteAction extends ActionValida
      */
     @Override
     public String action(){          
-        return service(this, getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), tramite, obs, getKey());       
+        return new AlumnoCertificacionGenerarLogroEnTramiteService().service(this, getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), tramite, obs, getKey());       
     }
     
     @Override

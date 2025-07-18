@@ -7,7 +7,7 @@ package action.verificacioncertificado;
 
 
 import static org.apache.struts2.ServletActionContext.getRequest;
-import static service.verificacioncertificado.VerificacionCertificadoService.service;
+import service.verificacioncertificado.VerificacionCertificadoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.LogUtil.logInfo;
 
@@ -31,7 +31,7 @@ public final class VerificacionCertificadoQRAction extends ActionCommonSupport {
     @Override
     public String action() throws Exception { 
         logInfo(":: IP:" + getRequest().getRemoteAddr() + " QR Folio=" + folio);
-        return service(this, sesion, folio, verificador);
+        return new VerificacionCertificadoService().service(this, sesion, folio, verificador);
     }    
 
     /**

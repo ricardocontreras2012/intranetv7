@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorActaRectificatoriaGetCursosService.service;
+import service.profesor.ProfesorActaRectificatoriaGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -30,7 +30,7 @@ public class ProfesorActaRectificatoriaGetCursosAction  extends ActionCommonSupp
 
         setKey(getKeySession());
 
-        return service(getGenericSession(), getKey(), keyParent);
+        return new ProfesorActaRectificatoriaGetCursosService().service(getGenericSession(), getKey(), keyParent);
     }
 
     public String getActionCall() {

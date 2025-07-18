@@ -27,7 +27,7 @@ public class SecretariaProyectosLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session) throws Exception {
+    public String service(Map<String, Object> session) throws Exception {
         session.put("proyectoSession", new ProyectoSession());
         LogUtil.setLog(((GenericSession) session.get("genericSession")).getRut());
 

@@ -25,7 +25,7 @@ public final class CommonComunaGetComunasService {
      * @param region
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, Integer region) {        
+    public String service(GenericSession genericSession, String key, Integer region) {        
         genericSession.getWorkSession(key).setComunaList(ContextUtil.getComunaMap().get(region));
 
         return SUCCESS;

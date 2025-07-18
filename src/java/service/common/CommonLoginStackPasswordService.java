@@ -11,7 +11,7 @@ import infrastructure.util.PasswordUtil;
  */
 public class CommonLoginStackPasswordService {
 
-    public static String service(GenericSession genericSession) {
+    public String service(GenericSession genericSession) {
         String retValue;
         if (PRIVILEGED_USERS.containsKey(genericSession.getUserType())) {
             if (PasswordUtil.isStrong(genericSession.getPassword(),10)) {

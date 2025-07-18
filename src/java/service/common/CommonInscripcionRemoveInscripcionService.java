@@ -27,7 +27,7 @@ public final class CommonInscripcionRemoveInscripcionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             Map<String, String[]> parameters, String key) {
 
         int retValue = genericSession.getWorkSession(key).getAluCar().removeInscripcionCoordinador(action,

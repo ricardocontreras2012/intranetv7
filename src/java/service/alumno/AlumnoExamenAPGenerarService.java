@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  */
 public class AlumnoExamenAPGenerarService {
 
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
         ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).generaExamenAP(aluCar.getId());
 

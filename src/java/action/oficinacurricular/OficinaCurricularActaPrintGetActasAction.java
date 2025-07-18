@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import static service.oficinacurricular.OficinaCurricularActaPrintGetActasService.service;
+import service.oficinacurricular.OficinaCurricularActaPrintGetActasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class OficinaCurricularActaPrintGetActasAction extends ActionCommon
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new OficinaCurricularActaPrintGetActasService().service(getGenericSession(), getKey());
     }
 }

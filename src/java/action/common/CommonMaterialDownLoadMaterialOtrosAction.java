@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonMaterialDownLoadMaterialService.service;
+import service.common.CommonMaterialDownLoadMaterialService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import static infrastructure.util.LogUtil.logExceptionMessage;
@@ -33,7 +33,7 @@ public final class CommonMaterialDownLoadMaterialOtrosAction extends ActionValid
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(),
+            ais = new CommonMaterialDownLoadMaterialService().service(getGenericSession(),
                     getGenericSession().getWorkSession(getKey()).getOtrosTmaterial(), tipo, material, getKey());
         } catch (Exception e) {
             retValue = "exception";

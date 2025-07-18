@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import org.apache.commons.lang3.StringUtils;
-import static service.titulosygrados.TitulosyGradosNominaGetNominaService.service;
+import service.titulosygrados.TitulosyGradosNominaGetNominaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public class TitulosyGradosNominaGetNominaAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), tipo, StringUtils.upperCase(nomina), agno, getKey());
+        return new TitulosyGradosNominaGetNominaService().service(getGenericSession(), tipo, StringUtils.upperCase(nomina), agno, getKey());
     }    
 
     public void setNomina(String nomina) {

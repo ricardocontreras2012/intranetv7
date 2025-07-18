@@ -63,7 +63,7 @@ public class AlumnoInscripcionGetCursosSwapService {
      * indica que la operación de intercambio de cursos se realizó
      * correctamente.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             AlumnoSession as, Map<String, String[]> parameters, String key) {
 
         // Recupera la sesión de trabajo asociada al alumno usando la clave proporcionada.

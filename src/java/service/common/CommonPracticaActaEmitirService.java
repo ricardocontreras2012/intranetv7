@@ -26,7 +26,7 @@ import infrastructure.util.common.CommonActaUtil;
  */
 public class CommonPracticaActaEmitirService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Extraer parámetros con validación
@@ -68,7 +68,7 @@ public class CommonPracticaActaEmitirService {
         }
     }
 
-    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
+    private Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
         ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord, "N");
 

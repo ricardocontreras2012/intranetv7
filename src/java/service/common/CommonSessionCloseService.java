@@ -39,7 +39,7 @@ public final class CommonSessionCloseService {
      * @param key
      * @return
      */
-    public static String service(Map<String, Object> sesion, String key) {
+    public String service(Map<String, Object> sesion, String key) {
         GenericSession genericSession;
 
         String retValue = DEFAULT_URL;

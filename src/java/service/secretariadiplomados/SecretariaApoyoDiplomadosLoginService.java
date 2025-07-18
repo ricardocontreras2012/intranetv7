@@ -32,7 +32,7 @@ public class SecretariaApoyoDiplomadosLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session, String key) throws Exception {
+    public String service(Map<String, Object> session, String key) throws Exception {
         SecretariaSession secreSession = new SecretariaSession();
         AlumnoSession alumnoSession = new AlumnoSession();
         GenericSession genericSession = (GenericSession) session.get("genericSession");

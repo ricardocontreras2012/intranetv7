@@ -16,7 +16,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class CommonAgnoSemService {
     
-    public static String service(GenericSession genericSession, String actionCall, String key) {
+    public String service(GenericSession genericSession, String actionCall, String key) {
         
         WorkSession ws = genericSession.getWorkSession(key);
         

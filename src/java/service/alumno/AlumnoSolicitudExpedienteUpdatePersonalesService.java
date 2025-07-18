@@ -20,7 +20,7 @@ import session.GenericSession;
  * @author Alvaro
  */
 public class AlumnoSolicitudExpedienteUpdatePersonalesService {
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String email, String emailLaboral, String direccion, Integer comuna, String fono, Integer estadoCivil) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String email, String emailLaboral, String direccion, Integer comuna, String fono, Integer estadoCivil) {
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email), emailNormalizado(emailLaboral), direccion, comuna, fono, estadoCivil);
         commitTransaction();

@@ -27,7 +27,7 @@ public final class CommonSalaReservaGetSalasService {
      * @return Action status.
      * @throws java.lang.Exception
      */
-    public static String service(GenericSession genericSession, String key) throws Exception{
+    public String service(GenericSession genericSession, String key) throws Exception{
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setSalaList(ContextUtil.getDAO().getSalaPersistence(ActionUtil.getDBUser()).findPropias(genericSession.getRut()));
 

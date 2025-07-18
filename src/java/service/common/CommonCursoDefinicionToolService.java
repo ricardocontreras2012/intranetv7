@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
  */
 public class CommonCursoDefinicionToolService {
 
-    public static String serviceGet(GenericSession genericSession, String busqueda, String key) throws Exception {
+    public String serviceGet(GenericSession genericSession, String busqueda, String key) throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
         CursoId id = ws.getCurso().getId();

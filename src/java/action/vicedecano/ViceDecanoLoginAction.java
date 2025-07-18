@@ -5,7 +5,7 @@
  */
 package action.vicedecano;
 
-import static service.vicedecano.ViceDecanoLoginService.service;
+import service.vicedecano.ViceDecanoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class ViceDecanoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {  
-        return service(getGenericSession(), getKey());
+        return new ViceDecanoLoginService().service(getGenericSession(), getKey());
     }
 }

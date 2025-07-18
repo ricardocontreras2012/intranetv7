@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoLoginSeleccionarIngresoService.service;
+import service.alumno.AlumnoLoginSeleccionarIngresoService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -26,7 +26,7 @@ public final class AlumnoLoginSeleccionarIngresoAction extends ActionValidationP
      */
     @Override
     public String action() {
-        return service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), getKey());
+        return new AlumnoLoginSeleccionarIngresoService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), getKey());
     }
 
     /**

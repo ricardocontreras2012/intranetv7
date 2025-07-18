@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionSaveTransversalesService.service;
+import service.common.CommonCursoDefinicionSaveTransversalesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,8 +24,7 @@ public class CommonCursoDefinicionSaveTransversalesAction extends ActionParamete
      */
     @Override
     public String action() throws Exception {
-
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonCursoDefinicionSaveTransversalesService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }
 

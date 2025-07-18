@@ -41,7 +41,7 @@ public class CommonRCurricularAddUnidadService {
      * @param uniSuperior
      * @return
      */
-    public static String service(GenericSession genericSession, String key, String duty, Integer menCodCar, Integer menCodMen, Integer uniCod, String uniNom, Integer uniCC, String uniUrl, Integer uniTipo, String uniColorSala, Integer uniAcadMayor, Integer uniAdmMayor, Integer uniMayor, Integer uniSuperior) {
+    public String service(GenericSession genericSession, String key, String duty, Integer menCodCar, Integer menCodMen, Integer uniCod, String uniNom, Integer uniCC, String uniUrl, Integer uniTipo, String uniColorSala, Integer uniAcadMayor, Integer uniAdmMayor, Integer uniMayor, Integer uniSuperior) {
         String retValue = SUCCESS;
         
         if(null == duty)

@@ -18,7 +18,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class JefeAreaGetCursosEncuestaService {
 
-    public static String service(GenericSession genericSession, String key, Integer agno, Integer sem) { 
+    public String service(GenericSession genericSession, String key, Integer agno, Integer sem) { 
         WorkSession ws = genericSession.getWorkSession(key);      
         
         CommonUtil.setAgnoSem(ws, agno, sem);

@@ -47,7 +47,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         return new ActionInputStreamUtil(name, description, input);
     }
 
-    private static InputStream getInput(GenericSession genericSession,
+    private InputStream getInput(GenericSession genericSession,
             String key, String name, ExpedienteLogro expl)
             throws Exception {
         

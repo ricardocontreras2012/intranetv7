@@ -44,7 +44,7 @@ public final class RegistradorCurricularActaGenerarxCarreraService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */    
-    public static String service(GenericSession genericSession, RegistradorSession registradorSession,
+    public String service(GenericSession genericSession, RegistradorSession registradorSession,
             Map<String, String[]> parameters, Integer agno, Integer sem, String key) {
 
         String user = ActionUtil.getDBUser();

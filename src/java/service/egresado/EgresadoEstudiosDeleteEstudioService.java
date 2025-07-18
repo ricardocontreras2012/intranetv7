@@ -34,7 +34,7 @@ public class EgresadoEstudiosDeleteEstudioService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer correl) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer correl) {
         String user = ActionUtil.getDBUser();
         Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(user).getMisDatos(genericSession.getRut());
 

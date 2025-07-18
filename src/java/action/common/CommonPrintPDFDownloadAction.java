@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonPrintPDFDownloadService.service;
+import service.common.CommonPrintPDFDownloadService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 
@@ -33,7 +33,7 @@ public class CommonPrintPDFDownloadAction extends ActionCommonSupport {
         description = AppStaticsUtil.PDF_MIME;
 
         try {
-            inputStream = service(getGenericSession(), getKey());
+            inputStream = new CommonPrintPDFDownloadService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));

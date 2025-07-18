@@ -24,7 +24,7 @@ import domain.model.CertificacionView;
  */
 public class AlumnoCertificacionGenerarLogroEnTramiteService {
 
-    public static String service(AlumnoCertificacionGenerarLogroEnTramiteAction action, GenericSession genericSession, AlumnoSession as, Integer pos, Integer codTramite, String obs,
+    public String service(AlumnoCertificacionGenerarLogroEnTramiteAction action, GenericSession genericSession, AlumnoSession as, Integer pos, Integer codTramite, String obs,
             String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);

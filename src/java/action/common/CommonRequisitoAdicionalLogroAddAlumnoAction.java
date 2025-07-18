@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRequisitoAdicionalLogroAddAlumnoService.service;
+import service.common.CommonRequisitoAdicionalLogroAddAlumnoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -30,6 +30,6 @@ public final class CommonRequisitoAdicionalLogroAddAlumnoAction extends ActionCo
 
         setKey(getGenericSession().getWorkSession(getKey()).getKeyParent());
 
-        return service(this, getGenericSession(), getKey(), keyAux);
+        return new CommonRequisitoAdicionalLogroAddAlumnoService().service(this, getGenericSession(), getKey(), keyAux);
     }
 }

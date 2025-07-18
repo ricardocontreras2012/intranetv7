@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoGetBoletinHorarioService.service;
+import service.common.CommonCursoGetBoletinHorarioService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -23,7 +23,7 @@ public class CommonCursoGetBoletinHorarioAction extends ActionValidationPosSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos());
+        return new CommonCursoGetBoletinHorarioService().service(getGenericSession(), getKey(), getPos());
     }
     
     @Override

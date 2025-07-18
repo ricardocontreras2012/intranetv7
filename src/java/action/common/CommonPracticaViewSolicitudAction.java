@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package action.common;
-import static service.common.CommonPracticaViewSolicitudService.service;
+import service.common.CommonPracticaViewSolicitudService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -23,7 +23,7 @@ public class CommonPracticaViewSolicitudAction extends ActionValidationPosSuppor
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos());
+        return new CommonPracticaViewSolicitudService().service(getGenericSession(), getKey(), getPos());
     }
 
     /**

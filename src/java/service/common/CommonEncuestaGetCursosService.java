@@ -30,7 +30,7 @@ public final class CommonEncuestaGetCursosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer agno, Integer sem, Integer pos, String key) {
+    public String service(GenericSession genericSession, Integer agno, Integer sem, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);
 

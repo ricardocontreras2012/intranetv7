@@ -26,7 +26,7 @@ public class OficinaCurricularLoginService {
      *
      * @throws Exception
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
        
         genericSession.getWorkSession(key).setTramites(ContextUtil.getTramiteList());
         return SUCCESS;

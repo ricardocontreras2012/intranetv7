@@ -9,16 +9,16 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import static service.alumno.AlumnoSolicitudExpedienteDownloadFileService.service;
+import service.alumno.AlumnoSolicitudExpedienteDownloadFileService;
 
 /**
  *
  * @author Alvaro
  */
 public class AlumnoSolicitudExpedienteDownloadFileAction extends ActionCommonSupport {
-
+    
     private Integer tdoc;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -30,7 +30,7 @@ public class AlumnoSolicitudExpedienteDownloadFileAction extends ActionCommonSup
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), tdoc, getKey());
+            ais = new AlumnoSolicitudExpedienteDownloadFileService().service(getGenericSession(), tdoc, getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

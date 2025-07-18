@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularUserExternoRemoveService.service;
+import service.registradorcurricular.RegistradorCurricularUserExternoRemoveService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -28,6 +28,6 @@ public final class RegistradorCurricularUserExternoRemoveAction extends ActionPa
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), getKey());
+        return new RegistradorCurricularUserExternoRemoveService().service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), getKey());
     }
 }

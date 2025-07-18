@@ -21,7 +21,7 @@ public final class CommonLoginEnableFormService {
      *
      * @return 
      */
-    public static Map<String, String> service() {
+    public Map<String, String> service() {
         return NORMAL_USERS;        
     }
 }

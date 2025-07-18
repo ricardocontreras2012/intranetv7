@@ -17,7 +17,7 @@ import session.GenericSession;
  */
 public class AlumnoSolicitudExpedienteUploadFileService {
     
-    public static String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
         CommonSolicitudExpedienteUtil.saveAttach(action, genericSession, upload, uploadFileName, tdoc, key);
         
         return Action.SUCCESS;

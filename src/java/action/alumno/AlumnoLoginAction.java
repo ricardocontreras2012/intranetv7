@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoLoginService.service;
+import service.alumno.AlumnoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class AlumnoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        return service(this, getSesion(), rut, passwd, getKey());
+        return new AlumnoLoginService().service(this, getSesion(), rut, passwd, getKey());
     }
 
     public Integer getRut() {

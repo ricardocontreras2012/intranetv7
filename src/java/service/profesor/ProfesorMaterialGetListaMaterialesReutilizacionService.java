@@ -26,7 +26,7 @@ public final class ProfesorMaterialGetListaMaterialesReutilizacionService {
      * @return El estado de la acción (SUCCESS si el proceso fue exitoso).
      * @throws Exception Si ocurre algún error durante el proceso.
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         // Recupera la sesión de trabajo
         WorkSession ws = genericSession.getWorkSession(key);
 

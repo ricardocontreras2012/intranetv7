@@ -33,7 +33,7 @@ public final class CommonProfesorGetEncuestaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer pos, String tipo, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer pos, String tipo, String key) {
              
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCursoProfesorList().get(pos).getCurso();

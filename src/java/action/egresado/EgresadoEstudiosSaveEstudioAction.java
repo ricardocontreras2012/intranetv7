@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoEstudiosSaveEstudioService.service;
+import service.egresado.EgresadoEstudiosSaveEstudioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -36,7 +36,7 @@ public class EgresadoEstudiosSaveEstudioAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), this.pais,
+        return new EgresadoEstudiosSaveEstudioService().service(this, getGenericSession(), this.pais,
                 this.institucionEducacional, this.otraInstitucion, this.tipoEstudio, this.nombreEstudio,
                 this.desdeAgno, this.desdeMes, this.hastaAgno, this.hastaMes, this.estadoEstudio, this.areaEstudio,
                 this.keyDummy);

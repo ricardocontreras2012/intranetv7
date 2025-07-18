@@ -59,7 +59,7 @@ public class CommonActaComplementariaEmitirActaService {
      * @param key Clave de la sesión de trabajo que se utiliza para obtener la sesión del alumno
      * @return El estado de la acción, normalmente {@link com.opensymphony.xwork2.Action#SUCCESS}
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> map, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> map, String key) {
         // Se obtiene la sesión de trabajo y los parámetros asociados al alumno
         WorkSession ws = genericSession.getWorkSession(key);  
         AluCar aluCar = ws.getAluCar();

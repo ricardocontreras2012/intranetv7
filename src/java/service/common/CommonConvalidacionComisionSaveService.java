@@ -21,7 +21,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  */
 public class CommonConvalidacionComisionSaveService {
 
-    public static String service(SecretariaSession secreSession)
+    public String service(SecretariaSession secreSession)
             throws Exception {
         String user = ActionUtil.getDBUser();
         Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaComision();

@@ -28,7 +28,7 @@ public class CommonCursoDefinicionGetEspejosService {
      * @param actionCall
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem, String actionCall) {
+    public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem, String actionCall) {
         
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);

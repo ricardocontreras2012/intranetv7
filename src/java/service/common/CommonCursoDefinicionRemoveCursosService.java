@@ -31,7 +31,7 @@ public final class CommonCursoDefinicionRemoveCursosService {
      * @param key
      * @return Action status
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Filtrar y eliminar los cursos seleccionados en una sola pasada

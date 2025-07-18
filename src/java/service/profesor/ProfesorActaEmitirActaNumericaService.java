@@ -42,7 +42,7 @@ public final class ProfesorActaEmitirActaNumericaService {
      * @param key Llave para acceder a los datos de la sesión.
      * @return El estado de la acción, indicando si el proceso fue exitoso.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> map, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> map, String key) {
         // Obtener sesión de trabajo y usuario
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();

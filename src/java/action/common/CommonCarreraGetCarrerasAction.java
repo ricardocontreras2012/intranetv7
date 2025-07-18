@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCarreraGetCarrerasService.service;
+import service.common.CommonCarreraGetCarrerasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonCarreraGetCarrerasAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonCarreraGetCarrerasService().service(getGenericSession(), getKey());
     }
 
     /**

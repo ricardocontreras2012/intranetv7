@@ -19,7 +19,7 @@ import infrastructure.util.common.CommonMallaUtil;
  */
 public class CommonCursoDefinicionGetMallaService {
 
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
 

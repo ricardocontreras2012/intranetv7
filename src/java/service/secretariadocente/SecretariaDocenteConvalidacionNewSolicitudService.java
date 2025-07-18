@@ -33,7 +33,7 @@ public class SecretariaDocenteConvalidacionNewSolicitudService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, SecretariaSession secreSession, String key) {
+    public String service(GenericSession genericSession, SecretariaSession secreSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(ActionUtil.getDBUser()).getPorConvalidar(aluCar));

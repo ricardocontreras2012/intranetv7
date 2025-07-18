@@ -19,7 +19,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  * @author Administrador
  */
 public class CommonCursoDefinicionAddElectivoService {
-    public static String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer minor, Integer area, String key) {
+    public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer minor, Integer area, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();

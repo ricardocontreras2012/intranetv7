@@ -25,7 +25,7 @@ public class CommonEmpleadorGetEmpleadoresxNombreService {
      * @param nombre
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, String nombre) {
+    public String service(GenericSession genericSession, String key, String nombre) {
 //        genericSession.getWorkSession(key).setEmpleador(
 //                ContextUtil.getDAO().getEmpleadorPersistence(AppStaticsUtil.USER_TYPE_COMMON).find(rut));
         WorkSession ws = genericSession.getWorkSession(key);

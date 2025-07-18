@@ -5,7 +5,7 @@
  */
 package action.areaapoyo;
 
-import static service.areaapoyo.AreaApoyoLoginService.service;
+import service.areaapoyo.AreaApoyoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class AreaApoyoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new AreaApoyoLoginService().service(getGenericSession(), getKey());
     }
 }

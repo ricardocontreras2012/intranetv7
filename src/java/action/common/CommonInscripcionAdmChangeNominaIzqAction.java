@@ -6,7 +6,7 @@
 package action.common;
 
 import java.util.List;
-import static service.common.CommonInscripcionAdmChangeNominaIzqService.service;
+import service.common.CommonInscripcionAdmChangeNominaIzqService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import java.util.Collection;
@@ -16,9 +16,10 @@ import java.util.Collection;
  * @author Felipe
  */
 public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAwareSupport {
+
     private static final long serialVersionUID = 1L;
     private String retValue;
-   private Collection<String> errors;
+    private Collection<String> errors;
     private Collection<String> errorMessages;
 
     /**
@@ -29,7 +30,7 @@ public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAw
      */
     @Override
     public String action() throws Exception {
-        retValue = service(this, getGenericSession(), Manager.getJefeCarreraSession(sesion) , getMapParameters(), getKey());
+        retValue = new CommonInscripcionAdmChangeNominaIzqService().service(this, getGenericSession(), Manager.getJefeCarreraSession(sesion), getMapParameters(), getKey());
         errors = this.getActionErrors();
         errorMessages = this.getActionMessages();
         return retValue;
@@ -58,5 +59,5 @@ public class CommonInscripcionAdmChangeNominaIzqAction extends ActionParameterAw
     public void setErrorMessages(List<String> errorMessages) {
         this.errorMessages = errorMessages;
     }
-    
+
 }

@@ -33,7 +33,7 @@ public class TitulosyGradosNominaSaveNominaService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         List<ExpedienteLogro> expedienteLogroList = ws.getExpedienteLogroList();
         String user = ActionUtil.getDBUser();

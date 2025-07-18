@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class CommonActaPrintAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    CommonActaPrintService cert = new CommonActaPrintService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
     
 
     /**
@@ -31,7 +30,7 @@ public class CommonActaPrintAction extends ActionCommonSupport {
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = cert.service(getGenericSession(), getKey());
+            ais = new CommonActaPrintService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

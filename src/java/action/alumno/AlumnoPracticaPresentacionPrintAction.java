@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class AlumnoPracticaPresentacionPrintAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    AlumnoPracticaPresentacionPrintService cert = new AlumnoPracticaPresentacionPrintService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
     
 
     /**
@@ -31,7 +30,7 @@ public class AlumnoPracticaPresentacionPrintAction extends ActionCommonSupport {
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = cert.service(getGenericSession(), getKey());
+            ais = new AlumnoPracticaPresentacionPrintService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

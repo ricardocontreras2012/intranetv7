@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorEvaluacionPorcentajesRelativosService.service;
+import service.profesor.ProfesorEvaluacionPorcentajesRelativosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class ProfesorEvaluacionPorcentajesRelativosAction extends ActionCo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new ProfesorEvaluacionPorcentajesRelativosService().service(getGenericSession(), getKey());
     }
 }

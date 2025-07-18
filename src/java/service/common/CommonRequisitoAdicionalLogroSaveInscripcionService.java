@@ -34,7 +34,7 @@ public final class CommonRequisitoAdicionalLogroSaveInscripcionService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(GenericSession genericSession, String tema, String fecha, String key)
+    public String service(GenericSession genericSession, String tema, String fecha, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         InscripcionAdicionalLogro inscripcionRequisitoAdicionalLogro = ws.getInscripcionAdicionalLogro();

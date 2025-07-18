@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoInscripcionGetInscripcionService.service;
+import service.alumno.AlumnoInscripcionGetInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class AlumnoInscripcionGetInscripcionAction extends ActionCommonSup
      */
     @Override
     public String action(){
-        return service(getGenericSession(), getKey());
+        return new AlumnoInscripcionGetInscripcionService().service(getGenericSession(), getKey());
     }
 }

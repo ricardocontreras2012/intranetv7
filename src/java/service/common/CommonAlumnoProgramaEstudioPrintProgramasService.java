@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
 
 public class CommonAlumnoProgramaEstudioPrintProgramasService {
 
-    public static ActionInputStreamUtil service(ActionParameterAwareSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
+    public ActionInputStreamUtil service(ActionParameterAwareSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
 
@@ -51,7 +51,7 @@ public class CommonAlumnoProgramaEstudioPrintProgramasService {
     }
 
     // Genera el nombre del archivo PDF basado en los datos de la calificación(asignatura)
-    private static String getFileName(AluCar aluCar, Calificacion calificacion) {
+    private String getFileName(AluCar aluCar, Calificacion calificacion) {
         String idFile = aluCar.getId().getAcaCodCar() + "-" + aluCar.getAcaCodMen() + "-" + calificacion.getAsignatura().getAsiCod();
         if ("S".equals(calificacion.getAsignatura().getAsiElect())) {
             idFile += "-" + calificacion.getId().getCalElect() + "-" + calificacion.getId().getCalAgno() + "-" + calificacion.getId().getCalSem();
@@ -60,7 +60,7 @@ public class CommonAlumnoProgramaEstudioPrintProgramasService {
     }
 
     // Verifica si faltan archivos necesarios
-    private static String archivosFaltan(GenericSession genericSession, AluCar aluCar, Map<String, String[]> parameters, String key) {
+    private String archivosFaltan(GenericSession genericSession, AluCar aluCar, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         return IntStream.range(0, ws.getCalificaciones().size())
@@ -71,7 +71,7 @@ public class CommonAlumnoProgramaEstudioPrintProgramasService {
     }
 
     // Genera el InputStream con el PDF final
-    private static InputStream getInput(GenericSession genericSession, AluCar aluCar, Map<String, String[]> parameters, String key) throws IOException {
+    private InputStream getInput(GenericSession genericSession, AluCar aluCar, Map<String, String[]> parameters, String key) throws IOException {
         WorkSession ws = genericSession.getWorkSession(key);
         String outFile = SystemParametersUtil.PATH_TEMP_FILES + "prog_" + aluCar.getId().getAcaRut() + ".pdf";
         Document document = null;

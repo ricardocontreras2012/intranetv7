@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import static service.titulosygrados.TitulosyGradosNominaResolucionPrintService.service;
+import service.titulosygrados.TitulosyGradosNominaResolucionPrintService;
 
 /**
  *
@@ -30,7 +30,7 @@ public class TitulosyGradosNominaResolucionPrintAction extends ActionCommonSuppo
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), getKey());
+            ais = new TitulosyGradosNominaResolucionPrintService().service(getGenericSession(), getKey());
 
         } catch (Exception e) {
             retValue = "exception";

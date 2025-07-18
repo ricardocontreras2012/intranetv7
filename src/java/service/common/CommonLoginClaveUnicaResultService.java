@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CommonLoginClaveUnicaResultService {
 
-    public static String service(HttpServletRequest request, Map<String, Object> sesion, String key) {
+    public String service(HttpServletRequest request, Map<String, Object> sesion, String key) {
 
         String token;
         String userType;

@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class AsistenteEmitirInformeCalificacionesAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    AsistenteEmitirInformeCalificacionesService serviceCert = new AsistenteEmitirInformeCalificacionesService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -31,7 +30,7 @@ public class AsistenteEmitirInformeCalificacionesAction extends ActionCommonSupp
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = serviceCert.service(getGenericSession(), getKey());
+            ais = new AsistenteEmitirInformeCalificacionesService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

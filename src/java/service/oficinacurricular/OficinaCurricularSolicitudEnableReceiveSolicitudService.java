@@ -27,7 +27,7 @@ public final class OficinaCurricularSolicitudEnableReceiveSolicitudService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession, Integer pos, String key) throws Exception {
+    public String service(GenericSession genericSession, Integer pos, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
         Solicitud solicitud = ws.getSolicitudList().get(pos);

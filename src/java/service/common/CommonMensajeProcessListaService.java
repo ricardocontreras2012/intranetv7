@@ -45,7 +45,7 @@ public final class CommonMensajeProcessListaService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
         if (ws.getMensajeSupport() == null) {
@@ -71,7 +71,7 @@ public final class CommonMensajeProcessListaService {
      * @param rootNode
      * @return
      */
-    private static MensajeNodeSupport getNodeToProcess(MensajeNodeSupport rootNode) {
+    private MensajeNodeSupport getNodeToProcess(MensajeNodeSupport rootNode) {
         if (!"SP".equals(rootNode.getState())) {
             return null;
         }
@@ -104,7 +104,7 @@ public final class CommonMensajeProcessListaService {
      * @param rootNode
      * @return
      */
-    private static String getDestiny(MensajeNodeSupport rootNode) {
+    private String getDestiny(MensajeNodeSupport rootNode) {
         if (rootNode.isTerminal()) {
             String mainValue = rootNode.getValue();
 
@@ -140,7 +140,7 @@ public final class CommonMensajeProcessListaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @throws Exception
      */
-    private static void setDestiny(GenericSession genericSession, String key) throws Exception {
+    private void setDestiny(GenericSession genericSession, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         String para = getDestiny(ws.getMensajeSupport().getRootNode());
 
@@ -157,7 +157,7 @@ public final class CommonMensajeProcessListaService {
      * @param sesion
      * @return
      */
-    private static String tipoUsuario(String sesion) {
+    private String tipoUsuario(String sesion) {
         return asList("DE", "VDD", "VDI", "DD", "DP", "JC").contains(sesion) ? "PR" : sesion;
     }
 
@@ -169,7 +169,7 @@ public final class CommonMensajeProcessListaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return
      */
-    private static String processNode(GenericSession genericSession, MensajeNodeSupport node, String key)
+    private String processNode(GenericSession genericSession, MensajeNodeSupport node, String key)
             throws Exception {
 
         String id;
@@ -359,12 +359,12 @@ public final class CommonMensajeProcessListaService {
      * @param genericSession Sesion de trabajo.
      * @param node
      */
-    private static void listaOtros(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaOtros(GenericSession genericSession, MensajeNodeSupport node) {
         muestraListaOtros(node,
                 ContextUtil.getDAO().getTmensajeDestinoPersistence(ActionUtil.getDBUser()).findOtros(genericSession.getUserType()));
     }
 
-    private static void listaFacultades(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaFacultades(GenericSession genericSession, MensajeNodeSupport node) {
         node.setTerminal(true);
 
         List<Unidad> facultades = ContextUtil.getDAO()
@@ -379,7 +379,7 @@ public final class CommonMensajeProcessListaService {
      *
      * @param node
      */
-    private static void listaDeptosFacultad(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaDeptosFacultad(GenericSession genericSession, MensajeNodeSupport node) {
         node.setTerminal(true);
 
         //OJO
@@ -395,7 +395,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaDirDeptosFacultad(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaDirDeptosFacultad(GenericSession genericSession, MensajeNodeSupport node) {
         node.setTerminal(true);
 
         getDirectoresDepto(genericSession.getFacultad())
@@ -406,7 +406,7 @@ public final class CommonMensajeProcessListaService {
         ));
     }
 
-    private static void listaCarrerasProgramas(String userType, Integer rut, MensajeNodeSupport node, String flag) {
+    private void listaCarrerasProgramas(String userType, Integer rut, MensajeNodeSupport node, String flag) {
         node.setTerminal(true);
 
         ContextUtil.getDAO()
@@ -423,7 +423,7 @@ public final class CommonMensajeProcessListaService {
                 );
     }
 
-    private static void listaDeptos(String userType, Integer rut, MensajeNodeSupport node) {
+    private void listaDeptos(String userType, Integer rut, MensajeNodeSupport node) {
         node.setTerminal(true);
 
         ContextUtil.getDAO()
@@ -444,7 +444,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaDirProgramasFacultad(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaDirProgramasFacultad(GenericSession genericSession, MensajeNodeSupport node) {
         //OJO
     }
 
@@ -454,7 +454,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaJefesCarreraFacultad(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaJefesCarreraFacultad(GenericSession genericSession, MensajeNodeSupport node) {
         //OJO
     }
 
@@ -465,7 +465,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void listaMiSecretariaDocente(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaMiSecretariaDocente(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list = Optional.ofNullable(
                 "AL".equals(tipoUsuario) ? getSecretariaDocenteAlumno(rut)
                 : "PR".equals(tipoUsuario) ? getSecretariaDocenteProfesor(rut) : null
@@ -481,7 +481,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaMiDirDepto(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaMiDirDepto(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
 
         List<LaborRealizada> list = Optional.ofNullable(
                 "AL".equals(tipoUsuario) ? getDirectorDepartamentoAlumno(rut)
@@ -499,7 +499,7 @@ public final class CommonMensajeProcessListaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @throws Exception
      */
-    private static void listaMiSubDirDepto(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaMiSubDirDepto(GenericSession genericSession, MensajeNodeSupport node, String key) {
         //OJO
     }
 
@@ -510,7 +510,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaMiDirPrograma(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaMiDirPrograma(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
 
         List<LaborRealizada> list
                 = "AL".equals(tipoUsuario) ? getDirectorProgramaAlumno(rut)
@@ -528,7 +528,7 @@ public final class CommonMensajeProcessListaService {
      * @param key LLave para acceder a los datos de la sesion.
      * @throws Exception
      */
-    private static void listaMiSubDirPrograma(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaMiSubDirPrograma(GenericSession genericSession, MensajeNodeSupport node, String key) {
         //OJO
     }
 
@@ -539,7 +539,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @throws Exception
      */
-    private static void listaMisJefesCarrera(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaMisJefesCarrera(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list
                 = "AL".equals(tipoUsuario) ? getJefeCarreraAlumno(rut)
                 : "PR".equals(tipoUsuario) ? getJefeCarreraProfesor(rut)
@@ -555,7 +555,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void listaCursosAlumno(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaCursosAlumno(GenericSession genericSession, MensajeNodeSupport node, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.getCursoList().stream()
@@ -575,7 +575,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void listaMisCursos(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaMisCursos(GenericSession genericSession, MensajeNodeSupport node, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String userType = genericSession.getUserType();
 
@@ -600,7 +600,7 @@ public final class CommonMensajeProcessListaService {
      *
      * @param node
      */
-    private static void listaCursos(GenericSession genericSession, MensajeNodeSupport node) {
+    private void listaCursos(GenericSession genericSession, MensajeNodeSupport node) {
         // Obtenemos el Stream de los cursos asociados al usuario
         ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
                 .findxUser(genericSession.getRut(), genericSession.getUserType())
@@ -618,7 +618,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void listaMisProfesores(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaMisProfesores(GenericSession genericSession, MensajeNodeSupport node, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String userType = tipoUsuario(genericSession.getUserType());
 
@@ -644,7 +644,7 @@ public final class CommonMensajeProcessListaService {
         }
     }
 
-    private static void listaMisAyudantes(GenericSession genericSession, MensajeNodeSupport node, String key) {
+    private void listaMisAyudantes(GenericSession genericSession, MensajeNodeSupport node, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.getCursoList().stream()
@@ -666,7 +666,7 @@ public final class CommonMensajeProcessListaService {
                 );
     }
 
-    private static void listaAlumnosCurso(MensajeNodeSupport node, String strCurso) {
+    private void listaAlumnosCurso(MensajeNodeSupport node, String strCurso) {
         new Curso(strCurso)
                 .getNominaAlumnos()
                 .stream()
@@ -681,7 +681,7 @@ public final class CommonMensajeProcessListaService {
                 );
     }
 
-    private static void listaDecanos(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaDecanos(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list
                 = "AL".equals(tipoUsuario) ? getDecanoAlumno(rut)
                 : "PR".equals(tipoUsuario) ? getDecanoProfesor(rut)
@@ -690,7 +690,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void listaViceDecDocencia(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaViceDecDocencia(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list
                 = "AL".equals(tipoUsuario) ? getViceDecanoDocAlumno(rut)
                 : "PR".equals(tipoUsuario) ? getViceDecanoDocProfesor(rut)
@@ -699,7 +699,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void listaViceDecInvestigacion(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaViceDecInvestigacion(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list
                 = "AL".equals(tipoUsuario) ? getViceDecanoInvAlumno(rut)
                 : "PR".equals(tipoUsuario) ? getViceDecanoInvProfesor(rut)
@@ -708,7 +708,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void listaRegistradorCurricular(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaRegistradorCurricular(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list = null;
 
         if ("AL".equals(tipoUsuario)) {
@@ -718,7 +718,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void listaAsistenteSocial(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaAsistenteSocial(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list = null;
 
         if ("AL".equals(tipoUsuario)) {
@@ -728,7 +728,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void listaJefeBiblioteca(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
+    private void listaJefeBiblioteca(String tipoUsuario, Integer rut, MensajeNodeSupport node) {
         List<LaborRealizada> list = null;
 
         if ("AL".equals(tipoUsuario)) {
@@ -738,7 +738,7 @@ public final class CommonMensajeProcessListaService {
         addLaborRealizada(list, node);
     }
 
-    private static void addLaborRealizada(List<LaborRealizada> list, MensajeNodeSupport node) {
+    private void addLaborRealizada(List<LaborRealizada> list, MensajeNodeSupport node) {
         Optional.ofNullable(list)
                 .ifPresent(laborList
                         -> laborList.stream()
@@ -761,7 +761,7 @@ public final class CommonMensajeProcessListaService {
      * @param id
      * @param value
      */
-    private static void addNode(MensajeNodeSupport node, String id, String value) {
+    private void addNode(MensajeNodeSupport node, String id, String value) {
         MensajeNodeSupport newNode = new MensajeNodeSupport();
 
         newNode.setId(id);
@@ -775,7 +775,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param otros
      */
-    private static void muestraListaOtros(MensajeNodeSupport node, List<TmensajeDestino> otros) {
+    private void muestraListaOtros(MensajeNodeSupport node, List<TmensajeDestino> otros) {
         if (otros != null) {
             otros.forEach(otro -> {
                 MensajeNodeSupport newNode = new MensajeNodeSupport();
@@ -798,7 +798,7 @@ public final class CommonMensajeProcessListaService {
      * @param node
      * @param codigo
      */
-    private static void getBarra(MensajeNodeSupport node, String codigo) {
+    private void getBarra(MensajeNodeSupport node, String codigo) {
         List<MensajeNodeSupport> nodeListBar = ContextUtil.getDAO()
                 .getTmensajeBarraDestinoPersistence(ActionUtil.getDBUser())
                 .find(codigo)
@@ -820,7 +820,7 @@ public final class CommonMensajeProcessListaService {
      * @param genericSession Sesion de trabajo.
      * @param key LLave para acceder a los datos de la sesion.
      */
-    private static void newRootMessage(GenericSession genericSession, String key) {
+    private void newRootMessage(GenericSession genericSession, String key) {
         List<TmensajeDestino> tmensajeDestinoList;
 
         MensajeNodeSupport rootNode = new MensajeNodeSupport();

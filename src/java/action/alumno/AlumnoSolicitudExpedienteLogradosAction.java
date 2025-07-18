@@ -6,7 +6,7 @@
 package action.alumno;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import static service.alumno.AlumnoSolicitudExpedienteLogradosService.service;
+import service.alumno.AlumnoSolicitudExpedienteLogradosService;
 
 /**
  *
@@ -18,6 +18,6 @@ public class AlumnoSolicitudExpedienteLogradosAction extends ActionCommonSupport
 
     @Override
     public String action() {
-        return service( getGenericSession(), getKey());
+        return new AlumnoSolicitudExpedienteLogradosService().service( getGenericSession(), getKey());
     }    
 }

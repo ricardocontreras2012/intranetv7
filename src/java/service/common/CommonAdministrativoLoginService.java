@@ -34,7 +34,7 @@ public final class CommonAdministrativoLoginService {
      * @param key La clave para acceder a los datos de la sesión.
      * @return El estado de la acción.
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion,  Integer rut, String passwd, String userType, String key) {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion,  Integer rut, String passwd, String userType, String key) {
         // Verificación de parámetros necesarios
         if (Stream.of(sesion, key, rut, passwd, userType).anyMatch(Objects::isNull)) {
             return retReLogin();
@@ -81,7 +81,7 @@ public final class CommonAdministrativoLoginService {
      * @param genericSession La sesión de trabajo.
      * @param administrativo El objeto administrativo.
      */
-    private static void getComplemento(GenericSession genericSession, Administrativo administrativo) {
+    private void getComplemento(GenericSession genericSession, Administrativo administrativo) {
         genericSession.setDv(administrativo.getAdmDv());
         genericSession.setPaterno(administrativo.getAdmPaterno());
         genericSession.setMaterno(administrativo.getAdmMaterno());

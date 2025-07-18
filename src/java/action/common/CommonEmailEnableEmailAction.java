@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonEmailEnableEmailService.service;
+import service.common.CommonEmailEnableEmailService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonEmailEnableEmailAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonEmailEnableEmailService().service(getGenericSession(), getKey());
     }
 }

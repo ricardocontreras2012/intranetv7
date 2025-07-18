@@ -19,7 +19,7 @@ import infrastructure.util.ContextUtil;
  */
 public class CommonCursoDefinicionGetElectivoService {
 
-    public static String service(GenericSession genericSession, Integer asign, String elect, String key) {
+    public String service(GenericSession genericSession, Integer asign, String elect, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ActionResultSupport actionSupport = new ActionResultSupport();
         actionSupport.setActionResult("");

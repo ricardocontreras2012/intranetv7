@@ -180,7 +180,7 @@ public class CommonCursoListaAsistenciaPrintService {
         return cell;
     }
 
-    private static class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

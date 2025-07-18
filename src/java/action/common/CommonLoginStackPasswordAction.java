@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonLoginStackPasswordService.service;
+import service.common.CommonLoginStackPasswordService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -23,7 +23,6 @@ public class CommonLoginStackPasswordAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession());
+        return new CommonLoginStackPasswordService().service(getGenericSession());
     }
-
 }

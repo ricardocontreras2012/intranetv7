@@ -32,7 +32,7 @@ public class SecretariaDocenteConvalidacionGetExcelService {
      * @param file
      * @return
      */
-    public static String service(GenericSession genericSession, SecretariaSession secreSession, String key, File file) {        
+    public String service(GenericSession genericSession, SecretariaSession secreSession, String key, File file) {        
         try (FileInputStream fis = new FileInputStream(file);
                 POIFSFileSystem fs = new POIFSFileSystem(fis);
                 HSSFWorkbook wb = new HSSFWorkbook(fs)) {

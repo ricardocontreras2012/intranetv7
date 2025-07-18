@@ -41,7 +41,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
      * @param key Llave única para acceder a los datos de la sesión.
      * @return Estado de la acción, en este caso siempre retorna "SUCCESS".
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();
 
@@ -76,7 +76,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
      * @param curso El curso al que se le asignarán las evaluaciones y sus porcentajes.
      * @param key Llave única para acceder a los datos de la sesión.
      */
-    private static void setDefault(GenericSession genericSession, Curso curso, String key) {
+    private void setDefault(GenericSession genericSession, Curso curso, String key) {
         List<Evaluacion> lEvaluacion = new ArrayList<>();
         List<CursoTevaluacion> cursoListTevaluacion = new ArrayList<>();       
         
@@ -111,7 +111,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
      * @param tevaluacion La evaluación que se asociará al curso.
      * @return El objeto {@link CursoTevaluacion} configurado.
      */
-    private static CursoTevaluacion createCursoTevaluacion(Curso curso, Tevaluacion tevaluacion) {
+    private CursoTevaluacion createCursoTevaluacion(Curso curso, Tevaluacion tevaluacion) {
         CursoTevaluacion cursoTevaluacion = new CursoTevaluacion();
         CursoTevaluacionId cursoTevaluacionId = new CursoTevaluacionId(curso.getId(), tevaluacion.getTevalCod());
         cursoTevaluacion.setId(cursoTevaluacionId);
@@ -131,7 +131,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
      * @param numEvals El número de evaluaciones requeridas para la evaluación.
      * @return El porcentaje calculado como BigDecimal.
      */
-    private static BigDecimal calculatePorcentaje(int numEvals) {
+    private BigDecimal calculatePorcentaje(int numEvals) {
         BigDecimal totalPorcentaje = new BigDecimal(100);
         return totalPorcentaje.divide(new BigDecimal(numEvals), 3, RoundingMode.FLOOR);
     }
@@ -144,7 +144,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
      * @param porc El porcentaje asignado a cada evaluación.
      * @return El objeto {@link Evaluacion} configurado.
      */
-    private static Evaluacion createEvaluacion(CursoTevaluacion cursoTevaluacion, int n, BigDecimal porc) {
+    private Evaluacion createEvaluacion(CursoTevaluacion cursoTevaluacion, int n, BigDecimal porc) {
         Evaluacion evaluacion = new Evaluacion();
         EvaluacionId evaluacionId = new EvaluacionId(cursoTevaluacion.getId(), n + 1);
         evaluacion.setId(evaluacionId);

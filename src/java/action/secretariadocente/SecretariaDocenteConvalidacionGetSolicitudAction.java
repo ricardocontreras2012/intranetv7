@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import static service.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudService.service;
+import service.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -24,7 +24,7 @@ public class SecretariaDocenteConvalidacionGetSolicitudAction extends ActionVali
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getSecretariaSession(sesion), getPos(), getKey());
+        return new SecretariaDocenteConvalidacionGetSolicitudService().service(getGenericSession(), Manager.getSecretariaSession(sesion), getPos(), getKey());
     }
 
     @Override

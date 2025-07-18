@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonProfesorGetEncuestaService.service;
+import service.common.CommonProfesorGetEncuestaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonProfesorGetEncuestaAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {    
-        return service(this, getGenericSession(), pos, tipo, getKey());
+        return new CommonProfesorGetEncuestaService().service(this, getGenericSession(), pos, tipo, getKey());
     }
 
     public void setPos(Integer pos) {

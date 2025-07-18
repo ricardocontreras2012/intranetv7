@@ -44,7 +44,7 @@ public final class CommonAlumnoPrintCartolaService extends CommonAlumnoPrintUtil
         doc.add(table);
     }
 
-    private static void putCartola(Document doc, AluCar aluCar) {
+    private void putCartola(Document doc, AluCar aluCar) {
         List<CartolaView> lista = ContextUtil.getDAO()
                 .getCartolaPersistenceView(ActionUtil.getDBUser())
                 .find(aluCar);
@@ -81,7 +81,7 @@ public final class CommonAlumnoPrintCartolaService extends CommonAlumnoPrintUtil
         }
     }
 
-    private static PdfPTable creaTabla() {
+    private PdfPTable creaTabla() {
         float[] columnWidths = {3, 1, 1, 1, 20, 2, 2, 2, 2, 2, 2};
 
         PdfPTable table = new PdfPTable(11);

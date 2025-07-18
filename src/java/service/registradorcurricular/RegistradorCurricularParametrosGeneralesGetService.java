@@ -14,7 +14,7 @@ import session.RegistradorSession;
  * @author Usach
  */
 public class RegistradorCurricularParametrosGeneralesGetService {
-    public static String service( GenericSession genericSession, RegistradorSession rs) {
+    public String service( GenericSession genericSession, RegistradorSession rs) {
        return Action.SUCCESS;
     }
     

@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  * @author Usach
  */
 public class CommonInscripcionSaveForceService {
-    public static String service(GenericSession genericSession, Integer pos, String force, 
+    public String service(GenericSession genericSession, Integer pos, String force, 
             String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);

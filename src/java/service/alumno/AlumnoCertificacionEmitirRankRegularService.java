@@ -171,7 +171,7 @@ public ActionInputStreamUtil service(Integer correl){
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
             Integer folio, String codigo, String facultad)
             {
 
@@ -223,7 +223,7 @@ public ActionInputStreamUtil service(Integer correl){
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
+    private void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
             {
         Paragraph parrafo1 = newParrafo(0, 40);
         parrafo1.setAlignment(ALIGN_JUSTIFIED);

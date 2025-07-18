@@ -21,7 +21,7 @@ import infrastructure.util.common.CommonCursoUtil;
  */
 public class CommonCursoGetCursoResumenService {
 
-    public static String service(GenericSession genericSession, Integer pos, String key) {
+    public String service(GenericSession genericSession, Integer pos, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         CursoResumenSupport crs = ws.getResumenCurso().get(pos);

@@ -17,7 +17,6 @@ import infrastructure.support.action.ActionParameterAwareSupport;
  */
 public final class CommonEncuestaPrintGroupAction extends ActionParameterAwareSupport {
 
-    // private static final long     serialVersionUID = 1L;
     private InputStream inputStream;
 
     /**

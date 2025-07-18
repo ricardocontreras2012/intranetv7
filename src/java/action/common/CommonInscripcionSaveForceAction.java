@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonInscripcionSaveForceService.service;
+import service.common.CommonInscripcionSaveForceService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -25,7 +25,7 @@ public class CommonInscripcionSaveForceAction extends ActionValidationPosSupport
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), force, getKey());
+        return new CommonInscripcionSaveForceService().service(getGenericSession(), getPos(), force, getKey());
     }
 
     @Override

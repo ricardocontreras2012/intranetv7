@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRequisitoAdicionalLogroEmitirActaService.service;
+import service.common.CommonRequisitoAdicionalLogroEmitirActaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,6 +26,6 @@ public class CommonRequisitoAdicionalLogroEmitirActaAction extends ActionParamet
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonRequisitoAdicionalLogroEmitirActaService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

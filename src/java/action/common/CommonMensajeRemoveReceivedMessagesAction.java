@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeRemoveReceivedMessagesService.service;
+import service.common.CommonMensajeRemoveReceivedMessagesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -33,7 +33,7 @@ public final class CommonMensajeRemoveReceivedMessagesAction extends ActionParam
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey(), start, length, searchValue, tipoOrder, nombreDataColumnaActual);
+        return new CommonMensajeRemoveReceivedMessagesService().service(getGenericSession(), getMapParameters(), getKey(), start, length, searchValue, tipoOrder, nombreDataColumnaActual);
     }
 
     public int getStart() {

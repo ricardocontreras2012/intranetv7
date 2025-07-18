@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonActaRectificatoriaGetActaService.service;
+import service.common.CommonActaRectificatoriaGetActaService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonActaRectificatoriaGetActaAction extends ActionValidatio
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonActaRectificatoriaGetActaService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

@@ -21,7 +21,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class CommonPracticaActaEnableService {
 
-    public static String service(GenericSession genericSession, Integer agno, Integer sem, Integer practica, String key) {
+    public String service(GenericSession genericSession, Integer agno, Integer sem, Integer practica, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         List<Asignatura> asignList = null;
 

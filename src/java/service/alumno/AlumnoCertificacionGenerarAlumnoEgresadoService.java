@@ -24,7 +24,7 @@ import infrastructure.util.common.CommonCertificacionUtil;
  */
 public class AlumnoCertificacionGenerarAlumnoEgresadoService {
 
-    public static String service(AlumnoCertificacionGenerarAlumnoEgresadoAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, String obs,
+    public String service(AlumnoCertificacionGenerarAlumnoEgresadoAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, String obs,
             String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);

@@ -32,7 +32,7 @@ public class RegistradorCurricularLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session, String key) throws Exception {
+    public String service(Map<String, Object> session, String key) throws Exception {
 
         RegistradorSession regisSession = new RegistradorSession();
         AlumnoSession alumnoSession = new AlumnoSession();

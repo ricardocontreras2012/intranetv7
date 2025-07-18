@@ -26,7 +26,7 @@ public final class ConsultaMisDatosGetMisDatosService {
      * @param genericSession Sesion de trabajo.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession) {
+    public String service(GenericSession genericSession) {
         return SUCCESS;
     }
 }

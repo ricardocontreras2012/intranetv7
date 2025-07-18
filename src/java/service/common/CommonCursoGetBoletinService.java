@@ -18,7 +18,7 @@ import infrastructure.util.common.CommonHorarioUtil;
  * @author Javier Frez V.
  */
 public class CommonCursoGetBoletinService {
-    public static String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
+    public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioDocencia(agno, sem));
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);

@@ -45,7 +45,7 @@ public class EgresadoEstudiosUpdateEstudioService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer correl,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer correl,
                                  Integer pais, Integer institucionEducacional, String otraInstitucion,
                                  Integer tipoEstudio, String nombreEstudio, Integer desdeAgno, Integer desdeMes,
                                  Integer hastaAgno, Integer hastaMes, Integer estadoEstudio, Integer areaEstudio,

@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  * @author Administrador
  */
 public class CommonCursoDefinicionModifyElectivoService {
-   public static String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer area, Integer minor, String key) {       
+   public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer area, Integer minor, String key) {       
         WorkSession ws = genericSession.getWorkSession(key);
               
         ContextUtil.getDAO().getElectivoPersistence(ActionUtil.getDBUser()).modify(asign,elect, electivo, minor, area, ws.getAgnoAct(), ws.getSemAct());                

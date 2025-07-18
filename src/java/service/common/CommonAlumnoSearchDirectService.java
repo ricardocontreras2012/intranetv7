@@ -31,7 +31,7 @@ public final class CommonAlumnoSearchDirectService {
      * @param pos Numero del registro seleccionado en el formulario.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String typeSearch, String key,
+    public String service(GenericSession genericSession, String typeSearch, String key,
             String keyParent, Integer pos) {
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
 

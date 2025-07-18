@@ -3,14 +3,10 @@
  *
  * Copyright (c) 2025 FAE-USACH
  */
-
-
 package action.ayudante;
 
-
-import static service.ayudante.AyudanteLoginService.service;
+import service.ayudante.AyudanteLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
-
 
 /**
  * Procesa el action mapeado del request a la URL AyudanteLogin
@@ -19,9 +15,10 @@ import infrastructure.support.action.common.ActionCommonSupport;
  * @version 7, 28/05/2012
  */
 public final class AyudanteLoginAction extends ActionCommonSupport {
+
     private static final long serialVersionUID = 1L;
     private Integer rut;
-private String passwd;
+    private String passwd;
 
     /**
      * Method description
@@ -31,7 +28,7 @@ private String passwd;
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), rut, passwd, getKey());
+        return new AyudanteLoginService().service(this, getSesion(), rut, passwd, getKey());
     }
 
     public Integer getRut() {
@@ -49,6 +46,5 @@ private String passwd;
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
-    
-    
+
 }

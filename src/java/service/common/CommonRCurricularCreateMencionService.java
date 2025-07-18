@@ -33,7 +33,7 @@ public class CommonRCurricularCreateMencionService {
      * @param menNom
      * @return
      */
-    public static String service(GenericSession genericSession, String key, Integer menCodCar, String menPrefijo, String menPlanComun, String menNom) {
+    public String service(GenericSession genericSession, String key, Integer menCodCar, String menPrefijo, String menPlanComun, String menNom) {
         List<Mencion> listaMenciones = ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).findByCarrera(menCodCar);
         Integer max_menCodMen = listaMenciones.stream().map(Mencion::getId).filter(Objects::nonNull).map(MencionId::getMenCodMen).filter(Objects::nonNull).max(Integer::compareTo).orElse(null);
         String retValue = SUCCESS;

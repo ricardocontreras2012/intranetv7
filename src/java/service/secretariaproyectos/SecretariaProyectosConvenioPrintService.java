@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
  */
 public class SecretariaProyectosConvenioPrintService {
     
-    public static ActionInputStreamUtil service(GenericSession genericSession, ProyectoSession ps, String key) throws Exception {     
+    public ActionInputStreamUtil service(GenericSession genericSession, ProyectoSession ps, String key) throws Exception {     
 
         String name;
         InputStream input;
@@ -45,7 +45,7 @@ public class SecretariaProyectosConvenioPrintService {
      *
      * @return
      */
-    private static InputStream getInput(Integer convenio, String name) {
+    private  InputStream getInput(Integer convenio, String name) {
         ConvenioSupport convenioSupport = new ConvenioSupport();
         return convenioSupport.print(convenio, name);
     }

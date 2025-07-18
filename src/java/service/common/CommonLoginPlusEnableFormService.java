@@ -21,7 +21,7 @@ public final class CommonLoginPlusEnableFormService {
      *
      * @return 
      */
-    public static Map<String, String> service() {
+    public Map<String, String> service() {
         return PRIVILEGED_USERS;        
     }
 }

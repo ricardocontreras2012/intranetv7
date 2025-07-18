@@ -5,6 +5,8 @@
  */
 package service.common;
 
+import action.common.CommonMensajeDownLoadImgAction;
+import infrastructure.util.FormatUtil;
 import java.io.InputStream;
 import session.GenericSession;
 import infrastructure.util.common.CommonArchivoUtil;
@@ -17,25 +19,10 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public final class CommonMensajeDownLoadImgService {
 
-    /**
-     * Method description
-     *
-     * @param name
-     * @return
-     * @throws java.lang.Exception
-     */
-    public static InputStream getFileServiceAction(String name) throws Exception {
-        return CommonArchivoUtil.getFile(name, "msg");
-    }
-
-    /**
-     * Method description
-     *
-     * @param genericSession Sesion de trabajo.
-     * @param key LLave para acceder a los datos de la sesion.
-     * @return
-     */
-    public static String getNameServiceAction(GenericSession genericSession, String key) {
-        return genericSession.getWorkSession(key).getCurrentMsg().getMsgImagen();
+    public InputStream service(CommonMensajeDownLoadImgAction action, GenericSession gs, String key) throws Exception {
+        String name = gs.getWorkSession(key).getCurrentMsg().getMsgImagen();
+        action.setName(name);
+        action.setContentType(FormatUtil.getMimeType(name));
+        return CommonArchivoUtil.getFile(action.getName(), "msg");
     }
 }

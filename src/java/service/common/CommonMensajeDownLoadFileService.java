@@ -24,7 +24,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public final class CommonMensajeDownLoadFileService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, Integer file, String key)
+    public ActionInputStreamUtil service(GenericSession genericSession, Integer file, String key)
             throws Exception {
         String name = "";
         InputStream input;

@@ -23,7 +23,7 @@ public class CommonMensajeGetPageService {
      * @param key
      * @return
      */    
-    public static InputStream service(GenericSession genericSession, String url, String key) {
+    public InputStream service(GenericSession genericSession, String url, String key) {
         try {
             URL page = new URL(url);
             StringBuilder stringBuilder = new StringBuilder();

@@ -25,7 +25,7 @@ public class CommonRequisitoAdicionalLogroEmitirActaService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> map, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> map, String key) {
 
         /*
         try {

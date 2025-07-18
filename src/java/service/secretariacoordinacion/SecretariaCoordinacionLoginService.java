@@ -26,7 +26,7 @@ public class SecretariaCoordinacionLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session) throws Exception {
+    public String service(Map<String, Object> session) throws Exception {
         LogUtil.setLog(((GenericSession) session.get("genericSession")).getRut());
 
         return SUCCESS;

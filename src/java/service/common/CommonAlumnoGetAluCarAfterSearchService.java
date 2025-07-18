@@ -16,7 +16,7 @@ import session.WorkSession;
  */
 public class CommonAlumnoGetAluCarAfterSearchService {
 
-    public static String service(GenericSession gs, String key) {
+    public String service(GenericSession gs, String key) {
         AluCar aluCar = gs.getWorkSession(key).getAluCar();
 
         aluCar.setCarga(gs);                     

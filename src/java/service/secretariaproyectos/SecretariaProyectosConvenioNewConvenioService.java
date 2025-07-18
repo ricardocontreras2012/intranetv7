@@ -18,7 +18,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class SecretariaProyectosConvenioNewConvenioService {
 
-    public static String service(GenericSession genericSession, ProyectoSession ps, String key) {
+    public String service(GenericSession genericSession, ProyectoSession ps, String key) {
         ps.setProyectoList(ContextUtil.getDAO().getProyectoPersistence(ActionUtil.getDBUser()).find(genericSession.getRut()));
         CommonUtil.setAgnoSemAct(genericSession.getWorkSession(key));
         

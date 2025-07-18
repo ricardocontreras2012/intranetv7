@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAlumnoGetSituacionesService.service;
+import service.common.CommonAlumnoGetSituacionesService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonAlumnoGetSituacionesAction extends ActionCommonSupport 
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonAlumnoGetSituacionesService().service(getGenericSession(), getKey());
     }
 }

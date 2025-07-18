@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAgnoSemService.service;
+import service.common.CommonAgnoSemService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonAgnoSemAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {        
-        return service(getGenericSession(),actionCall, getKey());
+        return new CommonAgnoSemService().service(getGenericSession(),actionCall, getKey());
     }    
 
     public void setActionCall(String actionCall) {

@@ -26,7 +26,7 @@ public final class ProfesorReporteModifyReporteService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer sesionReporte, String key) {
+    public String service(GenericSession genericSession, Integer sesionReporte, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setReporte(ws.getReportes().get(sesionReporte));

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonActaGetActasCarreraService.service;
+import service.common.CommonActaGetActasCarreraService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonActaGetActasCarreraAction extends ActionValidationAgnoS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new CommonActaGetActasCarreraService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
     }
 
     /**

@@ -30,7 +30,7 @@ public final class CommonProfesorCargaHistoricaPrintService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return
      */
-    public static List<Curso> service(GenericSession genericSession, Map<String, Object> report, String key){
+    public List<Curso> service(GenericSession genericSession, Map<String, Object> report, String key){
         List<Curso> nomina = genericSession.getWorkSession(key).getProfesor().getCargaHistorica();       
         
         report.put("nombreProfesor", genericSession.getWorkSession(key).getProfesor().getNombre());

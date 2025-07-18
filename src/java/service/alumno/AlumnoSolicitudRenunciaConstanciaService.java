@@ -44,7 +44,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class AlumnoSolicitudRenunciaConstanciaService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String motivo, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String motivo, String key) throws Exception {
         String name;
         InputStream input;
         String description;
@@ -65,7 +65,7 @@ public class AlumnoSolicitudRenunciaConstanciaService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String motivo, String key) throws Exception {
+    private InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String motivo, String key) throws Exception {
     
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
@@ -118,7 +118,7 @@ public class AlumnoSolicitudRenunciaConstanciaService {
      * @param fecha
      * @return
      */
-    public static String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha) {
+    private String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha) {
         String glosa;
         Alumno alumno = aluCar.getAlumno();
 
@@ -139,7 +139,7 @@ public class AlumnoSolicitudRenunciaConstanciaService {
      * @param aluCar
      * @return
      */
-    public static String getGlosaFinal(AluCar aluCar) {
+    private String getGlosaFinal(AluCar aluCar) {
         String s1;
         if (asList(43, 50, 53, 55).contains(aluCar.getAaingreso().getAaiViaIng().getViiCod())) {
             s1 = "Debe concurrir con éste documento a la Sociedad de Desarrollo Tecnológico(SDT) para finiquitar su estado financiero.";

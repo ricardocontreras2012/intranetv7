@@ -22,7 +22,7 @@ import session.WorkSession;
  */
 public class AlumnoSolicitudExpedienteNewService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, int pos, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, int pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setExpedienteLogro(ws.getExpedienteLogroList().get(pos));

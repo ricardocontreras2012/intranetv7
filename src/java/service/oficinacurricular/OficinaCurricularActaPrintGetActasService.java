@@ -27,7 +27,7 @@ public final class OficinaCurricularActaPrintGetActasService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ActaCalificacionPersistence actaPersistence

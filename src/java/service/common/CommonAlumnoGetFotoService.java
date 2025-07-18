@@ -18,7 +18,7 @@ import static infrastructure.util.common.CommonUsersUtil.getFoto;
  */
 public final class CommonAlumnoGetFotoService {
 
-    public static InputStream service(GenericSession genericSession, String key) {
+    public InputStream service(GenericSession genericSession, String key) {
         Alumno alumno = genericSession.getWorkSession(key).getAluCar().getAlumno();
         return getFoto(alumno.getAluRut(), alumno.getAluDv());
     }

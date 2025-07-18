@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLaboralesDeleteLaboralService.service;
+import service.egresado.EgresadoLaboralesDeleteLaboralService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -25,7 +25,7 @@ public class EgresadoLaboralesDeleteLaboralAction extends ActionValidationPosSup
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), Manager.getEgresadoSession(sesion), getPos(), getKey());
+        return new EgresadoLaboralesDeleteLaboralService().service(this, getGenericSession(), Manager.getEgresadoSession(sesion), getPos(), getKey());
     }
 
     @Override

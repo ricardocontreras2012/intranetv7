@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGetCertificadosService.service;
+import service.alumno.AlumnoCertificacionGetCertificadosService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -26,6 +26,6 @@ public final class AlumnoCertificacionGetCertificadosAction extends ActionCommon
      */
     @Override
     public String action(){
-        return service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return new AlumnoCertificacionGetCertificadosService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 }

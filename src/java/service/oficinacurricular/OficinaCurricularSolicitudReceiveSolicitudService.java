@@ -20,7 +20,7 @@ public final class OficinaCurricularSolicitudReceiveSolicitudService {
      *
      * @return Action status.
      */
-    public static String service() {
+    public String service() {
         return SUCCESS;
     }
 }

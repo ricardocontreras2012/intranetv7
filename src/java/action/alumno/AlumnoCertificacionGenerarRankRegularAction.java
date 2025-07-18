@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGenerarRankRegularService.service;
+import service.alumno.AlumnoCertificacionGenerarRankRegularService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -20,6 +20,7 @@ public class AlumnoCertificacionGenerarRankRegularAction extends ActionCommonSup
     private String  obs;
     private Integer correl;
     private Integer rank;
+    
 
     /**
      * Method description
@@ -28,7 +29,7 @@ public class AlumnoCertificacionGenerarRankRegularAction extends ActionCommonSup
      */
     @Override
     public String action(){          
-        return service(this, getGenericSession(), Manager.getAlumnoSession(sesion), tramite, obs, rank, getKey());       
+        return new AlumnoCertificacionGenerarRankRegularService().service(this, getGenericSession(), Manager.getAlumnoSession(sesion), tramite, obs, rank, getKey());       
     }    
 
     public void setTramite(Integer tramite) {

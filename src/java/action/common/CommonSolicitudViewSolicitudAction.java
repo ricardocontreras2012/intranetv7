@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonSolicitudViewSolicitudService.service;
+import service.common.CommonSolicitudViewSolicitudService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonSolicitudViewSolicitudAction extends ActionValidationPo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos());        
+        return new CommonSolicitudViewSolicitudService().service(getGenericSession(), getKey(), getPos());        
     }
 
     /**

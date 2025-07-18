@@ -26,7 +26,7 @@ public final class AlumnoInscripcionAddInscripcionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key)
     {
         WorkSession ws = genericSession.getWorkSession(key);

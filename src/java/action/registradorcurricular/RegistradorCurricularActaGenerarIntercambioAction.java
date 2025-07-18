@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularActaGenerarIntercambioService.service;
+import service.registradorcurricular.RegistradorCurricularActaGenerarIntercambioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -19,7 +19,7 @@ public class RegistradorCurricularActaGenerarIntercambioAction extends ActionCom
 
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), sem, agno, getKey());
+        return new RegistradorCurricularActaGenerarIntercambioService().service(this, getGenericSession(), sem, agno, getKey());
     }
 
     public Integer getAgno() {

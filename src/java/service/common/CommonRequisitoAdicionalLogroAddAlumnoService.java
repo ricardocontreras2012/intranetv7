@@ -36,7 +36,7 @@ public final class CommonRequisitoAdicionalLogroAddAlumnoService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String keyParent, String key)
             throws Exception {
         String retValue = SUCCESS;

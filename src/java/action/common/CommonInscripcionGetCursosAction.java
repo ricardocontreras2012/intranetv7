@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonInscripcionGetCursosService.service;
+import service.common.CommonInscripcionGetCursosService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonInscripcionGetCursosAction extends ActionValidationPosS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonInscripcionGetCursosService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

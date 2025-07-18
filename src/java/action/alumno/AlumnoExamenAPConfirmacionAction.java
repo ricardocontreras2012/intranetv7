@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoExamenAPConfirmacionService.service;
+import service.alumno.AlumnoExamenAPConfirmacionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class AlumnoExamenAPConfirmacionAction  extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new AlumnoExamenAPConfirmacionService().service(getGenericSession(), getKey());
     }
 }
 

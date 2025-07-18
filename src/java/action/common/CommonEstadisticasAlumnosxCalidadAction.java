@@ -7,7 +7,7 @@ package action.common;
 
 import domain.model.Ccalidad;
 import java.util.List;
-import static service.common.CommonEstadisticasAlumnosxCalidadService.service;
+import service.common.CommonEstadisticasAlumnosxCalidadService;
 import infrastructure.support.action.ActionReportSupport;
 
 /**
@@ -34,7 +34,7 @@ public final class CommonEstadisticasAlumnosxCalidadAction extends ActionReportS
      */
     @Override
     public String action() throws Exception {
-        nomina = service(getReport(), agno, calidad);
+        nomina = new CommonEstadisticasAlumnosxCalidadService().service(getReport(), agno, calidad);
 
         return SUCCESS;
     }

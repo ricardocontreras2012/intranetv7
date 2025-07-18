@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoInscripcionGetCursosService.service;
+import service.alumno.AlumnoInscripcionGetCursosService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -26,7 +26,7 @@ public final class AlumnoInscripcionGetCursosAction extends ActionValidationPosS
      */
     @Override
     public String action(){
-        return service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), getKey());
+        return new AlumnoInscripcionGetCursosService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), getKey());
     }
 
     /**

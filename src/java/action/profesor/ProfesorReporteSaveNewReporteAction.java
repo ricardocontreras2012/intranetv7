@@ -6,7 +6,7 @@
 package action.profesor;
 
 import java.io.File;
-import static service.profesor.ProfesorReporteSaveNewReporteService.service;
+import service.profesor.ProfesorReporteSaveNewReporteService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import static infrastructure.util.LogUtil.logExceptionMessage;
 import java.util.List;
@@ -40,7 +40,7 @@ public final class ProfesorReporteSaveNewReporteAction extends ActionValidationP
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), fecha, moduloHorario, objetivos,
+        return new ProfesorReporteSaveNewReporteService().service(this, getGenericSession(), fecha, moduloHorario, objetivos,
                 contenido, observaciones, metodo, upload, uploadFileName, recuperacion, getKey());
     }
 

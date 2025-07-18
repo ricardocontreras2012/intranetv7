@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGenerarAlumnoEgresadoService.service;
+import service.alumno.AlumnoCertificacionGenerarAlumnoEgresadoService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -27,7 +27,7 @@ public class AlumnoCertificacionGenerarAlumnoEgresadoAction extends ActionCommon
      */
     @Override
     public String action(){          
-        return service(this, getGenericSession(), Manager.getAlumnoSession(sesion), tramite, obs, getKey());       
+        return  new AlumnoCertificacionGenerarAlumnoEgresadoService().service(this, getGenericSession(), Manager.getAlumnoSession(sesion), tramite, obs, getKey());       
     }   
 
     public void setTramite(Integer tramite) {

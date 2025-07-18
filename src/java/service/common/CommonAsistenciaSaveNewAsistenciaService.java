@@ -43,7 +43,7 @@ public final class CommonAsistenciaSaveNewAsistenciaService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> map, String key, String fecha) throws Exception {
+    public String service(GenericSession genericSession, Map<String, String[]> map, String key, String fecha) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         String dbUser = ActionUtil.getDBUser();
 

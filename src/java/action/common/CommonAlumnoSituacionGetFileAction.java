@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonAlumnoSituacionGetFileService.service;
+import service.common.CommonAlumnoSituacionGetFileService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -18,7 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public class CommonAlumnoSituacionGetFileAction extends ActionValidationPosSupport {
 
     private static final long serialVersionUID = 1L;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -30,7 +30,7 @@ public class CommonAlumnoSituacionGetFileAction extends ActionValidationPosSuppo
 
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), getPos(), getKey());
+            ais = new CommonAlumnoSituacionGetFileService().service(getGenericSession(), getPos(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));

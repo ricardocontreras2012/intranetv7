@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import static service.oficinacurricular.OficinaCurricularActaRecepcionarActasService.service;
+import service.oficinacurricular.OficinaCurricularActaRecepcionarActasService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class OficinaCurricularActaRecepcionarActasAction extends ActionPar
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new OficinaCurricularActaRecepcionarActasService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

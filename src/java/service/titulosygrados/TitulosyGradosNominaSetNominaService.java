@@ -22,7 +22,7 @@ import infrastructure.util.DateUtil;
  */
 public class TitulosyGradosNominaSetNominaService {
 
-    public static String service(GenericSession genericSession, Integer tipo, Integer agno, String nomina, String fecha, String key) throws Exception {
+    public String service(GenericSession genericSession, Integer tipo, Integer agno, String nomina, String fecha, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
         if (ws.getExpedienteLogro() == null) {

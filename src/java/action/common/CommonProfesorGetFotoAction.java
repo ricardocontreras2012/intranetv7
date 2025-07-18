@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonProfesorGetFotoService.service;
+import service.common.CommonProfesorGetFotoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -28,7 +28,7 @@ public final class CommonProfesorGetFotoAction extends ActionCommonSupport {
      */
     @Override
     public String action() {   
-        ais = service(getGenericSession(), getKey());
+        ais = new CommonProfesorGetFotoService().service(getGenericSession(), getKey());
         return SUCCESS;
     }
 

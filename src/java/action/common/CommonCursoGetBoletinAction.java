@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
-import static service.common.CommonCursoGetBoletinService.service;
+import service.common.CommonCursoGetBoletinService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class CommonCursoGetBoletinAction extends ActionValidationAgnoSemSupport 
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new CommonCursoGetBoletinService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
     }
 
     /**

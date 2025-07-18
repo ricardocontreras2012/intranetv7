@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import static service.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudService.service;
+import service.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,6 +24,6 @@ public class SecretariaDocenteConvalidacionSaveSolicitudAction extends ActionPar
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getMapParameters(), getKey());
+        return new SecretariaDocenteConvalidacionSaveSolicitudService().service(this, getGenericSession(), getMapParameters(), getKey());
     }
 }

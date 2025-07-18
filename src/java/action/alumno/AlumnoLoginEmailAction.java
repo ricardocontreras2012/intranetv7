@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoLoginEmailService.service;
+import service.alumno.AlumnoLoginEmailService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class AlumnoLoginEmailAction  extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        return service(getGenericSession(), email, getKey());
+        return new AlumnoLoginEmailService().service(getGenericSession(), email, getKey());
     }
 
     public void setEmail(String email) {

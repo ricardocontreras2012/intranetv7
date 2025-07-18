@@ -45,7 +45,7 @@ public final class CommonCursoDefinicionAddCursoService {
      * @return Action status
      * @throws java.lang.Exception
      */
-    public static String service(GenericSession genericSession, Integer asign, String elect, String electivo, String coord, Integer secc, Integer cupo, String inicio, String termino,
+    public String service(GenericSession genericSession, Integer asign, String elect, String electivo, String coord, Integer secc, Integer cupo, String inicio, String termino,
             String diurno, String vesp, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

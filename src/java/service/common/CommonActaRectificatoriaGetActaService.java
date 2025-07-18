@@ -30,7 +30,7 @@ public final class CommonActaRectificatoriaGetActaService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession, Integer pos, String key)
+    public String service(GenericSession genericSession, Integer pos, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

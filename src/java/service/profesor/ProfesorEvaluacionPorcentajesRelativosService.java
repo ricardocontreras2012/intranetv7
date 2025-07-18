@@ -42,7 +42,7 @@ public final class ProfesorEvaluacionPorcentajesRelativosService {
      * @param key LLave única que permite acceder a los datos de la sesión.
      * @return Retorna el estado de la acción, en este caso, siempre "SUCCESS".
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();
@@ -92,7 +92,7 @@ public final class ProfesorEvaluacionPorcentajesRelativosService {
      * @param key LLave única para acceder a los datos de la sesión.
      * @return Lista de Evaluacion con las evaluaciones predeterminadas creadas.
      */
-    private static List<Evaluacion> setDefault(GenericSession genericSession, Curso curso, String key) {
+    private List<Evaluacion> setDefault(GenericSession genericSession, Curso curso, String key) {
         List<Evaluacion> lEvaluacion = new ArrayList<>();
         List<CursoTevaluacion> cursoListTevaluacion = new ArrayList<>();
 

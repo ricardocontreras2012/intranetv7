@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonPasswordAskNewPasswordService.service;
+import service.common.CommonPasswordAskNewPasswordService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonPasswordAskNewPasswordAction extends ActionPostCommonSu
      */
     @Override
     public String action()  throws Exception{        
-        return service(this, rut, userType);
+        return new CommonPasswordAskNewPasswordService().service(this, rut, userType);
     }
 
 

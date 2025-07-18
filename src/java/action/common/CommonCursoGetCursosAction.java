@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoGetCursosService.service;
+import service.common.CommonCursoGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -30,7 +30,7 @@ public final class CommonCursoGetCursosAction extends ActionCommonSupport {
         String keyParent = getKey();
         setKey(getKeySession());
 
-        return service(getGenericSession(), getKey(), keyParent, actionCall);
+        return new CommonCursoGetCursosService().service(getGenericSession(), getKey(), keyParent, actionCall);
     }
 
     /**

@@ -29,7 +29,7 @@ public final class ProfesorReporteAddReporteService {
      * @return El estado de la acción (SUCCESS si el proceso fue exitoso).
      * @throws Exception Si el servicio genera una excepción.
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         // Recupera la sesión de trabajo del profesor
         WorkSession ws = genericSession.getWorkSession(key);
 
@@ -55,7 +55,7 @@ public final class ProfesorReporteAddReporteService {
      * @param modList Lista de módulos de horario a combinar con los días.
      * @return Lista de cadenas combinadas de días y códigos de módulos.
      */
-    private static List<String> getModulos(List<ModuloHorario> modList) {
+    private List<String> getModulos(List<ModuloHorario> modList) {
         // Obtiene los días de la semana y los módulos combinados usando Streams
         return ContextUtil.getDiaList().stream()
                 .flatMap(dia -> modList.stream()

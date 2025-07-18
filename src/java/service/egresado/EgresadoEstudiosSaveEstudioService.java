@@ -41,7 +41,7 @@ public class EgresadoEstudiosSaveEstudioService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer pais,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer pais,
             Integer institucionEducacional, String otraInstitucion, Integer tipoEstudio,
             String nombreEstudio, Integer desdeAgno, Integer desdeMes, Integer hastaAgno,
             Integer hastaMes, Integer estadoEstudio, Integer areaEstudio, String keyDummy) {

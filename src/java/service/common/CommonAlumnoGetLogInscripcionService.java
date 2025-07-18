@@ -31,7 +31,7 @@ public final class CommonAlumnoGetLogInscripcionService {
      * @param agno
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, Integer sem, Integer agno) {
+    public String service(GenericSession genericSession, String key, Integer sem, Integer agno) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         Optional.ofNullable(sem).ifPresent(s

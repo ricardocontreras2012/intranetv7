@@ -21,9 +21,7 @@ public final class OficinaCurricularActaPrintActasAction extends ActionParameter
 
     @Override
     public String action() throws Exception {
-
-        OficinaCurricularActaPrintActasService serv = new OficinaCurricularActaPrintActasService();
-        serv.service(getGenericSession(), getMapParameters(), getKey());
+        new OficinaCurricularActaPrintActasService().service(getGenericSession(), getMapParameters(), getKey());
 
         return SUCCESS;
     }

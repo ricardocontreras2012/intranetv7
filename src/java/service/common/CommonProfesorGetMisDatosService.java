@@ -27,7 +27,7 @@ public final class CommonProfesorGetMisDatosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key) {      
+    public String service(GenericSession genericSession, String key) {      
         ProfesorPersistence profesorPersistence
                 = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
         Profesor profesorAux = profesorPersistence.getMisDatos(genericSession.getRut());

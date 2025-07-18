@@ -21,7 +21,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  */
 public class CommonPracticaSaveResolucionPracticaService {
 
-    public static String service(GenericSession genericSession, String key, String estado, String respuesta, Integer agno, Integer sem) {        
+    public String service(GenericSession genericSession, String key, String estado, String respuesta, Integer agno, Integer sem) {        
         if (!"S".equals(estado)) {
             WorkSession ws = genericSession.getWorkSession(key);
             Solicitud sol = ws.getSolicitud();

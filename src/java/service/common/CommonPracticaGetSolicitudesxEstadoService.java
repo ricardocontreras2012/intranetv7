@@ -24,7 +24,7 @@ public class CommonPracticaGetSolicitudesxEstadoService {
      * @param estado
      * @return
      */
-    public static String service(GenericSession genericSession, String key, Integer autoridad, Integer estado) {           
+    public String service(GenericSession genericSession, String key, Integer autoridad, Integer estado) {           
         genericSession.getWorkSession(key).setSolicitudList(ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).findPracticasxEstado(genericSession.getRut(), autoridad, estado));
         
         return SUCCESS;

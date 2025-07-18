@@ -5,7 +5,7 @@
  */
 package action.jefecarrera;
 
-import static service.jefecarrera.JefeCarreraLoginService.service;
+import service.jefecarrera.JefeCarreraLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class JefeCarreraLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {  
-        return service(getGenericSession(), getKey());
+        return new JefeCarreraLoginService().service(getGenericSession(), getKey());
     }
 }

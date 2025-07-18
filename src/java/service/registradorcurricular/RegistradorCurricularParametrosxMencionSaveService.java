@@ -23,7 +23,7 @@ import infrastructure.util.LogUtil;
  */
 public class RegistradorCurricularParametrosxMencionSaveService {
 
-    public static String service(GenericSession genericSession, RegistradorSession rs, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, RegistradorSession rs, Map<String, String[]> parameters, String key) {
 
         // Obtener parámetros de manera optimizada
         Integer pmenCodCar = parseInteger(parameters.get("pmenCodCar"));
@@ -59,7 +59,7 @@ public class RegistradorCurricularParametrosxMencionSaveService {
         return Action.SUCCESS;
     }
     
-    private static Integer parseInteger(String[] param) {
+    private Integer parseInteger(String[] param) {
         try {
             return Integer.parseInt(param[0]);
         } catch (NumberFormatException e) {
@@ -68,7 +68,7 @@ public class RegistradorCurricularParametrosxMencionSaveService {
     }
 
     // Método para convertir un String a Date con manejo de excepciones
-    private static Date parseDate(String[] param) {
+    private Date parseDate(String[] param) {
         try {
             return DateUtil.parseDate(param[0]);
         } catch (Exception e) {

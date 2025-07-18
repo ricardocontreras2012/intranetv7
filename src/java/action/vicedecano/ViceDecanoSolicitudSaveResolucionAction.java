@@ -5,7 +5,7 @@
  */
 package action.vicedecano;
 
-import static service.vicedecano.ViceDecanoSolicitudSaveResolucionService.service;
+import service.vicedecano.ViceDecanoSolicitudSaveResolucionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,7 +26,7 @@ public class ViceDecanoSolicitudSaveResolucionAction  extends ActionCommonSuppor
      */
     @Override
     public String action() throws Exception {        
-        return service(getGenericSession(), getKey(), resolucion, respuesta);
+        return new ViceDecanoSolicitudSaveResolucionService().service(getGenericSession(), getKey(), resolucion, respuesta);
     }
 
     public void setResolucion(String resolucion) {

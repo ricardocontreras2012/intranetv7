@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonGetSemAgnoService.service;
+import service.common.CommonGetSemAgnoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonGetSemAgnoAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonGetSemAgnoService().service(getGenericSession(), getKey());
     }
 }

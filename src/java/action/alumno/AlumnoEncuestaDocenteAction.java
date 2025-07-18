@@ -5,9 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoEncuestaDocenteService.searchService;
-import static service.alumno.AlumnoEncuestaDocenteService.saveService;
-import static service.alumno.AlumnoEncuestaDocenteService.showFormService;
+import service.alumno.AlumnoEncuestaDocenteService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -20,6 +18,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
 public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSupport {
 
     private static final long serialVersionUID = 1L;
+    private AlumnoEncuestaDocenteService svc = new AlumnoEncuestaDocenteService();
 
     /**
      * Method description
@@ -38,11 +37,11 @@ public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSuppo
      */
     
     public String search() {
-        return searchService(getGenericSession(), getKey());
+        return svc.searchService(getGenericSession(), getKey());
     }
     
     public String showForm() {
-        return showFormService(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return svc.showFormService(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 
     /**
@@ -51,6 +50,6 @@ public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSuppo
      * @return
      */
     public String save() {         
-        return saveService(getGenericSession(), getMapParameters(), getKey());
+        return svc.saveService(getGenericSession(), getMapParameters(), getKey());
     }
 }

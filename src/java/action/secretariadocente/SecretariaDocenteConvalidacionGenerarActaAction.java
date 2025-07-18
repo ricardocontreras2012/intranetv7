@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import static service.secretariadocente.SecretariaDocenteConvalidacionGenerarActaService.service;
+import service.secretariadocente.SecretariaDocenteConvalidacionGenerarActaService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -25,6 +25,6 @@ public class SecretariaDocenteConvalidacionGenerarActaAction extends ActionParam
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), Manager.getSecretariaSession(sesion), getMapParameters(), getKey());
+        return new SecretariaDocenteConvalidacionGenerarActaService().service(this, getGenericSession(), Manager.getSecretariaSession(sesion), getMapParameters(), getKey());
     }
 }

@@ -25,7 +25,7 @@ public final class RegistradorCurricularUserExternoGetNominaService {
      * @param genericSession Sesion de trabajo.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, RegistradorSession registradorSession) {
+    public String service(GenericSession genericSession, RegistradorSession registradorSession) {
         registradorSession.setExternoList(ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser()).find());
 
         return SUCCESS;

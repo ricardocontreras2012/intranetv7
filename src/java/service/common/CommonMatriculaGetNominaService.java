@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
  */
 public class CommonMatriculaGetNominaService {
 
-    public static String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
+    public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);

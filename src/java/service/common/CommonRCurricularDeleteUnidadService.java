@@ -31,7 +31,7 @@ public class CommonRCurricularDeleteUnidadService {
      * @param duty
      * @return
      */
-    public static String service(GenericSession genericSession, String key, Integer menCodCar, Integer menCodMen, Integer uniCod, String duty) {
+    public String service(GenericSession genericSession, String key, Integer menCodCar, Integer menCodMen, Integer uniCod, String duty) {
         String retValue = SUCCESS;
 
         Mencion mencionActual = MencionSupport.getMencion(menCodCar, menCodMen); 

@@ -43,7 +43,7 @@ import infrastructure.util.common.CommonConstanciaUtil;
  */
 public class AlumnoSolicitudRetiroConstanciaService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, AlumnoSession sesionAlumno, String key) throws Exception {
 
         String name;
         InputStream input;
@@ -66,7 +66,7 @@ public class AlumnoSolicitudRetiroConstanciaService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String key) throws Exception {
+    private InputStream getInput(GenericSession genericSession, AlumnoSession sesionAlumno, Integer folio, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         Solicitud solicitud = ws.getSolicitud();
@@ -114,7 +114,7 @@ public class AlumnoSolicitudRetiroConstanciaService {
      * @param tipo
      * @return
      */
-    public static String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha, Integer tipo) {
+    public String getGlosaPrincipal(AluCar aluCar, Integer agno, Integer sem, Date fecha, Integer tipo) {
         String glosa;
         Alumno alumno = aluCar.getAlumno();
 
@@ -136,7 +136,7 @@ public class AlumnoSolicitudRetiroConstanciaService {
      * @param aluCar
      * @return
      */
-    public static String getGlosaFinal(AluCar aluCar) {
+    public String getGlosaFinal(AluCar aluCar) {
         String s1;
 
         if (asList(43, 50, 53, 55).contains(aluCar.getAaingreso().getAaiViaIng().getViiCod())) {

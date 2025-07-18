@@ -32,7 +32,7 @@ public final class OficinaCurricularActaRecepcionarActasService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ActaCalificacionPersistence actaPersistence
                 = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());

@@ -34,7 +34,7 @@ public final class ConsultaMisDatosSaveMisDatosService {
      * @param email
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
                                  String email) {
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email));

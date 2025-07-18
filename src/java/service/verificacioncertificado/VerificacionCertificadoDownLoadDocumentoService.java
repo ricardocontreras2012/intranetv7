@@ -19,7 +19,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public class VerificacionCertificadoDownLoadDocumentoService {
     
-    public static ActionInputStreamUtil service(Map<String, Object> sesionMap) throws Exception
+    public ActionInputStreamUtil service(Map<String, Object> sesionMap) throws Exception
     {
         String name;
         InputStream input;
@@ -44,7 +44,7 @@ public class VerificacionCertificadoDownLoadDocumentoService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(String name) throws Exception {
+    private InputStream getInput(String name) throws Exception {
         InputStream retValue = null;
  
         if (name != null) {

@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularParametrosxMencionSaveService.service;
+import service.registradorcurricular.RegistradorCurricularParametrosxMencionSaveService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -17,6 +17,6 @@ public class RegistradorCurricularParametrosxMencionSaveAction extends ActionPar
 
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), getKey());
+        return new RegistradorCurricularParametrosxMencionSaveService().service(getGenericSession(), Manager.getRegistradorSession(sesion), getMapParameters(), getKey());
     }
 }

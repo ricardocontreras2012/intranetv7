@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionGetElectivoService.service;
+import service.common.CommonCursoDefinicionGetElectivoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonCursoDefinicionGetElectivoAction extends ActionCommonSupport 
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), asign, elect, getKey());
+        return new CommonCursoDefinicionGetElectivoService().service(getGenericSession(), asign, elect, getKey());
     }
 
     public void setAsign(Integer asign) {

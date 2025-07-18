@@ -27,7 +27,7 @@ import java.util.stream.IntStream;
  */
 public class CommonPracticaActaRectificatoriaEmitirService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Integer agno = parseInt(parameters.get("agno")[0]);
@@ -59,7 +59,7 @@ public class CommonPracticaActaRectificatoriaEmitirService {
         return retValue;
     }
 
-    private static Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
+    private Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
         ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord,"R");
 

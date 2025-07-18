@@ -19,8 +19,7 @@ import service.common.CommonAlumnoPrintMatriculasService;
  */
 public final class CommonAlumnoPrintMatriculasAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-    CommonAlumnoPrintMatriculasService serviceCert = new CommonAlumnoPrintMatriculasService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -31,7 +30,7 @@ public final class CommonAlumnoPrintMatriculasAction extends ActionCommonSupport
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = serviceCert.service(getGenericSession(), getKey());
+            ais = new CommonAlumnoPrintMatriculasService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

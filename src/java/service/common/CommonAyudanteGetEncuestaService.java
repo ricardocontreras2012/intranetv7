@@ -22,7 +22,7 @@ import infrastructure.util.LogUtil;
  * @author Ricardo
  */
 public class CommonAyudanteGetEncuestaService {
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key) {
          WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();
 

@@ -5,6 +5,7 @@
  */
 package service.common;
 
+import action.common.CommonReporteDownLoadAttachAction;
 import java.io.InputStream;
 import session.GenericSession;
 import infrastructure.util.common.CommonArchivoUtil;
@@ -17,25 +18,10 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public final class CommonReporteDownLoadAttachService {
 
-    /**
-     * Method description
-     *
-     * @param name
-     * @return
-     * @throws java.lang.Exception
-     */
-    public static InputStream getFileServiceAction(String name) throws Exception {
-        return CommonArchivoUtil.getFile(name, "mat");
-    }
+    public InputStream service(CommonReporteDownLoadAttachAction action, GenericSession gs, String key) throws Exception {
 
-    /**
-     * Method Servicio
-     *
-     * @param genericSession Sesion de trabajo.
-     * @param key LLave para acceder a los datos de la sesion.
-     * @return Action status
-     */
-    public static String getNameServiceAction(GenericSession genericSession, String key) {
-        return genericSession.getWorkSession(key).getReporte().getRclaAttach();
+        String name = gs.getWorkSession(key).getReporte().getRclaAttach();
+        action.setName(name);
+        return CommonArchivoUtil.getFile(name, "mat");
     }
 }

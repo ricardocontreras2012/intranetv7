@@ -9,7 +9,6 @@ package service.egresado;
 
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import static service.egresado.EgresadoLoginService.getComplemento;
 import session.GenericSession;
 
 
@@ -29,8 +28,9 @@ public final class EgresadoLoginSeleccionarIngresoService {
      * @param key         LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer pos, String key) {
-        getComplemento(genericSession,
+    public String service(GenericSession genericSession, Integer pos, String key) {
+        EgresadoLoginService svc = new EgresadoLoginService();
+        svc.getComplemento(genericSession,
                 genericSession.getWorkSession(key).getAluCarList().get(pos), key);
 
         return SUCCESS;

@@ -15,7 +15,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public class OficinaCurricularActaConsultarService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String flag, String key)
+    public String service(ActionCommonSupport action, GenericSession genericSession, String flag, String key)
             throws Exception {
         genericSession.getWorkSession(key).setFlag(flag);
         return SUCCESS;

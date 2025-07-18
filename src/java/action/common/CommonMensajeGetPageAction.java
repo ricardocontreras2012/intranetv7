@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonMensajeGetPageService.service;
+import service.common.CommonMensajeGetPageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonMensajeGetPageAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        inputStream = service(getGenericSession(), url, getKey());
+        inputStream = new CommonMensajeGetPageService().service(getGenericSession(), url, getKey());
 
         return "success";
     }

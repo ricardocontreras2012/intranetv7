@@ -21,7 +21,7 @@ import infrastructure.util.LogUtil;
  */
 public class RegistradorCurricularParametrosxMencionGetService {
 
-    public static String service(GenericSession genericSession, RegistradorSession rs, Integer pos, String key) {        
+    public String service(GenericSession genericSession, RegistradorSession rs, Integer pos, String key) {        
         WorkSession ws = genericSession.getWorkSession(key);
         Mencion mencion = ws.getMencionList().get(pos);
         

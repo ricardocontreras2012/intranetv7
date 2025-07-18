@@ -263,7 +263,7 @@ public final class AlumnoCertificacionEmitirAlumnoRegularService {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita, Integer folio, String codigo, String facultad) throws Exception {
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita, Integer folio, String codigo, String facultad) throws Exception {
 
         Paragraph parrafo1 = newParrafo(149, 80, titulo );
         parrafo1.setAlignment(ALIGN_LEFT);
@@ -314,7 +314,7 @@ public final class AlumnoCertificacionEmitirAlumnoRegularService {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
+    private void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
             throws Exception {
         Paragraph parrafo1 = newParrafo(0, 40, normal);
 

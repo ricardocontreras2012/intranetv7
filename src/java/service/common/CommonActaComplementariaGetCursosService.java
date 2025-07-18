@@ -49,7 +49,7 @@ public class CommonActaComplementariaGetCursosService {
      * @param semCal El semestre académico (calificación) que se desea consultar.
      * @return El resultado de la operación. Si todo es correcto, retorna {@link com.opensymphony.xwork2.Action.SUCCESS}.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String key, Integer agnoCal, Integer semCal) {
 
         // Obtiene la sesión de trabajo para acceder a los datos del alumno

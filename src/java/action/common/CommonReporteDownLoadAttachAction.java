@@ -6,8 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import static service.common.CommonReporteDownLoadAttachService.getFileServiceAction;
-import static service.common.CommonReporteDownLoadAttachService.getNameServiceAction;
+import service.common.CommonReporteDownLoadAttachService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -32,8 +31,7 @@ public final class CommonReporteDownLoadAttachAction extends ActionCommonSupport
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            name = getNameServiceAction(getGenericSession(), getKey());
-            inputStream = getFileServiceAction(name);
+            inputStream = new CommonReporteDownLoadAttachService().service(this, getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));
@@ -67,5 +65,9 @@ public final class CommonReporteDownLoadAttachAction extends ActionCommonSupport
      */
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

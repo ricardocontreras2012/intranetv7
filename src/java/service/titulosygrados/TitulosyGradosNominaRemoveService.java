@@ -32,7 +32,7 @@ public class TitulosyGradosNominaRemoveService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, Integer agno, String nomina, Integer tipo, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, Integer agno, String nomina, Integer tipo, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         beginTransaction(ActionUtil.getDBUser());

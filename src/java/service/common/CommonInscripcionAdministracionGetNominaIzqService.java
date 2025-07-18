@@ -14,7 +14,7 @@ import session.JefeCarreraSession;
  */
 public class CommonInscripcionAdministracionGetNominaIzqService {
 
-    public static String service(JefeCarreraSession jcSession) {
+    public String service(JefeCarreraSession jcSession) {
         jcSession.setNominaCursoAdmIzq(jcSession.getCursoAdmIzq().getNominaAlumnosRanking());
         return SUCCESS;
     }

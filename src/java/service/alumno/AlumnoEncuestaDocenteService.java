@@ -28,7 +28,7 @@ import java.util.Optional;
  */
 public final class AlumnoEncuestaDocenteService {
 
-    public static String searchService(GenericSession genericSession, String key) {
+    public  String searchService(GenericSession genericSession, String key) {
         return CommonAlumnoUtil.searchEncuestaDocente(genericSession, key, "I");
     }
 
@@ -40,7 +40,7 @@ public final class AlumnoEncuestaDocenteService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String showFormService(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
+    public  String showFormService(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
         return CommonEncuestaUtil.showFormService(genericSession, alumnoSession, key);
     }
 
@@ -52,7 +52,7 @@ public final class AlumnoEncuestaDocenteService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String saveService(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public  String saveService(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         CursoProfesor cursoProfesor = ws.getCursoProfesor();

@@ -50,7 +50,7 @@ import infrastructure.util.common.CommonSalaUtil;
  */
 public final class CommonSalaPrintHorarioService {
 
-    public static ActionInputStreamUtil service(ActionCommonSupport action, GenericSession genericSession, Integer agno,
+    public ActionInputStreamUtil service(ActionCommonSupport action, GenericSession genericSession, Integer agno,
             Integer sem, String key) throws Exception
     { 
         InputStream input;
@@ -74,7 +74,7 @@ public final class CommonSalaPrintHorarioService {
      * @return
      * @throws java.lang.Exception
      */
-    private static InputStream getInput(ActionCommonSupport action, GenericSession genericSession, Integer agno,
+    private InputStream getInput(ActionCommonSupport action, GenericSession genericSession, Integer agno,
             Integer sem, String key)
             throws Exception {
         
@@ -168,7 +168,7 @@ public final class CommonSalaPrintHorarioService {
      * @param table
      * @param diaList
      */
-    private static void setCellHeader(PdfPTable table, List<Dia> diaList) {
+    private void setCellHeader(PdfPTable table, List<Dia> diaList) {
         PdfPCell cell = new PdfPCell(new Phrase(""));
 
         cell.setBorder(0);
@@ -198,7 +198,7 @@ public final class CommonSalaPrintHorarioService {
      * @param horario
      * @throws Exception
      */
-    private static void setCell(PdfPTable table, Integer modulo, Integer dia, Horario[][] horario) throws Exception {
+    private void setCell(PdfPTable table, Integer modulo, Integer dia, Horario[][] horario) throws Exception {
         String curso = "";
         Horario horarioAux = horario[modulo][dia];
 
@@ -229,7 +229,7 @@ public final class CommonSalaPrintHorarioService {
      * @param table
      * @param iter
      */
-    private static void setCellLeft(PdfPTable table, Iterator<ModuloHorario> iter) {
+    private void setCellLeft(PdfPTable table, Iterator<ModuloHorario> iter) {
         ModuloHorario moduloHorario = iter.next();
         String curso = moduloHorario.getModDesde() + '-' + moduloHorario.getModHasta();
         Chunk diaModulo = new Chunk(curso, new Font(Font.TIMES_ROMAN, 8.0F, BOLD));
@@ -253,7 +253,7 @@ public final class CommonSalaPrintHorarioService {
      * @param text
      * @throws Exception
      */
-    private static void putText(PdfContentByte cb, Integer x, Integer y, String text) throws Exception {
+    private void putText(PdfContentByte cb, Integer x, Integer y, String text) throws Exception {
         cb.beginText();
         cb.setFontAndSize(createFont(BaseFont.TIMES_ROMAN, "Cp1252", false), 14.0F);
         cb.setTextMatrix(x, y);
@@ -272,7 +272,7 @@ public final class CommonSalaPrintHorarioService {
      * @param color
      * @throws Exception
      */
-    private static void putTextColor(PdfContentByte cb, Integer x, Integer y, String text, Color color)
+    private void putTextColor(PdfContentByte cb, Integer x, Integer y, String text, Color color)
             throws Exception {
         cb.rectangle(x, (y - 5), 400.0F, 20.0F);
         cb.setColorFill(color);
@@ -294,7 +294,7 @@ public final class CommonSalaPrintHorarioService {
      * @param text
      * @throws Exception
      */
-    private static void putDate(PdfContentByte cb, Integer x, Integer y, String text) throws Exception {
+    private void putDate(PdfContentByte cb, Integer x, Integer y, String text) throws Exception {
         cb.beginText();
         cb.setFontAndSize(createFont(BaseFont.TIMES_ROMAN, "Cp1252", false), 10.0F);
         cb.setTextMatrix(x, y);

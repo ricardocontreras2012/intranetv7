@@ -30,7 +30,7 @@ public class EgresadoLaboralesViewLaboralService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, EgresadoSession es, Integer pos, String key) {
+    public String service(GenericSession genericSession, EgresadoSession es, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         FichaLaboralPersistence fichaLaboralPersistence
                 = ContextUtil.getDAO().getFichaLaboralPersistence(ActionUtil.getDBUser());

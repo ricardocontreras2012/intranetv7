@@ -8,7 +8,7 @@ package action.common;
 import domain.model.Curso;
 import java.util.List;
 
-import static service.common.CommonProfesorCargaHistoricaPrintService.service;
+import service.common.CommonProfesorCargaHistoricaPrintService;
 import infrastructure.support.action.ActionReportSupport;
 
 /**
@@ -34,7 +34,7 @@ public final class CommonProfesorCargaHistoricaPrintAction extends ActionReportS
      */
     @Override
     public String action() throws Exception {              
-        nomina = service(getGenericSession(), getReport(), getKey());
+        nomina = new CommonProfesorCargaHistoricaPrintService().service(getGenericSession(), getReport(), getKey());
         return SUCCESS;
     }
    

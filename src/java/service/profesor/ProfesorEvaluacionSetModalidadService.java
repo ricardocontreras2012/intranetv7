@@ -24,7 +24,7 @@ public class ProfesorEvaluacionSetModalidadService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String modalidad, String key) {
+    public String service(GenericSession genericSession, String modalidad, String key) {
         String retValue = null;
 
         if ("R".equals(modalidad)) {

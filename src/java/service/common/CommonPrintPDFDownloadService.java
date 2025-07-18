@@ -15,7 +15,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public class CommonPrintPDFDownloadService {
 
-    public static InputStream service(GenericSession genericSession, String key) {
+    public InputStream service(GenericSession genericSession, String key) {
         try {
             return CommonArchivoUtil.getFile(genericSession.getWorkSession(key).getPdfTempFile(), "tmp");
         } catch (Exception e) {return null;

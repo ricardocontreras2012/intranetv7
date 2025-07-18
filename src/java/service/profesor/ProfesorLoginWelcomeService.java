@@ -14,7 +14,7 @@ import session.GenericSession;
  */
 public class ProfesorLoginWelcomeService {
 
-    public static String service(GenericSession genericSession, String key)
+    public String service(GenericSession genericSession, String key)
             throws Exception { 
 
         return Action.SUCCESS;

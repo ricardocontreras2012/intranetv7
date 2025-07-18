@@ -16,7 +16,7 @@ import session.SecretariaSession;
  */
 public class CommonConvalidacionComisionEnableService {
 
-    public static String service(SecretariaSession secreSession)
+    public String service(SecretariaSession secreSession)
             throws Exception {
         secreSession.setComision(new ArrayList<>());
 

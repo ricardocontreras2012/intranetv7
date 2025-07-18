@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMatriculaGetNominaService.service;
+import service.common.CommonMatriculaGetNominaService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**
@@ -24,7 +24,7 @@ public class CommonMatriculaGetNominaAction extends ActionValidationAgnoSemSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new CommonMatriculaGetNominaService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
     }
 
     /**

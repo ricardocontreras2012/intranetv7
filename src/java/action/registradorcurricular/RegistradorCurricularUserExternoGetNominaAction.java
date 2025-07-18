@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularUserExternoGetNominaService.service;
+import service.registradorcurricular.RegistradorCurricularUserExternoGetNominaService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -28,6 +28,6 @@ public final class RegistradorCurricularUserExternoGetNominaAction extends Actio
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getRegistradorSession(sesion));
+        return new RegistradorCurricularUserExternoGetNominaService().service(getGenericSession(), Manager.getRegistradorSession(sesion));
     }
 }

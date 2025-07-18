@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  */
 public class SecretariaDocenteConvalidacionGetSolicitudesService {
 
-    public static String service(GenericSession genericSession, SecretariaSession secreSession, String key) {
+    public String service(GenericSession genericSession, SecretariaSession secreSession, String key) {
         secreSession.setConvalidaciones(ContextUtil.getDAO().getConvalidacionSolicitudPersistence(ActionUtil.getDBUser()).find(genericSession.getWorkSession(key).getAluCar().getId()));
 
         return SUCCESS;

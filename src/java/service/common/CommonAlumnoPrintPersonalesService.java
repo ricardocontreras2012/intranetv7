@@ -30,7 +30,7 @@ public final class CommonAlumnoPrintPersonalesService extends CommonAlumnoPrintU
         putHeader2(document, aluCar);
     }    
     
-     private static void putHeader2(Document doc, AluCar aluCar) throws DocumentException {         
+     private void putHeader2(Document doc, AluCar aluCar) throws DocumentException {         
         Alumno alumno = aluCar.getAlumno();
         PdfPTable table = getTableTwoCols();
 

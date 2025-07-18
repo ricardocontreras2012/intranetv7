@@ -36,7 +36,7 @@ public final class CommonMaterialRemoveMaterialesService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key)
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         MaterialApoyoPersistence materialApoyoPersistence = ContextUtil.getDAO().getMaterialApoyoPersistence(ActionUtil.getDBUser());

@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorLoginService.service;
+import service.profesor.ProfesorLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -17,8 +17,8 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class ProfesorLoginAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-        private Integer rut;
-private String passwd;
+    private Integer rut;
+    private String passwd;
 
     /**
      * Method description
@@ -28,7 +28,7 @@ private String passwd;
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), rut, passwd, getKey());
+        return new ProfesorLoginService().service(this, getSesion(), rut, passwd, getKey());
     }
 
     public Integer getRut() {
@@ -45,5 +45,5 @@ private String passwd;
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
-    }    
+    }
 }

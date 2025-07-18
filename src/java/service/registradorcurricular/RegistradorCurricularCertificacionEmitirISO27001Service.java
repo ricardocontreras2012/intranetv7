@@ -140,7 +140,7 @@ public class RegistradorCurricularCertificacionEmitirISO27001Service {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font normal,  Font negrita,
+    private void putHeader(Document document, Font normal,  Font negrita,
             Integer folio, String codigo)
             throws Exception {        
 
@@ -176,7 +176,7 @@ public class RegistradorCurricularCertificacionEmitirISO27001Service {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, Font big, String certifico, String logro, String otorga, String valido, String fecha, String web)
+    private void putBody(Document document, Font normal, Font big, String certifico, String logro, String otorga, String valido, String fecha, String web)
             throws Exception {
         Paragraph parrafo1 = newParrafo(70, 25);
         parrafo1.setAlignment(ALIGN_JUSTIFIED);

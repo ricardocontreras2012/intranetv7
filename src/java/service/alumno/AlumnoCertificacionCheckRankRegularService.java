@@ -19,7 +19,7 @@ import infrastructure.util.ContextUtil;
  * @author Ricardo
  */
 public class AlumnoCertificacionCheckRankRegularService {
-    public static String service(GenericSession genericSession, AlumnoSession as,
+    public String service(GenericSession genericSession, AlumnoSession as,
             String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);

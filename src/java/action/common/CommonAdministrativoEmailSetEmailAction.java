@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAdministrativoEmailSetEmailService.service;
+import service.common.CommonAdministrativoEmailSetEmailService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonAdministrativoEmailSetEmailAction extends ActionCommonS
     @Override
     public String action() throws Exception {
         
-        return service(this, getGenericSession(), email);
+        return new CommonAdministrativoEmailSetEmailService().service(this, getGenericSession(), email);
     }    
 
 

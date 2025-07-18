@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonActaComplementariaEmitirActaService.service;
+import service.common.CommonActaComplementariaEmitirActaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,6 +24,6 @@ public class CommonActaComplementariaEmitirActaAction extends ActionParameterAwa
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getMapParameters(), getKey());
+        return new CommonActaComplementariaEmitirActaService().service(this, getGenericSession(), getMapParameters(), getKey());
     }
 }

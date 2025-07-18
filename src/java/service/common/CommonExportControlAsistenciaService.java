@@ -46,7 +46,7 @@ public final class CommonExportControlAsistenciaService {
      * @return
      * @throws java.lang.Exception
      */
-    public static InputStream service(GenericSession genericSession, String key, String content, Integer agno, Integer sem) throws Exception {
+    public InputStream service(GenericSession genericSession, String key, String content, Integer agno, Integer sem) throws Exception {
         InputStream retValue = null;
         String file;
         FileOutputStream fileOut = null;
@@ -191,7 +191,7 @@ public final class CommonExportControlAsistenciaService {
      * @param fila
      * @param notasFinales
      */
-    private static void getGrid(XSSFSheet hoja, int fila, Integer agno, Integer sem) {
+    private void getGrid(XSSFSheet hoja, int fila, Integer agno, Integer sem) {
 
         int filaAux = fila;
         for(String dia : new String[] {"L", "M", "W", "J", "V", "S"}) {

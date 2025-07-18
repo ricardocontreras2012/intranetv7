@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonReporteGetResumenService.service;
+import service.common.CommonReporteGetResumenService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class CommonReporteGetResumenAction extends ActionCommonAgnoSemSupp
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getAgno(), getSem(), pos, getKey());
+        return new CommonReporteGetResumenService().service(getGenericSession(), getAgno(), getSem(), pos, getKey());
     }
 
     /**

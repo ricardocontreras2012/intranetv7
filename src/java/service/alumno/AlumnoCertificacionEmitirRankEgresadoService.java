@@ -54,7 +54,8 @@ import infrastructure.util.common.CommonSimpleMessageUtil;
  * @author Ricardo
  */
 public class AlumnoCertificacionEmitirRankEgresadoService {
-   public ActionInputStreamUtil service(Integer correl) {
+
+    public ActionInputStreamUtil service(Integer correl) {
 
         Map<String, String> mapParams = CommonCertificacionUtil.getParams(correl);
 
@@ -69,7 +70,7 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
         String description = FormatUtil.getMimeType(name);
         Integer monto = Integer.parseInt(mapParams.get("monto"));
 
-        return new ActionInputStreamUtil(name, description, getInput(correl, tramite, obs, ranking, folio, name, genera, type, CommonCertificacionUtil.getPagoString(monto), session));      
+        return new ActionInputStreamUtil(name, description, getInput(correl, tramite, obs, ranking, folio, name, genera, type, CommonCertificacionUtil.getPagoString(monto), session));
     }
 
     private InputStream getInput(
@@ -82,7 +83,7 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
             Unidad facultad = aluCar.getUnidadFacultad();
             String urlWeb = facultad.getUniUrl();
             Date fecha = getSysdate();
-            String fechaString =  DateUtil.getFechaCiudad(fecha);
+            String fechaString = DateUtil.getFechaCiudad(fecha);
 
             if (fecha != null) {
                 Tramite tramite = ContextUtil.getTramiteMap().get(codTramite);
@@ -97,9 +98,9 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
                             + alumno.getNombre()
                             + ", Cédula Nacional de Identidad N° "
                             + alumno.getAluRut() + '-'
-                            + alumno.getAluDv() +", "
+                            + alumno.getAluDv() + ", "
                             + prefijoCarrera + " de "
-                            + aluCar.getNombreCarrera() + ", tiene el siguiente ranking de promoción.\n\n\n"+ranking;
+                            + aluCar.getNombreCarrera() + ", tiene el siguiente ranking de promoción.\n\n\n" + ranking;
 
                     String extiende = "";
 
@@ -108,7 +109,6 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
 
                     glosaLog = ranking;
 
-                    
                     CommonCertificacionUtil.registraLog(aluCar, folio, verificador, fecha, SystemParametersUtil.C6, null, null, codTramite, glosaLog, obs, genera, type);
 
                     Document document = new Document(LETTER);
@@ -136,16 +136,16 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
                     document.close();
                     CommonCertificacionUtil.writeFile(buffer, PATH_CERT + name);
                     buffer.close();
-                    
+
                     Files.createSymbolicLink(Paths.get(PATH_ATTACH_MESSAGES + name), Paths.get(PATH_CERT + name));
 
-                    CommonSimpleMessageUtil.send(name, key, aluCar.getAlumno().getAluRut(), aluCar.getAlumno().getNombreMensaje(), genera, "Registrador Curricular", "RC","",
+                    CommonSimpleMessageUtil.send(name, key, aluCar.getAlumno().getAluRut(), aluCar.getAlumno().getNombreMensaje(), genera, "Registrador Curricular", "RC", "",
                             "", "C6", "CERTIFICADO DE RANKING EGRESADO", "TM_CERT");
 
                     // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
                     ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
                     LogUtil.setLog(genera, alumno.getAluRut());
-                    
+
                     return CommonArchivoUtil.getFile(name, "cert");
                 }
 
@@ -171,9 +171,8 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
      *
      * @throws Exception
      */
-    private static void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
-            Integer folio, String codigo, String facultad)
-            {
+    private void putHeader(Document document, Font titulo, Font normal, Font subrayado, Font negrita,
+            Integer folio, String codigo, String facultad) {
 
         Paragraph parrafo1 = newParrafo(149, 80);
         parrafo1.setAlignment(ALIGN_LEFT);
@@ -223,8 +222,7 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
      *
      * @throws Exception
      */
-    private static void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web)
-            {
+    private void putBody(Document document, Font normal, String certifico, String extiende, String fecha, String web) {
         Paragraph parrafo1 = newParrafo(0, 40);
         parrafo1.setAlignment(ALIGN_JUSTIFIED);
         parrafo1.add(new Chunk(certifico, normal));
@@ -245,5 +243,5 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
         parrafo4.setAlignment(ALIGN_LEFT);
         parrafo4.add(new Chunk(fecha, normal));
         document.add(parrafo4);
-    }    
+    }
 }

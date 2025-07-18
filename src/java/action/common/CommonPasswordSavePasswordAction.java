@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonPasswordSavePasswordService.service;
+import service.common.CommonPasswordSavePasswordService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonPasswordSavePasswordAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), passwdActual, passwdNueva);
+        return new CommonPasswordSavePasswordService().service(this, getGenericSession(), passwdActual, passwdNueva);
     }
 
     public String getPasswdActual() {

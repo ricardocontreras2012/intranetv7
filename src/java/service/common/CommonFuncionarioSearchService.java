@@ -23,7 +23,7 @@ import infrastructure.util.LogUtil;
  */
 public class CommonFuncionarioSearchService {
 
-    public static String service(GenericSession genericSession, Integer rut, String paterno, String key) {
+    public String service(GenericSession genericSession, Integer rut, String paterno, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         List<Funcionario> list = new ArrayList<>();
 

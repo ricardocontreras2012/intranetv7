@@ -10,7 +10,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGetConfirmacionPagoService.service;
+import service.alumno.AlumnoCertificacionGetConfirmacionPagoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public class AlumnoCertificacionGetConfirmacionPagoAction extends ActionCommonSu
     
     @Override
     public String action(){
-        return service(this, transaction,amount, payment_method, isApproved);
+        return new AlumnoCertificacionGetConfirmacionPagoService().service(this, transaction,amount, payment_method, isApproved);
     }
 
     public void setTransaction(String transaction) {

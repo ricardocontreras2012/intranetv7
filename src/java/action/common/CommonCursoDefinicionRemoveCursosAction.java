@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionRemoveCursosService.service;
+import service.common.CommonCursoDefinicionRemoveCursosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class CommonCursoDefinicionRemoveCursosAction extends ActionParamet
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonCursoDefinicionRemoveCursosService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

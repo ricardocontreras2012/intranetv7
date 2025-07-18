@@ -8,7 +8,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonInscripcionGetFotoProfesorService.service;
+import service.common.CommonInscripcionGetFotoProfesorService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -22,7 +22,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public final class CommonInscripcionGetFotoProfesorAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
     private Integer pos;
     private String source;
 
@@ -33,7 +33,7 @@ public final class CommonInscripcionGetFotoProfesorAction extends ActionCommonSu
      */
    @Override
     public String action() {
-        ais = service(getGenericSession(), pos, source, getKey());
+        ais = new CommonInscripcionGetFotoProfesorService().service(getGenericSession(), pos, source, getKey());
         return SUCCESS;
     }
     

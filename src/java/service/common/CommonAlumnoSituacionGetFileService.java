@@ -20,7 +20,7 @@ import infrastructure.util.common.CommonArchivoUtil;
  */
 public class CommonAlumnoSituacionGetFileService {
     
-    public static ActionInputStreamUtil service(GenericSession genericSession, Integer pos, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, Integer pos, String key) throws Exception {
         String name;
         InputStream input;
         String description;

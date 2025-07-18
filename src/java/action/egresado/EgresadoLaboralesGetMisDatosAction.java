@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoLaboralesGetMisDatosService.service;
+import service.egresado.EgresadoLaboralesGetMisDatosService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -25,6 +25,6 @@ public class EgresadoLaboralesGetMisDatosAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getEgresadoSession(sesion), getKey());
+        return new EgresadoLaboralesGetMisDatosService().service(getGenericSession(), Manager.getEgresadoSession(sesion), getKey());
     }
 }

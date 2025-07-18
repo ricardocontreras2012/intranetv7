@@ -33,7 +33,7 @@ public final class CommonMaterialUploadMaterialService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer tipo, File upload,
             String uploadFileName, String caption, String key)
             throws Exception {
         doNewFile(action, genericSession, tipo, upload, uploadFileName, caption, key);

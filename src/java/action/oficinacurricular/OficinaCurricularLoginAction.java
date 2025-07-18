@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import static service.oficinacurricular.OficinaCurricularLoginService.service;
+import service.oficinacurricular.OficinaCurricularLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class OficinaCurricularLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new OficinaCurricularLoginService().service(getGenericSession(), getKey());
     }
 }

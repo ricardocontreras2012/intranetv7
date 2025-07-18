@@ -19,7 +19,7 @@ import infrastructure.util.ContextUtil;
  */
 public class SecretariaDocenteConvalidacionGetSolicitudService {
 
- public static String service(GenericSession genericSession, SecretariaSession secreSession, Integer pos, String key) {
+ public String service(GenericSession genericSession, SecretariaSession secreSession, Integer pos, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         secreSession.setConvalidacion( secreSession.getConvalidaciones().get(pos));

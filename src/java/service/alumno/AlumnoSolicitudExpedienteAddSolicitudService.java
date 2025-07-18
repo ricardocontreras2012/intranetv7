@@ -24,7 +24,7 @@ import session.WorkSession;
  */
 public class AlumnoSolicitudExpedienteAddSolicitudService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         Solicitud solicitud = ws.getSolicitud();

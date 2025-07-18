@@ -28,7 +28,7 @@ public final class AlumnoCertificacionGetCertificadosService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, AlumnoSession alumnoSession,
+    public String service(GenericSession genericSession, AlumnoSession alumnoSession,
             String key) {        
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setTramites(ContextUtil.getTramiteList());

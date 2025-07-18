@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonConvalidacionComisionAddProfService.service;
+import service.common.CommonConvalidacionComisionAddProfService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -27,7 +27,7 @@ public class CommonConvalidacionComisionAddProfAction extends ActionCommonSuppor
     @Override
     public String action() throws Exception {
 
-        service(getGenericSession(), Manager.getSecretariaSession(sesion), getKey());
+        new CommonConvalidacionComisionAddProfService().service(getGenericSession(), Manager.getSecretariaSession(sesion), getKey());
 
         setKey(getGenericSession().getWorkSession(getKey()).getKeyParent());
 

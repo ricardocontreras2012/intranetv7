@@ -13,7 +13,7 @@ import infrastructure.util.ContextUtil;
  */
 public class RegistradorCurricularCertificadosGetGlosaService {
 
-    public static String service(GenericSession genericSession, RegistradorSession rs) {
+    public String service(GenericSession genericSession, RegistradorSession rs) {
         rs.setCertificadoList(ContextUtil.getDAO().getSolicitudCertificadoCarritoPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));    
         return SUCCESS;
     }

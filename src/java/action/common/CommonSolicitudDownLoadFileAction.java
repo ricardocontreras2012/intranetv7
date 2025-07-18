@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonSolicitudDownLoadFileService.service;
+import service.common.CommonSolicitudDownLoadFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -21,7 +21,7 @@ import infrastructure.util.ActionInputStreamUtil;
 public final class CommonSolicitudDownLoadFileAction extends ActionCommonSupport {
 
     private Integer file;
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -33,7 +33,7 @@ public final class CommonSolicitudDownLoadFileAction extends ActionCommonSupport
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = service(getGenericSession(), file, getKey());
+            ais = new CommonSolicitudDownLoadFileService().service(getGenericSession(), file, getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

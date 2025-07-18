@@ -6,7 +6,7 @@
 package action.secretariadocente;
 
 import java.io.File;
-import static service.secretariadocente.SecretariaDocenteConvalidacionGetExcelService.service;
+import service.secretariadocente.SecretariaDocenteConvalidacionGetExcelService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -20,7 +20,7 @@ public class SecretariaDocenteConvalidacionGetExcelAction extends ActionCommonSu
 
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(),Manager.getSecretariaSession(sesion), getKey(), file);
+        return new SecretariaDocenteConvalidacionGetExcelService().service(getGenericSession(),Manager.getSecretariaSession(sesion), getKey(), file);
     }
 
     /**

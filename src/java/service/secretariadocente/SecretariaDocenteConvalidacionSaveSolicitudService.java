@@ -32,7 +32,7 @@ import java.util.stream.IntStream;
  */
 public class SecretariaDocenteConvalidacionSaveSolicitudService {
 
-    /*public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    /*public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user =ActionUtil.getDBUser();
         SecretariaSession secreSession = (SecretariaSession)action.getSesion().get("secretariaSession");
@@ -106,7 +106,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
         
         return retValue;
     }*/
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         SecretariaSession secreSession = (SecretariaSession) action.getSesion().get("secretariaSession");
@@ -137,7 +137,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
         return retValue;
     }
 
-    private static void inicializarSolicitud(ConvalidacionSolicitud solicitud, AluCar aluCar, Map<String, String[]> parameters, String user) {
+    private void inicializarSolicitud(ConvalidacionSolicitud solicitud, AluCar aluCar, Map<String, String[]> parameters, String user) {
         ConvalidacionComision comision = new ConvalidacionComision();
         Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaConvalidacion();
         comision.setCcoCod(ContextUtil.getDAO().getScalarPersistence(user).getComision(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()));
@@ -153,7 +153,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
         ContextUtil.getDAO().getConvalidacionSolicitudPersistence(user).makePersistent(solicitud);
     }
 
-    private static void procesarAsignaturas(SecretariaSession secreSession, Map<String, String[]> parameters, ConvalidacionSolicitud solicitud, String user) {
+    private void procesarAsignaturas(SecretariaSession secreSession, Map<String, String[]> parameters, ConvalidacionSolicitud solicitud, String user) {
         IntStream.range(0, secreSession.getPorAprobar().size())
                 .filter(i -> parameters.get("ck_" + i) != null)
                 .forEach(i -> {

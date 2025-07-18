@@ -18,8 +18,7 @@ import infrastructure.util.ActionInputStreamUtil;
  */
 public class SecretariaDocenteConvalidacionImprimirInformeAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-    SecretariaDocenteConvalidacionImprimirInformeService serviceCert = new SecretariaDocenteConvalidacionImprimirInformeService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -30,7 +29,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeAction extends ActionC
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = serviceCert.service(getGenericSession(), Manager.getSecretariaSession(sesion), getKey());
+            ais = new SecretariaDocenteConvalidacionImprimirInformeService().service(getGenericSession(), Manager.getSecretariaSession(sesion), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

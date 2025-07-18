@@ -26,7 +26,7 @@ public final class CommonMensajeGetNumMessagesService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
             WorkSession ws = genericSession.getWorkSession(key);
 
             ws.setBlinkMensajes(false);

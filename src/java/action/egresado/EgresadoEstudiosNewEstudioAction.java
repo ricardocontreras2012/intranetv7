@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoEstudiosNewEstudioService.service;
+import service.egresado.EgresadoEstudiosNewEstudioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class EgresadoEstudiosNewEstudioAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new EgresadoEstudiosNewEstudioService().service(getGenericSession(), getKey());
     }
 }

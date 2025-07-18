@@ -19,9 +19,7 @@ import service.common.CommonAlumnoPrintCalidadesService;
  */
 public final class CommonAlumnoPrintCalidadesAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-    //CommonAlumnoPrintCalidadesService serviceCert = new CommonAlumnoPrintCalidadesxxxService();
-    CommonAlumnoPrintCalidadesService serviceCert = new CommonAlumnoPrintCalidadesService();
-    ActionInputStreamUtil ais;
+    private ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -32,7 +30,7 @@ public final class CommonAlumnoPrintCalidadesAction extends ActionCommonSupport 
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = serviceCert.service(getGenericSession(), getKey());
+            ais = new CommonAlumnoPrintCalidadesService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

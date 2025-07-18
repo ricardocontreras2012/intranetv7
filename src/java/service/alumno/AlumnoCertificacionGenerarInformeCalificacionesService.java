@@ -23,7 +23,7 @@ import infrastructure.util.common.CommonCertificacionUtil;
  * @author Ricardo
  */
 public class AlumnoCertificacionGenerarInformeCalificacionesService {
-    public static String service(AlumnoCertificacionGenerarInformeCalificacionesAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, String obs, String key) {
+    public String service(AlumnoCertificacionGenerarInformeCalificacionesAction action, GenericSession genericSession, AlumnoSession as, Integer codTramite, String obs, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         String obsAux = (obs == null) ? "" : obs;

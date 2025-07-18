@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonInscripcionEnableInscripcionService.service;
+import service.common.CommonInscripcionEnableInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,6 +25,6 @@ public class CommonInscripcionEnableInscripcionAction extends ActionCommonSuppor
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonInscripcionEnableInscripcionService().service(getGenericSession(), getKey());
     }
 }

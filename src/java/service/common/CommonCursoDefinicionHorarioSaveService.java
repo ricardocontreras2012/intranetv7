@@ -29,7 +29,7 @@ import infrastructure.util.LogUtil;
  */
 public class CommonCursoDefinicionHorarioSaveService {
 
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         Integer position = parseInt(parameters.get("pos")[0]);
         String user = ActionUtil.getDBUser();
 

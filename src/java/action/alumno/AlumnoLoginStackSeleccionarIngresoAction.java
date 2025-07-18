@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoLoginStackSeleccionarIngresoService.service;
+import service.alumno.AlumnoLoginStackSeleccionarIngresoService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -14,9 +14,9 @@ import infrastructure.support.action.common.ActionCommonSupport;
  * @author Ricardo
  */
 public class AlumnoLoginStackSeleccionarIngresoAction extends ActionCommonSupport {
-
+    
     @Override
     public String action() {
-        return service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return new AlumnoLoginStackSeleccionarIngresoService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 }

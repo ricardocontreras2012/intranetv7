@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRCurricularAddUnidadService.service;
+import service.common.CommonRCurricularAddUnidadService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -39,7 +39,7 @@ public class CommonRCurricularAddUnidadAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        retValue = service(getGenericSession(), getKey(), duty, menCodCar, menCodMen, uniCod, uniNom, uniCC, uniUrl, uniTipo, uniColorSala, uniAcadMayor, uniAdmMayor, uniMayor, uniSuperior);
+        retValue = new CommonRCurricularAddUnidadService().service(getGenericSession(), getKey(), duty, menCodCar, menCodMen, uniCod, uniNom, uniCC, uniUrl, uniTipo, uniColorSala, uniAcadMayor, uniAdmMayor, uniMayor, uniSuperior);
         return retValue;
     }
 

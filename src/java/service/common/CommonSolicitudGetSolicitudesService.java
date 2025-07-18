@@ -35,7 +35,7 @@ public final class CommonSolicitudGetSolicitudesService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(GenericSession genericSession, String key, Integer estado, String inicio, String termino) throws Exception {
+    public String service(GenericSession genericSession, String key, Integer estado, String inicio, String termino) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
         Date fechaInicio;
         Date fechaFinal;

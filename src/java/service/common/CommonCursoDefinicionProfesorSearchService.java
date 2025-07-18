@@ -27,7 +27,7 @@ public class CommonCursoDefinicionProfesorSearchService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer rut, String paterno, String materno,
+    public String service(GenericSession genericSession, Integer rut, String paterno, String materno,
             String nombre, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 

@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorActaRectificatoriaGetNominaService.service;
+import service.profesor.ProfesorActaRectificatoriaGetNominaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class ProfesorActaRectificatoriaGetNominaAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new ProfesorActaRectificatoriaGetNominaService().service(getGenericSession(), getKey());
     }
 
 }

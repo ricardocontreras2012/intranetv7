@@ -32,7 +32,7 @@ import java.util.Optional;
  */
 public final class AlumnoEncuestaAyudanteService {
 
-    public static String search(GenericSession genericSession, String key) {
+    public String search(GenericSession genericSession, String key) {
         return CommonAlumnoUtil.searchEncuestaAyudante(genericSession, key, "I");
     }
 
@@ -43,7 +43,7 @@ public final class AlumnoEncuestaAyudanteService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String showFormServiceAction(GenericSession genericSession, String key) {
+    public String showFormServiceAction(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         EncuestaAyudante encuesta = ws.getEncuestaAyudante();
 
@@ -66,7 +66,7 @@ public final class AlumnoEncuestaAyudanteService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String saveServiceAction(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String saveServiceAction(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         int correl;
         WorkSession ws = genericSession.getWorkSession(key);
         CursoAyudante cursoAyudante = ws.getCursoAyudante();
@@ -138,7 +138,7 @@ public final class AlumnoEncuestaAyudanteService {
      * @param aluCar
      * @param encuesta
      */
-    private static void verificarRespuestas(List<CursoAyudante> cursoList, AluCar aluCar, EncuestaAyudante encuesta) {
+    private void verificarRespuestas(List<CursoAyudante> cursoList, AluCar aluCar, EncuestaAyudante encuesta) {
         if (encuesta != null) {
             while (!cursoList.isEmpty()) {
                 RespuestaEncuestaAyudantePersistence respuestaPersistence

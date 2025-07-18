@@ -31,7 +31,7 @@ public final class CommonRequisitoAdicionalLogroGetInscripcionesService {
      * @param key LLave para aceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, Integer trequisito, String key) {
+    public String service(GenericSession genericSession, Integer trequisito, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         if ((ws.getTrequisitoLogroAdicional()== null)

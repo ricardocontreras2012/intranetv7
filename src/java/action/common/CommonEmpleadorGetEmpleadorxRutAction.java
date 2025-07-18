@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonEmpleadorGetEmpleadorxRutService.service;
+import service.common.CommonEmpleadorGetEmpleadorxRutService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonEmpleadorGetEmpleadorxRutAction extends ActionCommonSup
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), rut);
+        return new CommonEmpleadorGetEmpleadorxRutService().service(getGenericSession(), getKey(), rut);
     }
 
     /**

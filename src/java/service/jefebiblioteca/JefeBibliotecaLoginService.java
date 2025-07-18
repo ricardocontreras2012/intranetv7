@@ -23,7 +23,7 @@ public class JefeBibliotecaLoginService {
      * @return
      * @throws Exception
      */
-    public static String service(ActionCommonSupport action, Map<String, Object> sesion, String key) throws Exception {
+    public String service(ActionCommonSupport action, Map<String, Object> sesion, String key) throws Exception {
         return SUCCESS;
     }
 }

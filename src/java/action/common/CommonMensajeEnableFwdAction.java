@@ -8,7 +8,7 @@
 package action.common;
 
 
-import static service.common.CommonMensajeEnableFwdService.service;
+import service.common.CommonMensajeEnableFwdService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 
@@ -29,6 +29,6 @@ public final class CommonMensajeEnableFwdAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new CommonMensajeEnableFwdService().service(getGenericSession(), getKey());
     }
 }

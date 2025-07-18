@@ -33,7 +33,7 @@ public class EgresadoLaboralesDeleteLaboralService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, EgresadoSession es, Integer pos, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, EgresadoSession es, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
 

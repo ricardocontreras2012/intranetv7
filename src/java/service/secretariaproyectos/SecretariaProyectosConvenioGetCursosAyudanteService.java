@@ -15,7 +15,7 @@ import infrastructure.util.ContextUtil;
  * @author Ricardo
  */
 public class SecretariaProyectosConvenioGetCursosAyudanteService {
- public static String service(GenericSession genericSession, Integer rut,
+ public String service(GenericSession genericSession, Integer rut,
             Integer agno, Integer sem, String proyecto, String key) {
 
         genericSession.getWorkSession(key).setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findAyudantia(rut, agno, sem, proyecto));

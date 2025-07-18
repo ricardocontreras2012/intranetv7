@@ -15,7 +15,7 @@ import infrastructure.util.common.CommonUtil;
  */
 public class DirectorEdContinuaLoginService {
 
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         CommonUtil.setAgnoSemAct(genericSession.getWorkSession(key));
         return SUCCESS;
     }

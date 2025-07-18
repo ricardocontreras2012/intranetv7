@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGlosaService.service;
+import service.alumno.AlumnoCertificacionGlosaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class AlumnoCertificacionGlosaAction extends ActionCommonSupport {
      */
     @Override
     public String action(){
-        return service(correl);
+        return new AlumnoCertificacionGlosaService().service(correl);
     }
 
     public void setCorrel(Integer correl) {

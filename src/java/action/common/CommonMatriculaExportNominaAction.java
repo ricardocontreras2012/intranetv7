@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import static service.common.CommonMatriculaExportNominaService.service;
+import service.common.CommonMatriculaExportNominaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.common.CommonMaterialUtil;
@@ -34,7 +34,7 @@ public class CommonMatriculaExportNominaAction extends ActionCommonSupport {
         
         description = AppStaticsUtil.XLS_MIME;
         contentDisposition = CommonMaterialUtil.getContentDispositionSemAgno(getGenericSession(), getKey(),"NOMINA_MATRICULADOS");
-        excelFile = service(getGenericSession(), contentDisposition,
+        excelFile = new CommonMatriculaExportNominaService().service(getGenericSession(), contentDisposition,
                 getKey());
 
         return SUCCESS;

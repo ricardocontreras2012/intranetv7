@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionCheckRankRegularService.service;
+import service.alumno.AlumnoCertificacionCheckRankRegularService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -24,6 +24,6 @@ public class AlumnoCertificacionCheckRankRegularAction extends ActionCommonSuppo
      */
     @Override
     public String action(){
-        return service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return new AlumnoCertificacionCheckRankRegularService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 }

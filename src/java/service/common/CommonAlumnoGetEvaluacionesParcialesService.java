@@ -27,7 +27,7 @@ public final class CommonAlumnoGetEvaluacionesParcialesService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         ws.getAluCar().setEvaluacionAlumnoList(CommonCursoUtil.getParent(ws.getCurso(), ws.getCargaEspejo()));

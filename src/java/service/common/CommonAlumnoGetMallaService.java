@@ -26,7 +26,7 @@ public final class CommonAlumnoGetMallaService {
      * @return Action status
      * @throws Exception Si el servicio genera una exception
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
 
         genericSession.setMallaContainer(aluCar.getMalla(genericSession.getUserType()));

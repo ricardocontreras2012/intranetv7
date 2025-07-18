@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonPersonaGetPersonaxRutService.service;
+import service.common.CommonPersonaGetPersonaxRutService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonPersonaGetPersonaxRutAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey(), rut);
+        return new CommonPersonaGetPersonaxRutService().service(getGenericSession(), getKey(), rut);
     }
 
     /**

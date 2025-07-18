@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import static service.egresado.EgresadoEstudiosDeleteEstudioService.service;
+import service.egresado.EgresadoEstudiosDeleteEstudioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,7 +25,7 @@ public class EgresadoEstudiosDeleteEstudioAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), correl);
+        return new EgresadoEstudiosDeleteEstudioService().service(this, getGenericSession(), correl);
     }
 
     /**

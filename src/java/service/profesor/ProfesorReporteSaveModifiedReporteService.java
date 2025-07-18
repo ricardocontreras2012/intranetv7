@@ -39,7 +39,7 @@ public final class ProfesorReporteSaveModifiedReporteService {
      * @return Action status.
      * @throws Exception Si el servico genera una exception.
      */
-    public static String service(GenericSession genericSession, Integer sesionReporte, String objetivos,
+    public String service(GenericSession genericSession, Integer sesionReporte, String objetivos,
             String contenido, String observaciones, String metodo, String recuperacion, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);

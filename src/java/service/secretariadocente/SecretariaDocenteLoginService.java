@@ -28,7 +28,7 @@ public class SecretariaDocenteLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session) throws Exception {       
+    public String service(Map<String, Object> session) throws Exception {       
         SecretariaSession secreSession = new SecretariaSession();
         GenericSession genericSession = (GenericSession)session.get("genericSession");
         Administrativo administrativo = genericSession.getAdministrativo();

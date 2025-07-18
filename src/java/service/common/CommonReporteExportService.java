@@ -40,8 +40,8 @@ import infrastructure.util.common.CommonSequenceUtil;
  */
 public class CommonReporteExportService {
 
-    //public static InputStream service(GenericSession genericSession, String content, String key) throws Exception {
-    public static ActionInputStreamUtil service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
+    //public InputStream service(GenericSession genericSession, String content, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
 
@@ -67,7 +67,7 @@ public class CommonReporteExportService {
      * @return El flujo de entrada del archivo Excel generado.
      * @throws Exception Si ocurre algún error al generar el archivo.
      */
-    private static InputStream getInput(String file, WorkSession ws, Map<String, String[]> parameters) throws Exception {
+    private InputStream getInput(String file, WorkSession ws, Map<String, String[]> parameters) throws Exception {
         Curso curso = ws.getCursoList().get(0); // Solo el primer curso
 
         // Crea un nuevo libro de trabajo Excel
@@ -111,7 +111,7 @@ public class CommonReporteExportService {
      *
      * @param sheet La hoja de trabajo Excel.
      */
-    private static void setColumnWidths(XSSFSheet sheet) {
+    private void setColumnWidths(XSSFSheet sheet) {
         sheet.setColumnWidth(0, CommonExcelUtil.calculateColWidth(10));
         sheet.setColumnWidth(1, CommonExcelUtil.calculateColWidth(5));
         sheet.setColumnWidth(2, CommonExcelUtil.calculateColWidth(20));
@@ -129,7 +129,7 @@ public class CommonReporteExportService {
      * @param alignment La alineación de la celda (opcional).
      * @return El estilo de la celda configurado.
      */
-    private static XSSFCellStyle createCellStyle(XSSFWorkbook workbook, XSSFFont font, HorizontalAlignment alignment) {
+    private XSSFCellStyle createCellStyle(XSSFWorkbook workbook, XSSFFont font, HorizontalAlignment alignment) {
         XSSFCellStyle style = workbook.createCellStyle();
         style.setFont(font);
         if (alignment != null) {
@@ -145,7 +145,7 @@ public class CommonReporteExportService {
      * @param font La fuente a utilizar en el estilo.
      * @return El estilo de la celda configurado.
      */
-    private static XSSFCellStyle createCellStyle(XSSFWorkbook workbook, XSSFFont font) {
+    private XSSFCellStyle createCellStyle(XSSFWorkbook workbook, XSSFFont font) {
         return createCellStyle(workbook, font, null);
     }
 
@@ -157,7 +157,7 @@ public class CommonReporteExportService {
      * @param titleStyle El estilo de la celda para el título.
      * @param ws La sesión de trabajo con los datos actuales.
      */
-    private static void insertTitleRow(XSSFSheet sheet, int rowNum, XSSFCellStyle titleStyle, WorkSession ws) {
+    private void insertTitleRow(XSSFSheet sheet, int rowNum, XSSFCellStyle titleStyle, WorkSession ws) {
         XSSFRow row = sheet.createRow(rowNum);
         XSSFCell cell = row.createCell(3);
         XSSFRichTextString title = new XSSFRichTextString("REPORTES DE CLASES: " + ws.getCurso().getNombreFull());
@@ -180,7 +180,7 @@ public class CommonReporteExportService {
      * @param rowNum El número de fila donde insertar las cabeceras.
      * @param headerStyle El estilo de la celda para las cabeceras.
      */
-    private static void insertHeaders(XSSFSheet sheet, int rowNum, XSSFCellStyle headerStyle) {
+    private void insertHeaders(XSSFSheet sheet, int rowNum, XSSFCellStyle headerStyle) {
         XSSFRow headerRow = sheet.createRow(rowNum);
 
         // Define las cabeceras
@@ -203,7 +203,7 @@ public class CommonReporteExportService {
      * @param horizontalCenterStyle El estilo de la celda con alineación
      * central.
      */
-    private static void insertReportsData(XSSFSheet sheet, Map<String, String[]> parameters, WorkSession ws, int rowNum) {
+    private void insertReportsData(XSSFSheet sheet, Map<String, String[]> parameters, WorkSession ws, int rowNum) {
 
         // Filtra los reportes seleccionados con stream y los agrega a la lista "nomina"
         List<ReporteClase> nomina = IntStream.range(0, ws.getReportes().size())
@@ -241,7 +241,7 @@ public class CommonReporteExportService {
      * @return El flujo de entrada del archivo generado.
      * @throws IOException Si ocurre un error al guardar el archivo.
      */
-    private static InputStream saveWorkbookToInputStream(XSSFWorkbook workbook, String file) throws IOException {
+    private InputStream saveWorkbookToInputStream(XSSFWorkbook workbook, String file) throws IOException {
         try (FileOutputStream fileOut = new FileOutputStream(PATH_TEMP_FILES + file)) {
             workbook.write(fileOut);
             fileOut.flush();

@@ -31,7 +31,7 @@ public class CommonInscripcionEnableInscripcionService {
      *
      * @throws Exception
      */
-    public static String service(GenericSession genericSession, String key) throws Exception {
+    public String service(GenericSession genericSession, String key) throws Exception {
         String retValue = "";
         WorkSession ws = genericSession.getWorkSession(key);
         List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());

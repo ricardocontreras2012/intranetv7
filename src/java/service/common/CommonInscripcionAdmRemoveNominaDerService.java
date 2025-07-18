@@ -34,7 +34,7 @@ public class CommonInscripcionAdmRemoveNominaDerService {
         * @param key LLave para acceder a los datos de la sesion.
         * @return Action status
      */
-    public static String service(GenericSession genericSession, JefeCarreraSession jcSession,
+    public String service(GenericSession genericSession, JefeCarreraSession jcSession,
             Map<String, String[]> parameters, String key) {
         
         String[] listaDerArray = parameters.get("listaDer");

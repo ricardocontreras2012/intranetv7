@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import static service.alumno.AlumnoCertificacionGetBotonPagoService.service;
+import service.alumno.AlumnoCertificacionGetBotonPagoService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -25,7 +25,7 @@ public class AlumnoCertificacionGetBotonPagoAction extends ActionCommonSupport {
      */
     @Override
     public String action(){
-        url = service(Manager.getAlumnoSession(sesion));
+        url = new AlumnoCertificacionGetBotonPagoService().service(Manager.getAlumnoSession(sesion));
         return SUCCESS;
     }
 

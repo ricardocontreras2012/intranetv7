@@ -33,7 +33,7 @@ public class CommonCursoDefinicionProfesorSaveService {
      * @param key La clave que identifica la sesión de trabajo.
      * @return El estado de la acción (SUCCESS si se completó correctamente).
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         // Obtener la sesión de trabajo del usuario a partir de la clave proporcionada.
         WorkSession ws = genericSession.getWorkSession(key);
         

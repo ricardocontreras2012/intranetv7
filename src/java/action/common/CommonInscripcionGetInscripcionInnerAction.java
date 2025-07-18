@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonInscripcionGetInscripcionInnerService.service;
+import service.common.CommonInscripcionGetInscripcionInnerService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class CommonInscripcionGetInscripcionInnerAction extends ActionCommonSupp
      */
     @Override
     public String action() throws Exception {    
-        return service(getGenericSession(), getKey());
+        return new CommonInscripcionGetInscripcionInnerService().service(getGenericSession(), getKey());
     }
 }
 

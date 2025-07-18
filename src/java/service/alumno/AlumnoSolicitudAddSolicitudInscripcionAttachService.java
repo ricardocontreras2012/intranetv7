@@ -17,7 +17,7 @@ import infrastructure.util.common.CommonSolicitudUtil;
  */
 public class AlumnoSolicitudAddSolicitudInscripcionAttachService {
 
-    public static String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String key) {
+    public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String key) {
         
         CommonSolicitudUtil.saveAttach(action, genericSession, upload, uploadFileName, key);
         

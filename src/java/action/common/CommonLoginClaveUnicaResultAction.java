@@ -9,7 +9,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 import org.apache.struts2.action.ServletRequestAware;
 import org.apache.struts2.action.SessionAware;
-import static service.common.CommonLoginClaveUnicaResultService.service;
+import service.common.CommonLoginClaveUnicaResultService;
 
 /**
  *
@@ -25,7 +25,7 @@ public class CommonLoginClaveUnicaResultAction extends ActionCommonSupport imple
     @Override
     public String action() throws Exception {
         this.key = getKeySession();
-        return service(request, getSesion(), key);
+        return new CommonLoginClaveUnicaResultService().service(request, getSesion(), key);
     }
 
     @Override

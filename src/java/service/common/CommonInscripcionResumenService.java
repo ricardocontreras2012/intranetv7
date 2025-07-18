@@ -19,7 +19,7 @@ import session.WorkSession;
  * @author Usach
  */
 public class CommonInscripcionResumenService {
-    public static String service(GenericSession genericSession, JefeCarreraSession js, int pos, int agno, int sem, String key)
+    public String service(GenericSession genericSession, JefeCarreraSession js, int pos, int agno, int sem, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

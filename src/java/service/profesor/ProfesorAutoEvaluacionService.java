@@ -36,7 +36,7 @@ public final class ProfesorAutoEvaluacionService {
      * @param key Llave de la sesión.
      * @return Resultado de la acción.
      */
-    public static String searchAction(GenericSession genericSession, String key) {
+    public String searchAction(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         return CommonProfesorUtil.getAutoevaluacion(ws, genericSession.getRut());
     }
@@ -49,7 +49,7 @@ public final class ProfesorAutoEvaluacionService {
      * @param key Llave de la sesión.
      * @return Resultado de la acción.
      */
-    public static String showFormService(GenericSession genericSession, String key) {
+    public String showFormService(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         
         if (ws.getCursosAutoEvaluacion().isEmpty()) {
@@ -78,7 +78,7 @@ public final class ProfesorAutoEvaluacionService {
      * @param key Llave para acceder a los datos de la sesión.
      * @return Resultado de la acción.
      */
-    public static String saveService(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String saveService(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         CursoProfesor cursoProfesor = ws.getCursoProfesor();
         String user = ActionUtil.getDBUser();
@@ -119,7 +119,7 @@ public final class ProfesorAutoEvaluacionService {
      * @param genericSession Sesión de trabajo.
      * @return Resultado de la acción.
      */
-    public static String removeService(GenericSession genericSession) {
+    public String removeService(GenericSession genericSession) {
         beginTransaction(ActionUtil.getDBUser());
         
         // Actauliza a null el rut en respuestas de la autoevaluación para el profesor

@@ -27,7 +27,7 @@ public class EgresadoEstudiosNewEstudioService {
      *
      * @return
      */
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
 
         /*
          * WorkSession ws = genericSession.getWorkSession(key);

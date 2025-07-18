@@ -52,7 +52,7 @@ public class EgresadoLaboralesSaveLaboralService {
      *
      * @return
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, Integer correlAluEmp, String dependiente,
+    public String service(ActionCommonSupport action, GenericSession genericSession, Integer correlAluEmp, String dependiente,
             Integer rutEmpleador, String tipoEmpleador, Integer indepActividadEconomica,
             Integer areaTrabajo, String lugar, Integer region, Integer comuna,
             String otroLugar, String cargo, Integer tipoTrabajo, Integer sueldo,

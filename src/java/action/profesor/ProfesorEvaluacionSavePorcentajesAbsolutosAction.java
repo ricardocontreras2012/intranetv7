@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorEvaluacionSavePorcentajesAbsolutosService.service;
+import service.profesor.ProfesorEvaluacionSavePorcentajesAbsolutosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class ProfesorEvaluacionSavePorcentajesAbsolutosAction extends Acti
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new ProfesorEvaluacionSavePorcentajesAbsolutosService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

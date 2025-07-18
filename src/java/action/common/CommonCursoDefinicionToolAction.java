@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonCursoDefinicionToolService.serviceGet;
+import service.common.CommonCursoDefinicionToolService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -14,6 +14,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public class CommonCursoDefinicionToolAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
+    private CommonCursoDefinicionToolService svc =  new CommonCursoDefinicionToolService();
         
     @Override
     public String action() throws Exception {
@@ -22,16 +23,16 @@ public class CommonCursoDefinicionToolAction extends ActionCommonSupport {
 
     public String getHorario() throws Exception
     {
-        return serviceGet(getGenericSession(), "HOR", getKey());
+        return svc.serviceGet(getGenericSession(), "HOR", getKey());
     }
 
     public String getProfesor() throws Exception
     {
-        return serviceGet(getGenericSession(), "PR", getKey());
+        return svc.serviceGet(getGenericSession(), "PR", getKey());
     }
 
     public String getAyudante() throws Exception
     {
-        return serviceGet(getGenericSession(), "AY", getKey());
+        return svc.serviceGet(getGenericSession(), "AY", getKey());
     }
 }

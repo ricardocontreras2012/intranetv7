@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonRCurricularDeleteUnidadService.service;
+import service.common.CommonRCurricularDeleteUnidadService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public class CommonRCurricularDeleteUnidadAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        retValue = service(getGenericSession(), getKey(), menCodCar, menCodMen, uniCod, duty);
+        retValue = new CommonRCurricularDeleteUnidadService().service(getGenericSession(), getKey(), menCodCar, menCodMen, uniCod, duty);
         return retValue;
     }
 

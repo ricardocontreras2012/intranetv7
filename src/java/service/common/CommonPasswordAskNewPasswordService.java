@@ -18,7 +18,7 @@ import static infrastructure.util.MailUtil.sendURLNewPassword;
  */
 public class CommonPasswordAskNewPasswordService {
 
-    public static String service(ActionPostCommonSupport action, int rut, String user) throws Exception {
+    public String service(ActionPostCommonSupport action, int rut, String user) throws Exception {
   
         String retValue;
         String email = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getEmail(rut);       

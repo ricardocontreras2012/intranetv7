@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonMensajeReplyMessageService.service;
+import service.common.CommonMensajeReplyMessageService;
 import infrastructure.support.action.post.ActionPostValidationSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonMensajeReplyMessageAction extends ActionPostValidationS
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getPos(), getKey());
+        return new CommonMensajeReplyMessageService().service(getGenericSession(), getPos(), getKey());
     }
 
     /**

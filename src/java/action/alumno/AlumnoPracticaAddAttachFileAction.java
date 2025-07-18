@@ -6,7 +6,7 @@
 package action.alumno;
 
 import java.io.File;
-import static service.alumno.AlumnoPracticaAddAttachFileService.service;
+import service.alumno.AlumnoPracticaAddAttachFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public final class AlumnoPracticaAddAttachFileAction extends ActionCommonSupport
      */
     @Override
     public String action() {
-        return service(this, getGenericSession(), getKey(), upload, uploadFileName, tipo);
+        return new AlumnoPracticaAddAttachFileService().service(this, getGenericSession(), getKey(), upload, uploadFileName, tipo);
     }    
 
     public void setUpload(File upload) {

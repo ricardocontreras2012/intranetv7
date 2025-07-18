@@ -8,7 +8,7 @@
 package action.common;
 
 
-import static service.common.CommonMaterialGetResumenService.service;
+import service.common.CommonMaterialGetResumenService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 
@@ -32,7 +32,7 @@ public final class CommonMaterialGetResumenAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), agno, sem, pos, getKey());
+        return new CommonMaterialGetResumenService().service(getGenericSession(), agno, sem, pos, getKey());
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonFuncionarioSearchService.service;
+import service.common.CommonFuncionarioSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonFuncionarioSearchAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), rut, paterno, getKey());
+        return new CommonFuncionarioSearchService().service(getGenericSession(), rut, paterno, getKey());
     }
 
     public String getPaterno() {

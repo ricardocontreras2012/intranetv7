@@ -26,7 +26,7 @@ import infrastructure.util.ContextUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AlumnoCalificacionRequisitoAdicionalLogroGetTipoService {
+public final class AlumnoCalificacionRequisitoAdicionalLogroGetTipoService{
 
     /**
      * Método de servicio que maneja la lógica de obtención de requisito adicional de logro.
@@ -42,7 +42,7 @@ public final class AlumnoCalificacionRequisitoAdicionalLogroGetTipoService {
      * @param key Llave para acceder a los datos dentro de la sesión de trabajo.
      * @return El estado de la acción, puede ser SUCCESS, ERROR, o "noActivo" en caso de que el alumno no esté activo.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key) {
         String retValue = ERROR;
 

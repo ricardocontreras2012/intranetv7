@@ -20,7 +20,7 @@ import session.WorkSession;
  */
 public class AlumnoSolicitudExpedienteDownloadFileService {
 
-    public static ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
+    public ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
         String name;
         InputStream input;
         String description;
@@ -49,7 +49,7 @@ public class AlumnoSolicitudExpedienteDownloadFileService {
     }
 
     // código nuevo que debo implementar
-    /*public static ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
+    /*public ActionInputStreamUtil service(GenericSession genericSession, Integer tdoc, String key) throws Exception {
         String name = null;
         InputStream input;
         String description;

@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
  * @author rcontreras
  */
 public class CommonSalaReservaReservarService {
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String dia, Integer modulo, String inicio, String termino, String motivo, String key) throws Exception{
+    public String service(ActionCommonSupport action, GenericSession genericSession, String dia, Integer modulo, String inicio, String termino, String motivo, String key) throws Exception{
         String retVal = SUCCESS;
 
         WorkSession ws = genericSession.getWorkSession(key);

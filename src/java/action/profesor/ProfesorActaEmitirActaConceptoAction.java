@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorActaEmitirActaConceptoService.service;
+import service.profesor.ProfesorActaEmitirActaConceptoService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class ProfesorActaEmitirActaConceptoAction extends ActionParameterA
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new ProfesorActaEmitirActaConceptoService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

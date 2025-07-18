@@ -19,7 +19,7 @@ import infrastructure.util.HibernateUtil;
  */
 public class CommonSalaReservaRemoveReservaService {
 
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Iniciar transacción

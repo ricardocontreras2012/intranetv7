@@ -28,7 +28,7 @@ public final class CommonCursoGetCursosService {
      * @param actionCall
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, String keyParent, String actionCall) {
+    public String service(GenericSession genericSession, String key, String keyParent, String actionCall) {
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
 
         ws.setKeyParent(keyParent);

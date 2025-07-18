@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import static service.registradorcurricular.RegistradorCurricularParametrosGeneralesGetService.service;
+import service.registradorcurricular.RegistradorCurricularParametrosGeneralesGetService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -17,7 +17,7 @@ public class RegistradorCurricularParametrosGeneralesGetAction extends ActionCom
     
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getRegistradorSession(sesion));
+        return new RegistradorCurricularParametrosGeneralesGetService().service(getGenericSession(), Manager.getRegistradorSession(sesion));
     }
 
 }

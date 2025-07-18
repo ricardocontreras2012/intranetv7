@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import static service.profesor.ProfesorMaterialGetListaMaterialesReutilizacionService.service;
+import service.profesor.ProfesorMaterialGetListaMaterialesReutilizacionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class ProfesorMaterialGetListaMaterialesReutilizacionAction extends
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new ProfesorMaterialGetListaMaterialesReutilizacionService().service(getGenericSession(), getKey());
     }
 }

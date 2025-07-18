@@ -6,7 +6,7 @@
 package action.alumno;
 
 import infrastructure.support.action.ActionValidationPosSupport;
-import static service.alumno.AlumnoSolicitudExpedienteNewService.service;
+import service.alumno.AlumnoSolicitudExpedienteNewService;
 
 /**
  *
@@ -23,7 +23,7 @@ public class AlumnoSolicitudExpedienteNewAction extends ActionValidationPosSuppo
      */
     @Override
     public String action() {
-        return service(this, getGenericSession(), getPos(), getKey());
+        return new AlumnoSolicitudExpedienteNewService().service(this, getGenericSession(), getPos(), getKey());
     }
 
     /**

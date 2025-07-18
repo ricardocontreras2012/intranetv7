@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import static service.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosService.service;
+import service.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
@@ -26,7 +26,7 @@ public class SecretariaProyectosConvenioRemoveConveniosAction extends ActionPara
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getProyectoSession(sesion), getMapParameters(), getKey());
+        return new SecretariaProyectosConvenioRemoveConveniosService().service(getGenericSession(), Manager.getProyectoSession(sesion), getMapParameters(), getKey());
     }
 }
 

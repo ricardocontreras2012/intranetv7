@@ -22,7 +22,7 @@ public final class CommonMensajeGetDataTableService {
      * @param nombreDataColumnaActual
      * @return Action status.
      */
-    public static String service(GenericSession genericSession, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
+    public String service(GenericSession genericSession, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
         genericSession.getWorkSession(key).setReceivedMsgs(ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser()).findReceivedWithLimits(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
         genericSession.getWorkSession(key).setCantMsgsReceived(ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser()).countMsgsReceived(genericSession.getRut()));
         genericSession.getWorkSession(key).setCantMsgsReceivedFiltered(ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser()).countMsgsReceivedFiltered(genericSession.getRut(), searchValue));

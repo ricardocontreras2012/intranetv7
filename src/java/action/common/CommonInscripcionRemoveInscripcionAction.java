@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonInscripcionRemoveInscripcionService.service;
+import service.common.CommonInscripcionRemoveInscripcionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonInscripcionRemoveInscripcionAction extends ActionParame
      */
     @Override
     public String action() throws Exception {
-        return service(this, getGenericSession(), getMapParameters(),
+        return new CommonInscripcionRemoveInscripcionService().service(this, getGenericSession(), getMapParameters(),
                 getKey());
     }
 }

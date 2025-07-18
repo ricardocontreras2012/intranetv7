@@ -5,7 +5,7 @@
  */
 package action.jefebiblioteca;
 
-import static service.jefebiblioteca.JefeBibliotecaLoginService.service;
+import service.jefebiblioteca.JefeBibliotecaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class JefeBibliotecaLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), getKey());
+        return new JefeBibliotecaLoginService().service(this, getSesion(), getKey());
     }
 }

@@ -13,7 +13,7 @@ import session.GenericSession;
  */
 public class CommonLoginStackService {
 
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         String action = null;
 
         if (!genericSession.getStackActionList().isEmpty()) {

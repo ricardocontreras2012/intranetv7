@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
  */
 public class RegistradorCurricularMencionGetService {
 
-    public static String service(GenericSession genericSession, String key) {         
+    public String service(GenericSession genericSession, String key) {         
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
 

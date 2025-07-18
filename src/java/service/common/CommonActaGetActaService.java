@@ -48,7 +48,7 @@ public class CommonActaGetActaService {
      * @throws Exception Si ocurre un error durante la ejecución del servicio, como problemas
      * de acceso a los datos o de ejecución de consultas.
      */
-    public static String service(GenericSession genericSession, Integer pos, String key)
+    public String service(GenericSession genericSession, Integer pos, String key)
             throws Exception {
 
         // Recupera la sesión de trabajo correspondiente utilizando la clave proporcionada

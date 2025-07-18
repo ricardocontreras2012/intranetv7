@@ -30,7 +30,7 @@ public final class CommonAdministrativoEmailSetEmailService {
      * @param email e-mail del administrativo
      * @return Action status.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession,
+    public String service(ActionCommonSupport action, GenericSession genericSession,
             String email) {
 
         beginTransaction(ActionUtil.getDBUser());

@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.ActionParameterAwareSupport;
-import static service.common.CommonSalaReservaRemoveReservaService.service;
+import service.common.CommonSalaReservaRemoveReservaService;
 
 /**
  *
@@ -25,7 +25,7 @@ public class CommonSalaReservaRemoveReservaAction extends ActionParameterAwareSu
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getMapParameters(), getKey());
+        return new CommonSalaReservaRemoveReservaService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }
 

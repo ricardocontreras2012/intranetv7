@@ -18,7 +18,7 @@ import static infrastructure.util.common.CommonUsersUtil.getFotoProfesor;
  * @version 7, 24/05/2012
  */
 public final class CommonProfesorGetFotoService {
-    public static ActionInputStreamUtil service(GenericSession genericSession, String key){
+    public ActionInputStreamUtil service(GenericSession genericSession, String key){
         InputStream input;
         WorkSession ws = genericSession.getWorkSession(key);        
         input = getFotoProfesor(ws.getProfesor().getProfRut(), ws.getProfesor().getProfDv());

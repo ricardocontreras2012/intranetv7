@@ -15,7 +15,7 @@ import session.ProfesorSession;
  * @author Usach
  */
 public class ProfesorLoginStackDatosPersonalesService {
-    static public String service(GenericSession genericSession, ProfesorSession ps, String key)
+     public String service(GenericSession genericSession, ProfesorSession ps, String key)
             throws Exception {
 
         Profesor prof = ps.getProfesor();

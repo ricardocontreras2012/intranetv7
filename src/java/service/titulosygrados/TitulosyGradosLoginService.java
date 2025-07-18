@@ -27,7 +27,7 @@ public class TitulosyGradosLoginService {
      *
      * @throws Exception
      */
-    public static String service(Map<String, Object> session) throws Exception {
+    public String service(Map<String, Object> session) throws Exception {
         TitulosyGradosSession tygSession = new TitulosyGradosSession();
         GenericSession genericSession = (GenericSession)session.get("genericSession");
         tygSession.setAdministrativo(genericSession.getAdministrativo());

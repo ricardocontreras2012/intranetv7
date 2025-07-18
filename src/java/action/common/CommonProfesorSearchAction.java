@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonProfesorSearchService.service;
+import service.common.CommonProfesorSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -30,7 +30,7 @@ public final class CommonProfesorSearchAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {  
-        return service(getGenericSession(), rut, paterno, materno, nombre, getKey());
+        return new CommonProfesorSearchService().service(getGenericSession(), rut, paterno, materno, nombre, getKey());
     }
 
     public void setMaterno(String materno) {

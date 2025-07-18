@@ -34,7 +34,7 @@ public final class ProfesorActaGetActaService {
      * @return El estado de la acción, indicando si el acta fue generada o no.
      * @throws Exception Si el servicio genera una excepción durante el procesamiento.
      */
-    public static String service(ActionCommonSupport action, GenericSession genericSession, String key)
+    public String service(ActionCommonSupport action, GenericSession genericSession, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 

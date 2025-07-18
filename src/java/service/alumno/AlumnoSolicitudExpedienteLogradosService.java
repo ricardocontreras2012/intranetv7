@@ -17,7 +17,7 @@ import session.WorkSession;
  */
 public class AlumnoSolicitudExpedienteLogradosService {
 
-    public static String service(GenericSession genericSession, String key) {
+    public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).findGeneradas(ws.getAluCar()));

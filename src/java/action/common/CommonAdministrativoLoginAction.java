@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import static service.common.CommonAdministrativoLoginService.service;
+import service.common.CommonAdministrativoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -29,7 +29,7 @@ public final class CommonAdministrativoLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(this, getSesion(), rut, passwd, userType, getKey());
+        return  new CommonAdministrativoLoginService().service(this, getSesion(), rut, passwd, userType, getKey());
     }
 
     public Integer getRut() {

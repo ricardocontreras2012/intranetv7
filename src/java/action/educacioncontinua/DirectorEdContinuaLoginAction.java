@@ -5,7 +5,7 @@
  */
 package action.educacioncontinua;
 
-import static service.educacioncontinua.DirectorEdContinuaLoginService.service;
+import service.educacioncontinua.DirectorEdContinuaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class DirectorEdContinuaLoginAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), getKey());
+        return new DirectorEdContinuaLoginService().service(getGenericSession(), getKey());
     }
 }

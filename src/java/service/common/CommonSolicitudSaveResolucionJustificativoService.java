@@ -41,7 +41,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
      * @return
      * @throws Exception
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Integer folio = ws.getSolicitud().getSolFolio();
@@ -106,7 +106,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
         return SUCCESS;
     }
 
-    private static void sendMessageProfesor(Solicitud sol, Curso curso) {
+    private void sendMessageProfesor(Solicitud sol, Curso curso) {
         Alumno alumno = sol.getAluCar().getAlumno();
         String subject = "Solicitud de Justificativo prueba PEP para el periodo "+
                 DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy");
@@ -121,7 +121,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
                 .forEach(email -> MailUtil.sendEmail(email, subject, body));
     }
 
-    private static void sendMessageAlumno(Solicitud sol) {
+    private void sendMessageAlumno(Solicitud sol) {
         Alumno alumno = sol.getAluCar().getAlumno();
         String correo = alumno.getAluEmailUsach();
                 

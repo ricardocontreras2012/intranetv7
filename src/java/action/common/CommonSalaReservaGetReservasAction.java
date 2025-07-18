@@ -6,7 +6,7 @@
 package action.common;
 
 
-import static service.common.CommonSalaReservaGetReservasService.service;
+import service.common.CommonSalaReservaGetReservasService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -20,7 +20,7 @@ public class CommonSalaReservaGetReservasAction extends ActionCommonSupport {
 
     @Override
     public String action() throws Exception{
-        service(getGenericSession(), Manager.getSecretariaSession(sesion),getKey());
+        new CommonSalaReservaGetReservasService().service(getGenericSession(), Manager.getSecretariaSession(sesion),getKey());
         return SUCCESS;
     }
 }

@@ -18,7 +18,7 @@ import infrastructure.util.LogUtil;
  */
 public class ProfesorActaRectificatoriaGetCursosService {
 
-    public static String service(GenericSession genericSession, String key, String keyParent) {
+    public String service(GenericSession genericSession, String key, String keyParent) {
 
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
         genericSession.getSessionMap().put(key, ws);

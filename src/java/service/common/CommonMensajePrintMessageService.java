@@ -86,7 +86,7 @@ public final class CommonMensajePrintMessageService {
 
     }
 
-    private static InputStream getInput(GenericSession genericSession,
+    private InputStream getInput(GenericSession genericSession,
             String name, Mensaje msg)
             throws Exception {
         
@@ -120,7 +120,7 @@ public final class CommonMensajePrintMessageService {
         return CommonArchivoUtil.getFile(name, "tmp");
     }
 
-    private static void putHeader(Document doc, PdfWriter writer, Mensaje msg) {
+    private void putHeader(Document doc, PdfWriter writer, Mensaje msg) {
         
 
         float[] columnWidthsHeader = {100};
@@ -192,7 +192,7 @@ public final class CommonMensajePrintMessageService {
         doc.add(table);
     }
 
-    public static class HeaderFooterPageEvent extends PdfPageEventHelper {
+    public class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

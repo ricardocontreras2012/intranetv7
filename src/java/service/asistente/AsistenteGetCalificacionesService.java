@@ -27,7 +27,7 @@ public final class AsistenteGetCalificacionesService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public static String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         
         WorkSession ws = genericSession.getWorkSession(key);
         ws.getAluCar().setCartolaAgnoView(Integer.parseInt(parameters.get("agno")[0]));

@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
-import static service.common.CommonInscripcionResumenService.service;
+import service.common.CommonInscripcionResumenService;
 import session.Manager;
 
 /**
@@ -26,7 +26,7 @@ public class CommonInscripcionResumenAction extends ActionCommonAgnoSemSupport {
      */
     @Override
     public String action() throws Exception {
-        return service(getGenericSession(), Manager.getJefeCarreraSession(sesion), pos, getAgno(), getSem(), getKey());
+        return new CommonInscripcionResumenService().service(getGenericSession(), Manager.getJefeCarreraSession(sesion), pos, getAgno(), getSem(), getKey());
     }
 
     public void setPos(Integer pos) {

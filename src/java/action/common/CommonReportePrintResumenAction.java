@@ -6,7 +6,7 @@
 package action.common;
 
 import java.util.List;
-import static service.common.CommonReportePrintResumenService.service;
+import service.common.CommonReportePrintResumenService;
 import infrastructure.support.CursoResumenSupport;
 import infrastructure.support.action.ActionReportSupport;
 
@@ -31,7 +31,7 @@ public final class CommonReportePrintResumenAction extends ActionReportSupport {
      */
     @Override
     public String action() throws Exception {
-        cursos = service(getGenericSession(), getReport(), format, getKey());
+        cursos = new CommonReportePrintResumenService().service(getGenericSession(), getReport(), format, getKey());
 
         return SUCCESS;
     }
