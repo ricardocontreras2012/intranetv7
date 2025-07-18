@@ -75,7 +75,7 @@ public final class ProfesorEvaluacionExportPlanillaService {
      * @return
      * @throws java.lang.Exception
      */
-    public InputStream getInput(GenericSession genericSession, String name, String key) throws Exception {
+    private InputStream getInput(GenericSession genericSession, String name, String key) throws Exception {
 
         try {
             InputStream retValue = null;

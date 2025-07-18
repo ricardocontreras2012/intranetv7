@@ -68,7 +68,7 @@ public class CommonHorarioPrintService {
         return new ActionInputStreamUtil(name, description, getInput(name, id, genericSession.getRut(), ws.getType(), rut, ws.getNombre(), ws.getModuloHorarioList(), ws.getCursoList()));                
     }
 
-    public InputStream getInput(String name, String id, Integer genera, String userType, Integer rut, String userName, List<ModuloHorario> modList, List<Curso> cursoList) throws Exception {
+    private InputStream getInput(String name, String id, Integer genera, String userType, Integer rut, String userName, List<ModuloHorario> modList, List<Curso> cursoList) throws Exception {
 
         Date fecha = getSysdate();
 

@@ -38,7 +38,7 @@ public class PdfUtil {
         doc.add(p);
     }
 
-    public static String createValidXMPMetadata(String title, String description) {
+    public static String createValidXMPMetadata(String title, String description) {        
         return "<?xpacket begin='' id='W5M0MpCehiHzreSzNTczkc9d'?>"
                 + "<x:xmpmeta xmlns:x='adobe:ns:meta/'>"
                 + "  <rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>"
@@ -62,7 +62,7 @@ public class PdfUtil {
                 + "          <rdf:li xml:lang='x-default'>" + description + "</rdf:li>"
                 + "        </rdf:Alt>"
                 + "      </dc:description>"
-                + "      <dc:format>application/pdf</dc:format>"
+                + "      <dc:format>"+AppStaticsUtil.PDF_MIME+"</dc:format>"
                 + "      <pdf:Producer>OpenPDF</pdf:Producer>"
                 + "      <pdfaid:part>3</pdfaid:part>"
                 + "      <pdfaid:conformance>B</pdfaid:conformance>"

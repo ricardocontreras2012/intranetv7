@@ -36,7 +36,7 @@ public class CommonActaExportService {
         return new ActionInputStreamUtil(fileName, mimeType, getInput(ws, fileName));
     }
 
-    public InputStream getInput(WorkSession ws, String name) throws Exception {
+    private InputStream getInput(WorkSession ws, String name) throws Exception {
         Curso curso = ws.getCurso();
 
         // Crear el workbook y la hoja

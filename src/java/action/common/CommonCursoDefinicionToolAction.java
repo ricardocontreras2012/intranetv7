@@ -14,7 +14,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public class CommonCursoDefinicionToolAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
-    private CommonCursoDefinicionToolService svc =  new CommonCursoDefinicionToolService();
+    private final CommonCursoDefinicionToolService svc =  new CommonCursoDefinicionToolService();
         
     @Override
     public String action() throws Exception {

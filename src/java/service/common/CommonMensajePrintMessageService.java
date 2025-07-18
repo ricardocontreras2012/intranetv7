@@ -192,7 +192,7 @@ public final class CommonMensajePrintMessageService {
         doc.add(table);
     }
 
-    public class HeaderFooterPageEvent extends PdfPageEventHelper {
+    private class HeaderFooterPageEvent extends PdfPageEventHelper {
 
         private PdfTemplate template;
         private Image total;

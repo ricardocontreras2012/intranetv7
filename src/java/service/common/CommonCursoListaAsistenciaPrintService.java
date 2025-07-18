@@ -68,7 +68,7 @@ public class CommonCursoListaAsistenciaPrintService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession, ws, name, file, curso));
     }
 
-    public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
+    private InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
 
         Integer genera = genericSession.getRut();
         String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");

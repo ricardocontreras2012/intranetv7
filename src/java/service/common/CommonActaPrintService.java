@@ -53,7 +53,7 @@ public class CommonActaPrintService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession.getRut(), ws, name));
     }
 
-    public InputStream getInput(Integer rut, WorkSession ws, String name) throws Exception {
+    private InputStream getInput(Integer rut, WorkSession ws, String name) throws Exception {
  
         Font titleFont = PdfUtil.getFont("times", 14.0f, Font.BOLD);
         Font font = PdfUtil.getFont("times", 9.0f, Font.NORMAL);

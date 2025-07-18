@@ -99,7 +99,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession, ws.getAluCar(), folio, name));
     }
 
-    public InputStream getInput(GenericSession genericSession, AluCar aca, Integer folio, String name) throws Exception {
+    private InputStream getInput(GenericSession genericSession, AluCar aca, Integer folio, String name) throws Exception {
 
         Integer genera = genericSession.getRut();
         Unidad facultad = aca.getUnidadFacultad();

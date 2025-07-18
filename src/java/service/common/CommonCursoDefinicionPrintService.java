@@ -70,7 +70,7 @@ public class CommonCursoDefinicionPrintService {
      * @return Un InputStream con el contenido del archivo PDF.
      * @throws Exception Si ocurre algún error durante la creación del PDF.
      */
-    public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file) throws Exception {
+    private InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file) throws Exception {
 
         Integer genera = genericSession.getRut();
         Image logo;

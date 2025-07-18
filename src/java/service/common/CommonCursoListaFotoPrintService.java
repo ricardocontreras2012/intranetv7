@@ -43,7 +43,7 @@ public class CommonCursoListaFotoPrintService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession, ws, name, file, curso));
     }
 
-    public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
+    private InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
         String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
 
         Document doc = new Document(PageSize.LETTER, 50, 50, 150, 50);// Establecer tamaño Letter

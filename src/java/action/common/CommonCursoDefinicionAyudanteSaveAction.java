@@ -15,8 +15,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
 public class CommonCursoDefinicionAyudanteSaveAction extends ActionParameterAwareSupport {
 
     private static final long serialVersionUID = 1L;
-    private CommonCursoDefinicionAyudanteSaveService svc = new CommonCursoDefinicionAyudanteSaveService();
-
+    
     /**
      * Method description
      *

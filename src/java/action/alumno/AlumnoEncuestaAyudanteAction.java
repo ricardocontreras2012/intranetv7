@@ -17,7 +17,7 @@ import service.alumno.AlumnoEncuestaAyudanteService;
 public final class AlumnoEncuestaAyudanteAction extends ActionParameterAwareSupport {
 
     private static final long serialVersionUID = 1L;
-    private AlumnoEncuestaAyudanteService svc = new AlumnoEncuestaAyudanteService();
+    private final AlumnoEncuestaAyudanteService svc = new AlumnoEncuestaAyudanteService();
 
     /**
      * Method description

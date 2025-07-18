@@ -86,7 +86,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
         return ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).find(exp);
     }
 
-    public InputStream getInput(GenericSession genericSession, AluCar aca, ExpedienteLogro exp, Integer folio, String name) throws Exception {
+    private InputStream getInput(GenericSession genericSession, AluCar aca, ExpedienteLogro exp, Integer folio, String name) throws Exception {
 
         Integer genera = genericSession.getRut();
         Date fecha = getSysdate();

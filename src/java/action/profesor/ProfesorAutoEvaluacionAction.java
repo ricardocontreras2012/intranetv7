@@ -18,7 +18,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
  */
 public final class ProfesorAutoEvaluacionAction extends ActionParameterAwareSupport {
     
-    private ProfesorAutoEvaluacionService svc = new ProfesorAutoEvaluacionService();
+    private final ProfesorAutoEvaluacionService svc = new ProfesorAutoEvaluacionService();
 
     public String search() {
         return svc.searchAction(getGenericSession(), getKey());

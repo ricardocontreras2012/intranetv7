@@ -30,6 +30,7 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
+import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
 import static infrastructure.util.DateUtil.getSysdate;
@@ -48,14 +49,12 @@ public class CommonEncuestaPrintService {
 
     public ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
-
         String name = "encuesta_" + ws.getCurso().getCodigo("_") + ".pdf";
-        String description = "application/pdf";
-
-        return new ActionInputStreamUtil(name, description, getInput(genericSession, ws));
+        
+        return new ActionInputStreamUtil(name, AppStaticsUtil.PDF_MIME, getInput(genericSession, ws));
     }
 
-    public InputStream getInput(GenericSession genericSession, WorkSession ws) throws Exception {
+    private InputStream getInput(GenericSession genericSession, WorkSession ws) throws Exception {
         Curso curso = ws.getCurso();
         List<Profesor> profList = ContextUtil.getDAO().getProfesorPersistence("CM").getProfesores(curso.getId());
 

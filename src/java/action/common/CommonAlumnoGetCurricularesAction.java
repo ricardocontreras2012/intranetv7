@@ -17,7 +17,6 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class CommonAlumnoGetCurricularesAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    private CommonAlumnoGetCurricularesService svc = new CommonAlumnoGetCurricularesService();
 
     /**
      * Method description
@@ -26,6 +25,6 @@ public final class CommonAlumnoGetCurricularesAction extends ActionCommonSupport
      */
     @Override
     public String action(){
-        return svc.service(getGenericSession(), getKey());
+        return new CommonAlumnoGetCurricularesService().service(getGenericSession(), getKey());
     }
 }

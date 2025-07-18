@@ -42,7 +42,7 @@ public class CommonEncuestaExportService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession, ws, name));
     }
 
-    public InputStream getInput(GenericSession genericSession, WorkSession ws, String name) throws Exception {
+    private InputStream getInput(GenericSession genericSession, WorkSession ws, String name) throws Exception {
         Curso curso = ws.getCurso();
         List<Profesor> profList = ContextUtil.getDAO().getProfesorPersistence("CM").getProfesores(curso.getId());
 

@@ -83,7 +83,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         return new ActionInputStreamUtil(name, description, getInput(name, genericSession, key));
     }
 
-    public InputStream getInput(String name, GenericSession genericSession, String key) {
+    private InputStream getInput(String name, GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         Unidad facultad = aluCar.getUnidadFacultad();
@@ -353,7 +353,7 @@ public final class AsistenteEmitirInformeCalificacionesService {
         private PdfTemplate template;
         private Image total;
 
-        public HeaderFooterPageEvent() {
+        private HeaderFooterPageEvent() {
         }
 
         @Override
