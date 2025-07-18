@@ -107,17 +107,34 @@ public class CommonCursoDefinicionExportService {
      * @param sheet La hoja de trabajo Excel.
      */
     private void setColumnWidths(XSSFSheet sheet) {
-        sheet.setColumnWidth(0, CommonExcelUtil.calculateColWidth(10));
-        sheet.setColumnWidth(1, CommonExcelUtil.calculateColWidth(2));
-        sheet.setColumnWidth(2, CommonExcelUtil.calculateColWidth(2));
-        sheet.setColumnWidth(3, CommonExcelUtil.calculateColWidth(2));
+        // CÓDIGO: 
+        sheet.setColumnWidth(0, CommonExcelUtil.calculateColWidth(16)); // asign
+        sheet.setColumnWidth(1, CommonExcelUtil.calculateColWidth(2));  // elect
+        sheet.setColumnWidth(2, CommonExcelUtil.calculateColWidth(2));  // coord
+        sheet.setColumnWidth(3, CommonExcelUtil.calculateColWidth(4));  // secc
+
+        // NOMBRE
         sheet.setColumnWidth(4, CommonExcelUtil.calculateColWidth(50));
+
+        // PROFESOR
         sheet.setColumnWidth(5, CommonExcelUtil.calculateColWidth(50));
+
+        // AYUDANTE
         sheet.setColumnWidth(6, CommonExcelUtil.calculateColWidth(50));
-        sheet.setColumnWidth(7, CommonExcelUtil.calculateColWidth(12));
-        sheet.setColumnWidth(8, CommonExcelUtil.calculateColWidth(24));
-        sheet.setColumnWidth(9, CommonExcelUtil.calculateColWidth(4));
-        sheet.setColumnWidth(10, CommonExcelUtil.calculateColWidth(4));
+
+        // HORARIO
+        sheet.setColumnWidth(7, CommonExcelUtil.calculateColWidth(20));
+
+        // SALAS
+        sheet.setColumnWidth(8, CommonExcelUtil.calculateColWidth(40));
+
+        // INI
+        sheet.setColumnWidth(9, CommonExcelUtil.calculateColWidth(10));
+
+        // INS
+        sheet.setColumnWidth(10, CommonExcelUtil.calculateColWidth(10));
+
+        // TIPO
         sheet.setColumnWidth(11, CommonExcelUtil.calculateColWidth(10));
     }
 
@@ -173,21 +190,23 @@ public class CommonCursoDefinicionExportService {
      * @param rowNum El número de fila donde insertar las cabeceras.
      * @param headerStyle El estilo de la celda para las cabeceras.
      */
-    private void insertHeaders(XSSFSheet sheet, int rowNum, XSSFCellStyle headerStyle) {
-        XSSFRow headerRow = sheet.createRow(rowNum);
+   private void insertHeaders(XSSFSheet sheet, int rowNum, XSSFCellStyle headerStyle) {
+    XSSFRow headerRow = sheet.createRow(rowNum);
 
-        // Crea las celdas de las cabeceras
-        String[] headers = {"CÓDIGO", "NOMBRE", "PROFESOR", "AYUDANTE", "HORARIO", "SALAS", "INI", "INS", "TIPO"};
+    // CÓDIGO (fusiona columnas 0 a 3)
+    XSSFCell codigoCell = headerRow.createCell(0);
+    codigoCell.setCellValue(new XSSFRichTextString("CÓDIGO"));
+    codigoCell.setCellStyle(headerStyle);
+    sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, 3));
 
-        IntStream.range(0, headers.length).forEach(i -> {
-            XSSFCell cell = headerRow.createCell(i);
-            XSSFRichTextString header = new XSSFRichTextString(headers[i]);
-            cell.setCellValue(header);
-            cell.setCellStyle(headerStyle);
-        });
-        // Fusiona las celdas de la primera columna para el "CÓDIGO"
-        sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, 3));
-    }
+    // Otros encabezados
+    String[] headers = {"NOMBRE", "PROFESOR", "AYUDANTE", "HORARIO", "SALAS", "INI", "INS", "TIPO"};
+    IntStream.range(0, headers.length).forEach(i -> {
+        XSSFCell cell = headerRow.createCell(i + 4); // comienza desde la columna 4
+        cell.setCellValue(new XSSFRichTextString(headers[i]));
+        cell.setCellStyle(headerStyle);
+    });
+}
 
     /**
      * Inserta los datos de los cursos en el archivo Excel.
@@ -199,26 +218,27 @@ public class CommonCursoDefinicionExportService {
      * central.
      */
     private void insertCoursesData(XSSFSheet sheet, List<Curso> cursoList, int rowNum, XSSFCellStyle horizontalCenterStyle) {
-        AtomicInteger rowNumAtomic = new AtomicInteger(rowNum); // Usamos AtomicInteger para poder actualizar el contador dentro de un lambda
-        cursoList.forEach(curso -> {
-            XSSFRow row = sheet.createRow(rowNumAtomic.getAndIncrement()); // Usamos getAndIncrement() para aumentar el valor de rowNum
-            // Inserta los datos de cada curso en las celdas correspondientes
-            row.createCell(0).setCellValue(curso.getId().getCurAsign());
-            row.createCell(1).setCellValue(curso.getId().getCurElect());
-            row.createCell(2).setCellValue(curso.getId().getCurCoord());
-            row.createCell(3).setCellValue(curso.getId().getCurSecc());
-            row.createCell(4).setCellValue(curso.getCurNombre());
-            row.createCell(5).setCellValue(curso.getCurProfesores());
-            row.createCell(6).setCellValue(curso.getCurAyudantes());
-            row.createCell(7).setCellValue(curso.getCurHorario());
-            row.createCell(8).setCellValue(curso.getCurSalas());
-            row.createCell(9).setCellValue(curso.getCurCupoIni());
-            row.createCell(10).setCellValue(curso.getCurCupoIni() - curso.getCurCupoDis());
-            XSSFCell tipoCell = row.createCell(11);
-            tipoCell.setCellValue(curso.getCurTipo());
-            tipoCell.setCellStyle(horizontalCenterStyle);
-        });
-    }
+    AtomicInteger rowNumAtomic = new AtomicInteger(rowNum); // Usamos AtomicInteger para poder actualizar el contador dentro de un lambda
+    cursoList.forEach(curso -> {
+        XSSFRow row = sheet.createRow(rowNumAtomic.getAndIncrement());
+
+        row.createCell(0).setCellValue(curso.getId().getCurAsign());
+        row.createCell(1).setCellValue(curso.getId().getCurElect());
+        row.createCell(2).setCellValue(curso.getId().getCurCoord());
+        row.createCell(3).setCellValue(curso.getId().getCurSecc());
+        row.createCell(4).setCellValue(curso.getCurNombre());
+        row.createCell(5).setCellValue(curso.getCurProfesores());
+        row.createCell(6).setCellValue(curso.getCurAyudantes());
+        row.createCell(7).setCellValue(curso.getCurHorario());
+        row.createCell(8).setCellValue(curso.getCurSalas());
+        row.createCell(9).setCellValue(curso.getCurCupoIni());
+        row.createCell(10).setCellValue(curso.getCurCupoIni() - curso.getCurCupoDis());
+
+        XSSFCell tipoCell = row.createCell(11);
+        tipoCell.setCellValue(curso.getCurTipo());
+        tipoCell.setCellStyle(horizontalCenterStyle);
+    });
+}
 
     /**
      * Guarda el libro de trabajo Excel en un archivo y devuelve el flujo de

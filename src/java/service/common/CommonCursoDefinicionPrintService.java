@@ -157,13 +157,14 @@ public class CommonCursoDefinicionPrintService {
         private PdfTemplate template;
         private Image total;
         private final String fecha;
-        private Image logo;
+        private final Image logo;
 
         HeaderFooterPageEvent(String name, Integer sem, Integer agno, String fecha, Image logo) {
             this.name = name;
             this.sem = sem;
             this.agno = agno;
             this.fecha = fecha;
+            this.logo = logo;
         }
 
         // Configurar el evento al abrir el documento

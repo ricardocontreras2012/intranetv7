@@ -31,7 +31,6 @@ public class CommonCursoListaFotoPrintService {
     static Font fontSmall = PdfUtil.getFont("tahoma", 7.0f, Font.NORMAL);
     static Font font = PdfUtil.getFont("tahoma", 8.5f, Font.NORMAL);
     private static final String LOGO_PATH = ServletActionContext.getServletContext().getRealPath(SystemParametersUtil.UNIVERSITY_LOGO_PATH3);
-    //private static Image logo;
 
     public ActionInputStreamUtil service(GenericSession genericSession, String key) throws Exception {
 
@@ -45,18 +44,17 @@ public class CommonCursoListaFotoPrintService {
     }
 
     public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
-        String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:MM:ss");
+        String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
 
         Document doc = new Document(PageSize.LETTER, 50, 50, 150, 50);// Establecer tamaño Letter
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         PdfWriter writer = PdfWriter.getInstance(doc, buffer);
+
+        // Cargar el logo
         Image logo = Image.getInstance(LOGO_PATH);
         logo.scaleToFit(60, 60); // Ajustar tamaño del logo
         HeaderFooterPageEvent event = new HeaderFooterPageEvent(fecha, curso, logo); // Crear evento para manejar encabezados y pies
         writer.setPageEvent(event); // Registrar el evento
-
-        // Cargar el logo
-        
 
         doc.open();
 
@@ -76,7 +74,7 @@ public class CommonCursoListaFotoPrintService {
             cell.setBorder(0);
             return cell;
         }).forEach(table::addCell);
-        
+
         AtomicInteger index = new AtomicInteger(1);
         java.util.List<AluCar> nomina = curso.getNominaAlumnos();
 
@@ -134,11 +132,12 @@ public class CommonCursoListaFotoPrintService {
         private Image total;
         private final String fecha;
         private final Curso curso;
-        private Image logo;
+        private final Image logo;
 
         HeaderFooterPageEvent(String fecha, Curso curso, Image logo) {
             this.fecha = fecha;
             this.curso = curso;
+            this.logo = logo;
         }
 
         @Override

@@ -71,7 +71,7 @@ public class CommonCursoListaAsistenciaPrintService {
     public InputStream getInput(GenericSession genericSession, WorkSession ws, String name, String file, Curso curso) throws Exception {
 
         Integer genera = genericSession.getRut();
-        String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:MM:ss");
+        String fecha = DateUtil.getFormattedDate(DateUtil.getSysdate(), "dd/MM/yyyy hh:mm:ss");
 
         Document doc = new Document(PageSize.LETTER.rotate(), 50, 50, 150, 50);// Establecer tamaño Letter
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -165,7 +165,7 @@ public class CommonCursoListaAsistenciaPrintService {
         doc.add(table);
         doc.close();
         CommonCertificacionUtil.writeFile(buffer, PATH_TEMP_FILES + file);
-        buffer.close();
+        buffer.close();       
 
         LogUtil.setLog(genera, name);
         return CommonArchivoUtil.getFile(file, "tmp");
