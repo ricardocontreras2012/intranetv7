@@ -5,8 +5,10 @@
  */
 package action.common;
 
+import domain.model.Comuna;
 import service.common.CommonComunaGetComunasService;
 import infrastructure.support.action.common.ActionCommonSupport;
+import java.util.List;
 
 /**
  * Procesa el action mapeado del request a la URL CommonComunaGetComunas
@@ -18,6 +20,7 @@ public final class CommonComunaGetComunasAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
     private Integer region;
+    private List<Comuna> comunaList;
 
     /**
      * Method description
@@ -27,16 +30,8 @@ public final class CommonComunaGetComunasAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonComunaGetComunasService().service(getGenericSession(), getKey(), region);
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public Integer getRegion() {
-        return region;
+        comunaList =  new CommonComunaGetComunasService().service(getGenericSession(), getKey(), region);
+        return SUCCESS;
     }
 
     /**
@@ -46,5 +41,9 @@ public final class CommonComunaGetComunasAction extends ActionCommonSupport {
      */
     public void setRegion(Integer region) {
         this.region = region;
+    }
+
+    public List<Comuna> getComunaList() {
+        return comunaList;
     }
 }

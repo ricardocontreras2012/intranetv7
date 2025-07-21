@@ -1,10 +1,8 @@
 
-
 function executeSearch() {
-    $("#actas-form").attr("action", 'OficinaCurricularActaConsultarGetActasxSemAgno');
+    $("#actas-form").attr("action", 'OficinaCurricularActaConsultarGetActas');
     $("#actas-form").attr("target", "_self");
     $("#actas-form").submit();
-
 }
 
 $(document).ready(function () {

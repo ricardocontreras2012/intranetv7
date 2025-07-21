@@ -12,7 +12,7 @@
         <div class="col-sm-9">
             <input type="text" class="form-control" id="nombreEmpleador" name="nombreEmpleador"
                    readonly="readonly"
-                   value="<s:property value="#session.genericSession.getWorkSession(key).empleador.empNombre"/>">
+                   value="<s:property value="empleador.empNombre"/>">
         </div>
     </div>
 
@@ -21,10 +21,10 @@
         <div class="col-sm-9">
             <input type="text" class="form-control" id="tipoEmpleador" name="tipoEmpleador"
                    readonly="readonly"
-                   <s:if test="#session.genericSession.getWorkSession(key).empleador.empTipoEmpleador == 'PR'">
+                   <s:if test="empleador.empTipoEmpleador == 'PR'">
                        value="PRIVADO"
                    </s:if>
-                   <s:elseif test="#session.genericSession.getWorkSession(key).empleador.empTipoEmpleador == 'PU'">
+                   <s:elseif test="empleador.empTipoEmpleador == 'PU'">
                        value="PÚBLICO"
                    </s:elseif>
             />

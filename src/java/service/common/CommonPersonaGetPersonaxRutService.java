@@ -5,7 +5,7 @@
  */
 package service.common;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.Persona;
 import session.GenericSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -26,9 +26,7 @@ public final class CommonPersonaGetPersonaxRutService {
      * @param rut
      * @return Action status.
      */
-    public String service(GenericSession genericSession, String key, Integer rut) {
-        genericSession.getWorkSession(key).setPersona(ContextUtil.getDAO().getPersonaPersistence(ActionUtil.getDBUser()).find(rut));
-
-        return SUCCESS;
+    public Persona service(GenericSession genericSession, String key, Integer rut) { 
+        return ContextUtil.getDAO().getPersonaPersistence(ActionUtil.getDBUser()).find(rut);        
     }
 }

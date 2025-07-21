@@ -74,14 +74,6 @@
         <!--
             ACTA
         -->
-
-        <action name="OficinaCurricularActaConsultar"
-                class="action.oficinacurricular.OficinaCurricularActaConsultarAction" method="execute">
-            <result name="success" type="redirectAction">
-                <param name="actionName">OficinaCurricularActaConsultarDummy</param>
-                <param name="key">${key}</param>
-            </result>
-        </action>
         <action name="OficinaCurricularActaConsultarDummy"
                 class="action.common.CommonGetSemAgnoAction" method="execute">
             <result name="success" type="redirectAction">
@@ -89,13 +81,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="OficinaCurricularActaConsultarGetActasxSemAgno"
-                class="action.common.CommonSetSemAgnoAction" method="execute">
-            <result name="success" type="redirectAction">
-                <param name="actionName">OficinaCurricularActaConsultarGetActas</param>
-                <param name="key">${key}</param>
-            </result>
-        </action>
+
         <action name="OficinaCurricularActaConsultarGetActas"
                 class="action.oficinacurricular.OficinaCurricularActaConsultarGetActasAction" method="execute">
             <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaConsulta.jsp

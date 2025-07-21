@@ -25,7 +25,7 @@ public final class CommonGetSemAgnoAction extends ActionCommonSupport {
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception {
+    public String action() throws Exception {                       
         return new CommonGetSemAgnoService().service(getGenericSession(), getKey());
     }
 }

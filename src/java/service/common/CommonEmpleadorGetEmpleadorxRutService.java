@@ -5,7 +5,7 @@
  */
 package service.common;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.Empleador;
 import session.GenericSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -26,9 +26,7 @@ public final class CommonEmpleadorGetEmpleadorxRutService {
      * @param rut
      * @return Action status.
      */
-    public String service(GenericSession genericSession, String key, Integer rut) {
-        genericSession.getWorkSession(key).setEmpleador(ContextUtil.getDAO().getEmpleadorPersistence(ActionUtil.getDBUser()).find(rut));
-
-        return SUCCESS;
+    public Empleador service(GenericSession genericSession, String key, Integer rut) {        
+       return ContextUtil.getDAO().getEmpleadorPersistence(ActionUtil.getDBUser()).find(rut);
     }
 }

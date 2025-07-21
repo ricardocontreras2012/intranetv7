@@ -112,10 +112,7 @@
                                                 <li><a class="dropdown-item" href="#">Eliminar</a></li>
                                                 <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#">Consultar</a>
                                                     <ul class="submenu dropdown-menu">
-                                                        <li><a class="dropdown-item" onclick="executeSimpleAction('OficinaCurricularActaConsultar?flag=*&key=<s:property value="key"/>');" href="#">Listado Estado</a></li>
-                                                        <li><a class="dropdown-item" onclick="executeSimpleAction('OficinaCurricularActaConsultar?flag=G&key=<s:property value="key"/>');" href="#">Listado sin Emitir</a></li>
-                                                        <li><a class="dropdown-item" onclick="executeSimpleAction('OficinaCurricularActaConsultar?flag=E&key=<s:property value="key"/>');"href="#">Listado sin Imprimir</a></li>
-                                                        <li><a class="dropdown-item" onclick="executeSimpleAction('OficinaCurricularActaConsultar?flag=I&key=<s:property value="key"/>');"href="#">Listado sin Firmar</a></li>
+                                                        <li><a class="dropdown-item" onclick="executeSimpleAction('OficinaCurricularActaConsultarDummy?key=<s:property value="key"/>');" href="#">Estado</a></li>
                                                         <li><a class="dropdown-item" href="#">Listado Recepción</a></li>
                                                     </ul>
                                                 </li>

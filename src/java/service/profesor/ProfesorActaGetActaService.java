@@ -42,7 +42,6 @@ public final class ProfesorActaGetActaService {
             // Inicializar valores en la sesión
             ws.setActas(null);
             ws.setPuedeEmitir(false);
-            ws.setTipoCalificacion(null);
 
             Curso curso = ws.getCurso();
             
@@ -62,7 +61,6 @@ public final class ProfesorActaGetActaService {
 
                 // Establecer la lista de actas y el tipo de calificación
                 ws.setNominaActa(actaList);
-                ws.setTipoCalificacion(curso.getAsignatura().getAsiTipoCal());
 
                 // Establecer el tipo de acta dependiendo del tipo de calificación
                 retValue = "N".equals(curso.getAsignatura().getAsiTipoCal())
@@ -72,13 +70,12 @@ public final class ProfesorActaGetActaService {
 
             // Registrar el log con la información del curso
             LogUtil.setLogCurso(genericSession.getRut(), curso);
-
+            
             return retValue;
         } catch (Exception e) {
             // En caso de error, restablecer valores y lanzar la excepción
             ws.setActas(null);
             ws.setPuedeEmitir(false);
-            ws.setTipoCalificacion(null);
 
             throw e;
         }

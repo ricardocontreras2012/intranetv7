@@ -9,7 +9,7 @@
 <s:select
         id="comuna"
         name="comuna"
-        list="#session.genericSession.getWorkSession(key).comunaList"
+        list="comunaList"
         listKey="comCod"
         listValue="comNom"
         headerKey=""

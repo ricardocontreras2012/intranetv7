@@ -5,6 +5,7 @@
  */
 package action.common;
 
+import domain.model.Persona;
 import service.common.CommonPersonaGetPersonaxRutService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -19,6 +20,7 @@ public final class CommonPersonaGetPersonaxRutAction extends ActionCommonSupport
 
     private static final long serialVersionUID = 1L;
     private Integer rut;
+    private Persona persona;
 
     /**
      * Method description
@@ -28,16 +30,8 @@ public final class CommonPersonaGetPersonaxRutAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return new CommonPersonaGetPersonaxRutService().service(getGenericSession(), getKey(), rut);
-    }
-
-    /**
-     * Method description
-     *
-     * @return
-     */
-    public Integer getRut() {
-        return rut;
+        persona =  new CommonPersonaGetPersonaxRutService().service(getGenericSession(), getKey(), rut);
+        return SUCCESS;
     }
 
     /**
@@ -47,5 +41,9 @@ public final class CommonPersonaGetPersonaxRutAction extends ActionCommonSupport
      */
     public void setRut(Integer rut) {
         this.rut = rut;
+    }
+
+    public Persona getPersona() {
+        return persona;
     }
 }

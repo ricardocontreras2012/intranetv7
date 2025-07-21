@@ -18,13 +18,14 @@ import infrastructure.util.ContextUtil;
  */
 public class OficinaCurricularActaConsultarGetActasService {
 
-    public String service(GenericSession genericSession, String key)
+    public String service(GenericSession genericSession, String flag, String key)
             throws Exception {
+
         WorkSession ws = genericSession.getWorkSession(key);
         ActaCalificacionPersistence actaPersistence
                 = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());
 
-        ws.setActas(actaPersistence.findActasxEstado(ws.getAgnoAct(), ws.getSemAct(), ws.getFlag()));
+        ws.setActas(actaPersistence.findActasxEstado(ws.getAgnoAct(), ws.getSemAct(), flag));
 
         return SUCCESS;
     }

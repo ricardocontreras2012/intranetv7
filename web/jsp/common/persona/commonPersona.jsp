@@ -15,4 +15,4 @@
     <label for="nombre"></label><input id="nombre" name="nombre-persona" size="100" style="text-transform: uppercase;"/>
 </s:else--%>
 
-<s:property value="#session.genericSession.getWorkSession(key).persona.perFull"/>
+<s:property value="persona.perFull"/>

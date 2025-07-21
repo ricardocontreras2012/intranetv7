@@ -1009,56 +1009,7 @@
             <result name="sinRequisitos">
                 /jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
             </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroEnableInscripcion"
-                class="action.common.CommonRequisitoAdicionalLogroEnableInscripcionAction" method="execute">
-            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroGetInscripciones"
-                class="action.common.CommonRequisitoAdicionalLogroGetInscripcionesAction" method="execute">
-            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetInscripciones.jsp
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroRemoveInscripciones"
-                class="action.common.CommonRequisitoAdicionalLogroRemoveInscripcionesAction" method="execute">
-            <result name="success" type="redirectAction">
-                <param name="actionName">CommonRequisitoAdicionalLogroGetInscripciones</param>
-                <param name="key">${key}</param>
-                <param name="TrequisitoLogroAdicional">${TrequisitoLogroAdicional}</param>
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroSaveInscripcion"
-                class="action.common.CommonRequisitoAdicionalLogroSaveInscripcionAction" method="execute">
-            <result name="success" type="redirectAction">
-                <param name="actionName">CommonRequisitoAdicionalLogroGetInscripciones</param>
-                <param name="key">${key}</param>
-                <param name="TrequisitoLogroAdicional">${TrequisitoLogroAdicional}</param>
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroGetInscripcion"
-                class="action.common.CommonRequisitoAdicionalLogroGetInscripcionAction" method="execute">
-            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetTema.jsp
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroEnableListaxCalificar"
-                class="action.common.CommonRequisitoAdicionalLogroEnableInscripcionAction" method="execute">
-            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetListaxCalificar.jsp
-            </result>
-        </action>
-
-        <action name="CommonRequisitoAdicionalLogroGetListaxCalificar"
-                class="action.common.CommonRequisitoAdicionalLogroGetListaxCalificarAction" method="execute">
-            <result name="success">/jsp/common/requisitoLogroAdicional/commonReqLogroAdicionalGetListaxCalificar.jsp
-            </result>
-        </action>
-
+        </action>        
 
         <action name="CommonLoginStack" class="action.common.CommonLoginStackAction" method="execute">
             <result name="success" type="redirectAction">
@@ -1799,12 +1750,6 @@
             </result>
             <result name="tope">/jsp/message/messageActionError.jsp
             </result>
-        </action>
-
-        <action name="CommonPrintPDFDownload" class="action.common.CommonPrintPDFDownloadAction"
-                method="execute">
-            <result type="myStream"/>
-            <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
         <!-- ACTAS -->

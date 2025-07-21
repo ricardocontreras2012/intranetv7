@@ -5,9 +5,10 @@
  */
 package service.common;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.Comuna;
 import session.GenericSession;
 import infrastructure.util.ContextUtil;
+import java.util.List;
 
 /**
  * Class description
@@ -25,9 +26,7 @@ public final class CommonComunaGetComunasService {
      * @param region
      * @return Action status.
      */
-    public String service(GenericSession genericSession, String key, Integer region) {        
-        genericSession.getWorkSession(key).setComunaList(ContextUtil.getComunaMap().get(region));
-
-        return SUCCESS;
+    public List<Comuna> service(GenericSession genericSession, String key, Integer region) {        
+        return ContextUtil.getComunaMap().get(region);        
     }
 }

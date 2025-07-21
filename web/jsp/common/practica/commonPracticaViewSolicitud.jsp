@@ -176,14 +176,14 @@
 
                     <tr>
                         <td>Requisitos</td>
-                        <s:if test="#session.genericSession.getWorkSession(key).status==\"NO Cumple requisitos\"">
+                        <s:if test="#session.genericSession.getWorkSession(key).solicitud.solMotivo==\"NO Cumple requisitos\"">
                             <td style="color: #FF0000;">
                             </s:if>
                             <s:else>
                             <td style="color: #088A68;">
                             </s:else>
 
-                            <s:property value="#session.genericSession.getWorkSession(key).status"/></td>
+                            <s:property value="#session.genericSession.getWorkSession(key).solicitud.solMotivo"/></td>
                     </tr>
                     <tr>
                         <td><s:text name="label.term.short"/>/<s:text name="label.year"/>&nbsp; Inscripción</td>

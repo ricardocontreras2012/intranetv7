@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="#session.genericSession.getWorkSession(key).logInscripcionList" status="row">
+                    <s:iterator value="logInscripcionList" status="row">
                         <tr>
                             <td style="width: 10%">
                                 <s:date name="logFecha" format="dd/MM/yyyy HH:mm:ss"/>
@@ -75,7 +75,7 @@
                                 <s:property value="logSem"/>/<s:property value="logAgno"/>
                             </td>
                             <td style="width: 35%">
-                                <s:property value="curso.curNombre"/>
+                                <s:property value="asignatura.asiNom"/>
                             </td>
                             <td style="width: 10%">
                                 <s:if test="logTipoMod ==\"A\"">

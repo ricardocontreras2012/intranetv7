@@ -28,10 +28,10 @@ public class CommonPracticaViewSolicitudService {
 
         ws.setPractica(ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).find(sol.getSolFolio()));
 
-        if (ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getPracticaxInscribir(ws.getSolicitud().getAluCar()).intValue() == ws.getPractica().getAsignatura().getAsiCod().intValue()) {
-            ws.setStatus("Cumple requisitos");
+        if (ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getPracticaxInscribir(ws.getSolicitud().getAluCar()).intValue() == ws.getPractica().getAsignatura().getAsiCod().intValue()) {                       
+            sol.setSolMotivo("Cumple requisitos");
         } else {
-            ws.setStatus("NO Cumple requisitos");
+            sol.setSolMotivo("NO Cumple requisitos");
         }
 
         return SUCCESS;

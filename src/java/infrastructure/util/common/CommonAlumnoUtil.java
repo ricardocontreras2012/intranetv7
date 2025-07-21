@@ -238,9 +238,7 @@ public final class CommonAlumnoUtil {
         setTipoCursos(ws);
         ws.setMencionInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetPersistence("AL").find(
                 aluCar.getPlan()));
-
-        //OJO con esto
-        //ws.setCalificacionRequisitoAdicionalLogroxInscribirList(ContextUtil.getDAO().getCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).findxInscribir(aluCar));
+        
         InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
         insSup.setSctNivel();
         ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());

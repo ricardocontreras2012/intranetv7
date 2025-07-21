@@ -10,7 +10,6 @@ import infrastructure.support.ReservaSalaSupport;
 import infrastructure.support.MensajeSupport;
 import infrastructure.support.ActionResultSupport;
 import infrastructure.support.ActaConsultaSupport;
-import infrastructure.support.CalificacionAdicionalLogroxInscribirSupport;
 import infrastructure.support.MiCarreraSupport;
 import infrastructure.support.DerechoCoordinadorSupport;
 import domain.model.Mensaje;
@@ -29,7 +28,6 @@ import domain.model.Profesor;
 import domain.model.Tevaluacion;
 import domain.model.SolicitudInscripcion;
 import domain.model.Alumno;
-import domain.model.Comuna;
 import domain.model.ComentarioEncuestaAyudante;
 import domain.model.MensajeDestinatario;
 import domain.model.Mencion;
@@ -43,12 +41,9 @@ import domain.model.Reincorporacion;
 import domain.model.CursoEspejo;
 import domain.model.Solicitud;
 import domain.model.LogSolicitud;
-import domain.model.LogInscripcion;
 import domain.model.MaterialApoyo;
 import domain.model.ExpedienteLogro;
-import domain.model.TdocumentoSolicitud;
 import domain.model.Unidad;
-import domain.model.Persona;
 import domain.model.ActaCalificacion;
 import domain.model.Tmaterial;
 import domain.model.ModuloHorario;
@@ -106,8 +101,7 @@ public final class WorkSession {
     private List<AsistenciaAlumnoNomina> asistenciaAlumnoNominaList;
     private Ayudante ayudante;
     private List<Ayudante> ayudanteList;
-    private boolean blinkMensajes;
-    private List<CalificacionAdicionalLogroxInscribirSupport> calificacionRequisitoAdicionalLogroxInscribirList;
+    private boolean blinkMensajes;    
     private List<Calificacion> calificaciones;
     private Ccalidad ccalidad;
     private List<ComentarioEncuestaDocente> comentarioEncuestaDocenteList;
@@ -115,7 +109,7 @@ public final class WorkSession {
     private List<ActaConsultaSupport> actaConsultaSupportList;
     private MiCarreraSupport miCarreraSupport;
     private List<MiCarreraSupport> miCarreraSupportList;
-    private List<Comuna> comunaList;
+    
     private Mensaje currentMsg;
     private Curso curso;
     private List<Curso> cursoList;
@@ -132,7 +126,6 @@ public final class WorkSession {
     private List<CursoAyudante> cursoAyudanteList;
     private Derecho derecho;
     private DerechoCoordinadorSupport derechoCoordinador;
-    private Empleador empleador;
     private List<Empleador> empleadorList;
     private EncuestaDocente encuestaDocente;
     private EncuestaAyudante encuestaAyudante;
@@ -145,12 +138,10 @@ public final class WorkSession {
     private Horario[][] horario;
     private List<Horario> horarioList;
     private List<ModuloHorario> moduloHorarioList;
-    private List<InscripcionAdicionalLogro> inscripcionRequisitoAdicionalLogroList;
     private InscripcionAdicionalLogro inscripcionRequisitoAdicionalLogro;
     private String keyParent;
     private LogCertificacion logCertificacion;
     private List<Tramite> tramites;
-    private List<LogInscripcion> logInscripcionList;
     private MaterialApoyo material;
     private MencionInfoIntranet mencionInfoIntranet;
     private List<Mencion> mencionList;
@@ -191,9 +182,7 @@ public final class WorkSession {
     private List<Solicitud> solicitudList;
     private List<Electivo> electivoList;
     private List<SolicitudInscripcion> solicitudInscripcionList;
-    private List<TdocumentoSolicitud> tdocumentoSolicitudList;
     private List<Tevaluacion> tevaluacion;
-    private String tipoCalificacion;
     private String tipoMaterial;
     private List<Tmaterial> tmaterial;
     private List<Tmaterial> tmaterialSelectOption;
@@ -204,22 +193,15 @@ public final class WorkSession {
     private Integer pos;
     private String fechaInicio;
     private String fechaTermino;
-
-    //private List<LogActa> logActaList;
     private List<LogSolicitud> logSolicitudList;
-    private Persona persona;
-    private String status;
     private List<CursoEspejo> cargaEspejo;
     private List<CursoEspejo> cursoEspejoList;
     private ReservaSalaSupport[][] horarioSala;
     private ReservaSala reserva;
     private List<Malla> mallaList;
-    private String pdfTempFile;
     private List<Reincorporacion> reincorporacionList;
-    private String flag;
     private String idHorario;
 
-    private Funcionario funcionario;
     private List<Funcionario> funcionarioList;
     private List<Calificacion> actaRectificatoriaList;
     private List<DocenteHorario> docenteHorarioList;
@@ -237,12 +219,10 @@ public final class WorkSession {
         this.type = type;
         this.nuevosMensajes = 0L;
     }
-
     
     public List<ActaCalificacion> getActas() {
         return actas;
     }
-
 
     public void setActas(List<ActaCalificacion> actas) {
         this.actas = actas;
@@ -252,21 +232,17 @@ public final class WorkSession {
         return actionCall;
     }
 
-
     public void setActionCall(String actionCall) {
         this.actionCall = actionCall;
     }
-
 
     public String getActionNested() {
         return actionNested;
     }
 
-
     public void setActionNested(String actionNested) {
         this.actionNested = actionNested;
     }
-
  
     public Integer getAgnoAct() {
         return agnoAct;
@@ -275,7 +251,6 @@ public final class WorkSession {
     public void setAgnoAct(Integer agnoAct) {
         this.agnoAct = agnoAct;
     }
-
     
     public AluCar getAluCar() {
         return aluCar;
@@ -288,7 +263,6 @@ public final class WorkSession {
     public void setAluCar(AluCar aluCar) {
         this.aluCar = aluCar;
     }
-
     
     public List<AluCar> getAluCarList() {
         return aluCarList;
@@ -297,12 +271,10 @@ public final class WorkSession {
     public void setAluCarList(List<AluCar> aluCarList) {
         this.aluCarList = aluCarList;
     }
-
     
     public Alumno getAlumno() {
         return alumno;
     }
-
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
@@ -371,15 +343,7 @@ public final class WorkSession {
 
     public void setBlinkMensajes(boolean blinkMensajes) {
         this.blinkMensajes = blinkMensajes;
-    }
-    
-    public List<CalificacionAdicionalLogroxInscribirSupport> getCalificacionRequisitoAdicionalLogroxInscribirList() {
-        return calificacionRequisitoAdicionalLogroxInscribirList;
-    }
-
-    public void setCalificacionRequisitoAdicionalLogroxInscribirList(List<CalificacionAdicionalLogroxInscribirSupport> calificacionRequisitoAdicionalLogroxInscribirList) {
-        this.calificacionRequisitoAdicionalLogroxInscribirList = calificacionRequisitoAdicionalLogroxInscribirList;
-    }
+    }    
     
     public List<Calificacion> getCalificaciones() {
         return calificaciones;
@@ -435,14 +399,6 @@ public final class WorkSession {
 
     public void setMiCarreraSupportList(List<MiCarreraSupport> miCarreraSupportList) {
         this.miCarreraSupportList = miCarreraSupportList;
-    }
-    
-    public List<Comuna> getComunaList() {
-        return comunaList;
-    }
-
-    public void setComunaList(List<Comuna> comunaList) {
-        this.comunaList = comunaList;
     }
     
     public Mensaje getCurrentMsg() {
@@ -532,24 +488,6 @@ public final class WorkSession {
     public void setDerechoCoordinador(DerechoCoordinadorSupport derechoCoordinador) {
         this.derechoCoordinador = derechoCoordinador;
     }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    
-    public Empleador getEmpleador() {
-        return empleador;
-    }
-
-    public void setEmpleador(Empleador empleador) {
-        this.empleador = empleador;
-    }
-
     
     public List<Empleador> getEmpleadorList() {
         return empleadorList;
@@ -640,13 +578,7 @@ public final class WorkSession {
         this.horario = copyOf(horario, horario.length);
     }
     
-    public List<InscripcionAdicionalLogro> getInscripcionAdicionalLogroList() {
-        return inscripcionRequisitoAdicionalLogroList;
-    }
-
-    public void setInscripcionAdicionalLogroList(List<InscripcionAdicionalLogro> inscripcionRequisitoAdicionalLogroList) {
-        this.inscripcionRequisitoAdicionalLogroList = inscripcionRequisitoAdicionalLogroList;
-    }
+    
     
     public InscripcionAdicionalLogro getInscripcionAdicionalLogro() {
         return inscripcionRequisitoAdicionalLogro;
@@ -670,14 +602,6 @@ public final class WorkSession {
 
     public void setLogCertificacion(LogCertificacion logCertificacion) {
         this.logCertificacion = logCertificacion;
-    }
-    
-    public List<LogInscripcion> getLogInscripcionList() {
-        return logInscripcionList;
-    }
-
-    public void setLogInscripcionList(List<LogInscripcion> logInscripcionList) {
-        this.logInscripcionList = logInscripcionList;
     }
     
     public MaterialApoyo getMaterial() {
@@ -935,15 +859,6 @@ public final class WorkSession {
     public void setSolicitudInscripcionList(List<SolicitudInscripcion> solicitudInscripcionList) {
         this.solicitudInscripcionList = solicitudInscripcionList;
     }
-
-    
-    public List<TdocumentoSolicitud> getTdocumentoSolicitudList() {
-        return tdocumentoSolicitudList;
-    }
-
-    public void setTdocumentoSolicitudList(List<TdocumentoSolicitud> tdocumentoSolicitudList) {
-        this.tdocumentoSolicitudList = tdocumentoSolicitudList;
-    }
     
     public List<Tevaluacion> getTevaluacion() {
         return tevaluacion;
@@ -951,14 +866,6 @@ public final class WorkSession {
 
     public void setTevaluacion(List<Tevaluacion> tevaluacion) {
         this.tevaluacion = tevaluacion;
-    }
-    
-    public String getTipoCalificacion() {
-        return tipoCalificacion;
-    }
-
-    public void setTipoCalificacion(String tipoCalificacion) {
-        this.tipoCalificacion = tipoCalificacion;
     }
     
     public String getTipoMaterial() {
@@ -1017,22 +924,12 @@ public final class WorkSession {
         return asiste(this, correl, rut);
     }
 
-
     public List<LogSolicitud> getLogSolicitudList() {
         return logSolicitudList;
     }
 
-
     public void setLogSolicitudList(List<LogSolicitud> logSolicitudList) {
         this.logSolicitudList = logSolicitudList;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public List<CursoEspejo> getCargaEspejo() {
@@ -1075,28 +972,12 @@ public final class WorkSession {
         this.respEnctaAyu = respEnctaAyu;
     }
 
-    public String getPdfTempFile() {
-        return pdfTempFile;
-    }
-
-    public void setPdfTempFile(String pdfTempFile) {
-        this.pdfTempFile = pdfTempFile;
-    }
-
     public List<Reincorporacion> getReincorporacionList() {
         return reincorporacionList;
     }
 
     public void setReincorporacionList(List<Reincorporacion> reincorporacionList) {
         this.reincorporacionList = reincorporacionList;
-    }
-
-    public String getFlag() {
-        return flag;
-    }
-
-    public void setFlag(String flag) {
-        this.flag = flag;
     }
 
     public List<PreguntaAutoEvaluacion> getPreguntasAutoevaluacionList() {
@@ -1161,14 +1042,6 @@ public final class WorkSession {
 
     public void setCursoEspejoList(List<CursoEspejo> cursoEspejoList) {
         this.cursoEspejoList = cursoEspejoList;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
     }
 
     public List<Funcionario> getFuncionarioList() {

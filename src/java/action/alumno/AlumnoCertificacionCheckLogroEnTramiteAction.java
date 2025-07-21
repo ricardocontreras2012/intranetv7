@@ -28,10 +28,7 @@ public class AlumnoCertificacionCheckLogroEnTramiteAction extends ActionValidati
     }
 
     @Override
-    public boolean isValidParam() throws IllegalArgumentException {
-        /*return isValidPos(getPos(),
-                getGenericSession().getWorkSession(getKey()).getCalificacionRequisitoAdicionalLogroxInscribirList());
-         */
+    public boolean isValidParam() throws IllegalArgumentException {        
         return true;
     }
 }

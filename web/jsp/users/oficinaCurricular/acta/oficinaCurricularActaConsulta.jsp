@@ -24,17 +24,18 @@
         <script type="text/javascript" src="/intranetv7/js/local/users/oficinaCurricular/acta/oficinaCurricularActaConsulta-3.0.1.js"></script>
     </head>
     <body class="inner-body">
+        
         <div class="title-div">
-            <s:if test="%{#session.genericSession.getWorkSession(key).flag==\"G\"}">
+            <s:if test="%{flag==\"G\"}">
                 ACTAS SIN EMITIR
             </s:if>
-            <s:if test="%{#session.genericSession.getWorkSession(key).flag==\"E\"}">
+            <s:if test="%{flag==\"E\"}">
                  ACTAS SIN IMPRIMIR
             </s:if>
-            <s:if test="%{#session.genericSession.getWorkSession(key).flag==\"I\"}">
+            <s:if test="%{flag==\"I\"}">
                 ACTAS SIN RECEPCIONAR
             </s:if>
-            <s:if test="%{#session.genericSession.getWorkSession(key).flag==\"*\"}">
+            <s:if test="%{flag==\"*\"}">
                 ACTAS
             </s:if>
 
@@ -44,7 +45,6 @@
             <div class="row">
                 <div id="justified-button-bar" class="col-lg-12">
                     <div class="btn-group">
-
                         <div class="btn-group">
                             <button id="search-button" title="Buscar" type="button" class="btn btn-light" >
                                 <span class="fa fa-search"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.search"/></span>
@@ -63,18 +63,27 @@
         <form id="actas-form" action="#" method="post">
             <div class="container-fluid pt-2 pb-2">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="form-inline row">
-                            <div class="col-md-3">                                
+                            <div class="col-md-2">                                
                                 Sem/Año
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <input id="sem" name="sem"
-                                       value="<s:property value="#session.genericSession.getWorkSession(key).semAct"/>"
+                                       value="<s:property value='#session.genericSession.getWorkSession(key).semAct'/>"
                                        maxlength="1" size="1" class="form-control input-sm"/>
                                 <input id="agno" name="agno"
-                                       value="<s:property value="#session.genericSession.getWorkSession(key).agnoAct"/>"
+                                       value="<s:property value='#session.genericSession.getWorkSession(key).agnoAct'/>"
                                        maxlength="4" size="4" class="form-control input-sm"/>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="flag" name="flag" class="form-control input-sm">
+                                    <option value="">-- Estados --</option>
+                                    <option value="G">ACTAS SIN EMITIR</option>
+                                    <option value="E">ACTAS SIN IMPRIMIR</option>
+                                    <option value="I">ACTAS SIN RECEPCIONAR</option>
+                                    <option value="*">GENERAL</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -96,13 +105,16 @@
                 <tbody>
                     <s:iterator value="#session.genericSession.getWorkSession(key).actas" status="row">
                         <tr>
-                            <td style="width: 4%"><input type="checkbox" id="ck_<s:property value="#row.count -1"/>"
-                                                         name="ck_<s:property value="#row.count -1"/>"/></td>
+                            <td style="width: 4%"><input type="checkbox" id="ck_<s:property value='#row.count -1'/>"
+                                                         name="ck_<s:property value='#row.count -1'/>"/></td>
                             <td style="width: 6%"><s:property value="id.acalFolio"/></td>
                             <td style="width: 6%"><s:property value="acalTipo"/></td>
-                            <td style="width: 10%"><s:property value="curso.id.curAsign"/> <s:property
-                                    value="curso.id.curElect"/> <s:property value="curso.id.curCoord"/> <s:property
-                                    value="curso.id.curSecc"/></td>
+                            <td style="width: 10%">
+                                <s:property value="curso.id.curAsign"/>
+                                <s:property value="curso.id.curElect"/>
+                                <s:property value="curso.id.curCoord"/>
+                                <s:property value="curso.id.curSecc"/>
+                            </td>
                             <td><s:property value="curso.curNombre"/></td>
                             <td><s:property value="curso.curProfesores"/></td>
                         </tr>
@@ -111,7 +123,7 @@
             </table>
 
             <div id="hidden-input-div">
-                <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
+                <input type="hidden" id="key" name="key" value="<s:property value='key'/>"/>
             </div>
         </form>
     </body>

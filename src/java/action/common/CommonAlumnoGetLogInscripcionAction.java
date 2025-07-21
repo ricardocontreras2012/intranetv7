@@ -5,8 +5,10 @@
  */
 package action.common;
 
+import domain.model.LogInscripcion;
 import service.common.CommonAlumnoGetLogInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
+import java.util.List;
 
 /**
  * Procesa el action mapeado del request a la URL CommonAlumnoGetLogInscripcion
@@ -19,6 +21,7 @@ public final class CommonAlumnoGetLogInscripcionAction extends ActionCommonSuppo
     
     private Integer sem;
     private Integer agno;
+    private List<LogInscripcion> logInscripcionList;
     
 
     /**
@@ -29,7 +32,8 @@ public final class CommonAlumnoGetLogInscripcionAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {              
-        return new CommonAlumnoGetLogInscripcionService().service(getGenericSession(), getKey(), this.sem, this.agno);
+        logInscripcionList =  new CommonAlumnoGetLogInscripcionService().service(getGenericSession(), getKey(), this.sem, this.agno);
+        return SUCCESS;
     }
 
     public void setSem(Integer sem) {
@@ -39,5 +43,8 @@ public final class CommonAlumnoGetLogInscripcionAction extends ActionCommonSuppo
     public void setAgno(Integer agno) {
         this.agno = agno;
     }
-    
+
+    public List<LogInscripcion> getLogInscripcionList() {
+        return logInscripcionList;
+    }
 }

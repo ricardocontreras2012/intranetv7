@@ -36,7 +36,6 @@ public class CommonFuncionarioSearchService {
                 funcionarioPersistence.creaFuncionario(rut);
                 funcionario = funcionarioPersistence.find(rut);
             }
-            ws.setFuncionario(funcionario);
             
             list.add(funcionario);
 

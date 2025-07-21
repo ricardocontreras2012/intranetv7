@@ -26,7 +26,7 @@
     <body>
         <div class="container-fluid">
             <div class="title-div">
-                <s:text name="label.title.reporte"/><s:property value="#session.genericSession.getWorkSession(key).curso.nombreCorto"/>
+                <s:text name="label.title.reportes"/>&nbsp;<s:property value="#session.genericSession.getWorkSession(key).curso.nombreCorto"/>
             </div>
 
             <div class="mb-3">
