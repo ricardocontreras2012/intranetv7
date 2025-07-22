@@ -6,8 +6,7 @@
     <entry key="AccesoWEB">W</entry>
     
     <entry key="backgroundLogoPath">/images/local/background/usach-letter-size.png</entry>
-    <entry key="universityLogoPath1">/images/local/logo-usach/logo_usach.jpg</entry>    
-    <entry key="universityLogoPath2">/images/local/logo-usach/logo_usach2.jpg</entry>
+    <entry key="universityLogoPath1">/images/local/logo-usach/logo_usach.jpg</entry>
     <entry key="universityLogoPath3">/images/local/logo-usach/logo_usach4.png</entry>
     <entry key="somosUsachPath">/images/local/certificado/somos_usach.png</entry>
     <entry key="universityLogoUsach">/images/local/logo-usach/logo-usach.png</entry>
@@ -44,5 +43,4 @@
     <entry key="passwordUserMinLength">6</entry>
     <entry key="passwordUserPlusMinLength">10</entry>
 
-    <entry key="actaGradoTituloBackgroundImagePath">/images/acta_grado_titulo.jpg</entry>
 </properties>

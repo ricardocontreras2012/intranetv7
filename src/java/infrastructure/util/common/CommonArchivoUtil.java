@@ -11,6 +11,9 @@ import static org.apache.commons.io.FileUtils.openInputStream;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.FormatUtil.normalizaFileName;
 import static infrastructure.util.SystemParametersUtil.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Utilidad para gestionar archivos en la intranet, como subir, eliminar y
@@ -25,6 +28,21 @@ public final class CommonArchivoUtil {
 
     // Constructor privado para evitar la instanciación de esta clase utilitaria
     private CommonArchivoUtil() {
+    }
+
+    private static final Map<String, String> PATH_MAP = new HashMap<>();
+
+    static {
+        PATH_MAP.put("mat", PATH_MATERIALES);
+        PATH_MAP.put("msg", PATH_ATTACH_MESSAGES);
+        PATH_MAP.put("sol", PATH_ATTACH_SOLICITUDES);
+        PATH_MAP.put("cert", PATH_CERT);
+        PATH_MAP.put("acta", PATH_ACTAS);
+        PATH_MAP.put("tmp", PATH_TEMP_FILES);
+        PATH_MAP.put("sit", PATH_SITUACIONES);
+        PATH_MAP.put("conv", PATH_CONV);
+        PATH_MAP.put("prog", PATH_PROG);
+        PATH_MAP.put("tit", PATH_TITULACION);
     }
 
     /**
@@ -147,13 +165,13 @@ public final class CommonArchivoUtil {
      */
     public static InputStream getFile(String name, String tipo) throws Exception {
         InputStream retValue = null;
- 
+
         if (name != null) {
             // Abre el archivo en la ruta determinada por el tipo
             retValue = openInputStream(new File(getServerPath(tipo) + name));
         }
 
-        return retValue;        
+        return retValue;
     }
 
     /**
@@ -161,31 +179,9 @@ public final class CommonArchivoUtil {
      *
      * @param tipo El tipo de archivo que determinará la carpeta de destino.
      * @return La ruta completa del servidor para el tipo de archivo.
-     */
+     */    
     public static String getServerPath(String tipo) {
-        switch (tipo) {
-            case "mat":
-                return PATH_MATERIALES;
-            case "msg":
-                return PATH_ATTACH_MESSAGES;
-            case "sol":
-                return PATH_ATTACH_SOLICITUDES;
-            case "cert":
-                return PATH_CERT;
-            case "acta":
-                return PATH_ACTAS;
-            case "tmp":
-                return PATH_TEMP_FILES;
-            case "sit":
-                return PATH_SITUACIONES;
-            case "conv":
-                return PATH_CONV;
-            case "prog":
-                return PATH_PROG;
-            case "tit":
-                return PATH_TITULACION;
-            default:
-                throw new IllegalArgumentException("Tipo de archivo desconocido: " + tipo);
-        }
+        return Optional.ofNullable(PATH_MAP.get(tipo))
+                .orElseThrow(() -> new IllegalArgumentException("Tipo de archivo desconocido: " + tipo));
     }
 }

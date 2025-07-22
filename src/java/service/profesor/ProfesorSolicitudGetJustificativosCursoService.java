@@ -6,15 +6,11 @@
 package service.profesor;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.model.Solicitud;
-import domain.model.SolicitudJustificativo;
-import java.util.List;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.LogUtil;
-import java.util.stream.Collectors;
 
 /**
  *

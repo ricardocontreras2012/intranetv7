@@ -12,14 +12,11 @@ import infrastructure.util.HibernateUtil;
 import domain.model.MensajeAttach;
 import domain.model.Mensaje;
 import domain.model.Curso;
-import java.io.File;
-import java.io.FileNotFoundException;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
 import static java.lang.System.out;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.IntStream;
 import static infrastructure.support.LaborSupport.getDirectoresDepto;
@@ -30,7 +27,11 @@ import static infrastructure.util.SystemParametersUtil.PATH_TEMP_FILES;
 import domain.model.AlumnoActivoView;
 import domain.model.AyudanteActivoView;
 import domain.model.ProfesorActivoView;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  *
@@ -546,17 +547,13 @@ public class MensajeSenderSupport {
                         .forEach(this::addDestinatario)
                 );
     }
-
+    
     private void sendRUNFile(MensajeNodeSupport nodoDest) {
-        File file = new File(PATH_TEMP_FILES + nodoDest.getValue());
-
-        try (Scanner inputStream = new Scanner(file, "UTF-8")) {
-            while (inputStream.hasNext()) {
-                String rut = inputStream.next();
-                addDestinatario(valueOf(rut));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace(); // En producción sería mejor usar un logger
+        String filePath = PATH_TEMP_FILES + nodoDest.getValue();
+        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+            lines.forEach(rut -> addDestinatario(valueOf(rut.trim())));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

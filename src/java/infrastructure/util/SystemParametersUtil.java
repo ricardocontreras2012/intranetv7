@@ -59,7 +59,6 @@ public class SystemParametersUtil {
      * Rutas a los logos de la universidad.
      */
     public static final String UNIVERSITY_LOGO_PATH1 = PROPERTIES.getProperty("universityLogoPath1");
-    public static final String UNIVERSITY_LOGO_PATH2 = PROPERTIES.getProperty("universityLogoPath2");
     public static final String UNIVERSITY_LOGO_PATH3 = PROPERTIES.getProperty("universityLogoPath3");
     public static final String UNIVERSITY_SOMOS_PATH = PROPERTIES.getProperty("somosUsachPath");
     public static final String UNIVERSITY_LOGO_PATH = PROPERTIES.getProperty("universityLogoUsach");
@@ -200,12 +199,7 @@ public class SystemParametersUtil {
      * Ruta de acceso al sistema web.
      */
     public static final String ACCESO_WEB = PROPERTIES.getProperty("AccesoWEB");
-
-    /**
-     * Ruta de imagen para el fondo del acta de grado y título.
-     */
-    public static final String ACTA_GRADO_TITULO_BACKGROUND_IMAGE_PATH = PROPERTIES.getProperty("actaGradoTituloBackgroundImagePath");
-
+   
     /**
      * Obtiene el valor de un parámetro desde la base de datos.
      *

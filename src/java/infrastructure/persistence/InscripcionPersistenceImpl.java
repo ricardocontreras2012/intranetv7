@@ -58,8 +58,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     @Override
     public List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns) {
         Criteria criteria = getSession().createCriteria(Inscripcion.class);
-     try{
-        
+
         String filter=" NOT EXISTS (SELECT 1 FROM calificacion WHERE cal_rut = ? and cal_cod_car = ? and "+
                 " cal_agno_ing = ? and cal_sem_ing = ? and cal_asign = ins_asign and cal_agno = ? and cal_sem = ?)";
 
@@ -80,8 +79,6 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         criteria.addOrder(asc("insSecc"));
 
         return criteria.list();
-        
-     }catch(Exception e) {e.printStackTrace();return null;}
     }
 
     @Override

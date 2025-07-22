@@ -193,6 +193,7 @@ public class AlumnoPracticaPresentacionPrintService {
 
         Image img = Image.getInstance( ServletActionContext.getServletContext().getRealPath("/images/local/practicas/firma-timbre"
                         + archivo + ".jpg")); 
+        
         img.scaleToFit(100, 100); // Escalar la imagen si es necesario
         PdfPCell imageCell = new PdfPCell(img);
         imageCell.setHorizontalAlignment(Element.ALIGN_CENTER);

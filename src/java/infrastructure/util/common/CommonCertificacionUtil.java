@@ -37,12 +37,33 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
 import static infrastructure.util.SystemParametersUtil.CERTIFICATE_BACKGROUND_IMAGE_PATH;
 import static infrastructure.util.SystemParametersUtil.CONTANCIA_BACKGROUND_IMAGE_PATH;
 import domain.model.CertificacionView;
+import java.util.HashMap;
 
 /**
  *
  * @author rcontreras
  */
 public class CommonCertificacionUtil {
+
+    private static final Map<Integer, String> PREFIJOS_MAP = new HashMap<>();
+
+    static {
+        PREFIJOS_MAP.put(1, "Certificado_Alumno_Regular_");
+        PREFIJOS_MAP.put(2, "No_impedimento_");
+        PREFIJOS_MAP.put(3, "Certificado_Alumno_Egresado_");
+        PREFIJOS_MAP.put(4, "Titulo_en_Tramite_");
+        PREFIJOS_MAP.put(5, "Grado_en_Tramite_");
+        PREFIJOS_MAP.put(7, "Informe_de_Calificaciones_I3_");
+        PREFIJOS_MAP.put(9, "Informe_de_Calificaciones_I4_");
+        PREFIJOS_MAP.put(11, "Ranking_egresado_");
+        PREFIJOS_MAP.put(14, "Ranking_regular_");
+        PREFIJOS_MAP.put(21, "Informe_de_Calificaciones_I7_");
+        PREFIJOS_MAP.put(30, "Postitulo_en_Tramite_");
+        PREFIJOS_MAP.put(32, "Diplomado_en_Tramite_");
+        PREFIJOS_MAP.put(40, "Certificado_Logro_");
+        PREFIJOS_MAP.put(50, "Informe_de_Convalidaciones_");
+        PREFIJOS_MAP.put(60, "ISO_27001_");
+    }
 
     public static Integer getFolio() {
         return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaCertificado();
@@ -65,60 +86,7 @@ public class CommonCertificacionUtil {
     }
 
     public static String getPrefijoArchivo(Integer tipo) {
-        String retValue;
-
-        switch (tipo) {
-            case 1:
-                retValue = "Certificado_Alumno_Regular_";
-                break;
-            case 2:
-                retValue = "No_impedimento_";
-                break;
-            case 3:
-                retValue = "Certificado_Alumno_Egresado_";
-                break;
-            case 4:
-                retValue = "Titulo_en_Tramite_";
-                break;
-            case 5:
-                retValue = "Grado_en_Tramite_";
-                break;
-            case 11:
-                retValue = "Ranking_egresado_";
-                break;
-            case 14:
-                retValue = "Ranking_regular_";
-                break;
-            case 30:
-                retValue = "Postitulo_en_Tramite_";
-                break;
-            case 32:
-                retValue = "Diplomado_en_Tramite_";
-                break;
-            case 7:
-                retValue = "Informe_de_Calificaciones_I3_";
-                break;
-            case 9:
-                retValue = "Informe_de_Calificaciones_I4_";
-                break;
-            case 21:
-                retValue = "Informe_de_Calificaciones_I7_";
-                break;
-            case 40:
-                retValue = "Certificado_Logro_";
-                break;
-            case 50:
-                retValue = "Informe_de_Convalidaciones_";
-                break;
-            case 60:
-                retValue = "ISO_27001_";
-                break;
-
-            default:
-                retValue = "";
-        }
-
-        return retValue;
+        return PREFIJOS_MAP.getOrDefault(tipo, "");
     }
 
     /**
@@ -296,14 +264,24 @@ public class CommonCertificacionUtil {
     }
 
     public static String getSemestre(int regimen, int semestre) {
-        return (semestre == 1
-                ? "Primer"
-                : semestre == 2
-                        ? "Segundo"
-                        : "Tercer")
-                + (regimen == 2
-                        ? " Semestre"
-                        : " Trimestre");
-    }
+        String semOrd;
+        switch (semestre) {
+            case 1:
+                semOrd = "Primer";
+                break;
+            case 2:
+                semOrd = "Segundo";
+                break;
+            case 3:
+                semOrd = "Tercer";
+                break;
+            default:
+                semOrd = "";
+                break;
+        }
 
+        String nombreRegimen = (regimen == 2) ? " Semestre" : " Trimestre";
+
+        return semOrd + nombreRegimen;
+    }
 }
