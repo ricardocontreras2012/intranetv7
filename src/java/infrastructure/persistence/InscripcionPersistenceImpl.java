@@ -23,6 +23,8 @@ import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
 import domain.model.InscripcionCursoView;
 import java.sql.Clob;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.Type;
 
 /**
  * Class description
@@ -50,6 +52,36 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         criteria.addOrder(asc("insSecc"));
 
         return criteria.list();
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns) {
+        Criteria criteria = getSession().createCriteria(Inscripcion.class);
+     try{
+        
+        String filter=" NOT EXISTS (SELECT 1 FROM calificacion WHERE cal_rut = ? and cal_cod_car = ? and "+
+                " cal_agno_ing = ? and cal_sem_ing = ? and cal_asign = ins_asign and cal_agno = ? and cal_sem = ?)";
+
+        criteria.setFetchMode("aluCar", JOIN);
+        criteria.setFetchMode("curso", JOIN);
+        criteria.createAlias("curso.asignatura","asignatura");
+        criteria.add(eq("id.insAgno", agnoIns));
+        criteria.add(eq("id.insSem", semIns));
+        criteria.add(eq("asignatura.asiFlagPractica", "S"));
+        criteria.add(eq("aluCar.id", id));
+        criteria.add(Restrictions.sqlRestriction(filter,
+                new Object[]{id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng(), agnoIns, semIns},
+                new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER,
+                    StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER}));
+        criteria.addOrder(asc("id.insAsign"));
+        criteria.addOrder(asc("id.insElect"));
+        criteria.addOrder(asc("insCoord"));
+        criteria.addOrder(asc("insSecc"));
+
+        return criteria.list();
+        
+     }catch(Exception e) {e.printStackTrace();return null;}
     }
 
     @Override

@@ -23,6 +23,7 @@ import domain.model.InscripcionCursoView;
  */
 public interface InscripcionPersistence extends CrudGenericDAO<Inscripcion, Long> {
     List<Inscripcion> getInscripcion(AluCar aluCar, Integer agnoIns, Integer semIns);
+    List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns);
     int deleteInscripcion(AluCar aluCar, CursoId id, String proceso, Integer rutRea, String user);
     List<InscripcionCursoView> findNomina(Curso curso);
     List<InscripcionCursoView> findNominaRanking(Curso curso);

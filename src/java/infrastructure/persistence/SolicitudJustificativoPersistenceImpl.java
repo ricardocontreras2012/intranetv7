@@ -38,8 +38,7 @@ public final class SolicitudJustificativoPersistenceImpl extends CrudAbstractDAO
         query.setParameter("secc", id.getCurSecc(), StandardBasicTypes.INTEGER);
         query.setParameter("agno", id.getCurAgno(), StandardBasicTypes.INTEGER);
         query.setParameter("sem", id.getCurSem(), StandardBasicTypes.INTEGER);
-        query.executeUpdate();
-
+        query.executeUpdate();        
     }
 
     @Override

@@ -41,6 +41,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddService {
         String inicio = parameters.get("fechaInicio")[0];
         String termino = parameters.get("fechaTermino")[0];
         String glosa = parameters.get("glosa")[0];
+        String eval = parameters.get("eval")[0];
 
         Solicitud solicitud = ws.getSolicitud();
         Integer folio = solicitud.getSolFolio();
@@ -76,7 +77,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddService {
         commitTransaction();
 
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(user).modify(folio, acumStr);
+        ContextUtil.getDAO().getSolicitudPersistence(user).modify(folio, "Justificativo "+eval+": "+acumStr);
         commitTransaction();
 
         LogUtil.setLog(genericSession.getRut(), folio);

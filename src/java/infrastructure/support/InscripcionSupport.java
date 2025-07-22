@@ -120,10 +120,9 @@ public final class InscripcionSupport {
     public Integer isAlumnoPropio(Integer rut, String userType) {
         return ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).isAlumnoPropio(aluCar, rut, userType);
     }
-
+    
     public List<Inscripcion> getInscripcionFull(Integer agno, Integer sem) {
         List<Inscripcion> insList = getInscripcion(agno, sem);
-
         getTotales(insList);
         return insList;
     }

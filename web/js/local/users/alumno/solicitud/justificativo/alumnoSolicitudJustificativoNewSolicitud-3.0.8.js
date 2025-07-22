@@ -8,17 +8,43 @@ function esFechaValida(fechaStr) {
     // Si pasa la expresión regular, convertimos la fecha a un objeto Date
     let  [day, month, year] = fechaStr.split('-').map(Number);
     const fecha = new Date(year, month - 1, day); // Mes - 1 porque en JS los meses empiezan desde 0
-    
+
     // Verificamos que la fecha generada sea válida
     return fecha.getDate() === day && fecha.getMonth() + 1 === month && fecha.getFullYear() === year;
 }
 
 function saveSolicitud() {
+    
+    if ($("#eval").val() === "") {
+        $("#aviso-eval-error").modal('show');
+        return;
+    }       
+        
     const rowCount = $('#solicitud-table tr').length;
-
     // Validación de cantidad de filas
     if (rowCount <= 1) {
         $("#aviso-cursos-error").modal('show');
+        return;
+    }
+    
+    const selectedCourses = new Set();
+    let hasDuplicate = false;
+
+    $('#solicitud-table select[id^="curso_"]').each(function () {
+        const value = $(this).val();    
+        
+        if (value !== "") {
+            if (selectedCourses.has(value)) {
+                hasDuplicate = true;
+                return false; // corta el .each
+            }
+            selectedCourses.add(value);
+        }
+    });
+
+    if (hasDuplicate) {
+        // Puedes usar un modal o alert, como prefieras
+        $("#aviso-duplicate-error").modal('show');
         return;
     }
 
@@ -84,8 +110,8 @@ function checkDates() {
         $("#aviso-fechas-error .modal-body p").text("Por favor, complete ambas fechas.");
         $("#aviso-fechas-error").modal("show");
         return false;
-    }   
-    
+    }
+
     if (!esFechaValida(valorInicio)) {
         alert("La fecha de inicio no es válida.");
         return false; // Detener el envío si la fecha no es válida
@@ -95,10 +121,10 @@ function checkDates() {
         alert("La fecha de término no es válida.");
         return false; // Detener el envío si la fecha no es válida
     }
-    
+
     const [dayInicio, monthInicio, yearInicio] = valorInicio.split('-');
     const [dayTermino, monthTermino, yearTermino] = valorTermino.split('-');
-    
+
     const fechaInicioObj = new Date(yearInicio, monthInicio - 1, dayInicio);
     const fechaTerminoObj = new Date(yearTermino, monthTermino - 1, dayTermino);
 
@@ -107,7 +133,7 @@ function checkDates() {
         alert("La fecha de inicio no puede ser mayor que la fecha de término.");
         return false; // Detener el envío si la fecha de inicio es mayor que la de término
     }
-    
+
     return true;
 }
 

@@ -25,14 +25,18 @@ public class ProfesorSolicitudGetJustificativosCursoService {
     public String service(GenericSession genericSession, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        List<Solicitud> lSol = ContextUtil.getDAO()
+        /*List<Solicitud> lSol = ContextUtil.getDAO()
                 .getSolicitudJustificativoPersistence(ActionUtil.getDBUser())
                 .find(ws.getCurso().getId())
                 .stream()
                 .map(SolicitudJustificativo::getSolicitud)
                 .collect(Collectors.toList());
 
-        ws.setSolicitudList(lSol);
+        ws.setSolicitudList(lSol);*/
+        
+  
+        
+        ws.setJustificativoList(ContextUtil.getDAO().getSolicitudJustificativoPersistence(ActionUtil.getDBUser()).find(ws.getCurso().getId()));
         LogUtil.setLog(genericSession.getRut());
 
         return SUCCESS;

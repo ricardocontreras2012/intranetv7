@@ -27,8 +27,9 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.rut-3.0.0.js"></script>
         <script type="text/javascript"
-        src="/intranetv7/js/local/users/alumno/solicitud/justificativo/alumnoSolicitudJustificativoNewSolicitud-3.0.6.js"></script>
+        src="/intranetv7/js/local/users/alumno/solicitud/justificativo/alumnoSolicitudJustificativoNewSolicitud-3.0.8.js"></script>
     </head>
+
     <body class="inner-body">
 
         <div class="container container-menu">
@@ -52,6 +53,20 @@
 
         <div class="col-12">
             <form id="solicitud-form" action="#" method="post" accept-charset="UTF-8">
+
+                <div class="row row-form mb-2">
+                    <div class="col-12 col-md-3 col-lg-2 col-xl-1">
+                        Selección Evaluación
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                        <select id="eval" name="eval" class="form-control">
+                            <option value="">-- Seleccione una opción --</option>
+                            <option value="PEP1">PEP1</option>
+                            <option value="PEP2">PEP2</option>
+                        </select>
+                    </div>
+                </div>
+
                 <table id="solicitud-table" class="table table-striped table-bordered">
                     <thead>
                     <th style="width: 50%">Cursos Seleccionados</th>
@@ -160,6 +175,44 @@
                     </div>
                     <div class="modal-body">
                         <p>Debe especificar el o los archivos a subir</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="aviso-duplicate-error" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">ERROR</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>No debe seleccionar el mismo curso más de una vez</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="aviso-eval-error" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">ERROR</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Debe especificar evaluación</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

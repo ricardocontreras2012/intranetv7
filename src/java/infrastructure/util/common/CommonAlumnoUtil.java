@@ -43,6 +43,7 @@ import static infrastructure.util.common.CommonCursoUtil.evitarLazyCursoAyudante
 import static infrastructure.util.common.CommonCursoUtil.evitarLazyCursoProf;
 import domain.model.AluCarFunctionsView;
 import domain.model.FlagInscripcionView;
+import domain.model.Inscripcion;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -121,8 +122,21 @@ public final class CommonAlumnoUtil {
     }
 
     public static List<Curso> getCarga(AluCar aluCar, GenericSession gs) {
-        InscripcionSupport insSup = new InscripcionSupport(aluCar, gs);
-        return InscripcionSupport.getCursoList(insSup.getInscripcionFull(aluCar.getParametros().getAgnoAct(), aluCar.getParametros().getSemAct()));
+        Integer agno = aluCar.getParametros().getAgnoAct();
+        Integer sem = aluCar.getParametros().getSemAct();
+
+        String next = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSemestrePrevio(agno, sem, aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+        Integer agnoPrev = Integer.parseInt(next.substring(0, 4));
+        Integer semPrev = Integer.parseInt(next.substring(4));
+
+        List<Inscripcion> insList = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getInscripcion(aluCar, agno, sem);
+        List<Inscripcion> insPracticaList = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getInscripcionPractica(aluCar.getId(), agnoPrev, semPrev);
+
+        if (insPracticaList != null && !insPracticaList.isEmpty()) {
+            insList.addAll(insPracticaList);
+        }
+
+        return InscripcionSupport.getCursoList(insList);
     }
 
     public static String getNombreSocial(Alumno alumno) {
@@ -238,7 +252,7 @@ public final class CommonAlumnoUtil {
         setTipoCursos(ws);
         ws.setMencionInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetPersistence("AL").find(
                 aluCar.getPlan()));
-        
+
         InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
         insSup.setSctNivel();
         ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());

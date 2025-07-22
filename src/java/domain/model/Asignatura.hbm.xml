@@ -48,5 +48,9 @@
         <property name="asiTipoControlTel" type="string">
             <column length="1" name="ASI_TIPO_CONTROL_TEL"/>
         </property>
+        
+        <property name="asiFlagPractica" type="string">
+            <column length="1" name="ASI_FLAG_PRACTICA"/>
+        </property>
     </class>
 </hibernate-mapping>

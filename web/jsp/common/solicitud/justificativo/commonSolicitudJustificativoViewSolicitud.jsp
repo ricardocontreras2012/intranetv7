@@ -49,7 +49,7 @@
                     <div class="col-12">
                         <table id="solicitud-table" class="table table-striped table-bordered">
                             <thead>
-                            <th style="width: 50%">Solicitud de Justificativo PEP: Cursos Seleccionados</th>                
+                            <th style="width: 50%">Solicitud de <s:property value="#session.genericSession.getWorkSession(key).solicitud.solSolicita.split(':')[0].trim()" /></th>                
                             </thead>
                             <tbody>
                                 <s:iterator value="#session.genericSession.getWorkSession(key).justificativoList" status="row">

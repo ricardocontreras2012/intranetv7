@@ -33,7 +33,7 @@
                     <div class="col-12">
                         <table id="solicitud-table" class="table table-striped table-bordered">
                             <thead>
-                            <th style="width: 40%">Solicitud de Justificativo PEP: Cursos Seleccionados</th>
+                            <th style="width: 40%">Solicitud de Justificativo <s:property value="#session.genericSession.getWorkSession(key).solicitud.solSolicita"/>: Cursos Seleccionados</th>
                             <th colspan="2" style="width: 60%">Estado</th> 
                             </thead>
                             <tbody>

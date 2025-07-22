@@ -35,27 +35,35 @@
                 <table id="solicitudes-table" class="table table-striped dataTable" style="width:100%">
                     <thead>
                         <tr>
-                            <th scope="col" style="width:5%"><s:text name="label.nro"/></th>
-                            <th scope="col" style="width:55%"><s:text name="label.name"/></th>
-                            <th scope="col" style="width:20%">Fecha Inicio</th>
-                            <th scope="col" style="width:20%">Fecha Tértmino</th>
+                            <th scope="col" style="width:5%"></th>
+                            <th scope="col" style="width:35%"><s:text name="label.name"/></th>
+                            <th scope="col" style="width:20%">Solicita</th>
+                            <th scope="col" style="width:10%">Fecha Inicio</th>
+                            <th scope="col" style="width:10%">Fecha Término</th>
+                            <th scope="col" style="width:20%">Obs</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <s:iterator value="#session.genericSession.getWorkSession(key).solicitudList" status="row">
+                        <s:iterator value="#session.genericSession.getWorkSession(key).justificativoList" status="row">
                             <tr>
                                 <td>
-                                    <s:property value="solFolio"/>
+                                    <s:property value="#row.count"/>
                                 </td>
                                 <td>
-                                    <s:property value="aluCar.alumno.getNombre()"/>
+                                    <s:property value="solicitud.aluCar.alumno.getNombre()"/>
+                                </td>
+                                <td>                                    
+                                    <s:property value="solicitud.solSolicita.split(':')[0].trim()"/>                                
                                 </td>
                                 <td>
-                                    <s:date name="solFechaInicio" format="dd/MM/yyyy"/>
+                                    <s:date name="solicitud.solFechaInicio" format="dd/MM/yyyy"/>
                                 </td>   
                                 <td>                                    
-                                    <s:date name="solFechaTermino" format="dd/MM/yyyy"/>                                 
-                                </td>                                   
+                                    <s:date name="solicitud.solFechaTermino" format="dd/MM/yyyy"/>                                 
+                                </td>
+                                <td>
+                                    <s:property value="soljRespuesta"/>
+                                </td>
                             </tr>
                         </s:iterator>
                     </tbody>

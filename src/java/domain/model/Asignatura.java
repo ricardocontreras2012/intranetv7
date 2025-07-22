@@ -31,6 +31,7 @@ public class Asignatura implements Serializable {
     private String asiTipo;
     private String asiTipoCal;
     private String asiBgColor;
+    private String asiFlagPractica;
 
     /**
      *
@@ -290,4 +291,14 @@ public class Asignatura implements Serializable {
     public void setAsiTipoControlTel(String asiTipoControlTel) {
         this.asiTipoControlTel = asiTipoControlTel;
     }
+
+    public String getAsiFlagPractica() {
+        return asiFlagPractica;
+    }
+
+    public void setAsiFlagPractica(String asiFlagPractica) {
+        this.asiFlagPractica = asiFlagPractica;
+    }
+    
+    
 }
