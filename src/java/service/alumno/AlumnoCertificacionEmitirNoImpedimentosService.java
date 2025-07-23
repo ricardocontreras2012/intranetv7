@@ -169,7 +169,7 @@ public final class AlumnoCertificacionEmitirNoImpedimentosService {
                                 "", "C2", "CERTIFICADO NO IMPEDIMENTO ACADÉMICO", "TM_CERT");
 
                         // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-                        ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
+                        ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
                         LogUtil.setLog(genera, alumno.getAluRut());
 
                         return CommonArchivoUtil.getFile(name, "cert");

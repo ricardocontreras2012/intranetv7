@@ -6,20 +6,13 @@
 package infrastructure.persistence.dao;
 
 //import org.apache.log4j.Logger;
-import infrastructure.persistence.AluCarFunctionsPersistenceViewImpl;
-import infrastructure.persistence.CertificacionPersistenceViewImpl;
-import infrastructure.persistence.CartolaPersistenceViewImpl;
-import infrastructure.persistence.ActaNominaPersistenceViewImpl;
-import infrastructure.persistence.NominaActaPersistenceViewImpl;
-import infrastructure.persistence.ActaPersistenceViewImpl;
-import infrastructure.persistence.FlagInscripcionPersistenceViewImpl;
-import domain.repository.FlagInscripcionPersistenceView;
-import domain.repository.AluCarFunctionsPersistenceView;
-import domain.repository.ActaNominaPersistenceView;
-import domain.repository.CartolaPersistenceView;
-import domain.repository.CertificacionPersistenceView;
-import domain.repository.NominaActaPersistenceView;
-import domain.repository.ActaPersistenceView;
+import infrastructure.persistence.AluCarFunctionsViewPersistenceImpl;
+import infrastructure.persistence.CertificacionViewPersistenceImpl;
+import infrastructure.persistence.CartolaViewPersistenceImpl;
+import infrastructure.persistence.ActaNominaViewPersistenceImpl;
+import infrastructure.persistence.NominaActaViewPersistenceImpl;
+import infrastructure.persistence.ActaViewPersistenceImpl;
+import infrastructure.persistence.FlagInscripcionViewPersistenceImpl;
 import infrastructure.persistence.ExamenPersistenceImpl;
 import infrastructure.persistence.MensajePersistenceImpl;
 import infrastructure.persistence.AsignaturaPersistenceImpl;
@@ -129,122 +122,130 @@ import infrastructure.persistence.EstadoCivilPersistenceImpl;
 import infrastructure.persistence.ComentarioEncuestaDocentePersistenceImpl;
 import infrastructure.persistence.DummyPersistenceImpl;
 import infrastructure.persistence.FichaEstudioPersistenceImpl;
-import domain.repository.SalaPersistence;
-import domain.repository.EmpleadorPersistence;
-import domain.repository.PreguntaAutoEvaluacionPersistence;
-import domain.repository.AyudantePersistence;
-import domain.repository.RespEnctaCursoPersistence;
-import domain.repository.AluCarPersistence;
-import domain.repository.DummyPersistence;
-import domain.repository.ParamArchivosWebPersistence;
-import domain.repository.EncuestaDocentePersistence;
-import domain.repository.UnidadPersistence;
-import domain.repository.LaborRealizadaPersistence;
-import domain.repository.PlanLogroPersistence;
-import domain.repository.LogActaPersistence;
-import domain.repository.CursoAyudantePersistence;
-import domain.repository.TsolicitudPersistence;
-import domain.repository.RespuestaAutoEvaluacionAcademicoPersistence;
-import domain.repository.InscripcionAdicionalLogroPersistence;
-import domain.repository.CalificacionLogroAdicionalPersistence;
-import domain.repository.RespuestaEncuestaDocentePersistence;
-import domain.repository.ActionPersistence;
-import domain.repository.ReporteClasePersistence;
-import domain.repository.ConvalidacionSolicitudPersistence;
-import domain.repository.AsistenciaAlumnoNominaPersistence;
-import domain.repository.AsignaturaPersistence;
-import domain.repository.TevaluacionPersistence;
-import domain.repository.MallaPersistence;
-import domain.repository.MencionInfoIntranetProfesorPersistence;
-import domain.repository.CursoTevaluacionPersistence;
-import domain.repository.ExpedienteNominaPersistence;
-import domain.repository.SolicitudPersistence;
-import domain.repository.AlumnoEmpleadorPersistence;
-import domain.repository.ComunaPersistence;
-import domain.repository.FichaEstudioPersistence;
-import domain.repository.SolicitudJustificativoPersistence;
-import domain.repository.DocenteHorarioPersistence;
-import domain.repository.HorarioPersistence;
-import domain.repository.FuncionarioPersistence;
-import domain.repository.SacarreraPersistence;
-import domain.repository.ModuloHorarioPersistence;
-import domain.repository.EncuestaAyudantePersistence;
-import domain.repository.UserLoginActionStackPersistence;
-import domain.repository.InscripcionPersistence;
-import domain.repository.CarreraPersistence;
-import domain.repository.PregEnctaPersistence;
-import domain.repository.MencionInfoIntranetPersistence;
-import domain.repository.ElectivoPersistence;
-import domain.repository.EmisionNominaPersistence;
-import domain.repository.ActaCalificacionNominaPersistence;
-import domain.repository.ProyectoPersistence;
-import domain.repository.MatriculaHistoricoPersistence;
-import domain.repository.LogInscripcionPersistence;
-import domain.repository.CursoPersistence;
-import domain.repository.AlumnoPersistence;
-import domain.repository.ComentarioEncuestaAyudantePersistence;
-import domain.repository.TmensajeDestinoPersistence;
-import domain.repository.ActaConvalidacionPersistence;
-import domain.repository.SolicitudInscripcionPersistence;
-import domain.repository.RequisitoGradoTituloAdicPersistence;
-import domain.repository.PersonaPersistence;
-import domain.repository.CursoEspejoPersistence;
-import domain.repository.DerechoPersistence;
-import domain.repository.CalificacionPersistence;
-import domain.repository.ProfesorPersistence;
-import domain.repository.ConvalidacionComisionProfPersistence;
-import domain.repository.LogCertificacionPersistence;
-import domain.repository.EstadoCivilPersistence;
-import domain.repository.ExpedienteLogroPersistence;
-import domain.repository.ConvalidacionSolicitudAsignPersistence;
-import domain.repository.AdministrativoPersistence;
-import domain.repository.ActaCalificacionPersistence;
-import domain.repository.MensajeDestinatarioPersistence;
-import domain.repository.CcalidadPersistence;
-import domain.repository.AreaPersistence;
-import domain.repository.TramitePersistence;
-import domain.repository.RespEnctaAyuCursoPersistence;
-import domain.repository.ParametroPersistence;
-import domain.repository.DiaPersistence;
-import domain.repository.MensajePersistence;
-import domain.repository.MensajeAttachPersistence;
-import domain.repository.ExternoPersistence;
-import domain.repository.TmaterialPerfilPersistence;
-import domain.repository.LogroPersistence;
-import domain.repository.ActaConvalidacionAsignaturaPersistence;
-import domain.repository.ReincorporacionPersistence;
-import domain.repository.RegionPersistence;
-import domain.repository.ConvalidacionComisionPersistence;
-import domain.repository.LogSolicitudPersistence;
-import domain.repository.ParametroMencionPersistence;
-import domain.repository.MencionPersistence;
-import domain.repository.SolicitudAttachPersistence;
-import domain.repository.CursoProfesorPersistence;
-import domain.repository.PracticaPersistence;
-import domain.repository.EstadoSolicitudPersistence;
-import domain.repository.ReservaSalaPersistence;
-import domain.repository.ExamenPersistence;
-import domain.repository.EvaluacionPersistence;
-import domain.repository.TmensajeBarraDestinoPersistence;
-import domain.repository.ComentarioEncuestaDocentePersistence;
-import domain.repository.FichaLaboralPersistence;
-import domain.repository.PasswordTicketPersistence;
-import domain.repository.ExamenComisionPersistence;
-import domain.repository.AsistenciaAlumnoPersistence;
-import domain.repository.RespuestaEncuestaAyudantePersistence;
-import domain.repository.MaterialApoyoPersistence;
-import domain.repository.SolicitudCertificadoCarritoPersistence;
-import domain.repository.TmotivoSolicitudInscripcionPersistence;
-import domain.repository.ConvenioPersistence;
-import domain.repository.EstadoDocExpPersistence;
-import domain.repository.EvaluacionAlumnoPersistence;
-import domain.repository.NominaCarreraPersistence;
 import infrastructure.persistence.EstadoDocExpPersistenceImpl;
+import domain.repository.SalaRepository;
+import domain.repository.EmpleadorRepository;
+import domain.repository.PreguntaAutoEvaluacionRepository;
+import domain.repository.RespEnctaCursoRepository;
+import domain.repository.ParamArchivosWebRepository;
+import domain.repository.EncuestaDocenteRepository;
+import domain.repository.UnidadRepository;
+import domain.repository.LaborRealizadaRepository;
+import domain.repository.PlanLogroRepository;
+import domain.repository.LogActaRepository;
+import domain.repository.TsolicitudRepository;
+import domain.repository.RespuestaAutoEvaluacionAcademicoRepository;
+import domain.repository.InscripcionAdicionalLogroRepository;
+import domain.repository.RespuestaEncuestaDocenteRepository;
+import domain.repository.ReporteClaseRepository;
+import domain.repository.TevaluacionRepository;
+import domain.repository.MallaRepository;
+import domain.repository.MencionInfoIntranetProfesorRepository;
+import domain.repository.ExpedienteNominaRepository;
+import domain.repository.SolicitudRepository;
+import domain.repository.FichaEstudioRepository;
+import domain.repository.SolicitudJustificativoRepository;
+import domain.repository.HorarioRepository;
+import domain.repository.FuncionarioRepository;
+import domain.repository.SacarreraRepository;
+import domain.repository.ModuloHorarioRepository;
+import domain.repository.EncuestaAyudanteRepository;
+import domain.repository.UserLoginActionStackRepository;
+import domain.repository.InscripcionRepository;
+import domain.repository.PregEnctaRepository;
+import domain.repository.MencionInfoIntranetRepository;
+import domain.repository.ElectivoRepository;
+import domain.repository.EmisionNominaRepository;
+import domain.repository.ProyectoRepository;
+import domain.repository.MatriculaHistoricoRepository;
+import domain.repository.LogInscripcionRepository;
+import domain.repository.TmensajeDestinoRepository;
+import domain.repository.SolicitudInscripcionRepository;
+import domain.repository.RequisitoGradoTituloAdicRepository;
+import domain.repository.PersonaRepository;
+import domain.repository.ProfesorRepository;
+import domain.repository.LogCertificacionRepository;
+import domain.repository.EstadoCivilRepository;
+import domain.repository.ExpedienteLogroRepository;
+import domain.repository.MensajeDestinatarioRepository;
+import domain.repository.TramiteRepository;
+import domain.repository.RespEnctaAyuCursoRepository;
+import domain.repository.ParametroRepository;
+import domain.repository.MensajeRepository;
+import domain.repository.MensajeAttachRepository;
+import domain.repository.ExternoRepository;
+import domain.repository.TmaterialPerfilRepository;
+import domain.repository.LogroRepository;
+import domain.repository.ReincorporacionRepository;
+import domain.repository.RegionRepository;
+import domain.repository.LogSolicitudRepository;
+import domain.repository.ParametroMencionRepository;
+import domain.repository.MencionRepository;
+import domain.repository.SolicitudAttachRepository;
+import domain.repository.PracticaRepository;
+import domain.repository.EstadoSolicitudRepository;
+import domain.repository.ReservaSalaRepository;
+import domain.repository.ExamenRepository;
+import domain.repository.EvaluacionRepository;
+import domain.repository.TmensajeBarraDestinoRepository;
+import domain.repository.FichaLaboralRepository;
+import domain.repository.PasswordTicketRepository;
+import domain.repository.ExamenComisionRepository;
+import domain.repository.RespuestaEncuestaAyudanteRepository;
+import domain.repository.MaterialApoyoRepository;
+import domain.repository.SolicitudCertificadoCarritoRepository;
+import domain.repository.TmotivoSolicitudInscripcionRepository;
+import domain.repository.EstadoDocExpRepository;
+import domain.repository.EvaluacionAlumnoRepository;
+import domain.repository.NominaCarreraRepository;
+
 import org.hibernate.Session;
 import persistence.scalar.ScalarPersistence;
 import persistence.scalar.ScalarPersistenceImpl;
 import static infrastructure.util.AppStaticsUtil.APP_DB_USERS;
 import infrastructure.util.HibernateUtil;
+import domain.repository.ActaCalificacionNominaRepository;
+import domain.repository.ActaCalificacionRepository;
+import domain.repository.ActaConvalidacionAsignaturaRepository;
+import domain.repository.ActaConvalidacionRepository;
+import domain.repository.ActaNominaViewRepository;
+import domain.repository.ActaViewRepository;
+import domain.repository.ActionRepository;
+import domain.repository.AdministrativoRepository;
+import domain.repository.AluCarFunctionsViewRepository;
+import domain.repository.AluCarRepository;
+import domain.repository.AlumnoEmpleadorRepository;
+import domain.repository.AlumnoRepository;
+import domain.repository.AreaRepository;
+import domain.repository.AsignaturaRepositoy;
+import domain.repository.AsistenciaAlumnoNominaRepository;
+import domain.repository.AsistenciaAlumnoRepository;
+import domain.repository.AyudanteRepository;
+import domain.repository.CalificacionLogroAdicionalRepository;
+import domain.repository.CalificacionRepository;
+import domain.repository.CarreraRepository;
+import domain.repository.CartolaViewRepository;
+import domain.repository.CcalidadRepository;
+import domain.repository.CertificacionViewRepository;
+import domain.repository.ComentarioEncuestaAyudanteRepository;
+import domain.repository.ComentarioEncuestaDocenteRepository;
+import domain.repository.ComunaRepository;
+import domain.repository.ConvalidacionComisionRepository;
+import domain.repository.ConvalidacionComisionProfRepository;
+import domain.repository.ConvalidacionSolicitudAsignRepository;
+import domain.repository.ConvalidacionSolicitudRepository;
+import domain.repository.ConvenioRepository;
+import domain.repository.CursoAyudanteRepository;
+import domain.repository.CursoEspejoRepository;
+import domain.repository.CursoRepository;
+import domain.repository.CursoProfesorRepository;
+import domain.repository.CursoTevaluacionRepository;
+import domain.repository.DerechoRepository;
+import domain.repository.DiaRepository;
+import domain.repository.DocenteHorarioRepository;
+import domain.repository.DummyRepository;
+import domain.repository.NominaActaViewRepository;
+import domain.repository.FlagInscripcionViewRepository;
 
 /**
  * Class description
@@ -263,8 +264,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ActaNominaPersistenceView getActaNominaPersistenceView(String userType) {
-        return (ActaNominaPersistenceView) instantiateDAO(ActaNominaPersistenceViewImpl.class, userType);
+    public ActaNominaViewRepository getActaNominaViewRepository(String userType) {
+        return (ActaNominaViewRepository) instantiateDAO(ActaNominaViewPersistenceImpl.class, userType);
     }
 
     /**
@@ -276,32 +277,18 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ActaCalificacionPersistence getActaCalificacionPersistence(String userType) {
-        return (ActaCalificacionPersistence) instantiateDAO(ActaCalificacionPersistenceImpl.class, userType);
+    public ActaCalificacionRepository getActaCalificacionRepository(String userType) {
+        return (ActaCalificacionRepository) instantiateDAO(ActaCalificacionPersistenceImpl.class, userType);
     }
 
     @Override
-    public ActaConvalidacionPersistence getActaConvalidacionPersistence(String userType) {
-        return (ActaConvalidacionPersistence) instantiateDAO(ActaConvalidacionPersistenceImpl.class, userType);
+    public ActaConvalidacionRepository getActaConvalidacionRepository(String userType) {
+        return (ActaConvalidacionRepository) instantiateDAO(ActaConvalidacionPersistenceImpl.class, userType);
     }
 
     @Override
-    public ActaConvalidacionAsignaturaPersistence getActaConvalidacionAsignaturaPersistence(String userType) {
-        return (ActaConvalidacionAsignaturaPersistence) instantiateDAO(ActaConvalidacionAsignaturaPersistenceImpl.class, userType);
-    }
-
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public ActaPersistenceView getActaMencionPersistenceView(String userType) {
-        return (ActaPersistenceView) instantiateDAO(ActaPersistenceViewImpl.class, userType);
+    public ActaConvalidacionAsignaturaRepository getActaConvalidacionAsignaturaRepository(String userType) {
+        return (ActaConvalidacionAsignaturaRepository) instantiateDAO(ActaConvalidacionAsignaturaPersistenceImpl.class, userType);
     }
 
 
@@ -314,8 +301,22 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AluCarPersistence getAluCarPersistence(String userType) {
-        return (AluCarPersistence) instantiateDAO(AluCarPersistenceImpl.class, userType);
+    public ActaViewRepository getActaMencionViewRepository(String userType) {
+        return (ActaViewRepository) instantiateDAO(ActaViewPersistenceImpl.class, userType);
+    }
+
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public AluCarRepository getAluCarRepository(String userType) {
+        return (AluCarRepository) instantiateDAO(AluCarPersistenceImpl.class, userType);
     }
 
     /**
@@ -327,8 +328,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AluCarFunctionsPersistenceView getAluCarFunctionsPersistenceView(String userType) {
-        return (AluCarFunctionsPersistenceView) instantiateDAO(AluCarFunctionsPersistenceViewImpl.class, userType);
+    public AluCarFunctionsViewRepository getAluCarFunctionsViewRepository(String userType) {
+        return (AluCarFunctionsViewRepository) instantiateDAO(AluCarFunctionsViewPersistenceImpl.class, userType);
     }
 
     /**
@@ -340,13 +341,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AlumnoPersistence getAlumnoPersistence(String userType) {
-        return (AlumnoPersistence) instantiateDAO(AlumnoPersistenceImpl.class, userType);
+    public AlumnoRepository getAlumnoRepository(String userType) {
+        return (AlumnoRepository) instantiateDAO(AlumnoPersistenceImpl.class, userType);
     }
     
     @Override
-    public AreaPersistence getAreaPersistence(String userType) {
-        return (AreaPersistence) instantiateDAO(AreaPersistenceImpl.class, userType);
+    public AreaRepository getAreaRepository(String userType) {
+        return (AreaRepository) instantiateDAO(AreaPersistenceImpl.class, userType);
     }
 
     /**
@@ -358,8 +359,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AsignaturaPersistence getAsignaturaPersistence(String userType) {
-        return (AsignaturaPersistence) instantiateDAO(AsignaturaPersistenceImpl.class, userType);
+    public AsignaturaRepositoy getAsignaturaRepository(String userType) {
+        return (AsignaturaRepositoy) instantiateDAO(AsignaturaPersistenceImpl.class, userType);
     }
 
     /**
@@ -371,8 +372,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AsistenciaAlumnoPersistence getAsistenciaAlumnoPersistence(String userType) {
-        return (AsistenciaAlumnoPersistence) instantiateDAO(AsistenciaAlumnoPersistenceImpl.class, userType);
+    public AsistenciaAlumnoRepository getAsistenciaAlumnoRepository(String userType) {
+        return (AsistenciaAlumnoRepository) instantiateDAO(AsistenciaAlumnoPersistenceImpl.class, userType);
     }
 
     /**
@@ -384,8 +385,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AsistenciaAlumnoNominaPersistence getAsistenciaAlumnoNominaPersistence(String userType) {
-        return (AsistenciaAlumnoNominaPersistence) instantiateDAO(AsistenciaAlumnoNominaPersistenceImpl.class,
+    public AsistenciaAlumnoNominaRepository getAsistenciaAlumnoNominaRepository(String userType) {
+        return (AsistenciaAlumnoNominaRepository) instantiateDAO(AsistenciaAlumnoNominaPersistenceImpl.class,
                 userType);
     }
 
@@ -398,8 +399,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AyudantePersistence getAyudantePersistence(String userType) {
-        return (AyudantePersistence) instantiateDAO(AyudantePersistenceImpl.class, userType);
+    public AyudanteRepository getAyudanteRepository(String userType) {
+        return (AyudanteRepository) instantiateDAO(AyudantePersistenceImpl.class, userType);
     }
 
     /**
@@ -411,8 +412,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ActaCalificacionNominaPersistence getActaCalificacionNominaPersistence(String userType) {
-        return (ActaCalificacionNominaPersistence) instantiateDAO(ActaCalificacionNominaPersistenceImpl.class, userType);
+    public ActaCalificacionNominaRepository getActaCalificacionNominaRepository(String userType) {
+        return (ActaCalificacionNominaRepository) instantiateDAO(ActaCalificacionNominaPersistenceImpl.class, userType);
     }
 
     /**
@@ -424,8 +425,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CalificacionLogroAdicionalPersistence getCalificacionAdicionalLogroPersistence(String userType) {
-        return (CalificacionLogroAdicionalPersistence) instantiateDAO(
+    public CalificacionLogroAdicionalRepository getCalificacionAdicionalLogroRepository(String userType) {
+        return (CalificacionLogroAdicionalRepository) instantiateDAO(
                 CalificacionLogroAdicionalPersistenceImpl.class, userType);
     }
 
@@ -438,8 +439,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CalificacionPersistence getCalificacionPersistence(String userType) {
-        return (CalificacionPersistence) instantiateDAO(CalificacionPersistenceImpl.class, userType);
+    public CalificacionRepository getCalificacionRepository(String userType) {
+        return (CalificacionRepository) instantiateDAO(CalificacionPersistenceImpl.class, userType);
     }
 
     /**
@@ -451,8 +452,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CartolaPersistenceView getCartolaPersistenceView(String userType) {
-        return (CartolaPersistenceView) instantiateDAO(CartolaPersistenceViewImpl.class, userType);
+    public CartolaViewRepository getCartolaViewRepository(String userType) {
+        return (CartolaViewRepository) instantiateDAO(CartolaViewPersistenceImpl.class, userType);
     }
 
     /**
@@ -464,8 +465,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CcalidadPersistence getCcalidadPersistence(String userType) {
-        return (CcalidadPersistence) instantiateDAO(CcalidadPersistenceImpl.class, userType);
+    public CcalidadRepository getCcalidadRepository(String userType) {
+        return (CcalidadRepository) instantiateDAO(CcalidadPersistenceImpl.class, userType);
     }
 
     /**
@@ -477,8 +478,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ComentarioEncuestaAyudantePersistence getComentarioEncuestaAyudantePersistence(String userType) {
-        return (ComentarioEncuestaAyudantePersistence) instantiateDAO(ComentarioEncuestaAyudantePersistenceImpl.class, userType);
+    public ComentarioEncuestaAyudanteRepository getComentarioEncuestaAyudanteRepository(String userType) {
+        return (ComentarioEncuestaAyudanteRepository) instantiateDAO(ComentarioEncuestaAyudantePersistenceImpl.class, userType);
     }
 
     /**
@@ -487,46 +488,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ComentarioEncuestaDocentePersistence getComentarioEncuestaDocentePersistence(String userType) {
-        return (ComentarioEncuestaDocentePersistence) instantiateDAO(ComentarioEncuestaDocentePersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public ComunaPersistence getComunaPersistence(String userType) {
-        return (ComunaPersistence) instantiateDAO(ComunaPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public ConvalidacionComisionPersistence getConvalidacionComisionPersistence(String userType) {
-        return (ConvalidacionComisionPersistence) instantiateDAO(ConvalidacionComisionPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public ConvalidacionComisionProfPersistence getConvalidacionComisionProfPersistence(String userType) {
-        return (ConvalidacionComisionProfPersistence) instantiateDAO(ConvalidacionComisionProfPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public ConvalidacionSolicitudPersistence getConvalidacionSolicitudPersistence(String userType) {
-        return (ConvalidacionSolicitudPersistence) instantiateDAO(ConvalidacionSolicitudPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public ConvalidacionSolicitudAsignPersistence getConvalidacionSolicitudAsignPersistence(String userType) {
-        return (ConvalidacionSolicitudAsignPersistence) instantiateDAO(ConvalidacionSolicitudAsignPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public ConvenioPersistence getConvenioPersistence(String userType) {
-        return (ConvenioPersistence) instantiateDAO(ConvenioPersistenceImpl.class, userType);
+    public ComentarioEncuestaDocenteRepository getComentarioEncuestaDocenteRepository(String userType) {
+        return (ComentarioEncuestaDocenteRepository) instantiateDAO(ComentarioEncuestaDocentePersistenceImpl.class, userType);
     }
 
     /**
@@ -538,7 +501,45 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ScalarPersistence getScalarPersistence(String userType) {
+    public ComunaRepository getComunaRepository(String userType) {
+        return (ComunaRepository) instantiateDAO(ComunaPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public ConvalidacionComisionRepository getConvalidacionComisionRepository(String userType) {
+        return (ConvalidacionComisionRepository) instantiateDAO(ConvalidacionComisionPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public ConvalidacionComisionProfRepository getConvalidacionComisionProfRepository(String userType) {
+        return (ConvalidacionComisionProfRepository) instantiateDAO(ConvalidacionComisionProfPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public ConvalidacionSolicitudRepository getConvalidacionSolicitudRepository(String userType) {
+        return (ConvalidacionSolicitudRepository) instantiateDAO(ConvalidacionSolicitudPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public ConvalidacionSolicitudAsignRepository getConvalidacionSolicitudAsignRepository(String userType) {
+        return (ConvalidacionSolicitudAsignRepository) instantiateDAO(ConvalidacionSolicitudAsignPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public ConvenioRepository getConvenioRepository(String userType) {
+        return (ConvenioRepository) instantiateDAO(ConvenioPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public ScalarPersistence getScalarRepository(String userType) {
         return (ScalarPersistence) instantiateDAO(ScalarPersistenceImpl.class, userType);
     }
 
@@ -551,8 +552,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CursoPersistence getCursoPersistence(String userType) {
-        return (CursoPersistence) instantiateDAO(CursoPersistenceImpl.class, userType);
+    public CursoRepository getCursoRepository(String userType) {
+        return (CursoRepository) instantiateDAO(CursoPersistenceImpl.class, userType);
     }
 
     /**
@@ -564,8 +565,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CursoAyudantePersistence getCursoAyudantePersistence(String userType) {
-        return (CursoAyudantePersistence) instantiateDAO(CursoAyudantePersistenceImpl.class, userType);
+    public CursoAyudanteRepository getCursoAyudanteRepository(String userType) {
+        return (CursoAyudanteRepository) instantiateDAO(CursoAyudantePersistenceImpl.class, userType);
     }       
 
     /**
@@ -574,13 +575,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CursoProfesorPersistence getCursoProfesorPersistence(String userType) {
-        return (CursoProfesorPersistence) instantiateDAO(CursoProfesorPersistenceImpl.class, userType);
+    public CursoProfesorRepository getCursoProfesorRepository(String userType) {
+        return (CursoProfesorRepository) instantiateDAO(CursoProfesorPersistenceImpl.class, userType);
     }
     
     @Override
-    public DocenteHorarioPersistence getDocenteHorarioPersistence(String userType) {
-        return (DocenteHorarioPersistence) instantiateDAO(DocenteHorarioPersistenceImpl.class, userType);
+    public DocenteHorarioRepository getDocenteHorarioRepository(String userType) {
+        return (DocenteHorarioRepository) instantiateDAO(DocenteHorarioPersistenceImpl.class, userType);
     }
 
     /**
@@ -592,26 +593,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CursoTevaluacionPersistence getCursoTevaluacionPersistence(String userType) {
-        return (CursoTevaluacionPersistence) instantiateDAO(CursoTevaluacionPersistenceImpl.class, userType);
+    public CursoTevaluacionRepository getCursoTevaluacionRepository(String userType) {
+        return (CursoTevaluacionRepository) instantiateDAO(CursoTevaluacionPersistenceImpl.class, userType);
     }
 
     @Override
-    public CursoEspejoPersistence getCursoEspejoPersistence(String userType) {
-        return (CursoEspejoPersistence) instantiateDAO(CursoEspejoPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public DerechoPersistence getDerechoPersistence(String userType) {
-        return (DerechoPersistence) instantiateDAO(DerechoPersistenceImpl.class, userType);
+    public CursoEspejoRepository getCursoEspejoRepository(String userType) {
+        return (CursoEspejoRepository) instantiateDAO(CursoEspejoPersistenceImpl.class, userType);
     }
 
     /**
@@ -623,13 +611,26 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public DiaPersistence getDiaPersistence(String userType) {
-        return (DiaPersistence) instantiateDAO(DiaPersistenceImpl.class, userType);
+    public DerechoRepository getDerechoRepository(String userType) {
+        return (DerechoRepository) instantiateDAO(DerechoPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public DiaRepository getDiaRepository(String userType) {
+        return (DiaRepository) instantiateDAO(DiaPersistenceImpl.class, userType);
     }    
 
     @Override
-    public DummyPersistence getDummyPersistence(String userType) {
-        return (DummyPersistence) instantiateDAO(DummyPersistenceImpl.class, userType);
+    public DummyRepository getDummyRepository(String userType) {
+        return (DummyRepository) instantiateDAO(DummyPersistenceImpl.class, userType);
     }
 
     /**
@@ -641,8 +642,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ElectivoPersistence getElectivoPersistence(String userType) {
-        return (ElectivoPersistence) instantiateDAO(ElectivoPersistenceImpl.class, userType);
+    public ElectivoRepository getElectivoRepository(String userType) {
+        return (ElectivoRepository) instantiateDAO(ElectivoPersistenceImpl.class, userType);
     }
 
     /**
@@ -654,8 +655,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EmisionNominaPersistence getEmisionNominaPersistence(String userType) {
-        return (EmisionNominaPersistence) instantiateDAO(EmisionNominaPersistenceImpl.class, userType);
+    public EmisionNominaRepository getEmisionNominaRepository(String userType) {
+        return (EmisionNominaRepository) instantiateDAO(EmisionNominaPersistenceImpl.class, userType);
     }
 
     /**
@@ -667,8 +668,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EmpleadorPersistence getEmpleadorPersistence(String userType) {
-        return (EmpleadorPersistence) instantiateDAO(EmpleadorPersistenceImpl.class, userType);
+    public EmpleadorRepository getEmpleadorRepository(String userType) {
+        return (EmpleadorRepository) instantiateDAO(EmpleadorPersistenceImpl.class, userType);
     }
 
     /**
@@ -680,8 +681,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EncuestaAyudantePersistence getEncuestaAyudantePersistence(String userType) {
-        return (EncuestaAyudantePersistence) instantiateDAO(EncuestaAyudantePersistenceImpl.class, userType);
+    public EncuestaAyudanteRepository getEncuestaAyudanteRepository(String userType) {
+        return (EncuestaAyudanteRepository) instantiateDAO(EncuestaAyudantePersistenceImpl.class, userType);
     }
 
     /**
@@ -690,8 +691,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EncuestaDocentePersistence getEncuestaDocentePersistence(String userType) {
-        return (EncuestaDocentePersistence) instantiateDAO(EncuestaDocentePersistenceImpl.class, userType);
+    public EncuestaDocenteRepository getEncuestaDocenteRepository(String userType) {
+        return (EncuestaDocenteRepository) instantiateDAO(EncuestaDocentePersistenceImpl.class, userType);
     }   
 
     /**
@@ -700,8 +701,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EstadoCivilPersistence getEstadoCivilPersistence(String userType) {
-        return (EstadoCivilPersistence) instantiateDAO(EstadoCivilPersistenceImpl.class, userType);
+    public EstadoCivilRepository getEstadoCivilRepository(String userType) {
+        return (EstadoCivilRepository) instantiateDAO(EstadoCivilPersistenceImpl.class, userType);
     }
 
     /**
@@ -710,21 +711,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EstadoSolicitudPersistence getEstadoSolicitudPersistence(String userType) {
-        return (EstadoSolicitudPersistence) instantiateDAO(EstadoSolicitudPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public EvaluacionPersistence getEvaluacionPersistence(String userType) {
-        return (EvaluacionPersistence) instantiateDAO(EvaluacionPersistenceImpl.class, userType);
+    public EstadoSolicitudRepository getEstadoSolicitudRepository(String userType) {
+        return (EstadoSolicitudRepository) instantiateDAO(EstadoSolicitudPersistenceImpl.class, userType);
     }
 
     /**
@@ -736,18 +724,31 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public EvaluacionAlumnoPersistence getEvaluacionAlumnoPersistence(String userType) {
-        return (EvaluacionAlumnoPersistence) instantiateDAO(EvaluacionAlumnoPersistenceImpl.class, userType);
+    public EvaluacionRepository getEvaluacionRepository(String userType) {
+        return (EvaluacionRepository) instantiateDAO(EvaluacionPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public EvaluacionAlumnoRepository getEvaluacionAlumnoRepository(String userType) {
+        return (EvaluacionAlumnoRepository) instantiateDAO(EvaluacionAlumnoPersistenceImpl.class, userType);
     }
     
     @Override
-    public ExamenPersistence getExamenPersistence(String userType) {
-        return (ExamenPersistence) instantiateDAO(ExamenPersistenceImpl.class, userType);
+    public ExamenRepository getExamenRepository(String userType) {
+        return (ExamenRepository) instantiateDAO(ExamenPersistenceImpl.class, userType);
     }
     
     @Override
-    public ExamenComisionPersistence getExamenComisionPersistence(String userType) {
-        return (ExamenComisionPersistence) instantiateDAO(ExamenComisionPersistenceImpl.class, userType);
+    public ExamenComisionRepository getExamenComisionRepository(String userType) {
+        return (ExamenComisionRepository) instantiateDAO(ExamenComisionPersistenceImpl.class, userType);
     }
 
     /**
@@ -759,26 +760,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ExpedienteLogroPersistence getExpedienteLogroPersistence(String userType) {
-        return (ExpedienteLogroPersistence) instantiateDAO(ExpedienteLogroPersistenceImpl.class, userType);
+    public ExpedienteLogroRepository getExpedienteLogroRepository(String userType) {
+        return (ExpedienteLogroRepository) instantiateDAO(ExpedienteLogroPersistenceImpl.class, userType);
     }
 
     @Override
-    public ExpedienteNominaPersistence getExpedienteNominaPersistence(String userType) {
-        return (ExpedienteNominaPersistence) instantiateDAO(ExpedienteNominaPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public ExternoPersistence getExternoPersistence(String userType) {
-        return (ExternoPersistence) instantiateDAO(ExternoPersistenceImpl.class, userType);
+    public ExpedienteNominaRepository getExpedienteNominaRepository(String userType) {
+        return (ExpedienteNominaRepository) instantiateDAO(ExpedienteNominaPersistenceImpl.class, userType);
     }
 
     /**
@@ -790,13 +778,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public FlagInscripcionPersistenceView getFlagInscripcionPersistenceView(String userType) {
-        return (FlagInscripcionPersistenceView) instantiateDAO(FlagInscripcionPersistenceViewImpl.class, userType);
-    }
-
-    @Override
-    public FuncionarioPersistence getFuncionarioPersistence(String userType) {
-        return (FuncionarioPersistence) instantiateDAO(FuncionarioPersistenceImpl.class, userType);
+    public ExternoRepository getExternoRepository(String userType) {
+        return (ExternoRepository) instantiateDAO(ExternoPersistenceImpl.class, userType);
     }
 
     /**
@@ -808,8 +791,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public HorarioPersistence getHorarioPersistence(String userType) {
-        return (HorarioPersistence) instantiateDAO(HorarioPersistenceImpl.class, userType);
+    public FlagInscripcionViewRepository getFlagInscripcionViewRepository(String userType) {
+        return (FlagInscripcionViewRepository) instantiateDAO(FlagInscripcionViewPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public FuncionarioRepository getFuncionarioRepository(String userType) {
+        return (FuncionarioRepository) instantiateDAO(FuncionarioPersistenceImpl.class, userType);
     }
 
     /**
@@ -821,8 +809,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public InscripcionPersistence getInscripcionPersistence(String userType) {
-        return (InscripcionPersistence) instantiateDAO(InscripcionPersistenceImpl.class, userType);
+    public HorarioRepository getHorarioRepository(String userType) {
+        return (HorarioRepository) instantiateDAO(HorarioPersistenceImpl.class, userType);
     }
 
     /**
@@ -834,8 +822,21 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public InscripcionAdicionalLogroPersistence getInscripcionAdicionalLogroPersistence(String userType) {
-        return (InscripcionAdicionalLogroPersistence) instantiateDAO(InscripcionAdicionalLogroPersistenceImpl.class,
+    public InscripcionRepository getInscripcionRepository(String userType) {
+        return (InscripcionRepository) instantiateDAO(InscripcionPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public InscripcionAdicionalLogroRepository getInscripcionAdicionalLogroRepository(String userType) {
+        return (InscripcionAdicionalLogroRepository) instantiateDAO(InscripcionAdicionalLogroPersistenceImpl.class,
                 userType);
     }
 
@@ -846,8 +847,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public LaborRealizadaPersistence getLaborRealizadaPersistence(String userType) {
-        return (LaborRealizadaPersistence) instantiateDAO(LaborRealizadaPersistenceImpl.class, userType);
+    public LaborRealizadaRepository getLaborRealizadaRepository(String userType) {
+        return (LaborRealizadaRepository) instantiateDAO(LaborRealizadaPersistenceImpl.class, userType);
     }
 
     /**
@@ -856,21 +857,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public LogActaPersistence getLogActaPersistence(String userType) {
-        return (LogActaPersistence) instantiateDAO(LogActaPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public LogCertificacionPersistence getLogCertificacionPersistence(String userType) {
-        return (LogCertificacionPersistence) instantiateDAO(LogCertificacionPersistenceImpl.class, userType);
+    public LogActaRepository getLogActaRepository(String userType) {
+        return (LogActaRepository) instantiateDAO(LogActaPersistenceImpl.class, userType);
     }
 
     /**
@@ -882,28 +870,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public LogInscripcionPersistence getLogInscripcionPersistence(String userType) {
-        return (LogInscripcionPersistence) instantiateDAO(LogInscripcionPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public LogSolicitudPersistence getLogSolicitudPersistence(String userType) {
-        return (LogSolicitudPersistence) instantiateDAO(LogSolicitudPersistenceImpl.class, userType);
-    }
-
-    /**
-     *
-     * @param userType
-     * @return
-     */
-    @Override
-    public ActionPersistence getLogActionPersistence(String userType) {
-        return (ActionPersistence) instantiateDAO(ActionPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public LogroPersistence getLogroPersistence(String userType) {
-        return (LogroPersistence) instantiateDAO(LogroPersistenceImpl.class, userType);
+    public LogCertificacionRepository getLogCertificacionRepository(String userType) {
+        return (LogCertificacionRepository) instantiateDAO(LogCertificacionPersistenceImpl.class, userType);
     }
 
     /**
@@ -915,8 +883,28 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MallaPersistence getMallaPersistence(String userType) {
-        return (MallaPersistence) instantiateDAO(MallaPersistenceImpl.class, userType);
+    public LogInscripcionRepository getLogInscripcionRepository(String userType) {
+        return (LogInscripcionRepository) instantiateDAO(LogInscripcionPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public LogSolicitudRepository getLogSolicitudRepository(String userType) {
+        return (LogSolicitudRepository) instantiateDAO(LogSolicitudPersistenceImpl.class, userType);
+    }
+
+    /**
+     *
+     * @param userType
+     * @return
+     */
+    @Override
+    public ActionRepository getLogActionRepository(String userType) {
+        return (ActionRepository) instantiateDAO(ActionPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public LogroRepository getLogroRepository(String userType) {
+        return (LogroRepository) instantiateDAO(LogroPersistenceImpl.class, userType);
     }
 
     /**
@@ -928,8 +916,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MaterialApoyoPersistence getMaterialApoyoPersistence(String userType) {
-        return (MaterialApoyoPersistence) instantiateDAO(MaterialApoyoPersistenceImpl.class, userType);
+    public MallaRepository getMallaRepository(String userType) {
+        return (MallaRepository) instantiateDAO(MallaPersistenceImpl.class, userType);
     }
 
     /**
@@ -941,8 +929,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MatriculaHistoricoPersistence getMatriculaHistoricoPersistence(String userType) {
-        return (MatriculaHistoricoPersistence) instantiateDAO(MatriculaHistoricoPersistenceImpl.class, userType);
+    public MaterialApoyoRepository getMaterialApoyoRepository(String userType) {
+        return (MaterialApoyoRepository) instantiateDAO(MaterialApoyoPersistenceImpl.class, userType);
     }
 
     /**
@@ -954,8 +942,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MencionPersistence getMencionPersistence(String userType) {
-        return (MencionPersistence) instantiateDAO(MencionPersistenceImpl.class, userType);
+    public MatriculaHistoricoRepository getMatriculaHistoricoRepository(String userType) {
+        return (MatriculaHistoricoRepository) instantiateDAO(MatriculaHistoricoPersistenceImpl.class, userType);
     }
 
     /**
@@ -967,8 +955,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MencionInfoIntranetPersistence getMencionInfoIntranetPersistence(String userType) {
-        return (MencionInfoIntranetPersistence) instantiateDAO(MencionInfoIntranetPersistenceImpl.class, userType);
+    public MencionRepository getMencionRepository(String userType) {
+        return (MencionRepository) instantiateDAO(MencionPersistenceImpl.class, userType);
     }
 
     /**
@@ -980,8 +968,21 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MencionInfoIntranetProfesorPersistence getMencionInfoIntranetProfesorPersistence(String userType) {
-        return (MencionInfoIntranetProfesorPersistence) instantiateDAO(
+    public MencionInfoIntranetRepository getMencionInfoIntranetRepository(String userType) {
+        return (MencionInfoIntranetRepository) instantiateDAO(MencionInfoIntranetPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    @Override
+    public MencionInfoIntranetProfesorRepository getMencionInfoIntranetProfesorRepository(String userType) {
+        return (MencionInfoIntranetProfesorRepository) instantiateDAO(
                 MencionInfoIntranetProfesorPersistenceImpl.class, userType);
     }
 
@@ -994,8 +995,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MensajeDestinatarioPersistence getMensajeDestinatarioPersistence(String userType) {
-        return (MensajeDestinatarioPersistence) instantiateDAO(MensajeDestinatarioPersistenceImpl.class, userType);
+    public MensajeDestinatarioRepository getMensajeDestinatarioRepository(String userType) {
+        return (MensajeDestinatarioRepository) instantiateDAO(MensajeDestinatarioPersistenceImpl.class, userType);
     }
 
     /**
@@ -1007,8 +1008,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MensajeAttachPersistence getMensajeAttachPersistence(String userType) {
-        return (MensajeAttachPersistence) instantiateDAO(MensajeAttachPersistenceImpl.class, userType);
+    public MensajeAttachRepository getMensajeAttachRepository(String userType) {
+        return (MensajeAttachRepository) instantiateDAO(MensajeAttachPersistenceImpl.class, userType);
     }
 
     /**
@@ -1020,8 +1021,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public MensajePersistence getMensajePersistence(String userType) {
-        return (MensajePersistence) instantiateDAO(MensajePersistenceImpl.class, userType);
+    public MensajeRepository getMensajeRepository(String userType) {
+        return (MensajeRepository) instantiateDAO(MensajePersistenceImpl.class, userType);
     }
 
     /**
@@ -1033,8 +1034,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ModuloHorarioPersistence getModuloHorarioPersistence(String userType) {
-        return (ModuloHorarioPersistence) instantiateDAO(ModuloHorarioPersistenceImpl.class, userType);
+    public ModuloHorarioRepository getModuloHorarioRepository(String userType) {
+        return (ModuloHorarioRepository) instantiateDAO(ModuloHorarioPersistenceImpl.class, userType);
     }
 
     /**
@@ -1046,8 +1047,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public PlanLogroPersistence getPlanLogroPersistence(String userType) {
-        return (PlanLogroPersistence) instantiateDAO(PlanLogroPersistenceImpl.class, userType);
+    public PlanLogroRepository getPlanLogroRepository(String userType) {
+        return (PlanLogroRepository) instantiateDAO(PlanLogroPersistenceImpl.class, userType);
     }
 
     /**
@@ -1059,8 +1060,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public NominaActaPersistenceView getNominaActaPersistenceView(String userType) {
-        return (NominaActaPersistenceView) instantiateDAO(NominaActaPersistenceViewImpl.class, userType);
+    public NominaActaViewRepository getNominaActaViewRepository(String userType) {
+        return (NominaActaViewRepository) instantiateDAO(NominaActaViewPersistenceImpl.class, userType);
     }
 
     /**
@@ -1072,8 +1073,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public NominaCarreraPersistence getNominaCarreraPersistence(String userType) {
-        return (NominaCarreraPersistence) instantiateDAO(NominaCarreraPersistenceImpl.class, userType);
+    public NominaCarreraRepository getNominaCarreraRepository(String userType) {
+        return (NominaCarreraRepository) instantiateDAO(NominaCarreraPersistenceImpl.class, userType);
     }
 
 
@@ -1086,13 +1087,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ParametroPersistence getParametroPersistence(String userType) {
-        return (ParametroPersistence) instantiateDAO(ParametroPersistenceImpl.class, userType);
+    public ParametroRepository getParametroRepository(String userType) {
+        return (ParametroRepository) instantiateDAO(ParametroPersistenceImpl.class, userType);
     }
     
      @Override
-    public ParametroMencionPersistence getParametroMencionPersistence(String userType) {
-        return (ParametroMencionPersistence) instantiateDAO(ParametroMencionPersistenceImpl.class, userType);
+    public ParametroMencionRepository getParametroMencionRepository(String userType) {
+        return (ParametroMencionRepository) instantiateDAO(ParametroMencionPersistenceImpl.class, userType);
     }
 
     /**
@@ -1104,8 +1105,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ParamArchivosWebPersistence getParamArchivosWebPersistence(String userType) {
-        return (ParamArchivosWebPersistence) instantiateDAO(ParamArchivosWebPersistenceImpl.class, userType);
+    public ParamArchivosWebRepository getParamArchivosWebRepository(String userType) {
+        return (ParamArchivosWebRepository) instantiateDAO(ParamArchivosWebPersistenceImpl.class, userType);
     }
 
     /**
@@ -1117,8 +1118,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public PasswordTicketPersistence getPasswordTicketPersistence(String userType) {
-        return (PasswordTicketPersistence) instantiateDAO(PasswordTicketPersistenceImpl.class, userType);
+    public PasswordTicketRepository getPasswordTicketRepository(String userType) {
+        return (PasswordTicketRepository) instantiateDAO(PasswordTicketPersistenceImpl.class, userType);
     }
 
     /**
@@ -1130,8 +1131,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public PracticaPersistence getPracticaPersistence(String userType) {
-        return (PracticaPersistence) instantiateDAO(PracticaPersistenceImpl.class, userType);
+    public PracticaRepository getPracticaRepository(String userType) {
+        return (PracticaRepository) instantiateDAO(PracticaPersistenceImpl.class, userType);
     }
 
     /**
@@ -1143,13 +1144,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public PregEnctaPersistence getPregEnctaPersistence(String userType) {
-        return (PregEnctaPersistence) instantiateDAO(PregEnctaPersistenceImpl.class, userType);
+    public PregEnctaRepository getPregEnctaRepository(String userType) {
+        return (PregEnctaRepository) instantiateDAO(PregEnctaPersistenceImpl.class, userType);
     }
 
     @Override
-    public PersonaPersistence getPersonaPersistence(String userType) {
-        return (PersonaPersistence) instantiateDAO(PersonaPersistenceImpl.class, userType);
+    public PersonaRepository getPersonaRepository(String userType) {
+        return (PersonaRepository) instantiateDAO(PersonaPersistenceImpl.class, userType);
     }
 
     /**
@@ -1161,13 +1162,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ProfesorPersistence getProfesorPersistence(String userType) {
-        return (ProfesorPersistence) instantiateDAO(ProfesorPersistenceImpl.class, userType);
+    public ProfesorRepository getProfesorRepository(String userType) {
+        return (ProfesorRepository) instantiateDAO(ProfesorPersistenceImpl.class, userType);
     }
 
     @Override
-    public ProyectoPersistence getProyectoPersistence(String userType) {
-        return (ProyectoPersistence) instantiateDAO(ProyectoPersistenceImpl.class, userType);
+    public ProyectoRepository getProyectoRepository(String userType) {
+        return (ProyectoRepository) instantiateDAO(ProyectoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1179,8 +1180,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ReporteClasePersistence getReporteClasePersistence(String userType) {
-        return (ReporteClasePersistence) instantiateDAO(ReporteClasePersistenceImpl.class, userType);
+    public ReporteClaseRepository getReporteClaseRepository(String userType) {
+        return (ReporteClaseRepository) instantiateDAO(ReporteClasePersistenceImpl.class, userType);
     }
 
     /**
@@ -1191,8 +1192,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      *
      * @return
      */
-    public RegionPersistence getRegionPersistence(String userType) {
-        return (RegionPersistence) instantiateDAO(RegionPersistenceImpl.class, userType);
+    public RegionRepository getRegionRepository(String userType) {
+        return (RegionRepository) instantiateDAO(RegionPersistenceImpl.class, userType);
     }
 
     /**
@@ -1201,21 +1202,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ReincorporacionPersistence getReincorporacionPersistence(String userType) {
-        return (ReincorporacionPersistence) instantiateDAO(ReincorporacionPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public ReservaSalaPersistence getReservaSalaPersistence(String userType) {
-        return (ReservaSalaPersistence) instantiateDAO(ReservaSalaPersistenceImpl.class, userType);
+    public ReincorporacionRepository getReincorporacionRepository(String userType) {
+        return (ReincorporacionRepository) instantiateDAO(ReincorporacionPersistenceImpl.class, userType);
     }
 
     /**
@@ -1226,16 +1214,9 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      *
      * @return
      */
-
-
     @Override
-    public RespEnctaCursoPersistence getRespEnctaCursoPersistence(String userType) {
-        return (RespEnctaCursoPersistence) instantiateDAO(RespEnctaCursoPersistenceImpl.class, userType);
-    }
-
-    @Override
-    public RespEnctaAyuCursoPersistence getRespEnctaAyuCursoPersistence(String userType) {
-        return (RespEnctaAyuCursoPersistence) instantiateDAO(RespEnctaAyuCursoPersistenceImpl.class, userType);
+    public ReservaSalaRepository getReservaSalaRepository(String userType) {
+        return (ReservaSalaRepository) instantiateDAO(ReservaSalaPersistenceImpl.class, userType);
     }
 
     /**
@@ -1247,15 +1228,35 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
 
+
     @Override
-    public PreguntaAutoEvaluacionPersistence getPreguntaAutoEvaluacionPersistence(String userType) {
-        return (PreguntaAutoEvaluacionPersistence) instantiateDAO(
+    public RespEnctaCursoRepository getRespEnctaCursoRepository(String userType) {
+        return (RespEnctaCursoRepository) instantiateDAO(RespEnctaCursoPersistenceImpl.class, userType);
+    }
+
+    @Override
+    public RespEnctaAyuCursoRepository getRespEnctaAyuCursoRepository(String userType) {
+        return (RespEnctaAyuCursoRepository) instantiateDAO(RespEnctaAyuCursoPersistenceImpl.class, userType);
+    }
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+
+    @Override
+    public PreguntaAutoEvaluacionRepository getPreguntaAutoEvaluacionRepository(String userType) {
+        return (PreguntaAutoEvaluacionRepository) instantiateDAO(
                 PreguntaAutoEvaluacionPersistenceImpl.class, userType);
     }
 
     @Override
-    public RespuestaAutoEvaluacionAcademicoPersistence getRespuestaAutoEvaluacionAcademicoPersistence(String userType) {
-        return (RespuestaAutoEvaluacionAcademicoPersistence) instantiateDAO(
+    public RespuestaAutoEvaluacionAcademicoRepository getRespuestaAutoEvaluacionAcademicoRepository(String userType) {
+        return (RespuestaAutoEvaluacionAcademicoRepository) instantiateDAO(
                 RespuestaAutoEvaluacionAcademicoPersistenceImpl.class, userType);
     }
 
@@ -1268,8 +1269,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public RespuestaEncuestaAyudantePersistence getRespuestaEncuestaAyudantePersistence(String userType) {
-        return (RespuestaEncuestaAyudantePersistence) instantiateDAO(RespuestaEncuestaAyudantePersistenceImpl.class,
+    public RespuestaEncuestaAyudanteRepository getRespuestaEncuestaAyudanteRepository(String userType) {
+        return (RespuestaEncuestaAyudanteRepository) instantiateDAO(RespuestaEncuestaAyudantePersistenceImpl.class,
                 userType);
     }
 
@@ -1279,8 +1280,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public RespuestaEncuestaDocentePersistence getRespuestaEncuestaDocentePersistence(String userType) {
-        return (RespuestaEncuestaDocentePersistence) instantiateDAO(RespuestaEncuestaDocentePersistenceImpl.class,
+    public RespuestaEncuestaDocenteRepository getRespuestaEncuestaDocenteRepository(String userType) {
+        return (RespuestaEncuestaDocenteRepository) instantiateDAO(RespuestaEncuestaDocentePersistenceImpl.class,
                 userType);
     }    
 
@@ -1293,8 +1294,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public SacarreraPersistence getSacarreraPersistence(String userType) {
-        return (SacarreraPersistence) instantiateDAO(SacarreraPersistenceImpl.class, userType);
+    public SacarreraRepository getSacarreraRepository(String userType) {
+        return (SacarreraRepository) instantiateDAO(SacarreraPersistenceImpl.class, userType);
     }
 
     /**
@@ -1306,8 +1307,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public SalaPersistence getSalaPersistence(String userType) {
-        return (SalaPersistence) instantiateDAO(SalaPersistenceImpl.class, userType);
+    public SalaRepository getSalaRepository(String userType) {
+        return (SalaRepository) instantiateDAO(SalaPersistenceImpl.class, userType);
     }
 
     /**
@@ -1319,18 +1320,18 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public SolicitudPersistence getSolicitudPersistence(String userType) {
-        return (SolicitudPersistence) instantiateDAO(SolicitudPersistenceImpl.class, userType);
+    public SolicitudRepository getSolicitudRepository(String userType) {
+        return (SolicitudRepository) instantiateDAO(SolicitudPersistenceImpl.class, userType);
     }
 
     @Override
-    public SolicitudInscripcionPersistence getSolicitudInscripcionPersistence(String userType) {
-        return (SolicitudInscripcionPersistence) instantiateDAO(SolicitudInscripcionPersistenceImpl.class, userType);
+    public SolicitudInscripcionRepository getSolicitudInscripcionRepository(String userType) {
+        return (SolicitudInscripcionRepository) instantiateDAO(SolicitudInscripcionPersistenceImpl.class, userType);
     }
     
     @Override
-    public SolicitudJustificativoPersistence getSolicitudJustificativoPersistence(String userType) {
-        return (SolicitudJustificativoPersistence) instantiateDAO(SolicitudJustificativoPersistenceImpl.class, userType);
+    public SolicitudJustificativoRepository getSolicitudJustificativoRepository(String userType) {
+        return (SolicitudJustificativoRepository) instantiateDAO(SolicitudJustificativoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1342,8 +1343,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public SolicitudAttachPersistence getSolicitudAttachPersistence(String userType) {
-        return (SolicitudAttachPersistence) instantiateDAO(SolicitudAttachPersistenceImpl.class, userType);
+    public SolicitudAttachRepository getSolicitudAttachRepository(String userType) {
+        return (SolicitudAttachRepository) instantiateDAO(SolicitudAttachPersistenceImpl.class, userType);
     }
 
     /**
@@ -1355,8 +1356,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AdministrativoPersistence getAdministrativoPersistence(String userType) {
-        return (AdministrativoPersistence) instantiateDAO(AdministrativoPersistenceImpl.class, userType);
+    public AdministrativoRepository getAdministrativoRepository(String userType) {
+        return (AdministrativoRepository) instantiateDAO(AdministrativoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1368,8 +1369,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public RequisitoGradoTituloAdicPersistence getRequisitoGradoTituloAdicPersistence(String userType) {
-        return (RequisitoGradoTituloAdicPersistence) instantiateDAO(RequisitoGradoTituloAdicPersistenceImpl.class,
+    public RequisitoGradoTituloAdicRepository getRequisitoGradoTituloAdicRepository(String userType) {
+        return (RequisitoGradoTituloAdicRepository) instantiateDAO(RequisitoGradoTituloAdicPersistenceImpl.class,
                 userType);
     }
 
@@ -1382,13 +1383,13 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TevaluacionPersistence getTevaluacionPersistence(String userType) {
-        return (TevaluacionPersistence) instantiateDAO(TevaluacionPersistenceImpl.class, userType);
+    public TevaluacionRepository getTevaluacionRepository(String userType) {
+        return (TevaluacionRepository) instantiateDAO(TevaluacionPersistenceImpl.class, userType);
     }  
     
     @Override
-    public CertificacionPersistenceView getCertificacionPersistenceView(String userType) {
-        return (CertificacionPersistenceView) instantiateDAO(CertificacionPersistenceViewImpl.class, userType);
+    public CertificacionViewRepository getCertificacionViewRepository(String userType) {
+        return (CertificacionViewRepository) instantiateDAO(CertificacionViewPersistenceImpl.class, userType);
     } 
 
     /**
@@ -1400,8 +1401,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TmaterialPerfilPersistence getTmaterialPerfilPersistence(String userType) {
-        return (TmaterialPerfilPersistence) instantiateDAO(TmaterialPerfilPersistenceImpl.class, userType);
+    public TmaterialPerfilRepository getTmaterialPerfilRepository(String userType) {
+        return (TmaterialPerfilRepository) instantiateDAO(TmaterialPerfilPersistenceImpl.class, userType);
     }
 
     /**
@@ -1413,8 +1414,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TmensajeDestinoPersistence getTmensajeDestinoPersistence(String userType) {
-        return (TmensajeDestinoPersistence) instantiateDAO(TmensajeDestinoPersistenceImpl.class, userType);
+    public TmensajeDestinoRepository getTmensajeDestinoRepository(String userType) {
+        return (TmensajeDestinoRepository) instantiateDAO(TmensajeDestinoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1426,8 +1427,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TmensajeBarraDestinoPersistence getTmensajeBarraDestinoPersistence(String userType) {
-        return (TmensajeBarraDestinoPersistence) instantiateDAO(TmensajeBarraDestinoPersistenceImpl.class, userType);
+    public TmensajeBarraDestinoRepository getTmensajeBarraDestinoRepository(String userType) {
+        return (TmensajeBarraDestinoRepository) instantiateDAO(TmensajeBarraDestinoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1439,8 +1440,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TramitePersistence getTramitePersistence(String userType) {
-        return (TramitePersistence) instantiateDAO(TramitePersistenceImpl.class, userType);
+    public TramiteRepository getTramiteRepository(String userType) {
+        return (TramiteRepository) instantiateDAO(TramitePersistenceImpl.class, userType);
     }
 
     /**
@@ -1452,28 +1453,28 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public TsolicitudPersistence getTsolicitudPersistence(String userType) {
-        return (TsolicitudPersistence) instantiateDAO(TsolicitudPersistenceImpl.class, userType);
+    public TsolicitudRepository getTsolicitudRepository(String userType) {
+        return (TsolicitudRepository) instantiateDAO(TsolicitudPersistenceImpl.class, userType);
     }
 
     @Override
-    public TmotivoSolicitudInscripcionPersistence getTmotivoSolicitudInscripcionPersistence(String userType) {
-        return (TmotivoSolicitudInscripcionPersistence) instantiateDAO(TmotivoSolicitudInscripcionPersistenceImpl.class, userType);
+    public TmotivoSolicitudInscripcionRepository getTmotivoSolicitudInscripcionRepository(String userType) {
+        return (TmotivoSolicitudInscripcionRepository) instantiateDAO(TmotivoSolicitudInscripcionPersistenceImpl.class, userType);
     }
 
     @Override
-    public UnidadPersistence getUnidadPersistence(String userType) {
-        return (UnidadPersistence) instantiateDAO(UnidadPersistenceImpl.class, userType);
+    public UnidadRepository getUnidadRepository(String userType) {
+        return (UnidadRepository) instantiateDAO(UnidadPersistenceImpl.class, userType);
     }
 
     @Override
-    public UserLoginActionStackPersistence getUserLoginActionStackPersistence(String userType) {
-        return (UserLoginActionStackPersistence) instantiateDAO(UserLoginActionStackPersistenceImpl.class, userType);
+    public UserLoginActionStackRepository getUserLoginActionStackRepository(String userType) {
+        return (UserLoginActionStackRepository) instantiateDAO(UserLoginActionStackPersistenceImpl.class, userType);
     }
     
     @Override
-    public SolicitudCertificadoCarritoPersistence getSolicitudCertificadoCarritoPersistence(String userType) {
-        return (SolicitudCertificadoCarritoPersistence) instantiateDAO(SolicitudCertificadoCarritoPersistenceImpl.class, userType);
+    public SolicitudCertificadoCarritoRepository getSolicitudCertificadoCarritoRepository(String userType) {
+        return (SolicitudCertificadoCarritoRepository) instantiateDAO(SolicitudCertificadoCarritoPersistenceImpl.class, userType);
     }
 
     /**
@@ -1523,8 +1524,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public FichaEstudioPersistence getFichaEstudioPersistence(String userType) {
-        return (FichaEstudioPersistence) instantiateDAO(FichaEstudioPersistenceImpl.class, userType);
+    public FichaEstudioRepository getFichaEstudioRepository(String userType) {
+        return (FichaEstudioRepository) instantiateDAO(FichaEstudioPersistenceImpl.class, userType);
     }
 
     /**
@@ -1536,8 +1537,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public FichaLaboralPersistence getFichaLaboralPersistence(String userType) {
-        return (FichaLaboralPersistence) instantiateDAO(FichaLaboralPersistenceImpl.class, userType);
+    public FichaLaboralRepository getFichaLaboralRepository(String userType) {
+        return (FichaLaboralRepository) instantiateDAO(FichaLaboralPersistenceImpl.class, userType);
     }
 
     /**
@@ -1549,8 +1550,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public AlumnoEmpleadorPersistence getAlumnoEmpleadorPersistence(String userType) {
-        return (AlumnoEmpleadorPersistence) instantiateDAO(AlumnoEmpleadorPersistenceImpl.class, userType);
+    public AlumnoEmpleadorRepository getAlumnoEmpleadorRepository(String userType) {
+        return (AlumnoEmpleadorRepository) instantiateDAO(AlumnoEmpleadorPersistenceImpl.class, userType);
     }
         
     /**
@@ -1562,12 +1563,12 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public CarreraPersistence getCarreraPersistence(String userType) {
-        return (CarreraPersistence) instantiateDAO(CarreraPersistenceImpl.class, userType);
+    public CarreraRepository getCarreraRepository(String userType) {
+        return (CarreraRepository) instantiateDAO(CarreraPersistenceImpl.class, userType);
     }
     
     @Override
-    public EstadoDocExpPersistence getEstadoDocExpPersistence(String userType) {
-        return (EstadoDocExpPersistence) instantiateDAO(EstadoDocExpPersistenceImpl.class, userType);
+    public EstadoDocExpRepository getEstadoDocExpRepository(String userType) {
+        return (EstadoDocExpRepository) instantiateDAO(EstadoDocExpPersistenceImpl.class, userType);
     }
 }

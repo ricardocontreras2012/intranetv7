@@ -19,10 +19,10 @@ import infrastructure.util.ContextUtil;
 public class RegistradorCurricularCertificadosEmitirGlosaService {
 
     public String service(RegistradorCurricularCertificadosEmitirGlosaAction action, GenericSession genericSession, RegistradorSession rs, Integer pos, String glosa) {
-        rs.setCertificadoList(ContextUtil.getDAO().getSolicitudCertificadoCarritoPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
+        rs.setCertificadoList(ContextUtil.getDAO().getSolicitudCertificadoCarritoRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
 
         SolicitudCertificadoCarrito csc = rs.getCertificadoList().get(pos);
-        ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setGlosa(csc.getId().getSccSolicitud(), csc.getId().getSccOrd(), glosa);
+        ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setGlosa(csc.getId().getSccSolicitud(), csc.getId().getSccOrd(), glosa);
         action.setCorrel(csc.getId().getSccSolicitud());
 
         return csc.getTcertificado().getTceDesCorta(); 

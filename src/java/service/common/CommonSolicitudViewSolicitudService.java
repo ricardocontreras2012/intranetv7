@@ -37,7 +37,7 @@ public final class CommonSolicitudViewSolicitudService {
         Integer folio = sol.getSolFolio();
         String user = ActionUtil.getDBUser();
 
-        sol.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(user).find(sol));
+        sol.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachRepository(user).find(sol));
         
         switch (sol.getTsolicitud().getTsolTipo()) {
             case "SIT":
@@ -45,27 +45,27 @@ public final class CommonSolicitudViewSolicitudService {
                 break;
             case "INS":
                 retValue = "inscripcion";
-                ws.setSolicitudInscripcionList(ContextUtil.getDAO().getSolicitudInscripcionPersistence(user).getSolicitud(folio));
+                ws.setSolicitudInscripcionList(ContextUtil.getDAO().getSolicitudInscripcionRepository(user).getSolicitud(folio));
                 break;
             case "PRA":
-                ws.setPractica(ContextUtil.getDAO().getPracticaPersistence(user).find(folio));
+                ws.setPractica(ContextUtil.getDAO().getPracticaRepository(user).find(folio));
                 retValue = "practica";
                 break;
             case "JUS":
-                ws.setJustificativoList(ContextUtil.getDAO().getSolicitudJustificativoPersistence(user).getSolicitud(folio));
+                ws.setJustificativoList(ContextUtil.getDAO().getSolicitudJustificativoRepository(user).getSolicitud(folio));
                 retValue = "justificativo";
                 break;
             case "MAT":                
                 retValue = "matricula";
                 break;
             case "EXP":
-                ws.setExpedienteLogro(ContextUtil.getDAO().getExpedienteLogroPersistence(user).findBySolicitud(ws.getAluCar().getAlumno().getAluRut(), folio));
-                ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpPersistence(user).find(ws.getExpedienteLogro().getId()));
+                ws.setExpedienteLogro(ContextUtil.getDAO().getExpedienteLogroRepository(user).findBySolicitud(ws.getAluCar().getAlumno().getAluRut(), folio));
+                ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpRepository(user).find(ws.getExpedienteLogro().getId()));
                 retValue = "expediente";
                 break;
         }
 
-        ws.setLogSolicitudList(ContextUtil.getDAO().getLogSolicitudPersistence(user).find(folio));
+        ws.setLogSolicitudList(ContextUtil.getDAO().getLogSolicitudRepository(user).find(folio));
         LogUtil.setLog(genericSession.getRut(), folio);
 
         return retValue;

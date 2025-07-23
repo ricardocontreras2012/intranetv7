@@ -46,7 +46,7 @@ public final class CommonAlumnoPrintCartolaService extends CommonAlumnoPrintUtil
 
     private void putCartola(Document doc, AluCar aluCar) {
         List<CartolaView> lista = ContextUtil.getDAO()
-                .getCartolaPersistenceView(ActionUtil.getDBUser())
+                .getCartolaViewRepository(ActionUtil.getDBUser())
                 .find(aluCar);
 
         PdfUtil.putBlank(doc);

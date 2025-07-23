@@ -36,7 +36,7 @@ public class CommonRequisitoAdicionalLogroEmitirActaService {
                 Integer folio;
 
                 beginTransaction(ActionUtil.getDBUser());
-                folio = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaActa();
+                folio = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaActa();
                 actaRequisitoAdicionalLogro = new ActaRequisitoAdicionalLogro();
 
                 EstadoActa estadoActa = new EstadoActa();
@@ -50,7 +50,7 @@ public class CommonRequisitoAdicionalLogroEmitirActaService {
                 actaRequisitoAdicionalLogro.setAratFolio(folio);
                 actaRequisitoAdicionalLogro.setEstadoActa(estadoActa);
                 actaRequisitoAdicionalLogro.setTrequisitoLogroAdicional(ws.getTrequisitoLogroAdicional());
-                getDAO().getActaRequisitoAdicionalLogroPersistence(ActionUtil.getDBUser()).makePersistent(actaRequisitoAdicionalLogro);
+                getDAO().getActaRequisitoAdicionalLogroRepository(ActionUtil.getDBUser()).makePersistent(actaRequisitoAdicionalLogro);
 
                 for (InscripcionAdicionalLogro inscripcionRequisitoAdicionalLogro
                         : ws.getInscripcionAdicionalLogroList()) {
@@ -72,7 +72,7 @@ public class CommonRequisitoAdicionalLogroEmitirActaService {
                         actaCalifRequisitoAdicionalLogro.setActaRequisitoAdicionalLogro(actaRequisitoAdicionalLogro);
                         actaCalifRequisitoAdicionalLogro.setAcratNota(new BigDecimal(tmpNota[0]));
                         actaCalifRequisitoAdicionalLogro.setAcratFechaEvaluacion(stringToDate(tmpFecha[0]));
-                        getDAO().getActaCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).makePersistent(actaCalifRequisitoAdicionalLogro);
+                        getDAO().getActaCalificacionAdicionalLogroRepository(ActionUtil.getDBUser()).makePersistent(actaCalifRequisitoAdicionalLogro);
                     }
                 }
 

@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActaCalificacionPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ActaCalificacion;
 import domain.model.AluCar;
@@ -24,6 +23,7 @@ import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.criterion.Restrictions.or;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ActaCalificacionRepository;
 
 /**
  * Class description
@@ -31,7 +31,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ActaCalificacionPersistenceImpl extends CrudAbstractDAO<ActaCalificacion, Long> implements ActaCalificacionPersistence {
+public final class ActaCalificacionPersistenceImpl extends CrudAbstractDAO<ActaCalificacion, Long> implements ActaCalificacionRepository {
 
     /**
      * Method description

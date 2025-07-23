@@ -7,7 +7,7 @@ package service.profesor;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Evaluacion;
-import domain.repository.EvaluacionAlumnoPersistence;
+import domain.repository.EvaluacionAlumnoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -32,16 +32,16 @@ public final class ProfesorEvaluacionGetAlumnoEvaluacionService {
      */
     public String service(GenericSession genericSession, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        EvaluacionAlumnoPersistence evaluacionAlumnoPersistence
-                = ContextUtil.getDAO().getEvaluacionAlumnoPersistence(ActionUtil.getDBUser());
+        EvaluacionAlumnoRepository evaluacionAlumnoRepository
+                = ContextUtil.getDAO().getEvaluacionAlumnoRepository(ActionUtil.getDBUser());
         Evaluacion evaluacion = ws.getEvaluacionList().get(pos);       
         
         HibernateUtil.beginTransaction(ActionUtil.getDBUser());
-        evaluacionAlumnoPersistence.sincronizaCurso(ws.getCurso().getId());
+        evaluacionAlumnoRepository.sincronizaCurso(ws.getCurso().getId());
         HibernateUtil.commitTransaction();
 
         ws.setEvaluacion(evaluacion);
-        ws.setEvaluacionAlumno(evaluacionAlumnoPersistence.find(evaluacion));
+        ws.setEvaluacionAlumno(evaluacionAlumnoRepository.find(evaluacion));
 
         return SUCCESS;
     }

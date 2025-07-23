@@ -308,7 +308,7 @@ public class Ayudante implements Serializable {
      * Method description
      */
     public void setCarga() {
-        this.carga = getDistinctAsc(ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).findCarga(
+        this.carga = getDistinctAsc(ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser()).findCarga(
                         this.ayuRut));
     }
 

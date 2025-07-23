@@ -63,17 +63,17 @@ public class CommonRCurricularAddUnidadService {
                     newUnidad.setAtributoUniAdmMayor(uniAdmMayor);
                     newUnidad.setAtributoUniMayor(uniMayor);
                     newUnidad.setAtributoUniSuperior(uniSuperior);
-                    newUnidad.setUniAcadMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniAcadMayor));
-                    newUnidad.setUniAdmMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniAdmMayor));
-                    newUnidad.setUniMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniMayor));
-                    newUnidad.setUniSuperior(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniSuperior));
+                    newUnidad.setUniAcadMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniAcadMayor));
+                    newUnidad.setUniAdmMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniAdmMayor));
+                    newUnidad.setUniMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniMayor));
+                    newUnidad.setUniSuperior(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniSuperior));
                     Mencion mencionActual = MencionSupport.getMencion(menCodCar, menCodMen);
                     mencionActual.setAtributoMenUnidad(uniCod);
                     mencionActual.setUnidad(newUnidad);
                     try {
                         beginTransaction(ActionUtil.getDBUser());
-                        ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).save(newUnidad);
-                        ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).update(mencionActual);
+                        ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).save(newUnidad);
+                        ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).update(mencionActual);
                         commitTransaction();
                     }
                     catch (Exception e) {
@@ -83,7 +83,7 @@ public class CommonRCurricularAddUnidadService {
                 }
             case "update":
                 {
-                    Unidad newUnidad = ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).findById(uniCod);
+                    Unidad newUnidad = ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).findById(uniCod);
                     newUnidad.setUniNom(uniNom);
                     newUnidad.setUniCC(uniCC);
                     newUnidad.setUniUrl(uniUrl);
@@ -93,17 +93,17 @@ public class CommonRCurricularAddUnidadService {
                     newUnidad.setAtributoUniAdmMayor(uniAdmMayor);
                     newUnidad.setAtributoUniMayor(uniMayor);
                     newUnidad.setAtributoUniSuperior(uniSuperior);
-                    newUnidad.setUniAcadMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniAcadMayor));
-                    newUnidad.setUniAdmMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniAdmMayor));
-                    newUnidad.setUniMayor(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniMayor));
-                    newUnidad.setUniSuperior(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(uniSuperior));
+                    newUnidad.setUniAcadMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniAcadMayor));
+                    newUnidad.setUniAdmMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniAdmMayor));
+                    newUnidad.setUniMayor(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniMayor));
+                    newUnidad.setUniSuperior(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(uniSuperior));
                     Mencion mencionActual = MencionSupport.getMencion(menCodCar, menCodMen);
                     mencionActual.setAtributoMenUnidad(uniCod);
                     mencionActual.setUnidad(newUnidad);
                     try {
                         beginTransaction(ActionUtil.getDBUser());
-                        ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).update(newUnidad);
-                        ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).update(mencionActual);
+                        ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).update(newUnidad);
+                        ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).update(mencionActual);
                         commitTransaction();
                     }
                     catch (Exception e) {

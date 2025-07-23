@@ -488,11 +488,11 @@ public class Curso implements Serializable {
      */
     public boolean cursoPropio(String userType, String userTypeShort, Integer rut, boolean isAutoridad) {
         return ("PR".equals(userTypeShort) || isAutoridad)
-                && ContextUtil.getDAO().getCursoProfesorPersistence(userType).exists(this, rut);
+                && ContextUtil.getDAO().getCursoProfesorRepository(userType).exists(this, rut);
     }
 
     public boolean cursoPropio(Integer asign, String userTypeShort, Integer rut) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).isCursoPropio(asign, rut, userTypeShort) == 1;
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).isCursoPropio(asign, rut, userTypeShort) == 1;
     }
 
     /**
@@ -501,15 +501,15 @@ public class Curso implements Serializable {
      * @return
      */
     public List<AluCar> getNominaAlumnos() {
-        return InscripcionSupport.getNomina(ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).findNomina(this));
+        return InscripcionSupport.getNomina(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).findNomina(this));
     }
 
     public List<AluCar> getNominaAlumnosRanking() {
-        return InscripcionSupport.getNomina(ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).findNominaRanking(this));
+        return InscripcionSupport.getNomina(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).findNominaRanking(this));
     }
 
     public List<Integer> getRutAlumnos() {
-        return ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getRutInscritos(this.getId());
+        return ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getRutInscritos(this.getId());
     }
 
     /**
@@ -531,7 +531,7 @@ public class Curso implements Serializable {
         boolean retValue = false;
 
         if (notasFinales()
-                && !ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser()).puedeEmitir(this).isEmpty()) {
+                && !ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).puedeEmitir(this).isEmpty()) {
             retValue = true;
         }
 
@@ -544,7 +544,7 @@ public class Curso implements Serializable {
      * @return
      */
     public boolean getPuedePonerNotasParciales() {
-        return "SI".equals(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getPuedePonerNotas(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
+        return "SI".equals(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getPuedePonerNotas(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
     }
 
     /**
@@ -552,7 +552,7 @@ public class Curso implements Serializable {
      * @param modo
      */
     public void setModoEvaluacion(String modo) {
-        ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).setModoEvaluacion(id, modo);
+        ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).setModoEvaluacion(id, modo);
         this.curModalEval = modo;
     }
 

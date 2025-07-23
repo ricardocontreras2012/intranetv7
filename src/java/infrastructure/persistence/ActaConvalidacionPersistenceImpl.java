@@ -5,19 +5,19 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActaConvalidacionPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ActaConvalidacion;
 import domain.model.AluCarId;
 import org.hibernate.Query;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ActaConvalidacionRepository;
 
 /**
  *
  * @author Ricardo Contreras S.
  */
 public class ActaConvalidacionPersistenceImpl extends CrudAbstractDAO<ActaConvalidacion, Long>
-        implements ActaConvalidacionPersistence {
+        implements ActaConvalidacionRepository {
 
     /**
      *

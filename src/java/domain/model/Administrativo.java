@@ -194,7 +194,7 @@ public class Administrativo implements Serializable {
      * @return
      */
     public boolean is(String trabajo) {     
-        return  ContextUtil.getDAO().getAdministrativoPersistence(ActionUtil.getDBUser()).trabaja(this.admRut, trabajo) != null;
+        return  ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser()).trabaja(this.admRut, trabajo) != null;
     }
 
     public String getNombreStd() {

@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.DerechoPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -19,6 +18,7 @@ import static org.hibernate.criterion.Restrictions.sqlRestriction;
 import org.hibernate.type.StandardBasicTypes;
 import infrastructure.support.DerechoCoordinadorSupport;
 import java.util.stream.Collectors;
+import domain.repository.DerechoRepository;
 
 /**
  * Class description
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long> implements DerechoPersistence {
+public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long> implements DerechoRepository {
 
     @SuppressWarnings("unchecked")
     @Override

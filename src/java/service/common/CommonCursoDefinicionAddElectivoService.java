@@ -24,11 +24,11 @@ public class CommonCursoDefinicionAddElectivoService {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         beginTransaction(user);
-        ContextUtil.getDAO().getElectivoPersistence(user).add(asign,elect, electivo, minor, area, ws.getAgnoAct(), ws.getSemAct());
+        ContextUtil.getDAO().getElectivoRepository(user).add(asign,elect, electivo, minor, area, ws.getAgnoAct(), ws.getSemAct());
         commitTransaction();
                 
         MiCarreraSupport carrera = ws.getMiCarreraSupport();                        
-        ws.setElectivoList(ContextUtil.getDAO().getElectivoPersistence(user).find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()));
+        ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(user).find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()));
 
         return SUCCESS;
     }

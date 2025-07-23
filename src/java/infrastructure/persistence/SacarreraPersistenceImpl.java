@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SacarreraPersistence;
+import domain.repository.SacarreraRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -24,7 +24,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class SacarreraPersistenceImpl extends CrudAbstractDAO<Sacarrera, Long> implements SacarreraPersistence {
+public final class SacarreraPersistenceImpl extends CrudAbstractDAO<Sacarrera, Long> implements SacarreraRepository {
 
     /**
      * Method description

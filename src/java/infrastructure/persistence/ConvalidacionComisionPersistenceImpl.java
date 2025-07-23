@@ -5,13 +5,13 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ConvalidacionComisionPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ConvalidacionComision;
+import domain.repository.ConvalidacionComisionRepository;
 
 /**
  *
  * @author rcontreras
  */
-public class ConvalidacionComisionPersistenceImpl extends CrudAbstractDAO<ConvalidacionComision, Long> implements ConvalidacionComisionPersistence {
+public class ConvalidacionComisionPersistenceImpl extends CrudAbstractDAO<ConvalidacionComision, Long> implements ConvalidacionComisionRepository {
 }

@@ -36,13 +36,13 @@ public class CommonCursoDefinicionSaveTransversalesService {
 
         // Agregar transversales
         procesarTransversales(cursoList, parameters, true,
-                (id) -> ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
+                (id) -> ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
                         .addTransversal(id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
                                 id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
 
         // Eliminar transversales
         procesarTransversales(cursoList, parameters, false,
-                (id) -> ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
+                (id) -> ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
                         .removeTransversal(id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
                                 id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
 

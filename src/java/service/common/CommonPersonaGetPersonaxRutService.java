@@ -27,6 +27,6 @@ public final class CommonPersonaGetPersonaxRutService {
      * @return Action status.
      */
     public Persona service(GenericSession genericSession, String key, Integer rut) { 
-        return ContextUtil.getDAO().getPersonaPersistence(ActionUtil.getDBUser()).find(rut);        
+        return ContextUtil.getDAO().getPersonaRepository(ActionUtil.getDBUser()).find(rut);        
     }
 }

@@ -9,11 +9,9 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.EmisionNomina;
 import domain.model.NominaCarrera;
 import domain.model.NominaCarreraId;
-import domain.repository.ActaCalificacionPersistence;
-import domain.repository.EmisionNominaPersistence;
-import domain.repository.NominaCarreraPersistence;
-import persistence.scalar.ScalarPersistence;
-import domain.repository.NominaActaPersistenceView;
+import domain.repository.EmisionNominaRepository;
+import domain.repository.NominaCarreraRepository;
+
 import session.GenericSession;
 import session.Manager;
 import session.WorkSession;
@@ -23,6 +21,9 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
+import domain.repository.ActaCalificacionRepository;
+import domain.repository.NominaActaViewRepository;
+import persistence.scalar.ScalarPersistence;
 
 /**
  *
@@ -45,19 +46,19 @@ public class RegistradorCurricularActaGenerarIntercambioService {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
 
-        ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(user).find(genericSession.getUserType(), genericSession.getRut()));
+        ws.setMencionList(ContextUtil.getDAO().getMencionRepository(user).find(genericSession.getUserType(), genericSession.getRut()));
 
-        ActaCalificacionPersistence actaPersistence
-                = ContextUtil.getDAO().getActaCalificacionPersistence(user);
-        ScalarPersistence nominaCarreraScalarPersistence
-                = ContextUtil.getDAO().getScalarPersistence(user);
-        NominaCarreraPersistence nominaCarreraPersistence
-                = ContextUtil.getDAO().getNominaCarreraPersistence(user);
-        EmisionNominaPersistence emisionPersistence
-                = ContextUtil.getDAO().getEmisionNominaPersistence(user);
-        NominaActaPersistenceView nominaActaPersistence
-                = ContextUtil.getDAO().getNominaActaPersistenceView(user);
-        Integer folio = nominaCarreraScalarPersistence.getSecuenciaNomina();
+        ActaCalificacionRepository actaRepository
+                = ContextUtil.getDAO().getActaCalificacionRepository(user);
+        ScalarPersistence nominaCarreraScalarRepository
+                = ContextUtil.getDAO().getScalarRepository(user);
+        NominaCarreraRepository nominaCarreraRepository
+                = ContextUtil.getDAO().getNominaCarreraRepository(user);
+        EmisionNominaRepository emisionRepository
+                = ContextUtil.getDAO().getEmisionNominaRepository(user);
+        NominaActaViewRepository nominaActaRepository
+                = ContextUtil.getDAO().getNominaActaViewRepository(user);
+        Integer folio = nominaCarreraScalarRepository.getSecuenciaNomina();
 
         EmisionNomina emision = new EmisionNomina();
 
@@ -68,7 +69,7 @@ public class RegistradorCurricularActaGenerarIntercambioService {
         emision.setEmiFecha(getSysdate());
         emision.setEmiReali(user);
         beginTransaction(user);
-        emisionPersistence.save(emision);
+        emisionRepository.save(emision);
 
         ws.getMencionList().forEach(mencion -> {
             NominaCarrera nominaCarrera = new NominaCarrera();
@@ -82,12 +83,12 @@ public class RegistradorCurricularActaGenerarIntercambioService {
             nominaCarrera.setNcAgno(agno);
             nominaCarrera.setNcSem(sem);
 
-            nominaCarreraPersistence.save(nominaCarrera);
+            nominaCarreraRepository.save(nominaCarrera);
         });
 
         commitTransaction();
-        actaPersistence.generaActasxCarrera(agno, sem, folio, "I");
-        Manager.getRegistradorSession(action.getSesion()).setNominaActaViewList(nominaActaPersistence.find(agno, sem, folio));
+        actaRepository.generaActasxCarrera(agno, sem, folio, "I");
+        Manager.getRegistradorSession(action.getSesion()).setNominaActaViewList(nominaActaRepository.find(agno, sem, folio));
 
         return SUCCESS;
     }

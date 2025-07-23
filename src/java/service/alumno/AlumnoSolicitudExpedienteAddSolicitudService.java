@@ -35,7 +35,7 @@ public class AlumnoSolicitudExpedienteAddSolicitudService {
         ExpedienteLogro expLogro = ws.getExpedienteLogro();
 
         try {
-            ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).saveExpedienteSolicitud(expLogro, solicitud.getSolFolio());
+            ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).saveExpedienteSolicitud(expLogro, solicitud.getSolFolio());
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Índice fuera de rango: ");
         } catch (NullPointerException e) {
@@ -46,7 +46,7 @@ public class AlumnoSolicitudExpedienteAddSolicitudService {
         }
 
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(user).save(solicitud);
+        ContextUtil.getDAO().getSolicitudRepository(user).save(solicitud);
         commitTransaction();
 
         //CommonSolicitudUtil.saveAttach(action, genericSession, upload, uploadFileName, key);

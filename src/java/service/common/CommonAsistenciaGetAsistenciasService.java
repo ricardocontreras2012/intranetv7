@@ -33,7 +33,7 @@ public final class CommonAsistenciaGetAsistenciasService {
 
         WorkSession ws = genericSession.getWorkSession(key);
 
-        ws.setAsistenciaAlumnoList(ContextUtil.getDAO().getAsistenciaAlumnoPersistence(ActionUtil.getDBUser()).find(
+        ws.setAsistenciaAlumnoList(ContextUtil.getDAO().getAsistenciaAlumnoRepository(ActionUtil.getDBUser()).find(
                         ws.getCurso()));
         ws.setFechaActual(getDate(DATE_FORMAT));
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());   

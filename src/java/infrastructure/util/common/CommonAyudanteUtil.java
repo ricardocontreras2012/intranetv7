@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.AyudantePersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -20,6 +19,7 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.FormatUtil.cleanName;
 import infrastructure.util.LogUtil;
 import session.ProfesorSession;
+import domain.repository.AyudanteRepository;
 
 /**
  * Class description
@@ -33,8 +33,8 @@ public final class CommonAyudanteUtil {
     }
 
     public static boolean login(Integer rut, String passwd, String key, Map<String, Object> sesion) {
-        AyudantePersistence ayudantePersistence = ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser());
-        Ayudante ayudante = ayudantePersistence.find(rut, passwd);
+        AyudanteRepository ayudanteRepository = ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser());
+        Ayudante ayudante = ayudanteRepository.find(rut, passwd);
 
         if (ayudante != null) {
             ayudante.setCarga();  // Carga los cursos asociados al ayudante
@@ -54,7 +54,7 @@ public final class CommonAyudanteUtil {
             genericSession.setLastLogin(ayudante.getAyuLastLogin());
 
             // Actualizar el último login del ayudante en la base de datos
-            ayudantePersistence.setLastLogin(rut);
+            ayudanteRepository.setLastLogin(rut);
 
             // Configurar los detalles adicionales del ayudante en la sesión
             getComplemento(genericSession, ayudante, key);
@@ -156,11 +156,11 @@ public final class CommonAyudanteUtil {
      */
     private static List<Ayudante> getAyudante(Integer rut, String paterno, String materno, String nombre) {
         List<Ayudante> lAyudante = null;
-        AyudantePersistence ayudantePersistence
-                = ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser());
+        AyudanteRepository ayudanteRepository
+                = ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser());
 
         if (rut != null) {
-            Ayudante ayudante = ayudantePersistence.find(rut);
+            Ayudante ayudante = ayudanteRepository.find(rut);
 
             lAyudante = new ArrayList<>();
 
@@ -169,7 +169,7 @@ public final class CommonAyudanteUtil {
             }
         } else {
             if (!StringUtils.isEmpty(paterno) || !StringUtils.isEmpty(materno) || !StringUtils.isEmpty(nombre)) {
-                lAyudante = ayudantePersistence.find(cleanName(paterno),
+                lAyudante = ayudanteRepository.find(cleanName(paterno),
                         cleanName(materno), cleanName(nombre));
             }
         }
@@ -179,26 +179,26 @@ public final class CommonAyudanteUtil {
 
     public static List<Ayudante> getAyudantePersona(Integer rut, String paterno, String materno, String nombre) {
         List<Ayudante> lAyudante = null;
-        AyudantePersistence ayudantePersistence
-                = ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser());
+        AyudanteRepository ayudanteRepository
+                = ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser());
 
         if (rut != null) {
-            Ayudante ayudante = ayudantePersistence.find(rut);
+            Ayudante ayudante = ayudanteRepository.find(rut);
 
             lAyudante = new ArrayList<>();
 
             if (ayudante != null) {
                 lAyudante.add(ayudante);
             } else {
-                ayudantePersistence.creaAyudante(rut);
-                ayudante = ayudantePersistence.find(rut);
+                ayudanteRepository.creaAyudante(rut);
+                ayudante = ayudanteRepository.find(rut);
                 if (ayudante != null) {
                     lAyudante.add(ayudante);
                 }
             }
         } else {
             if (!StringUtils.isEmpty(paterno) || !StringUtils.isEmpty(materno) || !StringUtils.isEmpty(nombre)) {
-                lAyudante = ayudantePersistence.find(cleanName(paterno),
+                lAyudante = ayudanteRepository.find(cleanName(paterno),
                         cleanName(materno), cleanName(nombre));
             }
         }

@@ -40,7 +40,7 @@ public final class CommonCursoDefinicionRemoveCursosService {
                 .forEach(curso -> {
                     CursoId id = curso.getId();
                     LogUtil.setLog(genericSession.getRut(), curso.getCodigo(" "));
-                    ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).remove(id);
+                    ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).remove(id);
                 });
 
         // Actualizar la lista de cursos (Cerrados, Transversales y Espejos)

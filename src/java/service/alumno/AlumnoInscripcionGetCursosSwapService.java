@@ -91,7 +91,7 @@ public class AlumnoInscripcionGetCursosSwapService {
 
             // Actualiza la lista de cursos disponibles para el alumno en función del curso seleccionado.
             as.setCursosSwap(ContextUtil.getDAO()
-                    .getInscripcionPersistence(ActionUtil.getDBUser())
+                    .getInscripcionRepository(ActionUtil.getDBUser())
                     .getCursosSwap(aluCar, id));
 
         });

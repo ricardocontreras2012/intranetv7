@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ParamArchivosWebPersistence;
+import domain.repository.ParamArchivosWebRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ParamArchivosWeb;
 
@@ -16,5 +16,5 @@ import domain.model.ParamArchivosWeb;
  * @version 7, 24/05/2012
  */
 public final class ParamArchivosWebPersistenceImpl extends CrudAbstractDAO<ParamArchivosWeb, Long>
-        implements ParamArchivosWebPersistence {
+        implements ParamArchivosWebRepository {
 }

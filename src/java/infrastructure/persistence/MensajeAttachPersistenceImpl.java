@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MensajeAttachPersistence;
+import domain.repository.MensajeAttachRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.MensajeAttach;
 import java.util.List;
@@ -21,7 +21,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class MensajeAttachPersistenceImpl extends CrudAbstractDAO<MensajeAttach, Long>
-        implements MensajeAttachPersistence {
+        implements MensajeAttachRepository {
 
     /**
      *

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ReservaSalaPersistence;
+import domain.repository.ReservaSalaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ReservaSala;
 import java.util.List;
@@ -22,7 +22,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class ReservaSalaPersistenceImpl extends CrudAbstractDAO<ReservaSala, Long>
-        implements ReservaSalaPersistence {
+        implements ReservaSalaRepository {
 
     /**
      * Method description

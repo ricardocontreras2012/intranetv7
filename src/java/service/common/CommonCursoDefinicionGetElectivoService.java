@@ -25,7 +25,7 @@ public class CommonCursoDefinicionGetElectivoService {
         actionSupport.setActionResult("");
         actionSupport.setActionStatus("NULL");
 
-        Electivo electivo = ContextUtil.getDAO().getElectivoPersistence(ActionUtil.getDBUser()).find(asign, elect, ws.getAgnoAct(), ws.getSemAct());
+        Electivo electivo = ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).find(asign, elect, ws.getAgnoAct(), ws.getSemAct());
 
         if (electivo != null) {
             actionSupport.setActionResult(electivo.getEleNom());

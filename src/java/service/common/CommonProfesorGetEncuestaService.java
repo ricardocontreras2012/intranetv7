@@ -44,9 +44,9 @@ public final class CommonProfesorGetEncuestaService {
             ws.setProfesor(ws.getCursoProfesorList().get(pos).getProfesor());
         } 
 
-        ws.setRespEncta(ContextUtil.getDAO().getRespEnctaCursoPersistence(ActionUtil.getDBUser()).find(curso.getId(), ws.getProfesor().getProfRut(), tipo));
+        ws.setRespEncta(ContextUtil.getDAO().getRespEnctaCursoRepository(ActionUtil.getDBUser()).find(curso.getId(), ws.getProfesor().getProfRut(), tipo));
 
-        ws.setComentarioEncuestaDocenteList(ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser()).find(curso,ws.getProfesor().getProfRut(), tipo));
+        ws.setComentarioEncuestaDocenteList(ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(ActionUtil.getDBUser()).find(curso,ws.getProfesor().getProfRut(), tipo));
         
         String retValue = SUCCESS;
 

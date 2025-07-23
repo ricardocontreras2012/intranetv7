@@ -22,7 +22,7 @@ public class AlumnoCertificacionCheckNoImpedimientosService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
-        ws.setMatriculaList(ContextUtil.getDAO().getMatriculaHistoricoPersistence(ActionUtil.getDBUser()).findMatCert(aluCar,genericSession.getUserType()));        
+        ws.setMatriculaList(ContextUtil.getDAO().getMatriculaHistoricoRepository(ActionUtil.getDBUser()).findMatCert(aluCar,genericSession.getUserType()));        
         
         return SUCCESS;
     }

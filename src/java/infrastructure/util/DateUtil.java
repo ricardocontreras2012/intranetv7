@@ -17,7 +17,7 @@ public class DateUtil {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT, LOCALE);
 
     public static Date getSysdate() {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSysdate();
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSysdate();
     }
 
     public static String getDate(String format) {
@@ -53,7 +53,7 @@ public class DateUtil {
     }
 
     public static String getFechaEnPalabras(String fecha) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getFechaEnPalabras(fecha);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getFechaEnPalabras(fecha);
     }
 
     public static String getFechaEnPalabras(Date fecha) {

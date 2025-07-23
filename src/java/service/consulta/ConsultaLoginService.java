@@ -10,7 +10,7 @@ import domain.model.Externo;
 import java.util.HashMap;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.ExternoPersistence;
+import domain.repository.ExternoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -42,9 +42,9 @@ public final class ConsultaLoginService {
         String retValue = SUCCESS;
 
         if (sesion != null && key != null) {
-            ExternoPersistence externoPersistence
-                    = ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser());
-            Externo externo = externoPersistence.find(rut, passwd);
+            ExternoRepository externoRepository
+                    = ContextUtil.getDAO().getExternoRepository(ActionUtil.getDBUser());
+            Externo externo = externoRepository.find(rut, passwd);
 
             if (externo != null) {
                 GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, passwd, 0);
@@ -52,7 +52,7 @@ public final class ConsultaLoginService {
                 genericSession.setLastLogin(externo.getExtLastLogin());
                 genericSession.setSessionMap(new HashMap<String, WorkSession>());
                 genericSession.getSessionMap().put(key, ws);
-                externoPersistence.setLastLogin(rut);
+                externoRepository.setLastLogin(rut);
                 getComplemento(genericSession, externo);
 
                 getRequest().getSession().setMaxInactiveInterval(1800);

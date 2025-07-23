@@ -33,8 +33,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import static org.apache.struts2.ServletActionContext.getServletContext;
-import domain.repository.ParametroPersistence;
-import domain.repository.ReincorporacionPersistence;
+import domain.repository.ParametroRepository;
+import domain.repository.ReincorporacionRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -69,16 +69,16 @@ public class RegistradorCurricularReincorporacionService {
         String user = ActionUtil.getDBUser();
         try {
             WorkSession ws = genericSession.getWorkSession(key);
-            ParametroPersistence parametroPersistence
-                    = ContextUtil.getDAO().getParametroPersistence(user);
-            Integer agno = valueOf(parametroPersistence.find("agno_reincorporacion").getParValor());
-            Integer sem = valueOf(parametroPersistence.find("sem_reincorporacion").getParValor());
+            ParametroRepository parametroRepository
+                    = ContextUtil.getDAO().getParametroRepository(user);
+            Integer agno = valueOf(parametroRepository.find("agno_reincorporacion").getParValor());
+            Integer sem = valueOf(parametroRepository.find("sem_reincorporacion").getParValor());
             Integer agnoReinc;
             Integer semReinc;
-            Integer nomina = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaNomina();
+            Integer nomina = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaNomina();
 
-            ReincorporacionPersistence reincorporacionPersistence
-                    = ContextUtil.getDAO().getReincorporacionPersistence(ActionUtil.getDBUser());
+            ReincorporacionRepository reincorporacionRepository
+                    = ContextUtil.getDAO().getReincorporacionRepository(ActionUtil.getDBUser());
 
             List<Reincorporacion> reincorporacionList;
             String nReinc = "";
@@ -86,19 +86,19 @@ public class RegistradorCurricularReincorporacionService {
             switch (tipoReinc) {
                 case "EL": //Eliminados
                     nReinc = "1,2,3";
-                    reincorporacionPersistence.reincorporaEliminados(agno, sem, nomina);
+                    reincorporacionRepository.reincorporaEliminados(agno, sem, nomina);
                     break;
                 case "MA-EL": //Masiva Eliminados
                     nReinc = "4";
-                    reincorporacionPersistence.reincorporaEliminadosFull(agno, sem, nomina);
+                    reincorporacionRepository.reincorporaEliminadosFull(agno, sem, nomina);
                     break;
                 case "RT": //Retiro Temporal
                     nReinc = "5";
-                    reincorporacionPersistence.reincorporaRetiros(agno, sem, nomina);
+                    reincorporacionRepository.reincorporaRetiros(agno, sem, nomina);
                     break;
                 case "PPL": //Prorroga Periodo Lectivo
                     nReinc = "7";
-                    reincorporacionPersistence.reincorporaProrrogas(agno, sem, nomina);
+                    reincorporacionRepository.reincorporaProrrogas(agno, sem, nomina);
             }
 
             if (sem == 1) {
@@ -109,7 +109,7 @@ public class RegistradorCurricularReincorporacionService {
                 agnoReinc = agno + 1;
             }
 
-            reincorporacionList = reincorporacionPersistence.find(agnoReinc, semReinc, nomina, nReinc);
+            reincorporacionList = reincorporacionRepository.find(agnoReinc, semReinc, nomina, nReinc);
 
             // Evitar lazy
             for (Reincorporacion reincorporacion : reincorporacionList) {
@@ -299,7 +299,7 @@ public class RegistradorCurricularReincorporacionService {
         String next;
         PlanId plan = aluCar.getPlan().getId();
 
-        next = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSiguienteSemestre(agno, sem, plan.getPlaCodCar(), plan.getPlaCodMen(), plan.getPlaCod());
+        next = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSiguienteSemestre(agno, sem, plan.getPlaCodCar(), plan.getPlaCodMen(), plan.getPlaCod());
         agnoReinc = Integer.parseInt(next.substring(0, 4));
         semReinc = Integer.parseInt(next.substring(4));
 
@@ -363,14 +363,14 @@ public class RegistradorCurricularReincorporacionService {
     }    
 
     private void marcarProcesado(List<Reincorporacion> reincorporacionList) {
-        ReincorporacionPersistence reincorporacionPersistence
-                = ContextUtil.getDAO().getReincorporacionPersistence(ActionUtil.getDBUser());
+        ReincorporacionRepository reincorporacionRepository
+                = ContextUtil.getDAO().getReincorporacionRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
         for (Reincorporacion reincorporacion : reincorporacionList) {
             Integer tipo = reincorporacion.getReiTipo();
             if (tipo >= 1 && tipo <= 3) {
-                reincorporacionPersistence.marcarProcesado(reincorporacion.getReiSolicitud());
+                reincorporacionRepository.marcarProcesado(reincorporacion.getReiSolicitud());
             }
         }
         commitTransaction();

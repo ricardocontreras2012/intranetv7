@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SolicitudJustificativoPersistence;
+import domain.repository.SolicitudJustificativoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.SolicitudJustificativo;
@@ -22,7 +22,7 @@ import org.hibernate.type.StandardBasicTypes;
  *
  * @author Ricardo
  */
-public final class SolicitudJustificativoPersistenceImpl extends CrudAbstractDAO<SolicitudJustificativo, Long> implements SolicitudJustificativoPersistence {
+public final class SolicitudJustificativoPersistenceImpl extends CrudAbstractDAO<SolicitudJustificativo, Long> implements SolicitudJustificativoRepository {
 
     @Override
     public void doSave(Integer solicitud, CursoId id) {

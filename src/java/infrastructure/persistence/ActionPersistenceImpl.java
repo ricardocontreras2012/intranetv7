@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActionPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.WebUser;
 import domain.model.WebUserAction;
@@ -15,6 +14,7 @@ import static org.hibernate.FetchMode.JOIN;
 import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ActionRepository;
 
 /**
  * Class description
@@ -23,7 +23,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class ActionPersistenceImpl extends CrudAbstractDAO<Object, Serializable>
-        implements ActionPersistence {
+        implements ActionRepository {
 
     @Override
     public WebUserAction find(String user, String action) {

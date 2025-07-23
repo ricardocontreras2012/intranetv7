@@ -25,7 +25,7 @@ public class AlumnoSolicitudGetNewSolicitudService {
      */
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setTsolicitudList(ContextUtil.getDAO().getTsolicitudPersistence(ActionUtil.getDBUser()).find(ws.getAluCar()));
+        ws.setTsolicitudList(ContextUtil.getDAO().getTsolicitudRepository(ActionUtil.getDBUser()).find(ws.getAluCar()));
 
         return SUCCESS;
     }

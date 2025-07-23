@@ -6,11 +6,11 @@
 package service.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.ActaCalificacionPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import domain.repository.ActaCalificacionRepository;
 
 /**
  * Class description
@@ -30,10 +30,10 @@ public final class OficinaCurricularActaPrintGetActasService {
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        ActaCalificacionPersistence actaPersistence
-                = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());
+        ActaCalificacionRepository actaRepository
+                = ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser());
 
-        ws.setActas(actaPersistence.findActasxImprimir(ws.getAgnoAct(), ws.getSemAct()));
+        ws.setActas(actaRepository.findActasxImprimir(ws.getAgnoAct(), ws.getSemAct()));
 
         return SUCCESS;
     }

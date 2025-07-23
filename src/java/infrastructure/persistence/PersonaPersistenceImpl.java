@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PersonaPersistence;
+import domain.repository.PersonaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Persona;
 import org.hibernate.Criteria;
@@ -17,7 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class PersonaPersistenceImpl extends CrudAbstractDAO<Persona, Long> implements PersonaPersistence {
+public final class PersonaPersistenceImpl extends CrudAbstractDAO<Persona, Long> implements PersonaRepository {
 
     /**
      * Method description

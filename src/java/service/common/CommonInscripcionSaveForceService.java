@@ -23,7 +23,7 @@ public class CommonInscripcionSaveForceService {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
 
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).setForce(aluCar.getId(), aluCar.getInsList().get(pos).getId(), force);
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).setForce(aluCar.getId(), aluCar.getInsList().get(pos).getId(), force);
      
         return SUCCESS;
     }    

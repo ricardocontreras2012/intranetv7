@@ -35,7 +35,7 @@ public final class CommonCursoGetCarrerasService {
         List<MiCarreraSupport> miCarreraSupport;
         CommonUtil.setAgnoSemAct(ws);
 
-        List<Mencion> list = ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut());
+        List<Mencion> list = ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut());
 
         Iterator<Mencion> iter = list.iterator();
         Set<MiCarreraSupport> miCarreraSupportSet = new HashSet<>(0);

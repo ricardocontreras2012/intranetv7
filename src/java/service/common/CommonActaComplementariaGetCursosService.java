@@ -76,7 +76,7 @@ public class CommonActaComplementariaGetCursosService {
             // Si el alumno es propio, obtiene la lista de cursos asociados al acta complementaria
             if (aluCar.getIsAlumnoPropio()) {
                 ws.setCursoList(ContextUtil.getDAO()
-                        .getActaCalificacionPersistence(ActionUtil.getDBUser())
+                        .getActaCalificacionRepository(ActionUtil.getDBUser())
                         .getCursosActaComplementaria(aluCar, agnoCal, semCal, genericSession.getRut(), genericSession.getUserType()));
             }
         } else {

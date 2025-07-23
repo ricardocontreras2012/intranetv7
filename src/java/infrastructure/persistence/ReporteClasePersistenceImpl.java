@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ReporteClasePersistence;
+import domain.repository.ReporteClaseRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.ReporteClase;
@@ -21,7 +21,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class ReporteClasePersistenceImpl extends CrudAbstractDAO<ReporteClase, Long>
-        implements ReporteClasePersistence {
+        implements ReporteClaseRepository {
 
     /**
      * Method description

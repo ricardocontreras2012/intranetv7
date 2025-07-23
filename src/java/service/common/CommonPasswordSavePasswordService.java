@@ -25,10 +25,10 @@ public class CommonPasswordSavePasswordService {
          
         if (passwdActual.equals(genericSession.getPassword())) {
  
-            ContextUtil.getDAO().getDummyPersistence(genericSession.getUserType()).setPasswordUser(genericSession.getRut(), genericSession.getUserType(), passwdNueva);
+            ContextUtil.getDAO().getDummyRepository(genericSession.getUserType()).setPasswordUser(genericSession.getRut(), genericSession.getUserType(), passwdNueva);
             genericSession.setPassword(passwdNueva);
 
-            email = ContextUtil.getDAO().getDummyPersistence(genericSession.getUserType()).getEmail(genericSession.getRut());
+            email = ContextUtil.getDAO().getDummyRepository(genericSession.getUserType()).getEmail(genericSession.getRut());
             if (email != null && !"".equals(email)) {
                 sendNewPassword(email, passwdNueva);
             }

@@ -70,8 +70,8 @@ public class AlumnoSolicitudProrrogaConstanciaService {
         CommonUtil.setAgnoSemAct(ws);
         
         HibernateUtil.beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).save(solicitud);
-        ContextUtil.getDAO().getSacarreraPersistence(user).prorroga(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), sol);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).save(solicitud);
+        ContextUtil.getDAO().getSacarreraRepository(user).prorroga(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), sol);
         HibernateUtil.commitTransaction();
 
         String verificador = CommonCertificacionUtil.getVerificador(folio);

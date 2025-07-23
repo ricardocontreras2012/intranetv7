@@ -35,7 +35,7 @@ public class CommonAlumnoPrintCalidadesService extends CommonAlumnoPrintUtil {
     @Override
     protected void putDetail(Document doc, AluCar aluCar) throws DocumentException {
         List<Ccalidad> lista = ContextUtil.getDAO()
-                .getCcalidadPersistence(ActionUtil.getDBUser())
+                .getCcalidadRepository(ActionUtil.getDBUser())
                 .find(aluCar);
 
         PdfUtil.putBlank(doc);

@@ -31,7 +31,7 @@ public final class CommonAlumnoGetCurricularesService {
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
-        ws.setCcalidad(ContextUtil.getDAO().getCcalidadPersistence(ActionUtil.getDBUser()).findxCalidad(
+        ws.setCcalidad(ContextUtil.getDAO().getCcalidadRepository(ActionUtil.getDBUser()).findxCalidad(
                 aluCar));
 
         ws.getAluCar().setRequisitoLogroAdicionalList();

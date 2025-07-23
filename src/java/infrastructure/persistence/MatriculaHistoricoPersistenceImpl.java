@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MatriculaHistoricoPersistence;
+import domain.repository.MatriculaHistoricoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -25,7 +25,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class MatriculaHistoricoPersistenceImpl extends CrudAbstractDAO<MatriculaHistorico, Long>
-        implements MatriculaHistoricoPersistence {
+        implements MatriculaHistoricoRepository {
 
     /**
      * Method description

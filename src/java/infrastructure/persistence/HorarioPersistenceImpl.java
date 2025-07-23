@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.HorarioPersistence;
+import domain.repository.HorarioRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.Horario;
@@ -28,7 +28,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class HorarioPersistenceImpl extends CrudAbstractDAO<Horario, Long> implements HorarioPersistence {
+public final class HorarioPersistenceImpl extends CrudAbstractDAO<Horario, Long> implements HorarioRepository {
 
     /**
      * Method description

@@ -27,9 +27,9 @@ public class AlumnoPracticaDeleteFileService {
         
         Integer doc = solicitud.getSolicitudAttachList().get(attach).getId().getSolaCorrelAttach();
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudAttachPersistence(user).deleteAttach(solicitud.getSolFolio(), doc);
+        ContextUtil.getDAO().getSolicitudAttachRepository(user).deleteAttach(solicitud.getSolFolio(), doc);
         commitTransaction();
-        solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(user).find(solicitud));
+        solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachRepository(user).find(solicitud));
 
         return SUCCESS;
     }

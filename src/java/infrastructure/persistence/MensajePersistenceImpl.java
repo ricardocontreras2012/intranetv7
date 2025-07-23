@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MensajePersistence;
+import domain.repository.MensajeRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Mensaje;
 import static java.lang.String.valueOf;
@@ -27,7 +27,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class MensajePersistenceImpl extends CrudAbstractDAO<Mensaje, Long> implements MensajePersistence {
+public final class MensajePersistenceImpl extends CrudAbstractDAO<Mensaje, Long> implements MensajeRepository {
 
     @Override
     public void saveMsg(Mensaje msg) {        

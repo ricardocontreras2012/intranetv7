@@ -53,12 +53,12 @@ public class CommonCursoDefinicionHorarioSaveService {
         // Guardar en la base de datos
         WorkSession ws = genericSession.getWorkSession(key);
         CursoId cursoId = ws.getCurso().getId();
-        String result = ContextUtil.getDAO().getScalarPersistence(user)
+        String result = ContextUtil.getDAO().getScalarRepository(user)
                 .saveHorarioSala(cursoId.getCurAsign(), cursoId.getCurElect(), cursoId.getCurCoord(), cursoId.getCurSecc(),
                         cursoId.getCurAgno(), cursoId.getCurSem(), json);
 
         // Obtener el curso y configurar el resultado de la acción
-        Curso curAux = ContextUtil.getDAO().getCursoPersistence(user).find(ws.getCurso());
+        Curso curAux = ContextUtil.getDAO().getCursoRepository(user).find(ws.getCurso());
         String actionResult = Stream.of(
                 curAux.getCurHorario() == null ? "" : curAux.getCurHorario(),
                 curAux.getCurSalas() == null ? "" : curAux.getCurSalas(),

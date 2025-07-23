@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.UserLoginActionStackPersistence;
+import domain.repository.UserLoginActionStackRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.UserLoginActionStack;
 import java.util.List;
@@ -18,7 +18,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo
  */
 public class UserLoginActionStackPersistenceImpl extends CrudAbstractDAO<UserLoginActionStack, Long>
-        implements UserLoginActionStackPersistence {
+        implements UserLoginActionStackRepository {
 
     @SuppressWarnings("unchecked")
     @Override

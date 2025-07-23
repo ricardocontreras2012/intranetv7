@@ -29,7 +29,7 @@ public final class CommonSalaReservaGetSalasService {
      */
     public String service(GenericSession genericSession, String key) throws Exception{
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setSalaList(ContextUtil.getDAO().getSalaPersistence(ActionUtil.getDBUser()).findPropias(genericSession.getRut()));
+        ws.setSalaList(ContextUtil.getDAO().getSalaRepository(ActionUtil.getDBUser()).findPropias(genericSession.getRut()));
 
         return SUCCESS;
     }

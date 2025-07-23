@@ -44,7 +44,7 @@ public final class VerificacionCertificadoService {
             sesionMap.put("verificacionCertificadoSession", session);
         }  
 
-        LogCertificacion log = ContextUtil.getDAO().getLogCertificacionPersistence("VC").find(folio,
+        LogCertificacion log = ContextUtil.getDAO().getLogCertificacionRepository("VC").find(folio,
                 verificador.toUpperCase(ContextUtil.getLocale()));
 
         session.setLogCertificacion(log);
@@ -57,7 +57,7 @@ public final class VerificacionCertificadoService {
         if (log == null) {
             action.addActionError(action.getText("error.certificado.invalido"));
         } else {                     
-            retValue = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getCert(log.getLcertTcertificado());            
+            retValue = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getCert(log.getLcertTcertificado());            
             fileFull = CommonCertificacionUtil.getNameFile(log.getAluCar(), folio, log.getLcertTcertificado());
         }         
         

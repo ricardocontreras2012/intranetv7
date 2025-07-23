@@ -6,7 +6,7 @@
 package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.PracticaPersistence;
+import domain.repository.PracticaRepository;
 import static java.lang.Integer.parseInt;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class CommonPracticaActaRectificatoriaEmitirService {
         Integer folio;
         folio = crearActa(practica, agno, sem, porc_emp, porc_coord);
         
-        PracticaPersistence practicaPersistence = ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser());
+        PracticaRepository practicaRepository = ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
         IntStream.range(0, ws.getPracticaList().size())
@@ -50,7 +50,7 @@ public class CommonPracticaActaRectificatoriaEmitirService {
                 BigDecimal notaEmp = new BigDecimal(parameters.get("emp_" + i)[0].replace(",", "."));
                 BigDecimal notaCoord = new BigDecimal(parameters.get("coord_" + i)[0].replace(",", "."));
 
-                practicaPersistence.agregarNomina(
+                practicaRepository.agregarNomina(
                         ws.getPracticaList().get(i).getAluCar().getId(), folio, notaEmp, notaCoord);
             });
         commitTransaction();
@@ -61,7 +61,7 @@ public class CommonPracticaActaRectificatoriaEmitirService {
 
     private Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord,"R");
+        ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord,"R");
 
         return folio;
     }

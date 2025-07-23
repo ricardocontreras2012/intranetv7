@@ -33,7 +33,7 @@ public final class CommonAsistenciaGetAsistenciaService {
         AsistenciaAlumno asistenciaAlumno = ws.getAsistenciaAlumnoList().get(pos);
 
         ws.setAsistenciaAlumno(asistenciaAlumno);
-        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaPersistence(ActionUtil.getDBUser()).find(asistenciaAlumno.getAsaCorrel()));
+        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaRepository(ActionUtil.getDBUser()).find(asistenciaAlumno.getAsaCorrel()));
 
         return SUCCESS;
     }

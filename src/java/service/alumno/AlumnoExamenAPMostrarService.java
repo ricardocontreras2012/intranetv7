@@ -32,7 +32,7 @@ public class AlumnoExamenAPMostrarService {
         AluCar aluCar = ws.getAluCar();
 
         // Obtiene la cadena de exámenes asociados al alumno desde la base de datos
-        String examenStr = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getExamenAP(aluCar.getId());
+        String examenStr = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getExamenAP(aluCar.getId());
 
         // Si hay exámenes disponibles (cadena no vacía)
         if (!examenStr.isEmpty()) {

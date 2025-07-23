@@ -54,11 +54,11 @@ public class ViceDecanoSolicitudSaveResolucionService {
         }
 
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).saveResolucion(ws.getSolicitud().getSolFolio(), resolucion, respuesta, estado);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).saveResolucion(ws.getSolicitud().getSolFolio(), resolucion, respuesta, estado);
         commitTransaction();
 
         ///Necesario recuperar aluCar de la BD
-        AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(ws.getSolicitud().getAluCar().getId());
+        AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(ws.getSolicitud().getAluCar().getId());
         aluCar.setAluCarFunction();
         ///
 
@@ -73,25 +73,25 @@ public class ViceDecanoSolicitudSaveResolucionService {
         switch (ws.getSolicitud().getTsolicitud().getTsolCodigo()) {
             case 11:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"));
+                    ContextUtil.getDAO().getSacarreraRepository(user).retiroConExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"));
                 }
                 saveRetiro(genericSession, ws, key, aluCar, fecha, fechaString, solicitud, folio, verificador);
                 break;
             case 25:
                 if ("A".equals(resolucion) || "AE".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionEliminacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraRepository(user).reincorporacionEliminacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionEliminacion(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;
             case 30:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionAbandono(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraRepository(user).reincorporacionAbandono(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionAbandono(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;
             case 35:
                 if ("A".equals(resolucion)) {
-                    ContextUtil.getDAO().getSacarreraPersistence(user).reincorporacionNoTitulacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
+                    ContextUtil.getDAO().getSacarreraRepository(user).reincorporacionNoTitulacion(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), solicitud, DateUtil.getFormattedDate(fecha, "dd/MM/yyyy"), respuesta);
                 }
                 saveReincorporacionNoTitulacion(genericSession, ws, key, aluCar, solicitud, resolucion, folio, verificador);
                 break;

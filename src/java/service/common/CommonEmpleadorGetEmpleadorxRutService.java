@@ -27,6 +27,6 @@ public final class CommonEmpleadorGetEmpleadorxRutService {
      * @return Action status.
      */
     public Empleador service(GenericSession genericSession, String key, Integer rut) {        
-       return ContextUtil.getDAO().getEmpleadorPersistence(ActionUtil.getDBUser()).find(rut);
+       return ContextUtil.getDAO().getEmpleadorRepository(ActionUtil.getDBUser()).find(rut);
     }
 }

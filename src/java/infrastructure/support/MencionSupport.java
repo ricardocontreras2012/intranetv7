@@ -20,7 +20,7 @@ public class MencionSupport implements Serializable {
     
     public static Mencion getMencion(Integer menCodCar, Integer menCodMen)
     {
-        return ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).find(menCodCar, menCodMen);
+        return ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).find(menCodCar, menCodMen);
     }
     
 }

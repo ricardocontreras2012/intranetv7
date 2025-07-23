@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CursoEspejoPersistence;
 import domain.model.CursoEspejo;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
@@ -17,12 +16,13 @@ import org.hibernate.criterion.Restrictions;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
+import domain.repository.CursoEspejoRepository;
 
 /**
  *
  * @author rcontreras
  */
-public class CursoEspejoPersistenceImpl extends CrudAbstractDAO<CursoEspejo, Long> implements CursoEspejoPersistence {
+public class CursoEspejoPersistenceImpl extends CrudAbstractDAO<CursoEspejo, Long> implements CursoEspejoRepository {
 
     @Override
     public CursoEspejo getEspejo(CursoId id) {

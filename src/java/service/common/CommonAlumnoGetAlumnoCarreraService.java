@@ -32,7 +32,7 @@ public class CommonAlumnoGetAlumnoCarreraService {
     public String service(GenericSession genericSession, String key) {
         String retValue = "";
         WorkSession ws = genericSession.getWorkSession(key);
-        List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());
+        List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());
 
         if (aluCarList != null) {
             if (aluCarList.size() == 1) {

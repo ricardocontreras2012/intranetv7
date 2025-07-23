@@ -223,7 +223,7 @@ public final class CommonHorarioUtil {
     }
 
     public static String getColorHexPorAsignatura(Integer asignatura) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getColorHexPorAsignatura(asignatura);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getColorHexPorAsignatura(asignatura);
     }
 
     /**
@@ -238,7 +238,7 @@ public final class CommonHorarioUtil {
     public static Horario[][] getHorario(List<ModuloHorario> modList, Sala sala, Integer agno, Integer sem) {
         // Obtener la lista de horarios
         List<Horario> horarioList = ContextUtil.getDAO()
-                .getHorarioPersistence(ActionUtil.getDBUser())
+                .getHorarioRepository(ActionUtil.getDBUser())
                 .findSalas(sala, agno, sem);
 
         int dias = ContextUtil.getDiaList().size();
@@ -277,7 +277,7 @@ public final class CommonHorarioUtil {
 
         // Retornar la lista de ModuloHorario
         return ContextUtil.getDAO()
-                .getModuloHorarioPersistence(ActionUtil.getDBUser())
+                .getModuloHorarioRepository(ActionUtil.getDBUser())
                 .findDocencia(agno, sem);
     }
 
@@ -295,18 +295,18 @@ public final class CommonHorarioUtil {
     }
 
     public static List<ModuloHorario> getModuloHorarioDocencia(Integer agno, Integer sem) {
-        return ContextUtil.getDAO().getModuloHorarioPersistence(ActionUtil.getDBUser()).findDocencia(agno, sem);
+        return ContextUtil.getDAO().getModuloHorarioRepository(ActionUtil.getDBUser()).findDocencia(agno, sem);
     }
 
     public static List<ModuloHorario> getModuloHorarioAll(String inicio, String termino) {
-        return ContextUtil.getDAO().getModuloHorarioPersistence(ActionUtil.getDBUser()).findAll(inicio, termino);
+        return ContextUtil.getDAO().getModuloHorarioRepository(ActionUtil.getDBUser()).findAll(inicio, termino);
     }
 
     public static List<Curso> getCarga(WorkSession ws) {
         List<Curso> lCurso = new ArrayList<>(ws.getCarga());
         switch (ws.getIdHorario()) {
             case "PR":
-                lCurso.addAll(ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).findCarga(
+                lCurso.addAll(ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser()).findCarga(
                         ws.getProfesor().getProfRut()));
                 break;
             case "AL":

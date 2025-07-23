@@ -6,11 +6,11 @@
 package service.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.ActaCalificacionPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import domain.repository.ActaCalificacionRepository;
 
 /**
  *
@@ -22,10 +22,10 @@ public class OficinaCurricularActaConsultarGetActasService {
             throws Exception {
 
         WorkSession ws = genericSession.getWorkSession(key);
-        ActaCalificacionPersistence actaPersistence
-                = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());
+        ActaCalificacionRepository actaRepository
+                = ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser());
 
-        ws.setActas(actaPersistence.findActasxEstado(ws.getAgnoAct(), ws.getSemAct(), flag));
+        ws.setActas(actaRepository.findActasxEstado(ws.getAgnoAct(), ws.getSemAct(), flag));
 
         return SUCCESS;
     }

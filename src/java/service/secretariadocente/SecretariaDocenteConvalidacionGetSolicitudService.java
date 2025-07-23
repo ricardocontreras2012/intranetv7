@@ -25,7 +25,7 @@ public class SecretariaDocenteConvalidacionGetSolicitudService {
         secreSession.setConvalidacion( secreSession.getConvalidaciones().get(pos));
         AluCar aluCar = ws.getAluCar();
 
-        secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(ActionUtil.getDBUser()).getPorConvalidar(aluCar, secreSession.getConvalidacion().getCosCorrel()));
+        secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(ActionUtil.getDBUser()).getPorConvalidar(aluCar, secreSession.getConvalidacion().getCosCorrel()));
 
         return SUCCESS;
     }

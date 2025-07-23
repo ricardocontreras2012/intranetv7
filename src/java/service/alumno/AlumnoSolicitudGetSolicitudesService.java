@@ -29,7 +29,7 @@ public final class AlumnoSolicitudGetSolicitudesService {
      */
     public String service(GenericSession genericSession, String key){
         WorkSession ws = genericSession.getWorkSession(key);        
-        ws.setSolicitudList(ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).find(ws.getAluCar()));
+        ws.setSolicitudList(ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).find(ws.getAluCar()));
         LogUtil.setLog(genericSession.getRut());
 
         return SUCCESS;

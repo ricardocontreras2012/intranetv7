@@ -23,7 +23,7 @@ public class ProfesorActaRectificatoriaGetCursosService {
         WorkSession ws = new WorkSession(ActionUtil.getDBUser());
         genericSession.getSessionMap().put(key, ws);
         WorkSession wsParent = genericSession.getWorkSession(keyParent);
-        ws.setCursoList(ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).findCursosActaRectificatoria(wsParent.getProfesor().getProfRut()));
+        ws.setCursoList(ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).findCursosActaRectificatoria(wsParent.getProfesor().getProfRut()));
         ws.setProfesor(wsParent.getProfesor());
         
         LogUtil.setLog(genericSession.getRut());

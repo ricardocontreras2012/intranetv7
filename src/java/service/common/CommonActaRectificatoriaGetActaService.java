@@ -35,7 +35,7 @@ public final class CommonActaRectificatoriaGetActaService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         Curso curso = ws.getCursoList().get(pos);
-        ws.setActaRectificatoriaList(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).find(curso.getId()));
+        ws.setActaRectificatoriaList(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).find(curso.getId()));
         ws.setCurso(curso);
 
         return SUCCESS;

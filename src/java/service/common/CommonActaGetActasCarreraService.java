@@ -80,7 +80,7 @@ public final class CommonActaGetActasCarreraService {
             case "DP":
             case "JP":
                 // Consulta por Mención
-                ContextUtil.getDAO().getActaMencionPersistenceView(ActionUtil.getDBUser())
+                ContextUtil.getDAO().getActaMencionViewRepository(ActionUtil.getDBUser())
                         .findMencion(agno, sem, tipoCarrera, especialidad, regimen, genericSession.getRut(), userType)
                         .forEach((acta) -> {
                             actaList.add(acta.getActaConsultaSupport());
@@ -90,7 +90,7 @@ public final class CommonActaGetActasCarreraService {
             case "SD":
             case "DD":
                 // Consulta por Departamento
-                ContextUtil.getDAO().getActaMencionPersistenceView(ActionUtil.getDBUser())
+                ContextUtil.getDAO().getActaMencionViewRepository(ActionUtil.getDBUser())
                         .findDepto(agno, sem, tipoCarrera, especialidad, regimen, genericSession.getRut(), userType)
                         .forEach((acta) -> {
                             actaList.add(acta.getActaConsultaSupport());
@@ -103,7 +103,7 @@ public final class CommonActaGetActasCarreraService {
             case "DE":
             case "VDD":
                 // Consulta por Facultad
-                ContextUtil.getDAO().getActaMencionPersistenceView(ActionUtil.getDBUser())
+                ContextUtil.getDAO().getActaMencionViewRepository(ActionUtil.getDBUser())
                         .findFacultad(agno, sem, tipoCarrera, especialidad, regimen, genericSession.getRut(), userType)
                         .forEach((acta) -> {
                             actaList.add(acta.getActaConsultaSupport());

@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang3.StringUtils;
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.ProfesorPersistence;
+import domain.repository.ProfesorRepository;
 import session.GenericSession;
 import session.ProfesorSession;
 import session.WorkSession;
@@ -58,11 +58,11 @@ public final class CommonProfesorUtil {
         List<Profesor> lProfesor = new ArrayList<>();
 
         // Obtener la persistencia de los profesores a través del DAO
-        ProfesorPersistence profesorPersistence = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
+        ProfesorRepository profesorRepository = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
 
         // Si el rut no es nulo, buscar un único profesor por rut
         if (rut != null) {
-            Profesor profesor = profesorPersistence.find(rut);
+            Profesor profesor = profesorRepository.find(rut);
 
             if (profesor != null) {
                 lProfesor.add(profesor);  // Se agrega el profesor encontrado a la lista
@@ -71,7 +71,7 @@ public final class CommonProfesorUtil {
             // Si el rut es nulo, buscar por apellidos o nombre
             if (StringUtils.isNotEmpty(paterno) || StringUtils.isNotEmpty(materno) || StringUtils.isNotEmpty(nombre)) {
                 // Buscar profesores por los apellidos y nombre
-                lProfesor = profesorPersistence.find(
+                lProfesor = profesorRepository.find(
                         cleanName(paterno),
                         cleanName(materno),
                         cleanName(nombre)
@@ -85,26 +85,26 @@ public final class CommonProfesorUtil {
 
     public static List<Profesor> getProfesorPersona(Integer rut, String paterno, String materno, String nombre) {
         List<Profesor> lProfesor = null;
-        ProfesorPersistence profesorPersistence
-                = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
+        ProfesorRepository profesorRepository
+                = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
 
         if (rut != null) {
-            Profesor profesor = profesorPersistence.find(rut);
+            Profesor profesor = profesorRepository.find(rut);
 
             lProfesor = new ArrayList<>();
 
             if (profesor != null) {
                 lProfesor.add(profesor);
             } else {
-                profesorPersistence.creaProfesor(rut);
-                profesor = profesorPersistence.find(rut);
+                profesorRepository.creaProfesor(rut);
+                profesor = profesorRepository.find(rut);
                 if (profesor != null) {
                     lProfesor.add(profesor);
                 }
             }
         } else {
             if (!StringUtils.isEmpty(paterno) || !StringUtils.isEmpty(materno) || !StringUtils.isEmpty(nombre)) {
-                lProfesor = profesorPersistence.find(cleanName(paterno),
+                lProfesor = profesorRepository.find(cleanName(paterno),
                         cleanName(materno), cleanName(nombre));
             }
         }
@@ -115,7 +115,7 @@ public final class CommonProfesorUtil {
     public static String getAutoevaluacion(WorkSession ws, Integer rut) {
         String retValue;
 
-        ws.setCursosAutoEvaluacion(ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoPersistence(ActionUtil.getDBUser()).getCursos(rut));
+        ws.setCursosAutoEvaluacion(ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoRepository(ActionUtil.getDBUser()).getCursos(rut));
 
         if (ws.getCursosAutoEvaluacion().size() > 0) {
             //Evita Lazy
@@ -133,9 +133,9 @@ public final class CommonProfesorUtil {
 
     public static boolean login(Integer rut, String passwd, String key, Map<String, Object> sesion, Integer flag) {
 
-        ProfesorPersistence profesorPersistence
-                = ContextUtil.getDAO().getProfesorPersistence("PR");
-        Profesor profesor = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? profesorPersistence.find(rut, passwd) : profesorPersistence.find(rut);
+        ProfesorRepository profesorRepository
+                = ContextUtil.getDAO().getProfesorRepository("PR");
+        Profesor profesor = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? profesorRepository.find(rut, passwd) : profesorRepository.find(rut);
 
         if (profesor != null) {
             GenericSession genericSession = new GenericSession("PR", rut, passwd, flag);
@@ -154,7 +154,7 @@ public final class CommonProfesorUtil {
             ws.setCursoList(profesor.getCarga());
             genericSession.setSessionMap(new HashMap<>());
             genericSession.getSessionMap().put(key, ws);
-            profesorPersistence.setLastLogin(rut);
+            profesorRepository.setLastLogin(rut);
             getComplemento(genericSession, key);
 
             getRequest().getSession().setMaxInactiveInterval(1800);
@@ -194,7 +194,7 @@ public final class CommonProfesorUtil {
         ws.setTmaterialSelectOption(ContextUtil.getTipoMaterialMap().get("PR"));
         setTipoCursos(genericSession, key);
         ws.setNombre(profesor.getNombre());
-        genericSession.getProfesorSession().setMencionInfoIntranetProfesorViewList(getDistinctInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetProfesorPersistence(ActionUtil.getDBUser()).find(profesor.getProfRut())));
+        genericSession.getProfesorSession().setMencionInfoIntranetProfesorViewList(getDistinctInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetProfesorRepository(ActionUtil.getDBUser()).find(profesor.getProfRut())));
     }
 
     /**

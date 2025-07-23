@@ -28,7 +28,7 @@ public final class CommonAsistenciaGetPlanillaService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Obtener la lista de AsistenciaAlumnoNomina y setearla en el WorkSession
-        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaPersistence(ActionUtil.getDBUser()).find(ws.getCurso()));
+        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaRepository(ActionUtil.getDBUser()).find(ws.getCurso()));
 
         // Obtener la lista de AsistenciaAlumno
         ws.setAsistenciaAlumnoList(getAsistencia(ws.getAsistenciaAlumnoNominaList()));

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ParametroMencionPersistence;
+import domain.repository.ParametroMencionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ParametroMencion;
 import java.util.Date;
@@ -17,7 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  *
  * @author Usach
  */
-public class ParametroMencionPersistenceImpl  extends CrudAbstractDAO<ParametroMencion, Long> implements ParametroMencionPersistence {
+public class ParametroMencionPersistenceImpl  extends CrudAbstractDAO<ParametroMencion, Long> implements ParametroMencionRepository {
     
     @Override
     public ParametroMencion getParameter(Integer carrera, Integer mencion)

@@ -8,8 +8,6 @@ package service.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.AsistenciaAlumnoNomina;
 import java.util.Map;
-import domain.repository.AsistenciaAlumnoNominaPersistence;
-import domain.repository.AsistenciaAlumnoPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -19,6 +17,8 @@ import static infrastructure.util.FormatUtil.isNotNull;
 import infrastructure.util.LogUtil;
 import java.util.List;
 import java.util.stream.IntStream;
+import domain.repository.AsistenciaAlumnoNominaRepository;
+import domain.repository.AsistenciaAlumnoRepository;
 
 /**
  * Class description
@@ -42,15 +42,15 @@ public final class CommonAsistenciaSaveModifiedAsistenciaService {
         WorkSession ws = genericSession.getWorkSession(key);
         String dbUser = ActionUtil.getDBUser();
 
-        AsistenciaAlumnoNominaPersistence asistenciaAlumnoNominaPersistence
-                = ContextUtil.getDAO().getAsistenciaAlumnoNominaPersistence(dbUser);
-        AsistenciaAlumnoPersistence asistenciaAlumnoPersistence
-                = ContextUtil.getDAO().getAsistenciaAlumnoPersistence(dbUser);
+        AsistenciaAlumnoNominaRepository asistenciaAlumnoNominaRepository
+                = ContextUtil.getDAO().getAsistenciaAlumnoNominaRepository(dbUser);
+        AsistenciaAlumnoRepository asistenciaAlumnoRepository
+                = ContextUtil.getDAO().getAsistenciaAlumnoRepository(dbUser);
 
         Integer correl = ws.getAsistenciaAlumno().getAsaCorrel();
 
         // Actualiza la fecha de asistencia
-        asistenciaAlumnoPersistence.updateFecha(correl, stringToDate(fecha));
+        asistenciaAlumnoRepository.updateFecha(correl, stringToDate(fecha));
 
         // Recorre la lista con IntStream para evitar el uso de una variable de índice manual
         List<AsistenciaAlumnoNomina> asistenciaAlumnoNominaList = ws.getAsistenciaAlumnoNominaList();
@@ -59,11 +59,11 @@ public final class CommonAsistenciaSaveModifiedAsistenciaService {
             AsistenciaAlumnoNomina asistenciaAlumnoNomina = asistenciaAlumnoNominaList.get(i);
             Integer asistio = isNotNull(map.get("ck_" + i)) ? 1 : 0;
 
-            asistenciaAlumnoNominaPersistence.updateNomina(asistenciaAlumnoNomina.getAluCar().getId(), correl, asistio);
+            asistenciaAlumnoNominaRepository.updateNomina(asistenciaAlumnoNomina.getAluCar().getId(), correl, asistio);
         });
 
         // Actualiza la lista de asistencia y registra en el log
-        ws.setAsistenciaAlumnoList(asistenciaAlumnoPersistence.find(ws.getCurso()));
+        ws.setAsistenciaAlumnoList(asistenciaAlumnoRepository.find(ws.getCurso()));
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());
 
         return SUCCESS;

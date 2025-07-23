@@ -251,7 +251,7 @@ public class TitulosyGradosNominaResolucionPrintService {
 
             Paragraph signature = new Paragraph();
             signature.setAlignment(Element.ALIGN_CENTER);
-            LaborRealizada secGeneral = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("SG");
+            LaborRealizada secGeneral = ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("SG");
             // Add the bold name
             Chunk name = new Chunk(secGeneral.getFuncionario().getTraNombreSimple() + "\n", TNR_10B);
             signature.add(name);
@@ -261,7 +261,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             signature.add(new Chunk(secGeneral.getLabel() + "\n(FAC. DELEGADA, FIRMA POR RES. EX. 1.118, DE 2025)\n", TNR_10));
             document.add(signature);
 
-            Paragraph initials = new Paragraph(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados") + "\n", TNR_8);
+            Paragraph initials = new Paragraph(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados") + "\n", TNR_8);
             initials.setAlignment(Element.ALIGN_LEFT);
             initials.setSpacingBefore(6);
             document.add(initials);
@@ -273,7 +273,7 @@ public class TitulosyGradosNominaResolucionPrintService {
             String facultad = acaFuc.getNombreFacultad().trim();
             Integer uniCod = acaFuc.getUnidadFacultad();
 
-            Administrativo adm = ContextUtil.getDAO().getAdministrativoPersistence(ActionUtil.getDBUser()).getRegistrador(uniCod);
+            Administrativo adm = ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser()).getRegistrador(uniCod);
 
             String distributionText = "1.\t" + "Registro Currucular de la " + facultad + ", " + adm.getAdmEmail() + ";\n"
                     + "2.\tRegistro Académico y Curricular, maria.duran@usach.cl;\n"

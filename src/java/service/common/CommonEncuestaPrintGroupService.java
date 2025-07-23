@@ -30,8 +30,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getServletContext;
-import domain.repository.ComentarioEncuestaDocentePersistence;
-import domain.repository.RespEnctaCursoPersistence;
+import domain.repository.RespEnctaCursoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -40,6 +39,7 @@ import static infrastructure.util.DateUtil.getDate;
 import static infrastructure.util.SystemParametersUtil.DATE_FULL_FORMAT;
 import static infrastructure.util.SystemParametersUtil.UNIVERSITY_LOGO_PATH1;
 import domain.model.RespEnctaCursoView;
+import domain.repository.ComentarioEncuestaDocenteRepository;
 
 /**
  * Class description
@@ -117,14 +117,14 @@ public final class CommonEncuestaPrintGroupService {
             Document document, PdfContentByte cb, Image image)
             throws Exception {
 
-        RespEnctaCursoPersistence respEnctaCursoPersistence
-                = ContextUtil.getDAO().getRespEnctaCursoPersistence(ActionUtil.getDBUser());
-        ComentarioEncuestaDocentePersistence comenEnctaPersistence
-                = ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser());
+        RespEnctaCursoRepository respEnctaCursoRepository
+                = ContextUtil.getDAO().getRespEnctaCursoRepository(ActionUtil.getDBUser());
+        ComentarioEncuestaDocenteRepository comenEnctaRepository
+                = ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(ActionUtil.getDBUser());
         
         /// OJO se puso 0 e I mientras
-        List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoPersistence.find(curso.getId(),0, "I");
-        List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaPersistence.find(curso,0, "I");
+        List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoRepository.find(curso.getId(),0, "I");
+        List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaRepository.find(curso,0, "I");
 
         if (n > 0) {
             document.newPage();

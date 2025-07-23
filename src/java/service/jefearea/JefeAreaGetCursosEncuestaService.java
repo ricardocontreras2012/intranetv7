@@ -23,7 +23,7 @@ public class JefeAreaGetCursosEncuestaService {
         
         CommonUtil.setAgnoSem(ws, agno, sem);
 
-        ws.setCursoProfesorList(ContextUtil.getDAO().getCursoProfesorPersistence(ActionUtil.getDBUser()).findCursosMallaJefeArea(
+        ws.setCursoProfesorList(ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).findCursosMallaJefeArea(
                 genericSession.getRut(), ws.getAgnoAct(), ws.getSemAct()));
 
         return SUCCESS;

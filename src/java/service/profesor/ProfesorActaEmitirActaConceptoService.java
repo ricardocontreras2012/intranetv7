@@ -65,12 +65,12 @@ public final class ProfesorActaEmitirActaConceptoService {
 
                     // Asignar la calificación conceptual a la acta
                     acta.setAcanConcep(tmp[0].toUpperCase(ContextUtil.getLocale()));
-                    ContextUtil.getDAO().getActaCalificacionNominaPersistence(user).putCalificacionConcepto(acta);
+                    ContextUtil.getDAO().getActaCalificacionNominaRepository(user).putCalificacionConcepto(acta);
 
                     // Si el folio de acta cambia, actualizar el estado del acta
                     if (acta.getAcalFolio() != nActa) {
                         nActa = acta.getAcalFolio();
-                        ContextUtil.getDAO().getActaCalificacionPersistence(user).putActaEstado(
+                        ContextUtil.getDAO().getActaCalificacionRepository(user).putActaEstado(
                                 nActa, acta.getAcalAgno(), acta.getAcalSem(), "E");  // Estado "E" para emitido
                     }
                 }

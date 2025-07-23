@@ -50,7 +50,7 @@ public class CommonPracticaActaEmitirService {
                         BigDecimal notaCoord = new BigDecimal(parameters.get("coord_" + ws.getPracticaList().indexOf(practicaItem))[0].replace(",", "."));
 
                         // Agregar a la nómina
-                        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser())
+                        ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser())
                                 .agregarNomina(practicaItem.getAluCar().getId(), folio, notaEmp, notaCoord);
                     });
 
@@ -70,7 +70,7 @@ public class CommonPracticaActaEmitirService {
 
     private Integer crearActa(Integer practica, Integer agno, Integer sem, Integer porcEmp, Integer porcCoord) {
         Integer folio = CommonActaUtil.getFolio(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord, "N");
+        ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).crearActa(folio, practica, agno, sem, porcEmp, porcCoord, "N");
 
         return folio;
     }

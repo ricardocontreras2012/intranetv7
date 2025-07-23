@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.RespuestaAutoEvaluacionAcademicoPersistence;
+import domain.repository.RespuestaAutoEvaluacionAcademicoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoProfesor;
 import domain.model.RespuestaAutoEvaluacionAcademico;
@@ -26,7 +26,7 @@ import org.hibernate.type.StandardBasicTypes;
  */
 public final class RespuestaAutoEvaluacionAcademicoPersistenceImpl
         extends CrudAbstractDAO<RespuestaAutoEvaluacionAcademico, Long>
-        implements RespuestaAutoEvaluacionAcademicoPersistence {
+        implements RespuestaAutoEvaluacionAcademicoRepository {
 
     /**
      * Method description

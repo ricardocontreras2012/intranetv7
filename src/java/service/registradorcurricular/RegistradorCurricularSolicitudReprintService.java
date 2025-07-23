@@ -34,11 +34,11 @@ public class RegistradorCurricularSolicitudReprintService {
  public String service(GenericSession genericSession, String key, Integer folio) throws Exception {
      AlumnoSolicitudRetiroConstanciaService svc = new AlumnoSolicitudRetiroConstanciaService();
         
-        Solicitud sol = ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).find(folio);
+        Solicitud sol = ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).find(folio);
 
         if (sol.getEstadoSolicitud().getEsolCod()==40) {
             ///Necesario recuperar aluCar de la BD
-            AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(sol.getAluCar().getId());
+            AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(sol.getAluCar().getId());
             aluCar.setAluCarFunction();
             ///
 
@@ -48,7 +48,7 @@ public class RegistradorCurricularSolicitudReprintService {
             Date fecha = sol.getSolFecha();
             
             HibernateUtil.beginTransaction(user);
-            ContextUtil.getDAO().getSacarreraPersistence(user).retiroConExp(aluCar.getId(), sol.getSolAgno(), sol.getSolSem(), solicitud, DateUtil.getFormattedDate(fecha,"dd/MM/yyyy"));
+            ContextUtil.getDAO().getSacarreraRepository(user).retiroConExp(aluCar.getId(), sol.getSolAgno(), sol.getSolSem(), solicitud, DateUtil.getFormattedDate(fecha,"dd/MM/yyyy"));
             HibernateUtil.commitTransaction();
                         
             String verificador = CommonCertificacionUtil.getVerificador(folio);

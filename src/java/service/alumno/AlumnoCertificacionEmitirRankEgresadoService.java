@@ -143,7 +143,7 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
                             "", "C6", "CERTIFICADO DE RANKING EGRESADO", "TM_CERT");
 
                     // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-                    ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
+                    ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
                     LogUtil.setLog(genera, alumno.getAluRut());
 
                     return CommonArchivoUtil.getFile(name, "cert");

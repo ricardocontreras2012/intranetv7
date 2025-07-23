@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.FuncionarioPersistence;
+import domain.repository.FuncionarioRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Funcionario;
 import java.util.List;
@@ -19,7 +19,7 @@ import infrastructure.util.FormatUtil;
  *
  * @author Ricardo
  */
-public class FuncionarioPersistenceImpl extends CrudAbstractDAO<Funcionario, Long> implements FuncionarioPersistence {
+public class FuncionarioPersistenceImpl extends CrudAbstractDAO<Funcionario, Long> implements FuncionarioRepository {
 
     /**
      * Method description

@@ -5,17 +5,17 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActividadEconomicaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ActividadEconomica;
 import java.util.List;
 import org.hibernate.Criteria;
+import domain.repository.ActividadEconomicaRepository;
 
 /**
  *
  * @author Virtual
  */
-public final class ActividadEconomicaPersistenceImpl extends CrudAbstractDAO<ActividadEconomica, Long> implements ActividadEconomicaPersistence {
+public final class ActividadEconomicaPersistenceImpl extends CrudAbstractDAO<ActividadEconomica, Long> implements ActividadEconomicaRepository {
 
     /**
      * Method description

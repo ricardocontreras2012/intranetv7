@@ -78,8 +78,8 @@ public class AlumnoSolicitudRenunciaConstanciaService {
         
         HibernateUtil.beginTransaction(user);
         CommonUtil.setAgnoSemAct(ws);
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).save(solicitud);
-        ContextUtil.getDAO().getSacarreraPersistence(user).renuncia(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), motivo, solFolio);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).save(solicitud);
+        ContextUtil.getDAO().getSacarreraRepository(user).renuncia(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), motivo, solFolio);
         HibernateUtil.commitTransaction();
 
         String verificador = CommonCertificacionUtil.getVerificador(folio);

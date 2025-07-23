@@ -7,7 +7,7 @@ package infrastructure.persistence;
 
 import domain.model.EstadoDocExp;
 import domain.model.ExpedienteLogroId;
-import domain.repository.EstadoDocExpPersistence;
+import domain.repository.EstadoDocExpRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -21,7 +21,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo
  */
 public class EstadoDocExpPersistenceImpl extends CrudAbstractDAO<EstadoDocExp, Long>
-        implements EstadoDocExpPersistence {
+        implements EstadoDocExpRepository {
 
     @SuppressWarnings("unchecked")
     @Override

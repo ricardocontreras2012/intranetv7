@@ -208,7 +208,7 @@ public class Profesor implements Serializable {
      * Method description
      */
     public void setCarga() {
-        this.carga = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).findCargaAcademica(this.profRut);
+        this.carga = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).findCargaAcademica(this.profRut);
     }
 
     /**
@@ -224,7 +224,7 @@ public class Profesor implements Serializable {
      * Method description
      */
     public void setCargaHistorica() {
-        this.cargaHistorica = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).findCargaHistorica(this.profRut);
+        this.cargaHistorica = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).findCargaHistorica(this.profRut);
     }
 
     /**

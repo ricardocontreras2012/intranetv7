@@ -51,7 +51,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddService {
         new SolicitudSupport(solicitud).setGenerada();
 
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(user).save(solicitud);
+        ContextUtil.getDAO().getSolicitudRepository(user).save(solicitud);
         commitTransaction();
 
         StringJoiner joiner = new StringJoiner(" :: ");
@@ -66,7 +66,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddService {
 
                     Curso curso = ws.getCursoSolicitudList().get(cursoPos);
                     ContextUtil.getDAO()
-                            .getSolicitudJustificativoPersistence(user)
+                            .getSolicitudJustificativoRepository(user)
                             .doSave(folio, curso.getId());
 
                     joiner.add(curso.getNombreFull());
@@ -77,7 +77,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddService {
         commitTransaction();
 
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(user).modify(folio, "Justificativo "+eval+": "+acumStr);
+        ContextUtil.getDAO().getSolicitudRepository(user).modify(folio, "Justificativo "+eval+": "+acumStr);
         commitTransaction();
 
         LogUtil.setLog(genericSession.getRut(), folio);

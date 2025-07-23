@@ -82,7 +82,7 @@ public class CommonActaPrintService {
 
         // Títulos y detalles
         addParagraph(doc, "UNIVERSIDAD DE SANTIAGO DE CHILE", titleFont, Element.ALIGN_CENTER, 2);
-        addParagraph(doc, ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreFacultadxAsign(curso.getId().getCurAsign()), titleFont, Element.ALIGN_CENTER, 2);
+        addParagraph(doc, ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreFacultadxAsign(curso.getId().getCurAsign()), titleFont, Element.ALIGN_CENTER, 2);
         addParagraph(doc, DateUtil.getFormattedDate(fecha, "dd-MM-yyyy hh:mm:ss"), smalFont, Element.ALIGN_RIGHT, 30);
 
         // Tabla de encabezado

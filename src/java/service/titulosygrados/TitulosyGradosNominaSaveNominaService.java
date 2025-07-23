@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.ExpedienteLogro;
 import java.util.List;
 import java.util.Map;
-import domain.repository.ExpedienteNominaPersistence;
+import domain.repository.ExpedienteNominaRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -41,10 +41,10 @@ public class TitulosyGradosNominaSaveNominaService {
         if (expedienteLogroList != null && !expedienteLogroList.isEmpty()) {
             HibernateUtil.beginTransaction(user);
 
-            ExpedienteNominaPersistence persistence
-                    = ContextUtil.getDAO().getExpedienteNominaPersistence(user);
+            ExpedienteNominaRepository Repository
+                    = ContextUtil.getDAO().getExpedienteNominaRepository(user);
 
-            persistence.saveNomina(ws.getExpedienteLogro().getNomina());
+            Repository.saveNomina(ws.getExpedienteLogro().getNomina());
 
             IntStream.range(0, expedienteLogroList.size())
                     .forEach(i -> {
@@ -53,7 +53,7 @@ public class TitulosyGradosNominaSaveNominaService {
                         String rol = parameters.get("rol_" + i)[0];
 
                         ContextUtil.getDAO()
-                                .getExpedienteLogroPersistence(user)
+                                .getExpedienteLogroRepository(user)
                                 .saveExpediente(expedienteLogroList.get(i), ne, fe, rol);
                     });
 

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ModuloHorarioPersistence;
+import domain.repository.ModuloHorarioRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ModuloHorario;
 import java.util.List;
@@ -21,7 +21,7 @@ import static org.hibernate.criterion.Restrictions.sqlRestriction;
  * @version 7, 24/05/2012
  */
 public final class ModuloHorarioPersistenceImpl extends CrudAbstractDAO<ModuloHorario, Long>
-        implements ModuloHorarioPersistence {
+        implements ModuloHorarioRepository {
 
     @SuppressWarnings("unchecked")
     @Override

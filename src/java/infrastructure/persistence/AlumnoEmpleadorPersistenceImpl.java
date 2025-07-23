@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AlumnoEmpleadorPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AlumnoEmpleador;
 import java.util.List;
@@ -15,13 +14,14 @@ import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.criterion.Restrictions.idEq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AlumnoEmpleadorRepository;
 
 /**
  *
  * @author Alvaro Romero C.
  */
 public final class AlumnoEmpleadorPersistenceImpl extends CrudAbstractDAO<AlumnoEmpleador, Long>
-        implements AlumnoEmpleadorPersistence {
+        implements AlumnoEmpleadorRepository {
 
     /**
      * Method description

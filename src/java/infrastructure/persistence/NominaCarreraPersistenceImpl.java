@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.NominaCarreraPersistence;
+import domain.repository.NominaCarreraRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.NominaCarrera;
 
@@ -16,5 +16,5 @@ import domain.model.NominaCarrera;
  * @version 7, 24/05/2012
  */
 public final class NominaCarreraPersistenceImpl extends CrudAbstractDAO<NominaCarrera, Long>
-        implements NominaCarreraPersistence {
+        implements NominaCarreraRepository {
 }

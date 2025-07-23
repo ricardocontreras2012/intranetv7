@@ -29,7 +29,7 @@ public final class OficinaCurricularActaRecepcionarGetActasService {
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        ws.setActas(ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser()).findActasxEstado(ws.getAgnoAct(), ws.getSemAct(),"I"));
+        ws.setActas(ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).findActasxEstado(ws.getAgnoAct(), ws.getSemAct(),"I"));
 
         return SUCCESS;
     }

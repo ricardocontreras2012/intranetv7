@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ParametroPersistence;
+import domain.repository.ParametroRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Parametro;
 import org.hibernate.Criteria;
@@ -17,7 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ParametroPersistenceImpl extends CrudAbstractDAO<Parametro, Long> implements ParametroPersistence {
+public final class ParametroPersistenceImpl extends CrudAbstractDAO<Parametro, Long> implements ParametroRepository {
 
     /**
      * Method description

@@ -9,7 +9,7 @@ import domain.model.Evaluacion;
 import domain.model.EvaluacionAlumno;
 import java.math.BigDecimal;
 import java.util.Map;
-import domain.repository.EvaluacionPersistence;
+import domain.repository.EvaluacionRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -40,7 +40,7 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String dbUser = ActionUtil.getDBUser();
-        EvaluacionPersistence evaluacionPersistence = ContextUtil.getDAO().getEvaluacionPersistence(dbUser);
+        EvaluacionRepository evaluacionRepository = ContextUtil.getDAO().getEvaluacionRepository(dbUser);
 
         List<EvaluacionAlumno> alumnos = ws.getEvaluacionAlumno();
         AtomicBoolean hayNotas = new AtomicBoolean(false);
@@ -52,18 +52,18 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
 
             if (isNotNull(tmpNotaRut)) {
                 evaluacionAlumno.setEvaluNota(new BigDecimal(tmpNotaRut[0].trim()));
-                ContextUtil.getDAO().getEvaluacionAlumnoPersistence(dbUser).makePersistent(evaluacionAlumno);
+                ContextUtil.getDAO().getEvaluacionAlumnoRepository(dbUser).makePersistent(evaluacionAlumno);
                 hayNotas.set(true);  // marcar que al menos una nota fue ingresada
             }
         });
 
         if (hayNotas.get()) {
             Evaluacion evaluacion = ws.getEvaluacion();
-            evaluacionPersistence.setStatusConNota(evaluacion);
+            evaluacionRepository.setStatusConNota(evaluacion);
 
             if (!"CN".equals(evaluacion.getEvalStatus())) {
                 evaluacion.setEvalStatus("CN");
-                evaluacionPersistence.makePersistent(evaluacion);
+                evaluacionRepository.makePersistent(evaluacion);
             }
         }
 

@@ -17,6 +17,6 @@ import infrastructure.util.ContextUtil;
 public class CommonSalaReservaGetReservasService {    
     public void service(GenericSession genericSession, SecretariaSession secreSession, String key) throws Exception
     {      
-         genericSession.getWorkSession(key).setReservaList(ContextUtil.getDAO().getReservaSalaPersistence(ActionUtil.getDBUser()).findReservas(genericSession.getRut()));                         
+         genericSession.getWorkSession(key).setReservaList(ContextUtil.getDAO().getReservaSalaRepository(ActionUtil.getDBUser()).findReservas(genericSession.getRut()));                         
     }    
 }

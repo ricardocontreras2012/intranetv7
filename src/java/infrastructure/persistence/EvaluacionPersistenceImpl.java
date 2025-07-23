@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EvaluacionPersistence;
+import domain.repository.EvaluacionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Curso;
 import domain.model.CursoId;
@@ -27,7 +27,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class EvaluacionPersistenceImpl extends CrudAbstractDAO<Evaluacion, Long>
-        implements EvaluacionPersistence {
+        implements EvaluacionRepository {
 
     /**
      * Method description

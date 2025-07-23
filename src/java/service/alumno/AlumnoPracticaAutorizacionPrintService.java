@@ -104,7 +104,7 @@ public class AlumnoPracticaAutorizacionPrintService {
         facultyParagraph.setSpacingAfter(2); // Espacio entre párrafos
         doc.add(facultyParagraph);
 
-        String departamento = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreDepartamento(
+        String departamento = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreDepartamento(
                 aca.getPlan().getMencion().getId().getMenCodCar(),
                 aca.getAcaCodMen()).toUpperCase(infrastructure.util.ContextUtil.getLocale());
 
@@ -137,7 +137,7 @@ public class AlumnoPracticaAutorizacionPrintService {
                 + ", de la carrera de " + aca.getNombreCarrera()
                 + ", con teléfono 7180000, solicita realizar su "
                 + practica.getAsignatura().getAsiNom()
-                + " con una duración de " + ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getHoras(practica.getAsignatura().getAsiCod())
+                + " con una duración de " + ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getHoras(practica.getAsignatura().getAsiCod())
                 + " horas en: " + practica.getEmpleador().getEmpNombre() + " con dirección en "
                 + practica.getPraDireccion() + ", comuna de "
                 + FormatUtil.initCapital(practica.getComuna().getComNom()) + ",Región "
@@ -182,11 +182,11 @@ public class AlumnoPracticaAutorizacionPrintService {
         doc.add(p2);
 
         String parrafo3 = "La fecha de inicio de la práctica será a contar de "
-                + ContextUtil.getDAO().getScalarPersistence(
+                + ContextUtil.getDAO().getScalarRepository(
                         ActionUtil.getDBUser()).getFechaEnPalabras(
                         DateUtil.getFormattedDate(practica.getPraFechaInicio(), SystemParametersUtil.DATE_FORMAT)) + " y "
                 + "finalizará el "
-                + ContextUtil.getDAO().getScalarPersistence(
+                + ContextUtil.getDAO().getScalarRepository(
                         ActionUtil.getDBUser()).getFechaEnPalabras(
                         DateUtil.getFormattedDate(practica.getPraFechaTermino(), SystemParametersUtil.DATE_FORMAT)) + '.';
 

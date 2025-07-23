@@ -6,7 +6,7 @@
 package service.egresado;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.FichaLaboralPersistence;
+import domain.repository.FichaLaboralRepository;
 import session.EgresadoSession;
 import session.GenericSession;
 import session.WorkSession;
@@ -32,10 +32,10 @@ public class EgresadoLaboralesViewLaboralService {
      */
     public String service(GenericSession genericSession, EgresadoSession es, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        FichaLaboralPersistence fichaLaboralPersistence
-                = ContextUtil.getDAO().getFichaLaboralPersistence(ActionUtil.getDBUser());
+        FichaLaboralRepository fichaLaboralRepository
+                = ContextUtil.getDAO().getFichaLaboralRepository(ActionUtil.getDBUser());
 
-        es.setFichaLaboral(fichaLaboralPersistence.find(ws.getAluCar().getAlumno().getAluRut(),
+        es.setFichaLaboral(fichaLaboralRepository.find(ws.getAluCar().getAlumno().getAluRut(),
                 es.getFichaLaboralList().get(pos).getFlabCorrelFicha()));
 
         return SUCCESS;

@@ -71,10 +71,10 @@ public class CommonActaGetActaService {
         cursoId.setCurComp("T");
 
         // Recupera los datos del curso asociado a la acta de calificación utilizando el identificador del curso
-        ws.setCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(cursoId));
+        ws.setCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(cursoId));
 
         // Recupera la nómina asociada al acta de calificación utilizando el identificador del acta
-        ws.setNominaActa(ContextUtil.getDAO().getActaNominaPersistenceView(ActionUtil.getDBUser())
+        ws.setNominaActa(ContextUtil.getDAO().getActaNominaViewRepository(ActionUtil.getDBUser())
                 .find(id.getAcalFolio(), id.getAcalAgno(), id.getAcalSem()));
 
         // Retorna el estado de éxito de la operación

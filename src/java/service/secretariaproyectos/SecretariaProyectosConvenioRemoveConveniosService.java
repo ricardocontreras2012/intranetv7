@@ -34,7 +34,7 @@ public class SecretariaProyectosConvenioRemoveConveniosService {
                 .filter(i -> parameters.get("ck_" + i) != null) // Filtra los índices con parámetros no nulos
                 .forEach(i -> {
                     Convenio convenio = lista.get(i);
-                    ContextUtil.getDAO().getConvenioPersistence(ActionUtil.getDBUser()).delConvenio(convenio.getConvNro());
+                    ContextUtil.getDAO().getConvenioRepository(ActionUtil.getDBUser()).delConvenio(convenio.getConvNro());
                     LogUtil.setLog(genericSession.getRut(), convenio.getConvNro());
                 });
 

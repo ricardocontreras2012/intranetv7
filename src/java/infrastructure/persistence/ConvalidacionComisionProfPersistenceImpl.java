@@ -5,19 +5,19 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ConvalidacionComisionProfPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ConvalidacionComisionProf;
 import java.util.List;
 import org.hibernate.Criteria;
 import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
+import domain.repository.ConvalidacionComisionProfRepository;
 
 /**
  *
  * @author rcontreras
  */
-public class ConvalidacionComisionProfPersistenceImpl extends CrudAbstractDAO<ConvalidacionComisionProf, Long> implements ConvalidacionComisionProfPersistence {
+public class ConvalidacionComisionProfPersistenceImpl extends CrudAbstractDAO<ConvalidacionComisionProf, Long> implements ConvalidacionComisionProfRepository {
 
     @SuppressWarnings("unchecked")
     @Override

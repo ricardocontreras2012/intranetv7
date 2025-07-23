@@ -27,7 +27,7 @@ public class CommonEncuestaGetCargaHistoricaService {
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        ws.setCursoProfesorList(ContextUtil.getDAO().getCursoProfesorPersistence(ActionUtil.getDBUser()).getCursosEncuesta(ws.getProfesor().getProfRut()));
+        ws.setCursoProfesorList(ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).getCursosEncuesta(ws.getProfesor().getProfRut()));
         return SUCCESS;
     }
 }

@@ -27,10 +27,10 @@ public class CommonPracticaActaRectificatoriaEnableService {
 
         switch (genericSession.getUserType()) {
             case "SM":
-                asignList = ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getPracticasSecretaria(genericSession.getRut());
+                asignList = ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getPracticasSecretaria(genericSession.getRut());
                 break;
             case "CP":
-                asignList = ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getPracticasCoordinador(genericSession.getRut());
+                asignList = ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getPracticasCoordinador(genericSession.getRut());
                 break;
         }
 
@@ -44,7 +44,7 @@ public class CommonPracticaActaRectificatoriaEnableService {
         }
        
         
-        ws.setPracticaList(ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getNominaxRectificar(practica, agno, sem));
+        ws.setPracticaList(ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getNominaxRectificar(practica, agno, sem));
 
         ws.setAgnoAct(agno);
         ws.setSemAct(sem);

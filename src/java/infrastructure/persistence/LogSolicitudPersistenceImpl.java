@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.LogSolicitudPersistence;
+import domain.repository.LogSolicitudRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.LogSolicitud;
 import java.util.List;
@@ -19,7 +19,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  */
 public class LogSolicitudPersistenceImpl extends CrudAbstractDAO<LogSolicitud, Long>
-        implements LogSolicitudPersistence {
+        implements LogSolicitudRepository {
 
     /**
      * Method description

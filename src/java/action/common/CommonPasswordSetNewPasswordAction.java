@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.PasswordTicket;
-import domain.repository.PasswordTicketPersistence;
+import domain.repository.PasswordTicketRepository;
 import infrastructure.support.action.common.ActionCommonSupportDirect;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.ActionUtil.retError;
@@ -43,20 +43,20 @@ public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirec
         PasswordTicket passwordTicket;
         String email;
 
-        PasswordTicketPersistence passwordTicketPersistence
-                = ContextUtil.getDAO().getPasswordTicketPersistence(user);
+        PasswordTicketRepository passwordTicketPersistence
+                = ContextUtil.getDAO().getPasswordTicketRepository(user);
         passwordTicket = passwordTicketPersistence.find(rut, getKey());
 
         if (passwordTicket != null) {
             userType = passwordTicket.getPtUserType();
             passwd = CommonRandomUtil.getRandomPassword(passwordTicket.getPtUserType());
-            actionCall = ContextUtil.getDAO().getLogActionPersistence(user).getActionLogin(userType);
+            actionCall = ContextUtil.getDAO().getLogActionRepository(user).getActionLogin(userType);
 
             setKey(getKeySession());
 
             if (actionCall != null) {
-                ContextUtil.getDAO().getDummyPersistence(user).setPasswordUser(rut, passwordTicket.getPtUserType(), passwd);
-                email = ContextUtil.getDAO().getDummyPersistence(user).getEmail(rut);
+                ContextUtil.getDAO().getDummyRepository(user).setPasswordUser(rut, passwordTicket.getPtUserType(), passwd);
+                email = ContextUtil.getDAO().getDummyRepository(user).getEmail(rut);
 
                 if (email != null) {
                     sendNewPassword(email, passwd);

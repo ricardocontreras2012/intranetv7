@@ -21,12 +21,12 @@ public class CommonSalaReservaReservarService {
         String retVal = SUCCESS;
 
         WorkSession ws = genericSession.getWorkSession(key);
-        String reserva = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getReserva(ws.getSala().getSalaNum(), dia, modulo+1, inicio, termino);
+        String reserva = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getReserva(ws.getSala().getSalaNum(), dia, modulo+1, inicio, termino);
         if (reserva == null)
         {
            motivo=motivo.trim();
            if ("".equals(motivo)) motivo="Reservada";
-           ContextUtil.getDAO().getReservaSalaPersistence(ActionUtil.getDBUser()).reservarSala(ws.getSala().getSalaNum(), dia, modulo+1, inicio, termino, motivo, genericSession.getRut());   
+           ContextUtil.getDAO().getReservaSalaRepository(ActionUtil.getDBUser()).reservarSala(ws.getSala().getSalaNum(), dia, modulo+1, inicio, termino, motivo, genericSession.getRut());   
         }
         else
         {

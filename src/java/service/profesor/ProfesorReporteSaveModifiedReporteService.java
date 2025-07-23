@@ -56,7 +56,7 @@ public final class ProfesorReporteSaveModifiedReporteService {
 
         reporte.setRclaFecGen(getSysdate());
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getReporteClasePersistence(ActionUtil.getDBUser()).makePersistent(reporte);
+        ContextUtil.getDAO().getReporteClaseRepository(ActionUtil.getDBUser()).makePersistent(reporte);
         commitTransaction();
         ws.setReporte(null);
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());

@@ -40,7 +40,7 @@ public final class CommonAlumnoSearchDirectService {
         ws.setTypeSearch(typeSearch);
 
         AluCar aluCarOri = genericSession.getWorkSession(keyParent).getNominaCurso().get(pos);
-        AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(aluCarOri.getId());
+        AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(aluCarOri.getId());
 
         CommonAlumnoUtil.loadAluCar(genericSession, ws, aluCar);
 

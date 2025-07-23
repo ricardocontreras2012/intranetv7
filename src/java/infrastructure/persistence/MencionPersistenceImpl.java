@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MencionPersistence;
+import domain.repository.MencionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Mencion;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import org.hibernate.type.Type;
  * @author Ricardo Contreras S and Javier Frez V.
  * @version 7, 24/05/2012
  */
-public final class MencionPersistenceImpl extends CrudAbstractDAO<Mencion, Long> implements MencionPersistence {
+public final class MencionPersistenceImpl extends CrudAbstractDAO<Mencion, Long> implements MencionRepository {
 
     /**
      * Method description

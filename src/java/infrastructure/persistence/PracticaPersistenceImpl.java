@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PracticaPersistence;
+import domain.repository.PracticaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -28,7 +28,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class PracticaPersistenceImpl extends CrudAbstractDAO<Practica, Long> implements PracticaPersistence {
+public final class PracticaPersistenceImpl extends CrudAbstractDAO<Practica, Long> implements PracticaRepository {
 
     @Override
     public String getHoras(Integer asignatura) {

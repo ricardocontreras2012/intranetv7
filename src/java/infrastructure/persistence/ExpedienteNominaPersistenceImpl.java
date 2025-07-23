@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ExpedienteNominaPersistence;
+import domain.repository.ExpedienteNominaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ExpedienteNomina;
 import org.hibernate.Query;
@@ -16,7 +16,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author rcontreras
  */
 public class ExpedienteNominaPersistenceImpl extends CrudAbstractDAO<ExpedienteNomina, Long>
-        implements ExpedienteNominaPersistence {
+        implements ExpedienteNominaRepository {
 
     @Override
     public void saveNomina(ExpedienteNomina nomina)

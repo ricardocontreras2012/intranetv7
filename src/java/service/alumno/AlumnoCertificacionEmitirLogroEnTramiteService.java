@@ -100,7 +100,7 @@ public final class AlumnoCertificacionEmitirLogroEnTramiteService {
                 if (tramite != null) {
                     String verificador = CommonCertificacionUtil.getVerificador(folio);
 
-                    fechaAdm = DateUtil.getFechaEnPalabras(ContextUtil.getDAO().getExpedienteLogroPersistence(type).getFechaTramite(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng(), certCorrel));
+                    fechaAdm = DateUtil.getFechaEnPalabras(ContextUtil.getDAO().getExpedienteLogroRepository(type).getFechaTramite(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng(), certCorrel));
 
                     String prefijoAlumno = CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo());
 
@@ -151,7 +151,7 @@ public final class AlumnoCertificacionEmitirLogroEnTramiteService {
                             "", "C4", "CERTIFICADO DE " + logro.toUpperCase() + " EN TRAMITE", "TM_CERT");
 
                     // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-                    ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
+                    ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
                     LogUtil.setLog(genera, alumno.getAluRut());
 
                     return CommonArchivoUtil.getFile(name, "cert");

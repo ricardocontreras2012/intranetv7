@@ -71,7 +71,7 @@ public class MensajeSenderSupport {
      * @return
      */
     private static int getCorrel() {
-        return ContextUtil.getDAO().getScalarPersistence(USER_DB).getSecuenciaMensaje();
+        return ContextUtil.getDAO().getScalarRepository(USER_DB).getSecuenciaMensaje();
     }
 
     /**
@@ -94,7 +94,7 @@ public class MensajeSenderSupport {
             processList(this.mensajeSupport.getRootNode());
 
             // Guardar el mensaje en la base de datos
-            ContextUtil.getDAO().getMensajePersistence(USER_DB).saveMsg(mensaje);
+            ContextUtil.getDAO().getMensajeRepository(USER_DB).saveMsg(mensaje);
 
             // Guardar los adjuntos si existen
             saveAdjuntos(mensaje);
@@ -128,7 +128,7 @@ public class MensajeSenderSupport {
             IntStream.range(0, mensaje.getMensajeAttachList().size())
                     .forEach(i -> {
                         MensajeAttach mensajeAttach = mensaje.getMensajeAttachList().get(i);
-                        ContextUtil.getDAO().getMensajeAttachPersistence(USER_DB)
+                        ContextUtil.getDAO().getMensajeAttachRepository(USER_DB)
                                 .saveAttach(correl, i, mensajeAttach.getMenaAttachFile());
                     });
         }
@@ -139,7 +139,7 @@ public class MensajeSenderSupport {
      */
     private void saveDestinatarios() {
         rutDestinatarios.forEach(rut
-                -> ContextUtil.getDAO().getMensajeDestinatarioPersistence(USER_DB)
+                -> ContextUtil.getDAO().getMensajeDestinatarioRepository(USER_DB)
                         .saveDest(correl, rut)
         );
     }
@@ -150,7 +150,7 @@ public class MensajeSenderSupport {
      * @return Una lista de destinatarios a los que se ha enviado el mensaje.
      */
     private List<String> getDestinatariosEnviados() {
-        return ContextUtil.getDAO().getMensajeDestinatarioPersistence(USER_DB).findSent(correl);
+        return ContextUtil.getDAO().getMensajeDestinatarioRepository(USER_DB).findSent(correl);
     }
 
     /**
@@ -200,49 +200,49 @@ public class MensajeSenderSupport {
                     switch (destCod) {
                         case "MALF": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findFacultad(rut, userType)
                                     .forEach(fac -> sendMsgAlumnosFacultad(fac.getUniCod()));
                             break;
                         }
                         case "MAYF": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findFacultad(rut, userType)
                                     .forEach(fac -> sendMsgAyudantesFacultad(fac.getUniCod()));
                             break;
                         }
                         case "MPRF": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findFacultad(rut, userType)
                                     .forEach(fac -> sendMsgProfesoresFacultad(fac.getUniCod()));
                             break;
                         }
                         case "MALD": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findDeptos(rut, userType)
                                     .forEach(depto -> sendMsgAlumnosDepto(depto.getUniCod()));
                             break;
                         }
                         case "MAYD": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findDeptos(rut, userType)
                                     .forEach(depto -> sendMsgAyudantesDepto(depto.getUniCod()));
                             break;
                         }
                         case "MPRD": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findDeptos(rut, userType)
                                     .forEach(depto -> sendMsgProfesoresDepto(depto.getUniCod()));
                             break;
                         }
                         case "MALC": {
                             ContextUtil.getDAO()
-                                    .getMencionPersistence(ActionUtil.getDBUser())
+                                    .getMencionRepository(ActionUtil.getDBUser())
                                     .find(userType, rut)
                                     .forEach(mencion
                                             -> sendMsgAlumnosCarrera(
@@ -254,7 +254,7 @@ public class MensajeSenderSupport {
                         }
                         case "MAYC": {
                             ContextUtil.getDAO()
-                                    .getMencionPersistence(ActionUtil.getDBUser())
+                                    .getMencionRepository(ActionUtil.getDBUser())
                                     .find(userType, rut)
                                     .forEach(mencion
                                             -> sendMsgAyudantesCarrera(
@@ -266,7 +266,7 @@ public class MensajeSenderSupport {
                         }
                         case "MPRC": {
                             ContextUtil.getDAO()
-                                    .getUnidadPersistence(ActionUtil.getDBUser())
+                                    .getUnidadRepository(ActionUtil.getDBUser())
                                     .findCarreras(rut, userType)
                                     .forEach(carrera -> sendMsgProfesoresCarrera(carrera.getUniCod()));
                             break;
@@ -634,7 +634,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAlumnosFacultad(int facultad) {
         ContextUtil.getDAO()
-                .getAlumnoPersistence(USER_DB)
+                .getAlumnoRepository(USER_DB)
                 .findAlumnosActivosFacultad(facultad)
                 .stream()
                 .map(AlumnoActivoView::getRut)
@@ -643,7 +643,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAlumnosDepto(int depto) {
         ContextUtil.getDAO()
-                .getAlumnoPersistence(USER_DB)
+                .getAlumnoRepository(USER_DB)
                 .findAlumnosActivosDepartamento(depto)
                 .stream()
                 .map(AlumnoActivoView::getRut)
@@ -652,7 +652,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAlumnosCarrera(int carrera, int mencion) {
         ContextUtil.getDAO()
-                .getAlumnoPersistence(USER_DB)
+                .getAlumnoRepository(USER_DB)
                 .findAlumnosActivosCarrera(carrera, mencion)
                 .stream()
                 .map(AlumnoActivoView::getRut)
@@ -661,7 +661,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAlumnosCarreraNivel(int carrera, int mencion, int nivel) {
         ContextUtil.getDAO()
-                .getAlumnoPersistence(USER_DB)
+                .getAlumnoRepository(USER_DB)
                 .findAlumnosActivosNivelCarrera(carrera, mencion, nivel)
                 .stream()
                 .map(AlumnoActivoView::getRut)
@@ -676,7 +676,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAyudantesFacultad(int facultad) {
         ContextUtil.getDAO()
-                .getAyudantePersistence(USER_DB)
+                .getAyudanteRepository(USER_DB)
                 .findAyudantesActivosFacultad(facultad)
                 .stream()
                 .map(AyudanteActivoView::getRut)
@@ -685,7 +685,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAyudantesDepto(int depto) {
         ContextUtil.getDAO()
-                .getAyudantePersistence(USER_DB)
+                .getAyudanteRepository(USER_DB)
                 .findAyudantesActivosDepartamento(depto)
                 .stream()
                 .map(AyudanteActivoView::getRut)
@@ -694,7 +694,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAyudantesCarrera(int carrera, int mencion) {
         ContextUtil.getDAO()
-                .getAyudantePersistence(USER_DB)
+                .getAyudanteRepository(USER_DB)
                 .findAyudantesActivosCarrera(carrera, mencion)
                 .stream()
                 .map(AyudanteActivoView::getRut)
@@ -703,7 +703,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgAyudantesCurso(Curso curso) throws Exception {
         ContextUtil.getDAO()
-                .getAyudantePersistence(USER_DB)
+                .getAyudanteRepository(USER_DB)
                 .find(curso)
                 .stream()
                 .map(cursoAyudante -> cursoAyudante.getId().getCayuRut())
@@ -712,7 +712,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgProfesoresFacultad(int facultad) {
         ContextUtil.getDAO()
-                .getProfesorPersistence(USER_DB)
+                .getProfesorRepository(USER_DB)
                 .findProfesoresActivosFacultad(facultad)
                 .stream()
                 .map(ProfesorActivoView::getRut)
@@ -721,7 +721,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgProfesoresDepto(int depto) {
         ContextUtil.getDAO()
-                .getProfesorPersistence(USER_DB)
+                .getProfesorRepository(USER_DB)
                 .findProfesoresActivosDepartamento(depto)
                 .stream()
                 .map(ProfesorActivoView::getRut)
@@ -730,7 +730,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgProfesoresCarrera(int carrera, int mencion) {
         ContextUtil.getDAO()
-                .getProfesorPersistence(USER_DB)
+                .getProfesorRepository(USER_DB)
                 .findProfesoresActivosCarrera(carrera, mencion)
                 .stream()
                 .map(ProfesorActivoView::getRut)
@@ -739,7 +739,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgProfesoresCarrera(Integer unidad) {
         ContextUtil.getDAO()
-                .getProfesorPersistence(USER_DB)
+                .getProfesorRepository(USER_DB)
                 .findProfesoresActivosCarrera(unidad)
                 .stream()
                 .map(ProfesorActivoView::getRut)
@@ -748,7 +748,7 @@ public class MensajeSenderSupport {
 
     private void sendMsgProfesoresCurso(Curso curso) throws Exception {
         ContextUtil.getDAO()
-                .getProfesorPersistence(USER_DB)
+                .getProfesorRepository(USER_DB)
                 .findProfesor(curso)
                 .stream()
                 .map(cursoProfesor -> cursoProfesor.getId().getCproRut())

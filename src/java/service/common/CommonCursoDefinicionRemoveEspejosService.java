@@ -39,7 +39,7 @@ public class CommonCursoDefinicionRemoveEspejosService {
                 .filter(ce -> parameters.containsKey("ck_" + ws.getCursoEspejoList().indexOf(ce))) // Verificar si el parámetro existe
                 .forEach(ce -> {
                     // Realizar la eliminación del curso espejo
-                    ContextUtil.getDAO().getCursoEspejoPersistence(ActionUtil.getDBUser()).remove(
+                    ContextUtil.getDAO().getCursoEspejoRepository(ActionUtil.getDBUser()).remove(
                             ce.getCesAsignTr(),
                             ce.getCesElectTr(),
                             ce.getCesCoordTr(),

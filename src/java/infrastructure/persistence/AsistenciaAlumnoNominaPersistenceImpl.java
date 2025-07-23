@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AsistenciaAlumnoNominaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.AsistenciaAlumnoNomina;
@@ -17,6 +16,7 @@ import org.hibernate.Query;
 import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AsistenciaAlumnoNominaRepository;
 
 /**
  * Class description
@@ -25,7 +25,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class AsistenciaAlumnoNominaPersistenceImpl extends CrudAbstractDAO<AsistenciaAlumnoNomina, Long>
-        implements AsistenciaAlumnoNominaPersistence {
+        implements AsistenciaAlumnoNominaRepository {
 
     /**
      * Method description

@@ -8,7 +8,7 @@ package service.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Mensaje;
 import java.util.Map;
-import domain.repository.MensajeDestinatarioPersistence;
+import domain.repository.MensajeDestinatarioRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -41,7 +41,7 @@ public final class CommonMensajeRemoveReceivedMessagesService {
      */
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
         WorkSession ws = genericSession.getWorkSession(key);
-        MensajeDestinatarioPersistence mensajeDestinatarioPersistence = ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser());
+        MensajeDestinatarioRepository mensajeDestinatarioRepository = ContextUtil.getDAO().getMensajeDestinatarioRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
 
@@ -50,11 +50,11 @@ public final class CommonMensajeRemoveReceivedMessagesService {
                 .forEach(i -> {
                     Mensaje msg = ws.getReceivedMsgs().get(i).getMensaje();
                     LogUtil.setLog(genericSession.getRut(), msg.getMsgCorrel());
-                    mensajeDestinatarioPersistence.setDeleteReceivedMessage(ws.getReceivedMsgs().get(i));
+                    mensajeDestinatarioRepository.setDeleteReceivedMessage(ws.getReceivedMsgs().get(i));
                 });
 
         commitTransaction();            
-        ws.setReceivedMsgs(mensajeDestinatarioPersistence.findReceivedWithLimits(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
+        ws.setReceivedMsgs(mensajeDestinatarioRepository.findReceivedWithLimits(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
 
         return SUCCESS;
     }

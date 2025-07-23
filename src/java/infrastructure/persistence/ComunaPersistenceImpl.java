@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ComunaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Comuna;
 import java.util.List;
@@ -13,6 +12,7 @@ import org.hibernate.Criteria;
 import static org.hibernate.FetchMode.JOIN;
 import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
+import domain.repository.ComunaRepository;
 
 /**
  * Class description
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ComunaPersistenceImpl extends CrudAbstractDAO<Comuna, Long> implements ComunaPersistence {
+public final class ComunaPersistenceImpl extends CrudAbstractDAO<Comuna, Long> implements ComunaRepository {
 
     /**
      * Method description

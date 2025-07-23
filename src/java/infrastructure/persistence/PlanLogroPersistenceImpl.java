@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PlanLogroPersistence;
+import domain.repository.PlanLogroRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.PlanId;
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Restrictions.sqlRestriction;
  * @author Ricardo Contreras S.
  */
 public class PlanLogroPersistenceImpl extends CrudAbstractDAO<PlanLogro, Long>
-        implements PlanLogroPersistence {
+        implements PlanLogroRepository {
 
     /**
      * Method description

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EmisionNominaPersistence;
+import domain.repository.EmisionNominaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.EmisionNomina;
 
@@ -16,5 +16,5 @@ import domain.model.EmisionNomina;
  * @version 7, 24/05/2012
  */
 public final class EmisionNominaPersistenceImpl extends CrudAbstractDAO<EmisionNomina, Long>
-        implements EmisionNominaPersistence {
+        implements EmisionNominaRepository {
 }

@@ -90,7 +90,7 @@ public final class CommonUsersUtil {
     }
 
     public static String getNombreTyG(String paterno, String materno, String nombre) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreNormalizado(getNombreStd(paterno, materno, nombre).replace("'", "''"));
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreNormalizado(getNombreStd(paterno, materno, nombre).replace("'", "''"));
     }
 
     /**
@@ -195,6 +195,6 @@ public final class CommonUsersUtil {
     }
 
     public static List<UserLoginActionStack> getActionStack(String user) {
-        return ContextUtil.getDAO().getUserLoginActionStackPersistence(ActionUtil.getDBUser()).find(user);
+        return ContextUtil.getDAO().getUserLoginActionStackRepository(ActionUtil.getDBUser()).find(user);
     }
 }

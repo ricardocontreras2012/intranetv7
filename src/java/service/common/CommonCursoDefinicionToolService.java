@@ -25,16 +25,16 @@ public class CommonCursoDefinicionToolService {
 
         switch (busqueda) {
             case "HOR":
-                ws.setHorarioList(ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).getHorario(id));
-                ws.setSalaList(ContextUtil.getDAO().getSalaPersistence(ActionUtil.getDBUser()).findPropias(genericSession.getRut()));
+                ws.setHorarioList(ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).getHorario(id));
+                ws.setSalaList(ContextUtil.getDAO().getSalaRepository(ActionUtil.getDBUser()).findPropias(genericSession.getRut()));
                 break;
             case "PR":
-                ws.setDocenteHorarioList(ContextUtil.getDAO().getDocenteHorarioPersistence(ActionUtil.getDBUser()).findDocente(id, "T"));
-                ws.setHorarioList(ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).findxTipo(id, 'C'));
+                ws.setDocenteHorarioList(ContextUtil.getDAO().getDocenteHorarioRepository(ActionUtil.getDBUser()).findDocente(id, "T"));
+                ws.setHorarioList(ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).findxTipo(id, 'C'));
                 break;
             case "AY":
-                ws.setDocenteHorarioList(ContextUtil.getDAO().getDocenteHorarioPersistence(ActionUtil.getDBUser()).findDocente(id, "E"));
-                ws.setHorarioList(ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).findxTipo(id, 'A'));
+                ws.setDocenteHorarioList(ContextUtil.getDAO().getDocenteHorarioRepository(ActionUtil.getDBUser()).findDocente(id, "E"));
+                ws.setHorarioList(ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).findxTipo(id, 'A'));
         }
         return SUCCESS;
     }

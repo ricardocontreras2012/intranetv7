@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ConvalidacionSolicitudAsignPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Asignatura;
@@ -16,17 +15,18 @@ import java.util.List;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import java.util.stream.Collectors;
+import domain.repository.ConvalidacionSolicitudAsignRepository;
 
 /**
  *
  * @author rcontreras
  */
-public class ConvalidacionSolicitudAsignPersistenceImpl extends CrudAbstractDAO<ConvalidacionSolicitudAsign, Long> implements ConvalidacionSolicitudAsignPersistence {
+public class ConvalidacionSolicitudAsignPersistenceImpl extends CrudAbstractDAO<ConvalidacionSolicitudAsign, Long> implements ConvalidacionSolicitudAsignRepository {
 
     @Override
     public List<ConvalidacionSolicitudAsign> getPorConvalidar(AluCar aluCar) {
 
-        List<Object[]> lconvalidacion = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser()).porConvalidar(aluCar);
+        List<Object[]> lconvalidacion = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser()).porConvalidar(aluCar);
 
         return lconvalidacion.stream()
                 .map(mallaObj -> {
@@ -45,7 +45,7 @@ public class ConvalidacionSolicitudAsignPersistenceImpl extends CrudAbstractDAO<
 
     @Override
     public List<ConvalidacionSolicitudAsign> getPorConvalidar(AluCar aluCar, Integer solicitud) {
-        List<Object[]> lconvalidacion = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser()).porConvalidarSolicitud(aluCar, solicitud);
+        List<Object[]> lconvalidacion = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser()).porConvalidarSolicitud(aluCar, solicitud);
 
         return lconvalidacion.stream()
                 .map(mallaObj -> {

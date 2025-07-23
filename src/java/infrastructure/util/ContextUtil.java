@@ -42,23 +42,23 @@ public final class ContextUtil {
             configure(true);
             System.out.println("Hibernate Configurado.");
 
-            paramArchivosWebList = safeList(dao.getParamArchivosWebPersistence("CM").findAll());
-            tramiteList = safeList(dao.getTramitePersistence("CM").find());
+            paramArchivosWebList = safeList(dao.getParamArchivosWebRepository("CM").findAll());
+            tramiteList = safeList(dao.getTramiteRepository("CM").find());
             tramiteMap = safeMap(new Tramite().getTramiteMap(tramiteList));
-            diaList = safeList(dao.getDiaPersistence("CM").findClases());
+            diaList = safeList(dao.getDiaRepository("CM").findClases());
             diaMap = new HashMap<>();
             for (Dia dia : diaList) {
                 diaMap.put(dia.getDiaCod(), dia.getDiaCorrel());
             }
 
-            tevaluacionList = safeList(dao.getTevaluacionPersistence("CM").findAllOrdered(new String[]{"tevalDes"}));
-            regionList = safeList(dao.getRegionPersistence("CM").findAllOrdered(new String[]{"regCod"}));
-            comunaList = safeList(dao.getComunaPersistence("CM").find());
+            tevaluacionList = safeList(dao.getTevaluacionRepository("CM").findAllOrdered(new String[]{"tevalDes"}));
+            regionList = safeList(dao.getRegionRepository("CM").findAllOrdered(new String[]{"regCod"}));
+            comunaList = safeList(dao.getComunaRepository("CM").find());
             comunaMap = safeMap(new Comuna().getComunaMap(regionList, comunaList));
-            estadoCivilList = safeList(dao.getEstadoCivilPersistence("CM").find());
-            estadoSolicitudList = safeList(dao.getEstadoSolicitudPersistence("CM").find());
+            estadoCivilList = safeList(dao.getEstadoCivilRepository("CM").find());
+            estadoSolicitudList = safeList(dao.getEstadoSolicitudRepository("CM").find());
             tipoMaterialMap = safeMap(getMapaTipoMaterial(dao));
-            tmotivoList = safeList(dao.getTmotivoSolicitudInscripcionPersistence("CM").find());
+            tmotivoList = safeList(dao.getTmotivoSolicitudInscripcionRepository("CM").find());
 
             locale = new Locale("es", "CL");
             collator = Collator.getInstance(locale);

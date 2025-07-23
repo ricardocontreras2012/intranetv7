@@ -26,8 +26,8 @@ public class CommonRCurricularGetMencionService {
      */
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).findAll());
-        ws.setUnidadList(ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).findAll());
+        ws.setMencionList(ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).findAll());
+        ws.setUnidadList(ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).findAll());
         return SUCCESS;
     }
 }

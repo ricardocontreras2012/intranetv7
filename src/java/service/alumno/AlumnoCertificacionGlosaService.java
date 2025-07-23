@@ -22,7 +22,7 @@ public class AlumnoCertificacionGlosaService {
      */
     public String service(Integer correl) { 
         // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-        ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "GL");
+        ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "GL");
 
         return SUCCESS;     
     }

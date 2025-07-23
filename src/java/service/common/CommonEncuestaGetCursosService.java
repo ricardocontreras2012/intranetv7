@@ -37,7 +37,7 @@ public final class CommonEncuestaGetCursosService {
         ws.setAgnoAct(agno);
         ws.setSemAct(sem);
         ws.setNombreCarrera(miCarreraSupport.getNombreCarrera());
-        ws.setResumenCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findResumenReportes(agno, sem, miCarreraSupport.getTcrCtip(), miCarreraSupport.getEspCod(), miCarreraSupport.getRegimen()));         
+        ws.setResumenCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findResumenReportes(agno, sem, miCarreraSupport.getTcrCtip(), miCarreraSupport.getEspCod(), miCarreraSupport.getRegimen()));         
         
         return SUCCESS;
     }

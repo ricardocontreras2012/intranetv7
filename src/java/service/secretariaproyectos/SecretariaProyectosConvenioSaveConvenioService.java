@@ -35,7 +35,7 @@ public class SecretariaProyectosConvenioSaveConvenioService {
 
         String user = ActionUtil.getDBUser();
 
-        Integer folio = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaConvenio();
+        Integer folio = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaConvenio();
         name = "Contrato_" + folio + ".pdf";
         input = getInput(genericSession, parameters, user, folio, name, key);
         ais = new ActionInputStreamUtil(name, AppStaticsUtil.PDF_MIME, input);
@@ -59,23 +59,23 @@ public class SecretariaProyectosConvenioSaveConvenioService {
         String tipoMonto = parameters.get("tipoMontoAux")[0];
         String obsPago = parameters.get("obsPagoAux")[0];
 
-        ContextUtil.getDAO().getFuncionarioPersistence(user).modify(rut, direcccion);
-        ContextUtil.getDAO().getConvenioPersistence(user).insert(
+        ContextUtil.getDAO().getFuncionarioRepository(user).modify(rut, direcccion);
+        ContextUtil.getDAO().getConvenioRepository(user).insert(
                 folio, rut, proyecto, rutFirma, fecha, fechaInicio, fechaTermino,
                 tipoContrato, funcion, monto, tipoMonto, obsPago);
 
         switch (tipoContrato) {
             case "DOC":
                 CursoId id = genericSession.getWorkSession(key).getCurso().getId();
-                List<Horario> horarioList = ContextUtil.getDAO().getHorarioPersistence(user).getHorario(id);
+                List<Horario> horarioList = ContextUtil.getDAO().getHorarioRepository(user).getHorario(id);
 
                 horarioList.stream()
                         .filter(horario -> "C".equals(String.valueOf(horario.getHorTipoClase())))
                         .forEach(horario -> {
                             String dia = horario.getId().getHorDia();
                             Integer modulo = horario.getId().getHorModulo();
-                            ModuloHorario mh = ContextUtil.getDAO().getModuloHorarioPersistence(user).find(id.getCurAgno(), id.getCurSem(), modulo);
-                            ContextUtil.getDAO().getConvenioPersistence(user).putHorario(folio, dia, mh.getModDesde(), mh.getModHasta());
+                            ModuloHorario mh = ContextUtil.getDAO().getModuloHorarioRepository(user).find(id.getCurAgno(), id.getCurSem(), modulo);
+                            ContextUtil.getDAO().getConvenioRepository(user).putHorario(folio, dia, mh.getModDesde(), mh.getModHasta());
                         });
                 break;
             case "SER":
@@ -90,7 +90,7 @@ public class SecretariaProyectosConvenioSaveConvenioService {
                             String inicio = parameters.get("inicio_" + row)[0];
                             String termino = parameters.get("termino_" + row)[0];
 
-                            ContextUtil.getDAO().getConvenioPersistence(user).putHorario(folio, dia, inicio, termino);
+                            ContextUtil.getDAO().getConvenioRepository(user).putHorario(folio, dia, inicio, termino);
                         });
 
                 break;

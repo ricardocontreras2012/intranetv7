@@ -16,6 +16,6 @@ public class CommonLoginService {
 
 
     public String service(String userType) {
-        return ContextUtil.getDAO().getLogActionPersistence(userType).getActionLogin(userType);
+        return ContextUtil.getDAO().getLogActionRepository(userType).getActionLogin(userType);
     }
 }

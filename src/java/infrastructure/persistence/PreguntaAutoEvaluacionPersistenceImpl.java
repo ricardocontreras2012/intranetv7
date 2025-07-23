@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PreguntaAutoEvaluacionPersistence;
+import domain.repository.PreguntaAutoEvaluacionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.PreguntaAutoEvaluacion;
 import java.util.List;
@@ -19,7 +19,7 @@ import static org.hibernate.criterion.Restrictions.sqlRestriction;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class PreguntaAutoEvaluacionPersistenceImpl extends CrudAbstractDAO<PreguntaAutoEvaluacion, Long> implements PreguntaAutoEvaluacionPersistence {
+public final class PreguntaAutoEvaluacionPersistenceImpl extends CrudAbstractDAO<PreguntaAutoEvaluacion, Long> implements PreguntaAutoEvaluacionRepository {
 
     @SuppressWarnings("unchecked")
     @Override

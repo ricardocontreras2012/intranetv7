@@ -65,7 +65,7 @@ public class AlumnoPracticaPresentacionPrintService {
         Practica practica = ws.getPractica();
 
         Date fecha = getSysdate();
-        LaborRealizada autoridad = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findLaborRealizadaMencion(aca.getPlan().getMencion().getId().getMenCodCar(), aca.getAcaCodMen(), "CP");
+        LaborRealizada autoridad = ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findLaborRealizadaMencion(aca.getPlan().getMencion().getId().getMenCodCar(), aca.getAcaCodMen(), "CP");
 
         Document doc = new Document(PageSize.LETTER, 100, 100, 20, 50);
         doc.addTitle("Carta Presentación");
@@ -95,7 +95,7 @@ public class AlumnoPracticaPresentacionPrintService {
         facultyParagraph.setSpacingAfter(2); // Espacio entre párrafos
         doc.add(facultyParagraph);
 
-        String departamento = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreDepartamento(
+        String departamento = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreDepartamento(
                 aca.getPlan().getMencion().getId().getMenCodCar(),
                 aca.getAcaCodMen()).toUpperCase(infrastructure.util.ContextUtil.getLocale());
 
@@ -125,7 +125,7 @@ public class AlumnoPracticaPresentacionPrintService {
                 + ", quien está en condiciones de realizar su "
                 + practica.getAsignatura().getAsiNom()
                 + " con una duración de "
-                + ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getHoras(practica.getAsignatura().getAsiCod())
+                + ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getHoras(practica.getAsignatura().getAsiCod())
                 + " horas efectivas de trabajo y sujeto a las normas de la institución acogedora.";
 
         Paragraph p1 = new Paragraph(parrafo1, font);

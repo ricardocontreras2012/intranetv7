@@ -45,13 +45,13 @@ public final class ProfesorMisDatosSaveService {
       
         String emailProf = (emailUsach == null || emailUsach.isEmpty()) ? email : emailUsach + "," + email;
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(emailProf), 
+        ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(emailProf), 
                 //new SimpleDateFormat("yyyy-MM-dd").parse(fechaNac), direccion, comuna,
                 fono);
         commitTransaction();
         action.addActionMessage(action.getText("message.datos.grabados"));
         
-        genericSession.getWorkSession(key).setProfesor(ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).find(ps.getProfesor().getProfRut()));
+        genericSession.getWorkSession(key).setProfesor(ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).find(ps.getProfesor().getProfRut()));
         if (ps.getProfesor().getProfUpdated() == null) {
             return "stack";
         } else {          

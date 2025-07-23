@@ -82,8 +82,8 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
 
     private ExpedienteLogro saveExp(ExpedienteLogro exp, String rol, Integer resol, String fecha) {
         Date fechaStd = DateUtil.stringToDate(fecha, "yyyy-MM-dd");
-        ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).saveExpediente(exp, rol, resol, fechaStd);
-        return ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).find(exp);
+        ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).saveExpediente(exp, rol, resol, fechaStd);
+        return ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).find(exp);
     }
 
     private InputStream getInput(GenericSession genericSession, AluCar aca, ExpedienteLogro exp, Integer folio, String name) throws Exception {
@@ -117,7 +117,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
         writer.getInfo().put(PdfName.PRODUCER, new PdfString("OpenPDF"));
         ////////////////////////////// FIN REQUISITOS PDF-A /////////////////
         
-        String iniciales = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados");
+        String iniciales = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados");
 
         TitulosyGradosAlumnoCertificadoPrintService.FooterPageEvent hf = new TitulosyGradosAlumnoCertificadoPrintService.FooterPageEvent(fecha, iniciales);
         writer.setPageEvent(hf);
@@ -174,7 +174,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
 
     private void putContent(Document doc, AluCar aluCar, ExpedienteLogro exp) {
         Alumno alumno = aluCar.getAlumno();
-        LaborRealizada sec = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("SG");
+        LaborRealizada sec = ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("SG");
 
         Paragraph titulo = new Paragraph("CERTIFICADO DE " + exp.getPlanLogro().getLogro().getTlogro().getTloDesLarga().toUpperCase(), TNR_16);
         titulo.setAlignment(Paragraph.ALIGN_CENTER);
@@ -194,7 +194,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
         cuerpo.add(new Chunk(secStr + FormatUtil.initCapAll(sec.getLabel()) + " de la Universidad de Santiago de Chile, conforme con lo dispuesto en el Decreto con Fuerza de Ley 29 de 2023, del Ministerio de Educación, que aprueba el Estatuto de la Corporación de Educación Superior, adecuado al Título II de la Ley 21.094, sobre Universidades Estatales, y de acuerdo con la Resolución Exenta 1.118 de 21 de marzo de 2025, del Rector, que delega de atribuciones en las autoridades que indica, certifica que con fecha " + DateUtil.getFechaEnPalabras(exp.getExplFecResol()) + " se confirió a " + ("1".equals(alumno.getAluSexo()) ? "doña " : "don "), TNR_12));
         cuerpo.add(new Chunk(alumno.getNombreStd(), TNR_12B));
         cuerpo.add(new Chunk(", RUT " + formatearConPuntos(alumno.getAluRut()) + "-" + alumno.getAluDv()
-                + ("Diplomado".equals(tipo) ? " con una duración de " + ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getHorasCromoMalla(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan()) + " horas cronológicas " : "")
+                + ("Diplomado".equals(tipo) ? " con una duración de " + ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getHorasCromoMalla(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan()) + " horas cronológicas " : "")
                 + ", el " + exp.getPlanLogro().getLogro().getTlogro().getTloDesLarga().toLowerCase() + " de:\n\n", TNR_12));
 
         doc.add(cuerpo);
@@ -220,7 +220,7 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
             int tipoCarrera = aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip();
 
             if (tipoCarrera == 20 || tipoCarrera == 30) {
-                distincion = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getDistincion(aluCar.getId().getAcaRut(), aluCar.getId().getAcaCodCar(), aluCar.getId().getAcaAgnoIng(), aluCar.getId().getAcaSemIng(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan(), exp.getId().getExplCorrel());
+                distincion = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getDistincion(aluCar.getId().getAcaRut(), aluCar.getId().getAcaCodCar(), aluCar.getId().getAcaAgnoIng(), aluCar.getId().getAcaSemIng(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan(), exp.getId().getExplCorrel());
             }
         }
 

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.InscripcionAdicionalLogroPersistence;
+import domain.repository.InscripcionAdicionalLogroRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.InscripcionAdicionalLogro;
 import java.util.List;
@@ -21,7 +21,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class InscripcionAdicionalLogroPersistenceImpl extends CrudAbstractDAO<InscripcionAdicionalLogro, Long>
-        implements InscripcionAdicionalLogroPersistence {
+        implements InscripcionAdicionalLogroRepository {
 
     /**
      * Method description

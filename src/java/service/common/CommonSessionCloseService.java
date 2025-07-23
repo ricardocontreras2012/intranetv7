@@ -56,7 +56,7 @@ public final class CommonSessionCloseService {
                             retValue=ws.getAluCar().getUnidadFacultad().getUniUrl();
                             break;
                         case "PR":
-                            retValue=ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(getUnidadxProf(ws.getProfesor().getProfRut())).getUniUrl();
+                            retValue=ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(getUnidadxProf(ws.getProfesor().getProfRut())).getUniUrl();
                             break;
                         default:
                             retValue = DEFAULT_URL;

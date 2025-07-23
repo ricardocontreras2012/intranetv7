@@ -81,8 +81,8 @@ public class ConvenioSupport {
 
     public InputStream print(Integer folio, String nameFile) {
 
-        Convenio convenio = ContextUtil.getDAO().getConvenioPersistence(ActionUtil.getDBUser()).find(folio);
-        Unidad unidad = ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(convenio.getProyecto().getUnidad().getUniCod());
+        Convenio convenio = ContextUtil.getDAO().getConvenioRepository(ActionUtil.getDBUser()).find(folio);
+        Unidad unidad = ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(convenio.getProyecto().getUnidad().getUniCod());
 
         folioConvenio = folio.toString();
         name = nameFile;
@@ -101,7 +101,7 @@ public class ConvenioSupport {
         fechaTermino = DateUtil.getFormattedDate(convenio.getConvFechaTer(), "dd-MM-yyyy");
         funcion = convenio.getConvFuncion();
         monto = convenio.getConvMonto();
-        montoFormateado = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNumeroEnPalabras(monto);
+        montoFormateado = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNumeroEnPalabras(monto);
         tipoPago = convenio.getConvTipoMonto();
         obsPago = convenio.getConvObsPago();
         fecha = DateUtil.getFechaEnPalabras(convenio.getConvFecha());

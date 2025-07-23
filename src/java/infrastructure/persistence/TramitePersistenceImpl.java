@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TramitePersistence;
+import domain.repository.TramiteRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Tramite;
 import java.util.List;
@@ -19,7 +19,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class TramitePersistenceImpl extends CrudAbstractDAO<Tramite, Long> implements TramitePersistence {
+public final class TramitePersistenceImpl extends CrudAbstractDAO<Tramite, Long> implements TramiteRepository {
 
     /**
      * Method description

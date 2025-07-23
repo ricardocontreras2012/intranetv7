@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import domain.repository.MallaPersistence;
+import domain.repository.MallaRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.MallaContainerSupport;
@@ -60,21 +60,21 @@ public final class CommonMallaUtil {
      * @return
      */
     private static MallaContainerSupport getMallaGrafica(AluCar aluCar, String user) {
-        MallaPersistence mallaPersistence
-                = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser());
-        List<Object[]> lCalificacion = mallaPersistence.getCalificacionesMalla(aluCar);
-        /*List<Object[]> lInscripcion = mallaPersistence.getInscripcionesMalla(aluCar);*/
+        MallaRepository mallaRepository
+                = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser());
+        List<Object[]> lCalificacion = mallaRepository.getCalificacionesMalla(aluCar);
+        /*List<Object[]> lInscripcion = mallaRepository.getInscripcionesMalla(aluCar);*/
         List<Object[]> lInscripcion = ("AL".equals(user) && "SI".equals(aluCar.getParametros().getBloqueada()))
                 ? new ArrayList<>()
-                : mallaPersistence.getInscripcionesMalla(aluCar);
+                : mallaRepository.getInscripcionesMalla(aluCar);
 
         List<List<MallaNodoSupport>> malla;
 
         if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 16
                 && aluCar.getAcaCodMen() == 2) {
-            malla = getInscripcionEconomia(getMalla(lCalificacion), lInscripcion, aluCar, mallaPersistence);
+            malla = getInscripcionEconomia(getMalla(lCalificacion), lInscripcion, aluCar, mallaRepository);
         } else {
-            malla = getInscripcion(getMalla(lCalificacion), lInscripcion, aluCar, mallaPersistence);
+            malla = getInscripcion(getMalla(lCalificacion), lInscripcion, aluCar, mallaRepository);
         }
 
         MallaContainerSupport mallaContainer = new MallaContainerSupport();
@@ -191,15 +191,15 @@ public final class CommonMallaUtil {
      * @param malla
      * @param lInscripcion
      * @param aluCar
-     * @param mallaPersistence
+     * @param mallaRepository
      *
      * @return
      */
     private static List<List<MallaNodoSupport>> getInscripcion(List<List<MallaNodoSupport>> malla,
-            List<Object[]> lInscripcion, AluCar aluCar, MallaPersistence mallaPersistence) {
+            List<Object[]> lInscripcion, AluCar aluCar, MallaRepository mallaRepository) {
 
         if (Arrays.asList(16, 20, 33, 35).contains(aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip())) {
-            final int[] nextElectivo = {mallaPersistence.getNextElectivo(aluCar)};
+            final int[] nextElectivo = {mallaRepository.getNextElectivo(aluCar)};
 
             lInscripcion.stream()
                     .map(inscripcion -> {
@@ -207,7 +207,7 @@ public final class CommonMallaUtil {
                         String elect = (String) inscripcion[1];
 
                         if ("S".equals(elect)) {
-                            asign = mallaPersistence.getAsignaturaElectiva(aluCar.getPlan().getId(), nextElectivo[0]);
+                            asign = mallaRepository.getAsignaturaElectiva(aluCar.getPlan().getId(), nextElectivo[0]);
                             nextElectivo[0]++;
                         }
 
@@ -240,7 +240,7 @@ public final class CommonMallaUtil {
      * @param malla
      * @param lInscripcion
      * @param aluCar
-     * @param mallaPersistence
+     * @param mallaRepository
      *
      * @return
      */
@@ -248,9 +248,9 @@ public final class CommonMallaUtil {
             List<List<MallaNodoSupport>> malla,
             List<Object[]> lInscripcion,
             AluCar aluCar,
-            MallaPersistence mallaPersistence) {
+            MallaRepository mallaRepository) {
 
-        Object[] nextElectivoObject = mallaPersistence.getNextElectivoxTipo(aluCar);
+        Object[] nextElectivoObject = mallaRepository.getNextElectivoxTipo(aluCar);
         PlanId idPlan = aluCar.getPlan().getId();
 
         // Inicializamos contadores de electivos
@@ -265,8 +265,8 @@ public final class CommonMallaUtil {
             String elect = (String) inscripcion[1];
 
             if ("S".equals(elect)) {
-                String tipo = mallaPersistence.getTipoElect(idPlan, asign);
-                asign = mallaPersistence.getAsignaturaElectivaxTipo(idPlan, nextElectivos.get(tipo), tipo);
+                String tipo = mallaRepository.getTipoElect(idPlan, asign);
+                asign = mallaRepository.getAsignaturaElectivaxTipo(idPlan, nextElectivos.get(tipo), tipo);
                 nextElectivos.put(tipo, nextElectivos.get(tipo) + 1);
             }
             
@@ -289,7 +289,7 @@ public final class CommonMallaUtil {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         List<Object[]> lCalificacionesObject = ContextUtil.getDAO()
-                .getMallaPersistence("CM")
+                .getMallaRepository("CM")
                 .getCalificacionesAsignatura(aluCar, asignatura);
 
         // RESET

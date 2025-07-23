@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getServletContext;
-import domain.repository.LogCertificacionPersistence;
+import domain.repository.LogCertificacionRepository;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
@@ -66,11 +66,11 @@ public class CommonCertificacionUtil {
     }
 
     public static Integer getFolio() {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaCertificado();
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaCertificado();
     }
 
     public static String getVerificador(Integer folio) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getVerificadorCertificado(folio);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getVerificadorCertificado(folio);
     }
 
     public static String getProfijoAlumon(String sexo) {
@@ -126,9 +126,9 @@ public class CommonCertificacionUtil {
         log.setLcertAgno(aluCar.getParametros().getAgnoAct());
         log.setLcertVerificador(verificador);
 
-        LogCertificacionPersistence logPersistence = ContextUtil.getDAO().getLogCertificacionPersistence(ActionUtil.getDBUser());
+        LogCertificacionRepository logRepository = ContextUtil.getDAO().getLogCertificacionRepository(ActionUtil.getDBUser());
         beginTransaction(ActionUtil.getDBUser());
-        logPersistence.save(log);
+        logRepository.save(log);
         commitTransaction();
     }
 
@@ -224,8 +224,8 @@ public class CommonCertificacionUtil {
     }
 
     public static AluCar getAluCar(Integer correl) {
-        AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).getAluCarCertificado(correl);
-        aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(aluCar.getId());
+        AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).getAluCarCertificado(correl);
+        aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(aluCar.getId());
         aluCar.setInitValues();
 
         return aluCar;
@@ -255,7 +255,7 @@ public class CommonCertificacionUtil {
 
     public static Map<String, String> getParams(Integer correl) {
 
-        Object[] obj = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getCertificado(correl);
+        Object[] obj = ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getCertificado(correl);
 
         String params = (String) obj[2];
         params = params.substring(1, params.length() - 1);

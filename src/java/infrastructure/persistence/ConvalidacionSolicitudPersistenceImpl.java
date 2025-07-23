@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ConvalidacionSolicitudPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.ConvalidacionSolicitud;
@@ -15,12 +14,13 @@ import static org.hibernate.FetchMode.JOIN;
 import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ConvalidacionSolicitudRepository;
 
 /**
  *
  * @author rcontreras
  */
-public class ConvalidacionSolicitudPersistenceImpl extends CrudAbstractDAO<ConvalidacionSolicitud, Long> implements ConvalidacionSolicitudPersistence {
+public class ConvalidacionSolicitudPersistenceImpl extends CrudAbstractDAO<ConvalidacionSolicitud, Long> implements ConvalidacionSolicitudRepository {
 
     @SuppressWarnings("unchecked")
     @Override

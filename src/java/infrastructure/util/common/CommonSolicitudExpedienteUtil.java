@@ -56,7 +56,7 @@ public class CommonSolicitudExpedienteUtil {
             attach.setId(attachId);
 
             // Guardar el archivo adjunto en la base de datos
-            ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).save(attach);
+            ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).save(attach);
         });
 
         // Confirmar la transacción de Hibernate
@@ -89,7 +89,7 @@ public class CommonSolicitudExpedienteUtil {
                     String nombre = getAttachFileName(attach.getSolaAttachFile(), "_SOL_" + i, folio);
 
                     try {
-                        ContextUtil.getDAO().getEstadoDocExpPersistence(ActionUtil.getDBUser()).updateFile(ws.getEstadoDocExpList().get(0).getId().getEdeRut(), ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(), ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(), ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(), ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(), tdoc, nombre);
+                        ContextUtil.getDAO().getEstadoDocExpRepository(ActionUtil.getDBUser()).updateFile(ws.getEstadoDocExpList().get(0).getId().getEdeRut(), ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(), ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(), ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(), ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(), tdoc, nombre);
                     } catch (IndexOutOfBoundsException e) {
                         System.err.println("Índice fuera de rango: ");
                     } catch (NullPointerException e) {

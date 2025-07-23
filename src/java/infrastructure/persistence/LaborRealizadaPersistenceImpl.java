@@ -1,6 +1,6 @@
 package infrastructure.persistence;
 
-import domain.repository.LaborRealizadaPersistence;
+import domain.repository.LaborRealizadaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.LaborRealizada;
 import java.util.List;
@@ -14,7 +14,7 @@ import org.hibernate.type.Type;
 /**
  * Implementación de la persistencia de LaborRealizada.
  */
-public class LaborRealizadaPersistenceImpl extends CrudAbstractDAO<LaborRealizada, Long> implements LaborRealizadaPersistence {
+public class LaborRealizadaPersistenceImpl extends CrudAbstractDAO<LaborRealizada, Long> implements LaborRealizadaRepository {
 
     /**
      * Buscar LaborRealizada por Mencion.

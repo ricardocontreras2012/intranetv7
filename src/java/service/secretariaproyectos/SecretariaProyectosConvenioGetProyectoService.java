@@ -18,7 +18,7 @@ import infrastructure.util.ContextUtil;
 public class SecretariaProyectosConvenioGetProyectoService {
 
     public String service(GenericSession genericSession, ProyectoSession ps,  String codigo, String key) {
-        ps.setProyecto(ContextUtil.getDAO().getProyectoPersistence(ActionUtil.getDBUser()).findProyecto(codigo));
+        ps.setProyecto(ContextUtil.getDAO().getProyectoRepository(ActionUtil.getDBUser()).findProyecto(codigo));
 
         return Action.SUCCESS;
 

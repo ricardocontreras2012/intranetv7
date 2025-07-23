@@ -99,13 +99,13 @@ public class AlumnoCertificacionEmitirAlumnoEgresadoService {
             String urlWeb = facultad.getUniUrl();
             Date fecha = getSysdate();
             String fechaString = DateUtil.getFechaCiudad(fecha);
-            CcalidadId ccalId = ContextUtil.getDAO().getCcalidadPersistence(user).findxCalidad(
+            CcalidadId ccalId = ContextUtil.getDAO().getCcalidadRepository(user).findxCalidad(
                     aluCar, 2).getId();
 
-            ScalarPersistence scalarPersistence
-                    = ContextUtil.getDAO().getScalarPersistence(user);
+            ScalarPersistence scalarRepository
+                    = ContextUtil.getDAO().getScalarRepository(user);
 
-            String next = scalarPersistence.getSemestrePrevio(ccalId.getCcaAgno(), ccalId.getCcaSem(), aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+            String next = scalarRepository.getSemestrePrevio(ccalId.getCcaAgno(), ccalId.getCcaSem(), aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
             Integer agno = Integer.parseInt(next.substring(0, 4));
             Integer sem = Integer.parseInt(next.substring(4));
 
@@ -131,7 +131,7 @@ public class AlumnoCertificacionEmitirAlumnoEgresadoService {
                     String extiende = "";
 
                     if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 200) {
-                        int hrsCrono = scalarPersistence.getHorasCromoMalla(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+                        int hrsCrono = scalarRepository.getHorasCromoMalla(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
                         extiende = "El diplomado consta de " + hrsCrono + " horas cronológicas \n";
                         extiende += StringUtils.capitalize(CommonCertificacionUtil.getProfijoAlumon(alumno.getAluSexo())) + "obtuvo un promedio de " + String.format("%.1f", aluCar.getAluCarFunction().getPromedioAprobados()) + " \n\n";
                     }
@@ -176,7 +176,7 @@ public class AlumnoCertificacionEmitirAlumnoEgresadoService {
                             "", "C3", "CERTIFICADO DE ALUMNO EGRESADO", "TM_CERT");
 
                     // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-                    ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
+                    ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
                     LogUtil.setLog(genera, alumno.getAluRut());
 
                     return CommonArchivoUtil.getFile(name, "cert");

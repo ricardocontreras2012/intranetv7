@@ -56,7 +56,7 @@ public class CommonInscripcionAdmChangeNominaDerService {
                 int i = Integer.parseInt(row.getIdRow()) - 1;
                 AluCarId aluCarId = jcSession.getNominaCursoAdmIzq().get(i).getId();
 
-                AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(aluCarId);
+                AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(aluCarId);
                 aluCar.setInitValues();
                 aluCar.setInsList(new InscripcionSupport(aluCar, genericSession).getInscripcion(ws.getAgnoAct(), ws.getSemAct()));
 

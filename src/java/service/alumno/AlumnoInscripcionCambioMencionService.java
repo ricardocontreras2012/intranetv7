@@ -32,7 +32,7 @@ public final class AlumnoInscripcionCambioMencionService {
     public String service(GenericSession genericSession, AlumnoSession alumnoSession,  String key) { 
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
    
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).cambioMencion(
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).cambioMencion(
                 aluCar, alumnoSession.getNewMencion(), aluCar.getParametros().getAgnoIns(), aluCar.getParametros().getSemIns());
         
         LogUtil.setLog(genericSession.getRut());

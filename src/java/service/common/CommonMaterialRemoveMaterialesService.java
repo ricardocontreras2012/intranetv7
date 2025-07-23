@@ -8,7 +8,7 @@ package service.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.MaterialApoyo;
 import java.util.Map;
-import domain.repository.MaterialApoyoPersistence;
+import domain.repository.MaterialApoyoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -39,7 +39,7 @@ public final class CommonMaterialRemoveMaterialesService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
-        MaterialApoyoPersistence materialApoyoPersistence = ContextUtil.getDAO().getMaterialApoyoPersistence(ActionUtil.getDBUser());
+        MaterialApoyoRepository materialApoyoRepository = ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
     
@@ -52,7 +52,7 @@ public final class CommonMaterialRemoveMaterialesService {
                     if (materialApoyo.getMatRutAutor().equals(genericSession.getRut())) {
                         LogUtil.setLog(genericSession.getRut(), genericSession.getCurso(key).getNombreCorto()
                                 + " > " + materialApoyo.getMatArchivo());
-                        materialApoyoPersistence.makeTransient(materialApoyo);
+                        materialApoyoRepository.makeTransient(materialApoyo);
                     }
                 }));
 

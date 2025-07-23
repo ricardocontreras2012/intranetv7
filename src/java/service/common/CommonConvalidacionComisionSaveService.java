@@ -24,12 +24,12 @@ public class CommonConvalidacionComisionSaveService {
     public String service(SecretariaSession secreSession)
             throws Exception {
         String user = ActionUtil.getDBUser();
-        Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaComision();
+        Integer correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaComision();
         ConvalidacionComision comision = new ConvalidacionComision();
         comision.setCcoCod(correl);
 
         beginTransaction(user);
-        ContextUtil.getDAO().getConvalidacionComisionPersistence(user).makePersistent(comision);
+        ContextUtil.getDAO().getConvalidacionComisionRepository(user).makePersistent(comision);
 
         secreSession.getComision().stream()
                 .forEach(profesor -> {
@@ -43,7 +43,7 @@ public class CommonConvalidacionComisionSaveService {
                     comisionProf.setProfesor(profesor);
 
                     ContextUtil.getDAO()
-                            .getConvalidacionComisionProfPersistence(user)
+                            .getConvalidacionComisionProfRepository(user)
                             .makePersistent(comisionProf);
                 });
 

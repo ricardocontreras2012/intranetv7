@@ -17,7 +17,7 @@ import infrastructure.util.ContextUtil;
 public class SecretariaProyectosConvenioGetProfesorService {
 
     public String service(GenericSession genericSession, Integer rut, String key) {
-        genericSession.getWorkSession(key).setProfesor(ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).find(rut));
+        genericSession.getWorkSession(key).setProfesor(ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).find(rut));
 
         return Action.SUCCESS;
 

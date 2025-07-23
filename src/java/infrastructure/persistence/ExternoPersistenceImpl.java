@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ExternoPersistence;
+import domain.repository.ExternoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Externo;
 import java.util.List;
@@ -23,7 +23,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ExternoPersistenceImpl extends CrudAbstractDAO<Externo, Long> implements ExternoPersistence {
+public final class ExternoPersistenceImpl extends CrudAbstractDAO<Externo, Long> implements ExternoRepository {
 
     /**
      * Method description

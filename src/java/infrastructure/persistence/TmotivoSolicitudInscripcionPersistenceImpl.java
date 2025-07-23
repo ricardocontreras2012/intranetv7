@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TmotivoSolicitudInscripcionPersistence;
+import domain.repository.TmotivoSolicitudInscripcionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.TmotivoSolicitudInscripcion;
 import java.util.List;
@@ -16,7 +16,7 @@ import static org.hibernate.criterion.Order.asc;
  *
  * @author Ricardo
  */
-public class TmotivoSolicitudInscripcionPersistenceImpl extends CrudAbstractDAO<TmotivoSolicitudInscripcion, Long> implements TmotivoSolicitudInscripcionPersistence {
+public class TmotivoSolicitudInscripcionPersistenceImpl extends CrudAbstractDAO<TmotivoSolicitudInscripcion, Long> implements TmotivoSolicitudInscripcionRepository {
 
     /**
      * Method description

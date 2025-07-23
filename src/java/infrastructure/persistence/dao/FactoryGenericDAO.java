@@ -5,123 +5,123 @@
  */
 package infrastructure.persistence.dao;
 
-import domain.repository.FlagInscripcionPersistenceView;
-import domain.repository.AluCarFunctionsPersistenceView;
-import domain.repository.ActaNominaPersistenceView;
-import domain.repository.CartolaPersistenceView;
-import domain.repository.CertificacionPersistenceView;
-import domain.repository.NominaActaPersistenceView;
-import domain.repository.ActaPersistenceView;
-import domain.repository.SalaPersistence;
-import domain.repository.EmpleadorPersistence;
-import domain.repository.PreguntaAutoEvaluacionPersistence;
-import domain.repository.AyudantePersistence;
-import domain.repository.RespEnctaCursoPersistence;
-import domain.repository.AluCarPersistence;
-import domain.repository.DummyPersistence;
-import domain.repository.ParamArchivosWebPersistence;
-import domain.repository.EncuestaDocentePersistence;
-import domain.repository.UnidadPersistence;
-import domain.repository.LaborRealizadaPersistence;
-import domain.repository.PlanLogroPersistence;
-import domain.repository.LogActaPersistence;
-import domain.repository.CursoAyudantePersistence;
-import domain.repository.TsolicitudPersistence;
-import domain.repository.RespuestaAutoEvaluacionAcademicoPersistence;
-import domain.repository.InscripcionAdicionalLogroPersistence;
-import domain.repository.CalificacionLogroAdicionalPersistence;
-import domain.repository.RespuestaEncuestaDocentePersistence;
-import domain.repository.ActionPersistence;
-import domain.repository.ReporteClasePersistence;
-import domain.repository.ConvalidacionSolicitudPersistence;
-import domain.repository.AsistenciaAlumnoNominaPersistence;
-import domain.repository.AsignaturaPersistence;
-import domain.repository.TevaluacionPersistence;
-import domain.repository.MallaPersistence;
-import domain.repository.MencionInfoIntranetProfesorPersistence;
-import domain.repository.CursoTevaluacionPersistence;
-import domain.repository.ExpedienteNominaPersistence;
-import domain.repository.SolicitudPersistence;
-import domain.repository.AlumnoEmpleadorPersistence;
-import domain.repository.ComunaPersistence;
-import domain.repository.FichaEstudioPersistence;
-import domain.repository.SolicitudJustificativoPersistence;
-import domain.repository.DocenteHorarioPersistence;
-import domain.repository.HorarioPersistence;
-import domain.repository.FuncionarioPersistence;
-import domain.repository.SacarreraPersistence;
-import domain.repository.ModuloHorarioPersistence;
-import domain.repository.EncuestaAyudantePersistence;
-import domain.repository.UserLoginActionStackPersistence;
-import domain.repository.InscripcionPersistence;
-import domain.repository.CarreraPersistence;
-import domain.repository.PregEnctaPersistence;
-import domain.repository.MencionInfoIntranetPersistence;
-import domain.repository.ElectivoPersistence;
-import domain.repository.EmisionNominaPersistence;
-import domain.repository.ActaCalificacionNominaPersistence;
-import domain.repository.ProyectoPersistence;
-import domain.repository.MatriculaHistoricoPersistence;
-import domain.repository.LogInscripcionPersistence;
-import domain.repository.CursoPersistence;
-import domain.repository.AlumnoPersistence;
-import domain.repository.ComentarioEncuestaAyudantePersistence;
-import domain.repository.TmensajeDestinoPersistence;
-import domain.repository.ActaConvalidacionPersistence;
-import domain.repository.SolicitudInscripcionPersistence;
-import domain.repository.RequisitoGradoTituloAdicPersistence;
-import domain.repository.PersonaPersistence;
-import domain.repository.CursoEspejoPersistence;
-import domain.repository.DerechoPersistence;
-import domain.repository.CalificacionPersistence;
-import domain.repository.ProfesorPersistence;
-import domain.repository.ConvalidacionComisionProfPersistence;
-import domain.repository.LogCertificacionPersistence;
-import domain.repository.EstadoCivilPersistence;
-import domain.repository.ExpedienteLogroPersistence;
-import domain.repository.ConvalidacionSolicitudAsignPersistence;
-import domain.repository.AdministrativoPersistence;
-import domain.repository.ActaCalificacionPersistence;
-import domain.repository.MensajeDestinatarioPersistence;
-import domain.repository.CcalidadPersistence;
-import domain.repository.AreaPersistence;
-import domain.repository.TramitePersistence;
-import domain.repository.RespEnctaAyuCursoPersistence;
-import domain.repository.ParametroPersistence;
-import domain.repository.DiaPersistence;
-import domain.repository.MensajePersistence;
-import domain.repository.MensajeAttachPersistence;
-import domain.repository.ExternoPersistence;
-import domain.repository.TmaterialPerfilPersistence;
-import domain.repository.LogroPersistence;
-import domain.repository.ActaConvalidacionAsignaturaPersistence;
-import domain.repository.ReincorporacionPersistence;
-import domain.repository.ConvalidacionComisionPersistence;
-import domain.repository.LogSolicitudPersistence;
-import domain.repository.ParametroMencionPersistence;
-import domain.repository.MencionPersistence;
-import domain.repository.SolicitudAttachPersistence;
-import domain.repository.CursoProfesorPersistence;
-import domain.repository.PracticaPersistence;
-import domain.repository.EstadoSolicitudPersistence;
-import domain.repository.ReservaSalaPersistence;
-import domain.repository.ExamenPersistence;
-import domain.repository.EvaluacionPersistence;
-import domain.repository.TmensajeBarraDestinoPersistence;
-import domain.repository.ComentarioEncuestaDocentePersistence;
-import domain.repository.FichaLaboralPersistence;
-import domain.repository.PasswordTicketPersistence;
-import domain.repository.ExamenComisionPersistence;
-import domain.repository.AsistenciaAlumnoPersistence;
-import domain.repository.RespuestaEncuestaAyudantePersistence;
-import domain.repository.MaterialApoyoPersistence;
-import domain.repository.SolicitudCertificadoCarritoPersistence;
-import domain.repository.TmotivoSolicitudInscripcionPersistence;
-import domain.repository.ConvenioPersistence;
-import domain.repository.EstadoDocExpPersistence;
-import domain.repository.EvaluacionAlumnoPersistence;
-import domain.repository.NominaCarreraPersistence;
+import domain.repository.SalaRepository;
+import domain.repository.EmpleadorRepository;
+import domain.repository.PreguntaAutoEvaluacionRepository;
+import domain.repository.RespEnctaCursoRepository;
+import domain.repository.ParamArchivosWebRepository;
+import domain.repository.EncuestaDocenteRepository;
+import domain.repository.UnidadRepository;
+import domain.repository.LaborRealizadaRepository;
+import domain.repository.PlanLogroRepository;
+import domain.repository.LogActaRepository;
+import domain.repository.TsolicitudRepository;
+import domain.repository.RespuestaAutoEvaluacionAcademicoRepository;
+import domain.repository.InscripcionAdicionalLogroRepository;
+import domain.repository.RespuestaEncuestaDocenteRepository;
+import domain.repository.ReporteClaseRepository;
+import domain.repository.TevaluacionRepository;
+import domain.repository.MallaRepository;
+import domain.repository.MencionInfoIntranetProfesorRepository;
+import domain.repository.ExpedienteNominaRepository;
+import domain.repository.SolicitudRepository;
+import domain.repository.FichaEstudioRepository;
+import domain.repository.SolicitudJustificativoRepository;
+import domain.repository.HorarioRepository;
+import domain.repository.FuncionarioRepository;
+import domain.repository.SacarreraRepository;
+import domain.repository.ModuloHorarioRepository;
+import domain.repository.EncuestaAyudanteRepository;
+import domain.repository.UserLoginActionStackRepository;
+import domain.repository.InscripcionRepository;
+import domain.repository.PregEnctaRepository;
+import domain.repository.MencionInfoIntranetRepository;
+import domain.repository.ElectivoRepository;
+import domain.repository.EmisionNominaRepository;
+import domain.repository.ProyectoRepository;
+import domain.repository.MatriculaHistoricoRepository;
+import domain.repository.LogInscripcionRepository;
+import domain.repository.TmensajeDestinoRepository;
+import domain.repository.SolicitudInscripcionRepository;
+import domain.repository.RequisitoGradoTituloAdicRepository;
+import domain.repository.PersonaRepository;
+import domain.repository.ProfesorRepository;
+import domain.repository.LogCertificacionRepository;
+import domain.repository.EstadoCivilRepository;
+import domain.repository.ExpedienteLogroRepository;
+import domain.repository.MensajeDestinatarioRepository;
+import domain.repository.TramiteRepository;
+import domain.repository.RespEnctaAyuCursoRepository;
+import domain.repository.ParametroRepository;
+import domain.repository.MensajeRepository;
+import domain.repository.MensajeAttachRepository;
+import domain.repository.ExternoRepository;
+import domain.repository.TmaterialPerfilRepository;
+import domain.repository.LogroRepository;
+import domain.repository.ReincorporacionRepository;
+import domain.repository.LogSolicitudRepository;
+import domain.repository.ParametroMencionRepository;
+import domain.repository.MencionRepository;
+import domain.repository.SolicitudAttachRepository;
+import domain.repository.PracticaRepository;
+import domain.repository.EstadoSolicitudRepository;
+import domain.repository.ReservaSalaRepository;
+import domain.repository.ExamenRepository;
+import domain.repository.EvaluacionRepository;
+import domain.repository.TmensajeBarraDestinoRepository;
+import domain.repository.FichaLaboralRepository;
+import domain.repository.PasswordTicketRepository;
+import domain.repository.ExamenComisionRepository;
+import domain.repository.RespuestaEncuestaAyudanteRepository;
+import domain.repository.MaterialApoyoRepository;
+import domain.repository.SolicitudCertificadoCarritoRepository;
+import domain.repository.TmotivoSolicitudInscripcionRepository;
+import domain.repository.EstadoDocExpRepository;
+import domain.repository.EvaluacionAlumnoRepository;
+import domain.repository.NominaCarreraRepository;
 import persistence.scalar.ScalarPersistence;
+import domain.repository.ActaCalificacionNominaRepository;
+import domain.repository.ActaCalificacionRepository;
+import domain.repository.ActaConvalidacionAsignaturaRepository;
+import domain.repository.ActaConvalidacionRepository;
+import domain.repository.ActaNominaViewRepository;
+import domain.repository.ActaViewRepository;
+import domain.repository.ActionRepository;
+import domain.repository.AdministrativoRepository;
+import domain.repository.AluCarFunctionsViewRepository;
+import domain.repository.AluCarRepository;
+import domain.repository.AlumnoEmpleadorRepository;
+import domain.repository.AlumnoRepository;
+import domain.repository.AreaRepository;
+import domain.repository.AsignaturaRepositoy;
+import domain.repository.AsistenciaAlumnoNominaRepository;
+import domain.repository.AsistenciaAlumnoRepository;
+import domain.repository.AyudanteRepository;
+import domain.repository.CalificacionLogroAdicionalRepository;
+import domain.repository.CalificacionRepository;
+import domain.repository.CarreraRepository;
+import domain.repository.CartolaViewRepository;
+import domain.repository.CcalidadRepository;
+import domain.repository.CertificacionViewRepository;
+import domain.repository.ComentarioEncuestaAyudanteRepository;
+import domain.repository.ComentarioEncuestaDocenteRepository;
+import domain.repository.ComunaRepository;
+import domain.repository.ConvalidacionComisionRepository;
+import domain.repository.ConvalidacionComisionProfRepository;
+import domain.repository.ConvalidacionSolicitudAsignRepository;
+import domain.repository.ConvalidacionSolicitudRepository;
+import domain.repository.ConvenioRepository;
+import domain.repository.CursoAyudanteRepository;
+import domain.repository.CursoEspejoRepository;
+import domain.repository.CursoRepository;
+import domain.repository.CursoProfesorRepository;
+import domain.repository.CursoTevaluacionRepository;
+import domain.repository.DerechoRepository;
+import domain.repository.DiaRepository;
+import domain.repository.DocenteHorarioRepository;
+import domain.repository.DummyRepository;
+import domain.repository.NominaActaViewRepository;
+import domain.repository.FlagInscripcionViewRepository;
 
 /**
  * Class description
@@ -139,7 +139,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ActaNominaPersistenceView getActaNominaPersistenceView(String userType);
+    public abstract ActaNominaViewRepository getActaNominaViewRepository(String userType);
 
     /**
      * Method description
@@ -149,21 +149,11 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ActaCalificacionPersistence getActaCalificacionPersistence(String userType);
+    public abstract ActaCalificacionRepository getActaCalificacionRepository(String userType);
 
-    public abstract ActaConvalidacionPersistence getActaConvalidacionPersistence(String userType);
+    public abstract ActaConvalidacionRepository getActaConvalidacionRepository(String userType);
 
-    public abstract ActaConvalidacionAsignaturaPersistence getActaConvalidacionAsignaturaPersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract ActaPersistenceView getActaMencionPersistenceView(String userType);
+    public abstract ActaConvalidacionAsignaturaRepository getActaConvalidacionAsignaturaRepository(String userType);
 
     /**
      * Method description
@@ -173,7 +163,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AdministrativoPersistence getAdministrativoPersistence(String userType);
+    public abstract ActaViewRepository getActaMencionViewRepository(String userType);
 
     /**
      * Method description
@@ -183,7 +173,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AluCarFunctionsPersistenceView getAluCarFunctionsPersistenceView(String userType);
+    public abstract AdministrativoRepository getAdministrativoRepository(String userType);
 
     /**
      * Method description
@@ -193,7 +183,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AluCarPersistence getAluCarPersistence(String userType);
+    public abstract AluCarFunctionsViewRepository getAluCarFunctionsViewRepository(String userType);
 
     /**
      * Method description
@@ -203,7 +193,17 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AlumnoPersistence getAlumnoPersistence(String userType);
+    public abstract AluCarRepository getAluCarRepository(String userType);
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract AlumnoRepository getAlumnoRepository(String userType);
 
     /**
      * Method description
@@ -214,8 +214,8 @@ abstract class FactoryGenericDAO {
      * @return
      */
     
-    public abstract AreaPersistence getAreaPersistence(String userType);
-    public abstract AsignaturaPersistence getAsignaturaPersistence(String userType);
+    public abstract AreaRepository getAreaRepository(String userType);
+    public abstract AsignaturaRepositoy getAsignaturaRepository(String userType);
 
     /**
      * Method description
@@ -225,7 +225,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AsistenciaAlumnoPersistence getAsistenciaAlumnoPersistence(String userType);
+    public abstract AsistenciaAlumnoRepository getAsistenciaAlumnoRepository(String userType);
 
     /**
      * Method description
@@ -235,7 +235,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AsistenciaAlumnoNominaPersistence getAsistenciaAlumnoNominaPersistence(String userType);
+    public abstract AsistenciaAlumnoNominaRepository getAsistenciaAlumnoNominaRepository(String userType);
 
     /**
      * Method description
@@ -245,7 +245,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AyudantePersistence getAyudantePersistence(String userType);
+    public abstract AyudanteRepository getAyudanteRepository(String userType);
 
     /**
      * Method description
@@ -255,7 +255,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ActaCalificacionNominaPersistence getActaCalificacionNominaPersistence(String userType);
+    public abstract ActaCalificacionNominaRepository getActaCalificacionNominaRepository(String userType);
 
     /**
      * Method description
@@ -265,7 +265,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CalificacionLogroAdicionalPersistence getCalificacionAdicionalLogroPersistence(String userType);
+    public abstract CalificacionLogroAdicionalRepository getCalificacionAdicionalLogroRepository(String userType);
 
     /**
      * Method description
@@ -275,7 +275,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CalificacionPersistence getCalificacionPersistence(String userType);
+    public abstract CalificacionRepository getCalificacionRepository(String userType);
 
     /**
      * Method description
@@ -285,7 +285,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CartolaPersistenceView getCartolaPersistenceView(String userType);
+    public abstract CartolaViewRepository getCartolaViewRepository(String userType);
 
     /**
      * Method description
@@ -295,7 +295,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CcalidadPersistence getCcalidadPersistence(String userType);
+    public abstract CcalidadRepository getCcalidadRepository(String userType);
 
     /**
      * Method description
@@ -305,29 +305,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ComentarioEncuestaAyudantePersistence getComentarioEncuestaAyudantePersistence(String userType);
+    public abstract ComentarioEncuestaAyudanteRepository getComentarioEncuestaAyudanteRepository(String userType);
 
-    public abstract ComentarioEncuestaDocentePersistence getComentarioEncuestaDocentePersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract ComunaPersistence getComunaPersistence(String userType);
-
-    public abstract ConvalidacionComisionPersistence getConvalidacionComisionPersistence(String userType);
-
-    public abstract ConvalidacionComisionProfPersistence getConvalidacionComisionProfPersistence(String userType);
-
-    public abstract ConvalidacionSolicitudPersistence getConvalidacionSolicitudPersistence(String userType);
-
-    public abstract ConvalidacionSolicitudAsignPersistence getConvalidacionSolicitudAsignPersistence(String userType);
-
-    public abstract ConvenioPersistence getConvenioPersistence(String userType);
+    public abstract ComentarioEncuestaDocenteRepository getComentarioEncuestaDocenteRepository(String userType);
 
     /**
      * Method description
@@ -337,7 +317,17 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ScalarPersistence getScalarPersistence(String userType);
+    public abstract ComunaRepository getComunaRepository(String userType);
+
+    public abstract ConvalidacionComisionRepository getConvalidacionComisionRepository(String userType);
+
+    public abstract ConvalidacionComisionProfRepository getConvalidacionComisionProfRepository(String userType);
+
+    public abstract ConvalidacionSolicitudRepository getConvalidacionSolicitudRepository(String userType);
+
+    public abstract ConvalidacionSolicitudAsignRepository getConvalidacionSolicitudAsignRepository(String userType);
+
+    public abstract ConvenioRepository getConvenioRepository(String userType);
 
     /**
      * Method description
@@ -347,7 +337,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CursoPersistence getCursoPersistence(String userType);
+    public abstract ScalarPersistence getScalarRepository(String userType);
 
     /**
      * Method description
@@ -357,9 +347,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CursoAyudantePersistence getCursoAyudantePersistence(String userType);
-    public abstract CursoProfesorPersistence getCursoProfesorPersistence(String userType);
-    public abstract DocenteHorarioPersistence getDocenteHorarioPersistence(String userType);
+    public abstract CursoRepository getCursoRepository(String userType);
 
     /**
      * Method description
@@ -369,19 +357,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CursoTevaluacionPersistence getCursoTevaluacionPersistence(String userType);
-
-    public abstract CursoEspejoPersistence getCursoEspejoPersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract DerechoPersistence getDerechoPersistence(String userType);
+    public abstract CursoAyudanteRepository getCursoAyudanteRepository(String userType);
+    public abstract CursoProfesorRepository getCursoProfesorRepository(String userType);
+    public abstract DocenteHorarioRepository getDocenteHorarioRepository(String userType);
 
     /**
      * Method description
@@ -391,19 +369,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract DiaPersistence getDiaPersistence(String userType);
+    public abstract CursoTevaluacionRepository getCursoTevaluacionRepository(String userType);
 
-    public abstract DummyPersistence getDummyPersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract ElectivoPersistence getElectivoPersistence(String userType);
+    public abstract CursoEspejoRepository getCursoEspejoRepository(String userType);
 
     /**
      * Method description
@@ -413,7 +381,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract EmisionNominaPersistence getEmisionNominaPersistence(String userType);
+    public abstract DerechoRepository getDerechoRepository(String userType);
 
     /**
      * Method description
@@ -423,7 +391,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract EmpleadorPersistence getEmpleadorPersistence(String userType);
+    public abstract DiaRepository getDiaRepository(String userType);
+
+    public abstract DummyRepository getDummyRepository(String userType);
 
     /**
      * Method description
@@ -433,13 +403,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract EncuestaAyudantePersistence getEncuestaAyudantePersistence(String userType);
-
-    public abstract EncuestaDocentePersistence getEncuestaDocentePersistence(String userType);
-
-    public abstract EstadoCivilPersistence getEstadoCivilPersistence(String userType);
-
-    public abstract EstadoSolicitudPersistence getEstadoSolicitudPersistence(String userType);
+    public abstract ElectivoRepository getElectivoRepository(String userType);
 
     /**
      * Method description
@@ -449,7 +413,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract EvaluacionAlumnoPersistence getEvaluacionAlumnoPersistence(String userType);
+    public abstract EmisionNominaRepository getEmisionNominaRepository(String userType);
 
     /**
      * Method description
@@ -459,7 +423,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract EvaluacionPersistence getEvaluacionPersistence(String userType);
+    public abstract EmpleadorRepository getEmpleadorRepository(String userType);
 
     /**
      * Method description
@@ -469,23 +433,13 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ExamenPersistence getExamenPersistence(String userType);
+    public abstract EncuestaAyudanteRepository getEncuestaAyudanteRepository(String userType);
 
-    public abstract ExamenComisionPersistence getExamenComisionPersistence(String userType);
+    public abstract EncuestaDocenteRepository getEncuestaDocenteRepository(String userType);
 
-    public abstract ExpedienteLogroPersistence getExpedienteLogroPersistence(String userType);
+    public abstract EstadoCivilRepository getEstadoCivilRepository(String userType);
 
-    public abstract ExpedienteNominaPersistence getExpedienteNominaPersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract ExternoPersistence getExternoPersistence(String userType);
+    public abstract EstadoSolicitudRepository getEstadoSolicitudRepository(String userType);
 
     /**
      * Method description
@@ -495,9 +449,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract FlagInscripcionPersistenceView getFlagInscripcionPersistenceView(String userType);
-
-    public abstract FuncionarioPersistence getFuncionarioPersistence(String userType);
+    public abstract EvaluacionAlumnoRepository getEvaluacionAlumnoRepository(String userType);
 
     /**
      * Method description
@@ -507,7 +459,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract HorarioPersistence getHorarioPersistence(String userType);
+    public abstract EvaluacionRepository getEvaluacionRepository(String userType);
 
     /**
      * Method description
@@ -517,7 +469,13 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract InscripcionPersistence getInscripcionPersistence(String userType);
+    public abstract ExamenRepository getExamenRepository(String userType);
+
+    public abstract ExamenComisionRepository getExamenComisionRepository(String userType);
+
+    public abstract ExpedienteLogroRepository getExpedienteLogroRepository(String userType);
+
+    public abstract ExpedienteNominaRepository getExpedienteNominaRepository(String userType);
 
     /**
      * Method description
@@ -527,11 +485,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract InscripcionAdicionalLogroPersistence getInscripcionAdicionalLogroPersistence(String userType);
-
-    public abstract LaborRealizadaPersistence getLaborRealizadaPersistence(String userType);
-
-    public abstract LogActaPersistence getLogActaPersistence(String userType);
+    public abstract ExternoRepository getExternoRepository(String userType);
 
     /**
      * Method description
@@ -541,7 +495,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract LogCertificacionPersistence getLogCertificacionPersistence(String userType);
+    public abstract FlagInscripcionViewRepository getFlagInscripcionViewRepository(String userType);
+
+    public abstract FuncionarioRepository getFuncionarioRepository(String userType);
 
     /**
      * Method description
@@ -551,11 +507,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract LogInscripcionPersistence getLogInscripcionPersistence(String userType);
-
-    public abstract ActionPersistence getLogActionPersistence(String userType);
-
-    public abstract LogroPersistence getLogroPersistence(String userType);
+    public abstract HorarioRepository getHorarioRepository(String userType);
 
     /**
      * Method description
@@ -565,9 +517,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract LogSolicitudPersistence getLogSolicitudPersistence(String userType);
-
-    public abstract MallaPersistence getMallaPersistence(String userType);
+    public abstract InscripcionRepository getInscripcionRepository(String userType);
 
     /**
      * Method description
@@ -577,7 +527,11 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MaterialApoyoPersistence getMaterialApoyoPersistence(String userType);
+    public abstract InscripcionAdicionalLogroRepository getInscripcionAdicionalLogroRepository(String userType);
+
+    public abstract LaborRealizadaRepository getLaborRealizadaRepository(String userType);
+
+    public abstract LogActaRepository getLogActaRepository(String userType);
 
     /**
      * Method description
@@ -587,7 +541,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MatriculaHistoricoPersistence getMatriculaHistoricoPersistence(String userType);
+    public abstract LogCertificacionRepository getLogCertificacionRepository(String userType);
 
     /**
      * Method description
@@ -597,7 +551,11 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MencionPersistence getMencionPersistence(String userType);
+    public abstract LogInscripcionRepository getLogInscripcionRepository(String userType);
+
+    public abstract ActionRepository getLogActionRepository(String userType);
+
+    public abstract LogroRepository getLogroRepository(String userType);
 
     /**
      * Method description
@@ -607,7 +565,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MencionInfoIntranetPersistence getMencionInfoIntranetPersistence(String userType);
+    public abstract LogSolicitudRepository getLogSolicitudRepository(String userType);
+
+    public abstract MallaRepository getMallaRepository(String userType);
 
     /**
      * Method description
@@ -617,7 +577,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MencionInfoIntranetProfesorPersistence getMencionInfoIntranetProfesorPersistence(String userType);
+    public abstract MaterialApoyoRepository getMaterialApoyoRepository(String userType);
 
     /**
      * Method description
@@ -627,7 +587,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MensajeDestinatarioPersistence getMensajeDestinatarioPersistence(String userType);
+    public abstract MatriculaHistoricoRepository getMatriculaHistoricoRepository(String userType);
 
     /**
      * Method description
@@ -637,7 +597,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MensajeAttachPersistence getMensajeAttachPersistence(String userType);
+    public abstract MencionRepository getMencionRepository(String userType);
 
     /**
      * Method description
@@ -647,7 +607,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract MensajePersistence getMensajePersistence(String userType);
+    public abstract MencionInfoIntranetRepository getMencionInfoIntranetRepository(String userType);
 
     /**
      * Method description
@@ -657,7 +617,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ModuloHorarioPersistence getModuloHorarioPersistence(String userType);
+    public abstract MencionInfoIntranetProfesorRepository getMencionInfoIntranetProfesorRepository(String userType);
 
     /**
      * Method description
@@ -667,7 +627,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract NominaActaPersistenceView getNominaActaPersistenceView(String userType);
+    public abstract MensajeDestinatarioRepository getMensajeDestinatarioRepository(String userType);
 
     /**
      * Method description
@@ -677,7 +637,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PlanLogroPersistence getPlanLogroPersistence(String userType);
+    public abstract MensajeAttachRepository getMensajeAttachRepository(String userType);
 
     /**
      * Method description
@@ -687,7 +647,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract NominaCarreraPersistence getNominaCarreraPersistence(String userType);
+    public abstract MensajeRepository getMensajeRepository(String userType);
 
     /**
      * Method description
@@ -697,7 +657,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ParamArchivosWebPersistence getParamArchivosWebPersistence(String userType);
+    public abstract ModuloHorarioRepository getModuloHorarioRepository(String userType);
 
     /**
      * Method description
@@ -707,8 +667,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ParametroPersistence getParametroPersistence(String userType);
-    public abstract ParametroMencionPersistence getParametroMencionPersistence(String userType);
+    public abstract NominaActaViewRepository getNominaActaViewRepository(String userType);
 
     /**
      * Method description
@@ -718,7 +677,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PasswordTicketPersistence getPasswordTicketPersistence(String userType);
+    public abstract PlanLogroRepository getPlanLogroRepository(String userType);
 
     /**
      * Method description
@@ -728,7 +687,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PracticaPersistence getPracticaPersistence(String userType);
+    public abstract NominaCarreraRepository getNominaCarreraRepository(String userType);
 
     /**
      * Method description
@@ -738,7 +697,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PregEnctaPersistence getPregEnctaPersistence(String userType);
+    public abstract ParamArchivosWebRepository getParamArchivosWebRepository(String userType);
 
     /**
      * Method description
@@ -748,13 +707,8 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PersonaPersistence getPersonaPersistence(String userType);
-
-    public abstract ProfesorPersistence getProfesorPersistence(String userType);
-
-    public abstract ProyectoPersistence getProyectoPersistence(String userType);
-
-    public abstract ReincorporacionPersistence getReincorporacionPersistence(String userType);
+    public abstract ParametroRepository getParametroRepository(String userType);
+    public abstract ParametroMencionRepository getParametroMencionRepository(String userType);
 
     /**
      * Method description
@@ -764,7 +718,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ReporteClasePersistence getReporteClasePersistence(String userType);
+    public abstract PasswordTicketRepository getPasswordTicketRepository(String userType);
 
     /**
      * Method description
@@ -774,7 +728,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ReservaSalaPersistence getReservaSalaPersistence(String userType);
+    public abstract PracticaRepository getPracticaRepository(String userType);
 
     /**
      * Method description
@@ -784,9 +738,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract RespEnctaCursoPersistence getRespEnctaCursoPersistence(String userType);
-
-    public abstract RespEnctaAyuCursoPersistence getRespEnctaAyuCursoPersistence(String userType);
+    public abstract PregEnctaRepository getPregEnctaRepository(String userType);
 
     /**
      * Method description
@@ -796,10 +748,58 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract PreguntaAutoEvaluacionPersistence getPreguntaAutoEvaluacionPersistence(
+    public abstract PersonaRepository getPersonaRepository(String userType);
+
+    public abstract ProfesorRepository getProfesorRepository(String userType);
+
+    public abstract ProyectoRepository getProyectoRepository(String userType);
+
+    public abstract ReincorporacionRepository getReincorporacionRepository(String userType);
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract ReporteClaseRepository getReporteClaseRepository(String userType);
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract ReservaSalaRepository getReservaSalaRepository(String userType);
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract RespEnctaCursoRepository getRespEnctaCursoRepository(String userType);
+
+    public abstract RespEnctaAyuCursoRepository getRespEnctaAyuCursoRepository(String userType);
+
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract PreguntaAutoEvaluacionRepository getPreguntaAutoEvaluacionRepository(
             String userType);
 
-    public abstract RespuestaAutoEvaluacionAcademicoPersistence getRespuestaAutoEvaluacionAcademicoPersistence(
+    public abstract RespuestaAutoEvaluacionAcademicoRepository getRespuestaAutoEvaluacionAcademicoRepository(
             String userType);
 
     /**
@@ -810,19 +810,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract RespuestaEncuestaAyudantePersistence getRespuestaEncuestaAyudantePersistence(String userType);
+    public abstract RespuestaEncuestaAyudanteRepository getRespuestaEncuestaAyudanteRepository(String userType);
 
-    public abstract RespuestaEncuestaDocentePersistence getRespuestaEncuestaDocentePersistence(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract SacarreraPersistence getSacarreraPersistence(String userType);
+    public abstract RespuestaEncuestaDocenteRepository getRespuestaEncuestaDocenteRepository(String userType);
 
     /**
      * Method description
@@ -832,7 +822,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract SalaPersistence getSalaPersistence(String userType);
+    public abstract SacarreraRepository getSacarreraRepository(String userType);
 
     /**
      * Method description
@@ -842,10 +832,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract SolicitudPersistence getSolicitudPersistence(String userType);
-
-    public abstract SolicitudInscripcionPersistence getSolicitudInscripcionPersistence(String userType);
-    public abstract SolicitudJustificativoPersistence getSolicitudJustificativoPersistence(String userType);
+    public abstract SalaRepository getSalaRepository(String userType);
 
     /**
      * Method description
@@ -855,7 +842,10 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract SolicitudAttachPersistence getSolicitudAttachPersistence(String userType);
+    public abstract SolicitudRepository getSolicitudRepository(String userType);
+
+    public abstract SolicitudInscripcionRepository getSolicitudInscripcionRepository(String userType);
+    public abstract SolicitudJustificativoRepository getSolicitudJustificativoRepository(String userType);
 
     /**
      * Method description
@@ -865,7 +855,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract RequisitoGradoTituloAdicPersistence getRequisitoGradoTituloAdicPersistence(String userType);
+    public abstract SolicitudAttachRepository getSolicitudAttachRepository(String userType);
 
     /**
      * Method description
@@ -875,9 +865,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TevaluacionPersistence getTevaluacionPersistence(String userType);
-
-    public abstract CertificacionPersistenceView getCertificacionPersistenceView(String userType);
+    public abstract RequisitoGradoTituloAdicRepository getRequisitoGradoTituloAdicRepository(String userType);
 
     /**
      * Method description
@@ -887,7 +875,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TmaterialPerfilPersistence getTmaterialPerfilPersistence(String userType);
+    public abstract TevaluacionRepository getTevaluacionRepository(String userType);
+
+    public abstract CertificacionViewRepository getCertificacionViewRepository(String userType);
 
     /**
      * Method description
@@ -897,7 +887,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TmensajeBarraDestinoPersistence getTmensajeBarraDestinoPersistence(String userType);
+    public abstract TmaterialPerfilRepository getTmaterialPerfilRepository(String userType);
 
     /**
      * Method description
@@ -907,7 +897,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TmensajeDestinoPersistence getTmensajeDestinoPersistence(String userType);
+    public abstract TmensajeBarraDestinoRepository getTmensajeBarraDestinoRepository(String userType);
 
     /**
      * Method description
@@ -917,7 +907,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TramitePersistence getTramitePersistence(String userType);
+    public abstract TmensajeDestinoRepository getTmensajeDestinoRepository(String userType);
 
     /**
      * Method description
@@ -927,13 +917,23 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract TsolicitudPersistence getTsolicitudPersistence(String userType);
+    public abstract TramiteRepository getTramiteRepository(String userType);
 
-    public abstract TmotivoSolicitudInscripcionPersistence getTmotivoSolicitudInscripcionPersistence(String userType);
+    /**
+     * Method description
+     *
+     *
+     * @param userType
+     *
+     * @return
+     */
+    public abstract TsolicitudRepository getTsolicitudRepository(String userType);
 
-    public abstract UnidadPersistence getUnidadPersistence(String userType);
+    public abstract TmotivoSolicitudInscripcionRepository getTmotivoSolicitudInscripcionRepository(String userType);
 
-    public abstract UserLoginActionStackPersistence getUserLoginActionStackPersistence(String userType);
+    public abstract UnidadRepository getUnidadRepository(String userType);
+
+    public abstract UserLoginActionStackRepository getUserLoginActionStackRepository(String userType);
 
     /**
      * Alvaro *
@@ -946,7 +946,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract FichaEstudioPersistence getFichaEstudioPersistence(String userType);
+    public abstract FichaEstudioRepository getFichaEstudioRepository(String userType);
 
     /**
      * Method description
@@ -956,7 +956,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract FichaLaboralPersistence getFichaLaboralPersistence(String userType);
+    public abstract FichaLaboralRepository getFichaLaboralRepository(String userType);
 
     /**
      * Method description
@@ -966,9 +966,9 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract AlumnoEmpleadorPersistence getAlumnoEmpleadorPersistence(String userType);
+    public abstract AlumnoEmpleadorRepository getAlumnoEmpleadorRepository(String userType);
 
-    public abstract SolicitudCertificadoCarritoPersistence getSolicitudCertificadoCarritoPersistence(String userType);
+    public abstract SolicitudCertificadoCarritoRepository getSolicitudCertificadoCarritoRepository(String userType);
 
     /**
      * Method description
@@ -978,8 +978,8 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract CarreraPersistence getCarreraPersistence(String userType);
+    public abstract CarreraRepository getCarreraRepository(String userType);
     
-    public abstract EstadoDocExpPersistence getEstadoDocExpPersistence(String userType);
+    public abstract EstadoDocExpRepository getEstadoDocExpRepository(String userType);
 
 }

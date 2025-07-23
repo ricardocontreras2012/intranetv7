@@ -27,7 +27,7 @@ public class CommonCursoGetBoletinService {
         ws.setAgnoAct(agno);
         ws.setSemAct(sem);
         
-        ws.setAluCarList(ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(miCarreraSupport.getTcrCtip(), miCarreraSupport.getEspCod(), miCarreraSupport.getRegimen()));
+        ws.setAluCarList(ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(miCarreraSupport.getTcrCtip(), miCarreraSupport.getEspCod(), miCarreraSupport.getRegimen()));
         
         return SUCCESS;
     }

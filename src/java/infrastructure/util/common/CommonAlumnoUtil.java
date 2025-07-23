@@ -27,8 +27,7 @@ import java.util.Objects;
 import java.util.Set;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 import org.apache.struts2.ServletActionContext;
-import domain.repository.AlumnoPersistence;
-import domain.repository.ParametroPersistence;
+import domain.repository.ParametroRepository;
 import session.AlumnoSession;
 import session.GenericSession;
 import session.WorkSession;
@@ -48,6 +47,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
+import domain.repository.AlumnoRepository;
 
 /**
  * Class description
@@ -61,7 +61,7 @@ public final class CommonAlumnoUtil {
     }
 
     public static Alumno find(Integer rut) {
-        return ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).find(rut);
+        return ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).find(rut);
     }
 
     /**
@@ -92,14 +92,14 @@ public final class CommonAlumnoUtil {
      */
     private static List<Alumno> getAlumno(Integer rut, String paterno, String materno, String nombre) {
         // Obtener la instancia de la persistencia de alumnos
-        AlumnoPersistence alumnoPersistence = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser());
+        AlumnoRepository alumnoRepository = ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser());
 
         // Lista para almacenar los alumnos encontrados
         List<Alumno> lAlumno = new ArrayList<>();
 
         // Si el rut no es nulo, buscar el alumno por su rut
         if (rut != null) {
-            Alumno alumno = alumnoPersistence.findFull(rut);
+            Alumno alumno = alumnoRepository.findFull(rut);
             if (alumno != null) {
                 // Si se encuentra el alumno, agregarlo a la lista
                 lAlumno.add(alumno);
@@ -113,7 +113,7 @@ public final class CommonAlumnoUtil {
                 String nombreBusquedaNombre = cleanName(nombre);
 
                 // Buscar los alumnos que coinciden con los criterios de búsqueda
-                lAlumno = alumnoPersistence.find(nombreBusquedaPaterno, nombreBusquedaMaterno, nombreBusquedaNombre);
+                lAlumno = alumnoRepository.find(nombreBusquedaPaterno, nombreBusquedaMaterno, nombreBusquedaNombre);
             }
         }
 
@@ -125,12 +125,12 @@ public final class CommonAlumnoUtil {
         Integer agno = aluCar.getParametros().getAgnoAct();
         Integer sem = aluCar.getParametros().getSemAct();
 
-        String next = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSemestrePrevio(agno, sem, aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+        String next = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSemestrePrevio(agno, sem, aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
         Integer agnoPrev = Integer.parseInt(next.substring(0, 4));
         Integer semPrev = Integer.parseInt(next.substring(4));
 
-        List<Inscripcion> insList = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getInscripcion(aluCar, agno, sem);
-        List<Inscripcion> insPracticaList = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getInscripcionPractica(aluCar.getId(), agnoPrev, semPrev);
+        List<Inscripcion> insList = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcion(aluCar, agno, sem);
+        List<Inscripcion> insPracticaList = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionPractica(aluCar.getId(), agnoPrev, semPrev);
 
         if (insPracticaList != null && !insPracticaList.isEmpty()) {
             insList.addAll(insPracticaList);
@@ -152,7 +152,7 @@ public final class CommonAlumnoUtil {
      * @return
      */
     public static AluCarFunctionsView getAluCarFunction(AluCar aluCar) {
-        return ContextUtil.getDAO().getAluCarFunctionsPersistenceView(ActionUtil.getDBUser()).find(
+        return ContextUtil.getDAO().getAluCarFunctionsViewRepository(ActionUtil.getDBUser()).find(
                 aluCar);
     }
 
@@ -189,7 +189,7 @@ public final class CommonAlumnoUtil {
         parametro.setPuedeModificar("NO");
         parametro.setBloqueada("NO");
 
-        FlagInscripcionView flags = ContextUtil.getDAO().getFlagInscripcionPersistenceView(ActionUtil.getDBUser()).find(
+        FlagInscripcionView flags = ContextUtil.getDAO().getFlagInscripcionViewRepository(ActionUtil.getDBUser()).find(
                 aluCar.getId().getAcaCodCar(),
                 aluCar.getAcaCodMen());
 
@@ -213,8 +213,8 @@ public final class CommonAlumnoUtil {
             parametro.setBloqueada("SI");
         }
 
-        ParametroPersistence parametroPersistence
-                = ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser());
+        ParametroRepository parametroRepository
+                = ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser());
 
         String parAgno = "agno_mat";
         String parSem = "sem_mat";
@@ -224,8 +224,8 @@ public final class CommonAlumnoUtil {
             parSem = "sem_mat_nvos";
         }
 
-        parametro.setAgnoMat(valueOf(parametroPersistence.find(parAgno).getParValor()));
-        parametro.setSemMat(valueOf(parametroPersistence.find(parSem).getParValor()));
+        parametro.setAgnoMat(valueOf(parametroRepository.find(parAgno).getParValor()));
+        parametro.setSemMat(valueOf(parametroRepository.find(parSem).getParValor()));
 
         return parametro;
     }
@@ -250,19 +250,19 @@ public final class CommonAlumnoUtil {
 
         ws.setTmaterialSelectOption(ContextUtil.getTipoMaterialMap().get("AL"));
         setTipoCursos(ws);
-        ws.setMencionInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetPersistence("AL").find(
+        ws.setMencionInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetRepository("AL").find(
                 aluCar.getPlan()));
 
         InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
         insSup.setSctNivel();
-        ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+        ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
     }
 
     public static boolean login(Integer rut, String passwd, String key, Map<String, Object> sesion, Integer flag) {
 
-        AlumnoPersistence alumnoPersistence
-                = ContextUtil.getDAO().getAlumnoPersistence("AL");
-        Alumno alumno = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? alumnoPersistence.find(rut, passwd) : alumnoPersistence.find(rut);
+        AlumnoRepository alumnoRepository
+                = ContextUtil.getDAO().getAlumnoRepository("AL");
+        Alumno alumno = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? alumnoRepository.find(rut, passwd) : alumnoRepository.find(rut);
 
         if (alumno != null) {
             GenericSession genericSession = new GenericSession("AL", rut, passwd, flag);
@@ -272,7 +272,7 @@ public final class CommonAlumnoUtil {
             AlumnoSession alumnoSession = new AlumnoSession();
             alumnoSession.setAlumno(alumno);
 
-            alumnoPersistence.setLastLogin(rut);
+            alumnoRepository.setLastLogin(rut);
 
             genericSession.setDv(alumno.getAluDv());
             genericSession.setPaterno(alumno.getAluPaterno());
@@ -318,7 +318,7 @@ public final class CommonAlumnoUtil {
 
     public static void resetWorkSession(GenericSession genericSession, AlumnoSession alumnoSession, String key, String user) {
         WorkSession wsOld = genericSession.getWorkSession(key);
-        AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(user).find(wsOld.getAluCar().getId());
+        AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(user).find(wsOld.getAluCar().getId());
         WorkSession wsNew = new WorkSession(user);
         genericSession.setSessionMap(new HashMap<>());
         genericSession.getSessionMap().put(key, wsNew);
@@ -334,11 +334,11 @@ public final class CommonAlumnoUtil {
         Integer agnoEnc = aluCar.getParametros().getAgnoEnc();
         Integer semEnc = aluCar.getParametros().getSemEnc();
 
-        EncuestaDocente encuesta = ContextUtil.getDAO().getEncuestaDocentePersistence(ActionUtil.getDBUser()).find(agnoEnc, semEnc, aluCar.getPlan().getMencion().getId().getMenCodCar(), aluCar.getAcaCodMen(), tipo);
+        EncuestaDocente encuesta = ContextUtil.getDAO().getEncuestaDocenteRepository(ActionUtil.getDBUser()).find(agnoEnc, semEnc, aluCar.getPlan().getMencion().getId().getMenCodCar(), aluCar.getAcaCodMen(), tipo);
 
         if (encuesta != null) {
             ws.setEncuestaDocente(encuesta);
-            List<CursoProfesor> cursoProfesorList = ContextUtil.getDAO().getCursoProfesorPersistence(ActionUtil.getDBUser()).getCursosEncuesta(aluCar.getId(), agnoEnc, semEnc);
+            List<CursoProfesor> cursoProfesorList = ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).getCursosEncuesta(aluCar.getId(), agnoEnc, semEnc);
 
             evitarLazyCursoProf(cursoProfesorList);
             ws.setCursoProfesorList(cursoProfesorList);
@@ -357,14 +357,14 @@ public final class CommonAlumnoUtil {
         Integer agnoEnc = aluCar.getParametros().getAgnoEnc();
         Integer semEnc = aluCar.getParametros().getSemEnc();
 
-        EncuestaAyudante encuesta = ContextUtil.getDAO().getEncuestaAyudantePersistence(ActionUtil.getDBUser()).find(
+        EncuestaAyudante encuesta = ContextUtil.getDAO().getEncuestaAyudanteRepository(ActionUtil.getDBUser()).find(
                 agnoEnc, semEnc, aluCar.getPlan().getMencion().getId().getMenCodCar(),
                 aluCar.getAcaCodMen(), tipo);
 
         if (encuesta != null) {
             ws.setEncuestaAyudante(encuesta);
 
-            List<CursoAyudante> cursoAyudanteList = ContextUtil.getDAO().getCursoAyudantePersistence(ActionUtil.getDBUser()).getCursosEncuesta(
+            List<CursoAyudante> cursoAyudanteList = ContextUtil.getDAO().getCursoAyudanteRepository(ActionUtil.getDBUser()).getCursosEncuesta(
                     aluCar.getId(), agnoEnc, semEnc);
 
             evitarLazyCursoAyudante(cursoAyudanteList);
@@ -386,10 +386,10 @@ public final class CommonAlumnoUtil {
     public static List<RequisitoLogroAdicional> getRequisitoLogroAdicionalList(AluCar aluCar) {
         // Obtener las listas de persistencia
         List<RequisitoLogroAdicional> requisitoLogroAdicionalList
-                = ContextUtil.getDAO().getRequisitoGradoTituloAdicPersistence(ActionUtil.getDBUser()).find(aluCar);
+                = ContextUtil.getDAO().getRequisitoGradoTituloAdicRepository(ActionUtil.getDBUser()).find(aluCar);
 
         List<CalificacionLogroAdicional> lCalificacion
-                = ContextUtil.getDAO().getCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).find(aluCar);
+                = ContextUtil.getDAO().getCalificacionAdicionalLogroRepository(ActionUtil.getDBUser()).find(aluCar);
 
         // Ordenar las calificaciones
         lCalificacion.sort(new CalificacionLogroAdicionalComparable());

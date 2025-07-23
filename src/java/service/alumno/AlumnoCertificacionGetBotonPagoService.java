@@ -49,7 +49,7 @@ public class AlumnoCertificacionGetBotonPagoService {
 
             Integer idTran = FormatUtil.Base64toInt(pago.getTransaction_number());
 
-            ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).createPago(as.getCorrelCert(), idTran);
+            ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).createPago(as.getCorrelCert(), idTran);
 
             return pago.getUrl_payment();
         } catch (Exception e) {

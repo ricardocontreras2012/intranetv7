@@ -7,7 +7,7 @@ package service.registradorcurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import domain.repository.ExternoPersistence;
+import domain.repository.ExternoRepository;
 import session.GenericSession;
 import session.RegistradorSession;
 import session.WorkSession;
@@ -35,20 +35,20 @@ public final class RegistradorCurricularUserExternoRemoveService {
      */
     public String service(GenericSession genericSession, RegistradorSession registradorSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ExternoPersistence externoPersistence
-                = ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser());
+        ExternoRepository externoRepository
+                = ContextUtil.getDAO().getExternoRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
 
         for (int i = 0; i < ws.getSentMsgs().size(); i++) {
             if (parameters.get("ck_" + i) != null) {
-                externoPersistence.makeTransient(
+                externoRepository.makeTransient(
                         registradorSession.getExternoList().get(i));
             }
         }
 
         commitTransaction();
-        registradorSession.setExternoList(externoPersistence.find());
+        registradorSession.setExternoList(externoRepository.find());
 
         return SUCCESS;
     }

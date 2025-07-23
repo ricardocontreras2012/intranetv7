@@ -103,7 +103,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
 
         Integer genera = genericSession.getRut();
         Unidad facultad = aca.getUnidadFacultad();
-        String iniciales = ContextUtil.getDAO().getScalarPersistence("TG").getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados");
+        String iniciales = ContextUtil.getDAO().getScalarRepository("TG").getIniciales(genericSession.getRut(), "Funcionario de Títulos y Grados");
         String codigo = CommonCertificacionUtil.getVerificador(folio);
         Date fecha = getSysdate();
 
@@ -197,7 +197,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
     private void putCalificacionesMalla(Document doc, AluCar aluCar) {
         AluCarId id = aluCar.getId();
         List<CalificacionCertificacionSupport> cartola
-                = delExentos(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).getI4NotasMalla(
+                = delExentos(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).getI4NotasMalla(
                         id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(),
                         id.getAcaSemIng(), aluCar.getAcaCodMen(),
                         aluCar.getAcaCodPlan()));
@@ -206,7 +206,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
     }
 
     private void putCalificacionesAdicionales(Document doc, AluCar aluCar) {
-        List<CalificacionCertificacionSupport> adicionales = ContextUtil.getDAO().getCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).findAprobadas(aluCar);
+        List<CalificacionCertificacionSupport> adicionales = ContextUtil.getDAO().getCalificacionAdicionalLogroRepository(ActionUtil.getDBUser()).findAprobadas(aluCar);
 
         if (!adicionales.isEmpty()) {
             PdfUtil.putBlank(doc, TA_8);
@@ -218,7 +218,7 @@ public final class TitulosyGradosAlumnoInformeCalificacionesPrintService {
 
     private void putCalificacionesOtras(Document doc, AluCar aluCar) {
         AluCarId id = aluCar.getId();
-        List<CalificacionCertificacionSupport> otras = delExentos(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).getI4NotasOtras(
+        List<CalificacionCertificacionSupport> otras = delExentos(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).getI4NotasOtras(
                 id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(),
                 id.getAcaSemIng(), aluCar.getAcaCodMen(),
                 aluCar.getAcaCodPlan()));

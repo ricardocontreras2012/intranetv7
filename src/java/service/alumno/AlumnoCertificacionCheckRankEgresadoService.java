@@ -27,13 +27,13 @@ public class AlumnoCertificacionCheckRankEgresadoService {
         AluCar aluCar = ws.getAluCar();
         AluCarId id = ws.getAluCar().getId();
 
-        String prom = String.format("%.1f", ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).getPromedioEgreso(id, aluCar.getAcaCodMen(), aluCar.getAcaCodPlan()));
-        String rankTmp = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getRankingEgresado(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng());
+        String prom = String.format("%.1f", ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).getPromedioEgreso(id, aluCar.getAcaCodMen(), aluCar.getAcaCodPlan()));
+        String rankTmp = ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getRankingEgresado(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng());
         String rank = "Ordenados los alumnos que ingresaron en su promoción, según su promedio final de notas " + prom + " ocupó el lugar N° " + rankTmp.substring(0, rankTmp.indexOf("->")) + " alumnos.";
         as.setRank(rank);
 
         if (aluCar.getAcaCodMen() > 0) {
-            rankTmp = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getRankingEgresadoMencion(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng(), aluCar.getAcaCodMen());
+            rankTmp = ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getRankingEgresadoMencion(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng(), aluCar.getAcaCodMen());
             String rankMencion = "Ordenados los alumnos que ingresaron en su promoción, según su promedio final de notas " + prom + " ocupó el lugar N° " + rankTmp.substring(0, rankTmp.indexOf("->")) + " alumnos.";
             as.setRankMencion(rankMencion);
         }

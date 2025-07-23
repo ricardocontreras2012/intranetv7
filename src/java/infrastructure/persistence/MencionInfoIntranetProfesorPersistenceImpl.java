@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MencionInfoIntranetProfesorPersistence;
+import domain.repository.MencionInfoIntranetProfesorRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -21,7 +21,7 @@ import domain.model.MencionInfoIntranetProfesorView;
  */
 public final class MencionInfoIntranetProfesorPersistenceImpl
         extends CrudAbstractDAO<MencionInfoIntranetProfesorView, Long>
-        implements MencionInfoIntranetProfesorPersistence {
+        implements MencionInfoIntranetProfesorRepository {
 
     /**
      * Method description

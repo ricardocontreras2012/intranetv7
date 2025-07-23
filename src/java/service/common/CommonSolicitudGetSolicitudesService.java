@@ -61,7 +61,7 @@ public final class CommonSolicitudGetSolicitudesService {
             fechaFinal = DateUtil.stringToDate(ws.getFechaTermino());
         }
 
-        ws.setSolicitudList(ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).findSolicitudBetweenDates(genericSession.getRut(), genericSession.getUserType(), estado, fechaInicio, fechaFinal));
+        ws.setSolicitudList(ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).findSolicitudBetweenDates(genericSession.getRut(), genericSession.getUserType(), estado, fechaInicio, fechaFinal));
         LogUtil.setLog(genericSession.getRut());
 
         return SUCCESS;

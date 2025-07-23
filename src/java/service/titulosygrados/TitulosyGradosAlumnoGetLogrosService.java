@@ -20,7 +20,7 @@ public class TitulosyGradosAlumnoGetLogrosService {
 
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).find(ws.getAluCar()));
+        ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).find(ws.getAluCar()));
 
         LogUtil.setLog(genericSession.getRut(), ws.getAluCar().getId().getAcaRut());
         return SUCCESS;

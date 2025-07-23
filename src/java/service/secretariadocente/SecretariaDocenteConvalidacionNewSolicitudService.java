@@ -36,7 +36,7 @@ public class SecretariaDocenteConvalidacionNewSolicitudService {
     public String service(GenericSession genericSession, SecretariaSession secreSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
-        secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(ActionUtil.getDBUser()).getPorConvalidar(aluCar));
+        secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(ActionUtil.getDBUser()).getPorConvalidar(aluCar));
 
         CommonUtil.setAgnoSemAct(ws);
         ConvalidacionSolicitud solicitud = new ConvalidacionSolicitud();

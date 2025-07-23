@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AdministrativoPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Administrativo;
 import org.hibernate.Criteria;
@@ -15,6 +14,7 @@ import static org.hibernate.criterion.Restrictions.idEq;
 import static org.hibernate.criterion.Restrictions.sqlRestriction;
 import org.hibernate.type.StringType;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AdministrativoRepository;
 
 /**
  * Class description
@@ -23,7 +23,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class AdministrativoPersistenceImpl extends CrudAbstractDAO<Administrativo, Long>
-        implements AdministrativoPersistence {
+        implements AdministrativoRepository {
 
     /**
      * Method description

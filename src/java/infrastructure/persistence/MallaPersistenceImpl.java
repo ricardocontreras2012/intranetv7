@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MallaPersistence;
+import domain.repository.MallaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -28,7 +28,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> implements MallaPersistence {
+public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> implements MallaRepository {
 
     @SuppressWarnings("unchecked")
     @Override

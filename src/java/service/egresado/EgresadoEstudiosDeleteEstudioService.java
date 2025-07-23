@@ -36,10 +36,10 @@ public class EgresadoEstudiosDeleteEstudioService {
      */
     public String service(ActionCommonSupport action, GenericSession genericSession, Integer correl) {
         String user = ActionUtil.getDBUser();
-        Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(user).getMisDatos(genericSession.getRut());
+        Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(user).getMisDatos(genericSession.getRut());
 
         beginTransaction(user);
-        ContextUtil.getDAO().getFichaEstudioPersistence(user).deleteEstudio(
+        ContextUtil.getDAO().getFichaEstudioRepository(user).deleteEstudio(
             correl, alumno.getAluRut());
         commitTransaction();
         action.addActionMessage(action.getText("message.datos.borrados"));

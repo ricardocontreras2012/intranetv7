@@ -5,18 +5,18 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AreaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Area;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AreaRepository;
 
 /**
  *
  * @author Usach
  */
-public class AreaPersistenceImpl extends CrudAbstractDAO<Area, Long> implements AreaPersistence {
+public class AreaPersistenceImpl extends CrudAbstractDAO<Area, Long> implements AreaRepository {
 
     @SuppressWarnings("unchecked")
     @Override

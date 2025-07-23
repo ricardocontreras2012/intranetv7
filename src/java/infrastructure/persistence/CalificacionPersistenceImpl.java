@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CalificacionPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -27,6 +26,7 @@ import org.hibernate.type.Type;
 import infrastructure.support.CalificacionCertificacionSupport;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import domain.repository.CalificacionRepository;
 
 /**
  * Class description
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * @version 7, 24/05/2012
  */
 public final class CalificacionPersistenceImpl extends CrudAbstractDAO<Calificacion, Long>
-        implements CalificacionPersistence {
+        implements CalificacionRepository {
 
     /**
      * Method description

@@ -76,8 +76,8 @@ public class AlumnoSolicitudRetiroConstanciaService {
         new SolicitudSupport(solicitud).setAprobada();
         
         HibernateUtil.beginTransaction(user);               
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).save(solicitud);
-        ContextUtil.getDAO().getSacarreraPersistence(user).retiroSinExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), sol);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).save(solicitud);
+        ContextUtil.getDAO().getSacarreraRepository(user).retiroSinExp(aluCar.getId(), ws.getAgnoAct(), ws.getSemAct(), sol);
         HibernateUtil.commitTransaction();
 
         String verificador = CommonCertificacionUtil.getVerificador(folio);

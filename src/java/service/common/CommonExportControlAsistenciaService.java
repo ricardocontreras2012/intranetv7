@@ -195,7 +195,7 @@ public final class CommonExportControlAsistenciaService {
 
         int filaAux = fila;
         for(String dia : new String[] {"L", "M", "W", "J", "V", "S"}) {
-            List<Horario> listaHorario = ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).getHorarioFAEByAgnoSem(agno, sem, dia);
+            List<Horario> listaHorario = ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).getHorarioFAEByAgnoSem(agno, sem, dia);
 
             for (Horario horario : listaHorario) {
                 XSSFRow rowExcel = hoja.createRow(filaAux);

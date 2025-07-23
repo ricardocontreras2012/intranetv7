@@ -47,8 +47,8 @@ public class CommonPracticaSaveResolucionPracticaService {
             }
 
             beginTransaction(ActionUtil.getDBUser());
-            ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).makePersistent(sol);
-            ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).resolver(practica);
+            ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).makePersistent(sol);
+            ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).resolver(practica);
             commitTransaction();
 
         }

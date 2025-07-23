@@ -18,7 +18,7 @@ public class SecretariaProyectosConvenioGetCursosAyudanteService {
  public String service(GenericSession genericSession, Integer rut,
             Integer agno, Integer sem, String proyecto, String key) {
 
-        genericSession.getWorkSession(key).setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findAyudantia(rut, agno, sem, proyecto));
+        genericSession.getWorkSession(key).setCursoList(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findAyudantia(rut, agno, sem, proyecto));
         return Action.SUCCESS;
     }
 }

@@ -27,7 +27,7 @@ public class ProfesorHorarioComunService {
 
         Curso curso = ws.getCurso();
 
-        String hor = ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).getHorarioCoumn(curso.getId());
+        String hor = ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).getHorarioCoumn(curso.getId());
         ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioList(ws.getCursoList()));
         ps.setHorarioComun(hor);        
         

@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.DocenteHorarioPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.DocenteHorario;
@@ -15,6 +14,7 @@ import static org.hibernate.FetchMode.JOIN;
 import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.DocenteHorarioRepository;
 
 /**
  * Class description
@@ -23,7 +23,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<DocenteHorario, Long>
-        implements DocenteHorarioPersistence {
+        implements DocenteHorarioRepository {
 
     @SuppressWarnings("unchecked")
     @Override

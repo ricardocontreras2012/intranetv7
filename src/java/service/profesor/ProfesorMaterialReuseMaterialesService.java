@@ -4,7 +4,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Curso;
 import domain.model.MaterialApoyo;
 import java.util.Map;
-import domain.repository.MaterialApoyoPersistence;
+import domain.repository.MaterialApoyoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import static infrastructure.util.AppStaticsUtil.APP_DB_USERS;
@@ -54,7 +54,7 @@ public final class ProfesorMaterialReuseMaterialesService {
                             .forEach(j -> {
                                 MaterialApoyo material = ws.getOtrosTmaterial().get(i).getMateriales().get(j);
                                 doReuse(material, genericSession.getUserType(), curso,
-                                        ContextUtil.getDAO().getMaterialApoyoPersistence(ActionUtil.getDBUser()));
+                                        ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser()));
                             });
                 });
 
@@ -73,10 +73,10 @@ public final class ProfesorMaterialReuseMaterialesService {
      * @param materialBase El material base que se va a reutilizar.
      * @param userTypeShort El tipo de usuario (profesor, alumno, etc.).
      * @param curso El curso al que se va a asociar el material.
-     * @param materialPersistence La persistencia para almacenar el material.
+     * @param materialRepository La persistencia para almacenar el material.
      */
     private void doReuse(MaterialApoyo materialBase, String userTypeShort, Curso curso,
-            MaterialApoyoPersistence materialPersistence) {
+            MaterialApoyoRepository materialRepository) {
         Integer folio = CommonSequenceUtil.getDocumentSeq();
         MaterialApoyo material = new MaterialApoyo();
 
@@ -92,6 +92,6 @@ public final class ProfesorMaterialReuseMaterialesService {
         material.setMatFechaHabilitacion(getSysdate());
 
         // Guarda el nuevo material reutilizado
-        materialPersistence.makePersistent(material);
+        materialRepository.makePersistent(material);
     }
 }

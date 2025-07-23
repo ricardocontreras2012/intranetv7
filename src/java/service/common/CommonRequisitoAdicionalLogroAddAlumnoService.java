@@ -42,7 +42,7 @@ public final class CommonRequisitoAdicionalLogroAddAlumnoService {
         String retValue = SUCCESS;
         Alumno alumno = genericSession.getWorkSession(key).getAlumno();
         WorkSession wsParent = genericSession.getWorkSession(keyParent);
-        List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).findActivo(
+        List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).findActivo(
                         alumno.getAluRut(),
                         wsParent.getMiCarreraSupport().getTcrCtip(),
                         wsParent.getMiCarreraSupport().getEspCod(),
@@ -53,9 +53,9 @@ public final class CommonRequisitoAdicionalLogroAddAlumnoService {
             retValue = "notFound";
         } else {
             AluCarId aluCarId = aluCarList.get(0).getId();
-            AluCar aluCar = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(aluCarId);
+            AluCar aluCar = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(aluCarId);
 
-            if (ContextUtil.getDAO().getCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).puedeInscribirAdicional(
+            if (ContextUtil.getDAO().getCalificacionAdicionalLogroRepository(ActionUtil.getDBUser()).puedeInscribirAdicional(
                             aluCar, wsParent.getTrequisitoLogroAdicional().getTrlaCod())) {
                 InscripcionAdicionalLogroId inscripcionAdicionalId = new InscripcionAdicionalLogroId();
 

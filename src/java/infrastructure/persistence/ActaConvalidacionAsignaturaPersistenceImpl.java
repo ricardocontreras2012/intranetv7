@@ -5,19 +5,19 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActaConvalidacionAsignaturaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ActaConvalidacionAsignatura;
 import java.math.BigDecimal;
 import org.hibernate.Query;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ActaConvalidacionAsignaturaRepository;
 
 /**
  *
  * @author Ricardo Contreras S.
  */
 public class ActaConvalidacionAsignaturaPersistenceImpl extends CrudAbstractDAO<ActaConvalidacionAsignatura, Long>
-        implements ActaConvalidacionAsignaturaPersistence {
+        implements ActaConvalidacionAsignaturaRepository {
 
     /**
      *

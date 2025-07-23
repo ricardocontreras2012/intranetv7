@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PasswordTicketPersistence;
+import domain.repository.PasswordTicketRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.PasswordTicket;
 import static java.lang.String.valueOf;
@@ -21,7 +21,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class PasswordTicketPersistenceImpl extends CrudAbstractDAO<PasswordTicket, Long>
-        implements PasswordTicketPersistence {
+        implements PasswordTicketRepository {
 
     /**
      * Method description

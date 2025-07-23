@@ -43,13 +43,13 @@ public class TitulosyGradosNominaAddAlumnoService {
         ExpedienteLogroId id = new ExpedienteLogroId();
 
         expediente.setAluCar(ws.getAluCar());
-        expediente.setExplRol(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getRol(ws.getAluCar().getId().getAcaRut()));
+        expediente.setExplRol(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getRol(ws.getAluCar().getId().getAcaRut()));
         expediente.setNomina(ws.getExpedienteLogro().getNomina());
         expediente.setPlanLogro(ws.getExpedienteLogro().getPlanLogro());
         expediente.setId(id);
 
         List<PlanLogro> logros
-                = ContextUtil.getDAO().getPlanLogroPersistence(ActionUtil.getDBUser()).find(ws.getAluCar().getId(), ws.getAluCar().getPlan().getId(), expediente.getPlanLogro().getLogro().getLogrCod());
+                = ContextUtil.getDAO().getPlanLogroRepository(ActionUtil.getDBUser()).find(ws.getAluCar().getId(), ws.getAluCar().getPlan().getId(), expediente.getPlanLogro().getLogro().getLogrCod());
 
         /// OJO Puede que haya mas de una (caso diplomados de carrera de derecho) En ese caso hay que retornar multiples valores
         if (logros != null && !logros.isEmpty()) {

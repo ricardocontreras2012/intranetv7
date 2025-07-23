@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.LogroPersistence;
+import domain.repository.LogroRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Logro;
 import java.util.List;
@@ -18,7 +18,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author rcontreras
  */
 public class LogroPersistenceImpl extends CrudAbstractDAO<Logro, Long>
-        implements LogroPersistence {
+        implements LogroRepository {
 
     @SuppressWarnings("unchecked")
     @Override

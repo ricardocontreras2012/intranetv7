@@ -46,7 +46,7 @@ public class AlumnoLoginStackSeleccionarIngresoService {
 
         // Recuperar la lista de registros de matrícula del alumno
         List<AluCar> aluCarList = ContextUtil.getDAO()
-                .getAluCarPersistence(ActionUtil.getDBUser())
+                .getAluCarRepository(ActionUtil.getDBUser())
                 .find(genericSession.getRut());
 
         // Verificar si se encontraron registros

@@ -32,9 +32,9 @@ public class EgresadoEstudiosNewEstudioService {
         /*
          * WorkSession ws = genericSession.getWorkSession(key);
          * Integer agnoMat;
-         * ParametroPersistence parametroPersistence
-         *           = ContextUtil.getDAO().getParametroPersistence(AppStaticsUtil.USER_TYPE_COMMON);
-         * agnoMat = Integer.valueOf(parametroPersistence.find("agno_mat").getParValor());
+         * ParametroRepository parametroRepository
+         *           = ContextUtil.getDAO().getParametroRepository(AppStaticsUtil.USER_TYPE_COMMON);
+         * agnoMat = Integer.valueOf(parametroRepository.find("agno_mat").getParValor());
          * ws.getFechaActual();
          */
         return SUCCESS;

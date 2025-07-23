@@ -33,8 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getServletContext;
-import domain.repository.ComentarioEncuestaDocentePersistence;
-import domain.repository.RespEnctaCursoPersistence;
+import domain.repository.RespEnctaCursoRepository;
 import session.AlumnoSession;
 import session.GenericSession;
 import session.WorkSession;
@@ -49,6 +48,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import domain.repository.ComentarioEncuestaDocenteRepository;
 
 /**
  *
@@ -124,14 +124,14 @@ public class CommonEncuestaUtil {
             Document document, PdfContentByte cb, Image image) {
 
         try {
-            RespEnctaCursoPersistence respEnctaCursoPersistence
-                    = ContextUtil.getDAO().getRespEnctaCursoPersistence(ActionUtil.getDBUser());
-            ComentarioEncuestaDocentePersistence comenEnctaPersistence
-                    = ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser());
+            RespEnctaCursoRepository respEnctaCursoRepository
+                    = ContextUtil.getDAO().getRespEnctaCursoRepository(ActionUtil.getDBUser());
+            ComentarioEncuestaDocenteRepository comenEnctaRepository
+                    = ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(ActionUtil.getDBUser());
 
             /// OJO puse 0 e I mientras
-            List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoPersistence.find(curso.getId(), 0, "I");
-            List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaPersistence.find(curso, 0, "I");
+            List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoRepository.find(curso.getId(), 0, "I");
+            List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaRepository.find(curso, 0, "I");
 
             if (n > 0) {
                 document.newPage();
@@ -687,7 +687,7 @@ public class CommonEncuestaUtil {
         if (encuesta != null && !ws.getCursoProfesorList().isEmpty()) {
             ws.setCursoProfesor(ws.getCursoProfesorList().get(0));
             if (ws.getPreguntasEncuesta() == null) {
-                ws.setPreguntasEncuesta(ContextUtil.getDAO().getPregEnctaPersistence(ActionUtil.getDBUser()).find(encuesta));
+                ws.setPreguntasEncuesta(ContextUtil.getDAO().getPregEnctaRepository(ActionUtil.getDBUser()).find(encuesta));
             }
         } else {
             retValue = "stack";
@@ -700,8 +700,8 @@ public class CommonEncuestaUtil {
         if (encuesta != null) {
             while (!cursoList.isEmpty()) {
                 // EncuestaDocente ya esta contestada?
-                alumnoSession.setCantEncuestasPorContestar(ContextUtil.getDAO().getRespuestaEncuestaDocentePersistence(ActionUtil.getDBUser()).find(aluCar, encuesta) / encuesta.getEdoNroPreg());
-                if (ContextUtil.getDAO().getRespuestaEncuestaDocentePersistence(ActionUtil.getDBUser()).find(aluCar, encuesta, cursoList.get(0)).isEmpty()) {
+                alumnoSession.setCantEncuestasPorContestar(ContextUtil.getDAO().getRespuestaEncuestaDocenteRepository(ActionUtil.getDBUser()).find(aluCar, encuesta) / encuesta.getEdoNroPreg());
+                if (ContextUtil.getDAO().getRespuestaEncuestaDocenteRepository(ActionUtil.getDBUser()).find(aluCar, encuesta, cursoList.get(0)).isEmpty()) {
                     cursoList.remove(0);
                 } else {
                     break;

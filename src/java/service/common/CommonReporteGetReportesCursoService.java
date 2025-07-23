@@ -34,7 +34,7 @@ public final class CommonReporteGetReportesCursoService {
 
         CursoId id = CommonCursoUtil.getParent(ws.getCurso(), ws.getCargaEspejo());
 
-        genericSession.getWorkSession(key).setReportes(ContextUtil.getDAO().getReporteClasePersistence(ActionUtil.getDBUser()).find(id));
+        genericSession.getWorkSession(key).setReportes(ContextUtil.getDAO().getReporteClaseRepository(ActionUtil.getDBUser()).find(id));
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());
 
         return SUCCESS;

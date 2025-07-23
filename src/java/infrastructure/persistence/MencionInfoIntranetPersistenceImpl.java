@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MencionInfoIntranetPersistence;
+import domain.repository.MencionInfoIntranetRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.MencionInfoIntranet;
 import domain.model.Plan;
@@ -19,7 +19,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class MencionInfoIntranetPersistenceImpl extends CrudAbstractDAO<MencionInfoIntranet, Long>
-        implements MencionInfoIntranetPersistence {
+        implements MencionInfoIntranetRepository {
 
     /**
      * Method description

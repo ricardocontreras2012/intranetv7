@@ -21,7 +21,7 @@ public class CommonPasswordAskNewPasswordService {
     public String service(ActionPostCommonSupport action, int rut, String user) throws Exception {
   
         String retValue;
-        String email = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getEmail(rut);       
+        String email = ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getEmail(rut);       
         
         if (email != null && !"".equals(email)) {                        
             sendURLNewPassword(rut, user, email);

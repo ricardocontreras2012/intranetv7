@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.InscripcionPersistence;
+import domain.repository.InscripcionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -33,7 +33,7 @@ import org.hibernate.type.Type;
  * @version 7, 24/05/2012
  */
 public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcion, Long>
-        implements InscripcionPersistence {
+        implements InscripcionRepository {
 
     @SuppressWarnings("unchecked")
     @Override

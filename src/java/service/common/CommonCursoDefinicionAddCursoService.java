@@ -72,7 +72,7 @@ public final class CommonCursoDefinicionAddCursoService {
 
         cupo = ObjectUtils.defaultIfNull(cupo, 0);
 
-        String result = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).addCurso(asign, elect, coord, secc, ws.getAgnoAct(), ws.getSemAct(), electivo, cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
+        String result = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).addCurso(asign, elect, coord, secc, ws.getAgnoAct(), ws.getSemAct(), electivo, cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
 
         CommonCursoUtil.getCursos(genericSession, "*", key); //Cerrados
         if ("OK".equals(result)) {

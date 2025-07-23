@@ -46,7 +46,7 @@ public final class ProfesorActaGetActaService {
             Curso curso = ws.getCurso();
             
             // Obtener la lista de actas generadas para el curso
-            List<ActaNominaView> actaList = ContextUtil.getDAO().getActaNominaPersistenceView(ActionUtil.getDBUser()).find(curso.getId());
+            List<ActaNominaView> actaList = ContextUtil.getDAO().getActaNominaViewRepository(ActionUtil.getDBUser()).find(curso.getId());
             String retValue;
 
             // Verificar si la lista de actas está vacía

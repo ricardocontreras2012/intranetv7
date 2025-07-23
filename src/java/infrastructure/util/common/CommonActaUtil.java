@@ -21,7 +21,7 @@ public class CommonActaUtil {
      * @return
      */
     public static Integer getFolio(String user) {
-        return ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaActa();
+        return ContextUtil.getDAO().getScalarRepository(user).getSecuenciaActa();
     }
 
     public static ActaConsultaSupport newActaView(ActaCalificacionId id,

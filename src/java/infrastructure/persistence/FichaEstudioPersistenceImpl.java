@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.FichaEstudioPersistence;
+import domain.repository.FichaEstudioRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.FichaEstudio;
 import java.util.List;
@@ -22,7 +22,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Alvaro Romero C.
  */
 public final class FichaEstudioPersistenceImpl extends CrudAbstractDAO<FichaEstudio, Long>
-        implements FichaEstudioPersistence {
+        implements FichaEstudioRepository {
 
     /**
      * Method description

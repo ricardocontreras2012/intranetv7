@@ -16,7 +16,7 @@ public class CommonSequenceUtil {
     
     static public Integer getDocumentSeq()
     {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaMaterial();
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaMaterial();
     }
     
 }

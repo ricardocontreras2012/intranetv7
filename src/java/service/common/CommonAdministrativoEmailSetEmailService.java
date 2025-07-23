@@ -34,7 +34,7 @@ public final class CommonAdministrativoEmailSetEmailService {
             String email) {
 
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getAdministrativoPersistence(ActionUtil.getDBUser()).setEmail(genericSession.getRut(), emailNormalizado(email));
+        ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser()).setEmail(genericSession.getRut(), emailNormalizado(email));
         commitTransaction();
         genericSession.setEmail(email);
         action.addActionMessage(action.getText("message.datos.grabados"));

@@ -33,7 +33,7 @@ public final class CommonAyudanteGetAyudanteService {
 
         if (!ws.getAyudanteList().isEmpty()) {
 
-            Ayudante ayudante = ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).findFull(
+            Ayudante ayudante = ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser()).findFull(
                             ws.getAyudanteList().get(pos).getAyuRut());
 
             ws.setAyudante(ayudante);

@@ -104,7 +104,7 @@ public class CommonSolicitudUtil {
             attach.setId(attachId);
 
             // Guardar el archivo adjunto en la base de datos
-            ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).save(attach);
+            ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).save(attach);
         });
 
         // Confirmar la transacción de Hibernate

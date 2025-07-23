@@ -9,7 +9,7 @@ package service.egresado;
 
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.FichaEstudioPersistence;
+import domain.repository.FichaEstudioRepository;
 import session.EgresadoSession;
 import session.GenericSession;
 import session.WorkSession;
@@ -35,10 +35,10 @@ public final class EgresadoEstudiosGetMisDatosService {
      */
     public String service(GenericSession genericSession, EgresadoSession es, String key) {
         WorkSession             ws             = genericSession.getWorkSession(key);
-        FichaEstudioPersistence fichaEstudioPersistence =
-            ContextUtil.getDAO().getFichaEstudioPersistence(ActionUtil.getDBUser());
+        FichaEstudioRepository fichaEstudioRepository =
+            ContextUtil.getDAO().getFichaEstudioRepository(ActionUtil.getDBUser());
 
-        es.setFichaEstudioList(fichaEstudioPersistence.find(ws.getAluCar().getAlumno().getAluRut()));
+        es.setFichaEstudioList(fichaEstudioRepository.find(ws.getAluCar().getAlumno().getAluRut()));
 
         return SUCCESS;
     }

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.UnidadPersistence;
+import domain.repository.UnidadRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Unidad;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.hibernate.type.StandardBasicTypes;
  *
  * @author Ricardo
  */
-public class UnidadPersistenceImpl extends CrudAbstractDAO<Unidad, Long> implements UnidadPersistence {
+public class UnidadPersistenceImpl extends CrudAbstractDAO<Unidad, Long> implements UnidadRepository {
 
     @Override
     public Unidad findById(Integer uniCod) {

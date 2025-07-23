@@ -55,7 +55,7 @@
                     <div class="col-sm-8">
                         <select id="tipo-select" name="tipo-select" class="form-select form-select-sm">
                             <%
-                                List<Logro> logros = ContextUtil.getDAO().getLogroPersistence(ActionUtil.getDBUser()).find();
+                                List<Logro> logros = ContextUtil.getDAO().getLogroRepository(ActionUtil.getDBUser()).find();
                                 for (Logro logro : logros) {
                                     out.println("<option value=" + logro.getLogrCod() + ">" + logro.getLogrDes() + "</option>");
                                 }

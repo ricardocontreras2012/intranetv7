@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ProyectoPersistence;
+import domain.repository.ProyectoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Proyecto;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.hibernate.type.Type;
  *
  * @author Ricardo
  */
-public class ProyectoPersistenceImpl extends CrudAbstractDAO<Proyecto, Long> implements ProyectoPersistence {
+public class ProyectoPersistenceImpl extends CrudAbstractDAO<Proyecto, Long> implements ProyectoRepository {
 
     @SuppressWarnings("unchecked")
     @Override

@@ -20,7 +20,7 @@ public class AlumnoSolicitudExpedienteLogradosService {
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroPersistence(ActionUtil.getDBUser()).findGeneradas(ws.getAluCar()));
+        ws.setExpedienteLogroList(ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).findGeneradas(ws.getAluCar()));
         
         return SUCCESS;
     }

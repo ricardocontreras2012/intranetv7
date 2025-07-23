@@ -12,7 +12,6 @@ import domain.model.ConvalidacionSolicitud;
 import domain.model.ConvalidacionSolicitudAsign;
 import java.math.BigDecimal;
 import java.util.Map;
-import domain.repository.ActaConvalidacionAsignaturaPersistence;
 import session.GenericSession;
 import session.SecretariaSession;
 import session.WorkSession;
@@ -24,6 +23,7 @@ import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonActaUtil;
 import java.util.List;
 import java.util.stream.IntStream;
+import domain.repository.ActaConvalidacionAsignaturaRepository;
 
 /**
  *
@@ -50,13 +50,13 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
         String user = ActionUtil.getDBUser();
         String retValue = SUCCESS;
 
-        ActaConvalidacionAsignaturaPersistence actaAsigPersistence
-                = ContextUtil.getDAO().getActaConvalidacionAsignaturaPersistence(user);
+        ActaConvalidacionAsignaturaRepository actaAsigRepository
+                = ContextUtil.getDAO().getActaConvalidacionAsignaturaRepository(user);
 
         if (aluCar.estaMatriculado(solicitud.getCosAgno(), solicitud.getCosSem())) {
             Integer folio;
             HibernateUtil.beginTransaction(user);
-            ContextUtil.getDAO().getConvalidacionSolicitudPersistence(user).setEstado(solicitud.getCosCorrel(), "E");
+            ContextUtil.getDAO().getConvalidacionSolicitudRepository(user).setEstado(solicitud.getCosCorrel(), "E");
 
             folio = crearActa(aluCar, solicitud.getCosAgno(), solicitud.getCosSem(), user);
             List<ConvalidacionSolicitudAsign> porAprobarList = secreSession.getPorAprobar();
@@ -72,7 +72,7 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
                             electivo = parameters.get("electivo_" + i)[0];
                         }
                         BigDecimal nota = (notaStr.isEmpty()) ? null : new BigDecimal(notaStr.replace(",", "."));
-                        actaAsigPersistence.convalidar(folio, asign, electivo, cursada, nota);
+                        actaAsigRepository.convalidar(folio, asign, electivo, cursada, nota);
                     });
 
             HibernateUtil.commitTransaction();
@@ -88,7 +88,7 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
 
     private Integer crearActa(AluCar aluCar, Integer agno, Integer sem, String user) {
         Integer folio = CommonActaUtil.getFolio(user);
-        ContextUtil.getDAO().getActaConvalidacionPersistence(user).crearActa(folio, agno, sem, aluCar.getId());
+        ContextUtil.getDAO().getActaConvalidacionRepository(user).crearActa(folio, agno, sem, aluCar.getId());
 
         return folio;
     }

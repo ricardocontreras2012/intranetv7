@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.AlumnoPersistence;
 import session.EgresadoSession;
 import session.GenericSession;
 import session.WorkSession;
@@ -23,6 +22,7 @@ import static infrastructure.util.ActionUtil.retError;
 import static infrastructure.util.AppStaticsUtil.ACTION_EXCEPTION;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.LogUtil;
+import domain.repository.AlumnoRepository;
 
 /**
  * Class description
@@ -48,9 +48,9 @@ public final class EgresadoLoginService {
         String user = ActionUtil.getDBUser();
 
         if (!sesion.isEmpty()) {
-            AlumnoPersistence alumnoPersistence
-                    = ContextUtil.getDAO().getAlumnoPersistence(user);
-            Alumno alumno = alumnoPersistence.find(rut, password);
+            AlumnoRepository alumnoRepository
+                    = ContextUtil.getDAO().getAlumnoRepository(user);
+            Alumno alumno = alumnoRepository.find(rut, password);
 
             if (alumno != null) {
                 GenericSession genericSession = new GenericSession(user, rut, password, 0);
@@ -61,9 +61,9 @@ public final class EgresadoLoginService {
 
                 EgresadoSession egresadoSession = new EgresadoSession();
                 egresadoSession.setAlumno(alumno);
-                alumnoPersistence.setLastLogin(rut);
+                alumnoRepository.setLastLogin(rut);
 
-                List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(user).findEgresado(rut);
+                List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarRepository(user).findEgresado(rut);
 
                 if ((aluCarList != null) && !aluCarList.isEmpty()) {
                     AluCar aluCar = aluCarList.iterator().next();
@@ -72,7 +72,7 @@ public final class EgresadoLoginService {
                     getComplemento(genericSession, aluCar, key);
 
                     genericSession.getWorkSession(key).setAluCarList(aluCarList);
-                    egresadoSession.setAgno(valueOf(ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser()).find("agno_act").getParValor()));
+                    egresadoSession.setAgno(valueOf(ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser()).find("agno_act").getParValor()));
 
                     //retValue = "multiplesIngresos";
                     getRequest().getSession().setMaxInactiveInterval(1800);

@@ -33,7 +33,7 @@ public final class CommonAlumnoGetAlumnoService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         if (!ws.getAlumnoList().isEmpty()) {
-            Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).findFull(
+            Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).findFull(
                             ws.getAlumnoList().get(pos).getAluRut());
 
             ws.setAlumno(alumno);

@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AluCarPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -19,6 +18,7 @@ import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.criterion.Restrictions.ge;
 import static org.hibernate.criterion.Restrictions.le;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AluCarRepository;
 
 /**
  * Class description
@@ -26,7 +26,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AluCarPersistenceImpl extends CrudAbstractDAO<AluCar, Long> implements AluCarPersistence {
+public final class AluCarPersistenceImpl extends CrudAbstractDAO<AluCar, Long> implements AluCarRepository {
 
     /**
      * Method description

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SolicitudPersistence;
+import domain.repository.SolicitudRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Solicitud;
@@ -33,7 +33,7 @@ import org.hibernate.type.Type;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class SolicitudPersistenceImpl extends CrudAbstractDAO<Solicitud, Long> implements SolicitudPersistence {
+public final class SolicitudPersistenceImpl extends CrudAbstractDAO<Solicitud, Long> implements SolicitudRepository {
 
     /**
      * Method description

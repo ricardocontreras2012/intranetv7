@@ -7,7 +7,7 @@ package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Profesor;
-import domain.repository.ProfesorPersistence;
+import domain.repository.ProfesorRepository;
 import session.GenericSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -28,9 +28,9 @@ public final class CommonProfesorGetMisDatosService {
      * @return Action status.
      */
     public String service(GenericSession genericSession, String key) {      
-        ProfesorPersistence profesorPersistence
-                = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
-        Profesor profesorAux = profesorPersistence.getMisDatos(genericSession.getRut());
+        ProfesorRepository profesorRepository
+                = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
+        Profesor profesorAux = profesorRepository.getMisDatos(genericSession.getRut());
         Profesor profesor = genericSession.getWorkSession(key).getProfesor();
 
 

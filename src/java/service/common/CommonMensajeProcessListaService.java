@@ -15,7 +15,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import static java.lang.String.valueOf;
 import java.util.*;
 import static java.util.Arrays.asList;
-import domain.repository.TmensajeDestinoPersistence;
+import domain.repository.TmensajeDestinoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import static infrastructure.support.LaborSupport.*;
@@ -361,14 +361,14 @@ public final class CommonMensajeProcessListaService {
      */
     private void listaOtros(GenericSession genericSession, MensajeNodeSupport node) {
         muestraListaOtros(node,
-                ContextUtil.getDAO().getTmensajeDestinoPersistence(ActionUtil.getDBUser()).findOtros(genericSession.getUserType()));
+                ContextUtil.getDAO().getTmensajeDestinoRepository(ActionUtil.getDBUser()).findOtros(genericSession.getUserType()));
     }
 
     private void listaFacultades(GenericSession genericSession, MensajeNodeSupport node) {
         node.setTerminal(true);
 
         List<Unidad> facultades = ContextUtil.getDAO()
-                .getUnidadPersistence(ActionUtil.getDBUser())
+                .getUnidadRepository(ActionUtil.getDBUser())
                 .findFacultad(genericSession.getRut(), genericSession.getUserType());
 
         facultades.forEach(fac -> addNode(node, fac.getUniCod().toString(), fac.getUniNom()));
@@ -384,7 +384,7 @@ public final class CommonMensajeProcessListaService {
 
         //OJO
         /*for (Departamento departamento
-                : getDAO().getDepartamentoPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut())) {
+                : getDAO().getDepartamentoRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut())) {
             addNode(node, departamento.getDeptCod().toString(), departamento.getDeptNom());
         }*/
     }
@@ -410,7 +410,7 @@ public final class CommonMensajeProcessListaService {
         node.setTerminal(true);
 
         ContextUtil.getDAO()
-                .getMencionPersistence(ActionUtil.getDBUser())
+                .getMencionRepository(ActionUtil.getDBUser())
                 .findCarrerasProgramas(userType, rut, flag)
                 .stream()
                 .sorted(Comparator.comparing(Mencion::getNombreCarreraFull))
@@ -427,7 +427,7 @@ public final class CommonMensajeProcessListaService {
         node.setTerminal(true);
 
         ContextUtil.getDAO()
-                .getUnidadPersistence(ActionUtil.getDBUser())
+                .getUnidadRepository(ActionUtil.getDBUser())
                 .findDeptos(rut, userType)
                 .forEach(depto
                         -> addNode(
@@ -582,7 +582,7 @@ public final class CommonMensajeProcessListaService {
         // Dependiendo del tipo de usuario, obtenemos el Stream de cursos adecuado
         Stream<Curso> cursoStream = asList("AL", "AY", "PR").contains(userType)
                 ? ws.getCursoList().stream()
-                : ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
+                : ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
                         .findxUser(genericSession.getRut(), userType).stream();
 
         // Recorremos el Stream y procesamos los cursos
@@ -602,7 +602,7 @@ public final class CommonMensajeProcessListaService {
      */
     private void listaCursos(GenericSession genericSession, MensajeNodeSupport node) {
         // Obtenemos el Stream de los cursos asociados al usuario
-        ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser())
+        ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
                 .findxUser(genericSession.getRut(), genericSession.getUserType())
                 .stream() // Convertimos la lista a un Stream
                 .forEach(curso -> {
@@ -634,7 +634,7 @@ public final class CommonMensajeProcessListaService {
         } else {
             // Obtener profesores específicos para el usuario
             List<Profesor> profesores = ContextUtil.getDAO()
-                    .getProfesorPersistence(ActionUtil.getDBUser())
+                    .getProfesorRepository(ActionUtil.getDBUser())
                     .findxUser(genericSession.getRut(), genericSession.getUserType());
 
             profesores.forEach(prof -> addNode(node,
@@ -650,7 +650,7 @@ public final class CommonMensajeProcessListaService {
         ws.getCursoList().stream()
                 .flatMap(curso
                         -> ContextUtil.getDAO()
-                        .getAyudantePersistence(ActionUtil.getDBUser())
+                        .getAyudanteRepository(ActionUtil.getDBUser())
                         .find(curso)
                         .stream()
                         .map(cursoAyudante
@@ -800,7 +800,7 @@ public final class CommonMensajeProcessListaService {
      */
     private void getBarra(MensajeNodeSupport node, String codigo) {
         List<MensajeNodeSupport> nodeListBar = ContextUtil.getDAO()
-                .getTmensajeBarraDestinoPersistence(ActionUtil.getDBUser())
+                .getTmensajeBarraDestinoRepository(ActionUtil.getDBUser())
                 .find(codigo)
                 .stream()
                 .map(tmensajeBarraDestino -> {
@@ -829,12 +829,12 @@ public final class CommonMensajeProcessListaService {
 
         mensajeSupport.setRootNode(rootNode);
         WorkSession ws = genericSession.getWorkSession(key);
-        TmensajeDestinoPersistence tmensajeDestinoPersistence
-                = ContextUtil.getDAO().getTmensajeDestinoPersistence(ActionUtil.getDBUser());
+        TmensajeDestinoRepository tmensajeDestinoRepository
+                = ContextUtil.getDAO().getTmensajeDestinoRepository(ActionUtil.getDBUser());
 
         tmensajeDestinoList = (ws.getCursoList() != null && !ws.getCursoList().isEmpty()) || PRIVILEGED_USERS.get(genericSession.getUserType()) != null
-                ? tmensajeDestinoPersistence.find(genericSession.getUserType())
-                : tmensajeDestinoPersistence.findSinCursos(genericSession.getUserType());
+                ? tmensajeDestinoRepository.find(genericSession.getUserType())
+                : tmensajeDestinoRepository.findSinCursos(genericSession.getUserType());
 
         tmensajeDestinoList.stream()
                 .filter(tmensajeDestino -> {

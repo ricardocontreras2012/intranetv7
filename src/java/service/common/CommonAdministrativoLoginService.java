@@ -4,7 +4,6 @@ import domain.model.Administrativo;
 import java.util.HashMap;
 import java.util.Map;
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.AdministrativoPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -15,6 +14,7 @@ import static infrastructure.util.ActionUtil.retReLogin;
 import infrastructure.util.ContextUtil;
 import java.util.Objects;
 import java.util.stream.Stream;
+import domain.repository.AdministrativoRepository;
 
 /**
  * Servicio para gestionar el inicio de sesión del administrativo.
@@ -40,8 +40,8 @@ public final class CommonAdministrativoLoginService {
             return retReLogin();
         }
 
-        AdministrativoPersistence admPersistence = ContextUtil.getDAO().getAdministrativoPersistence(ActionUtil.getDBUser());
-        Administrativo administrativo = admPersistence.find(rut, passwd);
+        AdministrativoRepository admRepository = ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser());
+        Administrativo administrativo = admRepository.find(rut, passwd);
         
         // Verificamos si el administrativo existe
         if (administrativo == null) {
@@ -56,7 +56,7 @@ public final class CommonAdministrativoLoginService {
         // Verificación de tipo de usuario
         if (administrativo.is(userType)) {
             // Configuración exitosa de la sesión
-            admPersistence.setLastLogin(rut);
+            admRepository.setLastLogin(rut);
             getComplemento(genericSession, administrativo);
 
             // Guardamos la sesión

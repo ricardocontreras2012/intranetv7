@@ -25,7 +25,7 @@ public final class CommonMensajeDownloadAttachFileService {
         String contentType;
         ActionInputStreamUtil ais= null;
         
-        if ( ContextUtil.getDAO().getMensajeAttachPersistence(ActionUtil.getDBUser()).find(
+        if ( ContextUtil.getDAO().getMensajeAttachRepository(ActionUtil.getDBUser()).find(
                 correl, file, key) != null) {                        
             input = CommonArchivoUtil.getFile(file, "msg");
             contentType = FormatUtil.getMimeType(file);

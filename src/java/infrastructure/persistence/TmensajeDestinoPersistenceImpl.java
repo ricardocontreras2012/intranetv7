@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TmensajeDestinoPersistence;
+import domain.repository.TmensajeDestinoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.TmensajeDestino;
 import domain.model.TmensajeOrigenDestino;
@@ -26,7 +26,7 @@ import static org.hibernate.criterion.Restrictions.le;
  * @version 7, 24/05/2012
  */
 public final class TmensajeDestinoPersistenceImpl extends CrudAbstractDAO<TmensajeDestino, Long>
-        implements TmensajeDestinoPersistence {
+        implements TmensajeDestinoRepository {
 
     /**
      * Method description

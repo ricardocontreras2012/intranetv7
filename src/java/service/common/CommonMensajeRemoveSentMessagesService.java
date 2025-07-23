@@ -8,7 +8,7 @@ package service.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Mensaje;
 import java.util.Map;
-import domain.repository.MensajePersistence;
+import domain.repository.MensajeRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -41,8 +41,8 @@ public final class CommonMensajeRemoveSentMessagesService {
      */
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key, int start, int length, String searchValue, String tipoOrder, String nombreDataColumnaActual) {
         WorkSession ws = genericSession.getWorkSession(key);
-        MensajePersistence mensajePersistence
-                = ContextUtil.getDAO().getMensajePersistence(ActionUtil.getDBUser());
+        MensajeRepository mensajeRepository
+                = ContextUtil.getDAO().getMensajeRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
    
@@ -51,11 +51,11 @@ public final class CommonMensajeRemoveSentMessagesService {
                 .forEach(i -> {
                     Mensaje msg = ws.getSentMsgs().get(i);
                     LogUtil.setLog(genericSession.getRut(), msg.getMsgCorrel());
-                    mensajePersistence.setDeleteSentMessage(msg);
+                    mensajeRepository.setDeleteSentMessage(msg);
                 });       
         
         commitTransaction();
-        ws.setSentMsgs(mensajePersistence.find(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
+        ws.setSentMsgs(mensajeRepository.find(genericSession.getRut(), start, length, searchValue, tipoOrder, nombreDataColumnaActual));
 
         return SUCCESS;
     }

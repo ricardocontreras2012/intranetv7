@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ComentarioEncuestaDocentePersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ComentarioEncuestaDocente;
 import domain.model.Curso;
@@ -17,6 +16,7 @@ import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.criterion.Restrictions.sqlRestriction;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ComentarioEncuestaDocenteRepository;
 
 /**
  * Class description
@@ -25,7 +25,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class ComentarioEncuestaDocentePersistenceImpl extends CrudAbstractDAO<ComentarioEncuestaDocente, Long>
-        implements ComentarioEncuestaDocentePersistence {
+        implements ComentarioEncuestaDocenteRepository {
 
     /**
      * Method description

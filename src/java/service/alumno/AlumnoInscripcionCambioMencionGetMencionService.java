@@ -20,7 +20,7 @@ public class AlumnoInscripcionCambioMencionGetMencionService {
         
         String men = MencionSupport.getMencion(aluCar.getId().getAcaCodCar(), mencion);
   
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).cambioMencion(
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).cambioMencion(
                 aluCar, alumnoSession.getCambioMencion(), aluCar.getParametros().getAgnoIns(), aluCar.getParametros().getSemIns());*/
         return SUCCESS;
     }

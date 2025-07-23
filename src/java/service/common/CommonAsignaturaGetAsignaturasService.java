@@ -26,7 +26,7 @@ public final class CommonAsignaturaGetAsignaturasService {
      * @return Action status.
      */
     public String service(GenericSession genericSession, String key) {
-        genericSession.getWorkSession(key).setAsignaturaList(ContextUtil.getDAO().getAsignaturaPersistence(ActionUtil.getDBUser()).find("P"));
+        genericSession.getWorkSession(key).setAsignaturaList(ContextUtil.getDAO().getAsignaturaRepository(ActionUtil.getDBUser()).find("P"));
 
         return SUCCESS;
     }

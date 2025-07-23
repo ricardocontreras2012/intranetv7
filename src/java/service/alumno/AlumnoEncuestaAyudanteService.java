@@ -12,7 +12,7 @@ import domain.model.CursoAyudante;
 import domain.model.EncuestaAyudante;
 import java.util.List;
 import java.util.Map;
-import domain.repository.RespuestaEncuestaAyudantePersistence;
+import domain.repository.RespuestaEncuestaAyudanteRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -73,7 +73,7 @@ public final class AlumnoEncuestaAyudanteService {
 
         if (cursoAyudante == ws.getCursosEncuestaAyudante().get(0)) {
             beginTransaction(ActionUtil.getDBUser());
-            correl = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaEncuesta();
+            correl = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaEncuesta();
 
             parameters.entrySet().stream()
                     .filter(entry -> entry.getKey().startsWith("P_"))
@@ -94,7 +94,7 @@ public final class AlumnoEncuestaAyudanteService {
                                 })
                                 .filter(Objects::nonNull) // Asegura que solo valores numéricos sean procesados
                                 .ifPresent(value -> ContextUtil.getDAO()
-                                .getRespuestaEncuestaAyudantePersistence(ActionUtil.getDBUser())
+                                .getRespuestaEncuestaAyudanteRepository(ActionUtil.getDBUser())
                                 .doSave(ws.getAluCar(), cursoAyudante, pregunta, value, correl));
                     });
 
@@ -120,7 +120,7 @@ public final class AlumnoEncuestaAyudanteService {
                 }
 
                 ContextUtil.getDAO()
-                        .getComentarioEncuestaAyudantePersistence(ActionUtil.getDBUser())
+                        .getComentarioEncuestaAyudanteRepository(ActionUtil.getDBUser())
                         .save(comenEncta);
             }
 
@@ -141,11 +141,11 @@ public final class AlumnoEncuestaAyudanteService {
     private void verificarRespuestas(List<CursoAyudante> cursoList, AluCar aluCar, EncuestaAyudante encuesta) {
         if (encuesta != null) {
             while (!cursoList.isEmpty()) {
-                RespuestaEncuestaAyudantePersistence respuestaPersistence
-                        = ContextUtil.getDAO().getRespuestaEncuestaAyudantePersistence(ActionUtil.getDBUser());
+                RespuestaEncuestaAyudanteRepository respuestaRepository
+                        = ContextUtil.getDAO().getRespuestaEncuestaAyudanteRepository(ActionUtil.getDBUser());
 
                 // EncuestaDocente ya esta contestada?
-                if (respuestaPersistence.find(aluCar, encuesta, cursoList.get(0)).isEmpty()) {
+                if (respuestaRepository.find(aluCar, encuesta, cursoList.get(0)).isEmpty()) {
                     cursoList.remove(0);
                 } else {
                     break;

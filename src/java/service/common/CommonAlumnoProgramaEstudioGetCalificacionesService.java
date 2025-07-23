@@ -26,7 +26,7 @@ public class CommonAlumnoProgramaEstudioGetCalificacionesService {
      */
     public String service(GenericSession genericSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setCalificaciones(ContextUtil.getDAO().getCalificacionPersistence(genericSession.getUserType()).findCalProgramas(ws.getAluCar()));
+        ws.setCalificaciones(ContextUtil.getDAO().getCalificacionRepository(genericSession.getUserType()).findCalProgramas(ws.getAluCar()));
         LogUtil.setLog(genericSession.getRut(), ws.getAluCar().getId().getAcaRut());
 
         return SUCCESS;

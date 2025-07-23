@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CcalidadPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Ccalidad;
@@ -14,6 +13,7 @@ import org.hibernate.Criteria;
 import static org.hibernate.FetchMode.JOIN;
 import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
+import domain.repository.CcalidadRepository;
 
 /**
  * Class description
@@ -21,7 +21,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CcalidadPersistenceImpl extends CrudAbstractDAO<Ccalidad, Long> implements CcalidadPersistence {
+public final class CcalidadPersistenceImpl extends CrudAbstractDAO<Ccalidad, Long> implements CcalidadRepository {
 
     /**
      * Method description

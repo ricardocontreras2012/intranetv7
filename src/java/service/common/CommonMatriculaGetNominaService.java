@@ -33,7 +33,7 @@ public class CommonMatriculaGetNominaService {
         String regimen = miCarreraSupport.getRegimen();
 
         ws.setMiCarreraSupport(miCarreraSupport);
-        ws.setMatriculaList(ContextUtil.getDAO().getMatriculaHistoricoPersistence(ActionUtil.getDBUser()).find(
+        ws.setMatriculaList(ContextUtil.getDAO().getMatriculaHistoricoRepository(ActionUtil.getDBUser()).find(
                 agno, sem, tipoCarrera, especialidad, regimen));
         
         LogUtil.setLog(genericSession.getRut(), miCarreraSupport.getNombreCarrera());

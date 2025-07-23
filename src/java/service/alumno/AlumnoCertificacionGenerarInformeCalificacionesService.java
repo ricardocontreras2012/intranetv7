@@ -54,7 +54,7 @@ public class AlumnoCertificacionGenerarInformeCalificacionesService {
         String json = "[" + gson.toJson(cMap, typeObject) + "]";
 
         as.setMontoCert(monto);
-        as.setCorrelCert(ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).createSolicitudCertificado(ws.getAluCar().getId(), monto, json));
+        as.setCorrelCert(ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).createSolicitudCertificado(ws.getAluCar().getId(), monto, json));
         action.setCorrel(as.getCorrelCert());
 
         return CommonCertificacionUtil.getRetCertificado(monto, obsAux);

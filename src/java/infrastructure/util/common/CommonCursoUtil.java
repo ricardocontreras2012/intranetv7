@@ -9,8 +9,6 @@ import domain.model.CursoId;
 import domain.model.CursoEspejo;
 import domain.model.CursoEspejoId;
 import domain.model.comparator.CursoComparable;
-import domain.repository.CursoPersistence;
-import domain.repository.CursoProfesorPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.MiCarreraSupport;
@@ -19,6 +17,8 @@ import infrastructure.util.ContextUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import domain.repository.CursoRepository;
+import domain.repository.CursoProfesorRepository;
 
 /**
  * Clase que contiene métodos utilitarios relacionados con el manejo de cursos.
@@ -148,7 +148,7 @@ public final class CommonCursoUtil {
      * @return ID transversal.
      */
     public static CursoId getIdTransversal(CursoId id) {
-        return Optional.ofNullable(ContextUtil.getDAO().getCursoEspejoPersistence(ActionUtil.getDBUser()).getEspejo(id))
+        return Optional.ofNullable(ContextUtil.getDAO().getCursoEspejoRepository(ActionUtil.getDBUser()).getEspejo(id))
                 .map(cursoEspejo -> {
                     CursoId idRet = new CursoId();
                     idRet.setCurAsign(cursoEspejo.getCesAsignTr());
@@ -218,7 +218,7 @@ public final class CommonCursoUtil {
         String userType = genericSession.getUserType();
         String user = ActionUtil.getDBUser();
         Integer rut = genericSession.getRut();
-        CursoPersistence cursoPersistence = ContextUtil.getDAO().getCursoPersistence(user);
+        CursoRepository cursoRepository = ContextUtil.getDAO().getCursoRepository(user);
 
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupport();
         Integer tipoCarrera = miCarreraSupport.getTcrCtip();
@@ -227,16 +227,16 @@ public final class CommonCursoUtil {
 
         switch (tipo) {
             case "*":
-                ws.setCursoList(cursoPersistence.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE"));
+                ws.setCursoList(cursoRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE"));
                 break;
             case "C":
-                ws.setCursoList(cursoPersistence.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "C"));
+                ws.setCursoList(cursoRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "C"));
                 break;
             case "T*": // Todos los transversales
-                ws.setCursoTransversalList(cursoPersistence.findTransversales(agno, sem));
+                ws.setCursoTransversalList(cursoRepository.findTransversales(agno, sem));
                 break;
             case "E":
-                ws.setCursoEspejoList(ContextUtil.getDAO().getCursoEspejoPersistence(user)
+                ws.setCursoEspejoList(ContextUtil.getDAO().getCursoEspejoRepository(user)
                         .find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType));
                 break;
         }
@@ -261,23 +261,23 @@ public final class CommonCursoUtil {
         String userType = genericSession.getUserType();
         String user = ActionUtil.getDBUser();
         Integer rut = genericSession.getRut();
-        CursoProfesorPersistence cursoProfesorPersistence = ContextUtil.getDAO().getCursoProfesorPersistence(user);
+        CursoProfesorRepository cursoProfesorRepository = ContextUtil.getDAO().getCursoProfesorRepository(user);
 
         switch (tipo) {
             case "*":
-                ws.setCursoProfesorList(cursoProfesorPersistence.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE"));
+                ws.setCursoProfesorList(cursoProfesorRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE"));
                 break;
             case "C":
-                ws.setCursoProfesorList(cursoProfesorPersistence.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "C"));
+                ws.setCursoProfesorList(cursoProfesorRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "C"));
                 break;
             case "T":
-                ws.setCursoProfesorList(cursoProfesorPersistence.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "T"));
+                ws.setCursoProfesorList(cursoProfesorRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "T"));
                 break;
             case "T*": // Todos los transversales
-                ws.setCursoTransversalList(ContextUtil.getDAO().getCursoPersistence(user).findTransversales(agno, sem));
+                ws.setCursoTransversalList(ContextUtil.getDAO().getCursoRepository(user).findTransversales(agno, sem));
                 break;
             case "E":
-                ws.setCursoEspejoList(ContextUtil.getDAO().getCursoEspejoPersistence(user)
+                ws.setCursoEspejoList(ContextUtil.getDAO().getCursoEspejoRepository(user)
                         .find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType));
                 break;
         }
@@ -301,7 +301,7 @@ public final class CommonCursoUtil {
      * @return Lista de profesores.
      */
     public static List<Profesor> getProfesores(Curso curso) {
-        return ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).getProfesores(curso.getId());
+        return ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).getProfesores(curso.getId());
     }
 
     /**
@@ -311,7 +311,7 @@ public final class CommonCursoUtil {
      * @return Lista de horarios.
      */
     public static List<Horario> getHorario(Curso curso) {
-        return ContextUtil.getDAO().getHorarioPersistence(ActionUtil.getDBUser()).getHorario(curso.getId());
+        return ContextUtil.getDAO().getHorarioRepository(ActionUtil.getDBUser()).getHorario(curso.getId());
     }
 
     /**
@@ -321,7 +321,7 @@ public final class CommonCursoUtil {
      * @return Lista de cursos históricos.
      */
     public static List<Curso> getCargaHistoricaAyudante(Integer rut) {
-        return ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).getCursos(rut);
+        return ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser()).getCursos(rut);
     }
 
     /**

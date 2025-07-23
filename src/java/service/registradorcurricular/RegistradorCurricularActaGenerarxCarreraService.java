@@ -10,11 +10,9 @@ import domain.model.EmisionNomina;
 import domain.model.NominaCarrera;
 import domain.model.NominaCarreraId;
 import java.util.Map;
-import domain.repository.ActaCalificacionPersistence;
-import domain.repository.EmisionNominaPersistence;
-import domain.repository.NominaCarreraPersistence;
+import domain.repository.EmisionNominaRepository;
+import domain.repository.NominaCarreraRepository;
 import persistence.scalar.ScalarPersistence;
-import domain.repository.NominaActaPersistenceView;
 import session.GenericSession;
 import session.RegistradorSession;
 import session.WorkSession;
@@ -24,6 +22,8 @@ import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import java.util.Optional;
+import domain.repository.ActaCalificacionRepository;
+import domain.repository.NominaActaViewRepository;
 
 /**
  * Class description
@@ -50,13 +50,13 @@ public final class RegistradorCurricularActaGenerarxCarreraService {
         String user = ActionUtil.getDBUser();
 
         // Obtener persistencias
-        ActaCalificacionPersistence actaPersistence = ContextUtil.getDAO().getActaCalificacionPersistence(user);
-        ScalarPersistence nominaCarreraScalarPersistence = ContextUtil.getDAO().getScalarPersistence(user);
-        NominaCarreraPersistence nominaCarreraPersistence = ContextUtil.getDAO().getNominaCarreraPersistence(user);
-        EmisionNominaPersistence emisionPersistence = ContextUtil.getDAO().getEmisionNominaPersistence(user);
-        NominaActaPersistenceView nominaActaPersistence = ContextUtil.getDAO().getNominaActaPersistenceView(user);
+        ActaCalificacionRepository actaRepository = ContextUtil.getDAO().getActaCalificacionRepository(user);
+        ScalarPersistence nominaCarreraScalarRepository = ContextUtil.getDAO().getScalarRepository(user);
+        NominaCarreraRepository nominaCarreraRepository = ContextUtil.getDAO().getNominaCarreraRepository(user);
+        EmisionNominaRepository emisionRepository = ContextUtil.getDAO().getEmisionNominaRepository(user);
+        NominaActaViewRepository nominaActaRepository = ContextUtil.getDAO().getNominaActaViewRepository(user);
 
-        Integer folio = nominaCarreraScalarPersistence.getSecuenciaNomina();
+        Integer folio = nominaCarreraScalarRepository.getSecuenciaNomina();
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Crear instancia de EmisionNomina usando setters
@@ -69,7 +69,7 @@ public final class RegistradorCurricularActaGenerarxCarreraService {
         emision.setEmiReali(user);
 
         beginTransaction(user);
-        emisionPersistence.save(emision);
+        emisionRepository.save(emision);
 
         // Obtener el flag de forma segura usando Optional
         String flag = Optional.ofNullable(parameters.get("flag"))
@@ -90,13 +90,13 @@ public final class RegistradorCurricularActaGenerarxCarreraService {
                     nominaCarrera.setNcAgno(agno);
                     nominaCarrera.setNcSem(sem);
 
-                    nominaCarreraPersistence.save(nominaCarrera);
+                    nominaCarreraRepository.save(nominaCarrera);
                 });
 
         commitTransaction();
   
-        actaPersistence.generaActasxCarrera(agno, sem, folio, flag);  
-        registradorSession.setNominaActaViewList(nominaActaPersistence.find(agno, sem, folio));
+        actaRepository.generaActasxCarrera(agno, sem, folio, flag);  
+        registradorSession.setNominaActaViewList(nominaActaRepository.find(agno, sem, folio));
         
         return SUCCESS;
     }

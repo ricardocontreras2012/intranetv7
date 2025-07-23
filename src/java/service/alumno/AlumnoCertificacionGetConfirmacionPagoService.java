@@ -29,7 +29,7 @@ public class AlumnoCertificacionGetConfirmacionPagoService {
             //Por ahora es un certificado x solicitud, luego tiene que ser una lista
 
             vRet = "retry";
-            Object[] obj = ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getSolicitudCertificado(idTran);
+            Object[] obj = ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getSolicitudCertificado(idTran);
 
             if (obj != null) {
                 estado = "PA";
@@ -49,8 +49,8 @@ public class AlumnoCertificacionGetConfirmacionPagoService {
                     vRet = "glosa";
                 }
 
-                ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoPago(correl, "true");
-                ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, ord, estado);
+                ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoPago(correl, "true");
+                ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, ord, estado);
             }
         }
         

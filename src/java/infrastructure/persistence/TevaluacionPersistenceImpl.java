@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TevaluacionPersistence;
+import domain.repository.TevaluacionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.Tevaluacion;
@@ -19,7 +19,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class TevaluacionPersistenceImpl extends CrudAbstractDAO<Tevaluacion, Long>
-        implements TevaluacionPersistence {
+        implements TevaluacionRepository {
 
     /**
      * Method description

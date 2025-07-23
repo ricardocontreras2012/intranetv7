@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AsignaturaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Asignatura;
@@ -15,6 +14,7 @@ import org.hibernate.SQLQuery;
 import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.AsignaturaRepositoy;
 
 /**
  * Class description
@@ -22,7 +22,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AsignaturaPersistenceImpl extends CrudAbstractDAO<Asignatura, Long> implements AsignaturaPersistence {
+public final class AsignaturaPersistenceImpl extends CrudAbstractDAO<Asignatura, Long> implements AsignaturaRepositoy {
     /**
      * Method description
      *

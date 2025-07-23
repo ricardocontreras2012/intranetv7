@@ -54,7 +54,7 @@ public final class CommonMaterialUtil {
             String tipoMaterial)
             throws Exception {
 
-        return getTmaterialFromMaterial(ContextUtil.getDAO().getMaterialApoyoPersistence(userType).find(
+        return getTmaterialFromMaterial(ContextUtil.getDAO().getMaterialApoyoRepository(userType).find(
                 id, rut, userTypeShort, tipoMaterial));
     }
 
@@ -66,7 +66,7 @@ public final class CommonMaterialUtil {
      * @throws java.lang.Exception
      */
     public static List<Tmaterial> getListaOtrosMateriales(CursoId id) throws Exception {
-        return getTmaterialFromMaterial(ContextUtil.getDAO().getMaterialApoyoPersistence(ActionUtil.getDBUser()).findOtros(id));
+        return getTmaterialFromMaterial(ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser()).findOtros(id));
     }
 
     /**
@@ -101,7 +101,7 @@ public final class CommonMaterialUtil {
      */
     public static Map<String, List<Tmaterial>> getMapaTipoMaterial(FactoryConcreteDAO dao) {
         // Obtener la lista de TmaterialPerfil desde el DAO
-        List<TmaterialPerfil> tmaterialPerfilList = dao.getTmaterialPerfilPersistence("CM").find();
+        List<TmaterialPerfil> tmaterialPerfilList = dao.getTmaterialPerfilRepository("CM").find();
 
         // Crear el mapa usando Streams para agrupar y filtrar
         return NORMAL_USERS.entrySet().stream() // Iterar sobre las entradas de NORMAL_USERS
@@ -152,7 +152,7 @@ public final class CommonMaterialUtil {
         materialApoyo.setMatFechaArchivado(getSysdate());
         materialApoyo.setMatFechaHabilitacion(getSysdate());
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getMaterialApoyoPersistence(ActionUtil.getDBUser()).makePersistent(
+        ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser()).makePersistent(
                 materialApoyo);
         commitTransaction();
     }

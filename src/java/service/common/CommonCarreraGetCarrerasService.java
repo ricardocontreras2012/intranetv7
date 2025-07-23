@@ -31,7 +31,7 @@ public final class CommonCarreraGetCarrerasService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         CommonUtil.setAgnoSemAct(ws);
-        ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
+        ws.setMencionList(ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
 
         return SUCCESS;
     }

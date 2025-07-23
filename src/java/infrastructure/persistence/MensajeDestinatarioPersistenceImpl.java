@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MensajeDestinatarioPersistence;
+import domain.repository.MensajeDestinatarioRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.MensajeDestinatario;
 import static java.lang.String.valueOf;
@@ -30,7 +30,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @version 7, 24/05/2012
  */
 public final class MensajeDestinatarioPersistenceImpl extends CrudAbstractDAO<MensajeDestinatario, Long>
-        implements MensajeDestinatarioPersistence {
+        implements MensajeDestinatarioRepository {
 
     @Override
     public void saveDest(Integer correl, Integer rut) {

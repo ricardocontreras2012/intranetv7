@@ -24,11 +24,11 @@ public class CommonPracticaViewSolicitudService {
         Solicitud sol = ws.getSolicitudList().get(pos);
 
         ws.setSolicitud(sol);
-        sol.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).find(sol));
+        sol.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).find(sol));
 
-        ws.setPractica(ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).find(sol.getSolFolio()));
+        ws.setPractica(ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).find(sol.getSolFolio()));
 
-        if (ContextUtil.getDAO().getPracticaPersistence(ActionUtil.getDBUser()).getPracticaxInscribir(ws.getSolicitud().getAluCar()).intValue() == ws.getPractica().getAsignatura().getAsiCod().intValue()) {                       
+        if (ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser()).getPracticaxInscribir(ws.getSolicitud().getAluCar()).intValue() == ws.getPractica().getAsignatura().getAsiCod().intValue()) {                       
             sol.setSolMotivo("Cumple requisitos");
         } else {
             sol.setSolMotivo("NO Cumple requisitos");

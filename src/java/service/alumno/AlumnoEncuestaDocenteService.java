@@ -59,7 +59,7 @@ public final class AlumnoEncuestaDocenteService {
 
         if (cursoProfesor.equals(ws.getCursoProfesorList().get(0))) {
             beginTransaction(user);
-            int correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaEncuesta();
+            int correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaEncuesta();
     
             parameters.entrySet().stream()
                     .filter(entry -> entry.getKey().startsWith("P_"))
@@ -84,7 +84,7 @@ public final class AlumnoEncuestaDocenteService {
                                     })
                                     .filter(Objects::nonNull) // Filtra valores nulos
                                     .ifPresent(value -> ContextUtil.getDAO()
-                                    .getRespuestaEncuestaDocentePersistence(user)
+                                    .getRespuestaEncuestaDocenteRepository(user)
                                     .doSave(ws.getAluCar(), cursoProfesor, apartado, pregunta, value, correl));
                         } catch (NumberFormatException e) {
                             // Manejo de error en caso de que no se pueda parsear el apartado o pregunta
@@ -104,7 +104,7 @@ public final class AlumnoEncuestaDocenteService {
                     .orElse(null);
 
             ContextUtil.getDAO()
-                    .getComentarioEncuestaDocentePersistence(user)
+                    .getComentarioEncuestaDocenteRepository(user)
                     .doUpdate(genericSession.getRut(), cursoProfesor, encuesta, correl + 100000, comen1, comen2);
 
             commitTransaction();

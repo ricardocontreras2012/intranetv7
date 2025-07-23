@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ElectivoPersistence;
+import domain.repository.ElectivoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Electivo;
 import java.util.List;
@@ -25,7 +25,7 @@ import org.hibernate.type.Type;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Long> implements ElectivoPersistence {
+public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Long> implements ElectivoRepository {
 
     /**
      * Method description

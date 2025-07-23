@@ -26,8 +26,8 @@ public class FormacionIntegralCursoGetCursosxAgnoSemService {
         ws.setSemAct(sem);
 
         ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioDocencia(agno, sem));
-        ws.setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findxPerfilPeriodo(agno, sem, genericSession.getRut(), genericSession.getUserType()));              
-        ws.setAsignaturaList(ContextUtil.getDAO().getAsignaturaPersistence(ActionUtil.getDBUser()).findFI(genericSession.getRut(), genericSession.getUserType()));
+        ws.setCursoList(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findxPerfilPeriodo(agno, sem, genericSession.getRut(), genericSession.getUserType()));              
+        ws.setAsignaturaList(ContextUtil.getDAO().getAsignaturaRepository(ActionUtil.getDBUser()).findFI(genericSession.getRut(), genericSession.getUserType()));
 
         return SUCCESS;
     }

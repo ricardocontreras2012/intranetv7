@@ -47,7 +47,7 @@ public final class CommonSalaUtil {
      * @return Matriz de horarios de la sala, organizada por módulo y día.
      */
     public static ReservaSalaSupport[][] getHorario(Sala sala, String inicio, String termino, List<ModuloHorario> moduloHorarioList) {
-        List<ReservaSalaSupport> reservaList = ContextUtil.getDAO().getSalaPersistence(ActionUtil.getDBUser()).getHorario(sala, inicio, termino);
+        List<ReservaSalaSupport> reservaList = ContextUtil.getDAO().getSalaRepository(ActionUtil.getDBUser()).getHorario(sala, inicio, termino);
 
         int modulos = moduloHorarioList.size();
         int dias = reservaList.size() / modulos;
@@ -82,6 +82,6 @@ public final class CommonSalaUtil {
      * @return El color hexadecimal asociado a la sala.
      */
     public static String getColorHexPorSala(String sala) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getColorHexPorSala(sala);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getColorHexPorSala(sala);
     }
 }

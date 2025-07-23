@@ -19,7 +19,7 @@ public class AlumnoLoginEmailService {
 
     public String service(GenericSession genericSession, String email, String key) {
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).setEmail(genericSession.getWorkSession(key).getAluCar().getId().getAcaRut(), email);
+        ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).setEmail(genericSession.getWorkSession(key).getAluCar().getId().getAcaRut(), email);
         commitTransaction();
         return "stack";
     }

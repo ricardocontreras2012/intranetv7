@@ -31,7 +31,7 @@ public class CommonSalaReservaRemoveReservaService {
                     .filter(reserva -> parameters.containsKey("ck_" + ws.getReservaList().indexOf(reserva)))
                     .map(reserva -> reserva.getRsalCorrel())
                     .forEach(reservaCorrel
-                            -> ContextUtil.getDAO().getReservaSalaPersistence(ActionUtil.getDBUser()).remove(reservaCorrel)
+                            -> ContextUtil.getDAO().getReservaSalaRepository(ActionUtil.getDBUser()).remove(reservaCorrel)
                     );
 
             // Confirmar transacción

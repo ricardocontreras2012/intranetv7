@@ -44,7 +44,7 @@ public class CommonRCurricularDeleteUnidadService {
         else if("Desligar".equals(duty)) {
             try {
                 beginTransaction(ActionUtil.getDBUser());
-                ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).update(mencionActual);
+                ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).update(mencionActual);
                 commitTransaction();
             }
             catch (Exception e) {

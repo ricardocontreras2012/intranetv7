@@ -61,17 +61,17 @@ public class EgresadoLaboralesSaveLaboralService {
             String descripcion, String keyDummy) {
 
         String user = ActionUtil.getDBUser();
-        Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(user).getMisDatos(genericSession.getRut());
+        Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(user).getMisDatos(genericSession.getRut());
 
         beginTransaction(user);
         if (correlAluEmp == null) {
-            correlAluEmp = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaFichaEgresado();
-            ContextUtil.getDAO().getAlumnoEmpleadorPersistence(user).createLaboral(
+            correlAluEmp = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaFichaEgresado();
+            ContextUtil.getDAO().getAlumnoEmpleadorRepository(user).createLaboral(
                     correlAluEmp, alumno.getAluRut(), rutEmpleador, indepActividadEconomica, desdeAgnoEmpresa, desdeMesEmpresa, hastaAgnoEmpresa, hastaMesEmpresa);
         }
 
-        Integer correlFicha = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaFichaEgresado();
-        ContextUtil.getDAO().getFichaLaboralPersistence(user).createLaboral(
+        Integer correlFicha = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaFichaEgresado();
+        ContextUtil.getDAO().getFichaLaboralRepository(user).createLaboral(
                 correlFicha, correlAluEmp, areaTrabajo, region, comuna, otroLugar, cargo, tipoTrabajo,
                 sueldo, desdeAgno, desdeMes, hastaAgno, hastaMes,
                 descripcion);

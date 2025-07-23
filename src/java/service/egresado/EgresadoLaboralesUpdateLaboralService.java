@@ -64,12 +64,12 @@ public class EgresadoLaboralesUpdateLaboralService {
                                  Integer desdeAgno, Integer desdeMes, Integer hastaAgno, Integer hastaMes,
                                  Integer desdeAgnoEmpresa, Integer desdeMesEmpresa, Integer hastaAgnoEmpresa, Integer hastaMesEmpresa,
                                  String descripcion, String keyDummy) {
-        Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
+        Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
 
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getAlumnoEmpleadorPersistence(ActionUtil.getDBUser()).updateLaboral(
+        ContextUtil.getDAO().getAlumnoEmpleadorRepository(ActionUtil.getDBUser()).updateLaboral(
             correlAluEmp, alumno.getAluRut(), rutEmpleador, indepActividadEconomica, desdeAgnoEmpresa, desdeMesEmpresa, hastaAgnoEmpresa, hastaMesEmpresa);
-        ContextUtil.getDAO().getFichaLaboralPersistence(ActionUtil.getDBUser()).updateLaboral(
+        ContextUtil.getDAO().getFichaLaboralRepository(ActionUtil.getDBUser()).updateLaboral(
             correlFicha, correlAluEmp, areaTrabajo, region, comuna, otroLugar, cargo, tipoTrabajo, sueldo,
                 desdeAgno, desdeMes, hastaAgno, hastaMes,
                 descripcion);

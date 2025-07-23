@@ -12,14 +12,14 @@ import static java.lang.Integer.parseInt;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
-import domain.repository.CursoTevaluacionPersistence;
-import domain.repository.EvaluacionPersistence;
+import domain.repository.EvaluacionRepository;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import domain.repository.CursoTevaluacionRepository;
 
 /**
  *
@@ -46,14 +46,14 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param tiposEvaluaciones
-     * @param cursoTevaluacionPersistence
+     * @param cursoTevaluacionRepository
      * @param curso
      */
     public static void resoloverDiferenciasTipos(Map<String, String[]> parameters,
-            List<CursoTevaluacion> tiposEvaluaciones, CursoTevaluacionPersistence cursoTevaluacionPersistence,
+            List<CursoTevaluacion> tiposEvaluaciones, CursoTevaluacionRepository cursoTevaluacionRepository,
             Curso curso) {
-        resolverTiposEliminados(parameters, tiposEvaluaciones, cursoTevaluacionPersistence, curso);
-        resolverTiposNuevos(parameters, tiposEvaluaciones, cursoTevaluacionPersistence, curso);
+        resolverTiposEliminados(parameters, tiposEvaluaciones, cursoTevaluacionRepository, curso);
+        resolverTiposNuevos(parameters, tiposEvaluaciones, cursoTevaluacionRepository, curso);
     }
 
     /**
@@ -62,18 +62,18 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param tiposEvaluaciones
-     * @param cursoTevaluacionPersistence
+     * @param cursoTevaluacionRepository
      * @param curso
      */
     public static void resolverTiposEliminados(Map<String, String[]> parameters,
             List<CursoTevaluacion> tiposEvaluaciones,
-            CursoTevaluacionPersistence cursoTevaluacionPersistence,
+            CursoTevaluacionRepository cursoTevaluacionRepository,
             Curso curso) {
         tiposEvaluaciones.stream()
                 .filter(tiposEvaluacion -> Optional.ofNullable(parameters.get("porc_" + tiposEvaluacion.getId().getCtevaTeva() + "_1"))
                 .map(arr -> arr.length == 0) // Verifica si el parámetro está vacío
                 .orElse(true)) // Si el parámetro es null o vacío, lo consideramos para eliminar
-                .forEach(tiposEvaluacion -> cursoTevaluacionPersistence.delete(curso.getId(), tiposEvaluacion.getId().getCtevaTeva()));  // Elimina
+                .forEach(tiposEvaluacion -> cursoTevaluacionRepository.delete(curso.getId(), tiposEvaluacion.getId().getCtevaTeva()));  // Elimina
     }
 
     /**
@@ -82,18 +82,18 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param tiposEvaluaciones
-     * @param cursoTevaluacionPersistence
+     * @param cursoTevaluacionRepository
      * @param curso
      */
     public static void resolverTiposNuevos(Map<String, String[]> parameters, List<CursoTevaluacion> tiposEvaluaciones,
-            CursoTevaluacionPersistence cursoTevaluacionPersistence, Curso curso) {
+            CursoTevaluacionRepository cursoTevaluacionRepository, Curso curso) {
         ContextUtil.getTevaluacionList().stream()
                 .filter(tipoEvaluacion -> Optional.ofNullable(parameters.get("porc_" + tipoEvaluacion.getTevalCod() + "_1"))
                 .map(arr -> arr.length > 0) // Verifica que el parámetro exista y no esté vacío
                 .orElse(false))
                 .filter(tipoEvaluacion -> tiposEvaluaciones.stream()
                 .noneMatch(te -> te.getId().getCtevaTeva().intValue() == tipoEvaluacion.getTevalCod().intValue())) // Verifica si el tipo ya existe en tiposEvaluaciones
-                .forEach(tipoEvaluacion -> cursoTevaluacionPersistence.insert(curso.getId(), tipoEvaluacion.getTevalCod())); // Si no existe, inserta
+                .forEach(tipoEvaluacion -> cursoTevaluacionRepository.insert(curso.getId(), tipoEvaluacion.getTevalCod())); // Si no existe, inserta
 
     }
 
@@ -103,13 +103,13 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param evaluaciones
-     * @param evaluacionPersistence
+     * @param evaluacionRepository
      * @param curso
      */
     public static void resolverDiferenciasEvaluaciones(Map<String, String[]> parameters, List<Evaluacion> evaluaciones,
-            EvaluacionPersistence evaluacionPersistence, Curso curso) {
-        resolverEvaluacionesEliminadas(parameters, evaluaciones, evaluacionPersistence, curso);
-        resolverEvaluacionesNuevas(parameters, evaluaciones, evaluacionPersistence, curso);
+            EvaluacionRepository evaluacionRepository, Curso curso) {
+        resolverEvaluacionesEliminadas(parameters, evaluaciones, evaluacionRepository, curso);
+        resolverEvaluacionesNuevas(parameters, evaluaciones, evaluacionRepository, curso);
     }
 
     /**
@@ -118,11 +118,11 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param evaluaciones
-     * @param evaluacionPersistence
+     * @param evaluacionRepository
      * @param curso
      */
     public static void resolverEvaluacionesEliminadas(Map<String, String[]> parameters, List<Evaluacion> evaluaciones,
-            EvaluacionPersistence evaluacionPersistence, Curso curso) {
+            EvaluacionRepository evaluacionRepository, Curso curso) {
         //beginTransaction(ActionUtil.getDBUser());
 
         evaluaciones.stream()
@@ -130,7 +130,7 @@ public class CommonEvaluacionUtil {
                 + evaluacion.getId().getEvalEval()))
                 .map(arr -> arr.length == 0) // Comprobamos si el arreglo está vacío
                 .orElse(true)) // Si no hay arreglo, se considera vacío
-                .forEach(evaluacion -> evaluacionPersistence.deleteEvaluacion(curso.getId(), evaluacion.getId().getEvalTeva(),
+                .forEach(evaluacion -> evaluacionRepository.deleteEvaluacion(curso.getId(), evaluacion.getId().getEvalTeva(),
                 evaluacion.getId().getEvalEval()));
 
         //commitTransaction();
@@ -142,11 +142,11 @@ public class CommonEvaluacionUtil {
      *
      * @param parameters
      * @param evaluaciones
-     * @param evaluacionPersistence
+     * @param evaluacionRepository
      * @param curso
      */
     public static void resolverEvaluacionesNuevas(Map<String, String[]> parameters, List<Evaluacion> evaluaciones,
-            EvaluacionPersistence evaluacionPersistence, Curso curso) {
+            EvaluacionRepository evaluacionRepository, Curso curso) {
         //beginTransaction(ActionUtil.getDBUser());
 
         ContextUtil.getTevaluacionList().forEach(tipoEvaluacion -> {
@@ -156,7 +156,7 @@ public class CommonEvaluacionUtil {
             mapEvaluaciones.entrySet().stream()
                     .map(entry -> getEvaluacion(entry.getKey()))
                     .filter(evalMap -> evalMap > numEvaluaciones)
-                    .forEach(evalMap -> evaluacionPersistence.insertEvaluacion(curso.getId(), tipoEvaluacion.getTevalCod(), evalMap, 0));
+                    .forEach(evalMap -> evaluacionRepository.insertEvaluacion(curso.getId(), tipoEvaluacion.getTevalCod(), evalMap, 0));
         });
 
         //commitTransaction();
@@ -224,11 +224,11 @@ public class CommonEvaluacionUtil {
      *
      *
      * @param parameters
-     * @param evaluacionPersistence
+     * @param evaluacionRepository
      * @param curso
      */
     public static void setearPorcentajesEvaluaciones(Map<String, String[]> parameters,
-            EvaluacionPersistence evaluacionPersistence, Curso curso) {
+            EvaluacionRepository evaluacionRepository, Curso curso) {
         String prefijo = "porc_";
 
         beginTransaction(ActionUtil.getDBUser());
@@ -242,7 +242,7 @@ public class CommonEvaluacionUtil {
                     int eval = getEvaluacion(porc);
 
                     // Actualiza la ponderación
-                    evaluacionPersistence.updatePonderacion(
+                    evaluacionRepository.updatePonderacion(
                             curso.getId(),
                             tipo,
                             eval,
@@ -258,11 +258,11 @@ public class CommonEvaluacionUtil {
      *
      *
      * @param parameters
-     * @param cursoTevaluacionPersistence
+     * @param cursoTevaluacionRepository
      * @param curso
      */
     public static void setearPorcentajesTipos(Map<String, String[]> parameters,
-            CursoTevaluacionPersistence cursoTevaluacionPersistence, Curso curso) {
+            CursoTevaluacionRepository cursoTevaluacionRepository, Curso curso) {
         String prefijo = "porcTbody_";
 
         beginTransaction(ActionUtil.getDBUser());
@@ -273,7 +273,7 @@ public class CommonEvaluacionUtil {
                     String porc = entry.getKey();
                     String[] val = entry.getValue();
 
-                    cursoTevaluacionPersistence.updatePonderacion(
+                    cursoTevaluacionRepository.updatePonderacion(
                             curso.getId(),
                             parseInt(porc.substring(prefijo.length())), // Extrae el tipo desde la clave
                             new BigDecimal(val[0]) // Convierte el valor a BigDecimal

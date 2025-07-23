@@ -21,7 +21,7 @@ public class CommonSalaReservaGetCursoService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = new Curso(cursoStr);
-        ws.setCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(
+        ws.setCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(
                            curso.getId()));
         return SUCCESS;
     }

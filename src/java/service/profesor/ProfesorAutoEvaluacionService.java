@@ -62,8 +62,8 @@ public final class ProfesorAutoEvaluacionService {
         Integer sem = cpro.getId().getCproSem();
 
         ws.setCursoProfesor(cpro);
-        ws.setEncuestaDocente(ContextUtil.getDAO().getEncuestaDocentePersistence(ActionUtil.getDBUser()).findAutoEval(agno, sem));
-        ws.setPreguntasAutoevaluacionList(ContextUtil.getDAO().getPreguntaAutoEvaluacionPersistence(ActionUtil.getDBUser()).find(agno, sem));
+        ws.setEncuestaDocente(ContextUtil.getDAO().getEncuestaDocenteRepository(ActionUtil.getDBUser()).findAutoEval(agno, sem));
+        ws.setPreguntasAutoevaluacionList(ContextUtil.getDAO().getPreguntaAutoEvaluacionRepository(ActionUtil.getDBUser()).find(agno, sem));
 
         LogUtil.setLogCurso(genericSession.getRut(), cpro.getCurso());
         return SUCCESS;
@@ -86,7 +86,7 @@ public final class ProfesorAutoEvaluacionService {
         beginTransaction(user);
         
         // Obtener correlativo para las respuestas
-        int correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaEncuesta();
+        int correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaEncuesta();
 
         // Guardar respuestas a las preguntas de la autoevaluación
         parameters.entrySet().stream()
@@ -95,14 +95,14 @@ public final class ProfesorAutoEvaluacionService {
                 String[] tmp = entry.getValue();
                 int pregunta = parseInt(entry.getKey().substring(entry.getKey().lastIndexOf('_') + 1));
                 if (tmp != null) {
-                    ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoPersistence(user).doSave(cursoProfesor, pregunta, valueOf(tmp[0]), correl);
+                    ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoRepository(user).doSave(cursoProfesor, pregunta, valueOf(tmp[0]), correl);
                 }
             });
         
         String comen1 = parameters.get("comentarioPositivo") != null ? parameters.get("comentarioPositivo")[0] : null;        
         String comen2 = parameters.get("comentarioMejora") != null ? parameters.get("comentarioMejora")[0] : null;
 
-        ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(user).doUpdate(
+        ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(user).doUpdate(
             genericSession.getRut(), cursoProfesor, ws.getEncuestaDocente().getEdoNro(), correl + 100000, comen1, comen2);
 
         commitTransaction();
@@ -123,7 +123,7 @@ public final class ProfesorAutoEvaluacionService {
         beginTransaction(ActionUtil.getDBUser());
         
         // Actauliza a null el rut en respuestas de la autoevaluación para el profesor
-        ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoPersistence(ActionUtil.getDBUser()).remove(genericSession.getRut());
+        ContextUtil.getDAO().getRespuestaAutoEvaluacionAcademicoRepository(ActionUtil.getDBUser()).remove(genericSession.getRut());
 
         commitTransaction();
         return SUCCESS;

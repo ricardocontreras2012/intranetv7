@@ -22,7 +22,7 @@ public class ProfesorSolicitudGetJustificativosCursoService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         /*List<Solicitud> lSol = ContextUtil.getDAO()
-                .getSolicitudJustificativoPersistence(ActionUtil.getDBUser())
+                .getSolicitudJustificativoRepository(ActionUtil.getDBUser())
                 .find(ws.getCurso().getId())
                 .stream()
                 .map(SolicitudJustificativo::getSolicitud)
@@ -32,7 +32,7 @@ public class ProfesorSolicitudGetJustificativosCursoService {
         
   
         
-        ws.setJustificativoList(ContextUtil.getDAO().getSolicitudJustificativoPersistence(ActionUtil.getDBUser()).find(ws.getCurso().getId()));
+        ws.setJustificativoList(ContextUtil.getDAO().getSolicitudJustificativoRepository(ActionUtil.getDBUser()).find(ws.getCurso().getId()));
         LogUtil.setLog(genericSession.getRut());
 
         return SUCCESS;

@@ -34,7 +34,7 @@ public class AlumnoSolicitudSaveRetiroExpresionService {
         new SolicitudSupport(solicitud).setGenerada();
         
         beginTransaction(user);        
-        ContextUtil.getDAO().getSolicitudPersistence(user).save(solicitud);
+        ContextUtil.getDAO().getSolicitudRepository(user).save(solicitud);
         commitTransaction();
 
         CommonSolicitudUtil.saveAttach(action, genericSession, upload, uploadFileName, key);

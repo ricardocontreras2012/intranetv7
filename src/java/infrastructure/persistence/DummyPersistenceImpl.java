@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.DummyPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.Dummy;
@@ -13,12 +12,13 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.DummyRepository;
 
 /**
  *
  * @author Ricardo
  */
-public class DummyPersistenceImpl extends CrudAbstractDAO<Dummy, Long> implements DummyPersistence {
+public class DummyPersistenceImpl extends CrudAbstractDAO<Dummy, Long> implements DummyRepository {
 
     @Override
     public void setPasswordUser(Integer rut, String user, String password) {

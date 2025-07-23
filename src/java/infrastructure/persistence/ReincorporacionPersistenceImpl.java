@@ -1,6 +1,6 @@
 package infrastructure.persistence;
 
-import domain.repository.ReincorporacionPersistence;
+import domain.repository.ReincorporacionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Reincorporacion;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Ricardo Contreras S.
  */
 public class ReincorporacionPersistenceImpl extends CrudAbstractDAO<Reincorporacion, Long>
-        implements ReincorporacionPersistence {
+        implements ReincorporacionRepository {
 
     /**
      *

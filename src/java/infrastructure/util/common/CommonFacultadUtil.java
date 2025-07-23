@@ -27,11 +27,11 @@ public class CommonFacultadUtil {
      * @return
      */
     public static String getNombrexAsign(Integer asign) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreFacultadxAsign(asign);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreFacultadxAsign(asign);
     }
 
     public static String getNombrexTcarrera(Integer tcarrera, Integer especialidad) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreFacultadxTcarrera(tcarrera, especialidad);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreFacultadxTcarrera(tcarrera, especialidad);
     }
 
     /**
@@ -40,7 +40,7 @@ public class CommonFacultadUtil {
      * @return
      */
     public static Integer getUnidadxProf(Integer rut) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getUnidadFacultadxProf(rut);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getUnidadFacultadxProf(rut);
     }
 
     /**
@@ -49,7 +49,7 @@ public class CommonFacultadUtil {
      * @return
      */
     public static String getNombrexAyu(Integer rut) {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreFacultadxAyu(rut);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreFacultadxAyu(rut);
     }
 
     /**

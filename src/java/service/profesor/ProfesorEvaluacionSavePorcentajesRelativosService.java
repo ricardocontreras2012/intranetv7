@@ -8,8 +8,7 @@ package service.profesor;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Curso;
 import java.util.Map;
-import domain.repository.CursoTevaluacionPersistence;
-import domain.repository.EvaluacionPersistence;
+import domain.repository.EvaluacionRepository;
 import session.GenericSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -19,6 +18,7 @@ import static infrastructure.util.common.CommonEvaluacionUtil.resolverDiferencia
 import static infrastructure.util.common.CommonEvaluacionUtil.setModoEvaluacion;
 import static infrastructure.util.common.CommonEvaluacionUtil.setearPorcentajesEvaluaciones;
 import static infrastructure.util.common.CommonEvaluacionUtil.setearPorcentajesTipos;
+import domain.repository.CursoTevaluacionRepository;
 
 /**
  * Class description
@@ -39,16 +39,16 @@ public final class ProfesorEvaluacionSavePorcentajesRelativosService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
 
         Curso curso = genericSession.getWorkSession(key).getCurso();
-        CursoTevaluacionPersistence cursoTevaluacionPersistence
-                = ContextUtil.getDAO().getCursoTevaluacionPersistence(ActionUtil.getDBUser());
+        CursoTevaluacionRepository cursoTevaluacionRepository
+                = ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser());
 
-        EvaluacionPersistence evaluacionPersistence
-                = ContextUtil.getDAO().getEvaluacionPersistence(ActionUtil.getDBUser());
+        EvaluacionRepository evaluacionRepository
+                = ContextUtil.getDAO().getEvaluacionRepository(ActionUtil.getDBUser());
 
-        resoloverDiferenciasTipos(parameters, cursoTevaluacionPersistence.find(curso), cursoTevaluacionPersistence, curso);
-        resolverDiferenciasEvaluaciones(parameters, evaluacionPersistence.find(curso), evaluacionPersistence, curso);
-        setearPorcentajesEvaluaciones(parameters, evaluacionPersistence, curso);
-        setearPorcentajesTipos(parameters, cursoTevaluacionPersistence, curso);
+        resoloverDiferenciasTipos(parameters, cursoTevaluacionRepository.find(curso), cursoTevaluacionRepository, curso);
+        resolverDiferenciasEvaluaciones(parameters, evaluacionRepository.find(curso), evaluacionRepository, curso);
+        setearPorcentajesEvaluaciones(parameters, evaluacionRepository, curso);
+        setearPorcentajesTipos(parameters, cursoTevaluacionRepository, curso);
         setModoEvaluacion(curso, "R");
         LogUtil.setLogCurso(genericSession.getRut(), curso);
 

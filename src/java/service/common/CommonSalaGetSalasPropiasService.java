@@ -31,7 +31,7 @@ public final class CommonSalaGetSalasPropiasService {
      * @throws Exception Si el servicio genera una exception
      */
     public String service(GenericSession genericSession, String key) throws Exception {  
-        List<Sala> salaList = ContextUtil.getDAO().getSalaPersistence(ActionUtil.getDBUser()).findPropias(genericSession.getRut());
+        List<Sala> salaList = ContextUtil.getDAO().getSalaRepository(ActionUtil.getDBUser()).findPropias(genericSession.getRut());
         WorkSession ws = genericSession.getWorkSession(key);
 
         CommonUtil.setAgnoSemAct(ws);

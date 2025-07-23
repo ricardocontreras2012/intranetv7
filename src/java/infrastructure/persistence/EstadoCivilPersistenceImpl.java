@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EstadoCivilPersistence;
+import domain.repository.EstadoCivilRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.EstadoCivil;
 import java.util.List;
@@ -18,7 +18,7 @@ import static org.hibernate.criterion.Order.asc;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class EstadoCivilPersistenceImpl extends CrudAbstractDAO<EstadoCivil, Long> implements EstadoCivilPersistence {
+public final class EstadoCivilPersistenceImpl extends CrudAbstractDAO<EstadoCivil, Long> implements EstadoCivilRepository {
 
     /**
      * Method description

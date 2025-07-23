@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.RegionPersistence;
+import domain.repository.RegionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Region;
 import org.hibernate.Criteria;
@@ -17,7 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class RegionPersistenceImpl extends CrudAbstractDAO<Region, Long> implements RegionPersistence {
+public final class RegionPersistenceImpl extends CrudAbstractDAO<Region, Long> implements RegionRepository {
 
     @Override
     public Region find(Integer region) {

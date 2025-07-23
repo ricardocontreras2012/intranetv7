@@ -30,10 +30,10 @@ public class CommonCursoDefinicionGetElectivosService {
         ws.setNombreCarrera(carrera.getNombreCarrera());
         ws.setMiCarreraSupport(carrera);
         
-        List<Malla> mallaList = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser()).getElectivosMalla(
+        List<Malla> mallaList = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser()).getElectivosMalla(
                 carrera.getTcrCtip(), carrera.getEspCod(), carrera.getRegimen(), genericSession.getRut(), genericSession.getUserType());
         ws.setAsignaturaList(CommonMallaUtil.getAsignaturasMalla(mallaList));        
-        ws.setElectivoList(ContextUtil.getDAO().getElectivoPersistence(ActionUtil.getDBUser()).find(carrera.getTcrCtip(), carrera.getEspCod(), agno, sem, genericSession.getRut(), genericSession.getUserType()));
+        ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).find(carrera.getTcrCtip(), carrera.getEspCod(), agno, sem, genericSession.getRut(), genericSession.getUserType()));
                 
         return SUCCESS;
     }

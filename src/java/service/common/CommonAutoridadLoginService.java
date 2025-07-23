@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.apache.struts2.ServletActionContext.getRequest;
-import domain.repository.ProfesorPersistence;
+import domain.repository.ProfesorRepository;
 import infrastructure.support.LaborSupport;
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -42,8 +42,8 @@ public final class CommonAutoridadLoginService {
             return retReLogin();
         }
 
-        ProfesorPersistence profesorPersistence = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser());
-        Profesor profesor = profesorPersistence.find(rut, passwd);
+        ProfesorRepository profesorRepository = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
+        Profesor profesor = profesorRepository.find(rut, passwd);
 
         // Verificamos si el profesor existe
         if (profesor == null) {
@@ -76,7 +76,7 @@ public final class CommonAutoridadLoginService {
 
         if (!retValue.equals(ACTION_NOTALLOW)) {
             // Configuración adicional de la sesión
-            configurarSessionData(genericSession, profesor, userType, key, profesorPersistence);
+            configurarSessionData(genericSession, profesor, userType, key, profesorRepository);
             action.getSesion().put("genericSession", genericSession);
         }
 
@@ -90,9 +90,9 @@ public final class CommonAutoridadLoginService {
      * @param profesor El objeto profesor.
      * @param userType El tipo de usuario.
      * @param key La clave de sesión.
-     * @param profesorPersistence El objeto de persistencia de profesor.
+     * @param profesorRepository El objeto de persistencia de profesor.
      */
-    private void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorPersistence profesorPersistence) {
+    private void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorRepository profesorRepository) {
         WorkSession ws = new WorkSession(userType);
 
         genericSession.setSessionMap(new HashMap<>());
@@ -108,7 +108,7 @@ public final class CommonAutoridadLoginService {
         genericSession.setNombreMensaje(profesor.getNombreMensaje());
 
         // Actualizar el último login del profesor
-        profesorPersistence.setLastLogin(profesor.getProfRut());
+        profesorRepository.setLastLogin(profesor.getProfRut());
         genericSession.setLastLogin(profesor.getProfLastLogin());
 
         // Configuramos el tiempo de inactividad de la sesión

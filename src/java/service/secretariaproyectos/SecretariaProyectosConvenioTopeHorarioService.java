@@ -23,7 +23,7 @@ public class SecretariaProyectosConvenioTopeHorarioService {
             String horaInicio, String horaTermino, String key) {
         
         WorkSession ws = genericSession.getWorkSession(key);
-        String tope = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getTopeHorarioConvenio(rut, dia, fechaInicio, fechaTermino, horaInicio, horaTermino);
+        String tope = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getTopeHorarioConvenio(rut, dia, fechaInicio, fechaTermino, horaInicio, horaTermino);
 
         ActionResultSupport actionSupport = new ActionResultSupport();
 

@@ -5,13 +5,13 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ComentarioEncuestaAyudantePersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ComentarioEncuestaAyudante;
 import domain.model.Curso;
 import java.util.List;
 import org.hibernate.Criteria;
 import static org.hibernate.criterion.Restrictions.eq;
+import domain.repository.ComentarioEncuestaAyudanteRepository;
 
 /**
  * Class description
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class ComentarioEncuestaAyudantePersistenceImpl extends CrudAbstractDAO<ComentarioEncuestaAyudante, Long>
-        implements ComentarioEncuestaAyudantePersistence {
+        implements ComentarioEncuestaAyudanteRepository {
 
     /**
      * Method description

@@ -27,7 +27,7 @@ public class AlumnoSolicitudExpedienteDownloadFileService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser(); //<-- chequear
-        ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpPersistence(user).find(ws.getExpedienteLogro().getId())); //<-- chequear
+        ws.setEstadoDocExpList(ContextUtil.getDAO().getEstadoDocExpRepository(user).find(ws.getExpedienteLogro().getId())); //<-- chequear
 
         for (Integer i = 0; i < ws.getEstadoDocExpList().size(); i++) {
             if (ws.getEstadoDocExpList().get(i).gettDocExpediente().getTdeCod().equals(tdoc)) {

@@ -5,13 +5,13 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ActaCalificacionNominaPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import org.hibernate.type.StandardBasicTypes;
 import domain.model.ActaCalificacionNomina;
 import java.math.BigDecimal;
 import org.hibernate.Query;
 import domain.model.ActaNominaView;
+import domain.repository.ActaCalificacionNominaRepository;
 
 /**
  * Class description
@@ -20,7 +20,7 @@ import domain.model.ActaNominaView;
  * @version 7, 24/05/2012
  */
 public final class ActaCalificacionNominaPersistenceImpl extends CrudAbstractDAO<ActaCalificacionNomina, Long>
-        implements ActaCalificacionNominaPersistence {    
+        implements ActaCalificacionNominaRepository {    
 
     /**
      * Method description

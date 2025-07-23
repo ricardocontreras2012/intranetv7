@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CursoPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Asignatura;
@@ -30,6 +29,7 @@ import org.hibernate.type.Type;
 import infrastructure.support.CursoResumenSupport;
 import java.util.Collections;
 import java.util.stream.Collectors;
+import domain.repository.CursoRepository;
 
 /**
  * Class description
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> implements CursoPersistence {
+public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> implements CursoRepository {
     @SuppressWarnings("unchecked")
     @Override
     public List<Curso> find(Integer asignatura) {

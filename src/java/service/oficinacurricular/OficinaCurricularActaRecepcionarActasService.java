@@ -7,7 +7,6 @@ package service.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import domain.repository.ActaCalificacionPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -15,6 +14,7 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import java.util.stream.IntStream;
+import domain.repository.ActaCalificacionRepository;
 
 /**
  * Class description
@@ -34,8 +34,8 @@ public final class OficinaCurricularActaRecepcionarActasService {
      */
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ActaCalificacionPersistence actaPersistence
-                = ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser());
+        ActaCalificacionRepository actaRepository
+                = ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
 
@@ -43,7 +43,7 @@ public final class OficinaCurricularActaRecepcionarActasService {
                 .filter(i -> parameters.get("ck_" + i) != null)
                 .mapToObj(i -> ws.getActas().get(i))
                 .forEach(acta -> {
-                    actaPersistence.recepcionarActa(
+                    actaRepository.recepcionarActa(
                             acta.getId().getAcalAgno(),
                             acta.getId().getAcalSem(),
                             acta.getId().getAcalFolio()

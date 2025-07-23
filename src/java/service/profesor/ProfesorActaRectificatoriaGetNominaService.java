@@ -25,7 +25,7 @@ public class ProfesorActaRectificatoriaGetNominaService {
 
         Curso curso = ws.getCurso();
 
-        ws.setActaRectificatoriaList(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).find(curso.getId()));
+        ws.setActaRectificatoriaList(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).find(curso.getId()));
         
         LogUtil.setLogCurso(genericSession.getRut(), curso);
         return Action.SUCCESS;

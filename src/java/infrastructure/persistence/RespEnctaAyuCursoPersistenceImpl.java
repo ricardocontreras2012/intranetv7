@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.RespEnctaAyuCursoPersistence;
+import domain.repository.RespEnctaAyuCursoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import java.util.List;
@@ -19,7 +19,7 @@ import domain.model.RespEnctaAyuCursoView;
  * @author Ricardo
  */
 public class RespEnctaAyuCursoPersistenceImpl extends CrudAbstractDAO<RespEnctaAyuCursoView, Long>
-        implements RespEnctaAyuCursoPersistence {
+        implements RespEnctaAyuCursoRepository {
 
     /**
      * Method description

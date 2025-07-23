@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TsolicitudPersistence;
+import domain.repository.TsolicitudRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.Tsolicitud;
@@ -19,7 +19,7 @@ import org.hibernate.SQLQuery;
  * @version 7, 24/05/2012
  */
 public final class TsolicitudPersistenceImpl extends CrudAbstractDAO<Tsolicitud, Long>
-        implements TsolicitudPersistence {
+        implements TsolicitudRepository {
 
     @SuppressWarnings("unchecked")
     @Override    

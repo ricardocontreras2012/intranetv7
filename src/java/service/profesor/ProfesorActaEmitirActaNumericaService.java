@@ -8,7 +8,6 @@ package service.profesor;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.math.BigDecimal;
 import java.util.Map;
-import domain.repository.ActaCalificacionPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -19,6 +18,7 @@ import infrastructure.util.LogUtil;
 import domain.model.ActaNominaView;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicInteger;
+import domain.repository.ActaCalificacionRepository;
 
 /**
  * Servicio encargado de emitir un acta numérica para los estudiantes,
@@ -48,7 +48,7 @@ public final class ProfesorActaEmitirActaNumericaService {
         String user = ActionUtil.getDBUser();
 
         // Persistencia de acta
-        ActaCalificacionPersistence actaCalifPersistence = ContextUtil.getDAO().getActaCalificacionPersistence(user);
+        ActaCalificacionRepository actaCalifRepository = ContextUtil.getDAO().getActaCalificacionRepository(user);
 
         if (!ws.isPuedeEmitir()) {
             return SUCCESS;
@@ -70,12 +70,12 @@ public final class ProfesorActaEmitirActaNumericaService {
                     
                     acta.setAcanFinal(new BigDecimal(tmp[0]));
 
-                    ContextUtil.getDAO().getActaCalificacionNominaPersistence(user).putCalificacionNumerica(acta);
+                    ContextUtil.getDAO().getActaCalificacionNominaRepository(user).putCalificacionNumerica(acta);
 
                     // Si el folio cambia, actualizar el estado del acta
                     if (acta.getAcalFolio() != nActa.get()) {
                         nActa.set(acta.getAcalFolio());
-                        actaCalifPersistence.putActaEstado(nActa.get(), acta.getAcalAgno(), acta.getAcalSem(), "E");
+                        actaCalifRepository.putActaEstado(nActa.get(), acta.getAcalAgno(), acta.getAcalSem(), "E");
                     }
                 });
 
@@ -83,7 +83,7 @@ public final class ProfesorActaEmitirActaNumericaService {
 
         // Finalizar actualización
 
-        actaCalifPersistence.fix(nActa.get());
+        actaCalifRepository.fix(nActa.get());
 
         // Marcar que el acta no se puede emitir y registrar log
         ws.setPuedeEmitir(false);

@@ -18,7 +18,7 @@ public class AlumnoExamenAPConfirmacionService {
 
     public String service(GenericSession genericSession, String key) {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
-        String examenStr = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getExamenAP(aluCar.getId());
+        String examenStr = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getExamenAP(aluCar.getId());
 
         if (examenStr.length() > 1) {
             return "mostrar";

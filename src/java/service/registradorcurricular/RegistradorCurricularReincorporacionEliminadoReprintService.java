@@ -36,7 +36,7 @@ public class RegistradorCurricularReincorporacionEliminadoReprintService {
      * @throws Exception
      */
     public String service(GenericSession genericSession, String key, Integer folio) throws Exception {
-        Reincorporacion reincorporacion = ContextUtil.getDAO().getReincorporacionPersistence(ActionUtil.getDBUser()).find(folio);
+        Reincorporacion reincorporacion = ContextUtil.getDAO().getReincorporacionRepository(ActionUtil.getDBUser()).find(folio);
         
         RegistradorCurricularReincorporacionService svc = new RegistradorCurricularReincorporacionService();
 

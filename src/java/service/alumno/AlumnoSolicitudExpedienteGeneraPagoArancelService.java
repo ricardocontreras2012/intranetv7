@@ -106,7 +106,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         document.add(new Paragraph("\n"));
 
         // Total a pagar
-        int valor = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getArancelLogro(ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrCod(), ws.getAluCar().getPlan().getMencion().getCarrera().getTprograma().getTprCod());
+        int valor = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getArancelLogro(ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrCod(), ws.getAluCar().getPlan().getMencion().getCarrera().getTprograma().getTprCod());
         String pagoFormateado = String.format(Locale.forLanguageTag("es-CL"), "%,d", valor);
         document.add(new Paragraph("Total a pagar $ " + pagoFormateado, fontBold));
 

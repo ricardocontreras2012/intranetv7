@@ -2,7 +2,7 @@ package service.alumno;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Solicitud;
-import domain.repository.SolicitudPersistence;
+import domain.repository.SolicitudRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -38,7 +38,7 @@ public final class AlumnoSolicitudRemoveSolicitudService {
 
         // Verifica que el tipo de usuario sea "AL" (Alumno)
         if ("AL".equals(genericSession.getUserType())) {
-            SolicitudPersistence solicitudPersistence = ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser());
+            SolicitudRepository solicitudRepository = ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser());
             List<Solicitud> solicitudList = ws.getSolicitudList();
 
             // Inicia la transacción
@@ -53,7 +53,7 @@ public final class AlumnoSolicitudRemoveSolicitudService {
                         // Log de la solicitud eliminada
                         LogUtil.setLog(genericSession.getRut(), "Folio=" + solicitud.getSolFolio());
                         // Elimina la solicitud de la base de datos
-                        solicitudPersistence.makeTransient(solicitud);
+                        solicitudRepository.makeTransient(solicitud);
                     });
 
             // Commit de la transacción

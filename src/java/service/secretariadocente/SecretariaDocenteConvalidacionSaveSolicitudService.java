@@ -54,8 +54,8 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
 
         if ("N".equals(solicitud.getCosEstado())) {
             ConvalidacionComision comision = new ConvalidacionComision();
-            correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaConvalidacion();
-            comision.setCcoCod(ContextUtil.getDAO().getScalarPersistence(user).getComision(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()));
+            correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaConvalidacion();
+            comision.setCcoCod(ContextUtil.getDAO().getScalarRepository(user).getComision(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()));
             solicitud.setCosCorrel(correl);
             solicitud.setCosFecha(getSysdate());
             solicitud.setAluCar(aluCar);
@@ -63,7 +63,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
             solicitud.setCosAgno(parseInt(parameters.get("agno")[0]));
             solicitud.setCosSem(parseInt(parameters.get("sem")[0]));
             solicitud.setCosEstado("G");
-            ContextUtil.getDAO().getConvalidacionSolicitudPersistence(user).makePersistent(solicitud);
+            ContextUtil.getDAO().getConvalidacionSolicitudRepository(user).makePersistent(solicitud);
         }
 
         for (int i = 0; i < secreSession.getPorAprobar().size(); i++) {
@@ -97,7 +97,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
                 asignConv.setCsaEstado(estado);
                 asignConv.setCsaObs(obs);
 
-                ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(user).makePersistent(asignConv);
+                ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(user).makePersistent(asignConv);
             }
         }
         HibernateUtil.commitTransaction();
@@ -139,8 +139,8 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
 
     private void inicializarSolicitud(ConvalidacionSolicitud solicitud, AluCar aluCar, Map<String, String[]> parameters, String user) {
         ConvalidacionComision comision = new ConvalidacionComision();
-        Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaConvalidacion();
-        comision.setCcoCod(ContextUtil.getDAO().getScalarPersistence(user).getComision(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()));
+        Integer correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaConvalidacion();
+        comision.setCcoCod(ContextUtil.getDAO().getScalarRepository(user).getComision(aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()));
 
         solicitud.setCosCorrel(correl);
         solicitud.setCosFecha(getSysdate());
@@ -150,7 +150,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
         solicitud.setCosSem(parseInt(parameters.get("sem")[0]));
         solicitud.setCosEstado("G");
 
-        ContextUtil.getDAO().getConvalidacionSolicitudPersistence(user).makePersistent(solicitud);
+        ContextUtil.getDAO().getConvalidacionSolicitudRepository(user).makePersistent(solicitud);
     }
 
     private void procesarAsignaturas(SecretariaSession secreSession, Map<String, String[]> parameters, ConvalidacionSolicitud solicitud, String user) {
@@ -181,7 +181,7 @@ public class SecretariaDocenteConvalidacionSaveSolicitudService {
                     asignConv.setCsaEstado(estado);
                     asignConv.setCsaObs(obs);
 
-                    ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(user).makePersistent(asignConv);
+                    ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(user).makePersistent(asignConv);
                 });
     }
 

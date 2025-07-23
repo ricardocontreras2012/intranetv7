@@ -26,7 +26,7 @@ public class SecretariaProyectosConvenioTopeHorarioCursoService {
         Curso curso = ws.getCursoList().get(pos);
         CursoId id = curso.getId();
         ws.setCurso(curso);
-        String tope = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getTopeHorarioConvenioCurso(rut, inicio, termino, id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), id.getCurAgno(), id.getCurSem());
+        String tope = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getTopeHorarioConvenioCurso(rut, inicio, termino, id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), id.getCurAgno(), id.getCurSem());
 
         actionSupport.setActionResult("");
         if (tope == null || "OK".equals(tope)) {

@@ -430,7 +430,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         celdaf10c6.setBorder(Rectangle.BOTTOM);
         tablaTitulosGrados.addCell(celdaf10c6);
 
-        LaborRealizada jtg = ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("JTG");
+        LaborRealizada jtg = ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("JTG");
 
         // fila nombre
         PdfPCell celdaf12c1 = new PdfPCell(new Phrase(jtg.getFuncionario().getTraNombreSimple(), fontNormal));

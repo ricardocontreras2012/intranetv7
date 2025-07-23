@@ -21,7 +21,7 @@ public class RegistradorCurricularMencionGetService {
 
     public String service(GenericSession genericSession, String key) {         
         WorkSession ws = genericSession.getWorkSession(key);
-        ws.setMencionList(ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
+        ws.setMencionList(ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut()));
 
         LogUtil.setLog(genericSession.getRut());
         return SUCCESS;

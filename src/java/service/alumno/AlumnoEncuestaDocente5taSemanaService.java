@@ -61,7 +61,7 @@ public final class AlumnoEncuestaDocente5taSemanaService {
         CursoProfesor cursoProfesor = ws.getCursoProfesor();
         alumnoSession.setBienvenida(false);
         if (cursoProfesor == ws.getCursoProfesorList().get(0)) {            
-            correl = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaEncuesta();
+            correl = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaEncuesta();
             beginTransaction(ActionUtil.getDBUser());
 
             parameters.entrySet().stream()
@@ -74,7 +74,7 @@ public final class AlumnoEncuestaDocente5taSemanaService {
 
                         if (tmp != null) {
                             ContextUtil.getDAO()
-                                    .getRespuestaEncuestaDocentePersistence(ActionUtil.getDBUser())
+                                    .getRespuestaEncuestaDocenteRepository(ActionUtil.getDBUser())
                                     .doSaveEncuestaIntermedia(ws.getAluCar(), cursoProfesor, pregunta, valueOf(tmp[0]), correl);
                         }
                     });
@@ -94,7 +94,7 @@ public final class AlumnoEncuestaDocente5taSemanaService {
                     comen2 = tmpMejora[0];
                 }
 
-                ContextUtil.getDAO().getComentarioEncuestaDocentePersistence(ActionUtil.getDBUser()).doUpdate(genericSession.getRut(), cursoProfesor, encuesta, correl + 100000, comen1, comen2);
+                ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(ActionUtil.getDBUser()).doUpdate(genericSession.getRut(), cursoProfesor, encuesta, correl + 100000, comen1, comen2);
             }
 
             commitTransaction();

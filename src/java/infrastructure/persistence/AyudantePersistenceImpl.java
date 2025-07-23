@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AyudantePersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Ayudante;
 import domain.model.Curso;
@@ -29,6 +28,7 @@ import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
 import infrastructure.util.ContextUtil;
 import domain.model.AyudanteActivoView;
+import domain.repository.AyudanteRepository;
 
 /**
  * Class description
@@ -36,7 +36,7 @@ import domain.model.AyudanteActivoView;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AyudantePersistenceImpl extends CrudAbstractDAO<Ayudante, Long> implements AyudantePersistence {
+public final class AyudantePersistenceImpl extends CrudAbstractDAO<Ayudante, Long> implements AyudanteRepository {
 
     /**
      * Method description

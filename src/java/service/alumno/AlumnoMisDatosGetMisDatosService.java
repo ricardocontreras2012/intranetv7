@@ -28,7 +28,7 @@ public final class AlumnoMisDatosGetMisDatosService {
      * @return Action status.
      */
     public String service(GenericSession genericSession, String key) {
-        Alumno alumnoAux = ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
+        Alumno alumnoAux = ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).getMisDatos(genericSession.getRut());
         Alumno alumno = genericSession.getWorkSession(key).getAluCar().getAlumno();
 
         alumno.setAluEstCiv(alumnoAux.getAluEstCiv());

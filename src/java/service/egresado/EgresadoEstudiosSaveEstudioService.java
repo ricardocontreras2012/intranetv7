@@ -62,11 +62,11 @@ public class EgresadoEstudiosSaveEstudioService {
          * ficha.setAreaEstudio(null);
          */
         String user = ActionUtil.getDBUser();
-        Alumno alumno = ContextUtil.getDAO().getAlumnoPersistence(user).getMisDatos(genericSession.getRut());
-        Integer correl = ContextUtil.getDAO().getScalarPersistence(user).getSecuenciaFichaEgresado();
+        Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(user).getMisDatos(genericSession.getRut());
+        Integer correl = ContextUtil.getDAO().getScalarRepository(user).getSecuenciaFichaEgresado();
 
         beginTransaction(user);
-        ContextUtil.getDAO().getFichaEstudioPersistence(user).createEstudio(
+        ContextUtil.getDAO().getFichaEstudioRepository(user).createEstudio(
                 correl, alumno.getAluRut(), pais, institucionEducacional, otraInstitucion, tipoEstudio, nombreEstudio,
                 desdeAgno, desdeMes, hastaAgno, hastaMes, estadoEstudio, areaEstudio);
         commitTransaction();

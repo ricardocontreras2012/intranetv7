@@ -36,7 +36,7 @@ public class CommonInscripcionResumenService {
         Integer especialidad = miCarreraSupport.getEspCod();
         String regimen = miCarreraSupport.getRegimen();
         
-        String json = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getResumen(tipoCarrera, especialidad, regimen, ws.getAgnoAct(), ws.getSemAct(), rut, userType);
+        String json = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getResumen(tipoCarrera, especialidad, regimen, ws.getAgnoAct(), ws.getSemAct(), rut, userType);
         js.setJson(json);     
         
         LogUtil.setLog(genericSession.getRut());

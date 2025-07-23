@@ -37,7 +37,7 @@ public final class CommonAlumnoPrintSituacionesService extends CommonAlumnoPrint
     @Override
     protected void putDetail(Document doc, AluCar aluCar) throws DocumentException {
         List<Sacarrera> lista = ContextUtil.getDAO()
-                .getSacarreraPersistence(ActionUtil.getDBUser())
+                .getSacarreraRepository(ActionUtil.getDBUser())
                 .find(aluCar);
 
         PdfUtil.putBlank(doc);

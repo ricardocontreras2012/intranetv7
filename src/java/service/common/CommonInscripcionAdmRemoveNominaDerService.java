@@ -48,7 +48,7 @@ public class CommonInscripcionAdmRemoveNominaDerService {
 
             for (CommonInscripcionUtil.RowData row : selectedRows) {
                 int i = Integer.parseInt(row.getIdRow()) -1;
-                retValue = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).deleteInscripcion(
+                retValue = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(
                         jcSession.getNominaCursoAdmDer().get(i), jcSession.getCursoAdmDer().getId(), "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
             }
         }

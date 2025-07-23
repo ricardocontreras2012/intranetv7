@@ -31,10 +31,10 @@ public class TitulosyGradosNominaSetNominaService {
             expedienteLogro.setPlanLogro(planLogro);
             ExpedienteNomina expedienteNomina = new ExpedienteNomina();
 
-            Logro logro = ContextUtil.getDAO().getLogroPersistence(ActionUtil.getDBUser()).find(tipo);
+            Logro logro = ContextUtil.getDAO().getLogroRepository(ActionUtil.getDBUser()).find(tipo);
             logro.setLogrCod(tipo);
 
-            expedienteNomina.setExpnCorrel(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaExpedienteNomina());
+            expedienteNomina.setExpnCorrel(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaExpedienteNomina());
             expedienteNomina.setExpnNumero(nomina);
             expedienteNomina.setExpnAgno(agno);
             expedienteNomina.setExpnFecha(DateUtil.stringToDate(fecha));

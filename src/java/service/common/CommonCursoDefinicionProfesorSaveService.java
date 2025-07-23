@@ -90,7 +90,7 @@ public class CommonCursoDefinicionProfesorSaveService {
 
             // Si el docente no se encuentra en los parámetros, se elimina.
             if (!found) {
-                ContextUtil.getDAO().getDocenteHorarioPersistence(user).removeDocente(
+                ContextUtil.getDAO().getDocenteHorarioRepository(user).removeDocente(
                         id, dh.getProfesor().getProfRut(),
                         hor, "T"
                 );
@@ -134,13 +134,13 @@ public class CommonCursoDefinicionProfesorSaveService {
 
                 // Si no existe el docente, se añade a la lista.
                 if (!docenteExistente) {
-                    ContextUtil.getDAO().getDocenteHorarioPersistence(user).addDocente(id, rut, hor, "T");
+                    ContextUtil.getDAO().getDocenteHorarioRepository(user).addDocente(id, rut, hor, "T");
                 }
             }
         }
 
         // Obtener el curso actualizado desde la base de datos.
-        Curso cursoAux = ContextUtil.getDAO().getCursoPersistence(user).find(id);
+        Curso cursoAux = ContextUtil.getDAO().getCursoRepository(user).find(id);
 
         // Actualizar la lista de cursos en la sesión de trabajo.
         ws.getCursoList().set(pos, cursoAux);

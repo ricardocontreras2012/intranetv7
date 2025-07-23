@@ -54,9 +54,9 @@ public final class AlumnoPracticaSavePracticaService {
             WorkSession ws = genericSession.getWorkSession(key);
             String user = ActionUtil.getDBUser();            
             Practica practica = ws.getPractica();
-            Empleador empleador = ContextUtil.getDAO().getEmpleadorPersistence(user).find(rutEmp);
-            Persona autoriza = ContextUtil.getDAO().getPersonaPersistence(user).find(rutAut);
-            Comuna comunaAux = ContextUtil.getDAO().getComunaPersistence(user).find(comuna);
+            Empleador empleador = ContextUtil.getDAO().getEmpleadorRepository(user).find(rutEmp);
+            Persona autoriza = ContextUtil.getDAO().getPersonaRepository(user).find(rutAut);
+            Comuna comunaAux = ContextUtil.getDAO().getComunaRepository(user).find(comuna);
             
             practica.setEmpleador(empleador);
             practica.setComuna(comunaAux);
@@ -72,10 +72,10 @@ public final class AlumnoPracticaSavePracticaService {
             practica.setPraEmail(email);
 
             HibernateUtil.beginTransaction(user);
-            ContextUtil.getDAO().getSolicitudPersistence(user).save(practica.getSolicitud());
+            ContextUtil.getDAO().getSolicitudRepository(user).save(practica.getSolicitud());
             HibernateUtil.commitTransaction();
             HibernateUtil.beginTransaction(user);
-            ContextUtil.getDAO().getPracticaPersistence(user).insert(practica);
+            ContextUtil.getDAO().getPracticaRepository(user).insert(practica);
             HibernateUtil.commitTransaction();
 
             LogUtil.setLog(genericSession.getRut());

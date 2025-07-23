@@ -25,7 +25,7 @@ import static javax.mail.Session.getDefaultInstance;
 import javax.mail.internet.*;
 import static javax.mail.internet.InternetAddress.parse;
 import org.apache.commons.lang3.StringUtils;
-import domain.repository.PasswordTicketPersistence;
+import domain.repository.PasswordTicketRepository;
 import static infrastructure.util.SystemParametersUtil.MAIL_PROPERTIES;
 import static infrastructure.util.SystemParametersUtil.PATH_CERT;
 import static infrastructure.util.SystemParametersUtil.PATH_ATTACH_MESSAGES;
@@ -91,17 +91,17 @@ public class MailUtil {
      */
     public static void sendURLNewPassword(Integer rut, String userType, String email) {
         // Obtención de la persistencia del ticket
-        PasswordTicketPersistence ticketPersistence = ContextUtil.getDAO().getPasswordTicketPersistence(ActionUtil.getDBUser());
+        PasswordTicketRepository ticketRepository = ContextUtil.getDAO().getPasswordTicketRepository(ActionUtil.getDBUser());
 
         // Crear y configurar el ticket
         PasswordTicket ticket = new PasswordTicket();
         ticket.setPtRut(rut);
         ticket.setPtUserType(userType);
-        ticket.setPtKey(ticketPersistence.getKey(rut));
+        ticket.setPtKey(ticketRepository.getKey(rut));
 
         // Eliminar tickets previos y agregar el nuevo
-        ticketPersistence.deleteTickets(rut);
-        ticketPersistence.insertTicket(ticket);
+        ticketRepository.deleteTickets(rut);
+        ticketRepository.insertTicket(ticket);
 
         ActionSupport action = (ActionSupport) getContext().getActionInvocation().getAction();
         // Obtener el asunto y cuerpo del correo de manera centralizada

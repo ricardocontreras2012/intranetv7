@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SolicitudCertificadoCarritoPersistence;
+import domain.repository.SolicitudCertificadoCarritoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.SolicitudCertificadoCarrito;
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Restrictions.sqlRestriction;
  * @author Ricardo
  */
 public class SolicitudCertificadoCarritoPersistenceImpl extends CrudAbstractDAO<SolicitudCertificadoCarrito, Long>
-        implements SolicitudCertificadoCarritoPersistence {
+        implements SolicitudCertificadoCarritoRepository {
 
     @SuppressWarnings("unchecked")
     @Override

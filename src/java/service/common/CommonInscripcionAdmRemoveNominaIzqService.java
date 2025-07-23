@@ -48,7 +48,7 @@ public class CommonInscripcionAdmRemoveNominaIzqService {
 
             for (CommonInscripcionUtil.RowData row : selectedRows) {
                 int i = Integer.parseInt(row.getIdRow()) -1;
-                retValue = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).deleteInscripcion(
+                retValue = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(
                         jcSession.getNominaCursoAdmIzq().get(i), jcSession.getCursoAdmIzq().getId(), "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
             }
         }

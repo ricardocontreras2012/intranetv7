@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.TmaterialPerfilPersistence;
+import domain.repository.TmaterialPerfilRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.TmaterialPerfil;
 import java.util.List;
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Order.asc;
  * @version 7, 24/05/2012
  */
 public final class TmaterialPerfilPersistenceImpl extends CrudAbstractDAO<TmaterialPerfil, Long>
-        implements TmaterialPerfilPersistence {
+        implements TmaterialPerfilRepository {
 
     /**
      * Method description

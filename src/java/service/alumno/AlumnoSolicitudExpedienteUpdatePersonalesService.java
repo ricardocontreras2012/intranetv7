@@ -22,7 +22,7 @@ import session.GenericSession;
 public class AlumnoSolicitudExpedienteUpdatePersonalesService {
     public String service(ActionCommonSupport action, GenericSession genericSession, String email, String emailLaboral, String direccion, Integer comuna, String fono, Integer estadoCivil) {
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getAlumnoPersistence(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email), emailNormalizado(emailLaboral), direccion, comuna, fono, estadoCivil);
+        ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email), emailNormalizado(emailLaboral), direccion, comuna, fono, estadoCivil);
         commitTransaction();
         //action.addActionMessage(action.getText("message.datos.grabados"));
         LogUtil.setLog(genericSession.getRut());

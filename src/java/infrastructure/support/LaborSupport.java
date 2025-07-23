@@ -24,7 +24,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDecanoAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("DE", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("DE", rut);
     }
 
     /**
@@ -33,7 +33,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDecanoProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadProfesor("DE", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadProfesor("DE", rut);
     }
 
     /**
@@ -44,7 +44,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getViceDecanoDocAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("VDD", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("VDD", rut);
     }
 
     /**
@@ -53,7 +53,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getViceDecanoDocProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadProfesor("VDD", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadProfesor("VDD", rut);
     }
 
     /**
@@ -64,7 +64,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getViceDecanoInvAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("VDI", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("VDI", rut);
     }
 
     /**
@@ -73,7 +73,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getViceDecanoInvProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadProfesor("VDI", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadProfesor("VDI", rut);
     }
 
     /**
@@ -82,7 +82,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getRegistradorAlumno(Integer rut) {   
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("RC", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("RC", rut);
     }
 
     /**
@@ -91,7 +91,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getAsitenteSocial(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("AS", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("AS", rut);
     }
 
     /**
@@ -100,7 +100,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getJefeBiblioteca(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAlumno("JB", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAlumno("JB", rut);
     }
 
     /**
@@ -111,7 +111,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getJefesCarrera(Integer facultad) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("JC", facultad);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("JC", facultad);
     }
 
     /**
@@ -122,7 +122,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectoresDepto(Integer facultad) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("DD", facultad);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("DD", facultad);
     }
 
     /**
@@ -131,15 +131,15 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getJefeCarreraAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("JC", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("JC", rut);
     }
 
     public static List<LaborRealizada> getSecretariaDocenteAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("SM", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("SM", rut);
     }
 
     public static List<LaborRealizada> getSecretariaDocenteProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaMencionProfesor("SM", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaMencionProfesor("SM", rut);
     }
 
     /**
@@ -148,7 +148,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getJefeCarreraProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaMencionProfesor("JC", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaMencionProfesor("JC", rut);
     }
 
     /**
@@ -160,7 +160,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirDepto(Integer depto) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("DD", depto);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("DD", depto);
     }
 
     /**
@@ -171,7 +171,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectoresPrograma(Integer facultad) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridad("DD", facultad);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridad("DD", facultad);
     }
 
     /**
@@ -183,7 +183,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectorProgramaAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("DP", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaMencionAlumno("DP", rut);
     }
 
     /**
@@ -192,7 +192,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectorProgramaProfesor(Integer rut) { 
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaDeptoProfesor("DP", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaDeptoProfesor("DP", rut);
     }
 
     /*public static List<Profesor> getDirectorPrograma(Integer carrera, Integer mencion) {
@@ -205,7 +205,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectorDepartamentoAlumno(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaAlumnoDepto("DD", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaAlumnoDepto("DD", rut);
     }
 
     /**
@@ -214,7 +214,7 @@ public class LaborSupport {
      * @return
      */
     public static List<LaborRealizada> getDirectorDepartamentoProfesor(Integer rut) {
-        return ContextUtil.getDAO().getLaborRealizadaPersistence(ActionUtil.getDBUser()).findAutoridadAcademicaDeptoProfesor("DD", rut);
+        return ContextUtil.getDAO().getLaborRealizadaRepository(ActionUtil.getDBUser()).findAutoridadAcademicaDeptoProfesor("DD", rut);
     }
 
     /**
@@ -227,6 +227,6 @@ public class LaborSupport {
      * @return
      */
     public static boolean is(Integer rut, String user) {
-        return ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).trabaja(rut, user) != null;
+        return ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).trabaja(rut, user) != null;
     }
 }

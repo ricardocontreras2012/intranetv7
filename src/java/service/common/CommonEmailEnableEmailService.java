@@ -25,7 +25,7 @@ public final class CommonEmailEnableEmailService {
      * @return Action status
      */
     public String service(GenericSession genericSession, String key) {
-        genericSession.getWorkSession(key).setActionCall(ContextUtil.getDAO().getLogActionPersistence(genericSession.getUserType()).setEmail(genericSession.getUserType()));
+        genericSession.getWorkSession(key).setActionCall(ContextUtil.getDAO().getLogActionRepository(genericSession.getUserType()).setEmail(genericSession.getUserType()));
 
         return SUCCESS;
     }

@@ -61,7 +61,7 @@
                     <td style="width: 40%"><label for="tipo-select"><s:text name="label.nomina.tipo"/></label></td>
                     <td><select id="tipo-select" name="tipo-select" class="form-control input-sm">
                             <%
-                                List<Logro> logros = ContextUtil.getDAO().getLogroPersistence(ActionUtil.getDBUser()).find();
+                                List<Logro> logros = ContextUtil.getDAO().getLogroRepository(ActionUtil.getDBUser()).find();
                                 out.println("<option value=\"\">Seleccione Logro</option>");
                                 for (Logro logro : logros) {
                                     out.println("<option value=" + logro.getLogrCod() + ">" + logro.getLogrDes() + "</option>");

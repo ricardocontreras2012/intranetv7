@@ -46,7 +46,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
         Curso curso = ws.getCurso();
 
         // Obtener las evaluaciones asociadas al curso desde la base de datos
-        List<Evaluacion> lEvaluacion = ContextUtil.getDAO().getEvaluacionPersistence(ActionUtil.getDBUser()).find(curso);
+        List<Evaluacion> lEvaluacion = ContextUtil.getDAO().getEvaluacionRepository(ActionUtil.getDBUser()).find(curso);
 
         // Asignar las evaluaciones al curso
         curso.setEvaluacionList(lEvaluacion);
@@ -54,7 +54,7 @@ public final class ProfesorEvaluacionPorcentajesAbsolutosService {
         // Si hay evaluaciones configuradas, se cargan en la sesión
         if (lEvaluacion != null && !lEvaluacion.isEmpty()) {
             ws.setEvaluacionList(lEvaluacion);
-            ws.setCursoTevaluacion(ContextUtil.getDAO().getCursoTevaluacionPersistence(ActionUtil.getDBUser()).find(curso));
+            ws.setCursoTevaluacion(ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser()).find(curso));
         } else {
             // Si no se encuentran evaluaciones, se asignan valores predeterminados
             setDefault(genericSession, curso, key);

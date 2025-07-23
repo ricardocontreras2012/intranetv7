@@ -19,7 +19,7 @@ public class AlumnoExamenAPGenerarService {
 
     public String service(GenericSession genericSession, String key) {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
-        ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).generaExamenAP(aluCar.getId());
+        ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).generaExamenAP(aluCar.getId());
 
         return SUCCESS;
     }

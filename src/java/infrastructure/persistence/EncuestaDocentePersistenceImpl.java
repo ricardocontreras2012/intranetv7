@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EncuestaDocentePersistence;
+import domain.repository.EncuestaDocenteRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.EncuestaDocente;
 import org.hibernate.Criteria;
@@ -18,7 +18,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class EncuestaDocentePersistenceImpl extends CrudAbstractDAO<EncuestaDocente, Long> implements EncuestaDocentePersistence {
+public final class EncuestaDocentePersistenceImpl extends CrudAbstractDAO<EncuestaDocente, Long> implements EncuestaDocenteRepository {
 
     /**
      * Method description

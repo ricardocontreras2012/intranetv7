@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EstadoSolicitudPersistence;
+import domain.repository.EstadoSolicitudRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.EstadoSolicitud;
 import java.util.List;
@@ -16,7 +16,7 @@ import static org.hibernate.criterion.Order.asc;
  *
  * @author Ricardo Contreras S.
  */
-public class EstadoSolicitudPersistenceImpl extends CrudAbstractDAO<EstadoSolicitud, Long> implements EstadoSolicitudPersistence {
+public class EstadoSolicitudPersistenceImpl extends CrudAbstractDAO<EstadoSolicitud, Long> implements EstadoSolicitudRepository {
 
     /**
      * Method description

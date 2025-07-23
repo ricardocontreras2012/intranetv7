@@ -83,7 +83,7 @@ public class SolicitudCertificadoCarrito implements Serializable {
     {
         JsonObject jobj = new Gson().fromJson(sccParams.substring(1, sccParams.length() - 1), JsonObject.class);
         Integer codTram =  Integer.valueOf(jobj.get("tramite").toString().replace("\"",""));
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getTramite(codTram);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getTramite(codTram);
     }
     
 }

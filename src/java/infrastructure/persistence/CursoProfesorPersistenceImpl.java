@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CursoProfesorPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.Curso;
@@ -22,6 +21,7 @@ import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
+import domain.repository.CursoProfesorRepository;
 
 /**
  * Class description
@@ -30,7 +30,7 @@ import org.hibernate.type.Type;
  * @version 7, 24/05/2012
  */
 public final class CursoProfesorPersistenceImpl extends CrudAbstractDAO<CursoProfesor, Long>
-        implements CursoProfesorPersistence {
+        implements CursoProfesorRepository {
 
     /**
      * Method description

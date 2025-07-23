@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.PregEnctaPersistence;
+import domain.repository.PregEnctaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.EncuestaDocente;
 import domain.model.PregEncta;
@@ -20,7 +20,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class PregEnctaPersistenceImpl extends CrudAbstractDAO<PregEncta, Long> implements PregEnctaPersistence {
+public final class PregEnctaPersistenceImpl extends CrudAbstractDAO<PregEncta, Long> implements PregEnctaRepository {
 
     @SuppressWarnings("unchecked")
     @Override

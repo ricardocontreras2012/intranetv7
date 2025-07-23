@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ProfesorPersistence;
+import domain.repository.ProfesorRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Curso;
 import domain.model.CursoId;
@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorPersistenceImpl extends CrudAbstractDAO<Profesor, Long> implements ProfesorPersistence {
+public final class ProfesorPersistenceImpl extends CrudAbstractDAO<Profesor, Long> implements ProfesorRepository {
 
     /**
      * Method description

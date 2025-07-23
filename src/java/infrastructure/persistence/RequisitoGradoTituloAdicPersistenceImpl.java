@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.RequisitoGradoTituloAdicPersistence;
+import domain.repository.RequisitoGradoTituloAdicRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.RequisitoLogroAdicional;
@@ -22,7 +22,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @version 7, 24/05/2012
  */
 public final class RequisitoGradoTituloAdicPersistenceImpl extends CrudAbstractDAO<RequisitoLogroAdicional, Long>
-        implements RequisitoGradoTituloAdicPersistence {
+        implements RequisitoGradoTituloAdicRepository {
 
     /**
      * Method description

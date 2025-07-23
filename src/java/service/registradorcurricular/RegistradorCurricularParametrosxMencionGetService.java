@@ -26,7 +26,7 @@ public class RegistradorCurricularParametrosxMencionGetService {
         Mencion mencion = ws.getMencionList().get(pos);
         
         ParametroMencion pmen
-                = ContextUtil.getDAO().getParametroMencionPersistence(ActionUtil.getDBUser()).getParameter(mencion.getId().getMenCodCar(), mencion.getId().getMenCodMen());
+                = ContextUtil.getDAO().getParametroMencionRepository(ActionUtil.getDBUser()).getParameter(mencion.getId().getMenCodCar(), mencion.getId().getMenCodMen());
                 
         rs.setParametroMencion(pmen);
         rs.setMencion(mencion);

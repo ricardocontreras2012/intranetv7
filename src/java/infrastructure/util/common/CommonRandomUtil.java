@@ -23,7 +23,7 @@ public final class CommonRandomUtil {
 
     public static String getRandomPassword(String user)
     {
-        return ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).getRandomPassword(user);
+        return ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).getRandomPassword(user);
     }
 
     /**

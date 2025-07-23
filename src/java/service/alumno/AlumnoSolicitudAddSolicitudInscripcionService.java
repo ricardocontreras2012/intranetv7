@@ -58,7 +58,7 @@ public final class AlumnoSolicitudAddSolicitudInscripcionService {
         // Iniciar transacción para guardar la solicitud
         beginTransaction(user);
         Solicitud solicitud = ws.getSolicitud();
-        ContextUtil.getDAO().getSolicitudPersistence(user).save(solicitud);
+        ContextUtil.getDAO().getSolicitudRepository(user).save(solicitud);
         commitTransaction();
 
         StringJoiner joiner = new StringJoiner(" :: ");
@@ -74,7 +74,7 @@ public final class AlumnoSolicitudAddSolicitudInscripcionService {
 
                     // Obtener el curso y guardar la relación con la solicitud
                     Curso curso = ws.getCursoSolicitudList().get(cursoPos);
-                    ContextUtil.getDAO().getSolicitudInscripcionPersistence(user)
+                    ContextUtil.getDAO().getSolicitudInscripcionRepository(user)
                             .doSave(solicitud.getSolFolio(), curso.getId(), motivo, otro);
 
                     // Acumular la información usando StringJoiner
@@ -84,7 +84,7 @@ public final class AlumnoSolicitudAddSolicitudInscripcionService {
 
         // Iniciar transacción para actualizar la solicitud con los cursos registrados
         beginTransaction(user);
-        ContextUtil.getDAO().getSolicitudPersistence(user).modify(solicitud.getSolFolio(), joiner.toString());
+        ContextUtil.getDAO().getSolicitudRepository(user).modify(solicitud.getSolFolio(), joiner.toString());
         commitTransaction();
 
         // Registrar el log de la acción

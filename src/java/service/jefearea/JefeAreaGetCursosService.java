@@ -31,7 +31,7 @@ public class JefeAreaGetCursosService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         CommonUtil.setAgnoSem(ws, agno, sem);
-        ws.setCursoList(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findxPerfilPeriodo(ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()
+        ws.setCursoList(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findxPerfilPeriodo(ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()
                          ));
         return SUCCESS;
     }

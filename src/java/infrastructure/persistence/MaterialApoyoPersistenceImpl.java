@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.MaterialApoyoPersistence;
+import domain.repository.MaterialApoyoRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.MaterialApoyo;
@@ -25,7 +25,7 @@ import org.hibernate.type.Type;
  * @version 7, 24/05/2012
  */
 public final class MaterialApoyoPersistenceImpl extends CrudAbstractDAO<MaterialApoyo, Long>
-        implements MaterialApoyoPersistence {
+        implements MaterialApoyoRepository {
 
     /**
      * Method description

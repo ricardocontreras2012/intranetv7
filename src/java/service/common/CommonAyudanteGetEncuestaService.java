@@ -8,14 +8,14 @@ package service.common;
 import static com.opensymphony.xwork2.Action.NONE;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Curso;
-import domain.repository.ComentarioEncuestaAyudantePersistence;
-import domain.repository.RespEnctaAyuCursoPersistence;
+import domain.repository.RespEnctaAyuCursoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.LogUtil;
+import domain.repository.ComentarioEncuestaAyudanteRepository;
 
 /**
  *
@@ -26,13 +26,13 @@ public class CommonAyudanteGetEncuestaService {
          WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();
 
-        RespEnctaAyuCursoPersistence respEnctaAyuCursoPersistence
-                = ContextUtil.getDAO().getRespEnctaAyuCursoPersistence(ActionUtil.getDBUser());
-        ComentarioEncuestaAyudantePersistence comenEnctaPersistence
-                = ContextUtil.getDAO().getComentarioEncuestaAyudantePersistence(ActionUtil.getDBUser());
+        RespEnctaAyuCursoRepository respEnctaAyuCursoRepository
+                = ContextUtil.getDAO().getRespEnctaAyuCursoRepository(ActionUtil.getDBUser());
+        ComentarioEncuestaAyudanteRepository comenEnctaRepository
+                = ContextUtil.getDAO().getComentarioEncuestaAyudanteRepository(ActionUtil.getDBUser());
 
-        ws.setRespEnctaAyu(respEnctaAyuCursoPersistence.find(curso.getId()));
-        ws.setComentarioEncuestaAyudanteList(comenEnctaPersistence.find(curso));
+        ws.setRespEnctaAyu(respEnctaAyuCursoRepository.find(curso.getId()));
+        ws.setComentarioEncuestaAyudanteList(comenEnctaRepository.find(curso));
         String retValue = SUCCESS;
 
         if (ws.getRespEnctaAyu() == null || ws.getRespEnctaAyu().isEmpty()) {

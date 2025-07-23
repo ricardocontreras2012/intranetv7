@@ -29,13 +29,13 @@ public class CommonCursoDefinicionRemoveElectivosService {
                 .forEach(electivo -> {
                     ElectivoId id = electivo.getId();
                     // Realizar la eliminación del electivo
-                    ContextUtil.getDAO().getElectivoPersistence(ActionUtil.getDBUser())
+                    ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser())
                             .delete(id.getEleAsign(), id.getEleElect(), id.getEleAgno(), id.getEleSem());
                 });
 
         // Actualizar la lista de electivos
         MiCarreraSupport carrera = ws.getMiCarreraSupport();
-        ws.setElectivoList(ContextUtil.getDAO().getElectivoPersistence(ActionUtil.getDBUser())
+        ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser())
                 .find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(),
                         genericSession.getRut(), genericSession.getUserType()));
 

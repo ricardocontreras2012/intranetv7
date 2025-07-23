@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SolicitudInscripcionPersistence;
+import domain.repository.SolicitudInscripcionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
 import domain.model.SolicitudInscripcion;
@@ -21,7 +21,7 @@ import org.hibernate.type.StandardBasicTypes;
  *
  * @author Ricardo
  */
-public final class SolicitudInscripcionPersistenceImpl extends CrudAbstractDAO<SolicitudInscripcion, Long> implements SolicitudInscripcionPersistence {
+public final class SolicitudInscripcionPersistenceImpl extends CrudAbstractDAO<SolicitudInscripcion, Long> implements SolicitudInscripcionRepository {
     @Override
     public void doSave(Integer solicitud, CursoId id, Integer motivo, String otro) {
         String hql = "insert into Solicitud_Inscripcion (soli_sol,soli_asign ,soli_elect,soli_coord,soli_secc,soli_agno,soli_sem,soli_comp,soli_motivo,soli_otro_glosa,soli_estado) VALUES "

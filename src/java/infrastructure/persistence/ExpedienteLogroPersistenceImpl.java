@@ -6,7 +6,7 @@
 package infrastructure.persistence;
 
 import domain.model.AluCar;
-import domain.repository.ExpedienteLogroPersistence;
+import domain.repository.ExpedienteLogroRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.ExpedienteLogro;
 import java.util.Date;
@@ -23,7 +23,7 @@ import infrastructure.util.DateUtil;
  * @author Ricardo Contreras S.
  */
 public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<ExpedienteLogro, Long>
-        implements ExpedienteLogroPersistence {
+        implements ExpedienteLogroRepository {
 
     /**
      * Method description

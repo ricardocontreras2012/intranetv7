@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.LogInscripcionPersistence;
+import domain.repository.LogInscripcionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.LogInscripcion;
@@ -21,7 +21,7 @@ import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class LogInscripcionPersistenceImpl extends CrudAbstractDAO<LogInscripcion, Long> implements LogInscripcionPersistence {
+public final class LogInscripcionPersistenceImpl extends CrudAbstractDAO<LogInscripcion, Long> implements LogInscripcionRepository {
 
     /**
      * Method description

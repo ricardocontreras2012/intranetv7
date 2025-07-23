@@ -36,7 +36,7 @@ public class CommonCursoGetCursoResumenService {
         id.setCurSem(crs.getSem());
 
         id =  CommonCursoUtil.getIdTransversal(id);
-        Curso curso = ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(id);
+        Curso curso = ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(id);
 
         curso.setId(id);
 

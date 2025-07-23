@@ -444,7 +444,7 @@ public final class GenericSession {
     }
 
     public String getMessagePlus() {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getMsgPlusFlag(userType);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getMsgPlusFlag(userType);
     }
 
     public WorkSession getProfWorkSession(String keyNormal) {

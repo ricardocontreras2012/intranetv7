@@ -32,7 +32,7 @@ public final class CommonMensajeDownLoadFileService {
         ActionInputStreamUtil ais = null;
 
         Mensaje mensaje = genericSession.getWorkSession(key).getCurrentMsg();
-        MensajeAttach mensajeAttach = ContextUtil.getDAO().getMensajeAttachPersistence(ActionUtil.getDBUser()).find(mensaje.getMsgCorrel(), file);
+        MensajeAttach mensajeAttach = ContextUtil.getDAO().getMensajeAttachRepository(ActionUtil.getDBUser()).find(mensaje.getMsgCorrel(), file);
 
         if (mensajeAttach != null) {
             name = mensajeAttach.getMenaAttachFile();

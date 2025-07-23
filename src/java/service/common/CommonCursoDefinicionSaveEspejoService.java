@@ -25,7 +25,7 @@ public class CommonCursoDefinicionSaveEspejoService {
         CursoId ct = ws.getCursoTransversalList().get(transversal).getId();
         CursoId cc = ws.getCursoList().get(cerrado).getId();
 
-        ContextUtil.getDAO().getCursoEspejoPersistence(ActionUtil.getDBUser()).
+        ContextUtil.getDAO().getCursoEspejoRepository(ActionUtil.getDBUser()).
                 add(ct.getCurAsign(), ct.getCurElect(), ct.getCurCoord(), ct.getCurSecc(), ct.getCurAgno(), ct.getCurSem(),
                         cc.getCurAsign(), cc.getCurElect(), cc.getCurCoord(), cc.getCurSecc(), cc.getCurAgno(), cc.getCurSem());
 

@@ -203,7 +203,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
             CommonCertificacionUtil.registraLog(aluCar, folio, codigo, fecha, SystemParametersUtil.I3, 0, 0, codTramite, "", obs, genera, type);
 
             // Ojo por ahora 1 pero despues puede ser el que correponda al carrito
-            ContextUtil.getDAO().getDummyPersistence(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
+            ContextUtil.getDAO().getDummyRepository(ActionUtil.getDBUser()).setEstadoCarrito(correl, 1, "EM");
             LogUtil.setLog(genera, aluCar.getId().getAcaRut());
 
             return CommonArchivoUtil.getFile(name, "cert");
@@ -273,7 +273,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
     private void putCalificacionesMalla(Document doc, AluCar aluCar) {
         AluCarId id = aluCar.getId();
         List<CalificacionCertificacionSupport> cartola
-                = delExentos(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).getI4NotasMalla(
+                = delExentos(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).getI4NotasMalla(
                         id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(),
                         id.getAcaSemIng(), aluCar.getAcaCodMen(),
                         aluCar.getAcaCodPlan()));
@@ -283,7 +283,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
     }
 
     private void putCalificacionesAdicionales(Document doc, AluCar aluCar) {
-        List<CalificacionCertificacionSupport> adicionales = ContextUtil.getDAO().getCalificacionAdicionalLogroPersistence(ActionUtil.getDBUser()).findAprobadas(aluCar);
+        List<CalificacionCertificacionSupport> adicionales = ContextUtil.getDAO().getCalificacionAdicionalLogroRepository(ActionUtil.getDBUser()).findAprobadas(aluCar);
 
         if (!adicionales.isEmpty()) {
             PdfUtil.putBlank(doc, TA_8);
@@ -295,7 +295,7 @@ public final class AlumnoCertificacionEmitirInformeCalificacionesService {
 
     private void putCalificacionesOtras(Document doc, AluCar aluCar) {
         AluCarId id = aluCar.getId();
-        List<CalificacionCertificacionSupport> otras = delExentos(ContextUtil.getDAO().getCalificacionPersistence(ActionUtil.getDBUser()).getI4NotasOtras(
+        List<CalificacionCertificacionSupport> otras = delExentos(ContextUtil.getDAO().getCalificacionRepository(ActionUtil.getDBUser()).getI4NotasOtras(
                 id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(),
                 id.getAcaSemIng(), aluCar.getAcaCodMen(),
                 aluCar.getAcaCodPlan()));

@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CalificacionLogroAdicionalPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
 import domain.model.AluCarId;
@@ -20,6 +19,7 @@ import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
 import infrastructure.support.CalificacionCertificacionSupport;
 import java.util.stream.Collectors;
+import domain.repository.CalificacionLogroAdicionalRepository;
 
 /**
  * Class description
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  * @version 7, 24/05/2012
  */
 public final class CalificacionLogroAdicionalPersistenceImpl
-        extends CrudAbstractDAO<CalificacionLogroAdicional, Long> implements CalificacionLogroAdicionalPersistence {
+        extends CrudAbstractDAO<CalificacionLogroAdicional, Long> implements CalificacionLogroAdicionalRepository {
 
     /**
      * Method description

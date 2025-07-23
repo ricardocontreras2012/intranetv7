@@ -10,7 +10,7 @@ import domain.model.Solicitud;
 import domain.model.SolicitudAttach;
 import java.io.File;
 import java.util.List;
-import domain.repository.SolicitudAttachPersistence;
+import domain.repository.SolicitudAttachRepository;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -42,7 +42,7 @@ public final class SolicitudSupport {
      */
     public List<SolicitudAttach> getDocumentos() {
 
-        return ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).find(solicitud);
+        return ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).find(solicitud);
     }
 
     /**
@@ -58,14 +58,14 @@ public final class SolicitudSupport {
     public void doNewFile(ActionCommonSupport action, Integer tipo, File upload, String uploadFileName, String caption)
             throws Exception {
 
-        SolicitudAttachPersistence attachPersistence
-                = ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser());
-        Integer correlDoc = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaDocumentoSolicitud();
+        SolicitudAttachRepository attachRepository
+                = ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser());
+        Integer correlDoc = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaDocumentoSolicitud();
         String nombreArchivo = getSolicitudAttachFileName(uploadFileName,
                 this.solicitud.getSolFolio(), correlDoc);
 
         doUpload(action, upload, nombreArchivo,"sol");              
-        attachPersistence. addAttach(this.solicitud.getSolFolio(), correlDoc, nombreArchivo, tipo);
+        attachRepository. addAttach(this.solicitud.getSolFolio(), correlDoc, nombreArchivo, tipo);
     }
     
     public void setGenerada()

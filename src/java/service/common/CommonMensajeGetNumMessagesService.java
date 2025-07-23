@@ -31,7 +31,7 @@ public final class CommonMensajeGetNumMessagesService {
 
             ws.setBlinkMensajes(false);
 
-            Long numMsgs = ContextUtil.getDAO().getMensajeDestinatarioPersistence(ActionUtil.getDBUser()).countMsgs(genericSession.getRut());
+            Long numMsgs = ContextUtil.getDAO().getMensajeDestinatarioRepository(ActionUtil.getDBUser()).countMsgs(genericSession.getRut());
 
             if (ws.getNuevosMensajes().compareTo(numMsgs) < 0) {
                 ws.setNuevosMensajes(numMsgs);

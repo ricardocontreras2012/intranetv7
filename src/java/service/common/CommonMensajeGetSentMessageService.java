@@ -32,7 +32,7 @@ public final class CommonMensajeGetSentMessageService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         ws.setCurrentMsg(ws.getSentMsgs().get(pos));
-        ws.getCurrentMsg().setMensajeAttachList(ContextUtil.getDAO().getMensajeAttachPersistence(ActionUtil.getDBUser()).find(
+        ws.getCurrentMsg().setMensajeAttachList(ContextUtil.getDAO().getMensajeAttachRepository(ActionUtil.getDBUser()).find(
                         ws.getCurrentMsg().getMsgCorrel()));
 
         LogUtil.setLog(genericSession.getRut(), ws.getCurrentMsg().getMsgCorrel());

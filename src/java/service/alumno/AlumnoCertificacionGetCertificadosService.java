@@ -32,7 +32,7 @@ public final class AlumnoCertificacionGetCertificadosService {
             String key) {        
         WorkSession ws = genericSession.getWorkSession(key);
         ws.setTramites(ContextUtil.getTramiteList());
-        alumnoSession.setCertList(ContextUtil.getDAO().getCertificacionPersistenceView(ActionUtil.getDBUser()).find(ws.getAluCar().getId()));
+        alumnoSession.setCertList(ContextUtil.getDAO().getCertificacionViewRepository(ActionUtil.getDBUser()).find(ws.getAluCar().getId()));
         
         return SUCCESS;     
     }

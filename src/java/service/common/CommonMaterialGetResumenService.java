@@ -42,7 +42,7 @@ public final class CommonMaterialGetResumenService {
         Integer especialidad = miCarreraSupport.getEspCod();
         String regimen = miCarreraSupport.getRegimen();
 
-        ws.setResumenCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findResumenMateriales(agno, sem, tipoCarrera, especialidad, regimen));
+        ws.setResumenCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findResumenMateriales(agno, sem, tipoCarrera, especialidad, regimen));
 
         return SUCCESS;
     }

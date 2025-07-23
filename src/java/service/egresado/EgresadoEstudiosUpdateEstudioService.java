@@ -53,7 +53,7 @@ public class EgresadoEstudiosUpdateEstudioService {
         String user = ActionUtil.getDBUser();        
 
         beginTransaction(user);
-        ContextUtil.getDAO().getFichaEstudioPersistence(user).updateEstudio(
+        ContextUtil.getDAO().getFichaEstudioRepository(user).updateEstudio(
             correl, pais, institucionEducacional, otraInstitucion, tipoEstudio, nombreEstudio, desdeAgno, desdeMes,
             hastaAgno, hastaMes, estadoEstudio, areaEstudio);
 

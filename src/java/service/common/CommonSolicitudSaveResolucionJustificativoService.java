@@ -68,7 +68,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
 
             String[] obsValue = observaciones.get(obsKey);
 
-            ContextUtil.getDAO().getSolicitudJustificativoPersistence(ActionUtil.getDBUser())
+            ContextUtil.getDAO().getSolicitudJustificativoRepository(ActionUtil.getDBUser())
                     .doUpdate(folio, ws.getJustificativoList().get(cursoId).getCurso().getId(), obsValue[0], cursoValue[0]);
 
             if ("A".equals(cursoValue[0])) {
@@ -96,7 +96,7 @@ public class CommonSolicitudSaveResolucionJustificativoService {
         }
 
         HibernateUtil.beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()).saveResolucion(folio, resolucion, respuesta, 40);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()).saveResolucion(folio, resolucion, respuesta, 40);
         commitTransaction();
 
         sendMessageAlumno(ws.getSolicitud());

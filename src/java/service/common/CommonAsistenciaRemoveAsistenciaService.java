@@ -2,13 +2,13 @@ package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import domain.repository.AsistenciaAlumnoNominaPersistence;
-import domain.repository.AsistenciaAlumnoPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.LogUtil;
+import domain.repository.AsistenciaAlumnoNominaRepository;
+import domain.repository.AsistenciaAlumnoRepository;
 
 /**
  * Servicio para eliminar la asistencia de los alumnos.
@@ -26,22 +26,22 @@ public final class CommonAsistenciaRemoveAsistenciaService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession workSession = genericSession.getWorkSession(key);
 
-        AsistenciaAlumnoPersistence asistenciaAlumnoPersistence = ContextUtil.getDAO()
-                .getAsistenciaAlumnoPersistence(ActionUtil.getDBUser());
-        AsistenciaAlumnoNominaPersistence asistenciaAlumnoNominaPersistence = ContextUtil.getDAO()
-                .getAsistenciaAlumnoNominaPersistence(ActionUtil.getDBUser());
+        AsistenciaAlumnoRepository asistenciaAlumnoRepository = ContextUtil.getDAO()
+                .getAsistenciaAlumnoRepository(ActionUtil.getDBUser());
+        AsistenciaAlumnoNominaRepository asistenciaAlumnoNominaRepository = ContextUtil.getDAO()
+                .getAsistenciaAlumnoNominaRepository(ActionUtil.getDBUser());
 
         // Filtramos las asistencias que deben eliminarse usando Stream
         workSession.getAsistenciaAlumnoList().stream()
                 .filter(asistencia -> parameters.containsKey("ck_" + workSession.getAsistenciaAlumnoList().indexOf(asistencia)))
                 .map(asistencia -> asistencia.getAsaCorrel())
                 .forEach(correl -> {
-                    asistenciaAlumnoNominaPersistence.delete(correl);
-                    asistenciaAlumnoPersistence.delete(correl);
+                    asistenciaAlumnoNominaRepository.delete(correl);
+                    asistenciaAlumnoRepository.delete(correl);
                 });
 
         // Actualizamos la lista de AsistenciaAlumno en la sesión
-        workSession.setAsistenciaAlumnoList(asistenciaAlumnoPersistence.find(workSession.getCurso()));
+        workSession.setAsistenciaAlumnoList(asistenciaAlumnoRepository.find(workSession.getCurso()));
 
         // Registrar el log
         LogUtil.setLogCurso(genericSession.getRut(), workSession.getCurso());

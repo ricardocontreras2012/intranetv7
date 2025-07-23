@@ -47,14 +47,14 @@ public final class ProfesorEvaluacionPorcentajesRelativosService {
         WorkSession ws = genericSession.getWorkSession(key);
         Curso curso = ws.getCurso();
         List<Evaluacion> lEvaluacion
-                = ContextUtil.getDAO().getEvaluacionPersistence(ActionUtil.getDBUser()).find(curso);
+                = ContextUtil.getDAO().getEvaluacionRepository(ActionUtil.getDBUser()).find(curso);
 
         curso.setEvaluacionList(lEvaluacion);
 
         // Si existen evaluaciones, se configuran en la sesión
         if (lEvaluacion != null && !lEvaluacion.isEmpty()) {
             ws.setEvaluacionList(lEvaluacion);
-            ws.setCursoTevaluacion(ContextUtil.getDAO().getCursoTevaluacionPersistence(ActionUtil.getDBUser()).find(curso));
+            ws.setCursoTevaluacion(ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser()).find(curso));
         } else {
             // Si no existen evaluaciones, se configuran las predeterminadas
             lEvaluacion = setDefault(genericSession, curso, key);

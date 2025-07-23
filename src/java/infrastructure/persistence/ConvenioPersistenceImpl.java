@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.ConvenioPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Convenio;
 import java.util.List;
@@ -15,12 +14,13 @@ import org.hibernate.Query;
 import static org.hibernate.criterion.Restrictions.eq;
 import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
 import org.hibernate.type.StandardBasicTypes;
+import domain.repository.ConvenioRepository;
 
 /**
  *
  * @author Ricardo
  */
-public class ConvenioPersistenceImpl extends CrudAbstractDAO<Convenio, Long> implements ConvenioPersistence {
+public class ConvenioPersistenceImpl extends CrudAbstractDAO<Convenio, Long> implements ConvenioRepository {
 
     @Override
     public Convenio find(Integer id) {

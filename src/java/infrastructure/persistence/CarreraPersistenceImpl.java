@@ -5,11 +5,11 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CarreraPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Carrera;
 import org.hibernate.Criteria;
 import static org.hibernate.criterion.Restrictions.eq;
+import domain.repository.CarreraRepository;
 
 /**
  * Class description
@@ -17,7 +17,7 @@ import static org.hibernate.criterion.Restrictions.eq;
  * @author Ricardo Contreras S and Javier Frez V.
  * @version 2.1, 18/12/2023
  */
-public final class CarreraPersistenceImpl extends CrudAbstractDAO<Carrera, Long> implements CarreraPersistence {
+public final class CarreraPersistenceImpl extends CrudAbstractDAO<Carrera, Long> implements CarreraRepository {
     /**
      * Method description
      *

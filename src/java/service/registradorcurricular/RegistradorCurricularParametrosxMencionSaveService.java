@@ -47,7 +47,7 @@ public class RegistradorCurricularParametrosxMencionSaveService {
   
         beginTransaction(ActionUtil.getDBUser());
         // Ahora ejecutamos el SQL para actualizar la base de datos directamente
-        ContextUtil.getDAO().getParametroMencionPersistence(ActionUtil.getDBUser()).updateParametroMencion(pmenCodCar, pmenCodMen, pmenAgnoAct, pmenSemAct,
+        ContextUtil.getDAO().getParametroMencionRepository(ActionUtil.getDBUser()).updateParametroMencion(pmenCodCar, pmenCodMen, pmenAgnoAct, pmenSemAct,
                 pmenAgnoCal, pmenSemCal, pmenAgnoEnc, pmenSemEnc,
                 pmenAgnoIns, pmenSemIns, pmenInsPostInicio,
                 pmenInsPostTermino, pmenInsAdmTermino,

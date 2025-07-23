@@ -68,7 +68,7 @@ public final class ProfesorMaterialGetListaCursosReutilizacionService {
     private List<Curso> getLista(GenericSession genericSession, String key) {   
         CursoId cursoActualId = genericSession.getWorkSession(key).getCurso().getId();
         Integer agnoInicio = getMinAgno(genericSession, key) - 4;
-        List<Curso> cursoList = ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).findCursosMaterialHistorico(
+        List<Curso> cursoList = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).findCursosMaterialHistorico(
                 genericSession.getRut(), agnoInicio);
 
         return cursoList != null ? cursoList.stream()

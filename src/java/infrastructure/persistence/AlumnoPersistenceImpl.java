@@ -5,7 +5,6 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.AlumnoPersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Alumno;
 import java.util.List;
@@ -20,6 +19,7 @@ import org.hibernate.type.StringType;
 import org.hibernate.type.StandardBasicTypes;
 import infrastructure.util.ContextUtil;
 import domain.model.AlumnoActivoView;
+import domain.repository.AlumnoRepository;
 
 /**
  * Class description
@@ -27,7 +27,7 @@ import domain.model.AlumnoActivoView;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AlumnoPersistenceImpl extends CrudAbstractDAO<Alumno, Long> implements AlumnoPersistence {
+public final class AlumnoPersistenceImpl extends CrudAbstractDAO<Alumno, Long> implements AlumnoRepository {
 
     /**
      * Method description

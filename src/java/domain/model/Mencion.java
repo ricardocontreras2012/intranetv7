@@ -109,7 +109,7 @@ public class Mencion implements Serializable {
      * @return
      */
     public String getNombreCarreraFull() {
-        return  ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).getNombreCarreraFull(
+        return  ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).getNombreCarreraFull(
                         this.id.getMenCodCar(), this.id.getMenCodMen());
     }
 

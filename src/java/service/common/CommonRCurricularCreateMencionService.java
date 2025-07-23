@@ -34,7 +34,7 @@ public class CommonRCurricularCreateMencionService {
      * @return
      */
     public String service(GenericSession genericSession, String key, Integer menCodCar, String menPrefijo, String menPlanComun, String menNom) {
-        List<Mencion> listaMenciones = ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).findByCarrera(menCodCar);
+        List<Mencion> listaMenciones = ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).findByCarrera(menCodCar);
         Integer max_menCodMen = listaMenciones.stream().map(Mencion::getId).filter(Objects::nonNull).map(MencionId::getMenCodMen).filter(Objects::nonNull).max(Integer::compareTo).orElse(null);
         String retValue = SUCCESS;
         
@@ -47,11 +47,11 @@ public class CommonRCurricularCreateMencionService {
             newMencion.setMenNom(menNom);
             newMencion.setMenPrefijo(menPrefijo);
             newMencion.setMenPlanComun(menPlanComun);
-            newMencion.setCarrera(ContextUtil.getDAO().getCarreraPersistence(ActionUtil.getDBUser()).find(menCodCar));
+            newMencion.setCarrera(ContextUtil.getDAO().getCarreraRepository(ActionUtil.getDBUser()).find(menCodCar));
             newMencion.setUnidad(null);
 
             beginTransaction(ActionUtil.getDBUser());
-            ContextUtil.getDAO().getMencionPersistence(ActionUtil.getDBUser()).save(newMencion);
+            ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).save(newMencion);
             commitTransaction();
         }
         catch (Exception e) {

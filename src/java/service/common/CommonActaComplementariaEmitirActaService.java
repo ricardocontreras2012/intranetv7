@@ -79,7 +79,7 @@ public class CommonActaComplementariaEmitirActaService {
             // Si hay una nota válida, generamos el acta complementaria
             if (isNotNull(tmp)) {
                 // Llamada al DAO para generar el acta complementaria para el curso
-                ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser())
+                ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser())
                     .generarActaComplementariaCoordinador(
                         aluCar.getId(),
                         curso.getId(),
@@ -96,7 +96,7 @@ public class CommonActaComplementariaEmitirActaService {
         });
 
         // Actualizamos la lista de cursos en la sesión con los cursos de la acta complementaria
-        ws.setCursoList(ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser())
+        ws.setCursoList(ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser())
             .getCursosActaComplementaria(aluCar, parametros.getAgnoCal(), parametros.getSemCal(),
                                          genericSession.getRut(), genericSession.getUserType()));
 

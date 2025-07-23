@@ -16,7 +16,7 @@ import infrastructure.util.ContextUtil;
  */
 public class CommonSalaReservaGetReservaService {
     public String service(GenericSession genericSession, Integer reserva, String key) {
-        genericSession.getWorkSession(key).setReserva(ContextUtil.getDAO().getReservaSalaPersistence(ActionUtil.getDBUser()).find(reserva));
+        genericSession.getWorkSession(key).setReserva(ContextUtil.getDAO().getReservaSalaRepository(ActionUtil.getDBUser()).find(reserva));
         return SUCCESS;
     }
 }

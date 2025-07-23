@@ -39,7 +39,7 @@ public final class CommonAlumnoGetLogInscripcionService {
             ws.setSemAct(sem);
             ws.setAgnoAct(agno);
             lista = ContextUtil.getDAO()
-                    .getLogInscripcionPersistence(ActionUtil.getDBUser())
+                    .getLogInscripcionRepository(ActionUtil.getDBUser())
                     .findAgnoSem(ws.getAluCar(), sem, agno);
             
             ///////////////
@@ -52,7 +52,7 @@ public final class CommonAlumnoGetLogInscripcionService {
         } else {
             CommonUtil.setAgnoSemAct(ws);
             lista = ContextUtil.getDAO()
-                    .getLogInscripcionPersistence(ActionUtil.getDBUser())
+                    .getLogInscripcionRepository(ActionUtil.getDBUser())
                     .find(ws.getAluCar());
         }
 

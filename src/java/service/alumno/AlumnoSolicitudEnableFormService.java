@@ -36,7 +36,7 @@ public class AlumnoSolicitudEnableFormService {
         Tsolicitud tsolicitud = new Tsolicitud();        
         Solicitud solicitud = new Solicitud();
         solicitud.setAluCar(aluCar);
-        solicitud.setSolFolio(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getSecuenciaSolicitud());
+        solicitud.setSolFolio(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSecuenciaSolicitud());
         tsolicitud.setTsolCodigo(tipo);
         EstadoSolicitud estadoSolicitud = new EstadoSolicitud();
         estadoSolicitud.setEsolCod(10);
@@ -88,16 +88,16 @@ public class AlumnoSolicitudEnableFormService {
             ////
             case 30:
                 solicitud.setSolSolicita("Reincorporación por no Matrícula(Abandono)");
-                solicitud.setSolAgno(valueOf(ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser()).find("agno_reinc_aba_y_notit").getParValor()));
-                solicitud.setSolSem(valueOf(ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser()).find("sem_reinc_aba_y_notit").getParValor()));
+                solicitud.setSolAgno(valueOf(ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser()).find("agno_reinc_aba_y_notit").getParValor()));
+                solicitud.setSolSem(valueOf(ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser()).find("sem_reinc_aba_y_notit").getParValor()));
 
                 retValue = "reincNoMat";
                 break;
 
             case 35:
                 solicitud.setSolSolicita("Reincorporación por no Titulación");
-                solicitud.setSolAgno(valueOf(ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser()).find("agno_reinc_aba_y_notit").getParValor()));
-                solicitud.setSolSem(valueOf(ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser()).find("sem_reinc_aba_y_notit").getParValor()));
+                solicitud.setSolAgno(valueOf(ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser()).find("agno_reinc_aba_y_notit").getParValor()));
+                solicitud.setSolSem(valueOf(ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser()).find("sem_reinc_aba_y_notit").getParValor()));
 
                 retValue = "reincNoTit";
                 break;
@@ -112,7 +112,7 @@ public class AlumnoSolicitudEnableFormService {
 
             ////
             case 50:
-                List<Curso> cursoList = ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).getCursosSolicitudInscripcion(aluCar, aluCar.getParametros().getAgnoIns(), aluCar.getParametros().getSemIns());
+                List<Curso> cursoList = ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).getCursosSolicitudInscripcion(aluCar, aluCar.getParametros().getAgnoIns(), aluCar.getParametros().getSemIns());
                 ws.setCursoSolicitudList(cursoList);
 
                 retValue = "inscripcion";
@@ -125,7 +125,7 @@ public class AlumnoSolicitudEnableFormService {
             case 64:
                 Practica practica = new Practica();
                 PracticaId id = new PracticaId();
-                Asignatura asignatura = ContextUtil.getDAO().getAsignaturaPersistence(ActionUtil.getDBUser()).find(aluCar, tipo);
+                Asignatura asignatura = ContextUtil.getDAO().getAsignaturaRepository(ActionUtil.getDBUser()).find(aluCar, tipo);
 
                 id.setPraRut(aluCar.getId().getAcaRut());
                 id.setPraCodCar(aluCar.getId().getAcaCodCar());

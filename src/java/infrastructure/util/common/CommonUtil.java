@@ -6,7 +6,7 @@
 package infrastructure.util.common;
 
 import static java.lang.Integer.valueOf;
-import domain.repository.ParametroPersistence;
+import domain.repository.ParametroRepository;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
@@ -33,14 +33,14 @@ public class CommonUtil {
     }
 
     public static void setAgnoSemAct(WorkSession ws) {
-        ParametroPersistence parametroPersistence = ContextUtil.getDAO().getParametroPersistence(ActionUtil.getDBUser());
+        ParametroRepository parametroRepository = ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser());
 
-        ws.setAgnoAct(valueOf(parametroPersistence.find("agno_act").getParValor()));
-        ws.setSemAct(valueOf(parametroPersistence.find("sem_act").getParValor()));
+        ws.setAgnoAct(valueOf(parametroRepository.find("agno_act").getParValor()));
+        ws.setSemAct(valueOf(parametroRepository.find("sem_act").getParValor()));
     }
 
     public static String getEmailUsach(String email) {
-        String aux = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getEmailUsach(email);
+        String aux = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getEmailUsach(email);
         return "null".equals(aux) ? "" : aux;
     }
 }

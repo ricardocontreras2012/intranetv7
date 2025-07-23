@@ -33,7 +33,7 @@ public final class CommonAlumnoGetAsistenciaService {
         WorkSession ws = genericSession.getWorkSession(key);
         String retValue = SUCCESS;
 
-        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaPersistence(ActionUtil.getDBUser()).find(
+        ws.setAsistenciaAlumnoNominaList(ContextUtil.getDAO().getAsistenciaAlumnoNominaRepository(ActionUtil.getDBUser()).find(
                 ws.getCurso(), ws.getAluCar().getId().getAcaRut()));
 
         LogUtil.setLog(genericSession.getRut(), ws.getAluCar().getId().getAcaRut());

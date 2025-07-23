@@ -30,7 +30,7 @@ public class JefeAreaMaterialesGetResumenService {
         WorkSession ws = genericSession.getWorkSession(key);
         
         CommonUtil.setAgnoSem(ws, agno, sem);
-        ws.setResumenCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findResumenMateriales(
+        ws.setResumenCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findResumenMateriales(
                 genericSession.getRut(), ws.getAgnoAct(), ws.getSemAct()));
 
         return SUCCESS;

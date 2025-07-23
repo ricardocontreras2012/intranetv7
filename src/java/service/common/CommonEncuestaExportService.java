@@ -44,7 +44,7 @@ public class CommonEncuestaExportService {
 
     private InputStream getInput(GenericSession genericSession, WorkSession ws, String name) throws Exception {
         Curso curso = ws.getCurso();
-        List<Profesor> profList = ContextUtil.getDAO().getProfesorPersistence("CM").getProfesores(curso.getId());
+        List<Profesor> profList = ContextUtil.getDAO().getProfesorRepository("CM").getProfesores(curso.getId());
 
         XSSFWorkbook workbook = new XSSFWorkbook();
 

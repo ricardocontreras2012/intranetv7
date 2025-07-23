@@ -32,7 +32,7 @@ public final class AyudanteEmailSetEmailService {
      */
     public String service(ActionCommonSupport action, GenericSession genericSession, String email) {
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getAyudantePersistence(ActionUtil.getDBUser()).setEmail(genericSession.getRut(), emailNormalizado(email));
+        ContextUtil.getDAO().getAyudanteRepository(ActionUtil.getDBUser()).setEmail(genericSession.getRut(), emailNormalizado(email));
         commitTransaction();
         genericSession.setEmail(email);
         action.addActionMessage(action.getText("message.datos.grabados"));

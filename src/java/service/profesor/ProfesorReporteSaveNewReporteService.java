@@ -13,7 +13,7 @@ import domain.model.ReporteClaseId;
 import java.io.File;
 import static java.lang.Integer.valueOf;
 import java.util.Iterator;
-import domain.repository.ReporteClasePersistence;
+import domain.repository.ReporteClaseRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -96,25 +96,25 @@ public final class ProfesorReporteSaveNewReporteService {
             reporte.setRclaAttach(nombre);
         }
 
-        ReporteClasePersistence reportePersistence
-                = ContextUtil.getDAO().getReporteClasePersistence(ActionUtil.getDBUser());
+        ReporteClaseRepository reporteRepository
+                = ContextUtil.getDAO().getReporteClaseRepository(ActionUtil.getDBUser());
         String retValue = SUCCESS;
 
-        if (reportePersistence.exists(reporte)) {
+        if (reporteRepository.exists(reporte)) {
             ws.setReporte(reporte);
             action.addActionError(action.getText("error.reporte.repetido"));
             retValue = "yaExiste";
         } else {
             beginTransaction(ActionUtil.getDBUser());
-            reportePersistence.makePersistent(reporte);
+            reporteRepository.makePersistent(reporte);
 
-            Iterator<ReporteClase> iter = reportePersistence.find(cursoId).iterator();
+            Iterator<ReporteClase> iter = reporteRepository.find(cursoId).iterator();
             int i = 1;
 
             while (iter.hasNext()) {
                 reporte = iter.next();
                 reporte.setRclaSesion(i++);
-                reportePersistence.makePersistent(reporte);
+                reporteRepository.makePersistent(reporte);
             }
 
             commitTransaction();

@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.SalaPersistence;
+import domain.repository.SalaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Sala;
 import java.util.Date;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class SalaPersistenceImpl extends CrudAbstractDAO<Sala, Long> implements SalaPersistence {
+public final class SalaPersistenceImpl extends CrudAbstractDAO<Sala, Long> implements SalaRepository {
 
     /**
      * Method description

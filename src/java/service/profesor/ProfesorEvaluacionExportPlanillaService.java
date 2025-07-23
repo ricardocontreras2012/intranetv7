@@ -82,10 +82,10 @@ public final class ProfesorEvaluacionExportPlanillaService {
             FileOutputStream fileOut = null;
             Curso curso = genericSession.getCurso(key);
 
-            List<EvaluacionAlumno> planilla = ContextUtil.getDAO().getEvaluacionAlumnoPersistence(ActionUtil.getDBUser()).getPlanilla(curso);
-            List<CursoTevaluacion> cursoListTecaluacion = ContextUtil.getDAO().getCursoTevaluacionPersistence(ActionUtil.getDBUser()).find(curso);
+            List<EvaluacionAlumno> planilla = ContextUtil.getDAO().getEvaluacionAlumnoRepository(ActionUtil.getDBUser()).getPlanilla(curso);
+            List<CursoTevaluacion> cursoListTecaluacion = ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser()).find(curso);
             List<Evaluacion> lEvaluacion
-                    = ContextUtil.getDAO().getEvaluacionPersistence(ActionUtil.getDBUser()).find(curso);
+                    = ContextUtil.getDAO().getEvaluacionRepository(ActionUtil.getDBUser()).find(curso);
 
             sort(lEvaluacion, new EvaluacionComparable());
             curso.setEvaluacionList(lEvaluacion);

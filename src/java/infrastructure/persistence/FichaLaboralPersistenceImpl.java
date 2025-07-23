@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.FichaLaboralPersistence;
+import domain.repository.FichaLaboralRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.FichaLaboral;
 import java.util.List;
@@ -22,7 +22,7 @@ import org.hibernate.type.StandardBasicTypes;
  * @author Alvaro Romero C.
  */
 public final class FichaLaboralPersistenceImpl extends CrudAbstractDAO<FichaLaboral, Long>
-        implements FichaLaboralPersistence {
+        implements FichaLaboralRepository {
 
     /**
      * Method description

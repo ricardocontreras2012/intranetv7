@@ -56,7 +56,7 @@ public class CommonEncuestaPrintService {
 
     private InputStream getInput(GenericSession genericSession, WorkSession ws) throws Exception {
         Curso curso = ws.getCurso();
-        List<Profesor> profList = ContextUtil.getDAO().getProfesorPersistence("CM").getProfesores(curso.getId());
+        List<Profesor> profList = ContextUtil.getDAO().getProfesorRepository("CM").getProfesores(curso.getId());
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         //Document doc = new Document();
@@ -97,7 +97,7 @@ public class CommonEncuestaPrintService {
         titleParagraph.setSpacingAfter(2); // Espacio entre párrafos
         doc.add(titleParagraph);
 
-        Paragraph facultyParagraph = new Paragraph(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getNombreFacultadxAsign(curso.getId().getCurAsign()), titleFont);
+        Paragraph facultyParagraph = new Paragraph(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getNombreFacultadxAsign(curso.getId().getCurAsign()), titleFont);
         facultyParagraph.setAlignment(Element.ALIGN_CENTER);
         facultyParagraph.setSpacingAfter(2); // Espacio entre párrafos
         doc.add(facultyParagraph);

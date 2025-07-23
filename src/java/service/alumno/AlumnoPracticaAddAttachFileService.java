@@ -41,7 +41,7 @@ public final class AlumnoPracticaAddAttachFileService {
 
         try {
             new SolicitudSupport(solicitud).doNewFile(action, tipo, upload, uploadFileName, "");
-            solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachPersistence(ActionUtil.getDBUser()).find(solicitud));
+            solicitud.setSolicitudAttachList(ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).find(solicitud));
         } catch (Exception e) {
             e.printStackTrace();
         }

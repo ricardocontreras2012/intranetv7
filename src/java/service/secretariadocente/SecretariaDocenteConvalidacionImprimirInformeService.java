@@ -91,7 +91,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
         String user = ActionUtil.getDBUser();
 
         HibernateUtil.beginTransaction(user);
-        ContextUtil.getDAO().getConvalidacionSolicitudPersistence(user).setEstado(conv.getCosCorrel(), "I");
+        ContextUtil.getDAO().getConvalidacionSolicitudRepository(user).setEstado(conv.getCosCorrel(), "I");
         HibernateUtil.commitTransaction();
 
         AluCar aluCar = ws.getAluCar();
@@ -212,7 +212,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
     }
 
     private void putAsignaturas(String user, Document doc, AluCar aluCar, Integer correl) {
-        List<ConvalidacionSolicitudAsign> lAsign = ContextUtil.getDAO().getConvalidacionSolicitudAsignPersistence(user).getPorConvalidar(aluCar, correl);
+        List<ConvalidacionSolicitudAsign> lAsign = ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(user).getPorConvalidar(aluCar, correl);
         PdfUtil.putBlank(doc);
         PdfPTable table = creaTabla();
 
@@ -241,7 +241,7 @@ public class SecretariaDocenteConvalidacionImprimirInformeService {
     }
 
     private void putComision(String user, Document doc, Integer correl) {
-        List<ConvalidacionComisionProf> lProf = ContextUtil.getDAO().getConvalidacionComisionProfPersistence(user).find(correl);
+        List<ConvalidacionComisionProf> lProf = ContextUtil.getDAO().getConvalidacionComisionProfRepository(user).find(correl);
 
         Paragraph dummy = new Paragraph("\n\n");
         doc.add(dummy);

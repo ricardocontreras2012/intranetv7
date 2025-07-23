@@ -47,9 +47,9 @@ public class CommonCursoDefinicionModifyCursoService {
             jornada += vesp;
         }
 
-        ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).modifyCurso(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), ws.getAgnoAct(), ws.getSemAct(), cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
+        ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).modifyCurso(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), ws.getAgnoAct(), ws.getSemAct(), cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
         
-        ws.getCursoList().set(pos, ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(id));
+        ws.getCursoList().set(pos, ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(id));
         ws.setPos(pos);
         return SUCCESS;
     }

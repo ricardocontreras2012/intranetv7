@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.LogCertificacionPersistence;
+import domain.repository.LogCertificacionRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.LogCertificacion;
 import org.hibernate.Criteria;
@@ -20,7 +20,7 @@ import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
  * @version 7, 24/05/2012
  */
 public final class LogCertificacionPersistenceImpl extends CrudAbstractDAO<LogCertificacion, Long>
-        implements LogCertificacionPersistence {
+        implements LogCertificacionRepository {
 
     /**
      * Method description

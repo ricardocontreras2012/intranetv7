@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.LogActaPersistence;
+import domain.repository.LogActaRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.LogActa;
 
@@ -14,5 +14,5 @@ import domain.model.LogActa;
  * @author Ricardo Contreras S.
  */
 public class LogActaPersistenceImpl extends CrudAbstractDAO<LogActa, Long>
-        implements LogActaPersistence {
+        implements LogActaRepository {
 }

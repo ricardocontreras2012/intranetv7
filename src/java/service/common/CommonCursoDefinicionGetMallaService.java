@@ -25,7 +25,7 @@ public class CommonCursoDefinicionGetMallaService {
 
         MiCarreraSupport carrera = ws.getMiCarreraSupport();
        
-        ws.setAsignaturaList(CommonMallaUtil.getAsignaturasMalla(ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser()).getMalla(carrera.getTcrCtip(), carrera.getEspCod(), carrera.getRegimen(), genericSession.getRut(), genericSession.getUserType())));
+        ws.setAsignaturaList(CommonMallaUtil.getAsignaturasMalla(ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser()).getMalla(carrera.getTcrCtip(), carrera.getEspCod(), carrera.getRegimen(), genericSession.getRut(), genericSession.getUserType())));
 
         return SUCCESS;
     }

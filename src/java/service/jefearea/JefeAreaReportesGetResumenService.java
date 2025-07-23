@@ -30,7 +30,7 @@ public class JefeAreaReportesGetResumenService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         CommonUtil.setAgnoSem(ws, agno, sem);
-        ws.setResumenCurso(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findResumenReportes(
+        ws.setResumenCurso(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findResumenReportes(
                 genericSession.getRut(), ws.getAgnoAct(), ws.getSemAct()));
 
         return SUCCESS;

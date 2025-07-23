@@ -37,7 +37,7 @@ public final class CommonAlumnoPrintLogInscripcionService extends CommonAlumnoPr
     @Override
     protected void putDetail(Document doc, AluCar aluCar) throws DocumentException {
         List<LogInscripcion> lista = ContextUtil.getDAO()
-                .getLogInscripcionPersistence(ActionUtil.getDBUser())
+                .getLogInscripcionRepository(ActionUtil.getDBUser())
                 .find(aluCar);
 
         PdfUtil.putBlank(doc);

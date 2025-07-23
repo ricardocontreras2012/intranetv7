@@ -5,7 +5,7 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.EmpleadorPersistence;
+import domain.repository.EmpleadorRepository;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.Empleador;
 import java.util.List;
@@ -20,7 +20,7 @@ import infrastructure.util.ContextUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class EmpleadorPersistenceImpl extends CrudAbstractDAO<Empleador, Long> implements EmpleadorPersistence {
+public final class EmpleadorPersistenceImpl extends CrudAbstractDAO<Empleador, Long> implements EmpleadorRepository {
 
     /**
      * Method description

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import domain.repository.AluCarPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -17,6 +16,7 @@ import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonActaUtil;
+import domain.repository.AluCarRepository;
 
 /**
  * Servicio para la emisión del acta rectificatoria de calificaciones.
@@ -49,7 +49,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
     public String service(ActionCommonSupport action, GenericSession genericSession, Map<String, String[]> map, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
-        AluCarPersistence persistence = ContextUtil.getDAO().getAluCarPersistence(user);
+        AluCarRepository Repository = ContextUtil.getDAO().getAluCarRepository(user);
         CursoId cursoId = ws.getCurso().getId();
 
         // Listas para almacenar las calificaciones categorizadas por tipo de alumno
@@ -65,7 +65,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
 
             // Verifica si la calificación ha cambiado
             if (nota.compareTo(calificacion.getCalNotaFin()) != 0) {
-                String tipoAlumno = persistence.tipoAlumno(calificacion.getAluCar().getId());
+                String tipoAlumno = Repository.tipoAlumno(calificacion.getAluCar().getId());
                 calificacion.setCalNotaFin(nota);
 
                 // Categoriza la calificación según el tipo de alumno
@@ -158,7 +158,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
     private int createActa(Integer asign, String elect, String coord, Integer secc,
                                   Integer agno, Integer sem, String tel, String tipo, String user) {
         Integer folio = CommonActaUtil.getFolio(user);
-        ContextUtil.getDAO().getActaCalificacionPersistence(user)
+        ContextUtil.getDAO().getActaCalificacionRepository(user)
                    .crearActa(folio, agno, sem, asign, elect, coord, secc, tel, "R", "E", tipo);
         return folio;
     }
@@ -172,7 +172,7 @@ public final class CommonActaRectificatoriaEmitirActaService {
      */
     private void crearCalificacionActa(Integer folio, Calificacion calificacion, String user) {
         CalificacionId calificacionId = calificacion.getId();
-        ContextUtil.getDAO().getActaCalificacionNominaPersistence(user)
+        ContextUtil.getDAO().getActaCalificacionNominaRepository(user)
                    .insertCalificacion(folio, calificacionId.getCalAgno(), calificacionId.getCalSem(),
                                        calificacionId.getCalRut(), calificacionId.getCalCodCar(),
                                        calificacionId.getCalAgnoIng(), calificacionId.getCalSemIng(),

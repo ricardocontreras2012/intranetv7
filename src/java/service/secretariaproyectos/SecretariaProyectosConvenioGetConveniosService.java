@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
 public class SecretariaProyectosConvenioGetConveniosService {
 
     public String service(GenericSession genericSession, ProyectoSession ps, String key) {
-        ps.setConvenioList(ContextUtil.getDAO().getConvenioPersistence(ActionUtil.getDBUser()).getMisConvenios(genericSession.getRut()));
+        ps.setConvenioList(ContextUtil.getDAO().getConvenioRepository(ActionUtil.getDBUser()).getMisConvenios(genericSession.getRut()));
         LogUtil.setLog(genericSession.getRut());        
         return Action.SUCCESS;
     }

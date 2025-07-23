@@ -50,7 +50,7 @@ public final class CommonRequisitoAdicionalLogroSaveInscripcionService {
         inscripcionRequisitoAdicionalLogro.setIalFechaSys(getSysdate());
         inscripcionRequisitoAdicionalLogro.setIalReali("C");
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getInscripcionAdicionalLogroPersistence(ActionUtil.getDBUser()).update(inscripcionRequisitoAdicionalLogro);
+        ContextUtil.getDAO().getInscripcionAdicionalLogroRepository(ActionUtil.getDBUser()).update(inscripcionRequisitoAdicionalLogro);
         commitTransaction();
 
         return SUCCESS;

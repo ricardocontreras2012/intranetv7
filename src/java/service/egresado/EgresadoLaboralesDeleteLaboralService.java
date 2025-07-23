@@ -38,7 +38,7 @@ public class EgresadoLaboralesDeleteLaboralService {
         String user = ActionUtil.getDBUser();
 
         beginTransaction(user);
-        ContextUtil.getDAO().getFichaLaboralPersistence(user).deleteLaboral(
+        ContextUtil.getDAO().getFichaLaboralRepository(user).deleteLaboral(
                 es.getFichaLaboralList().get(pos).getFlabCorrelFicha());
         commitTransaction();
         action.addActionMessage(action.getText("message.datos.borrados"));

@@ -33,7 +33,7 @@ public class CommonSolicitudSaveResolucionService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getSolicitudPersistence(ActionUtil.getDBUser()). saveResolucion(ws.getSolicitud().getSolFolio(), resolucion, respuesta, 40);
+        ContextUtil.getDAO().getSolicitudRepository(ActionUtil.getDBUser()). saveResolucion(ws.getSolicitud().getSolFolio(), resolucion, respuesta, 40);
         commitTransaction();
         return SUCCESS;
     }

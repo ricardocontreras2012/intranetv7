@@ -37,7 +37,7 @@ public final class CommonAlumnoPrintMatriculasService extends CommonAlumnoPrintU
     @Override
     protected void putDetail(Document doc, AluCar aluCar) throws DocumentException {
         List<MatriculaHistorico> lista = ContextUtil.getDAO()
-                .getMatriculaHistoricoPersistence(ActionUtil.getDBUser())
+                .getMatriculaHistoricoRepository(ActionUtil.getDBUser())
                 .find(aluCar);
 
         PdfUtil.putBlank(doc);

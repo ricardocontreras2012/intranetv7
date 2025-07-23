@@ -37,7 +37,7 @@ public final class ConsultaMisDatosSaveMisDatosService {
     public String service(ActionCommonSupport action, GenericSession genericSession,
                                  String email) {
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getExternoPersistence(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email));
+        ContextUtil.getDAO().getExternoRepository(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email));
         commitTransaction();
         action.addActionMessage(action.getText("message.datos.grabados"));
 

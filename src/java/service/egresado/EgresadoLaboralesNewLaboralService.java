@@ -9,12 +9,12 @@ package service.egresado;
 
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.AlumnoEmpleadorPersistence;
 import session.EgresadoSession;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import domain.repository.AlumnoEmpleadorRepository;
 
 
 /**
@@ -36,11 +36,11 @@ public class EgresadoLaboralesNewLaboralService {
     public String service(GenericSession genericSession, EgresadoSession es, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         es.setAreaTrabajoList(ContextUtil.getAreaTrabajoList());
-        AlumnoEmpleadorPersistence alumnoEmpleadorPersistence
-                = ContextUtil.getDAO().getAlumnoEmpleadorPersistence(ActionUtil.getDBUser());
+        AlumnoEmpleadorRepository alumnoEmpleadorRepository
+                = ContextUtil.getDAO().getAlumnoEmpleadorRepository(ActionUtil.getDBUser());
 
         es.setAlumnoEmpleadorList(
-                alumnoEmpleadorPersistence.find(ws.getAluCar().getAlumno().getAluRut()));
+                alumnoEmpleadorRepository.find(ws.getAluCar().getAlumno().getAluRut()));
         return SUCCESS;
     }
 }

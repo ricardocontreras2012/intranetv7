@@ -76,7 +76,7 @@ public final class AuthenticationInterceptor extends AbstractInterceptor {
                 .map(session -> {
                     String userType = session.getUserType();
                     WebUserAction wua = ContextUtil.getDAO()
-                            .getLogActionPersistence(AppStaticsUtil.APP_DB_USERS.get(userType))
+                            .getLogActionRepository(AppStaticsUtil.APP_DB_USERS.get(userType))
                             .find(userType, actionName);
 
                     if (wua != null) {

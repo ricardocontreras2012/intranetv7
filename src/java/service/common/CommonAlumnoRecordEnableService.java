@@ -36,9 +36,9 @@ public final class CommonAlumnoRecordEnableService {
         WorkSession ws = genericSession.getWorkSession(key);
 
         if (!"PR".equals(genericSession.getUserType())
-                || "S".equals(ContextUtil.getDAO().getProfesorPersistence(ActionUtil.getDBUser()).esProfesorDe(
+                || "S".equals(ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser()).esProfesorDe(
                         genericSession.getRut(), ws.getAlumno().getAluRut()))) {
-            List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());
+            List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).find(ws.getAlumno().getAluRut());
 
             if (aluCarList != null) {
                 if (aluCarList.size() == 1) {

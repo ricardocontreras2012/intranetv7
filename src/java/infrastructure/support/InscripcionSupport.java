@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
-import domain.repository.MallaPersistence;
+import domain.repository.MallaRepository;
 import session.GenericSession;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
@@ -88,7 +88,7 @@ public final class InscripcionSupport {
         List<Curso> cursoLists = new ArrayList<>();
 
         if (this.aluCar.getDerechosInscripcion() != null) {
-            cursoLists = ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).find(
+            cursoLists = ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(
                     derecho.getId().getDerAsign(), this.aluCar.getParametros().getAgnoIns(),
                     this.aluCar.getParametros().getSemIns(), this.aluCar.getPlan().getMencion().getId().getMenCodCar());
         }
@@ -106,7 +106,7 @@ public final class InscripcionSupport {
      * @return Lista de cursos definidos para la asignatura.
      */
     public List<Curso> getCursos(GenericSession gs, DerechoCoordinadorSupport derecho, Integer agnoIns, Integer semIns) {
-        return getDistinctAsc(ContextUtil.getDAO().getCursoPersistence(ActionUtil.getDBUser()).findAll(
+        return getDistinctAsc(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findAll(
                 gs.getRut(), gs.getUserType(), derecho.getDerAsign(), agnoIns, semIns));
     }
 
@@ -118,7 +118,7 @@ public final class InscripcionSupport {
      * @return Lista de cursos inscritos.
      */
     public Integer isAlumnoPropio(Integer rut, String userType) {
-        return ContextUtil.getDAO().getAluCarPersistence(ActionUtil.getDBUser()).isAlumnoPropio(aluCar, rut, userType);
+        return ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).isAlumnoPropio(aluCar, rut, userType);
     }
     
     public List<Inscripcion> getInscripcionFull(Integer agno, Integer sem) {
@@ -128,7 +128,7 @@ public final class InscripcionSupport {
     }
 
     public List<Inscripcion> getInscripcion(Integer agno, Integer sem) {
-        return ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).getInscripcion(aluCar, agno,
+        return ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcion(aluCar, agno,
                 sem);
     }
 
@@ -200,7 +200,7 @@ public final class InscripcionSupport {
                     CursoId idCurso = curso.getId();
                     String nombre = curso.getNombreFull();
 
-                    int errDelete = ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, idCurso, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
+                    int errDelete = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, idCurso, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
 
                     if (errDelete > 0) {
                         String errMsg;
@@ -273,7 +273,7 @@ public final class InscripcionSupport {
             return ERROR;
         }
 
-        if (ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), curso.getId()) != 0) {
+        if (ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), curso.getId()) != 0) {
             action.addActionError(action.getText("error.acta.generada"));
             LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
                     + action.getText("error.acta.generada"));
@@ -303,7 +303,7 @@ public final class InscripcionSupport {
      */
     public String traspasoInscripcionCoordinador(String userType, AluCar aluCar, Curso oldCurso, Curso newCurso) {
 
-        if (ContextUtil.getDAO().getActaCalificacionPersistence(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), newCurso.getId()) != 0) {
+        if (ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), newCurso.getId()) != 0) {
             action.clearErrors();
 
             action.addActionError(action.getText("error.acta.generada"));
@@ -336,7 +336,7 @@ public final class InscripcionSupport {
     public void newInscripcion(Curso curso, String realizador, String force) {
 
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).makePersistent(
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).makePersistent(
                 inscripcionNueva(curso, realizador, genericSession.getRut(), force));
 
         commitTransaction();
@@ -354,7 +354,7 @@ public final class InscripcionSupport {
      */
     public void traspasoInscripcion(AluCar aluCar, Curso oldCurso, Curso newCurso, String realizador) {
 
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).traspaso(aluCar.getId(), oldCurso.getId(), newCurso.getId());
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).traspaso(aluCar.getId(), oldCurso.getId(), newCurso.getId());
         LogUtil.setLog(genericSession.getRut(), rut + "> " + newCurso.getNombreFull());
     }
 
@@ -535,7 +535,7 @@ public final class InscripcionSupport {
                 || "SI".equals(aluCar.getParametros().getPuedeModificar())
                 || asList("JC", "SP").contains(genericSession.getUserType())) {
 
-            MallaPersistence mallaPersistence = ContextUtil.getDAO().getMallaPersistence(ActionUtil.getDBUser());
+            MallaRepository mallaPersistence = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser());
 
             if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 35 && aluCar.getAcaCodPlan() < 7) {
                 aluCar.setCreditosNivel(mallaPersistence.getCreditosNivel(aluCar));
@@ -592,7 +592,7 @@ public final class InscripcionSupport {
         CursoId id = curso.getId();
 
         if (!"P".equals(curso.getAsignatura().getAsiTipo())) {
-            retValue = "NO".equals(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).hayCupoCarrera(
+            retValue = "NO".equals(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).hayCupoCarrera(
                     id.getCurAsign(),
                     id.getCurElect(),
                     id.getCurCoord(),
@@ -602,7 +602,7 @@ public final class InscripcionSupport {
                     carrera, mencion));
         } else {
             if ("SI".equals(this.aluCar.getParametros().getPuedeModificar())) {
-                retValue = "NO".equals(ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).hayCupo(
+                retValue = "NO".equals(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).hayCupo(
                         id.getCurAsign(),
                         id.getCurElect(),
                         id.getCurCoord(),
@@ -628,7 +628,7 @@ public final class InscripcionSupport {
         if ("S".equals(curso.getAsignatura().getAsiElect())) {
             CursoId cursoId = curso.getId();
             AluCarId aluCarId = this.aluCar.getId();
-            int flag = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).tienePreReqElectivo(
+            int flag = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).tienePreReqElectivo(
                     aluCarId.getAcaRut(),
                     aluCarId.getAcaCodCar(),
                     aluCarId.getAcaAgnoIng(),
@@ -654,7 +654,7 @@ public final class InscripcionSupport {
             CursoId cursoId = curso.getId();
             AluCarId aluCarId = this.aluCar.getId();
 
-            int flag = ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).electivoYaAprobado(
+            int flag = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).electivoYaAprobado(
                     aluCarId.getAcaRut(),
                     aluCarId.getAcaCodCar(),
                     aluCarId.getAcaAgnoIng(),
@@ -681,7 +681,7 @@ public final class InscripcionSupport {
         AluCarId id = this.aluCar.getId();
         CursoId cursoId = curso.getId();
 
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).topeHorario(
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).topeHorario(
                 id.getAcaRut(),
                 id.getAcaCodCar(),
                 id.getAcaAgnoIng(),
@@ -701,7 +701,7 @@ public final class InscripcionSupport {
         CursoId oriId = cursoOri.getId();
         CursoId destId = cursoDest.getId();
 
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).topeHorarioCambioCurso(
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).topeHorarioCambioCurso(
                 id.getAcaRut(),
                 id.getAcaCodCar(),
                 id.getAcaAgnoIng(),
@@ -773,7 +773,7 @@ public final class InscripcionSupport {
 
     public void swapInscripcion(AluCarId id, CursoId cOld, CursoId cNew) {
         beginTransaction(ActionUtil.getDBUser());
-        ContextUtil.getDAO().getInscripcionPersistence(ActionUtil.getDBUser()).swap(id, cOld, cNew);
+        ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).swap(id, cOld, cNew);
         commitTransaction();
     }
 

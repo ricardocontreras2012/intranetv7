@@ -41,7 +41,7 @@ public class TitulosyGradosNominaRemoveService {
                 .filter(i -> parameters.get("ck_" + i) != null)
                 .mapToObj(i -> ws.getExpedienteLogroList().get(i).getId().getExplRut())
                 .forEach(rut -> ContextUtil.getDAO()
-                .getExpedienteLogroPersistence(ActionUtil.getDBUser())
+                .getExpedienteLogroRepository(ActionUtil.getDBUser())
                 .removeNomina(rut, tipo, nomina, agno));
 
         commitTransaction();

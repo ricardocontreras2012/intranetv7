@@ -500,7 +500,7 @@ public class AluCar implements Serializable {
      *
      */
     public void setCartolaView() {
-        this.cartolaView = ContextUtil.getDAO().getCartolaPersistenceView(ActionUtil.getDBUser()).find(this);
+        this.cartolaView = ContextUtil.getDAO().getCartolaViewRepository(ActionUtil.getDBUser()).find(this);
     }
 
     /**
@@ -509,7 +509,7 @@ public class AluCar implements Serializable {
      * @param agno
      */
     public void setCartolaAgnoView(Integer agno) {
-        this.cartolaView = ContextUtil.getDAO().getCartolaPersistenceView(ActionUtil.getDBUser()).find(this, agno);
+        this.cartolaView = ContextUtil.getDAO().getCartolaViewRepository(ActionUtil.getDBUser()).find(this, agno);
     }
 
     /**
@@ -523,7 +523,7 @@ public class AluCar implements Serializable {
      * @return
      */
     public boolean estaMatriculado(Integer agno, Integer sem) {
-        return ContextUtil.getDAO().getMatriculaHistoricoPersistence(ActionUtil.getDBUser()).find(this.getId(), agno, sem) == 1;
+        return ContextUtil.getDAO().getMatriculaHistoricoRepository(ActionUtil.getDBUser()).find(this.getId(), agno, sem) == 1;
     }
 
     /**
@@ -570,16 +570,16 @@ public class AluCar implements Serializable {
         List<Derecho> der1 = new ArrayList<>();
         List<Derecho> der2 = new ArrayList<>();
         
-        ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).generarDerechos(this);
+        ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).generarDerechos(this);
  
         // Cargar der1 si se puede inscribir en Malla
         if ("SI".equals(this.parametros.getPuedeInscribirMalla())||"SI".equals(this.parametros.getPuedeModificar())) {                      
-            der1 = ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).findDerMalla(this);
+            der1 = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).findDerMalla(this);
         }
 
         // Cargar der2 si se puede inscribir en Formación Integral
         if ("SI".equals(this.parametros.getPuedeInscribirFormacionIntegral())) {
-            der2 = ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).findDerFI(this);
+            der2 = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).findDerFI(this);
         }
 
         // Concatenar ambas listas
@@ -597,15 +597,15 @@ public class AluCar implements Serializable {
      * @param userType
      */
     public void setDerechosCoordinadorInscripcion(Integer rut, String userType) {
-        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).getDerechoCoordinador(this, rut, userType);
+        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).getDerechoCoordinador(this, rut, userType);
     }
 
     public void setDerechosCoordinadorInscripcionLibre(Integer rut) {
-        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).getDerechoCoordinadorLibre(this, rut);
+        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).getDerechoCoordinadorLibre(this, rut);
     }
 
     public void setDerechosFIInscripcion(Integer rut, String userType) {
-        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoPersistence(ActionUtil.getDBUser()).getDerechoFI(this, rut, userType);
+        this.derechosCoordinadorInscripcion = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).getDerechoFI(this, rut, userType);
     }
 
     /**
@@ -622,7 +622,7 @@ public class AluCar implements Serializable {
      *
      */
     public void setMatriculas() {
-        this.matriculas = ContextUtil.getDAO().getMatriculaHistoricoPersistence(ActionUtil.getDBUser()).find(this);
+        this.matriculas = ContextUtil.getDAO().getMatriculaHistoricoRepository(ActionUtil.getDBUser()).find(this);
     }
 
     /**
@@ -640,7 +640,7 @@ public class AluCar implements Serializable {
      */
     public void setCalidades() {
         this.calidades
-                = ContextUtil.getDAO().getCcalidadPersistence(ActionUtil.getDBUser()).find(this);
+                = ContextUtil.getDAO().getCcalidadRepository(ActionUtil.getDBUser()).find(this);
     }
 
     /**
@@ -658,7 +658,7 @@ public class AluCar implements Serializable {
      */
     public void setSituaciones() {
         this.situaciones
-                = ContextUtil.getDAO().getSacarreraPersistence(ActionUtil.getDBUser()).find(this);
+                = ContextUtil.getDAO().getSacarreraRepository(ActionUtil.getDBUser()).find(this);
     }
 
     /**
@@ -676,7 +676,7 @@ public class AluCar implements Serializable {
      * @param userType
      */
     public void setCalificaciones(String userType) {
-        this.calificaciones = ContextUtil.getDAO().getCalificacionPersistence(userType).find(this);
+        this.calificaciones = ContextUtil.getDAO().getCalificacionRepository(userType).find(this);
     }
 
     /**
@@ -948,7 +948,7 @@ public class AluCar implements Serializable {
      * @param id
      */
     public void setEvaluacionAlumnoList(CursoId id) {
-        this.evaluacionAlumnoList = ContextUtil.getDAO().getEvaluacionAlumnoPersistence(ActionUtil.getDBUser()).getNotas(this.id.getAcaRut(), id);
+        this.evaluacionAlumnoList = ContextUtil.getDAO().getEvaluacionAlumnoRepository(ActionUtil.getDBUser()).getNotas(this.id.getAcaRut(), id);
     }
 
     /**
@@ -968,7 +968,7 @@ public class AluCar implements Serializable {
     }
 
     public String getUltimaMatricula() {
-        return ContextUtil.getDAO().getScalarPersistence(ActionUtil.getDBUser()).getUltimaMatricula(id);
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getUltimaMatricula(id);
     }
 
     public List<CursoEspejo> getCargaEspejo() {
@@ -980,7 +980,7 @@ public class AluCar implements Serializable {
     }
 
     public Unidad getUnidadFacultad() {
-        return ContextUtil.getDAO().getUnidadPersistence(ActionUtil.getDBUser()).find(this.getAluCarFunction().getUnidadFacultad());
+        return ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(this.getAluCarFunction().getUnidadFacultad());
     }
 
     public boolean isIsAlumnoPropio() {

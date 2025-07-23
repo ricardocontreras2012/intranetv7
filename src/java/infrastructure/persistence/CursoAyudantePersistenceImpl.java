@@ -5,12 +5,12 @@
  */
 package infrastructure.persistence;
 
-import domain.repository.CursoAyudantePersistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.CursoAyudante;
 import java.util.List;
 import org.hibernate.Query;
+import domain.repository.CursoAyudanteRepository;
 
 /**
  * Class description
@@ -19,7 +19,7 @@ import org.hibernate.Query;
  * @version 7, 24/05/2012
  */
 public final class CursoAyudantePersistenceImpl extends CrudAbstractDAO<CursoAyudante, Long>
-        implements CursoAyudantePersistence {
+        implements CursoAyudanteRepository {
 
     /**
      * Method description

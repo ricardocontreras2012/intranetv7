@@ -11,8 +11,6 @@ import domain.model.AluCar;
 import domain.model.AsistenciaAlumno;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
-import domain.repository.AsistenciaAlumnoNominaPersistence;
-import domain.repository.AsistenciaAlumnoPersistence;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -24,6 +22,8 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
 import java.util.List;
 import java.util.stream.IntStream;
+import domain.repository.AsistenciaAlumnoNominaRepository;
+import domain.repository.AsistenciaAlumnoRepository;
 
 /**
  * Class description
@@ -47,19 +47,19 @@ public final class CommonAsistenciaSaveNewAsistenciaService {
         WorkSession ws = genericSession.getWorkSession(key);
         String dbUser = ActionUtil.getDBUser();
 
-        AsistenciaAlumnoNominaPersistence asistenciaAlumnoNominaPersistence
-                = ContextUtil.getDAO().getAsistenciaAlumnoNominaPersistence(dbUser);
-        AsistenciaAlumnoPersistence asistenciaAlumnoPersistence
-                = ContextUtil.getDAO().getAsistenciaAlumnoPersistence(dbUser);
+        AsistenciaAlumnoNominaRepository asistenciaAlumnoNominaRepository
+                = ContextUtil.getDAO().getAsistenciaAlumnoNominaRepository(dbUser);
+        AsistenciaAlumnoRepository asistenciaAlumnoRepository
+                = ContextUtil.getDAO().getAsistenciaAlumnoRepository(dbUser);
 
         beginTransaction(dbUser);
 
         AsistenciaAlumno asistencia = new AsistenciaAlumno();
         asistencia.setCurso(ws.getCurso());
         asistencia.setAsaFecha(stringToDate(fecha));
-        asistencia.setAsaCorrel(ContextUtil.getDAO().getScalarPersistence(dbUser).getSecuenciaAsistencia());
+        asistencia.setAsaCorrel(ContextUtil.getDAO().getScalarRepository(dbUser).getSecuenciaAsistencia());
 
-        asistenciaAlumnoPersistence.makePersistent(asistencia);
+        asistenciaAlumnoRepository.makePersistent(asistencia);
 
         List<AluCar> nominaCurso = ws.getNominaCurso();
 
@@ -76,11 +76,11 @@ public final class CommonAsistenciaSaveNewAsistenciaService {
             nomina.setId(nominaId);
 
             nomina.setAanAsistio(isNotNull(map.get("ck_" + i)) ? 1 : 0);
-            asistenciaAlumnoNominaPersistence.makePersistent(nomina);
+            asistenciaAlumnoNominaRepository.makePersistent(nomina);
         });
 
         commitTransaction();
-        ws.setAsistenciaAlumnoList(asistenciaAlumnoPersistence.find(ws.getCurso()));
+        ws.setAsistenciaAlumnoList(asistenciaAlumnoRepository.find(ws.getCurso()));
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());
 
         return SUCCESS;
