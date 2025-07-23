@@ -79,7 +79,6 @@ import domain.repository.TmotivoSolicitudInscripcionRepository;
 import domain.repository.EstadoDocExpRepository;
 import domain.repository.EvaluacionAlumnoRepository;
 import domain.repository.NominaCarreraRepository;
-import persistence.scalar.ScalarPersistence;
 import domain.repository.ActaCalificacionNominaRepository;
 import domain.repository.ActaCalificacionRepository;
 import domain.repository.ActaConvalidacionAsignaturaRepository;
@@ -122,6 +121,7 @@ import domain.repository.DocenteHorarioRepository;
 import domain.repository.DummyRepository;
 import domain.repository.NominaActaViewRepository;
 import domain.repository.FlagInscripcionViewRepository;
+import persistence.scalar.ScalarRespository;
 
 /**
  * Class description
@@ -337,7 +337,7 @@ abstract class FactoryGenericDAO {
      *
      * @return
      */
-    public abstract ScalarPersistence getScalarRepository(String userType);
+    public abstract ScalarRespository getScalarRepository(String userType);
 
     /**
      * Method description

@@ -200,7 +200,6 @@ import domain.repository.EvaluacionAlumnoRepository;
 import domain.repository.NominaCarreraRepository;
 
 import org.hibernate.Session;
-import persistence.scalar.ScalarPersistence;
 import persistence.scalar.ScalarPersistenceImpl;
 import static infrastructure.util.AppStaticsUtil.APP_DB_USERS;
 import infrastructure.util.HibernateUtil;
@@ -246,6 +245,7 @@ import domain.repository.DocenteHorarioRepository;
 import domain.repository.DummyRepository;
 import domain.repository.NominaActaViewRepository;
 import domain.repository.FlagInscripcionViewRepository;
+import persistence.scalar.ScalarRespository;
 
 /**
  * Class description
@@ -539,8 +539,8 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
      * @return
      */
     @Override
-    public ScalarPersistence getScalarRepository(String userType) {
-        return (ScalarPersistence) instantiateDAO(ScalarPersistenceImpl.class, userType);
+    public ScalarRespository getScalarRepository(String userType) {
+        return (ScalarRespository) instantiateDAO(ScalarPersistenceImpl.class, userType);
     }
 
     /**

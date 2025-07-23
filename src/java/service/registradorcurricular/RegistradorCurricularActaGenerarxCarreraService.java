@@ -12,7 +12,6 @@ import domain.model.NominaCarreraId;
 import java.util.Map;
 import domain.repository.EmisionNominaRepository;
 import domain.repository.NominaCarreraRepository;
-import persistence.scalar.ScalarPersistence;
 import session.GenericSession;
 import session.RegistradorSession;
 import session.WorkSession;
@@ -24,6 +23,7 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
 import java.util.Optional;
 import domain.repository.ActaCalificacionRepository;
 import domain.repository.NominaActaViewRepository;
+import persistence.scalar.ScalarRespository;
 
 /**
  * Class description
@@ -51,7 +51,7 @@ public final class RegistradorCurricularActaGenerarxCarreraService {
 
         // Obtener persistencias
         ActaCalificacionRepository actaRepository = ContextUtil.getDAO().getActaCalificacionRepository(user);
-        ScalarPersistence nominaCarreraScalarRepository = ContextUtil.getDAO().getScalarRepository(user);
+        ScalarRespository nominaCarreraScalarRepository = ContextUtil.getDAO().getScalarRepository(user);
         NominaCarreraRepository nominaCarreraRepository = ContextUtil.getDAO().getNominaCarreraRepository(user);
         EmisionNominaRepository emisionRepository = ContextUtil.getDAO().getEmisionNominaRepository(user);
         NominaActaViewRepository nominaActaRepository = ContextUtil.getDAO().getNominaActaViewRepository(user);

@@ -23,7 +23,7 @@ import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import domain.repository.ActaCalificacionRepository;
 import domain.repository.NominaActaViewRepository;
-import persistence.scalar.ScalarPersistence;
+import persistence.scalar.ScalarRespository;
 
 /**
  *
@@ -50,7 +50,7 @@ public class RegistradorCurricularActaGenerarIntercambioService {
 
         ActaCalificacionRepository actaRepository
                 = ContextUtil.getDAO().getActaCalificacionRepository(user);
-        ScalarPersistence nominaCarreraScalarRepository
+        ScalarRespository nominaCarreraScalarRepository
                 = ContextUtil.getDAO().getScalarRepository(user);
         NominaCarreraRepository nominaCarreraRepository
                 = ContextUtil.getDAO().getNominaCarreraRepository(user);

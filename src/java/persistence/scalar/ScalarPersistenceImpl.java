@@ -24,7 +24,7 @@ import org.hibernate.type.Type;
  * @version 7, 24/05/2012
  */
 public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Serializable>
-        implements ScalarPersistence {
+        implements ScalarRespository {
 
     private Integer getSecuencia(String secuencia) {
         return (Integer) getSession().createSQLQuery("SELECT " + secuencia + ".NEXTVAL seq FROM DUAL").addScalar("seq", INTEGER).uniqueResult();

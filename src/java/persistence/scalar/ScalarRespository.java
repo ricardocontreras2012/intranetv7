@@ -1,5 +1,5 @@
 /*
- * @(#)ScalarPersistence.java
+ * @(#)ScalarRespository.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -16,7 +16,7 @@ import java.util.Date;
  * @author Ricardo Contreras S.
  *
  */
-public interface ScalarPersistence extends CrudGenericDAO<Object, Serializable> {
+public interface ScalarRespository extends CrudGenericDAO<Object, Serializable> {
 
     /**
      * Method description

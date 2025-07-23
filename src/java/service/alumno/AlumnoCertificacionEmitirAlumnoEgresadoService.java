@@ -30,7 +30,6 @@ import static java.security.Security.addProvider;
 import java.util.Date;
 import static org.apache.struts2.ServletActionContext.getServletContext;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import persistence.scalar.ScalarPersistence;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
 import static infrastructure.util.BarCodeUtil.putBarCode;
@@ -52,6 +51,7 @@ import static infrastructure.util.SystemParametersUtil.PATH_ATTACH_MESSAGES;
 import static infrastructure.util.SystemParametersUtil.PATH_CERT;
 import infrastructure.util.common.CommonCertificacionUtil.BackgroundImage;
 import static infrastructure.util.common.CommonCertificacionUtil.newParrafo;
+import persistence.scalar.ScalarRespository;
 
 /**
  *
@@ -102,7 +102,7 @@ public class AlumnoCertificacionEmitirAlumnoEgresadoService {
             CcalidadId ccalId = ContextUtil.getDAO().getCcalidadRepository(user).findxCalidad(
                     aluCar, 2).getId();
 
-            ScalarPersistence scalarRepository
+            ScalarRespository scalarRepository
                     = ContextUtil.getDAO().getScalarRepository(user);
 
             String next = scalarRepository.getSemestrePrevio(ccalId.getCcaAgno(), ccalId.getCcaSem(), aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
