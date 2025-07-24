@@ -38,6 +38,7 @@ import domain.repository.CursoRepository;
  * @version 7, 24/05/2012
  */
 public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> implements CursoRepository {
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Curso> find(Integer asignatura) {
@@ -53,7 +54,8 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera) {
+    public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion) {
+
         Criteria criteria = getSession().createCriteria(Curso.class);
         String sqlFilter;
         String sqlFilterPrefijo = "exists (select * from curso_car where "
@@ -62,13 +64,13 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
                 + "ccar_coord = this_.cur_coord and "
                 + "ccar_secc = this_.cur_secc and "
                 + "ccar_agno = this_.cur_agno and "
-                + "ccar_sem = this_.cur_sem and ";
+                + "ccar_sem = this_.cur_sem and "
+                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_cod_car, ccar_cod_men, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
 
-        // Construir la consulta SQL con un parámetro nombrado
         if (asignatura > 1000) {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car=:carrera)";
+            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = ?)";
         } else {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car=facultad_pkg.get_unidad_x_carrera_mencion(:carrera, 0))";
+            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, 0))";
         }
 
         criteria.setFetchMode("asignatura", JOIN);
@@ -76,10 +78,14 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
         criteria.add(eq("id.curAgno", agno));
         criteria.add(eq("id.curSem", sem));
 
-        // Añadir la restricción SQL usando parámetros
-        criteria.add(Restrictions.sqlRestriction(sqlFilter,
-                new Object[]{carrera},
-                new Type[]{IntegerType.INSTANCE}));
+        // Armar lista de parámetros dependiendo del caso
+        Object[] params;
+        Type[] types;
+
+        params = new Object[]{carrera, mencion, carrera};
+        types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
+
+        criteria.add(Restrictions.sqlRestriction(sqlFilter, params, types));
 
         return criteria.list();
     }
@@ -372,8 +378,8 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<Curso> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {      
-        
+    public List<Curso> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {
+
         try {
             Query query = getSession().getNamedQuery("GetCursosFunction");
             query.setParameter(0, tcarrera, StandardBasicTypes.INTEGER);
@@ -404,7 +410,7 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
                         curso.setCurProfesores(Objects.toString(obj[8], ""));
                         curso.setCurAyudantes(Objects.toString(obj[9], ""));
                         curso.setCurHorario(Objects.toString(obj[10], ""));
-                        curso.setCurSalas((String) obj[11]);                                            
+                        curso.setCurSalas((String) obj[11]);
                         curso.setCurCupoIni(((Number) obj[12]).intValue());
                         curso.setCurCupoDis(((Number) obj[13]).intValue());
                         curso.setCurFechaInicio((Date) obj[14]);

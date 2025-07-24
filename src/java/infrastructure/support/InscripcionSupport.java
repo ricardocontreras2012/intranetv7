@@ -90,7 +90,7 @@ public final class InscripcionSupport {
         if (this.aluCar.getDerechosInscripcion() != null) {
             cursoLists = ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(
                     derecho.getId().getDerAsign(), this.aluCar.getParametros().getAgnoIns(),
-                    this.aluCar.getParametros().getSemIns(), this.aluCar.getPlan().getMencion().getId().getMenCodCar());
+                    this.aluCar.getParametros().getSemIns(), this.aluCar.getPlan().getMencion().getId().getMenCodCar(), this.aluCar.getPlan().getMencion().getId().getMenCodMen());
         }
 
         return cursoLists;

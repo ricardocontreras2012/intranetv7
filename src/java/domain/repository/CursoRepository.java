@@ -46,9 +46,10 @@ public interface CursoRepository extends CrudGenericDAO<Curso, Long> {
      * @param agno
      * @param sem
      * @param carrera
+     * @param mencion
      * @return
      */
-    List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera);
+    List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion);
 
     /**
      *
