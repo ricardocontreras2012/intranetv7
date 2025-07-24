@@ -47,10 +47,11 @@ public final class AlumnoLoginService {
      */
     public String service(ActionCommonSupport action, Map<String, Object> sesion, Integer rut, String passwd, String key) {
         // Verificación temprana para asegurarse de que la sesión y la clave no sean nulas.
+                 
         if (Stream.of(sesion, key, rut, passwd).anyMatch(Objects::isNull)) {
             return retReLogin();
-        }
-
+        }       
+        
         try {
             // Intentar realizar el inicio de sesión utilizando las credenciales del alumno y la clave de sesión.
             boolean isLoginSuccessful = CommonAlumnoUtil.login(
@@ -74,6 +75,6 @@ public final class AlumnoLoginService {
             // Si ocurre una excepción, registrar el error y lanzarla nuevamente para su manejo superior.
             e.printStackTrace();
             throw e;
-        }
+        }                      
     }
 }

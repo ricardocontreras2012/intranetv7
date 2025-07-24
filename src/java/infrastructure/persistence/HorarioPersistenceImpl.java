@@ -194,63 +194,6 @@ public final class HorarioPersistenceImpl extends CrudAbstractDAO<Horario, Long>
 
     }
 
-    /*
-    @Override
-    public String getHorarioCoumn(CursoId id) {
-        
-try{        
-        Query query = getSession().getNamedQuery("GetHorarioComunFunction");
-
-        query.setParameter(0, id.getCurAsign(), StandardBasicTypes.INTEGER);
-        query.setString(1, id.getCurElect());
-        query.setString(2, id.getCurCoord());
-        query.setParameter(3, id.getCurSecc(), StandardBasicTypes.INTEGER);
-        query.setParameter(4, id.getCurAgno(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, id.getCurSem(), StandardBasicTypes.INTEGER);
-        
-        query.setParameter(0, 1);
-        
-        
-
-        //query.setResultTransformer(AliasToEntityMapResultTransformer.INSTANCE);
-
-        /*List<?> result = query.list();
-        if (!result.isEmpty()) {
-            Object clobObject = ((Map<?, ?>) result.get(0)).values().iterator().next();
-            if (clobObject instanceof Clob) {
-                try {
-                    Clob clob = (Clob) clobObject;
-                    Reader reader = clob.getCharacterStream();
-                    StringBuilder sb = new StringBuilder();
-                    char[] buffer = new char[1024];
-                    int charsRead;
-                    while ((charsRead = reader.read(buffer)) != -1) {
-                        sb.append(buffer, 0, charsRead);
-                    }
-                    return sb.toString();
-                } catch (IOException | SQLException e) {
-                    throw new RuntimeException("Error leyendo el CLOB", e);
-                }
-            }
-       
-        
-        //Clob resultClob = (Clob) query.uniqueResult();
-        
-
-// Si lo necesitas como String:
-//String resultString = resultClob.getSubString(1, (int) resultClob.length());
-
-String resultString = (String)query.uniqueResult();
-
-System.out.println("x==="+resultString);
-
-return Action.SUCCESS;
-
-}catch(Exception e){e.printStackTrace();}
-        
-        return null;
-
-    }*/
     @Override
     public String getHorarioCoumn(CursoId id) {
 

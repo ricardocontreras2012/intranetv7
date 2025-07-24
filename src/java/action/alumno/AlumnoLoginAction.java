@@ -26,7 +26,7 @@ public final class AlumnoLoginAction extends ActionCommonSupport {
      * @return
      */
     @Override
-    public String action() {
+    public String action() {                
         return new AlumnoLoginService().service(this, getSesion(), rut, passwd, getKey());
     }
 

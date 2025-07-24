@@ -238,8 +238,8 @@ public final class CommonAlumnoUtil {
      * @param key
      */
     public static void login(GenericSession genericSession, AlumnoSession alumnoSession, AluCar aluCar, String key) {
-        WorkSession ws = genericSession.getWorkSession(key);
-
+        WorkSession ws = genericSession.getWorkSession(key);     
+        
         loadAluCar(genericSession, ws, aluCar);
         alumnoSession.setAluCar(aluCar);
         alumnoSession.setBienvenida(true);
@@ -254,15 +254,16 @@ public final class CommonAlumnoUtil {
                 aluCar.getPlan()));
 
         InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
-        insSup.setSctNivel();
-        ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
+        insSup.setSctNivel();              
+        
+        ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());      
     }
 
     public static boolean login(Integer rut, String passwd, String key, Map<String, Object> sesion, Integer flag) {
-
+        
         AlumnoRepository alumnoRepository
                 = ContextUtil.getDAO().getAlumnoRepository("AL");
-        Alumno alumno = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? alumnoRepository.find(rut, passwd) : alumnoRepository.find(rut);
+        Alumno alumno = Objects.equals(flag, SystemParametersUtil.INGRESO_REGULAR) ? alumnoRepository.find(rut, passwd) : alumnoRepository.find(rut);              
 
         if (alumno != null) {
             GenericSession genericSession = new GenericSession("AL", rut, passwd, flag);
@@ -288,6 +289,7 @@ public final class CommonAlumnoUtil {
             sesion.put("genericSession", genericSession);
             sesion.put("alumnoSession", alumnoSession);
             LogUtil.setLog(rut);
+                                              
             return true;
         }
         return false;
@@ -298,7 +300,7 @@ public final class CommonAlumnoUtil {
         aluCar.setCarga(gs);
         ws.setAluCar(aluCar);
         ws.setCursoList(aluCar.getCarga());
-        ws.setCargaEspejo(aluCar.getCargaEspejo());
+        ws.setCargaEspejo(aluCar.getCargaEspejo());               
     }
 
     /**

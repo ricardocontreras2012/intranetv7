@@ -100,9 +100,9 @@ public class AlumnoCertificacionEmitirRankEgresadoService {
                             + alumno.getAluRut() + '-'
                             + alumno.getAluDv() + ", "
                             + prefijoCarrera + " de "
-                            + aluCar.getNombreCarrera() + ", tiene el siguiente ranking de promoción.\n\n\n" + ranking;
+                            + aluCar.getNombreCarrera() + ", tiene el siguiente ranking de egreso.\n\n" + ranking;
 
-                    String extiende = "";
+                    String extiende = "El cálculo de ranking se basa en la Resolución N° 7446 con fecha 17/11/2017 que trata sobre el mecanismo de cálculo del ranking para los alumnos egresados.\n\n";
 
                     extiende += "Se extiende el presente certificado para ser presentado en: Trámite "
                             + tramite.getTraPrefijo() + ' ' + tramite.getTraDescripcion() + ((obs != null) ? "\n" + obs : "");

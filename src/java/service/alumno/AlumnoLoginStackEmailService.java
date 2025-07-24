@@ -17,8 +17,9 @@ import infrastructure.util.ContextUtil;
 public class AlumnoLoginStackEmailService {
 
     public String service(GenericSession genericSession, String key) {
+        
         AluCarId id = genericSession.getWorkSession(key).getAluCar().getId();
 
-        return (ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getFlagEmail(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng())==0)?"stack":"email";
+        return (ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getFlagEmail(id.getAcaRut(), id.getAcaCodCar(), id.getAcaAgnoIng(), id.getAcaSemIng())==0)?"stack":"email";        
     }
 }

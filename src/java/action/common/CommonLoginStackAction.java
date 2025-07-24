@@ -21,9 +21,9 @@ public class CommonLoginStackAction extends ActionCommonSupport {
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception {
+    public String action() throws Exception {                                
         action =  new CommonLoginStackService().service(getGenericSession(), getKey());
-
+        
         return SUCCESS;
     }
 
