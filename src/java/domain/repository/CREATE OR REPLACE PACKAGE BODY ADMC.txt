@@ -1,0 +1,1135 @@
+CREATE OR REPLACE PACKAGE BODY ADMCURR_FAE.derecho_inscripcion_pkg
+AS
+   FUNCTION obtener_nivel_maximo_inscrito (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_agno           IN   NUMBER,
+      p_sem            IN   NUMBER
+   )
+      RETURN NUMBER
+   IS
+      v_nivel_maximo   NUMBER := 1000;
+   BEGIN
+      SELECT MAX (d.der_niv) + 1
+        INTO v_nivel_maximo
+        FROM derecho d
+       WHERE d.der_rut = p_rut_alumno
+         AND d.der_cod_car = p_cod_carrera
+         AND d.der_agno_ing = p_agno_ingreso
+         AND d.der_sem_ing = p_sem_ingreso
+         AND d.der_men = p_cod_mencion
+         AND d.der_asign_status NOT IN ('P')
+         AND NOT EXISTS (
+                SELECT 1
+                  FROM derecho d2
+                 WHERE d2.der_rut = p_rut_alumno
+                   AND d2.der_cod_car = p_cod_carrera
+                   AND d2.der_agno_ing = p_agno_ingreso
+                   AND d2.der_sem_ing = p_sem_ingreso
+                   AND d2.der_men = p_cod_mencion
+                   AND d2.der_niv = d.der_niv
+                   AND d2.der_asign_status NOT IN ('P')
+                   AND d.der_asign <> d2.der_asign
+                   AND NOT EXISTS (
+                          SELECT 1
+                            FROM inscripcion i
+                           WHERE i.ins_rut = p_rut_alumno
+                             AND i.ins_cod_car = p_cod_carrera
+                             AND i.ins_agno_ing = p_agno_ingreso
+                             AND i.ins_sem_ing = p_sem_ingreso
+                             AND i.ins_asign = d2.der_asign
+                             AND i.ins_agno = p_agno
+                             AND i.ins_sem = p_sem));
+
+      DBMS_OUTPUT.put_line (v_nivel_maximo);
+
+      IF v_nivel_maximo IS NULL
+      THEN
+         --insert into t values ('ingreso x min');
+         SELECT MIN (der_niv)
+           INTO v_nivel_maximo
+           FROM derecho
+          WHERE der_rut = p_rut_alumno
+            AND der_cod_car = p_cod_carrera
+            AND der_agno_ing = p_agno_ingreso
+            AND der_sem_ing = p_sem_ingreso
+            AND der_men = p_cod_mencion
+            AND der_asign_status NOT IN ('P');
+
+         IF v_nivel_maximo IS NULL
+         THEN
+            v_nivel_maximo := 1000;
+         END IF;
+      END IF;
+
+      --insert into t values ('niv---->>>>>>>>>>>' || v_nivel_maximo);
+      RETURN v_nivel_maximo;
+   END;
+
+   FUNCTION get_nivel_inscribir (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_agno           IN   NUMBER,
+      p_sem            IN   NUMBER
+   )
+      RETURN NUMBER
+   IS
+      PRAGMA AUTONOMOUS_TRANSACTION;
+      v_nivel_minimo   NUMBER;
+   BEGIN
+      -- Seleccionar el nivel m¿¿s bajo donde el alumno tiene asignaturas pendientes por inscribir
+      SELECT MIN (d.der_niv)
+        INTO v_nivel_minimo
+        FROM derecho d
+       WHERE der_rut = p_rut_alumno
+         AND der_cod_car = p_cod_carrera
+         AND der_agno_ing = p_agno_ingreso
+         AND der_sem_ing = p_sem_ingreso
+         --AND der_men = p_cod_mencion
+         AND der_asign_status NOT IN ('P')
+         AND NOT EXISTS (SELECT *
+                           FROM asignatura
+                          WHERE asi_cod = der_asign AND asi_elect = 'S')
+         AND NOT EXISTS (
+                SELECT 1
+                  FROM inscripcion i
+                 WHERE ins_rut = p_rut_alumno
+                   AND ins_cod_car = p_cod_carrera
+                   AND ins_agno_ing = p_agno_ingreso
+                   AND ins_sem_ing = p_sem_ingreso
+                   AND ins_agno = p_agno
+                   AND ins_sem = p_sem
+                   AND ins_asign = d.der_asign)
+         AND EXISTS (
+                SELECT *
+                  FROM curso_car
+                 WHERE der_asign = ccar_asign
+                   AND ccar_cod_car = p_cod_carrera
+                   AND ccar_cod_men = p_cod_mencion
+                   AND ccar_agno = p_agno
+                   AND ccar_sem = p_sem)
+         AND der_asign NOT IN
+                (361416, 362316, 362319, 361434, 361440, 362337, 352437,
+                 352450);
+
+      RETURN NVL (v_nivel_minimo, 0);
+   END;
+
+   FUNCTION get_status (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_asign          IN   NUMBER,
+      p_agno           IN   NUMBER,
+      p_sem            IN   NUMBER
+   )
+      RETURN VARCHAR2
+   IS
+      v_inscripcion   NUMBER;
+      v_sit           derecho.der_asign_status%TYPE;
+   BEGIN
+      -- Verificar si el alumno est  inscrito en el periodo actual
+      SELECT COUNT (*)
+        INTO v_inscripcion
+        FROM inscripcion
+       WHERE ins_rut = p_rut_alumno
+         AND ins_cod_car = p_cod_carrera
+         AND ins_agno_ing = p_agno_ingreso
+         AND ins_sem_ing = p_sem_ingreso
+         AND ins_asign = p_asign
+         AND ins_agno = p_agno
+         AND ins_sem = p_sem;
+
+      -- Si est  inscrito en el periodo
+      IF v_inscripcion > 0
+      THEN
+         -- Verificar si hay calificaci n para el periodo actual
+         BEGIN
+            SELECT cal_sit_alu
+              INTO v_sit
+              FROM calificacion
+             WHERE cal_rut = p_rut_alumno
+               AND cal_cod_car = p_cod_carrera
+               AND cal_agno_ing = p_agno_ingreso
+               AND cal_sem_ing = p_sem_ingreso
+               AND cal_asign = p_asign
+               AND cal_agno = p_agno
+               AND cal_sem = p_sem;
+
+            RETURN v_sit;
+         EXCEPTION
+            WHEN NO_DATA_FOUND
+            THEN
+               RETURN 'P';
+         END;
+      ELSE
+         BEGIN
+            SELECT cal_sit_alu
+              INTO v_sit
+              FROM ultima_calificacion
+             WHERE cal_rut = p_rut_alumno
+               AND cal_cod_car = p_cod_carrera
+               AND cal_agno_ing = p_agno_ingreso
+               AND cal_sem_ing = p_sem_ingreso
+               AND cal_asign = p_asign;
+
+            RETURN v_sit;
+         EXCEPTION
+            WHEN NO_DATA_FOUND
+            THEN
+               RETURN 'SC';
+         END;
+      END IF;
+   END;
+
+   PROCEDURE con_pool_sin_cambio_mencion (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_cod_plan       IN   NUMBER,
+      p_agno_ant       IN   NUMBER,
+      p_sem_ant        IN   NUMBER
+   )
+   IS
+      v_cod_asignatura   derecho.der_asign%TYPE;
+      v_nivel            derecho.der_niv%TYPE;
+      v_creditos         derecho.der_cred%TYPE;
+      v_elect            VARCHAR2 (1);
+      v_situacion        alu_car.aca_csit%TYPE;
+      v_calidad          alu_car.aca_ccal%TYPE;
+      v_menciones        NUMBER;
+      v_dummy            NUMBER;
+      v_status           derecho.der_asign_status%TYPE;
+
+      CURSOR c_ramos_faltan
+      IS
+         SELECT DISTINCT ma_asign, MIN (ma_nivel),
+                         MIN (  NVL (asi_hcred_teo, 0)
+                              + NVL (asi_hcred_lab, 0)
+                              + NVL (asi_hcred_eje, 0)
+                             ),
+                         asi_elect
+                    FROM malla, asignatura
+                   WHERE ma_asign = asi_cod
+                     AND ma_cod_car = p_cod_carrera
+                     AND ma_cod_plan = p_cod_plan
+                     AND (   asi_elect = 'S'
+                          OR (NOT EXISTS (
+                                 SELECT cal_asign
+                                   FROM calificacion
+                                  WHERE cal_rut = p_rut_alumno
+                                    AND cal_cod_car = p_cod_carrera
+                                    AND cal_agno_ing = p_agno_ingreso
+                                    AND cal_sem_ing = p_sem_ingreso
+                                    AND cal_asign = asi_cod
+                                    AND cal_sit_alu = 'A')
+                             )
+                         )
+                GROUP BY ma_asign, asi_elect;
+   BEGIN
+      OPEN c_ramos_faltan;
+
+      LOOP
+--DBMS_OUTPUT.PUT_LINE('Parametros: ' || p_cod_carrera || ', ' || p_cod_plan || ', ' || p_rut_alumno || ', ' || p_agno_ingreso || ', ' || p_sem_ingreso);
+         FETCH c_ramos_faltan
+          INTO v_cod_asignatura, v_nivel, v_creditos, v_elect;
+
+         --dbms_output.put_line('ok1');
+         EXIT WHEN c_ramos_faltan%NOTFOUND;
+
+         IF tiene_prereq (p_rut_alumno,
+                          p_cod_carrera,
+                          p_agno_ingreso,
+                          p_sem_ingreso,
+                          p_cod_mencion,
+                          p_cod_plan,
+                          v_cod_asignatura,
+                          p_agno_ant,
+                          p_sem_ant
+                         )
+         THEN
+            BEGIN
+               IF v_elect = 'S'
+               THEN
+                  v_status := 'SC';
+               ELSE
+                  v_status :=
+                     get_status (p_rut_alumno,
+                                 p_cod_carrera,
+                                 p_agno_ingreso,
+                                 p_sem_ingreso,
+                                 v_cod_asignatura,
+                                 p_agno_ant,
+                                 p_sem_ant
+                                );
+               END IF;
+
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing,
+                            der_sem_ing, der_asign, der_niv,
+                            der_cred, der_men, der_plan, der_tipo,
+                            der_asign_status
+                           )
+                    VALUES (p_rut_alumno, p_cod_carrera, p_agno_ingreso,
+                            p_sem_ingreso, v_cod_asignatura, v_nivel,
+                            v_creditos, p_cod_mencion, p_cod_plan, 1,
+                            v_status
+                           );
+            EXCEPTION
+               WHEN DUP_VAL_ON_INDEX
+               THEN
+                  v_dummy := 0;
+            END;
+         END IF;
+      END LOOP;
+
+      CLOSE c_ramos_faltan;
+
+      COMMIT;
+   EXCEPTION
+      WHEN OTHERS
+      THEN
+         raise_application_error
+              (-20001,
+                  'ERROR EN PROCEDIMIENTO ASIGNACION DE DERECHO_ALUMNO (RUT:'
+               || TO_CHAR (p_rut_alumno)
+               || ') '
+               || SUBSTR (SQLERRM, 1, 90)
+              );
+   END;
+
+   PROCEDURE derecho_con_pool_con_mencion (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_cod_plan       IN   NUMBER,
+      p_agno_ant       IN   NUMBER,
+      p_sem_ant        IN   NUMBER,
+      p_tipo_carrera   IN   NUMBER,
+      p_nivel_alu      IN   NUMBER,
+      p_via_ingreso    IN   NUMBER
+   )
+   IS
+      v_cod_asignatura    derecho.der_asign%TYPE;
+      v_nivel             derecho.der_niv%TYPE;
+      v_creditos          derecho.der_cred%TYPE;
+      v_elect             CHAR;
+      v_cod_mencion_aux   malla.ma_cod_men%TYPE;
+      v_situacion         alu_car.aca_csit%TYPE;
+      v_calidad           alu_car.aca_ccal%TYPE;
+      v_menciones         NUMBER;
+      v_dummy             NUMBER;
+      v_status            derecho.der_asign_status%TYPE;
+
+      CURSOR c_ramos_faltan
+      IS
+         SELECT DISTINCT ma_asign,
+                         MAX (DECODE (asi_elect, 'S', 10, ma_nivel)),
+                         MIN (  NVL (asi_hcred_teo, 0)
+                              + NVL (asi_hcred_lab, 0)
+                              + NVL (asi_hcred_eje, 0)
+                             ),
+                         asi_elect, p_cod_mencion
+                    FROM malla_plan_comun_ing, asignatura
+                   WHERE ma_asign = asi_cod
+                     AND ma_cod_car = p_cod_carrera
+                     AND ma_cod_plan = p_cod_plan
+                     AND (   asi_elect = 'S'
+                          OR (NOT EXISTS (
+                                 SELECT cal_asign
+                                   FROM calificacion
+                                  WHERE cal_rut = p_rut_alumno
+                                    AND cal_cod_car = p_cod_carrera
+                                    AND cal_agno_ing = p_agno_ingreso
+                                    AND cal_sem_ing = p_sem_ingreso
+                                    AND cal_asign = asi_cod
+                                    AND cal_sit_alu = 'A')
+                             )
+                         )
+                GROUP BY ma_asign, asi_elect, ma_cod_men
+         UNION
+         SELECT DISTINCT ma_asign,
+                         MAX (DECODE (asi_elect, 'S', 10, ma_nivel)),
+                         MIN (  NVL (asi_hcred_teo, 0)
+                              + NVL (asi_hcred_lab, 0)
+                              + NVL (asi_hcred_eje, 0)
+                             ),
+                         asi_elect, ma_cod_men
+                    FROM malla_ing_com_adm, asignatura
+                   WHERE ma_asign = asi_cod
+                     AND ma_cod_car = p_cod_carrera
+                     AND ma_cod_plan = p_cod_plan
+                     AND (   asi_elect = 'S'
+                          OR (NOT EXISTS (
+                                 SELECT cal_asign
+                                   FROM calificacion
+                                  WHERE cal_rut = p_rut_alumno
+                                    AND cal_cod_car = p_cod_carrera
+                                    AND cal_agno_ing = p_agno_ingreso
+                                    AND cal_sem_ing = p_sem_ingreso
+                                    AND cal_asign = asi_cod
+                                    AND cal_sit_alu = 'A')
+                             )
+                         )
+                GROUP BY ma_asign, asi_elect, ma_cod_men
+         UNION
+         SELECT DISTINCT ma_asign,
+                         MAX (DECODE (asi_elect, 'S', 10, ma_nivel)),
+                         MIN (  NVL (asi_hcred_teo, 0)
+                              + NVL (asi_hcred_lab, 0)
+                              + NVL (asi_hcred_eje, 0)
+                             ),
+                         asi_elect, ma_cod_men
+                    FROM malla_ing_com_eco, asignatura
+                   WHERE ma_asign = asi_cod
+                     AND ma_cod_car = p_cod_carrera
+                     AND ma_cod_plan = p_cod_plan
+                     AND (   asi_elect = 'S'
+                          OR (NOT EXISTS (
+                                 SELECT cal_asign
+                                   FROM calificacion
+                                  WHERE cal_rut = p_rut_alumno
+                                    AND cal_cod_car = p_cod_carrera
+                                    AND cal_agno_ing = p_agno_ingreso
+                                    AND cal_sem_ing = p_sem_ingreso
+                                    AND cal_asign = asi_cod
+                                    AND cal_sit_alu = 'A')
+                             )
+                         )
+                GROUP BY ma_asign, asi_elect, ma_cod_men;
+   BEGIN
+      OPEN c_ramos_faltan;
+
+      LOOP
+         FETCH c_ramos_faltan
+          INTO v_cod_asignatura, v_nivel, v_creditos, v_elect,
+               v_cod_mencion_aux;
+
+         EXIT WHEN c_ramos_faltan%NOTFOUND;
+
+         IF tiene_prereq (p_rut_alumno,
+                          p_cod_carrera,
+                          p_agno_ingreso,
+                          p_sem_ingreso,
+                          p_cod_mencion,
+                          p_cod_plan,
+                          v_cod_asignatura,
+                          p_agno_ant,
+                          p_sem_ant
+                         )
+         THEN
+            BEGIN
+               IF v_elect = 'S'
+               THEN
+                  v_status := 'SC';
+               ELSE
+                  v_status :=
+                     get_status (p_rut_alumno,
+                                 p_cod_carrera,
+                                 p_agno_ingreso,
+                                 p_sem_ingreso,
+                                 v_cod_asignatura,
+                                 p_agno_ant,
+                                 p_sem_ant
+                                );
+               END IF;
+
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing,
+                            der_sem_ing, der_asign, der_niv,
+                            der_cred, der_men, der_plan, der_tipo,
+                            der_asign_status
+                           )
+                    VALUES (p_rut_alumno, p_cod_carrera, p_agno_ingreso,
+                            p_sem_ingreso, v_cod_asignatura, v_nivel,
+                            v_creditos, v_cod_mencion_aux, p_cod_plan, 1,
+                            v_status
+                           );
+            EXCEPTION
+               WHEN DUP_VAL_ON_INDEX
+               THEN
+                  v_dummy := 0;
+            END;
+         END IF;
+      END LOOP;
+
+      CLOSE c_ramos_faltan;
+
+      COMMIT;
+   EXCEPTION
+      WHEN OTHERS
+      THEN
+         raise_application_error
+              (-20001,
+                  'ERROR EN PROCEDIMIENTO ASIGNACION DE DERECHO_ALUMNO (RUT:'
+               || TO_CHAR (p_rut_alumno)
+               || ') '
+               || SUBSTR (SQLERRM, 1, 90)
+              );
+   END;
+
+   PROCEDURE derecho_sin_pool (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_cod_plan       IN   NUMBER,
+      p_agno_ant       IN   NUMBER,
+      p_sem_ant        IN   NUMBER,
+      p_tipo_carrera   IN   NUMBER,
+      p_nivel_alu      IN   NUMBER,
+      p_via_ingreso    IN   NUMBER
+   )
+   IS
+      v_cod_asignatura    derecho.der_asign%TYPE;
+      v_nivel             derecho.der_niv%TYPE;
+      v_creditos          derecho.der_cred%TYPE;
+      v_elect             CHAR;
+      v_cod_mencion_aux   malla.ma_cod_men%TYPE;
+      v_situacion         alu_car.aca_csit%TYPE;
+      v_calidad           alu_car.aca_ccal%TYPE;
+      v_menciones         NUMBER;
+      v_dummy             NUMBER;
+      v_status            derecho.der_asign_status%TYPE;
+
+      CURSOR c_ramos_faltan
+      IS
+         SELECT DISTINCT ma_asign, MIN (ma_nivel),
+                         MIN (  NVL (asi_hcred_teo, 0)
+                              + NVL (asi_hcred_lab, 0)
+                              + NVL (asi_hcred_eje, 0)
+                             ),
+                         asi_elect
+                    FROM malla, asignatura
+                   WHERE ma_asign = asi_cod
+                     AND ma_cod_car = p_cod_carrera
+                     AND ma_cod_plan = p_cod_plan
+                     AND ma_cod_men = p_cod_mencion
+                     AND ma_asign NOT IN (76151, 76152)
+                     AND ma_asign =
+                            DECODE (p_tipo_carrera,
+                                    40, DECODE (ma_nivel,
+                                                GREATEST (ma_nivel,
+                                                          p_nivel_alu + 4
+                                                         ), 0,
+                                                ma_asign
+                                               ),
+                                    ma_asign
+                                   )
+                     AND NOT EXISTS (
+                            SELECT cal_asign
+                              FROM calificacion
+                             WHERE cal_rut = p_rut_alumno
+                               AND cal_cod_car = p_cod_carrera
+                               AND cal_agno_ing = p_agno_ingreso
+                               AND cal_sem_ing = p_sem_ingreso
+                               AND cal_asign = asi_cod
+                               AND cal_sit_alu = 'A')
+                GROUP BY ma_asign, asi_elect;
+   BEGIN
+      OPEN c_ramos_faltan;
+
+      LOOP
+         FETCH c_ramos_faltan
+          INTO v_cod_asignatura, v_nivel, v_creditos, v_elect;
+
+         EXIT WHEN c_ramos_faltan%NOTFOUND;
+
+         IF tiene_prereq (p_rut_alumno,
+                          p_cod_carrera,
+                          p_agno_ingreso,
+                          p_sem_ingreso,
+                          p_cod_mencion,
+                          p_cod_plan,
+                          v_cod_asignatura,
+                          p_agno_ant,
+                          p_sem_ant
+                         )
+         THEN
+            BEGIN
+               v_status :=
+                  get_status (p_rut_alumno,
+                              p_cod_carrera,
+                              p_agno_ingreso,
+                              p_sem_ingreso,
+                              v_cod_asignatura,
+                              p_agno_ant,
+                              p_sem_ant
+                             );
+
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing,
+                            der_sem_ing, der_asign, der_niv,
+                            der_cred, der_men, der_plan, der_tipo,
+                            der_asign_status
+                           )
+                    VALUES (p_rut_alumno, p_cod_carrera, p_agno_ingreso,
+                            p_sem_ingreso, v_cod_asignatura, v_nivel,
+                            v_creditos, p_cod_mencion, p_cod_plan, 1,
+                            v_status
+                           );
+            EXCEPTION
+               WHEN DUP_VAL_ON_INDEX
+               THEN
+                  v_dummy := 0;
+            END;
+         END IF;
+      END LOOP;
+
+      CLOSE c_ramos_faltan;
+
+      COMMIT;
+   EXCEPTION
+      WHEN OTHERS
+      THEN
+         raise_application_error
+              (-20001,
+                  'ERROR EN PROCEDIMIENTO ASIGNACION DE DERECHO_ALUMNO (RUT:'
+               || TO_CHAR (p_rut_alumno)
+               || ') '
+               || SUBSTR (SQLERRM, 1, 90)
+              );
+   END;
+   
+   
+   FUNCTION get_num_asign_pendientes(
+    p_rut       IN NUMBER,
+    p_carrera   IN NUMBER,
+    p_agno_ing   IN NUMBER,
+    p_sem_ing    IN NUMBER,
+    p_mencion   IN NUMBER,
+    p_plan      IN NUMBER,
+    p_agno_ins   IN NUMBER,
+    p_sem_ins    IN NUMBER
+) RETURN NUMBER  IS
+    v_count NUMBER;
+    
+BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM malla m
+    WHERE m.MA_COD_CAR = p_carrera
+      AND m.MA_COD_MEN = p_mencion
+      AND m.MA_COD_PLAN = p_plan
+      AND NOT EXISTS (
+          SELECT 1
+          FROM calificacion c
+          WHERE c.CAL_RUT = p_rut
+            AND c.CAL_COD_CAR = p_carrera
+            AND c.CAL_AGNO_ING = p_agno_ing
+            AND c.CAL_SEM_ING = p_sem_ing
+            AND c.CAL_ASIGN = m.MA_ASIGN
+            AND c.CAL_SIT_ALU = 'A'
+      )
+      AND NOT EXISTS (
+          SELECT 1
+          FROM inscripcion i
+          WHERE i.INS_RUT = p_rut
+            AND i.INS_COD_CAR = p_carrera
+            AND i.INS_AGNO_ING = p_agno_ing
+            AND i.INS_SEM_ING = p_sem_ing
+            AND i.INS_ASIGN = m.MA_ASIGN
+            AND i.INS_AGNO = p_agno_ins
+            AND i.INS_SEM = p_sem_ins
+      );
+
+    RETURN v_count;
+END;
+
+   PROCEDURE derechos_alumno (
+      p_rut_alumno     IN   NUMBER,
+      p_cod_carrera    IN   NUMBER,
+      p_agno_ingreso   IN   NUMBER,
+      p_sem_ingreso    IN   NUMBER,
+      p_cod_mencion    IN   NUMBER,
+      p_cod_plan       IN   NUMBER,
+      p_agno_ins       IN   NUMBER,
+      p_sem_ins        IN   NUMBER,
+      p_tipo_carrera   IN   NUMBER,
+      p_nivel_alu      IN   NUMBER,
+      p_via_ingreso    IN   NUMBER
+   )
+   IS
+      v_situacion             alu_car.aca_csit%TYPE;
+      v_calidad               alu_car.aca_ccal%TYPE;
+      v_puede_inscribir       BOOLEAN;
+      v_tipo_pool             PLAN.pla_flag_pool%TYPE;
+      v_semestres_esperados   NUMBER;
+      v_sem                   NUMBER;
+      v_agno_ant              NUMBER;
+      v_sem_ant               NUMBER;
+      v_nro_ciclos            NUMBER;
+      x number;
+   BEGIN
+      -- Borrar registros anteriores
+      DELETE FROM derecho
+            WHERE der_rut = p_rut_alumno
+              AND der_cod_car = p_cod_carrera
+              AND der_agno_ing = p_agno_ingreso
+              AND der_sem_ing = p_sem_ingreso;
+
+      -- Obtener situaci n y calidad
+      BEGIN
+         SELECT aca_csit, aca_ccal
+           INTO v_situacion, v_calidad
+           FROM alu_car
+          WHERE aca_rut = p_rut_alumno
+            AND aca_cod_car = p_cod_carrera
+            AND aca_agno_ing = p_agno_ingreso
+            AND aca_sem_ing = p_sem_ingreso
+            AND aca_ccal = 1
+            AND (   aca_csit >= 100
+                 OR EXISTS (
+                       SELECT *
+                         FROM sacarrera
+                        WHERE sac_rut = aca_rut
+                          AND sac_ccarr = aca_cod_car
+                          AND sac_agno_ing = aca_agno_ing
+                          AND sac_sem_ing = aca_sem_ing
+                          AND sac_codsit IN (3, 6, 7, 8, 17, 18)
+                          AND get_semestres (sac_agno_inic,
+                                             sac_sem_inic,
+                                             p_agno_ins,
+                                             p_sem_ins
+                                            ) = 1)
+                );
+
+         v_puede_inscribir := TRUE;
+      EXCEPTION
+         WHEN NO_DATA_FOUND
+         THEN
+            v_puede_inscribir := FALSE;
+      END;
+
+      SELECT NVL (pla_flag_pool, 'SP')
+        INTO v_tipo_pool
+        FROM PLAN
+       WHERE pla_cod_car = p_cod_carrera
+         AND pla_cod_men = p_cod_mencion
+         AND pla_cod = p_cod_plan;
+
+      v_nro_ciclos :=
+                     ciclos_carrera (p_cod_carrera, p_cod_mencion, p_cod_plan);
+      v_sem_ant := ciclo_ant (p_sem_ins, v_nro_ciclos);
+      v_agno_ant := agno_ciclo_ant (p_agno_ins, p_sem_ins);
+
+      -- Condicional seg n v a de ingreso
+      IF p_via_ingreso IN (56, 96)
+      THEN
+         -- Inserci n seg n la v a de ingreso
+         INSERT INTO derecho
+                     (der_rut, der_cod_car, der_agno_ing, der_sem_ing,
+                      der_asign, der_cred, der_niv, der_men, der_plan,
+                      der_tipo)
+            SELECT DISTINCT p_rut_alumno, p_cod_carrera, p_agno_ingreso,
+                            p_sem_ingreso, ma_asign,
+                            asi_hcred_teo + asi_hcred_lab + asi_hcred_eje,
+                            ma_nivel,
+                            DECODE (p_cod_carrera, 3511, 1, p_cod_mencion),
+                            ma_cod_plan, 1
+                       FROM malla, asignatura
+                      WHERE ma_asign = asi_cod
+                        AND ma_cod_car = p_cod_carrera
+                        AND ma_cod_plan = p_cod_plan;
+      ELSE
+         -- L gica de inscripci n si calidad es 1
+         v_puede_inscribir := (v_calidad = 1);
+
+         IF NOT v_puede_inscribir
+         THEN
+            BEGIN
+               SELECT sac_codsit
+                 INTO v_situacion
+                 FROM sacarrera
+                WHERE sac_rut = p_rut_alumno
+                  AND sac_ccarr = p_cod_carrera
+                  AND sac_agno_ing = p_agno_ingreso
+                  AND sac_sem_ing = p_sem_ingreso
+                  AND sac_codsit IN (3, 6, 7, 8, 17, 18)
+                  AND sac_agno_inic = v_agno_ant
+                  AND sac_sem_inic = v_sem_ant;
+
+               v_puede_inscribir := TRUE;
+            EXCEPTION
+               WHEN NO_DATA_FOUND
+               THEN
+                  v_puede_inscribir := FALSE;
+            END;
+         END IF;
+
+         BEGIN
+            SELECT NVL (pla_flag_pool, 'SP')
+              INTO v_tipo_pool
+              FROM PLAN
+             WHERE pla_cod_car = p_cod_carrera
+               AND pla_cod_men = p_cod_mencion
+               AND pla_cod = p_cod_plan;
+
+            CASE v_tipo_pool
+               WHEN 'SP'
+               THEN
+                  derecho_sin_pool (p_rut_alumno,
+                                    p_cod_carrera,
+                                    p_agno_ingreso,
+                                    p_sem_ingreso,
+                                    p_cod_mencion,
+                                    p_cod_plan,
+                                    v_agno_ant,
+                                    v_sem_ant,
+                                    p_tipo_carrera,
+                                    p_nivel_alu,
+                                    p_via_ingreso
+                                   );
+               WHEN 'P'
+               THEN
+                  con_pool_sin_cambio_mencion (p_rut_alumno,
+                                               p_cod_carrera,
+                                               p_agno_ingreso,
+                                               p_sem_ingreso,
+                                               p_cod_mencion,
+                                               p_cod_plan,
+                                               v_agno_ant,
+                                               v_sem_ant
+                                              );
+               WHEN 'PM'
+               THEN
+                  derecho_con_pool_con_mencion (p_rut_alumno,
+                                                p_cod_carrera,
+                                                p_agno_ingreso,
+                                                p_sem_ingreso,
+                                                p_cod_mencion,
+                                                p_cod_plan,
+                                                v_agno_ant,
+                                                v_sem_ant,
+                                                p_tipo_carrera,
+                                                p_nivel_alu,
+                                                p_via_ingreso
+                                               );
+               ELSE
+                  NULL;
+            END CASE;
+         EXCEPTION
+            WHEN NO_DATA_FOUND
+            THEN
+               NULL;
+         END;
+
+         -- Inserci n seg n tipo de carrera
+         IF v_puede_inscribir
+         THEN
+            IF p_tipo_carrera IN (16, 33, 35)
+            THEN
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing, der_sem_ing,
+                            der_asign, der_niv, der_cred, der_men, der_plan,
+                            der_tipo)
+                  SELECT DISTINCT p_rut_alumno, p_cod_carrera,
+                                  p_agno_ingreso, p_sem_ingreso, cur_asign,
+                                  0,
+                                    NVL (asi_hcred_teo, 0)
+                                  + NVL (asi_hcred_lab, 0)
+                                  + NVL (asi_hcred_eje, 0),
+                                  p_cod_mencion, 0, 2
+                             FROM curso, asignatura
+                            WHERE asi_cod = cur_asign
+                              AND cur_agno * 10 + cur_sem >
+                                                   v_agno_ant * 10 + v_sem_ant
+                              AND asi_tipo IN ('T')
+                              AND asi_cod NOT IN (2002)
+                              AND NOT EXISTS (
+                                     SELECT *
+                                       FROM calificacion
+                                      WHERE cal_rut = p_rut_alumno
+                                        AND cal_cod_car = p_cod_carrera
+                                        AND cal_agno_ing = p_agno_ingreso
+                                        AND cal_sem_ing = p_sem_ingreso
+                                        AND cal_asign = cur_asign
+                                        AND cal_sit_alu = 'A');
+            END IF;
+
+            IF p_tipo_carrera IN (16, 33, 35, 40)
+            THEN
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing, der_sem_ing,
+                            der_asign, der_niv, der_cred, der_men, der_plan,
+                            der_tipo)
+                  SELECT DISTINCT p_rut_alumno, p_cod_carrera,
+                                  p_agno_ingreso, p_sem_ingreso, cur_asign,
+                                  0,
+                                    NVL (asi_hcred_teo, 0)
+                                  + NVL (asi_hcred_lab, 0)
+                                  + NVL (asi_hcred_eje, 0),
+                                  p_cod_mencion, 0, 3
+                             FROM curso, asignatura
+                            WHERE asi_cod = cur_asign
+                              AND cur_agno * 10 + cur_sem >
+                                                   v_agno_ant * 10 + v_sem_ant
+                              AND asi_tipo IN ('I')
+                              AND (asi_cod < 1000)
+                              and asi_cod not in (721,722,723,724,725,726,727,728);
+            END IF;
+            
+             IF p_tipo_carrera IN (20,30)
+            THEN
+               INSERT INTO derecho
+                           (der_rut, der_cod_car, der_agno_ing, der_sem_ing,
+                            der_asign, der_niv, der_cred, der_men, der_plan,
+                            der_tipo)
+                  SELECT DISTINCT p_rut_alumno, p_cod_carrera,
+                                  p_agno_ingreso, p_sem_ingreso, cur_asign,
+                                  0,
+                                    NVL (asi_hcred_teo, 0)
+                                  + NVL (asi_hcred_lab, 0)
+                                  + NVL (asi_hcred_eje, 0),
+                                  p_cod_mencion, 0, 3
+                             FROM curso, asignatura
+                            WHERE asi_cod = cur_asign
+                              AND cur_agno * 10 + cur_sem >
+                                                   v_agno_ant * 10 + v_sem_ant
+                              AND asi_tipo IN ('I')
+                              AND (asi_cod < 1000);
+            END IF;
+         END IF;
+      END IF;
+
+      -- Limpiar posibles duplicados
+      DELETE FROM derecho d1
+            WHERE der_rut = p_rut_alumno
+              AND ROWID =
+                     (SELECT   MAX (ROWID)
+                          FROM derecho d2
+                         WHERE d1.der_rut = d2.der_rut
+                           AND d1.der_cod_car = d2.der_cod_car
+                           AND d1.der_men = d2.der_men
+                           AND d1.der_plan = d2.der_plan
+                           AND d1.der_asign = d2.der_asign
+                      GROUP BY d2.der_rut, d2.der_asign
+                        HAVING COUNT (*) > 1);
+
+      COMMIT;
+
+      -- Limpiar lo inscrito
+      DELETE FROM derecho
+            WHERE der_tipo = 1
+              AND EXISTS (
+                     SELECT *
+                       FROM inscripcion, asignatura
+                      WHERE der_asign = ins_asign
+                        AND asi_cod = ins_asign
+                        AND asi_elect = 'N'
+                        AND ins_rut = p_rut_alumno
+                        AND ins_cod_car = p_cod_carrera
+                        AND ins_agno_ing = p_agno_ingreso
+                        AND ins_sem_ing = p_sem_ingreso
+                        AND ins_agno = p_agno_ins
+                        AND ins_sem = p_sem_ins);
+
+      COMMIT;
+
+      DELETE FROM derecho
+            WHERE der_tipo = 1
+              AND EXISTS (
+                     SELECT 1
+                       FROM inscripcion i JOIN asignatura a
+                            ON a.asi_cod = i.ins_asign
+                            JOIN prerequisito p ON p.pre_asign = i.ins_asign
+                      WHERE i.ins_rut = p_rut_alumno
+                        AND i.ins_cod_car = p_cod_carrera
+                        AND i.ins_agno_ing = p_agno_ingreso
+                        AND i.ins_sem_ing = p_sem_ingreso
+                        AND i.ins_agno = p_agno_ins
+                        AND i.ins_sem = p_sem_ins
+                        AND p.pre_cod_car = p_cod_carrera
+                        AND p.pre_cod_men = p_cod_mencion
+                        AND p.pre_cod_plan = p_cod_plan
+                        AND p.pre_asign_pre = derecho.der_asign);
+
+      COMMIT;
+
+      DELETE FROM derecho
+            WHERE der_tipo = 1
+              AND EXISTS (
+                     SELECT 1
+                       FROM inscripcion i JOIN asignatura a
+                            ON a.asi_cod = i.ins_asign
+                            JOIN prerequisito p ON p.pre_asign_pre =
+                                                                   i.ins_asign
+                      WHERE i.ins_rut = p_rut_alumno
+                        AND i.ins_cod_car = p_cod_carrera
+                        AND i.ins_agno_ing = p_agno_ingreso
+                        AND i.ins_sem_ing = p_sem_ingreso
+                        AND i.ins_agno = p_agno_ins
+                        AND i.ins_sem = p_sem_ins
+                        AND p.pre_cod_car = p_cod_carrera
+                        AND p.pre_cod_men = p_cod_mencion
+                        AND p.pre_cod_plan = p_cod_plan
+                        AND p.pre_asign = derecho.der_asign);
+
+      v_semestres_esperados :=
+         alu_car_pkg.get_semestres_inscripcion (p_rut_alumno,
+                                                p_cod_carrera,
+                                                p_agno_ingreso,
+                                                p_sem_ingreso,
+                                                p_cod_mencion
+                                               );
+      v_sem :=
+         get_nivel_inscribir (p_rut_alumno,
+                              p_cod_carrera,
+                              p_agno_ingreso,
+                              p_sem_ingreso,
+                              p_cod_mencion,
+                              p_agno_ins,
+                              p_sem_ins
+                             );
+                             
+                             
+      insert into t values ('v_semestres_esperados= '||  v_semestres_esperados, ss.nextval);
+      insert into t values ('v_sem= '||  v_sem, ss.nextval);
+      
+                           
+
+      IF v_sem < v_semestres_esperados
+      THEN
+         DELETE FROM derecho
+               WHERE der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+                 AND NOT EXISTS (
+                                 SELECT *
+                                   FROM asignatura
+                                  WHERE asi_cod = der_asign
+                                        AND asi_elect = 'S')
+                 AND der_asign_status NOT IN ('P')
+                 AND der_niv > v_sem;
+      END IF;
+
+      IF v_tipo_pool = 'PM'
+      THEN
+         DELETE FROM derecho
+               WHERE der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+                 AND der_tipo = '1'
+                 AND NOT EXISTS (
+                        SELECT *
+                          FROM curso_car
+                         WHERE der_asign = ccar_asign
+                           AND ccar_agno = p_agno_ins
+                           AND ccar_sem = p_sem_ins);
+      ELSE
+         DELETE FROM derecho
+               WHERE der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+                 AND der_tipo = '1'
+                 AND NOT EXISTS (
+                        SELECT *
+                          FROM curso_car
+                         WHERE der_asign = ccar_asign
+                           AND ccar_cod_car = p_cod_carrera
+                           AND ccar_cod_men = p_cod_mencion
+                           AND ccar_agno = p_agno_ins
+                           AND ccar_sem = p_sem_ins);
+      END IF;
+
+      COMMIT;
+
+      UPDATE derecho
+         SET der_force = 'F'
+       WHERE der_rut = p_rut_alumno
+         AND der_cod_car = p_cod_carrera
+         AND der_agno_ing = p_agno_ingreso
+         AND der_sem_ing = p_sem_ingreso
+         AND der_asign_status NOT IN ('P')
+         AND der_niv < v_semestres_esperados
+         AND EXISTS (
+                SELECT *
+                  FROM malla
+                 WHERE ma_cod_car = p_cod_carrera
+                   AND ma_cod_men = p_cod_mencion
+                   AND ma_asign = der_asign);
+
+      -- Actualizaci n de cr ditos Ingeco Adm
+      IF p_tipo_carrera = 16
+      THEN
+         UPDATE derecho
+            SET der_cred = 0
+          WHERE der_rut = p_rut_alumno
+            AND der_cod_car = p_cod_carrera
+            AND der_agno_ing = p_agno_ingreso
+            AND der_sem_ing = p_sem_ingreso
+            AND der_asign IN (351425, 351458);
+      END IF;
+
+      --Ajustar alumnos de derecho
+      IF p_tipo_carrera = 40 AND p_via_ingreso NOT IN (56, 96)
+      THEN
+         -- Eliminar derechos de niveles superiores
+         DELETE FROM derecho
+               WHERE der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+                 AND der_niv > p_nivel_alu + 4;
+
+         -- Eliminar derechos de niveles superiores cachorros
+         DELETE FROM derecho
+               WHERE der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+                 AND (der_niv > 1 OR der_tipo > 1)
+                 AND EXISTS (
+                        SELECT *
+                          FROM parametro_mencion
+                         WHERE pmen_cod_car = p_cod_carrera
+                           AND pmen_cod_men = p_cod_mencion
+                           AND pmen_agno_ins * 10 + pmen_sem_ins =
+                                               der_agno_ing * 10 + der_sem_ing);
+      END IF;
+
+      DELETE FROM derecho
+            WHERE der_asign IN (721, 722, 723, 724, 725, 726, 727, 728)
+              AND EXISTS (
+                     SELECT *
+                       FROM carrera
+                      WHERE car_cod = p_cod_carrera
+                        AND car_tprograma IN (10, 40));
+
+      DELETE FROM derecho
+            WHERE der_asign < 1000 AND p_agno_ingreso = p_agno_ins;
+                  
+           
+      x := get_num_asign_pendientes(p_rut_alumno, p_cod_carrera, p_agno_ingreso, p_sem_ingreso, p_cod_mencion, p_cod_plan, p_agno_ins, p_sem_ins);
+      insert into t values ('pend='||x, ss.nextval);
+      
+      delete from derecho where
+      der_rut = p_rut_alumno
+                 AND der_cod_car = p_cod_carrera
+                 AND der_agno_ing = p_agno_ingreso
+                 AND der_sem_ing = p_sem_ingreso
+      and p_tipo_carrera = 16
+      and p_nivel_alu < 4
+      and der_niv > 3 
+      and get_num_asign_pendientes(p_rut_alumno, p_cod_carrera, p_agno_ingreso, p_sem_ingreso, p_cod_mencion, p_cod_plan, p_agno_ins, p_sem_ins) > 0;
+      
+
+      COMMIT;
+   END;
+END derecho_inscripcion_pkg;
+/

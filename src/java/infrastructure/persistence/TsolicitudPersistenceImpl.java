@@ -22,31 +22,37 @@ public final class TsolicitudPersistenceImpl extends CrudAbstractDAO<Tsolicitud,
         implements TsolicitudRepository {
 
     @SuppressWarnings("unchecked")
-    @Override    
+    @Override
     public List<Tsolicitud> find(AluCar aluCar) {
         String strQuery
                 = "SELECT tsol_codigo, "
-                + "decode(tsol_codigo, 80, tsol_descrip || ': ' || expediente_pkg.get_logros_solicitud("
-                + ":rut, :codCar, :agnoIng, :semIng, :codMen, :codPlan), tsol_descrip) AS tsol_descrip, "
+                + "decode(tsol_codigo, 80, tsol_descrip || ': ' || expediente_pkg.get_logros_solicitud(?, ?, ?, ?, ?, ?), tsol_descrip) AS tsol_descrip, "
                 + "tsol_tipo "
                 + "FROM tsolicitud "
-                + "WHERE get_puede_solicitar("
-                + ":rut, :codCar, :agnoIng, :semIng, :codMen, :codPlan, "
-                + ":agnoAct, :semAct, tsol_codigo, tsol_tipo, tsol_descrip) = 1 "
+                + "WHERE get_puede_solicitar(?, ?, ?, ?, ?, ?, ?, ?, tsol_codigo, tsol_tipo, tsol_descrip) = 1 "
                 + "ORDER BY tsol_tipo, tsol_codigo";
 
         SQLQuery query = getSession().createSQLQuery(strQuery)
                 .addEntity("Tsolicitud", Tsolicitud.class);
 
-        query.setParameter("rut", aluCar.getId().getAcaRut());
-        query.setParameter("codCar", aluCar.getId().getAcaCodCar());
-        query.setParameter("agnoIng", aluCar.getId().getAcaAgnoIng());
-        query.setParameter("semIng", aluCar.getId().getAcaSemIng());
-        query.setParameter("codMen", aluCar.getAcaCodMen());
-        query.setParameter("codPlan", aluCar.getAcaCodPlan());
-        query.setParameter("agnoAct", aluCar.getParametros().getAgnoAct());
-        query.setParameter("semAct", aluCar.getParametros().getSemAct());
+        // Asignación de parámetros en el orden correcto (14 parámetros)
+        query.setParameter(0, aluCar.getId().getAcaRut());      // get_logros_solicitud(1)
+        query.setParameter(1, aluCar.getId().getAcaCodCar());   // 2
+        query.setParameter(2, aluCar.getId().getAcaAgnoIng());  // 3
+        query.setParameter(3, aluCar.getId().getAcaSemIng());   // 4
+        query.setParameter(4, aluCar.getAcaCodMen());           // 5
+        query.setParameter(5, aluCar.getAcaCodPlan());          // 6
+
+        query.setParameter(6, aluCar.getId().getAcaRut());      // get_puede_solicitar(1)
+        query.setParameter(7, aluCar.getId().getAcaCodCar());   // 2
+        query.setParameter(8, aluCar.getId().getAcaAgnoIng());  // 3
+        query.setParameter(9, aluCar.getId().getAcaSemIng());   // 4
+        query.setParameter(10, aluCar.getAcaCodMen());          // 5
+        query.setParameter(11, aluCar.getAcaCodPlan());         // 6
+        query.setParameter(12, aluCar.getParametros().getAgnoAct()); // 7
+        query.setParameter(13, aluCar.getParametros().getSemAct());  // 8
 
         return query.list();
     }
+
 }

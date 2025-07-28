@@ -52,7 +52,7 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
         return criteria.list();
     }
 
-    @SuppressWarnings("unchecked")
+    /*@SuppressWarnings("unchecked")
     @Override
     public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion) {
 
@@ -65,12 +65,12 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
                 + "ccar_secc = this_.cur_secc and "
                 + "ccar_agno = this_.cur_agno and "
                 + "ccar_sem = this_.cur_sem and "
-                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_cod_car, ccar_cod_men, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
+                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
 
         if (asignatura > 1000) {
             sqlFilter = sqlFilterPrefijo + "ccar_cod_car = ?)";
-        } else {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, 0))";
+        } else {         
+            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, ?))";
         }
 
         criteria.setFetchMode("asignatura", JOIN);
@@ -84,6 +84,43 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
 
         params = new Object[]{carrera, mencion, carrera};
         types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
+
+        criteria.add(Restrictions.sqlRestriction(sqlFilter, params, types));
+
+        return criteria.list();
+    }*/
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion) {
+
+        Criteria criteria = getSession().createCriteria(Curso.class);
+        String sqlFilter;
+        String sqlFilterPrefijo = "exists (select * from curso_car where "
+                + "ccar_asign = this_.cur_asign and "
+                + "ccar_elect = this_.cur_elect and "
+                + "ccar_coord = this_.cur_coord and "
+                + "ccar_secc = this_.cur_secc and "
+                + "ccar_agno = this_.cur_agno and "
+                + "ccar_sem = this_.cur_sem and "
+                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
+
+        Object[] params;
+        Type[] types;
+
+        if (asignatura > 1000) {
+            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = ?)";
+            params = new Object[]{carrera, mencion,carrera};
+            types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
+        } else {
+            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, ?))";
+            params = new Object[]{carrera, mencion, carrera, mencion};
+            types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
+        }
+
+        criteria.setFetchMode("asignatura", JOIN);
+        criteria.add(eq("id.curAsign", asignatura));
+        criteria.add(eq("id.curAgno", agno));
+        criteria.add(eq("id.curSem", sem));
 
         criteria.add(Restrictions.sqlRestriction(sqlFilter, params, types));
 

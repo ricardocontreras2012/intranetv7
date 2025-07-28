@@ -6,6 +6,7 @@
 package domain.model;
 
 import com.opensymphony.xwork2.Action;
+import domain.repository.DerechoRepository;
 import infrastructure.support.InscripcionSupport;
 import infrastructure.support.MallaContainerSupport;
 import infrastructure.support.ParametroSesionSupport;
@@ -570,16 +571,18 @@ public class AluCar implements Serializable {
         List<Derecho> der1 = new ArrayList<>();
         List<Derecho> der2 = new ArrayList<>();
         
-        ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).generarDerechos(this);
+        DerechoRepository derRep =  ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser());
+        
+        derRep.generarDerechos(this);
  
         // Cargar der1 si se puede inscribir en Malla
         if ("SI".equals(this.parametros.getPuedeInscribirMalla())||"SI".equals(this.parametros.getPuedeModificar())) {                      
-            der1 = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).findDerMalla(this);
+            der1 = derRep.findDerMalla(this);
         }
 
         // Cargar der2 si se puede inscribir en Formación Integral
         if ("SI".equals(this.parametros.getPuedeInscribirFormacionIntegral())) {
-            der2 = ContextUtil.getDAO().getDerechoRepository(ActionUtil.getDBUser()).findDerFI(this);
+            der2 = derRep.findDerFI(this);
         }
 
         // Concatenar ambas listas

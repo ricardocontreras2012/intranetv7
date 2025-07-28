@@ -28,20 +28,31 @@
 
         <form id="inscripcion-form" action="#" method="post" class="form-inline"> 
             <div class="container-fluid">
+                <!--  iframe inscripcion -->
                 <div class="row" style="height: 50vh; overflow: hidden;">
                     <div class="col-12">
-                        <iframe id="inscripcion-iframe" class="embed-responsive-item" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe>
+                        <iframe id="inscripcion-iframe" class="embed-responsive-item"
+                                style="height: 50vh; width: 100%; overflow: auto; border: none;" 
+                                allowfullscreen loading="lazy"></iframe>
                     </div>
                 </div>
-                <div class="row" style="overflow: hidden;">    
+
+                <div class="row" style="overflow: hidden;">
+                    <!-- Derechos -->
                     <div class="col-12 col-md-6">
-                        <iframe id="derechos-iframe" class="embed-responsive-item" src="AlumnoInscripcionGetDerechos?key=<s:property value='key'/>" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe>                       
+                        <iframe id="derechos-iframe" class="embed-responsive-item"
+                                src="AlumnoInscripcionGetDerechos?key=<s:property value='key'/>"
+                                style="height: 50vh; width: 100%; overflow: auto; border: none;" 
+                                allowfullscreen loading="lazy"></iframe>
                     </div>
+
+                    <!-- Cursos -->
                     <div class="col-12 col-md-6">
-                        <div class="col-12 col-md-6">                            
-                        <iframe id="cursos-iframe" class="embed-responsive-item" style="height: 50vh; width: 100%; overflow: auto; border: none;" allowfullscreen loading="lazy"></iframe></div>
+                        <iframe id="cursos-iframe" class="embed-responsive-item"
+                                style="height: 50vh; width: 100%; overflow: auto; border: none;" 
+                                allowfullscreen loading="lazy"></iframe>
                     </div>
-                </div> 
+                </div>
             </div>
 
             <div id="hidden-input-div">
@@ -182,7 +193,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                                           
+
                     <s:if test="#session.genericSession.getWorkSession(key).aluCar.acaCodMen == 0">
                         <div class="modal-body">                        
                             <p>Usted se encuentra en <s:property value="#session.genericSession.getWorkSession(key).aluCar.getNombreCarrera"/> </p>                        
