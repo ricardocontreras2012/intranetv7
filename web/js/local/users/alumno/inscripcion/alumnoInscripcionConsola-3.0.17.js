@@ -7,12 +7,12 @@ function showCambioMencionDialog()
         type: "POST",
         data: data_string,
         success: function (data) {
-            $("#men-div").html(data);
-            //menDivValue = data.trim();
+            $("#men1-div").html(data);
+            $("#men2-div").html(data);
         },
         async: false
     });
-    if ($("#men-div").text().trim() === "Ingeniería Comercial en Administración de Empresas")
+    if ($("#men1-div").text().trim() === "Ingeniería Comercial en Administración de Empresas")
     {
         $("#cambio-mencion1").modal("show");
     } else

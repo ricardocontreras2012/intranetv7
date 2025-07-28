@@ -329,25 +329,26 @@ public final class CommonAlumnoUtil {
     }
 
     public static String searchEncuestaDocente(GenericSession genericSession, String key, String tipo) {
+               
         WorkSession ws = genericSession.getWorkSession(key);
         String retVal = SUCCESS;
         AluCar aluCar = ws.getAluCar();
 
         Integer agnoEnc = aluCar.getParametros().getAgnoEnc();
         Integer semEnc = aluCar.getParametros().getSemEnc();
-
+        
         EncuestaDocente encuesta = ContextUtil.getDAO().getEncuestaDocenteRepository(ActionUtil.getDBUser()).find(agnoEnc, semEnc, aluCar.getPlan().getMencion().getId().getMenCodCar(), aluCar.getAcaCodMen(), tipo);
-
-        if (encuesta != null) {
-            ws.setEncuestaDocente(encuesta);
-            List<CursoProfesor> cursoProfesorList = ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).getCursosEncuesta(aluCar.getId(), agnoEnc, semEnc);
-
+        
+        if (encuesta != null) {            
+            ws.setEncuestaDocente(encuesta);                        
+            List<CursoProfesor> cursoProfesorList = ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).getCursosEncuesta(aluCar.getId(), agnoEnc, semEnc);           
+            
             evitarLazyCursoProf(cursoProfesorList);
             ws.setCursoProfesorList(cursoProfesorList);
         } else {
             retVal = "stack";
-        }
-
+        }         
+        
         return retVal;
     }
 

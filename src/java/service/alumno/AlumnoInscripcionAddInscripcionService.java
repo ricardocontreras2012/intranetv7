@@ -29,8 +29,8 @@ public final class AlumnoInscripcionAddInscripcionService {
     public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key)
     {
-        WorkSession ws = genericSession.getWorkSession(key);
-
+        WorkSession ws = genericSession.getWorkSession(key);       
+        
         return ws.getAluCar().addInscripcionAlumno(action, genericSession, pos, ws.getDerecho());        
     }
 }

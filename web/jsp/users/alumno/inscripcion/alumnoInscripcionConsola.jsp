@@ -19,7 +19,7 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionConsola-3.0.12.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionConsola-3.0.17.js"></script>
     </head>
     <body class="inner-body" style="font-size: 14px;">
         <div class="title-div">
@@ -197,7 +197,7 @@
                     <s:if test="#session.genericSession.getWorkSession(key).aluCar.acaCodMen == 0">
                         <div class="modal-body">                        
                             <p>Usted se encuentra en <s:property value="#session.genericSession.getWorkSession(key).aluCar.getNombreCarrera"/> </p>                        
-                            <p>Desea cambiar/ingresar a <div id="men-div"></div></p>
+                            <p>Desea cambiar/ingresar a <div id="men1-div"></div></p>
                             <s:text name="confirmation.cambio.mencion"/>
                         </div>
                         <div class="modal-footer">
@@ -216,6 +216,41 @@
                 </div>
             </div>
         </div>
+                        
+        <div class="modal fade" id="cambio-mencion2" role="dialog">
+            <div class="modal-dialog" role="document">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><s:text name="message.title.confirmacion"/>1</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <s:if test="#session.genericSession.getWorkSession(key).aluCar.acaCodMen == 0">
+                        <div class="modal-body">                        
+                            <p>Usted se encuentra en <s:property value="#session.genericSession.getWorkSession(key).aluCar.getNombreCarrera"/> </p>                        
+                            <p>Desea cambiar/ingresar a <div id="men2-div"></div></p>
+                            <s:text name="confirmation.cambio.mencion"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-light" onclick="cambiarMencion();">SI</button>
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        </div>
+                    </s:if>
+                    <s:else>
+                        <div class="modal-body">                        
+                            <p>Para realizar el cambio a esta nueva mención debe solicitarlo al correo ivan.jorquera@usach.cl</p>
+                        </div>
+                        <div class="modal-footer">                        
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                        </div>
+                    </s:else>
+                </div>
+            </div>
+        </div>                
+                        
 
         <div class="modal fade" id="cambio-mencion2" role="dialog">
             <div class="modal-dialog" role="document">

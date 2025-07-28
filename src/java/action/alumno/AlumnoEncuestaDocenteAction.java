@@ -18,7 +18,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
 public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSupport {
 
     private static final long serialVersionUID = 1L;
-    private AlumnoEncuestaDocenteService svc = new AlumnoEncuestaDocenteService();
+    private final AlumnoEncuestaDocenteService svc = new AlumnoEncuestaDocenteService();
 
     /**
      * Method description
@@ -36,7 +36,7 @@ public final class AlumnoEncuestaDocenteAction extends ActionParameterAwareSuppo
      * @return
      */
     
-    public String search() {
+    public String search() {   
         return svc.searchService(getGenericSession(), getKey());
     }
     

@@ -678,8 +678,8 @@ public class CommonEncuestaUtil {
 
     public static String showFormService(GenericSession genericSession, AlumnoSession alumnoSession, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        EncuestaDocente encuesta = ws.getEncuestaDocente();
-
+        EncuestaDocente encuesta = ws.getEncuestaDocente();       
+        
         verificarRespuestas(alumnoSession, ws.getCursoProfesorList(), ws.getAluCar(), encuesta);
 
         String retValue = SUCCESS;
@@ -698,9 +698,11 @@ public class CommonEncuestaUtil {
 
     private static void verificarRespuestas(AlumnoSession alumnoSession, List<CursoProfesor> cursoList, AluCar aluCar, EncuestaDocente encuesta) {
         if (encuesta != null) {
+            
             while (!cursoList.isEmpty()) {
                 // EncuestaDocente ya esta contestada?
                 alumnoSession.setCantEncuestasPorContestar(ContextUtil.getDAO().getRespuestaEncuestaDocenteRepository(ActionUtil.getDBUser()).find(aluCar, encuesta) / encuesta.getEdoNroPreg());
+     
                 if (ContextUtil.getDAO().getRespuestaEncuestaDocenteRepository(ActionUtil.getDBUser()).find(aluCar, encuesta, cursoList.get(0)).isEmpty()) {
                     cursoList.remove(0);
                 } else {

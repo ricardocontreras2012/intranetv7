@@ -760,14 +760,15 @@ public class AluCar implements Serializable {
      */
     public String addInscripcionAlumno(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, Derecho derecho) {
-        
+
         String retValue= new InscripcionSupport(this, action, genericSession).addInscripcionAlumno(getCursosInscripcion().get(pos), derecho, this.getId().getAcaCodCar(), this.getAcaCodMen());
-        
+
         if (Action.SUCCESS.equals(retValue) && "P".equals(derecho.getAsignatura().getAsiTipo()))
         {          
             setDerechosAlumno();
         }
         return retValue;
+           
     }
 
     /**

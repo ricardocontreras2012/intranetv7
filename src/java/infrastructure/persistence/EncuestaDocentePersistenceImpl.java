@@ -33,8 +33,8 @@ public final class EncuestaDocentePersistenceImpl extends CrudAbstractDAO<Encues
     @SuppressWarnings("unchecked")
     @Override
     public EncuestaDocente find(Integer agno, Integer sem, Integer carrera, Integer mencion, String tipo) {
-        Criteria criteria = getSession().createCriteria(EncuestaDocente.class);
-
+        Criteria criteria = getSession().createCriteria(EncuestaDocente.class);       
+        
         criteria.createAlias("encuestaCarreras", "encuestaCarreras");
         criteria.add(eq("edoAgno", agno));
         criteria.add(eq("edoCiclo", sem));
