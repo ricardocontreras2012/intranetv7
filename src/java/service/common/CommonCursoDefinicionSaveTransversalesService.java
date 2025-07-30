@@ -27,58 +27,44 @@ public class CommonCursoDefinicionSaveTransversalesService {
 
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
+        List<Curso> cursos = ws.getCursoList();
 
-        // Obtener la lista de cursos
-        List<Curso> cursoList = ws.getCursoList();
-
-        // Iniciar la transacción para agregar y eliminar transversales
+        // Agregar transversales (nuevos)
         beginTransaction(ActionUtil.getDBUser());
-
-        // Agregar transversales
-        procesarTransversales(cursoList, parameters, true,
-                (id) -> ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
-                        .addTransversal(id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
-                                id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
-
-        // Eliminar transversales
-        procesarTransversales(cursoList, parameters, false,
-                (id) -> ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser())
-                        .removeTransversal(id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
-                                id.getCurSecc(), id.getCurAgno(), id.getCurSem()));
-
-        // Confirmar transacciones
+        cursos.stream()
+              .filter(c -> isChecked(parameters, cursos.indexOf(c)) && "C".equals(c.getCurTipo()))
+              .forEach(c -> {
+                  CursoId id = c.getId();
+                  ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).addTransversal(
+                      id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
+                      id.getCurSecc(), id.getCurAgno(), id.getCurSem()
+                  );
+              });
         commitTransaction();
 
-        // Actualizar la lista de cursos (cerrados, transversales y espejos)
+        // Eliminar transversales
+        beginTransaction(ActionUtil.getDBUser());
+        cursos.stream()
+              .filter(c -> !isChecked(parameters, cursos.indexOf(c)) && "T".equals(c.getCurTipo()))
+              .forEach(c -> {
+                  CursoId id = c.getId();
+                  ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).removeTransversal(
+                      id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
+                      id.getCurSecc(), id.getCurAgno(), id.getCurSem()
+                  );
+              });
+        commitTransaction();
+
+        // Refrescar lista de cursos
         CommonCursoUtil.getCursos(genericSession, "*", key);
+        
+        
+System.out.println("supppppp");
 
         return SUCCESS;
     }
 
-    /**
-     * Procesa la adición o eliminación de transversales en la lista de cursos
-     * utilizando una expresión lambda que define la operación que se debe
-     * realizar.
-     *
-     * @param cursoList La lista de cursos a procesar.
-     * @param parameters Los parámetros que determinan si se debe agregar o
-     * eliminar el curso.
-     * @param agregar Si es `true`, agrega transversales; si es `false`, elimina
-     * transversales.
-     * @param action La operación a realizar (agregar o eliminar transversal).
-     */
-    private void procesarTransversales(List<Curso> cursoList, Map<String, String[]> parameters,
-            boolean agregar, Consumer<CursoId> action) {
-        cursoList.stream()
-                .filter(curso -> (agregar && parameters.get("ck_" + cursoList.indexOf(curso)) != null)
-                || (!agregar && parameters.get("ck_" + cursoList.indexOf(curso)) == null))
-                .forEach(curso -> {
-                    CursoId id = curso.getId();
-                    if ((agregar && "C".equals(curso.getCurTipo())) || (!agregar && "T".equals(curso.getCurTipo()))) {
-                        // Realizar la operación definida por la lambda
-                        action.accept(id);
-                    }
-                });
+    private static boolean isChecked(Map<String, String[]> parameters, int index) {
+        return parameters.get("ck_" + index) != null;
     }
-
 }

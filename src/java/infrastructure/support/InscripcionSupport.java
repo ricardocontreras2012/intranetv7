@@ -523,11 +523,12 @@ public final class InscripcionSupport {
     private boolean sobrepasaMaxSct(Integer tipoDerecho, Integer sct) {
 
         Integer sctExtra = 4;
+        
 
         /*if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 16) {
             sctExtra = 4;
         }*/
-        return (tipoDerecho == 1 || tipoDerecho == 4) && (this.aluCar.getSctInscritos() + sct > aluCar.getSctNivel() + sctExtra);
+        return (tipoDerecho == 1 || tipoDerecho == 4) &&  this.aluCar.getSctInscritos() + sct > 34 ;
     }
 
     public void setSctNivel() {
