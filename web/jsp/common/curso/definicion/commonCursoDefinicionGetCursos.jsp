@@ -27,7 +27,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.rut-3.0.0.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetCursos-3.2.3.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetCursos-3.2.5.js"></script>
     </head>
 
     <body class="inner-body" style="overflow: hidden">
@@ -258,11 +258,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Fecha Inicio</td>
-                                                        <td><input type="date" id="inicio" name="inicio" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" /></td>
+                                                        <td><input type="date" id="inicio" name="inicio" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" /></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Fecha Término</td>
-                                                        <td><input type="date" id="termino" name="termino" class="form-control" maxlength="10" placeholder="dd/mm/yyyy" /></td>
+                                                        <td><input type="date" id="termino" name="termino" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" /></td>
                                                     </tr>
 
                                                     <s:if test="#session.genericSession.userType !=\"CFI\"" >

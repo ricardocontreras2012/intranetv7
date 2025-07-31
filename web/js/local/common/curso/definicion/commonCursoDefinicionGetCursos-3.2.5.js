@@ -100,14 +100,14 @@ function validateCurso()
     }
 
     var partesInicio = inicio.split("-");
-    partesInicio[0] = parseInt(partesInicio[0], 10).toString();
+    partesInicio[0] = Number.parseInt(partesInicio[0], 10).toString();
     if (partesInicio[0].length === 2) {
         partesInicio[0] = "20" + partesInicio[0];
     }
     $("#inicio").val(partesInicio.join("-"));
 
     var partesTermino = termino.split("-");
-    partesTermino[0] = parseInt(partesTermino[0], 10).toString();
+    partesTermino[0] = Number.parseInt(partesTermino[0], 10).toString();
     if (partesTermino[0].length === 2) {
         partesTermino[0] = "20" + partesTermino[0];
     }
@@ -640,7 +640,6 @@ function duplicateProfesor()
     var nombre = tdNombre.split("&nbsp;");
 
     addProfesorList(rutdv, nombre[0], nombre[1], nombre[2]);
-
 }
 
 function modalDelProfesor()
@@ -669,7 +668,6 @@ function delProfesorEstricto()
 
     $("#profesor-estricto-table tr").remove();
 }
-
 
 function modalSaveProfesor()
 {
@@ -1091,17 +1089,17 @@ $(document).ready(function () {
             return false;
         }
     });
-    
+
     function validarFecha(inputId) {
         const str = $(`#${inputId}`).val();
-        const re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
+        const re = /^\d{4}-\d{2}-\d{2}$/;
 
         if (!re.test(str)) {
             $(`#${inputId}`).val('');
             return false;
         }
 
-        const [dd, mm, yyyy] = str.split('/').map(n => parseInt(n, 10));
+        const [yyyy, mm, dd] = str.split('-').map(n => parseInt(n, 10));
         const fecha = new Date(yyyy, mm - 1, dd);
 
         const isValid =
