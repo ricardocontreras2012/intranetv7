@@ -84,7 +84,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     @Override
     public int deleteInscripcion(AluCar aluCar, CursoId id, String proceso, Integer rutRea, String user) {
         int retValue;
-        
+                   
         Query query = getSession().getNamedQuery("InscripcionRemoveFunction");
 
         query.setParameter(0, aluCar.getId().getAcaRut(), StandardBasicTypes.INTEGER);

@@ -840,11 +840,12 @@ public class AluCar implements Serializable {
      */
     public int removeInscripcionAlumno(ActionCommonSupport action,
             GenericSession genericSession, Map<String, String[]> parameters) {
+        
         InscripcionSupport inscripcionSupport = new InscripcionSupport(this, action, genericSession);
 
         inscripcionSupport.removeInscripcionAlumno(parameters);
 
-        return inscripcionSupport.getErrDelete();
+        return inscripcionSupport.getErrDelete();        
     }
 
     /**

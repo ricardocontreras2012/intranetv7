@@ -169,7 +169,7 @@ public final class InscripcionSupport {
      * @param parameters Check-box del formulario de inscripción.
      */
     public void removeInscripcionAlumno(Map<String, String[]> parameters) {
-        if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
+        if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {                        
             removeInscripciones(action, parameters, true);
         }
     }
@@ -337,8 +337,8 @@ public final class InscripcionSupport {
 
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).makePersistent(
-                inscripcionNueva(curso, realizador, genericSession.getRut(), force));
-
+                inscripcionNueva(curso, realizador, genericSession.getRut(), force));      
+        
         commitTransaction();
         LogUtil.setLog(genericSession.getRut(), rut + "> " + curso.getNombreFull());
     }

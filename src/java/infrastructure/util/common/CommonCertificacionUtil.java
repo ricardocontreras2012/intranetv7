@@ -229,7 +229,6 @@ public class CommonCertificacionUtil {
         aluCar.setInitValues();
 
         return aluCar;
-
     }
 
     @SuppressWarnings("unchecked")
