@@ -17,7 +17,6 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.common.CommonCursoUtil;
-import java.util.function.Consumer;
 
 /**
  *

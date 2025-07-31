@@ -9,7 +9,6 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.AluCar;
 import domain.model.Asignatura;
 import domain.model.ConvalidacionSolicitud;
-import domain.model.ConvalidacionSolicitudAsign;
 import java.math.BigDecimal;
 import java.util.Map;
 import session.GenericSession;
@@ -21,7 +20,6 @@ import infrastructure.util.ContextUtil;
 import infrastructure.util.HibernateUtil;
 import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonActaUtil;
-import java.util.List;
 import java.util.stream.IntStream;
 import domain.repository.ActaConvalidacionAsignaturaRepository;
 
@@ -59,19 +57,21 @@ public class SecretariaDocenteConvalidacionGenerarActaService {
             ContextUtil.getDAO().getConvalidacionSolicitudRepository(user).setEstado(solicitud.getCosCorrel(), "E");
 
             folio = crearActa(aluCar, solicitud.getCosAgno(), solicitud.getCosSem(), user);
-            List<ConvalidacionSolicitudAsign> porAprobarList = secreSession.getPorAprobar();
-            IntStream.range(0, porAprobarList.size())
-                    .filter(i -> "C".equals(parameters.get("estado_" + i)))
+            IntStream.range(0, secreSession.getPorAprobar().size())
+                    .filter(i -> "C".equals(parameters.get("estado_" + i)[0]))
                     .forEach(i -> {
-                        Asignatura asignatura = porAprobarList.get(i).getAsignatura();
+                        Asignatura asignatura = secreSession.getPorAprobar().get(i).getAsignatura();
                         Integer asign = asignatura.getAsiCod();
                         String cursada = parameters.get("cursada_" + i)[0];
                         String notaStr = parameters.get("nota_" + i)[0];
-                        String electivo = null;
+                        String electivo = "N"; // valor por defecto
+
                         if ("S".equals(asignatura.getAsiElect())) {
                             electivo = parameters.get("electivo_" + i)[0];
                         }
-                        BigDecimal nota = (notaStr.isEmpty()) ? null : new BigDecimal(notaStr.replace(",", "."));
+
+                        BigDecimal nota = notaStr.isEmpty() ? null : new BigDecimal(notaStr.replace(",", "."));
+
                         actaAsigRepository.convalidar(folio, asign, electivo, cursada, nota);
                     });
 

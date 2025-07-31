@@ -29,8 +29,8 @@ public class ActaConvalidacionAsignaturaPersistenceImpl extends CrudAbstractDAO<
     @Override
     public void convalidar(Integer folio, Integer asign, String electivo, String cursada, BigDecimal nota) {
         String hql = "insert into Acta_Convalidacion_Asignatura (acoa_folio, acoa_asign, acoa_electivo, acoa_cursada, acoa_nota) VALUES"
-                + "(:folio, :asign, :electivo, :cursada, :nota)";
-
+                + "(:folio, :asign, :electivo, :cursada, :nota)";    
+        
             Query query = getSession().createSQLQuery(hql);
 
             query.setParameter("folio", folio, StandardBasicTypes.INTEGER);
@@ -40,5 +40,6 @@ public class ActaConvalidacionAsignaturaPersistenceImpl extends CrudAbstractDAO<
             query.setParameter("nota", nota, StandardBasicTypes.BIG_DECIMAL);
 
             query.executeUpdate();
+            
     }
 }
