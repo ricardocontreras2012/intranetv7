@@ -46,7 +46,7 @@ public class CommonCursoDefinicionSaveTransversalesService {
         cursos.stream()
               .filter(c -> !isChecked(parameters, cursos.indexOf(c)) && "T".equals(c.getCurTipo()))
               .forEach(c -> {
-                  CursoId id = c.getId();
+                  CursoId id = c.getId();                  
                   ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).removeTransversal(
                       id.getCurAsign(), id.getCurElect(), id.getCurCoord(),
                       id.getCurSecc(), id.getCurAgno(), id.getCurSem()
