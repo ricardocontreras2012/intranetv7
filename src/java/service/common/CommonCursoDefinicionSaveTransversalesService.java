@@ -57,9 +57,6 @@ public class CommonCursoDefinicionSaveTransversalesService {
         // Refrescar lista de cursos
         CommonCursoUtil.getCursos(genericSession, "*", key);
         
-        
-System.out.println("supppppp");
-
         return SUCCESS;
     }
 
