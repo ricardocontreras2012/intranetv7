@@ -351,7 +351,7 @@ public class FormatUtil {
     public static String sanitizeFileName(String input) {
         // 1. Normalizar acentos
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-            .replaceAll("\\p{M}", "");  // eliminar diacríticos
+            .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); // eliminar diacríticos
 
         // 2. Reemplazar ñ, Ñ manualmente
         normalized = normalized.replace("ñ", "n").replace("Ñ", "N");

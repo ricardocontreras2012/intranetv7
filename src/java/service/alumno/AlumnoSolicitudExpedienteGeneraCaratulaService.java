@@ -28,6 +28,9 @@ import infrastructure.util.common.CommonCertificacionUtil;
 import infrastructure.util.common.CommonSequenceUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.stream.Stream;
 import org.apache.struts2.ServletActionContext;
 import session.GenericSession;
 import session.WorkSession;
@@ -41,11 +44,11 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
-        String datoAlu = aca.getId().getAcaRut()+"-"+aca.getId().getAcaCodCar()+"-"+aca.getId().getAcaAgnoIng()+"-"+aca.getId().getAcaSemIng();
+        String datoAlu = aca.getId().getAcaRut() + "-" + aca.getId().getAcaCodCar() + "-" + aca.getId().getAcaAgnoIng() + "-" + aca.getId().getAcaSemIng();
         String logro = ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrDes();
         Integer folio = CommonSequenceUtil.getDocumentSeq();
         ExpedienteLogro expl = ws.getExpedienteLogro();
-        
+
         name = sanitizeFileName(datoAlu + "-" + logro + "-Caratula-Template-" + folio + ".pdf");
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name, expl);
@@ -53,7 +56,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         return new ActionInputStreamUtil(name, description, input);
     }
 
-    private InputStream getInput(GenericSession genericSession,
+    /*private InputStream getInput(GenericSession genericSession,
             String key, String name, ExpedienteLogro expl)
             throws Exception {
 
@@ -501,5 +504,174 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         LogUtil.setLog(genericSession.getRut(), aca.getId().getAcaRut());
         return CommonArchivoUtil.getFile(name, "tit");
+    }*/
+    private static final float MARGIN_CM = 28.35f * 2; // 1 cm en puntos
+    private static final Font FONT_CONDENSED_8 = new Font(Font.HELVETICA, 8, Font.NORMAL);
+    private static final Font FONT_NORMAL_11 = new Font(Font.HELVETICA, 11, Font.NORMAL);
+    private static final Font FONT_BOLD_15 = new Font(Font.HELVETICA, 15, Font.BOLD);
+    private static final Font FONT_BOLD_10 = new Font(Font.HELVETICA, 10, Font.BOLD);
+    private static final Font FONT_SMALL_9 = new Font(Font.HELVETICA, 9, Font.NORMAL);
+
+    private PdfPCell createUnderlinedCell(String label, Font font) {
+        Phrase phrase = new Phrase();
+        phrase.add(new Chunk(label + " ", font));
+        Chunk underline = new Chunk("               ", font);
+        underline.setUnderline(0.5f, -2f);
+        phrase.add(underline);
+
+        PdfPCell cell = new PdfPCell(phrase);
+        cell.setBorder(Rectangle.NO_BORDER);
+        return cell;
     }
+
+    private PdfPCell createCell(String content, Font font, int colspan, int border, int alignment, float padding) {
+        PdfPCell cell = new PdfPCell(new Phrase(content, font));
+        cell.setColspan(colspan);
+        cell.setBorder(border);
+        cell.setHorizontalAlignment(alignment);
+        cell.setPadding(padding);
+        return cell;
+    }
+
+    private PdfPCell createCheckboxCell() {
+        PdfPTable cuadro = new PdfPTable(1);
+        cuadro.setTotalWidth(14f);
+        cuadro.setLockedWidth(true);
+
+        PdfPCell cuadradoCell = new PdfPCell();
+        cuadradoCell.setFixedHeight(14f);
+        cuadradoCell.setPadding(0);
+        cuadradoCell.setBorder(Rectangle.BOX);
+        cuadro.addCell(cuadradoCell);
+
+        PdfPCell wrapperCell = new PdfPCell(cuadro);
+        wrapperCell.setPadding(2f);
+        wrapperCell.setBorder(Rectangle.NO_BORDER);
+        return wrapperCell;
+    }
+
+    PdfPCell createHeaderCell(String content, int colspan) {
+        PdfPCell cell = createCell(content, FONT_BOLD_10, colspan, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 0f);
+        return cell;
+    }
+
+    private InputStream getInput(GenericSession genericSession,
+            String key, String name, ExpedienteLogro expl) throws Exception {
+
+        WorkSession ws = genericSession.getWorkSession(key);
+        AluCar aca = ws.getAluCar();
+        Alumno alumno = aca.getAlumno();
+
+        Document document = new Document(PageSize.LETTER, MARGIN_CM, MARGIN_CM, MARGIN_CM / 2, MARGIN_CM / 2);
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        PdfWriter.getInstance(document, buffer);
+
+        document.open();
+
+        // Header Table Setup (logo + text + campos)
+        PdfPTable headerTable = new PdfPTable(4);
+        headerTable.setWidthPercentage(100);
+        headerTable.setWidths(new float[]{2, 5, 3, 7.3f});
+
+        // Logo
+        Image logo = Image.getInstance(ServletActionContext.getServletContext().getRealPath(SystemParametersUtil.UNIVERSITY_LOGO_PATH));
+        logo.scaleToFit(100, 50);
+
+        PdfPCell logoCell = new PdfPCell(logo, false);
+        logoCell.setBorder(Rectangle.NO_BORDER);
+        logoCell.setVerticalAlignment(Element.ALIGN_TOP);
+        logoCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        headerTable.addCell(logoCell);
+
+        // Textos Celda
+        PdfPCell textosCell = new PdfPCell();
+        textosCell.setBorder(Rectangle.NO_BORDER);
+        textosCell.setVerticalAlignment(Element.ALIGN_TOP);
+        textosCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        textosCell.addElement(new Paragraph("UNIVERSIDAD DE SANTIAGO DE CHILE", FONT_CONDENSED_8));
+        textosCell.addElement(new Paragraph("REGISTRO ACADÉMICO", FONT_CONDENSED_8));
+        textosCell.addElement(new Paragraph("TÍTULOS Y GRADOS", FONT_CONDENSED_8));
+        headerTable.addCell(textosCell);
+
+        // Empty cell
+        PdfPCell emptyCell = new PdfPCell(new Phrase(""));
+        emptyCell.setBorder(Rectangle.NO_BORDER);
+        headerTable.addCell(emptyCell);
+
+        // Campos con línea
+        PdfPTable tablaCampos = new PdfPTable(1);
+        tablaCampos.setWidthPercentage(100);
+        String[] campos = {"ROL USACH N°", "APROBADO", "RESOLUCIÓN N°", "DEL"};
+        for (String campo : campos) {
+            tablaCampos.addCell(createUnderlinedCell(campo, FONT_NORMAL_11));
+        }
+
+        PdfPCell camposCell = new PdfPCell(tablaCampos);
+        camposCell.setBorder(Rectangle.NO_BORDER);
+        camposCell.setVerticalAlignment(Element.ALIGN_TOP);
+        camposCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        headerTable.addCell(camposCell);
+
+        document.add(headerTable);
+
+        // Titulo central
+        Paragraph titulo = new Paragraph("EXPEDIENTE DE " + expl.getPlanLogro().getLogro().getTlogro().getTloDes().toUpperCase(), FONT_BOLD_15);
+        titulo.setAlignment(Element.ALIGN_CENTER);
+        document.add(titulo);
+
+        // Tabla Personales simplificada
+        PdfPTable tablaPersonales = new PdfPTable(3);
+        tablaPersonales.setWidths(new float[]{65f, 30f, 5f});
+        tablaPersonales.setWidthPercentage(100);
+
+        tablaPersonales.addCell(createCell(alumno.getNombreStd(), FONT_BOLD_10, 3, Rectangle.BOTTOM, Element.ALIGN_CENTER, 5f));
+        tablaPersonales.addCell(createCell("Apellidos y Nombres Completos", FONT_SMALL_9, 3, Rectangle.NO_BORDER, Element.ALIGN_CENTER, 0f));
+        tablaPersonales.addCell(createCell(alumno.getAluDirecAlu().toUpperCase(), FONT_NORMAL_11, 3, Rectangle.BOTTOM, Element.ALIGN_CENTER, 5f));
+        tablaPersonales.addCell(createCell("Domicilio", FONT_SMALL_9, 3, Rectangle.NO_BORDER, Element.ALIGN_CENTER, 0f));
+        tablaPersonales.addCell(createCell("CÉDULA DE IDENTIDAD: " + FormatUtil.getRutFormateado(alumno.getAluRut()), FONT_NORMAL_11, 3, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+        tablaPersonales.addCell(createCell("TELÉFONO: " + alumno.getAluFonoAlu(), FONT_NORMAL_11, 3, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+
+        String email = alumno.getAluEmail();
+        String emailUsach = alumno.getAluEmailUsach();
+        String combinedEmails = (email == null || email.isEmpty()) ? emailUsach : emailUsach + "," + email;
+        tablaPersonales.addCell(createCell("E-MAIL: " + combinedEmails, FONT_NORMAL_11, 1, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+        tablaPersonales.addCell(createCell("FIRMA INTERESADO", FONT_SMALL_9, 1, Rectangle.TOP, Element.ALIGN_CENTER, 0f));
+        tablaPersonales.addCell(createCell(" ", FONT_NORMAL_11, 1, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 0f));
+
+        tablaPersonales.addCell(createCell("SOLICITA: " + expl.getPlanLogro().getPlalNomLogro().toUpperCase(), FONT_NORMAL_11, 3, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+
+        String especialidad = aca.getPlan().getMencion().getMenNom();
+        especialidad = especialidad == null ? "====================================" : especialidad.toUpperCase();
+        tablaPersonales.addCell(createCell("ESPECIALIDAD: " + especialidad, FONT_NORMAL_11, 3, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+
+        tablaPersonales.addCell(createCell(aca.getAluCarFunction().getNombreFacultad().trim().toUpperCase(), FONT_NORMAL_11, 3, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 5f));
+
+        PdfPTable tablaTitulosGrados = new PdfPTable(6);
+        tablaTitulosGrados.setWidths(new float[]{18f, 27f, 5f, 25f, 5f, 20f});
+        tablaTitulosGrados.setWidthPercentage(100);
+
+        tablaTitulosGrados.addCell(createHeaderCell("ARANCELES E IMPUESTOS", 3));
+        PdfPCell headerRegistros = createHeaderCell("REGISTROS", 3);
+        headerRegistros.setHorizontalAlignment(Element.ALIGN_CENTER);
+        tablaTitulosGrados.addCell(headerRegistros);
+
+        tablaTitulosGrados.addCell(createCell("Solicitud", FONT_NORMAL_11, 1, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 0f));
+        tablaTitulosGrados.addCell(createCell(" ", FONT_NORMAL_11, 1, Rectangle.BOTTOM, Element.ALIGN_LEFT, 0f));
+        tablaTitulosGrados.addCell(createCell(" ", FONT_NORMAL_11, 1, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 0f));
+        tablaTitulosGrados.addCell(createCell("V°B° Legal", FONT_NORMAL_11, 1, Rectangle.NO_BORDER, Element.ALIGN_LEFT, 0f));
+        tablaTitulosGrados.addCell(createCheckboxCell());
+        tablaTitulosGrados.addCell(createCell(" ", FONT_NORMAL_11, 1, Rectangle.BOTTOM, Element.ALIGN_LEFT, 0f));
+
+        document.add(tablaTitulosGrados);
+
+        // Continúa con tablaGeneral y demás siguiente la misma técnica
+        document.close();
+
+        CommonCertificacionUtil.writeFile(buffer, PATH_TITULACION + name);
+
+        LogUtil.setLog(genericSession.getRut(), aca.getId().getAcaRut());
+        return CommonArchivoUtil.getFile(name, "tit");
+    }
+
 }

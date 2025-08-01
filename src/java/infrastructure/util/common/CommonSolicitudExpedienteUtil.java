@@ -109,6 +109,6 @@ public class CommonSolicitudExpedienteUtil {
                 return normalizaFileName(tipo.getTdeDes());
             }
         }
-        return null; // o algún valor por defecto
+        return null;
     }
 }
