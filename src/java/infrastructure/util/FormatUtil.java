@@ -344,4 +344,25 @@ public class FormatUtil {
                 .map(s -> s.toUpperCase(ContextUtil.getLocale())) // Convierte el String a mayúsculas usando la configuración regional
                 .orElse("");  // Retorna una cadena vacía si el input es null
     }
+    
+    /* Convierte un string a un formato optimo para ser usado como nombre de archivo 
+    *  
+    */
+    public static String sanitizeFileName(String input) {
+        // 1. Normalizar acentos
+        String normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
+            .replaceAll("\\p{M}", "");  // eliminar diacríticos
+
+        // 2. Reemplazar ñ, Ñ manualmente
+        normalized = normalized.replace("ñ", "n").replace("Ñ", "N");
+
+        // 3. Reemplazar espacios por guiones bajos
+        normalized = normalized.replaceAll("\\s+", "-");
+
+        // 4. Eliminar cualquier carácter no seguro (solo letras, números, _, -, .)
+        normalized = normalized.replaceAll("[^a-zA-Z0-9_.-]", "");
+
+        // 5. Convertir a minúsculas
+        return normalized.toLowerCase();
+    }
 }

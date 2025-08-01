@@ -24,7 +24,6 @@ public class AlumnoSolicitudExpedienteUpdatePersonalesService {
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).setMisDatos(genericSession.getRut(), emailNormalizado(email), emailNormalizado(emailLaboral), direccion, comuna, fono, estadoCivil);
         commitTransaction();
-        //action.addActionMessage(action.getText("message.datos.grabados"));
         LogUtil.setLog(genericSession.getRut());
 
         return SUCCESS;

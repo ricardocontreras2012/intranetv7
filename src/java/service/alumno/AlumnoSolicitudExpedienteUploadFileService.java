@@ -7,6 +7,7 @@ package service.alumno;
 
 import com.opensymphony.xwork2.Action;
 import infrastructure.support.action.common.ActionCommonSupport;
+import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonSolicitudExpedienteUtil;
 import java.io.File;
 import session.GenericSession;
@@ -20,6 +21,7 @@ public class AlumnoSolicitudExpedienteUploadFileService {
     public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
         CommonSolicitudExpedienteUtil.saveAttach(action, genericSession, upload, uploadFileName, tdoc, key);
         
+        LogUtil.setLog(genericSession.getRut());
         return Action.SUCCESS;
     }   
 }

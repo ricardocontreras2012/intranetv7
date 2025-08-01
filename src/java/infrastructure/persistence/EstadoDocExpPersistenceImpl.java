@@ -52,7 +52,6 @@ public class EstadoDocExpPersistenceImpl extends CrudAbstractDAO<EstadoDocExp, L
 
     @Override
     public void updateFile(Integer rut, Integer codCar, Integer agnoIng, Integer semIng, Integer correlLogro, Integer tdoc, String fileName) {
-        System.out.println("UPDATE ede");
         String hql = "update EstadoDocExp set ede_file = :fileName, ede_estado = 1 , ede_observacion=null "
                 + "where ede_rut = :rut and ede_cod_car = :codCar "
                 + "and ede_agno_ing = :agnoIng and ede_sem_ing = :semIng "

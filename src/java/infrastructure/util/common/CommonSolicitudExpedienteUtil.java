@@ -1,20 +1,19 @@
 package infrastructure.util.common;
 
+import domain.model.AluCar;
 import domain.model.EstadoDocExp;
 import domain.model.SolicitudAttach;
-import domain.model.SolicitudAttachId;
 import domain.model.TDocExpediente;
-import domain.model.TdocumentoSolicitud;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.FormatUtil.normalizaFileName;
-import infrastructure.util.HibernateUtil;
+import static infrastructure.util.FormatUtil.sanitizeFileName;
 import static infrastructure.util.common.CommonArchivoUtil.doUpload;
-import static infrastructure.util.common.CommonArchivoUtil.getAttachFileName;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.IntStream;
 import session.GenericSession;
 import session.WorkSession;
@@ -29,42 +28,21 @@ public class CommonSolicitudExpedienteUtil {
     }
 
     public static void saveAttach(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
-        // Obtener la sesión de trabajo de la solicitud usando la clave proporcionada
-        WorkSession ws = genericSession.getWorkSession(key);
-
         // Obtener la lista de archivos adjuntos de la solicitud
-        List<SolicitudAttach> attachList = getAttachFiles(action, genericSession, upload, uploadFileName, tdoc, key);
-
-        // Iniciar transacción de Hibernate
-        HibernateUtil.beginTransaction(ActionUtil.getDBUser());
-
-        // Asociar cada archivo adjunto con la solicitud y guardar en la base de datos
-        IntStream.range(0, attachList.size()).forEach(i -> {
-            SolicitudAttach attach = attachList.get(i);
-            SolicitudAttachId attachId = new SolicitudAttachId();
-            TdocumentoSolicitud tDoc = new TdocumentoSolicitud();
-
-            // Asignar código fijo al tipo de documento (se deberá cambiar pronto)
-            tDoc.setTdsCod(10);
-
-            // Configurar el ID del archivo adjunto
-            attachId.setSolaCorrelAttach(i);
-            attachId.setSolaCorrelSol(ws.getSolicitud().getSolFolio());
-
-            // Establecer los valores en el objeto de archivo adjunto
-            attach.setTdocumentoSolicitud(tDoc);
-            attach.setId(attachId);
-
-            // Guardar el archivo adjunto en la base de datos
-            ContextUtil.getDAO().getSolicitudAttachRepository(ActionUtil.getDBUser()).save(attach);
-        });
-
-        // Confirmar la transacción de Hibernate
-        HibernateUtil.commitTransaction();
+        getAttachFiles(action, genericSession, upload, uploadFileName, tdoc, key);
     }
 
-    private static List<SolicitudAttach> getAttachFiles(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
+    private static void getAttachFiles(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
+        AluCar aluCar = ws.getAluCar();
+
+        String datoAlu = aluCar.getId().getAcaRut() + "-" + aluCar.getId().getAcaCodCar() + "-" + aluCar.getId().getAcaAgnoIng() + "-" + aluCar.getId().getAcaSemIng();
+        String logro = ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrDes();
+        String documento = ws.getEstadoDocExpList().
+                stream().
+                map(EstadoDocExp::gettDocExpediente).
+                filter(doc -> doc != null && Objects.equals(doc.getTdeCod(), tdoc)).
+                map(TDocExpediente::getTdeDes).findFirst().orElse(null); // o "No encontrada", o lo que prefieras
 
         List<SolicitudAttach> attachList = new ArrayList<>();
 
@@ -76,6 +54,14 @@ public class CommonSolicitudExpedienteUtil {
 
                 // Crear objetos de solicitud adjunta para cada archivo
                 IntStream.range(0, upload.length).forEach(i -> {
+                    String fileName = uploadFileName[i];
+                    // Verificar que el archivo sea un PDF
+                    if (fileName != null && !fileName.toLowerCase().endsWith(".pdf")) {
+                        // Aquí podrías lanzar una excepción o simplemente agregar un mensaje de error
+                        //System.err.println("El archivo " + fileName + " no es un archivo PDF.");
+                        return;  // Devolvemos para evitar procesar archivos que no sean PDFs
+                    }
+
                     SolicitudAttach attach = new SolicitudAttach();
                     attach.setSolaAttachFile(uploadFileName[i]);
                     files[i] = upload[i];
@@ -86,7 +72,7 @@ public class CommonSolicitudExpedienteUtil {
                 // aca llamar a el nombre del documento
                 IntStream.range(0, attachList.size()).forEach(i -> {
                     SolicitudAttach attach = attachList.get(i);
-                    String nombre = getAttachFileName(attach.getSolaAttachFile(), "_SOL_" + i, folio);
+                    String nombre = sanitizeFileName(datoAlu + "-" + logro + "-" + documento + "-SOL-" + folio + ".pdf");
 
                     try {
                         ContextUtil.getDAO().getEstadoDocExpRepository(ActionUtil.getDBUser()).updateFile(ws.getEstadoDocExpList().get(0).getId().getEdeRut(), ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(), ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(), ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(), ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(), tdoc, nombre);
@@ -108,15 +94,12 @@ public class CommonSolicitudExpedienteUtil {
                     } catch (Exception e) {
                         e.printStackTrace();  // Manejar la excepción según sea necesario
                     }
-
                 });
             }
 
         } catch (Exception e) {
             e.printStackTrace();  // Imprimir el error en caso de que falle algún proceso
         }
-
-        return attachList;
     }
 
     public static String obtenerDescripcionPorId(List<EstadoDocExp> lista, int idBuscado) {

@@ -19,11 +19,13 @@ import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import infrastructure.util.FormatUtil;
+import static infrastructure.util.FormatUtil.sanitizeFileName;
 import infrastructure.util.LogUtil;
 import infrastructure.util.SystemParametersUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TITULACION;
 import infrastructure.util.common.CommonArchivoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
+import infrastructure.util.common.CommonSequenceUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import org.apache.struts2.ServletActionContext;
@@ -38,9 +40,13 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         String description;
 
         WorkSession ws = genericSession.getWorkSession(key);
-
+        AluCar aca = ws.getAluCar();
+        String datoAlu = aca.getId().getAcaRut()+"-"+aca.getId().getAcaCodCar()+"-"+aca.getId().getAcaAgnoIng()+"-"+aca.getId().getAcaSemIng();
+        String logro = ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrDes();
+        Integer folio = CommonSequenceUtil.getDocumentSeq();
         ExpedienteLogro expl = ws.getExpedienteLogro();
-        name = "CARATULA_EXPEDIENTE" + ".pdf";
+        
+        name = sanitizeFileName(datoAlu + "-" + logro + "-Caratula-Template-" + folio + ".pdf");
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name, expl);
 
@@ -50,7 +56,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
     private InputStream getInput(GenericSession genericSession,
             String key, String name, ExpedienteLogro expl)
             throws Exception {
-        
+
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
         Alumno alumno = aca.getAlumno();
@@ -58,12 +64,8 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         float margin = 28.35f * 2; // 1 cm en puntos
         Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        PdfWriter writer = PdfWriter.getInstance(document, buffer);
+        PdfWriter.getInstance(document, buffer);
         document.open();
-
-        PdfContentByte cb = writer.getDirectContent();
-        float pageWidth = document.getPageSize().getWidth();
-        float colWidth = (pageWidth - 2 * margin) / 12f;
 
         // Logo
         Image logo = Image.getInstance(ServletActionContext.getServletContext().getRealPath(SystemParametersUtil.UNIVERSITY_LOGO_PATH));
@@ -111,11 +113,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         PdfPTable tablaCampos = new PdfPTable(1);
         tablaCampos.setWidthPercentage(100);
         String[] campos = {"ROL USACH N°", "APROBADO", "RESOLUCIÓN N°", "DEL"};
-        /*for (String campo : campos) {
-            PdfPCell cell = new PdfPCell(new Phrase(campo, fontNormal));
-            cell.setBorder(Rectangle.NO_BORDER);
-            tablaCampos.addCell(cell);
-        }*/
 
         for (String campo : campos) {
             Phrase phrase = new Phrase();
@@ -497,11 +494,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         document.add(tablaGeneral);
 
-        //document.add(tablaTitulosGrados);
-        // Firma jefe de títulos y grados
-        /*cb.moveTo(margin * 1.25f, document.getPageSize().getHeight() - margin * 5.5f);
-        cb.lineTo(margin * 1.25f + colWidth * 5, document.getPageSize().getHeight() - margin * 5.5f);
-        cb.stroke();*/
         // Cerrar documento
         document.close();
 
@@ -509,6 +501,5 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         LogUtil.setLog(genericSession.getRut(), aca.getId().getAcaRut());
         return CommonArchivoUtil.getFile(name, "tit");
-
     }
 }

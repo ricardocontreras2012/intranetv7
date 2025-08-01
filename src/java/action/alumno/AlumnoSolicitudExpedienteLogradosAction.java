@@ -16,8 +16,19 @@ public class AlumnoSolicitudExpedienteLogradosAction extends ActionCommonSupport
 
     private static final long serialVersionUID = 1L;
 
+    /**/
+    private boolean fechaSolLogro;
+
+    public boolean getFechaSolLogro() {
+        return fechaSolLogro;
+    }
+
+    public void setFechaSolLogro(boolean fechaSolLogro) {
+        this.fechaSolLogro = fechaSolLogro;
+    }
+    /**/
     @Override
     public String action() {
-        return new AlumnoSolicitudExpedienteLogradosService().service( getGenericSession(), getKey());
+        return new AlumnoSolicitudExpedienteLogradosService().service( getGenericSession(), getKey(), this);
     }    
 }

@@ -83,6 +83,7 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
         criteria.createAlias("planLogro.logro", "logro");
         criteria.createAlias("planLogro", "planLogro");
         criteria.createAlias("aluCar.alumno", "alumno");
+        //criteria.createAlias("aluCar.id.carCod", "carrera");
         criteria.add(eq("aluCar.id", aca.getId()));
         criteria.add(eq("explEstado", "GE"));
         criteria.addOrder(asc("planLogro.id.plalCorrel"));
@@ -220,6 +221,23 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
         query.setParameter("solicitud", solicitud, StandardBasicTypes.INTEGER);
         
         query.executeUpdate();
+    }
+    
+    @Override
+    public void saveExpedienteSolicitudToNull(Integer solicitud) {
+        try {
+        String hql
+                = "update ExpedienteLogro SET "
+                + "expl_sol = null "
+                + "WHERE expl_sol=:solicitud";
+        Query query = getSession().createQuery(hql);
+        
+        query.setParameter("solicitud", solicitud, StandardBasicTypes.INTEGER);
+        
+        query.executeUpdate();}
+        catch (Exception e){
+            System.out.println(e);
+    }
     }
 
     @Override

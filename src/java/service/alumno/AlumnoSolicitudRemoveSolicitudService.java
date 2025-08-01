@@ -50,6 +50,10 @@ public final class AlumnoSolicitudRemoveSolicitudService {
                     .mapToObj(i -> solicitudList.get(i))  // Obtiene la solicitud correspondiente
                     .filter(solicitud -> "GEN".equals(solicitud.getEstadoSolicitud().getEsolDesCorta()))  // Filtra las solicitudes con estado "GEN"
                     .forEach(solicitud -> {
+                        if (solicitud.getTsolicitud().getTsolCodigo() == 80) {
+                            // Deja en Null el número de solicitud en expediente_logro si solicitud corresponde a expediente
+                            ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).saveExpedienteSolicitudToNull(solicitud.getSolFolio());
+                        }
                         // Log de la solicitud eliminada
                         LogUtil.setLog(genericSession.getRut(), "Folio=" + solicitud.getSolFolio());
                         // Elimina la solicitud de la base de datos
@@ -60,6 +64,7 @@ public final class AlumnoSolicitudRemoveSolicitudService {
             commitTransaction();
         }
 
+        LogUtil.setLog(genericSession.getRut());
         return SUCCESS;
     }
 }

@@ -14,6 +14,7 @@ import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
+import infrastructure.util.LogUtil;
 import org.apache.commons.lang3.StringUtils;
 import session.GenericSession;
 import session.WorkSession;
@@ -48,8 +49,9 @@ public class AlumnoSolicitudExpedienteAddSolicitudService {
         beginTransaction(user);
         ContextUtil.getDAO().getSolicitudRepository(user).save(solicitud);
         commitTransaction();
+        
+        LogUtil.setLog(genericSession.getRut());
 
-        //CommonSolicitudUtil.saveAttach(action, genericSession, upload, uploadFileName, key);
         return Action.SUCCESS;
     }
 }

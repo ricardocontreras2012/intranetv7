@@ -16,11 +16,13 @@ import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
 import static infrastructure.util.DateUtil.getSysdate;
 import infrastructure.util.FormatUtil;
+import static infrastructure.util.FormatUtil.sanitizeFileName;
 import infrastructure.util.LogUtil;
 import infrastructure.util.SystemParametersUtil;
 import static infrastructure.util.SystemParametersUtil.PATH_TITULACION;
 import infrastructure.util.common.CommonArchivoUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
+import infrastructure.util.common.CommonSequenceUtil;
 
 import java.io.*;
 import java.util.Locale;
@@ -36,7 +38,13 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         String name;
         String description;
 
-        name = "PAGO_ARANCEL_EXPEDIENTE" + ".pdf";
+        WorkSession ws = genericSession.getWorkSession(key);
+        AluCar aca = ws.getAluCar();
+        String datoAlu = aca.getId().getAcaRut()+"-"+aca.getId().getAcaCodCar()+"-"+aca.getId().getAcaAgnoIng()+"-"+aca.getId().getAcaSemIng();
+        String logro = ws.getExpedienteLogro().getPlanLogro().getLogro().getLogrDes();
+        Integer folio = CommonSequenceUtil.getDocumentSeq();
+        
+        name = sanitizeFileName(datoAlu + "-" + logro +  "-Pago-de-Arancel-Template-" + folio +".pdf");
         description = FormatUtil.getMimeType(name);
         input = getInput(genericSession, key, name);
         
@@ -55,7 +63,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         float margin = 28.35f * 2;
         Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);      
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        PdfWriter writer = PdfWriter.getInstance(document, buffer);
+        PdfWriter.getInstance(document, buffer);
                
         // Abrir el documento
         document.open();

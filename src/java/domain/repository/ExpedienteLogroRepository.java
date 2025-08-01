@@ -59,6 +59,7 @@ public interface ExpedienteLogroRepository extends CrudGenericDAO<ExpedienteLogr
     void saveExpediente(ExpedienteLogro expediente, Integer ne, String fe, String rol);
     void saveExpediente(ExpedienteLogro expediente, String rol, Integer resol, Date fecha);
     void saveExpedienteSolicitud(ExpedienteLogro expediente, Integer solicitud);
+    void saveExpedienteSolicitudToNull(Integer solicitud);
     Date getFechaTramite(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer correl );
 
 }
