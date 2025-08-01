@@ -16,10 +16,11 @@ import infrastructure.util.common.CommonSolicitudUtil;
  * @author Usach
  */
 public class AlumnoSolicitudSolicitudJustificativoPEPAddAttachService {
-     public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String key) {
-        
+
+    public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, String key) {
+
         CommonSolicitudUtil.saveAttach(action, genericSession, upload, uploadFileName, key);
-        
+
         return Action.SUCCESS;
-    }    
+    }
 }
