@@ -28,9 +28,6 @@ import infrastructure.util.common.CommonCertificacionUtil;
 import infrastructure.util.common.CommonSequenceUtil;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.stream.Stream;
 import org.apache.struts2.ServletActionContext;
 import session.GenericSession;
 import session.WorkSession;
@@ -56,7 +53,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
         return new ActionInputStreamUtil(name, description, input);
     }
 
-    /*private InputStream getInput(GenericSession genericSession,
+    private InputStream getInput(GenericSession genericSession,
             String key, String name, ExpedienteLogro expl)
             throws Exception {
 
@@ -504,8 +501,9 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         LogUtil.setLog(genericSession.getRut(), aca.getId().getAcaRut());
         return CommonArchivoUtil.getFile(name, "tit");
-    }*/
-    private static final float MARGIN_CM = 28.35f * 2; // 1 cm en puntos
+    }
+    
+    /*private static final float MARGIN_CM = 28.35f * 2; // 1 cm en puntos
     private static final Font FONT_CONDENSED_8 = new Font(Font.HELVETICA, 8, Font.NORMAL);
     private static final Font FONT_NORMAL_11 = new Font(Font.HELVETICA, 11, Font.NORMAL);
     private static final Font FONT_BOLD_15 = new Font(Font.HELVETICA, 15, Font.BOLD);
@@ -672,6 +670,6 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         LogUtil.setLog(genericSession.getRut(), aca.getId().getAcaRut());
         return CommonArchivoUtil.getFile(name, "tit");
-    }
+    }*/
 
 }

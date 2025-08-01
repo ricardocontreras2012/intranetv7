@@ -108,7 +108,6 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
 
         document.add(new Paragraph("Cédula Nacional de Identidad N°.: " + alumnoDoc + "\n\n", fontRegular));
         document.add(new Paragraph("Nombre: " + alumnoNombre + "\n\n", fontRegular));
-        //document.add(new Paragraph("Tramita el " + tipoLogro + " de: " + logro + "\n\n", fontRegular));
         document.add(new Paragraph("Arancel correspondiente a tramitación para la obtención de Certificado y Diploma de Grado Académico y/o Título Profesional.", fontRegular));
 
         document.add(new Paragraph("\n"));
@@ -130,7 +129,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelService {
         "Rut USACH: 60.911.000-7\n" +
         "Banco: Banco Santander\n" +
         "Número de cuenta corriente: 0-000-1903580-8\n" +
-        "Correo electrónico envío transferencia: recaudación.tesoreria@usach.cl\n" +
+        "Correo electrónico envío transferencia: recaudacion.tesoreria@usach.cl\n" +
         "IMPORTANTE. Motivo: Título o Grado", fontSmall));
         
 
