@@ -235,10 +235,7 @@ public final class CommonCursoUtil {
             case "T": // Transversales               
                 ws.setCursoTransversalList(cursoRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CT"));                
                 break;
-            case "T*": // Todos los transversales
-                
-System.out.println("super");
-
+            case "T*": // Todos los transversales                
                 ws.setCursoTransversalFullList(cursoRepository.findTransversales(agno, sem));
                 break;
             case "E":
