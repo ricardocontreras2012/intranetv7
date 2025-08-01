@@ -76,7 +76,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <s:iterator value="#session.genericSession.getWorkSession(key).cursoList" status="row">
+                                    <s:iterator value="#session.genericSession.getWorkSession(key).cursoTransversalList" status="row">
                                         <tr <s:if test="curTipo==\"T\"">style="background-color:#93E9BE"</s:if>>
                                                 <td>
                                                     <input type="checkbox" id="ck_<s:property value="#row.count -1"/>" name="ck_<s:property value="#row.count -1"/>" <s:if test="curTipo == \"T\"">checked</s:if> <s:if test="curTipo == \"E\"">disabled</s:if>/>

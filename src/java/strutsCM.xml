@@ -1215,12 +1215,12 @@
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetTransversales" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonCursoDefinicionGetTransversales" class="action.common.CommonCursoGetTransversalesxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp
             </result>
         </action>
-
+               
         <action name="CommonCursoDefinicionSaveTransversales"
                 class="action.common.CommonCursoDefinicionSaveTransversalesAction" method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp

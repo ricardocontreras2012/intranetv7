@@ -22,7 +22,7 @@ public class CommonCursoDefinicionSaveEspejoService {
     public String service(GenericSession genericSession, Integer transversal, Integer cerrado, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
 
-        CursoId ct = ws.getCursoTransversalList().get(transversal).getId();
+        CursoId ct = ws.getCursoTransversalFullList().get(transversal).getId();
         CursoId cc = ws.getCursoList().get(cerrado).getId();
 
         ContextUtil.getDAO().getCursoEspejoRepository(ActionUtil.getDBUser()).
@@ -32,7 +32,6 @@ public class CommonCursoDefinicionSaveEspejoService {
 
         CommonCursoUtil.getCursos(genericSession, "E", key); //Espejos
         CommonCursoUtil.getCursos(genericSession, "T*", key); //Transversales
-        //CommonCursoUtil.getCursos(genericSession, "C", key); //Cerrados
 
         return SUCCESS;
     }

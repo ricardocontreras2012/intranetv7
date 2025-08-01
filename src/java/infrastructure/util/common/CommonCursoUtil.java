@@ -223,7 +223,7 @@ public final class CommonCursoUtil {
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupport();
         Integer tipoCarrera = miCarreraSupport.getTcrCtip();
         Integer especialidad = miCarreraSupport.getEspCod();
-        String regimen = miCarreraSupport.getRegimen();
+        String regimen = miCarreraSupport.getRegimen();               
 
         switch (tipo) {
             case "*":
@@ -232,8 +232,14 @@ public final class CommonCursoUtil {
             case "C":
                 ws.setCursoList(cursoRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "C"));
                 break;
+            case "T": // Transversales               
+                ws.setCursoTransversalList(cursoRepository.find(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CT"));                
+                break;
             case "T*": // Todos los transversales
-                ws.setCursoTransversalList(cursoRepository.findTransversales(agno, sem));
+                
+System.out.println("super");
+
+                ws.setCursoTransversalFullList(cursoRepository.findTransversales(agno, sem));
                 break;
             case "E":
                 ws.setCursoEspejoList(ContextUtil.getDAO().getCursoEspejoRepository(user)

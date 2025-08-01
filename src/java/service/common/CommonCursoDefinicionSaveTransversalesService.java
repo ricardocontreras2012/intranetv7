@@ -26,7 +26,7 @@ public class CommonCursoDefinicionSaveTransversalesService {
 
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        List<Curso> cursos = ws.getCursoList();
+        List<Curso> cursos = ws.getCursoTransversalList();
 
         // Agregar transversales (nuevos)
         beginTransaction(ActionUtil.getDBUser());
@@ -55,7 +55,7 @@ public class CommonCursoDefinicionSaveTransversalesService {
         commitTransaction();
 
         // Refrescar lista de cursos
-        CommonCursoUtil.getCursos(genericSession, "*", key);
+        CommonCursoUtil.getCursos(genericSession, "T", key);
         
         return SUCCESS;
     }

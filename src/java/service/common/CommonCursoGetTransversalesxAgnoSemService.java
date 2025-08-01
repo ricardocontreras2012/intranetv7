@@ -6,43 +6,30 @@
 package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import session.GenericSession;
-import session.WorkSession;
 import infrastructure.support.MiCarreraSupport;
 import infrastructure.util.common.CommonCursoUtil;
+import infrastructure.util.common.CommonHorarioUtil;
+import session.GenericSession;
+import session.WorkSession;
 
 /**
  *
  * @author Ricardo
  */
-public class CommonCursoDefinicionGetEspejosService {
-
-    /**
-     * Method description
-     *
-     * @param genericSession Sesion de trabajo.
-     * @param key LLave para acceder a los datos de la sesion.
-     * @param pos Numero del registro seleccionado en el formulario.
-     * @param agno
-     * @param sem
-     * @param actionCall
-     * @return Action status.
-     */
+public class CommonCursoGetTransversalesxAgnoSemService {
     public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem, String actionCall) {
-        
+
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport miCarreraSupport = ws.getMiCarreraSupportList().get(pos);
-
         ws.setAgnoAct(agno);
         ws.setSemAct(sem);
+        ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioDocencia(agno, sem));
         ws.setNombreCarrera(miCarreraSupport.getNombreCarrera());
         ws.setMiCarreraSupport(miCarreraSupport);
         ws.setActionCall(actionCall);
-        CommonCursoUtil.getCursos(genericSession, "E", key); //Espejos
-        CommonCursoUtil.getCursos(genericSession, "T*", key); //Todos los Transversales
-        CommonCursoUtil.getCursos(genericSession, "C", key); //Cerrados
-        
+        CommonCursoUtil.getCursos(genericSession, "T", key); //Cerrados, Transversales y Espejos
+
         return SUCCESS;
     }
-
+    
 }

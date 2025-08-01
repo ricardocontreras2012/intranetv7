@@ -138,7 +138,7 @@
                                                         <td>Curso Transversal</td>
                                                         <td><select id="transversal" name="transversal" class="form-control">
                                                                 <option value="-1">Seleccione Transversal</option>
-                                                                <s:iterator value="#session.genericSession.getWorkSession(key).cursoTransversalList" status="row">
+                                                                <s:iterator value="#session.genericSession.getWorkSession(key).cursoTransversalFullList" status="row">
                                                                     <option value="<s:property value="#row.count -1"/>"><s:property value="getNombreFull()"/>&nbsp;&nbsp;Prof:: <s:property value="curProfesores"/>&nbsp;&nbsp;Horario::<s:property value="curHorario"/></option>
                                                                 </s:iterator>
                                                             </select>

@@ -115,6 +115,7 @@ public final class WorkSession {
     private List<Curso> cursoList;
     private List<Curso> cursoSolicitudList;
     private List<Curso> cursoTransversalList;
+    private List<Curso> cursoTransversalFullList;
     private boolean cursoPregrado;
     private CursoProfesor cursoProfesor;
     private CursoAyudante cursoAyudante;
@@ -1207,4 +1208,12 @@ public final class WorkSession {
     public void setEstadoDocExpList(List<EstadoDocExp> estadoDocExpList) {
         this.estadoDocExpList = estadoDocExpList;
     }
+
+    public List<Curso> getCursoTransversalFullList() {
+        return cursoTransversalFullList;
+    }
+
+    public void setCursoTransversalFullList(List<Curso> cursoTransversalFullList) {
+        this.cursoTransversalFullList = cursoTransversalFullList;
+    }    
 }
