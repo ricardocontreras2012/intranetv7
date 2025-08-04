@@ -94,14 +94,6 @@ function generaPagoArancel() {
 }
 
 function abrirPaso(numero) {
-    console.log("Llamada paso");
-    // Cierra todos los paneles primero (opcional, si usas data-bs-parent)
-    const paneles = document.querySelectorAll('.accordion-collapse');
-    paneles.forEach(p => {
-      const instancia = bootstrap.Collapse.getOrCreateInstance(p);
-      instancia.hide();
-    });
-
     // Abre el panel deseado
     const target = document.getElementById(`collapse${numero}`);
     const collapseInstance = bootstrap.Collapse.getOrCreateInstance(target);
