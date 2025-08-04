@@ -1,4 +1,7 @@
 
+function exportLista() {
+    $("#cursos-form").attr("action", 'CommonCursoDefinicionExport').attr("target", "_blank").submit();
+}
 
 function showDetail(posVal) {
     $("#pos").val(posVal);
@@ -8,10 +11,12 @@ function showDetail(posVal) {
 
 $(document).ready(function () {
     //Handlers
-    $("a").click(function () {
+    /*$("a").click(function () {
         const field_name = $(this).attr("id");
         showDetail(field_name.substr(field_name.indexOf("_") + 1));
-    });
+    });*/
+    
+    $("#export-button").click(exportLista);
 
     $("#cursos-table").dataTable({"aLengthMenu": [
             [10, 25, 50, -1],
@@ -38,6 +43,12 @@ $(document).ready(function () {
         "aoColumns": [
             {
                 "bSortable": false
+            },
+            {
+                "sType": false
+            },
+            {
+                "sType": false
             },
             {
                 "sType": false

@@ -13,6 +13,7 @@
         <title>Lista de Cursos</title>
         <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/dataTables/1.10.24/datatables.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
@@ -21,47 +22,86 @@
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/common/curso/commonCursoListaCursosxAgnoSem-3.0.1.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/common/curso/commonCursoListaCursosxAgnoSem-3.0.2.js"></script>
     </head>
     <body class="inner-body">
-        <div class="title-div" style="line-height: 1.5;">
-            <s:if test="actionCall==\"CommonCursoGetListaCurso\"">
-                <s:property value="#session.genericSession.getWorkSession(key).nombreCarrera"/>&nbsp;
-                <s:property value="#session.genericSession.getWorkSession(key).agnoAct"/>/<s:property value="#session.genericSession.getWorkSession(key).semAct"/>
-            </s:if>
-            <s:if test="actionCall==\"CommonReporteGetReportesCurso\"">
-                <s:text name="label.title.cursos.reportes"/>
-            </s:if>
-        </div>
-        <div style="height: 90vh; overflow-y: scroll; overflow-x: hidden;">
-            <form id="cursos-form" action="#" method="post">
-                <div class="data-tables-container">
-                    <table id="cursos-table" class="table table-striped table-bordered dataTable">
-                        <thead>
-                            <tr>
-                                <th scope="col"><s:text name="label.code"/></th>
-                                <th scope="col"><s:text name="label.name"/></th>
-                                <th scope="col"><s:text name="label.profesor"/></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <s:iterator value="#session.genericSession.getWorkSession(key).cursoList" status="row">
-                                <tr>
-                                    <td><a id="curso_<s:property value="#row.count -1"/>"><s:property value="id.curAsign"/>-<s:property value="id.curElect"/>&nbsp;<s:property
-                                                value="id.curCoord"/><s:property value="id.curSecc"/></a></td>
-                                    <td><a id="nombre_<s:property value="#row.count -1"/>"><s:property value="curNombre"/></a></td>
-                                    <td><s:property value="curProfesores"/></td>
-                                </tr>
-                            </s:iterator>
-                        </tbody>
-                    </table>
+
+        <div class="container-fluid d-flex flex-column vh-100">
+            <row>
+                <div class="navbar-brand container-fluid">
+
+                    <div class="title-div" style="line-height: 1.5;">
+                        <s:if test="actionCall==\"CommonCursoGetListaCurso\" || actionCall== \"\"">
+                            <s:property value="#session.genericSession.getWorkSession(key).nombreCarrera"/>&nbsp;
+                            <s:property value="#session.genericSession.getWorkSession(key).agnoAct"/>/<s:property value="#session.genericSession.getWorkSession(key).semAct"/>
+                        </s:if>
+                        <s:if test="actionCall==\"CommonReporteGetReportesCurso\"">
+                            <s:text name="label.title.cursos.reportes"/>
+                        </s:if>
+                    </div>
                 </div>
-                <div id="hidden-input-div">
-                    <input type="hidden" id="actionCall" name="actionCall" value="<s:property value="actionCall"/>"/>
-                    <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
-                    <input type="hidden" id="pos" name="pos" value="<s:property value="pos"/>"/>
+            </row>
+            <row>
+                <div class="container-fluid container-menu">
+                    <div class="row">
+                        <div id="justified-button-bar" class="col-lg-12">
+                            <div class="btn-group">                                
+                                <div class="btn-group">
+                                    <button id="export-button" title="Exportar" type="button" class="btn btn-light" >
+                                        <span class="fa fa-file-excel-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.export"/></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </row>
+
+            <row class="overflow-auto">
+                <div style="height: 90vh; overflow-y: scroll; overflow-x: hidden;">
+                    <form id="cursos-form" action="#" method="post">
+                        <div class="data-tables-container">
+                            <table id="cursos-table" class="table table-striped table-bordered dataTable">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"><s:text name="label.code"/></th>
+                                        <th scope="col"><s:text name="label.name"/></th>
+                                        <th scope="col"><s:text name="label.profesor"/></th>
+                                        <th scope="col"><s:text name="label.cupo"/></th>
+                                        <th scope="col"><s:text name="label.inscritos"/></th>
+                                        <th scope="col">Disponibles</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <s:iterator value="#session.genericSession.getWorkSession(key).cursoList" status="row">
+                                        <tr>
+                                            <td><a id="curso_<s:property value="#row.count -1"/>"><s:property value="id.curAsign"/>-<s:property value="id.curElect"/>&nbsp;<s:property
+                                                        value="id.curCoord"/><s:property value="id.curSecc"/></a></td>
+                                            <td><a id="nombre_<s:property value="#row.count -1"/>"><s:property value="curNombre"/></a></td>
+                                            <td><s:property value="curProfesores"/></td>
+                                            <td><s:property value="curCupoIni"/></td>
+                                            <td><s:property value="curCupoIni - curCupoDis"/></td>
+                                            <td><s:if test="curCupoDis < 0">
+                                                    <span style="color:red;"><s:property value="curCupoDis"/></span>
+                                                </s:if>
+                                                <s:else>
+                                                    <s:property value="curCupoDis"/>
+                                                </s:else>
+                                            </td>
+                                        </tr>
+                                    </s:iterator>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="hidden-input-div">
+                            <input type="hidden" id="actionCall" name="actionCall" value="<s:property value="actionCall"/>"/>
+                            <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
+                            <input type="hidden" id="pos" name="pos" value="<s:property value="pos"/>"/>
+                        </div>
+                    </form>
+
+                </div>
+            </row>
         </div>
     </body>
 </html>
