@@ -56,7 +56,7 @@ public class EstadoDocExpPersistenceImpl extends CrudAbstractDAO<EstadoDocExp, L
                 + "where ede_rut = :rut and ede_cod_car = :codCar "
                 + "and ede_agno_ing = :agnoIng and ede_sem_ing = :semIng "
                 + "and ede_correl_logro = :correlLogro and ede_tdoc = :tdoc";
-        //Query query = getSession().createSQLQuery(hql);
+
         Query query = getSession().createQuery(hql);
 
         query.setParameter("rut", rut, StandardBasicTypes.INTEGER);
@@ -68,22 +68,4 @@ public class EstadoDocExpPersistenceImpl extends CrudAbstractDAO<EstadoDocExp, L
         query.setParameter("fileName", fileName, StandardBasicTypes.STRING);
         query.executeUpdate();
     }
-    /*public void updateFile(Integer rut, Integer cod_car, Integer agno_ing, Integer sem_ing,
-            Integer correl_logro, Integer tdoc, String file) {
-        System.out.println("UPDATE ede");
-
-        // 1. Crear una clave compuesta si tu entidad la usa como @IdClass o @EmbeddedId
-        EstadoDocExpId id = new EstadoDocExpId(rut, cod_car, agno_ing, sem_ing, correl_logro, tdoc);
-
-        // 2. Buscar la entidad
-        EstadoDocExp entity = (EstadoDocExp) getSession().get(EstadoDocExp.class, id);
-
-        // 3. Verificar si existe y actualizar
-        if (entity != null) {
-            entity.setEdeFile(file);
-            getSession().update(entity);  // Aunque no es estrictamente necesario si la entidad está en sesión
-        } else {
-            System.out.println("Entidad no encontrada para los parámetros dados");
-        }
-    }*/
 }

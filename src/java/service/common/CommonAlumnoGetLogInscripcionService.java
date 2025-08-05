@@ -40,14 +40,7 @@ public final class CommonAlumnoGetLogInscripcionService {
             ws.setAgnoAct(agno);
             lista = ContextUtil.getDAO()
                     .getLogInscripcionRepository(ActionUtil.getDBUser())
-                    .findAgnoSem(ws.getAluCar(), sem, agno);
-            
-            ///////////////
-            for (LogInscripcion log : lista) {
-    System.out.println("ID: " + log.getAsignatura().getAsiCod()+"-->"+log.getAsignatura().getAsiNom());
-    // otros getters según tu clase LogInscripcion
-}
-            ///////////////
+                    .findAgnoSem(ws.getAluCar(), sem, agno);            
             
         } else {
             CommonUtil.setAgnoSemAct(ws);

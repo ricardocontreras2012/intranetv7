@@ -236,7 +236,7 @@ public final class ExpedienteLogroPersistenceImpl extends CrudAbstractDAO<Expedi
         
         query.executeUpdate();}
         catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
     }
     }
 

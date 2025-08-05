@@ -20,11 +20,11 @@ import infrastructure.util.ContextUtil;
 public class SecretariaDocenteConvalidacionGetSolicitudService {
 
  public String service(GenericSession genericSession, SecretariaSession secreSession, Integer pos, String key) {
-
+     
         WorkSession ws = genericSession.getWorkSession(key);
         secreSession.setConvalidacion( secreSession.getConvalidaciones().get(pos));
         AluCar aluCar = ws.getAluCar();
-
+        
         secreSession.setPorAprobar(ContextUtil.getDAO().getConvalidacionSolicitudAsignRepository(ActionUtil.getDBUser()).getPorConvalidar(aluCar, secreSession.getConvalidacion().getCosCorrel()));
 
         return SUCCESS;
