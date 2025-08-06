@@ -11,10 +11,10 @@ function showDetail(posVal) {
 
 $(document).ready(function () {
     //Handlers
-    /*$("a").click(function () {
+    $("a").click(function () {
         const field_name = $(this).attr("id");
         showDetail(field_name.substr(field_name.indexOf("_") + 1));
-    });*/
+    });
     
     $("#export-button").click(exportLista);
 

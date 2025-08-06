@@ -4,21 +4,25 @@
     Author     : Ricardo
 --%>
 <!DOCTYPE html>
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Contrato</title>
         <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/dataTables/1.10.24/datatables.min.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/dataTables/1.10.24/datatables.min.css" type="text/css" />        
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-convenio.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/datePicker/gijgo-1.9.13.min.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/local/local-forms-validation.css" type="text/css" />        
-        <link rel="stylesheet" href="/intranetv7/js/timePicker/timepicker.css" type="text/css" />        
+        <link rel="stylesheet" href="/intranetv7/css/local/local-forms-validation.css" type="text/css" />                
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/flatpickr.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/material_blue.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/all.min.css" type="text/css" /> 
+        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" /> 
+
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
@@ -33,7 +37,9 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>                
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.rut-3.0.0.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.maskedinput.min.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/secretariaProyectos/convenio/secretariaProyectosConvenioNewConvenio-3.0.4.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/flatpickr.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/es.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/secretariaProyectos/convenio/secretariaProyectosConvenioNewConvenio-3.0.5.js"></script>
     </head>
     <body>
         <div class="title-div">
@@ -61,7 +67,12 @@
                         FECHA
                     </div>
                     <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">
-                        <div><input width="150" id="fecha" name="fecha" class="input-form"/></div>
+                        <div class="input-group" style="max-width: fit-content;">
+                            <input type="text" id="fecha" name="fecha" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                            <button class="btn btn-outline-secondary" type="button" id="btnCalendario">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="row row-form">
@@ -151,21 +162,35 @@
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">
-                        FECHA INICIO
+                        <label for="fechaInicio" class="col-auto col-form-label">Fecha Inicio</label>
                     </div>
-                    <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">
-                        <div><input width="150" id="fechaInicio" name="fechaInicio" class="input-form" onchange="checkDates()"/></div>
+                    <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">                      
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="fechaInicio" name="fechaInicio" class="form-control" placeholder="dd-mm-yyyy" />
+                            <button class="btn btn-outline-secondary" type="button" id="btnCalendarioInicio">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">
-                        FECHA TERMINO
+                        <label for="fechaTermino" class="col-auto col-form-label">Fecha Término</label>
                     </div>
                     <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">
-                        <div><input width="150" id="fechaTermino" name="fechaTermino" class="input-form" onchange="checkDates()"/></div>
+                        <div class="input-group input-group-sm">
+                            <input type="text" id="fechaTermino" name="fechaTermino"
+                                   class="form-control" placeholder="dd-mm-yyyy" />
+                            <button class="btn btn-outline-secondary" type="button" id="btnCalendarioTermino">
+                                <i class="fa fa-calendar"></i>
+                            </button>
+                        </div>
                     </div>
+
                 </div>
+
+
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">

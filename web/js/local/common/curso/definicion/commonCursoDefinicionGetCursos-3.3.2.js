@@ -48,8 +48,6 @@ function validateCurso()
     var coord = $("#coord").val();
     var secc = $("#secc").val();
     var cupo = $("#cupo").val();
-    var inicio = $("#inicio").val();
-    var termino = $("#termino").val();
 
     if (asign === "0")
     {
@@ -99,26 +97,6 @@ function validateCurso()
         $('#cupo').val(0);
     }
 
-    var partesInicio = inicio.split("-");
-    partesInicio[0] = Number.parseInt(partesInicio[0], 10).toString();
-    if (partesInicio[0].length === 2) {
-        partesInicio[0] = "20" + partesInicio[0];
-    }
-    $("#inicio").val(partesInicio.join("-"));
-
-    var partesTermino = termino.split("-");
-    partesTermino[0] = Number.parseInt(partesTermino[0], 10).toString();
-    if (partesTermino[0].length === 2) {
-        partesTermino[0] = "20" + partesTermino[0];
-    }
-    $("#termino").val(partesTermino.join("-"));
-
-    if ($("#inicio").val() > $("#termino").val())
-    {
-        flag = false;
-        msg = "Fecha de inicio debe ser menor o igual la de término";
-    }
-
     if (!flag && msg !== "")
     {
         $("#error-div").html(msg);
@@ -145,14 +123,7 @@ function addCurso() {
 
 function modifyCurso() {
     validateCupoId();
-    if ($("#inicioId").val() <= $("#terminoId").val())
-    {
-        $("#cursos-form").attr("action", "CommonCursoDefinicionModifyCurso?key=" + $("#key").val()).attr("target", "_self").submit();
-    } else
-    {
-        $("#error-div").html("Fecha de inicio debe ser menor o igual a la de término");
-        $("#error-modal").modal('show').css('z-index', 1051);
-    }
+    $("#cursos-form").attr("action", "CommonCursoDefinicionModifyCurso?key=" + $("#key").val()).attr("target", "_self").submit();
 }
 
 function resetCss()
@@ -258,24 +229,9 @@ function showCurso()
     $("#seccId").html(secc);
     $("#electivoId").val(electivo);
     $("#cupoId").val(cupo);
-
-    var partes = inicio.split("-");
-    if (partes[2] && partes[2].length === 2) {
-        partes[2] = "20" + partes[2];
-        $("#inicioId").val(partes[2] + "-" + partes[1] + "-" + partes[0]);
-    } else
-    {
-        $("#inicioId").val(inicio);
-    }
-
-    var partes = termino.split("-");
-    if (partes[2] && partes[2].length === 2) {
-        partes[2] = "20" + partes[2];
-        $("#terminoId").val(partes[2] + "-" + partes[1] + "-" + partes[0]);
-    } else
-    {
-        $("#terminoId").val(termino);
-    }
+    $("#inicioId").val(inicio);
+    $("#terminoId").val(termino);
+    
 
     $("#diurnoId").prop('checked', false);
     if (diurno === "D")
@@ -1018,6 +974,62 @@ $(document).ready(function () {
         modalSaveAyudanteEstricto();
     });
 
+    const pickerTermino = flatpickr("#termino", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false
+    });
+
+    document.getElementById("btnCalendarioTermino").addEventListener("click", (e) => {
+        e.preventDefault();  // evita comportamiento por defecto del botón
+        pickerTermino.open();
+    });
+
+    const pickerInicio = flatpickr("#inicio", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false,
+        onChange: function (selectedDates) {
+            pickerTermino.set('minDate', selectedDates[0]);
+        }
+    });
+
+    document.getElementById("btnCalendarioInicio").addEventListener("click", (e) => {
+        e.preventDefault();
+        pickerInicio.open();
+    });
+
+    const pickerTerminoId = flatpickr("#terminoId", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false
+    });
+
+    document.getElementById("btnCalendarioTerminoId").addEventListener("click", (e) => {
+        e.preventDefault();  // evita comportamiento por defecto del botón
+        pickerTerminoId.open();
+    });
+
+    const pickerInicioId = flatpickr("#inicioId", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false,
+        onChange: function (selectedDates) {
+            pickerTerminoId.set('minDate', selectedDates[0]);
+        }
+    });
+
+    document.getElementById("btnCalendarioInicioId").addEventListener("click", (e) => {
+        e.preventDefault();
+        pickerInicioId.open();
+    });
+
+    ////////////
+
     $('#asign').on('change', function () {
         var optionSelected = $(this).find("option:selected");
         var textSelected = optionSelected.text().toUpperCase();
@@ -1089,34 +1101,6 @@ $(document).ready(function () {
             return false;
         }
     });
-
-    function validarFecha(inputId) {
-        const str = $(`#${inputId}`).val();
-        const re = /^\d{4}-\d{2}-\d{2}$/;
-
-        if (!re.test(str)) {
-            $(`#${inputId}`).val('');
-            return false;
-        }
-
-        const [yyyy, mm, dd] = str.split('-').map(n => parseInt(n, 10));
-        const fecha = new Date(yyyy, mm - 1, dd);
-
-        const isValid =
-                fecha.getFullYear() === yyyy &&
-                fecha.getMonth() === mm - 1 &&
-                fecha.getDate() === dd;
-
-        if (!isValid) {
-            $(`#${inputId}`).val('');
-            return false;
-        }
-
-        return true;
-    }
-
-    $('#inicio').blur(() => validarFecha('inicio'));
-    $('#termino').blur(() => validarFecha('termino'));
 
     $("#cursos-table").dataTable({
         "sPaginationType": "full_numbers",
@@ -1276,6 +1260,3 @@ $(document).ready(function () {
     });
     scrollToPos();
 });
-
-
-

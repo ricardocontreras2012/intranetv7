@@ -11,12 +11,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Lista de Cursos</title>
-        <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />       
         <link rel="stylesheet" href="/intranetv7/css/dataTables/1.10.24/datatables.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-form.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
-        <link rel="stylesheet" href="/intranetv7/css/local/local-tooltip.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/local/local-tooltip.css" type="text/css" />         
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/flatpickr.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/material_blue.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/all.min.css" type="text/css" /> 
+        <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />        
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/popper/1.16.1/popper.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
@@ -27,7 +30,9 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.rut-3.0.0.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetCursos-3.2.6.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/flatpickr.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/es.js"></script>  
+        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetCursos-3.3.2.js"></script>         
     </head>
 
     <body class="inner-body" style="overflow: hidden">
@@ -128,8 +133,8 @@
                                             <td><s:property value="curCupoIni - curCupoDis"/></td>                                            
                                             <td><s:property value="curJorDiurno"/></td>
                                             <td><s:property value="curJorVesp"/></td>
-                                            <td><s:property value="curFechaInicio"/></td>
-                                            <td><s:property value="curFechaTermino"/></td>
+                                            <td><s:date name="curFechaInicio" format="dd-MM-yyyy" /></td>
+                                            <td><s:date name="curFechaTermino" format="dd-MM-yyyy" /></td>
                                             <td>
                                                 <a href="#"  title="<s:if test="curTipo==\"C\"">Cerrado</s:if><s:if test="curTipo==\"E\"">Espejo</s:if><s:if test="curTipo==\"T\"">Transversal</s:if>">
                                                     <s:property value="curTipo"/>
@@ -258,11 +263,25 @@
                                                     </tr>
                                                     <tr>
                                                         <td>Fecha Inicio</td>
-                                                        <td><input type="date" id="inicio" name="inicio" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" /></td>
+                                                        <td>
+                                                            <div class="input-group" style="max-width: fit-content;">
+                                                                <input type="text" id="inicio" name="inicio" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                                                                <button class="btn btn-outline-secondary" type="button" id="btnCalendarioInicio">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Fecha Término</td>
-                                                        <td><input type="date" id="termino" name="termino" class="form-control" maxlength="10" placeholder="dd-mm-yyyy" /></td>
+                                                        <td>
+                                                            <div class="input-group" style="max-width: fit-content;">
+                                                                <input type="text" id="termino" name="termino" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                                                                <button class="btn btn-outline-secondary" type="button" id="btnCalendarioTermino">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>                                                            
+                                                        </td>
                                                     </tr>
 
                                                     <s:if test="#session.genericSession.userType !=\"CFI\"" >
@@ -345,12 +364,26 @@
                                                         <td><input type="text" id="cupoId" name="cupoId" class="form-control" maxlength="3"/></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Fecha Inicio</td>
-                                                        <td><input type="date" id="inicioId" name="inicioId" class="form-control" maxlength="10" placeholder="dd/mm/yyyy"/></td>
+                                                        <td>Fecha Inicio</td>                                                                                                                
+                                                        <td>
+                                                             <div class="input-group" style="max-width: fit-content;">
+                                                                <input type="text" id="inicioId" name="inicioId" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                                                                <button class="btn btn-outline-secondary" type="button" id="btnCalendarioInicioId">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Fecha Término</td>
-                                                        <td><input type="date" id="terminoId" name="terminoId" class="form-control" maxlength="10" placeholder="dd/mm/yyyy"/></td>
+                                                        <td>
+                                                            <div class="input-group" style="max-width: fit-content;">
+                                                                <input type="text" id="terminoId" name="terminoId" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                                                                <button class="btn btn-outline-secondary" type="button" id="btnCalendarioTerminoId">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Diurno</td>
@@ -373,7 +406,7 @@
                                 </div>
                             </div>
                         </div>        
-                                    
+
                         <div class="modal fade" id="horario-modal" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -456,7 +489,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="modal-profesor-estricto" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -507,7 +540,7 @@
                                 </div>
                             </div>
                         </div>
-                                                
+
                         <div class="modal fade" id="profesor-estricto-search-modal" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -557,7 +590,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="del-profesor-estricto-modal" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -597,7 +630,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="save-profesor-estricto-modal" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -638,7 +671,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="ayudante-estricto-modal" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -689,7 +722,7 @@
                                 </div>
                             </div>
                         </div>
-                                                
+
                         <div class="modal fade" id="ayudante-estricto-search-modal" role="dialog">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
@@ -739,7 +772,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="del-ayudante-estricto-modal" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -779,7 +812,7 @@
                                 </div>
                             </div>
                         </div>
-                                        
+
                         <div class="modal fade" id="save-ayudante-estricto-modal" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">

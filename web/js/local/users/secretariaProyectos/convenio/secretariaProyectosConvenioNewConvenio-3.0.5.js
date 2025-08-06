@@ -302,9 +302,9 @@ function changeFirma()
 
 function checkDates()
 {
-    if ($("#fechaInicio").val() !== "" && $("#fechaTermino").val() !== "" && $("#proyecto").find("option:selected").val() !== "0") {
+    //if ($("#fechaInicio").val() !== "" && $("#fechaTermino").val() !== "" && $("#proyecto").find("option:selected").val() !== "0") {
         $('#tipoContrato').attr("style", "pointer-events: auto;");
-    }
+    //}
 }
 
 function enableProyecto()
@@ -390,33 +390,47 @@ $(document).ready(function () {
             }
         }
     });
-
-    $("#fecha").datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        locale: 'es-es',
-        format: 'dd-mm-yyyy',
-        weekStartDay: 1
+    
+    const picker = flatpickr("#fecha", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false
     });
 
-    $("#fechaInicio").datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        locale: 'es-es',
-        format: 'dd-mm-yyyy',
-        weekStartDay: 1
+    document.getElementById("btnCalendario").addEventListener("click", (e) => {
+        e.preventDefault();  // evita comportamiento por defecto del botón
+        picker.open();
     });
 
-    $("#fechaTermino").datepicker({
-        uiLibrary: 'bootstrap4',
-        iconsLibrary: 'fontawesome',
-        locale: 'es-es',
-        format: 'dd-mm-yyyy',
-        weekStartDay: 1,
-        minDate: function () {
-            return $('#fechaInicio').val();
+     const pickerTermino = flatpickr("#fechaTermino", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false
+    });
+
+    document.getElementById("btnCalendarioTermino").addEventListener("click", (e) => {
+        e.preventDefault();  // evita comportamiento por defecto del botón
+        pickerTermino.open();
+    });
+
+    const pickerInicio = flatpickr("#fechaInicio", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false,
+        onChange: function (selectedDates) {
+            pickerTermino.set('minDate', selectedDates[0]);
         }
     });
+
+    document.getElementById("btnCalendarioInicio").addEventListener("click", (e) => {
+        e.preventDefault();
+        pickerInicio.open();
+    });
+
+    
 
     $("#monto").keyup(function (e)
     {

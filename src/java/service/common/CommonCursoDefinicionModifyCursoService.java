@@ -11,7 +11,6 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import infrastructure.util.DateUtil;
 
 /**
  *
@@ -46,8 +45,8 @@ public class CommonCursoDefinicionModifyCursoService {
         if (vesp != null) {
             jornada += vesp;
         }
-
-        ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).modifyCurso(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), ws.getAgnoAct(), ws.getSemAct(), cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
+        
+        ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).modifyCurso(id.getCurAsign(), id.getCurElect(), id.getCurCoord(), id.getCurSecc(), ws.getAgnoAct(), ws.getSemAct(), cupo, inicio, termino, genericSession.getRut(), jornada);
         
         ws.getCursoList().set(pos, ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(id));
         ws.setPos(pos);

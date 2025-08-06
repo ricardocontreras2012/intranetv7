@@ -80,8 +80,8 @@ public class TitulosyGradosAlumnoCertificadoPrintService {
         return new ActionInputStreamUtil(name, description, getInput(genericSession, ws.getAluCar(), exp, folio, name));
     }
 
-    private ExpedienteLogro saveExp(ExpedienteLogro exp, String rol, Integer resol, String fecha) {
-        Date fechaStd = DateUtil.stringToDate(fecha, "yyyy-MM-dd");
+    private ExpedienteLogro saveExp(ExpedienteLogro exp, String rol, Integer resol, String fecha) {                 
+        Date fechaStd = DateUtil.stringToDate(fecha, "dd-MM-yyyy");
         ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).saveExpediente(exp, rol, resol, fechaStd);
         return ContextUtil.getDAO().getExpedienteLogroRepository(ActionUtil.getDBUser()).find(exp);
     }

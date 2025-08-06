@@ -1,4 +1,17 @@
 $(document).ready(function () {
+    
+    const picker = flatpickr("#fecha", {
+        dateFormat: "d-m-Y",
+        locale: "es",
+        allowInput: true,
+        clickOpens: false
+    });
+
+    document.getElementById("btnCalendario").addEventListener("click", (e) => {
+        e.preventDefault();  // evita comportamiento por defecto del botón
+        picker.open();
+    });
+    
     let selectedRowIndex = null;  // Variable global para guardar el índice de la fila seleccionada
 
     // Captura el clic en cualquier fila de la tabla
@@ -18,29 +31,8 @@ $(document).ready(function () {
         const rol = $(this).find("td:nth-child(2)").text().trim();  // explRol
         const resolucion = $(this).find("td:nth-child(3)").text().trim();  // explNumResol
         const fecha = $(this).find("td:nth-child(4)").text().trim();  // explFecResol
-
-        if (fecha !== null && fecha !== "") {
-            if (fecha !== null && fecha !== "") {
-                // Verifica si el formato es 'dd-mm-yy' y lo convierte a 'yyyy-mm-dd'
-                const partesFecha = fecha.split('-'); // Divide la fecha por el guion '-'
-                if (partesFecha.length === 3) {
-                    // Reorganiza las partes para el formato 'yyyy-mm-dd' (donde el año es 20yy)
-                    const fechaFormateada = '20' + partesFecha[2] + '-' + partesFecha[1] + '-' + partesFecha[0];
-
-                    // Crea un objeto Date con la fecha formateada
-                    const fechaObjeto = new Date(fechaFormateada);
-
-                    // Verifica si la fecha es válida
-                    if (!isNaN(fechaObjeto)) {
-                        // Convierte la fecha a formato 'YYYY-MM-DD'
-                        const fechaFinal = fechaObjeto.toISOString().split('T')[0];
-                        $("#fecha").val(fechaFinal);  // Asigna la fecha formateada
-                    } else {
-                        console.error("La fecha no es válida.");
-                    }
-                }
-            }
-        }
+        
+        $("#fecha").val(fecha);
         // Asigna los valores obtenidos al modal
         $("#rol").val(rol);
         $("#resolucion").val(resolucion);

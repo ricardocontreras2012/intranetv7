@@ -14,7 +14,6 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import infrastructure.util.DateUtil;
 import infrastructure.util.LogUtil;
 import infrastructure.util.common.CommonCursoUtil;
 import java.util.stream.IntStream;
@@ -48,6 +47,9 @@ public final class CommonCursoDefinicionAddCursoService {
     public String service(GenericSession genericSession, Integer asign, String elect, String electivo, String coord, Integer secc, Integer cupo, String inicio, String termino,
             String diurno, String vesp, String key) throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
+        
+        
+System.out.println("inicio="+inicio);        
 
         //int pos = -1;
         Curso curso = new Curso();
@@ -72,7 +74,7 @@ public final class CommonCursoDefinicionAddCursoService {
 
         cupo = ObjectUtils.defaultIfNull(cupo, 0);
 
-        String result = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).addCurso(asign, elect, coord, secc, ws.getAgnoAct(), ws.getSemAct(), electivo, cupo, DateUtil.transform(inicio, "yyyy-MM-dd", "dd/MM/yyyy"), DateUtil.transform(termino, "yyyy-MM-dd", "dd/MM/yyyy"), genericSession.getRut(), jornada);
+        String result = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).addCurso(asign, elect, coord, secc, ws.getAgnoAct(), ws.getSemAct(), electivo, cupo, inicio, termino, genericSession.getRut(), jornada);
 
         CommonCursoUtil.getCursos(genericSession, "*", key); //Cerrados
         if ("OK".equals(result)) {

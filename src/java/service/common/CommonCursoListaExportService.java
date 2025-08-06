@@ -65,6 +65,7 @@ public final class CommonCursoListaExportService {
         hoja.setColumnWidth(3, CommonExcelUtil.calculateColWidth(30));
         hoja.setColumnWidth(4, CommonExcelUtil.calculateColWidth(50));
         hoja.setColumnWidth(5, CommonExcelUtil.calculateColWidth(50));
+        hoja.setColumnWidth(6, CommonExcelUtil.calculateColWidth(10));
 
         CommonExcelUtil.putLogo(libro, hoja);
         XSSFFont fuente = libro.createFont();
@@ -172,9 +173,16 @@ public final class CommonCursoListaExportService {
         XSSFRichTextString textoCabEmail = new XSSFRichTextString("E-MAIL");
         celdaCabEmail.setCellValue(textoCabEmail);
         celdaCabEmail.setCellStyle(estiloCabecera);
+        
+System.out.println("usuario="+genericSession.getUserType());
+        
+        XSSFCell celdaCabRank = cabecera.createCell(6);
+        XSSFRichTextString textoCabRank = new XSSFRichTextString("JC".equals(genericSession.getUserType())?"RANK":"");
+        celdaCabRank.setCellValue(textoCabRank);
+        celdaCabRank.setCellStyle(estiloCabecera);
 
         fila++;
-        getGrid(curso, hoja, fila);
+        getGrid(curso, hoja, fila, genericSession.getUserType());
 
         try {
             file = content.replace("attachment;filename=", "").replaceAll("\"", "");
@@ -209,7 +217,7 @@ public final class CommonCursoListaExportService {
      * @param fila
      * @param notasFinales
      */
-    private void getGrid(Curso curso, XSSFSheet hoja, int fila) {        
+    private void getGrid(Curso curso, XSSFSheet hoja, int fila, String usuario) {        
         List<AluCar> nomina = curso.getNominaAlumnos();
         AtomicInteger filaAux = new AtomicInteger(fila);  // Usamos AtomicInteger para poder incrementarlo dentro de la lambda
 
@@ -225,6 +233,7 @@ public final class CommonCursoListaExportService {
             crearCelda(rowExcel, 3, alumno.getAluMaterno());
             crearCelda(rowExcel, 4, CommonAlumnoUtil.getNombreSocial(alumno));
             crearCelda(rowExcel, 5, alumno.getAluEmailUsach());
+            crearCelda(rowExcel, 6, "JC".equals(usuario)?aluCar.getAcaRanking().toString():"");
         });
     }
 

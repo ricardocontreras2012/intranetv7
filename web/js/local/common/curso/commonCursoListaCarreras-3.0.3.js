@@ -1,4 +1,4 @@
-function executeAction(posValue) {
+function executeAction(posValue) {    
     $("#carreras-form").attr("action", $("#actionName").val() + "?pos=" + posValue + '&key=' + $("#keyDummy").val());
     $("#carreras-form").attr("target", "_blank").submit();
 }

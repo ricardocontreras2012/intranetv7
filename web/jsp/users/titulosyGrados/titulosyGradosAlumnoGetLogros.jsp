@@ -12,13 +12,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Logros</title>
         <link rel="stylesheet" href="/intranetv7/css/bootstrap/4.6.0/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/flatpickr.min.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/material_blue.css" type="text/css" />
+        <link rel="stylesheet" href="/intranetv7/css/flatpickr/all.min.css" type="text/css" /> 
         <link rel="stylesheet" href="/intranetv7/css/font-awesome-4.7.0/css/font-awesome.min.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-forms-validation.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>       
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/titulosyGrados/titulosyGradosAlumnoGetLogros-3.0.0.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/flatpickr.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/flatpickr/es.js"></script>  
+        <script type="text/javascript" src="/intranetv7/js/local/users/titulosyGrados/titulosyGradosAlumnoGetLogros-3.0.2.js"></script>
         <style>
             /* Estilo para cambiar el cursor cuando se pasa sobre una fila */
             table.table tbody tr {
@@ -58,7 +63,7 @@
                                 <s:property value="explNumResol"/>
                             </td>
                             <td style="display: none;">
-                                <s:property value="explFecResol"/>
+                                <s:date name="explFecResol" format="dd-MM-yyyy"/>
                             </td>                            
                         </tr>
                     </s:iterator>
@@ -91,7 +96,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="fecha">Fecha</label>
-                                    <input type="date" class="form-control" id="fecha" name ="fecha" required>
+                                    <div class="input-group" style="max-width: fit-content;">
+                                        <input type="text" id="fecha" name="fecha" class="form-control" placeholder="dd-mm-yyyy" data-input />
+                                        <button class="btn btn-outline-secondary" type="button" id="btnCalendario">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
