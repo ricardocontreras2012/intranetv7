@@ -1,10 +1,26 @@
 
-
 function setTransversales() {
-    $("#cursos-form").attr("action", "CommonCursoDefinicionSaveTransversales").attr("target", "_self").submit();
+    Swal.fire({
+        title: 'Guardando...',
+        html: '<div class="spinner-border text-primary" role="status"></div><br><br>Por favor, espera.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        backdrop: true,
+        didOpen: () => {
+            $("#cursos-form")
+                .attr("action", "CommonCursoDefinicionSaveTransversales")
+                .attr("target", "_self")
+                .submit();
+        }
+    });
 }
 
-$(document).ready(function () {
+$(document).ready(function () {    
+    if (Swal.isVisible()) {
+        Swal.close();
+    }
+    
     $("#save-button").click(setTransversales);
 
     $("#cursos-table").dataTable({

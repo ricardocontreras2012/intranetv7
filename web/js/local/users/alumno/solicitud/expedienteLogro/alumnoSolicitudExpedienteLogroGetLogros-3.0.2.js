@@ -38,15 +38,16 @@ $(document).ready(function () {
                 }
             });
 
-            // Si no cumple la condición, mostrar alerta y cancelar el clic
+            // Si no cumple la condición, mostrar modal y cancelar el clic
             if (!valid) {
-                alert("Debe solicitar su Licencitura como requisito para la entrega del Título.");
-                e.preventDefault(); // Evita que siga el click
+                var modal = new bootstrap.Modal(document.getElementById('requiereLicenciaturaModal'));
+                modal.show();
+
+                e.preventDefault(); // Evita que se dispare el link
                 return;
             }
         }
-
-        // Si no hay problema, continuar
+        
         getDoc(pos);
     });
 });

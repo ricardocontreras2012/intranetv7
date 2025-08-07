@@ -22,7 +22,24 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/5.3.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroNew-1.0.2.js"></script>
         <style>
-            h4 { color: #00a499 !important;}
+            h2 {
+                font-size: 40px;
+            }
+            h4 {
+                color: #00a499 !important;
+            }
+            #desc-pasos .card-body button{
+                height: 100%;
+                width: 100%;
+            }
+            #desc-pasos .card-body button h4{
+                color: #fff !important;
+            }
+            #desc-pasos .card-body button img{
+                width: 115px;
+                max-width: 100%;
+                padding: 10px;
+            }
             .paso {
                 display: none;
             }
@@ -48,7 +65,7 @@
             }
 
             .step.completed .circle {
-                background: #198754; /* verde éxito */
+                background: #00a499; /* verde éxito */
                 color: white;
             }
 
@@ -68,7 +85,7 @@
             }
 
             .step.completed::after {
-                background: #198754;
+                background: #00a499;
             }
 
             .step .label {
@@ -88,18 +105,18 @@
             <div class="paso activo"  data-step="1">
                 <div class="card shadow rounded-4">
                     <div class="card-body px-5 py-4">
-                        <h2 class="text-center bebas-neue-regular" style="color: #00a499;">🎓 ¡Felicidades!<br/></h2>
-                        <h3 class="text-center mb-4" style="color: #00a499;">Pasos a seguir para solicitar <s:property value="#session.genericSession.getWorkSession(key).expedienteLogro.planLogro.plalNomLogro" />.</h3>
+                        <h2 class="text-center bebas-neue-regular" >Solicitud de Tramitación Expediente<br/></h2>
+                        <h3 class="text-center mb-4" >Procedimiento para solicitar: <s:property value="#session.genericSession.getWorkSession(key).expedienteLogro.planLogro.plalNomLogro" />.</h3>
 
                         <hr>
 
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" id="desc-pasos">
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card text-center h-100">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-light" style="height:100%" data-bs-toggle="modal" data-bs-target="#paso1Modal">
-                                            <h3>Paso 1.<br/>Revisión datos personales</h3>
-                                            <img src="/intranetv7/images/local/users/alumno/solicitud/revision.png" style="width: 130px; max-width:100%;">
+                                        <button type="button" class="btn btn-light" style="height:100%; background: #ff7178;" data-bs-toggle="modal" data-bs-target="#paso1Modal">
+                                            <h4>PASO 1<br/>Revisión datos</h4>
+                                            <!--img src="/intranetv7/images/local/users/alumno/solicitud/revision.png"-->
                                         </button>
                                     </div>
                                 </div>
@@ -107,9 +124,9 @@
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card text-center h-100">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-light" style="height:100%" data-bs-toggle="modal" data-bs-target="#paso2Modal">
-                                            <h3>Paso 2.<br/>Descarga y completa los formularios requeridos</h3>
-                                            <img src="/intranetv7/images/local/users/alumno/solicitud/descarga.png" style="width: 130px; max-width:100%;">
+                                        <button type="button" class="btn btn-light" style="height:100%; background: #fd9036;" data-bs-toggle="modal" data-bs-target="#paso2Modal">
+                                            <h4>PASO 2<br/>Descarga y firma</h4>
+                                            <!--img src="/intranetv7/images/local/users/alumno/solicitud/descarga.png"-->
                                         </button>
                                     </div>
                                 </div>
@@ -117,9 +134,9 @@
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card text-center h-100">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-light" style="height:100%" data-bs-toggle="modal" data-bs-target="#paso3Modal">
-                                            <h3>Paso 3.<br/>Subir Documentación</h3>
-                                            <img src="/intranetv7/images/local/users/alumno/solicitud/subida.png" style="width: 130px; max-width:100%;">
+                                        <button type="button" class="btn btn-light" style="height:100%; background: #ffcf61;" data-bs-toggle="modal" data-bs-target="#paso3Modal">
+                                            <h4>PASO 3<br/>Subir documentos</h4>
+                                            <!--img src="/intranetv7/images/local/users/alumno/solicitud/subida.png"-->
                                         </button>
                                     </div>
                                 </div>
@@ -127,9 +144,9 @@
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card text-center h-100">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-light" style="height:100%" data-bs-toggle="modal" data-bs-target="#paso4Modal">
-                                            <h3>Paso 4.<br/>Revisión y envío de Solicitud</h3>
-                                            <img src="/intranetv7/images/local/users/alumno/solicitud/envio.png" style="width: 130px; max-width:100%;">
+                                        <button type="button" class="btn btn-light" style="height:100%;  background: #7dcc84;" data-bs-toggle="modal" data-bs-target="#paso4Modal">
+                                            <h4>PASO 4<br/>Revisión y envío</h4>
+                                            <!--img src="/intranetv7/images/local/users/alumno/solicitud/envio.png"-->
                                         </button>
                                     </div>
                                 </div>
@@ -166,7 +183,7 @@
                         <s:form id="personales-form" action="#" class="form-horizontal">
                             <div class="row">
                                 <div class="col-12">
-                                    <h4 class="mb-4">Paso 1. Revisión datos personales</h4>
+                                    <h4 class="mb-4">Paso 1. Revisión datos</h4>
                                     <p>Verifica tus datos personales y actualízalos si es necesario.</p>
 
                                     <div class="mb-1 mb-md-3 row">
@@ -184,7 +201,7 @@
                                                            format="dd/MM/yyyy"/>" />
                                         </div>
                                     </div>
-                                    <div class="mb-1 mb-md-3 row">
+                                    <!--div class="mb-1 mb-md-3 row">
                                         <label for="estadoCivil" class="col-12 col-md-4 col-form-label"><s:text name="label.estado.civil"/></label>
                                         <div class="col-12 col-md-8">
                                             <s:select id="estadoCivil"
@@ -195,7 +212,7 @@
                                                       listValue="ecivDes"
                                                       cssClass="form-select"/>
                                         </div>
-                                    </div>
+                                    </div-->
                                     <div class="mb-1 mb-md-3 row">
                                         <label for="nacimiento" class="col-12 col-md-4 col-form-label"><s:text name="label.direccion"/></label>
                                         <div class="col-12 col-md-8">
@@ -242,7 +259,10 @@
                                                    value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmail"/>"/>
                                         </div>
                                     </div>
-                                    <input type="hidden" id="emailLaboral" name="emailLaboral" maxlength="57" value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmailLaboral"/>"/>
+                                    
+                                                   <input type="hidden" id="emailLaboral" name="emailLaboral"  value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEmailLaboral"/>"/>
+                                                   <input type="hidden" id="estadoCivil" name="estadoCivil"  value="<s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluEstCiv"/>"/>
+                                    
                                     <div class="mb-1 mb-md-3 row">
                                         <label for="emailInstitucional" class="col-12 col-md-4 col-form-label"><s:text name="label.email.institucional"/></label>
                                         <div class="col-12 col-md-8">
@@ -320,14 +340,14 @@
                 <div class="card shadow rounded-4">
                     <div class="card-body px-5 py-4">
                         <form id="get-docs-form" action="#">
-                            <h4 class="mb-4">Paso 2. Descarga y completa los formularios requeridos</h4>
+                            <h4 class="mb-4">Paso 2. Descarga y firma</h4>
                             <p>Recopilar los siguientes documentos, completarlos y/o firmarlos según corresponda.</p>
 
                             <div class="mb-3">
                                 <div class="row">
                                     <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
                                         <s:if test="tDocExpediente.tdeUser == 'AL'">
-                                            <div class="col col-md-6 mb-3">
+                                            <div class="col-12 col-sm-6 mb-3">
                                                 <div class="card h-100">
                                                     <div class="card-body">
                                                         <h5 class="card-title"><s:property value="tDocExpediente.tdeDes" /></h5>
@@ -343,9 +363,6 @@
                                                             </a>
                                                         </s:if>
                                                         <s:if test="id.edeTdoc == 100">
-                                                            <a href="https://fae.usach.cl/fae/docs/intranet/solicitud-de-genero.pdf" target="_blank" class="btn btn-light" >
-                                                                <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
-                                                            </a>
                                                             <button id="genero-button" title="<s:text name="label.button.download"/>" type="button" class="btn btn-light" >
                                                                 <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
                                                             </button>
@@ -369,7 +386,7 @@
                             </div>
                             <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
                         </form>
-                        <div class="alert alert-warning " role="alert" title="color: #37332a">Los documentos le serán requeridos en el siguiente paso.</div>
+                        <div class="alert alert-warning " role="alert" style="color: #37332a">Los documentos le serán requeridos en el siguiente paso.</div>
                     </div>
                     <div class="card-footer">
                         <div class="text-end my-2">
@@ -400,13 +417,13 @@
                 <div class="card shadow rounded-4">
                     <div class="card-body px-5 py-4">
                         <form id="expediente-form" action="#">
-                            <h4 class="mb-4">Paso 3. Subir Documentación</h4>
+                            <h4 class="mb-4">Paso 3. Subir documentos</h4>
                             <p>Sube todos los documentos solicitados en en el paso anterior en formato PDF.</p>
                             <div class="mb-3">
                                 <div class="formulario row" id="formulario">
                                     <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
                                         <s:if test="tDocExpediente.tdeUser == 'AL'">
-                                            <div class="col col-md-6 mb-3">
+                                            <div class="col-12 col-sm-6 mb-3">
                                                 <div class="card h-100">
                                                     <div class="card-body">
                                                         <h5 class="card-title"><s:property value="tDocExpediente.tdeDes" /></h5>
@@ -529,8 +546,8 @@
                 <div class="card shadow rounded-4">
                     <div class="card-body px-5 py-4">
                         <form id="expediente-form" action="#">
-                            <h4 class="mb-4">Paso 4. Envío de Solicitud</h4>
-                            <p>Revise la documentación que adjuntó, sí está correcta, finalmente envíe su solicitud.</p>
+                            <h4 class="mb-4">Paso 4. Revisión y envío</h4>
+                            <p>Revise la documentación que adjuntó, sí está correcta, finalmente envíe su solicitud a Registro Curricular.</p>
                             <div class="mb-3">
                                 <div class="formulario row" id="formulario">
                                     <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
@@ -578,7 +595,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paso1ModalLabel">Revisión datos personales</h5>
+                        <h5 class="modal-title" id="paso1ModalLabel">Revisión datos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -596,7 +613,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paso2ModalLabel">Descarga y completa los documentos requeridos</h5>
+                        <h5 class="modal-title" id="paso2ModalLabel">Descarga y firma</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -621,7 +638,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paso3ModalLabel">Subir Documentación</h5>
+                        <h5 class="modal-title" id="paso3ModalLabel">Subir documentos</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -639,7 +656,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="paso4ModalLabel">Revisión y envío de solicitud</h5>
+                        <h5 class="modal-title" id="paso4ModalLabel">Revisión y envío</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">

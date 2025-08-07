@@ -19,16 +19,20 @@ $(document).ready(function () {
 
     $("#personales-form").validate({
         rules: {
+            direccion: {required: true},
             region: {required: true},
             comuna: {required: true},
             fechaNac: {required: true, formatoFecha: true},
+            fono: {required: true},
             email: {required: true, multiemail: true},
             emailLaboral: {multiemail: true}
         },
         messages: {
+            direccion: {required: jQuery.validator.messages.required},
             region: {required: jQuery.validator.messages.required},
             comuna: {required: jQuery.validator.messages.required},
             fechaNac: {required: jQuery.validator.messages.required},
+            fono: {required: jQuery.validator.messages.required},
             email: {required: jQuery.validator.messages.required}
         }
     });
@@ -50,6 +54,17 @@ $(document).ready(function () {
         const key = $("#key").val();
         if (!file)
             return;
+
+        // Validación de extensión .pdf
+        const fileName = file.name;
+        const fileExtension = fileName.split('.').pop().toLowerCase(); // Obtiene la extensión en minúsculas
+
+        // Verificar si la extensión del archivo es .pdf
+        if (fileExtension !== "pdf") {
+            alert("Por favor, seleccione un archivo PDF.");
+            $(fileInput).val(""); // Limpia el input
+            return; // Detiene el resto del proceso
+        }
 
         const formData = new FormData();
         formData.append("upload", file);
@@ -139,7 +154,6 @@ function grabar() {
         alert("Debes subir todos los documentos requeridos antes de continuar.");
         return;
     } else {
-        //console.log("Disabled: false");
         $('#btn-next-step-4').prop('disabled', false);
     }
 

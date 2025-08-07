@@ -37,7 +37,7 @@
             }
 
             .step.completed .circle {
-                background: #198754; /* verde éxito */
+                background: #00a499; /* verde éxito */
                 color: white;
             }
 
@@ -57,7 +57,7 @@
             }
 
             .step.completed::after {
-                background: #198754;
+                background: #00a499;
             }
 
             .step .label {
@@ -259,8 +259,14 @@
                     </h2>
                     <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
                         <div class="accordion-body">
-                            <p>Una vez verificado, el expediente será enviado a la <strong>Unidad de Títulos y Grados</strong> para el trámite final.</p>
                             <input type="hidden" name="exp-estado" id="exp-estado" value="<s:property value="#session.genericSession.getWorkSession(key).expedienteLogro.explEstado" />" />
+                            <s:if test="#session.genericSession.getWorkSession(key).expedienteLogro.explEstado == 'GE'">
+                                <p>Una vez verificado, el expediente será enviado a la <strong>Unidad de Títulos y Grados</strong> para el trámite final.</p>
+                            </s:if>
+                            <s:else>
+                                <p>Su expediente fue enviado a <strong>Unidad de Títulos y Grados</strong> con fecha: <strong><s:property value="#session.genericSession.getWorkSession(key).expedienteLogro.explFecOrd" /></strong></p>
+                                <p>Plazo máximo de respuesta por parte de Unidad de Títulos y Grados, 37 días hábiles.</p>
+                            </s:else>
                         </div>
                     </div>
                 </div>

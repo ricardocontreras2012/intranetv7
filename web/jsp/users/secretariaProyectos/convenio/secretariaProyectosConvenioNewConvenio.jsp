@@ -3,7 +3,6 @@
     Created on : 02-12-2020, 10:25:04
     Author     : Ricardo
 --%>
-<!DOCTYPE html>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -162,10 +161,10 @@
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">
-                        <label for="fechaInicio" class="col-auto col-form-label">Fecha Inicio</label>
+                        FECHA INICIO
                     </div>
                     <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">                      
-                        <div class="input-group input-group-sm">
+                        <div class="input-group" style="max-width: fit-content;">
                             <input type="text" id="fechaInicio" name="fechaInicio" class="form-control" placeholder="dd-mm-yyyy" />
                             <button class="btn btn-outline-secondary" type="button" id="btnCalendarioInicio">
                                 <i class="fa fa-calendar"></i>
@@ -176,10 +175,10 @@
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">
-                        <label for="fechaTermino" class="col-auto col-form-label">Fecha Término</label>
+                        FECHA TÉRMINO
                     </div>
                     <div class="col-sm-6 col-md-11 col-lg-11 col-xl-11 text-left">
-                        <div class="input-group input-group-sm">
+                        <div class="input-group" style="max-width: fit-content;">
                             <input type="text" id="fechaTermino" name="fechaTermino"
                                    class="form-control" placeholder="dd-mm-yyyy" />
                             <button class="btn btn-outline-secondary" type="button" id="btnCalendarioTermino">
@@ -187,10 +186,7 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
-
-
 
                 <div class="row row-form">
                     <div class="col-sm-6 col-md-1 col-lg-1 col-xl-1 text-left">
