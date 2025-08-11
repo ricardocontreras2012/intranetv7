@@ -21,6 +21,7 @@ public class AlumnoSolicitudExpedienteUploadFileAction extends ActionPostCommonS
     private File[] upload;
     private String[] uploadFileName;
     private Integer tdoc;
+    private String retValue;
    
     /**
      * Method description
@@ -30,7 +31,8 @@ public class AlumnoSolicitudExpedienteUploadFileAction extends ActionPostCommonS
      */
     @Override
     public String action() throws Exception {
-        return new AlumnoSolicitudExpedienteUploadFileService().service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
+        retValue = new AlumnoSolicitudExpedienteUploadFileService().service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
+        return retValue;
     }
 
     public File[] getUpload() {
@@ -57,5 +59,11 @@ public class AlumnoSolicitudExpedienteUploadFileAction extends ActionPostCommonS
         this.tdoc = tdoc;
     }
     
-    
+    public String getRetValue() {
+        return retValue;
+    }
+
+    public void setRetValue(String retValue) {
+        this.retValue = retValue;
+    }
 }

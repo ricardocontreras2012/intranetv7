@@ -154,9 +154,6 @@
                                                                 <span class="fa fa-info-circle" aria-hidden="true"></span>
                                                             </button>
                                                         </s:elseif>
-                                                        <s:elseif test="edeEstado == 4">
-                                                            <span data-estado-al="4" class="badge text-bg-danger">Rechazado</span>
-                                                        </s:elseif>
                                                     </td>
                                                     <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>
                                                     <td>
@@ -175,9 +172,9 @@
                                                                 </a>
                                                             </s:if>
                                                             <s:if test="id.edeTdoc == 100">
-                                                                <a href="https://fae.usach.cl/fae/docs/intranet/solicitud-de-genero.pdf" title="<s:property value="tDocExpediente.tdeTexto" />" target="_blank" class="btn btn-light" >
+                                                                <button id="genero-button" title="<s:property value="tDocExpediente.tdeTexto" />" type="button" class="btn btn-light" >
                                                                     <span class="fa fa-file-pdf-o"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.download"/></span>
-                                                                </a>
+                                                                </button>
                                                             </s:if>
                                                             <s:if test="id.edeTdoc == 110">
                                                                 <button id="pago-arancel-button" title="<s:property value="tDocExpediente.tdeTexto" />" type="button" class="btn btn-light" >
@@ -234,10 +231,7 @@
                                                         <span data-estado-us="3" class="badge text-bg-warning">Observado</span>
                                                     </s:elseif>
                                                     <s:elseif test="edeEstado == 4">
-                                                        <span data-estado-us="4" class="badge text-bg-danger">Rechazado</span>
-                                                    </s:elseif>
-                                                    <s:elseif test="edeEstado == 5">
-                                                        <span data-estado-us="5" class="badge text-bg-primary">Solicitado</span>
+                                                        <span data-estado-us="4" class="badge text-bg-primary">Solicitado</span>
                                                     </s:elseif>
                                                 </td>
                                                 <td><strong><s:property value="tDocExpediente.tdeDes" /></strong></td>

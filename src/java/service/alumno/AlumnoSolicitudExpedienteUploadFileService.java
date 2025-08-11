@@ -19,9 +19,14 @@ import session.GenericSession;
 public class AlumnoSolicitudExpedienteUploadFileService {
     
     public String service(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
-        CommonSolicitudExpedienteUtil.saveAttach(action, genericSession, upload, uploadFileName, tdoc, key);
-        
+        boolean retValue = CommonSolicitudExpedienteUtil.saveAttach(action, genericSession, upload, uploadFileName, tdoc, key);        
         LogUtil.setLog(genericSession.getRut());
-        return Action.SUCCESS;
+        
+        if(retValue){
+            return Action.SUCCESS;
+        }
+        else {
+            return Action.ERROR;
+        }
     }   
 }

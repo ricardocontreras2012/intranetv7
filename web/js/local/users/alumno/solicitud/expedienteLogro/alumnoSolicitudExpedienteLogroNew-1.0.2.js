@@ -61,9 +61,9 @@ $(document).ready(function () {
 
         // Verificar si la extensión del archivo es .pdf
         if (fileExtension !== "pdf") {
-            alert("Por favor, seleccione un archivo PDF.");
-            $(fileInput).val(""); // Limpia el input
-            return; // Detiene el resto del proceso
+         alert("Por favor, seleccione un archivo PDF.");
+         $(fileInput).val(""); // Limpia el input
+         return; // Detiene el resto del proceso
         }
 
         const formData = new FormData();
@@ -75,12 +75,21 @@ $(document).ready(function () {
             url: "AlumnoSolicitudExpedienteUploadFile",
             type: "POST",
             data: formData,
+            dataType: 'json',
             contentType: false,
             processData: false,
             success: function (response) {
-                alert("Archivo subido exitosamente.");
+                if (response.retValue === "success") {
+                    alert("Archivo subido exitosamente.");
+                    $(fileInput).attr("data-upload-success", "true");
+                    $(fileInput).addClass("is-valid");
+                } else {
+                    alert("Error al subir el archivo.");
+                    $(fileInput).attr("data-upload-success", "false");
+                }
+                /*alert("Archivo subido exitosamente.");
                 $(fileInput).attr("data-upload-success", "true");
-                $(fileInput).addClass("is-valid");
+                $(fileInput).addClass("is-valid");*/
 
                 /* verifico si activo boton*/
                 let allUploaded = true;

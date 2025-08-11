@@ -27,12 +27,19 @@ public class CommonSolicitudExpedienteUtil {
     private CommonSolicitudExpedienteUtil() {
     }
 
-    public static void saveAttach(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
-        // Obtener la lista de archivos adjuntos de la solicitud
-        getAttachFiles(action, genericSession, upload, uploadFileName, tdoc, key);
+    // Cambiar el tipo de retorno a String para poder retornar mensajes como "success", "failure", etc.
+    public static boolean saveAttach(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
+        try {
+            // Verificamos si la operación fue exitosa o falló
+            boolean retValue = getAttachFiles(action, genericSession, upload, uploadFileName, tdoc, key);
+            return retValue;
+        } catch (Exception e) {
+            //e.printStackTrace();  // Loguear el error
+            return false;  // Indicar que hubo un error general
+        }
     }
 
-    private static void getAttachFiles(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
+    private static boolean getAttachFiles(ActionCommonSupport action, GenericSession genericSession, File[] upload, String[] uploadFileName, Integer tdoc, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
 
@@ -42,7 +49,7 @@ public class CommonSolicitudExpedienteUtil {
                 stream().
                 map(EstadoDocExp::gettDocExpediente).
                 filter(doc -> doc != null && Objects.equals(doc.getTdeCod(), tdoc)).
-                map(TDocExpediente::getTdeDes).findFirst().orElse(null); // o "No encontrada", o lo que prefieras
+                map(TDocExpediente::getTdeDes).findFirst().orElse(null);
 
         List<SolicitudAttach> attachList = new ArrayList<>();
 
@@ -57,9 +64,9 @@ public class CommonSolicitudExpedienteUtil {
                     String fileName = uploadFileName[i];
                     // Verificar que el archivo sea un PDF
                     if (fileName != null && !fileName.toLowerCase().endsWith(".pdf")) {
-                        // Aquí podrías lanzar una excepción o simplemente agregar un mensaje de error
-                        //System.err.println("El archivo " + fileName + " no es un archivo PDF.");
-                        return;  // Devolvemos para evitar procesar archivos que no sean PDFs
+                        // Si no es PDF, puedes devolver un error específico
+                        throw new IllegalArgumentException("El archivo " + fileName + " no es un archivo PDF.");
+                        //System.out.println("El archivo " + fileName + " no es un archivo PDF.");
                     }
 
                     SolicitudAttach attach = new SolicitudAttach();
@@ -68,47 +75,45 @@ public class CommonSolicitudExpedienteUtil {
                     attachList.add(attach);
                 });
 
-                // Renombrar cada archivo y subirlo al servidor
-                // aca llamar a el nombre del documento
+                // Renombrar y subir archivos
                 IntStream.range(0, attachList.size()).forEach(i -> {
                     SolicitudAttach attach = attachList.get(i);
                     String nombre = sanitizeFileName(datoAlu + "-" + logro + "-" + documento + "-SOL-" + folio + ".pdf");
 
                     try {
-                        ContextUtil.getDAO().getEstadoDocExpRepository(ActionUtil.getDBUser()).updateFile(ws.getEstadoDocExpList().get(0).getId().getEdeRut(), ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(), ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(), ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(), ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(), tdoc, nombre);
-                    } catch (IndexOutOfBoundsException e) {
-                        System.err.println("Índice fuera de rango: ");
-                    } catch (NullPointerException e) {
-                        System.err.println("Referencia nula encontrada: " + e.getMessage());
-                    } catch (Exception e) {
-                        System.err.println("Error general: " + e.getMessage());
-                        e.printStackTrace();
+                        ContextUtil.getDAO().getEstadoDocExpRepository(ActionUtil.getDBUser()).updateFile(
+                                ws.getEstadoDocExpList().get(0).getId().getEdeRut(),
+                                ws.getEstadoDocExpList().get(0).getId().getEdeCodCar(),
+                                ws.getEstadoDocExpList().get(0).getId().getEdeAgnoIng(),
+                                ws.getEstadoDocExpList().get(0).getId().getEdeSemIng(),
+                                ws.getEstadoDocExpList().get(0).getId().getEdeCorrelLogro(),
+                                tdoc, nombre
+                        );
+                    } catch (IndexOutOfBoundsException | NullPointerException e) {
+                        System.err.println("Error al actualizar el archivo: " + e.getMessage());
+                        //throw new RuntimeException("Error al actualizar el archivo");
                     }
 
                     attach.setSolaAttachFile(nombre);
 
-                    // Subir el archivo al servidor
                     try {
                         // Subir el archivo al servidor
                         doUpload(action, files[i], nombre, "tit");
                     } catch (Exception e) {
-                        e.printStackTrace();  // Manejar la excepción según sea necesario
+                        e.printStackTrace();  // Manejo de error al subir el archivo
+                        throw new RuntimeException("Error al subir el archivo: " + e.getMessage());
                     }
                 });
+
+                return true;  // Si todo salió bien, devolvemos true
+            } else {
+                System.err.println("No se subieron archivos.");
+                return false;  // Si no se subieron archivos, devolvemos false
             }
 
         } catch (Exception e) {
-            e.printStackTrace();  // Imprimir el error en caso de que falle algún proceso
+            e.printStackTrace();  // Loguear el error
+            return false;  // Si hubo un error en algún paso, devolvemos false
         }
-    }
-
-    public static String obtenerDescripcionPorId(List<EstadoDocExp> lista, int idBuscado) {
-        for (EstadoDocExp estado : lista) {
-            TDocExpediente tipo = estado.gettDocExpediente();
-            if (tipo != null && tipo.getTdeCod() == idBuscado) {
-                return normalizaFileName(tipo.getTdeDes());
-            }
-        }
-        return null;
     }
 }

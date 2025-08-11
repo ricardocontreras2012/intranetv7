@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("#caratula-button").click(generaCaratula);
+    $("#genero-button").click(generaGenero);
     $("#pago-arancel-button").click(generaPagoArancel);
     
     $('[data-bs-toggle="tooltip"]').tooltip();
@@ -22,14 +23,19 @@ $(document).ready(function() {
             url: "AlumnoSolicitudExpedienteUploadFile",
             type: "POST",
             data: formData,
+            dataType: 'json',
             contentType: false,
             processData: false,
             success: function (response) {
-                $(fileInput).addClass("is-valid");
-                $(fileInput).attr("data-upload-success", "true");
-                alert("Archivo subido exitosamente.");
-                location.reload();
-                
+                if (response.retValue === "success") {
+                    alert("Archivo subido exitosamente.");
+                    $(fileInput).attr("data-upload-success", "true");
+                    $(fileInput).addClass("is-valid");
+                    location.reload();
+                } else {
+                    alert("Error al subir el archivo.");
+                    $(fileInput).attr("data-upload-success", "false");
+                }
             },
             error: function () {
                 $(fileInput).attr("data-upload-success", "false");
@@ -93,15 +99,11 @@ function generaPagoArancel() {
     $("#expediente-form").submit();
 }
 
+function generaGenero() {
+    $("#expediente-form").attr("action", "AlumnoSolicitudExpedienteGeneraSolicitudGenero");
+    $("#expediente-form").submit();
+}
 function abrirPaso(numero) {
-    console.log("Llamada paso:"+numero);
-    // Cierra todos los paneles primero (opcional, si usas data-bs-parent)
-    /*const paneles = document.querySelectorAll('.accordion-collapse');
-    paneles.forEach(p => {
-      const instancia = bootstrap.Collapse.getOrCreateInstance(p);
-      instancia.hide();
-    });*/
-
     // Abre el panel deseado
     const target = document.getElementById(`collapse${numero}`);
     const collapseInstance = bootstrap.Collapse.getOrCreateInstance(target);
