@@ -59,7 +59,7 @@ public class AlumnoSolicitudExpedienteGeneraCaratulaService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
-        Alumno alumno = aca.getAlumno();
+        Alumno alumno = ContextUtil.getDAO().getAlumnoRepository(ActionUtil.getDBUser()).findFull(genericSession.getRut());
 
         float margin = 28.35f * 2; // 1 cm en puntos
         Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);
