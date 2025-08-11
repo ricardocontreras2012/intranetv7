@@ -64,10 +64,11 @@ public final class CommonHorarioUtil {
         Map<String, Integer> diaMap = IntStream.range(0, dias)
                 .boxed()
                 .collect(Collectors.toMap(i -> ContextUtil.getDiaList().get(i).getDiaCod(), i -> i));
-
+        
         // Procesar cada curso
         cursoList.forEach(curso -> {
             Set<Horario> horarios = new HashSet<>(CommonCursoUtil.getHorario(curso));
+                                    
             horarios.forEach(horario -> {
                 String dia = horario.getId().getHorDia();
                 Integer modulo = horario.getId().getHorModulo();

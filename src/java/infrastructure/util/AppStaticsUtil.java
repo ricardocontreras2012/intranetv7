@@ -71,5 +71,5 @@ public class AppStaticsUtil {
         SECRETARIAS = Collections.unmodifiableMap(secre);
         AUTORIDADES = Collections.unmodifiableMap(auto);
         APP_DB_USERS = Collections.unmodifiableMap(appdb);
-    }
+    }   
 }

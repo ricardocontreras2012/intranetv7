@@ -7,11 +7,7 @@ package infrastructure.util;
 
 import domain.model.ParamArchivosWeb;
 import static java.lang.Integer.valueOf;
-import java.util.Map;
 import java.util.Properties;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import infrastructure.support.UserEmailSupport;
 import static infrastructure.util.LogUtil.logExceptionMessage;
 import static infrastructure.util.PropertyLoaderUtil.loadProperties;
 import static infrastructure.util.ContextUtil.getParamArchivosWebList;
@@ -106,16 +102,6 @@ public class SystemParametersUtil {
     public static final Integer MESSAGE_SUBJECT_MAX_LENGTH = valueOf(PROPERTIES.getProperty("messageSubjectMaxLength"));
 
     /*
-     * Configuración de correos electrónicos
-     */
-    /**
-     * Propiedades para la configuración del correo electrónico.
-     */
-    public static final Properties MAIL_PROPERTIES = loadProperties("config/mail/mail.xml");
-    public static final Integer NUM_EMAIL_USERS = valueOf(MAIL_PROPERTIES.getProperty("users"));
-    public static final Map<Integer, UserEmailSupport> EMAIL_USERS = getEmailUsers();
-
-    /*
      * Configuración general
      */
     /**
@@ -134,7 +120,8 @@ public class SystemParametersUtil {
     public static final String EXTENSION_FOTOS = PROPERTIES.getProperty("ExtencionFotos");
 
     /**
-     * Longitud de nombre archivos permitidos para fotos de usuario para efectos de formateo.
+     * Longitud de nombre archivos permitidos para fotos de usuario para efectos
+     * de formateo.
      */
     public static final Integer LARGO_NOMBRE_ARCHIVO_FOTO
             = valueOf(PROPERTIES.getProperty("LargoNombreArchivoFoto"));
@@ -199,7 +186,7 @@ public class SystemParametersUtil {
      * Ruta de acceso al sistema web.
      */
     public static final String ACCESO_WEB = PROPERTIES.getProperty("AccesoWEB");
-   
+
     /**
      * Obtiene el valor de un parámetro desde la base de datos.
      *
@@ -217,23 +204,5 @@ public class SystemParametersUtil {
             logExceptionMessage(e);
             return ""; // Retorna una cadena vacía en caso de excepción
         }
-    }
-
-    /**
-     * Obtiene una lista de usuarios de correo electrónico configurados.
-     *
-     * @return Un mapa con los usuarios y sus respectivas configuraciones de
-     * correo.
-     */
-    private static Map<Integer, UserEmailSupport> getEmailUsers() {
-        return IntStream.range(0, NUM_EMAIL_USERS)
-                .boxed()
-                .collect(Collectors.toMap(
-                        i -> i,
-                        i -> new UserEmailSupport(
-                                MAIL_PROPERTIES.getProperty("mail.smtp.user" + i),
-                                MAIL_PROPERTIES.getProperty("mail.smtp.password"+i)
-                        )
-                ));
-    }
+    }    
 }
