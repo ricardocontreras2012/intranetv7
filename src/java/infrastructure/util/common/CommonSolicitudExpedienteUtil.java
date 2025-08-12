@@ -7,7 +7,6 @@ import domain.model.TDocExpediente;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import static infrastructure.util.FormatUtil.normalizaFileName;
 import static infrastructure.util.FormatUtil.sanitizeFileName;
 import static infrastructure.util.common.CommonArchivoUtil.doUpload;
 import java.io.File;

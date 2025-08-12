@@ -35,6 +35,7 @@ public class AlumnoCertificacionGenerarAlumnoRegularService {
 
         Integer monto = CommonCertificacionUtil.getValor(as.getCertList(), C1);
         Integer folio = CommonCertificacionUtil.getFolio();
+                       
         String name = CommonCertificacionUtil.getNameFile(genericSession.getWorkSession(key).getAluCar(), folio, C1);
 
         Gson gson = new Gson();
