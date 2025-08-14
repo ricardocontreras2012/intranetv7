@@ -8,7 +8,7 @@
 package action.common;
 
 
-import service.common.CommonMensajeEnableListaDestinatariosService;
+import service.mensaje.CommonMensajeEnableListaDestinatariosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 

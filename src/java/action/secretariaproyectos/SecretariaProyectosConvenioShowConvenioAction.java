@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import service.secretariaproyectos.SecretariaProyectosConvenioShowConvenioService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioShowConvenioService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

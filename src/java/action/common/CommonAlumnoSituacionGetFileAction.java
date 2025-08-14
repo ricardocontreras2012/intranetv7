@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.common.CommonAlumnoSituacionGetFileService;
+import service.alumno.CommonAlumnoSituacionGetFileService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAlumnoRecordEnableService;
+import service.alumno.CommonAlumnoRecordEnableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

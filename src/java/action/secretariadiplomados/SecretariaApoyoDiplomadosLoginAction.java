@@ -5,7 +5,7 @@
  */
 package action.secretariadiplomados;
 
-import service.secretariadiplomados.SecretariaApoyoDiplomadosLoginService;
+import service.login.secretariadiplomados.SecretariaApoyoDiplomadosLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

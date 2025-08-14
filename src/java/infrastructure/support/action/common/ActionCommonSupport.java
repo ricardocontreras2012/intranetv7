@@ -50,8 +50,8 @@ public class ActionCommonSupport extends ActionSupport implements SessionAware {
             if (key != null && getGenericSession() != null) {
                 getGenericSession().setCurrentAction(currentAction);                
             }
-        } catch (Exception e) {
-            System.out.println(Arrays.stream(e.getStackTrace()).map(s->s.toString()).collect(Collectors.joining("\n"))); 
+        } catch (Exception e) {            
+            System.out.println(Arrays.stream(e.getStackTrace()).map(Object::toString).collect(Collectors.joining("\n")));
             retValue = ACTION_EXCEPTION;
         }
   

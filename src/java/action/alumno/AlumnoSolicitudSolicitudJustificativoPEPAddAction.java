@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoSolicitudSolicitudJustificativoPEPAddService;
+import service.solicitud.justificativo.alumno.AlumnoAddService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -24,6 +24,6 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddAction extends ActionPar
      */
     @Override
     public String action() throws Exception {   
-        return new AlumnoSolicitudSolicitudJustificativoPEPAddService().service(getGenericSession(), getMapParameters(), getKey());
+        return new AlumnoAddService().service(getGenericSession(), getMapParameters(), getKey());
     } 
 }

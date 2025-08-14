@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonInscripcionAdministracionGetNominaIzqService;
+import service.inscripcion.CommonInscripcionAdministracionGetNominaIzqService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

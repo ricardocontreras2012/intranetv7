@@ -32,9 +32,8 @@ import java.util.stream.Collectors;
  * @version 7, 24/05/2012
  */
 public class MailUtil {
-
-    static int MAX_INTENTOS = 30;
-    //static int DELAY = 5000;
+    
+    final static int MAX_ATTEMPTS = 3;
 
     /**
      *
@@ -42,23 +41,21 @@ public class MailUtil {
     public MailUtil() {
     }
 
-    /**
-     * Envia de correo.
-     *
-     * @param emailAddress Dirección de correo.
-     * @param subject Subject del correo.
-     * @param text Texto del correo.
-     */
-    public static void sendEmail(String emailAddress, String subject, String text) {
+    private interface MimeMessageBuilder {
+
+        void buildMessage(MimeMessage message, Address[] recipients, String subject, Transport transport) throws Exception;
+    }
+
+    private static void sendEmailInternal(String emailAddress, String subject, MimeMessageBuilder builder) {
         if (emailAddress == null || emailAddress.trim().isEmpty()) {
             System.out.println("[WARN] Dirección de correo vacía.");
             return;
         }
 
-        String email = getValidEmail(emailAddress);
+        String validEmails = getValidEmail(emailAddress);
         Address[] recipients;
         try {
-            recipients = InternetAddress.parse(email, false);
+            recipients = InternetAddress.parse(validEmails, false);
             if (recipients.length == 0) {
                 System.out.println("[WARN] No se encontraron direcciones válidas.");
                 return;
@@ -68,10 +65,11 @@ public class MailUtil {
             return;
         }
 
-        final int MAX_ATTEMPTS = 3;
+        
         int attempt = 0;
         boolean success = false;
 
+        // Aquí recipients es mutable y se actualizará en cada ciclo
         while (attempt < MAX_ATTEMPTS && !success && recipients.length > 0) {
             attempt++;
             SmtpTransportPoolUtil.TransportWrapper wrapper = null;
@@ -87,18 +85,14 @@ public class MailUtil {
                 Session session = EmailPoolManagerUtil.SMTP_POOL.getSession();
 
                 MimeMessage message = new MimeMessage(session);
-                String fromAddress = wrapper.getAccount().getUsername();
 
-                message.setFrom(new InternetAddress(fromAddress));
-                message.setRecipients(Message.RecipientType.BCC, recipients);
-                message.setSubject(subject);
-                message.setText(text);
+                // Pasamos el arreglo actual de recipients al builder
+                builder.buildMessage(message, recipients, subject, transport);
 
-                System.out.println("[INFO] Intento " + attempt + ": Enviando correo desde " + fromAddress + " -> " + Arrays.toString(recipients));
+                transport.sendMessage(message, message.getAllRecipients());
 
-                transport.sendMessage(message, recipients);
-
-                System.out.println("[INFO] Correo enviado exitosamente.");
+                System.out.println("[INFO] Correo enviado exitosamente desde "
+                        + transport.getURLName().getUsername() + " a " + Arrays.toString(recipients));
                 success = true;
 
             } catch (SendFailedException se) {
@@ -114,7 +108,7 @@ public class MailUtil {
                 }
 
                 if (validUnsent != null && validUnsent.length > 0) {
-                    recipients = validUnsent;
+                    recipients = validUnsent; // Actualizamos la variable recipients para reintentar
                     System.out.println("[INFO] Reintentando solo con direcciones válidas: " + Arrays.toString(validUnsent));
                 } else {
                     System.out.println("[FAIL] No quedan direcciones válidas para reintentar.");
@@ -134,6 +128,31 @@ public class MailUtil {
             System.out.println("[FAIL] No se pudo enviar el correo tras " + MAX_ATTEMPTS + " intentos.");
         }
     }
+
+    public static void sendEmail(String emailAddress, String subject, String text) {
+        sendEmailInternal(emailAddress, subject, (message, recipients, subj, transport) -> {
+            message.setFrom(new InternetAddress(transport.getURLName().getUsername()));
+            message.setRecipients(Message.RecipientType.BCC, recipients);
+            message.setSubject(subj);
+            message.setText(text);
+        });
+    }
+
+    public void sendMensajeEmail(
+            String emailAddress, String subject, String body,
+            List<MensajeAttach> attachList, String attachFileName,
+            String imagen, String tipo, String part, int intento) {
+        sendEmailInternal(emailAddress, subject, (message, recipients, subj, transport) -> {
+            message.setFrom(new InternetAddress(transport.getURLName().getUsername()));
+            message.setRecipients(Message.RecipientType.BCC, recipients);
+            message.setSubject(subj);
+
+            Multipart multipart = buildMultipart(body, imagen, part);
+            addAttachments(multipart, tipo, attachList, attachFileName);
+            message.setContent(multipart);
+        });
+    }
+
     /**
      * Envia correo con la confirmacion de la peticion de una nueva password.
      *
@@ -162,7 +181,7 @@ public class MailUtil {
 
         // Convertir el string de emails a un conjunto para evitar duplicados y enviar el correo
         //commaDelimitedStringToSet(email).forEach(s -> sendEmail(s, subject, body));
-        plop.sendEmail(email, subject, body);
+        sendEmail(email, subject, body);
     }
 
     public static void sendNewPassword(String email, String password) {
@@ -172,118 +191,7 @@ public class MailUtil {
 
         // Usar streams para enviar el correo a cada destinatario
         //emails.forEach(recipient -> sendEmail(recipient, action.getText("mail.password"), password));
-        
-        plop.sendEmail(email, action.getText("mail.password"), password);
-    }
-
-    /**
-     * Envia copia del mensaje a un correo especifico de usuario.
-     *
-     * @param emailAddress Correo del destinatario.
-     * @param subject Subject del correo.
-     * @param body Cuerpo del mensaje.
-     * @param attachList
-     * @param attachFileName
-     * @param imagen
-     * @param tipo
-     * @param part
-     * @param intento
-     */
-    public void sendMensajeEmail(
-            String emailAddress, String subject, String body,
-            List<MensajeAttach> attachList, String attachFileName,
-            String imagen, String tipo, String part, int intento) {
-
-        if (emailAddress == null || emailAddress.trim().isEmpty()) {
-            System.out.println("[WARN] Dirección de correo vacía.");
-            return;
-        }
-
-        String email = getValidEmail(emailAddress);
-        Address[] recipients;
-        try {
-            recipients = InternetAddress.parse(email, false);
-            if (recipients.length == 0) {
-                System.out.println("[WARN] No se encontraron direcciones válidas.");
-                return;
-            }
-        } catch (AddressException e) {
-            System.out.println("[ERROR] Error al parsear direcciones: " + e.getMessage());
-            return;
-        }
-
-        final int MAX_ATTEMPTS = 3;
-        int attempt = 0;
-        boolean success = false;       
-
-        while (attempt < MAX_ATTEMPTS && !success && recipients.length > 0) {
-            attempt++;
-            SmtpTransportPoolUtil.TransportWrapper wrapper = null;
-
-            try {
-                wrapper = EmailPoolManagerUtil.SMTP_POOL.borrowTransport();
-                if (wrapper == null) {
-                    System.out.println("[ERROR] Intento " + attempt + ": No se pudo obtener un transporte SMTP.");
-                    continue;
-                }
-
-                Transport transport = wrapper.getTransport();
-                Session session = EmailPoolManagerUtil.SMTP_POOL.getSession();
-
-                MimeMessage message = new MimeMessage(session);
-
-                buildMessage(message, recipients, subject, body, attachList, attachFileName, imagen, tipo, part, transport);
-
-                transport.sendMessage(message, message.getAllRecipients());
-
-                System.out.println("[INFO] Correo enviado a: " + email + " usando " + transport.getURLName().getUsername());
-                success = true;
-
-            } catch (SendFailedException se) {
-                System.out.println("[WARN] SendFailedException: " + se.getMessage());
-
-                Address[] invalid = se.getInvalidAddresses();
-                Address[] validUnsent = se.getValidUnsentAddresses();
-
-                if (invalid != null && invalid.length > 0) {
-                    for (Address addr : invalid) {
-                        System.out.println("[INVALID EMAIL DETECTED DURANTE ENVÍO] => " + addr.toString());
-                    }
-                }
-
-                if (validUnsent != null && validUnsent.length > 0) {
-                    recipients = validUnsent;
-                    System.out.println("[INFO] Reintentando solo con direcciones válidas: " + Arrays.toString(validUnsent));
-                } else {
-                    System.out.println("[FAIL] No quedan direcciones válidas para reintentar.");
-                    break;
-                }
-
-            } catch (Exception e) {
-                System.out.println("[ERROR] Intento " + attempt + ": Fallo inesperado: " + e.getMessage());
-            } finally {
-                if (wrapper != null) {
-                    EmailPoolManagerUtil.SMTP_POOL.returnTransport(wrapper);
-                }
-            }
-        }
-
-        if (!success) {
-            System.out.println("[FAIL] No se pudo enviar el correo tras " + MAX_ATTEMPTS + " intentos.");
-        }
-    }
-    
-    private void buildMessage(MimeMessage message, Address[] recipients, String subject, String body,
-            List<MensajeAttach> attachList, String attachFileName, String imagen,
-            String tipo, String part, Transport transport) throws Exception {
-
-        message.setFrom(new InternetAddress(transport.getURLName().getUsername()));
-        message.setRecipients(Message.RecipientType.BCC, recipients);
-        message.setSubject(subject);
-
-        Multipart multipart = buildMultipart(body, imagen, part);
-        addAttachments(multipart, tipo, attachList, attachFileName);
-        message.setContent(multipart);
+        sendEmail(email, action.getText("mail.password"), password);
     }
 
     private Multipart buildMultipart(String body, String imagen, String part) throws Exception {
@@ -414,5 +322,5 @@ public class MailUtil {
             // Si se lanza una excepción, significa que el correo no es válido 
             return false;
         }
-    }   
+    }
 }

@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import service.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudService;
+import service.convalidacion.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

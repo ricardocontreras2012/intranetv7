@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularActaGenerarxCarreraService;
+import service.acta.registradorcurricular.RegistradorCurricularActaGenerarxCarreraService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 

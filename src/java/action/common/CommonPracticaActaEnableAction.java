@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonPracticaActaEnableService;
+import service.practica.EnableActaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonPracticaActaEnableAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonPracticaActaEnableService().service(getGenericSession(), agno, sem, practica,  getKey());
+        return new EnableActaService().service(getGenericSession(), agno, sem, practica,  getKey());
     }
 
     public Integer getAgno() {

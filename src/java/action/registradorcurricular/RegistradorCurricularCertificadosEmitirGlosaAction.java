@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaService;
+import service.certificacion.registradorcurricular.RegistradorCurricularCertificadosEmitirGlosaService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

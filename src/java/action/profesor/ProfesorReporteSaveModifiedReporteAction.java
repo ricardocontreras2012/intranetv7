@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorReporteSaveModifiedReporteService;
+import service.reporteclase.profesor.ProfesorSaveModifiedReporteService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -33,7 +33,7 @@ public final class ProfesorReporteSaveModifiedReporteAction extends ActionValida
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorReporteSaveModifiedReporteService().service(getGenericSession(), sesionReporte, objetivos,
+        return new ProfesorSaveModifiedReporteService().service(getGenericSession(), sesionReporte, objetivos,
                 contenido, observaciones, metodo, recuperacion, getKey());
     }
 

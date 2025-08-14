@@ -5,7 +5,7 @@
  */
 package action.ayudante;
 
-import service.ayudante.AyudanteLoginService;
+import service.login.ayudante.AyudanteLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

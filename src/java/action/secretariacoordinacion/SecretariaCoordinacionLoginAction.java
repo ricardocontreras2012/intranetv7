@@ -5,7 +5,7 @@
  */
 package action.secretariacoordinacion;
 
-import service.secretariacoordinacion.SecretariaCoordinacionLoginService;
+import service.login.secretariacoordinacion.SecretariaCoordinacionLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

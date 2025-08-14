@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import service.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioRemoveConveniosService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 

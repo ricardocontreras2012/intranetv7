@@ -6,7 +6,7 @@
 package action.registradorcurricular;
 
 import java.io.InputStream;
-import service.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Service;
+import service.certificacion.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Service;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.common.CommonCertificacionUtil;

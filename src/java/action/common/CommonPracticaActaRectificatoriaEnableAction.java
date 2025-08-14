@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonPracticaActaRectificatoriaEnableService;
+import service.practica.EnableActaRectificatoriaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,7 +27,7 @@ public class CommonPracticaActaRectificatoriaEnableAction extends ActionCommonSu
      */
     @Override
     public String action() throws Exception {
-        return new CommonPracticaActaRectificatoriaEnableService().service(getGenericSession(), agno, sem, practica,  getKey());
+        return new EnableActaRectificatoriaService().service(getGenericSession(), agno, sem, practica,  getKey());
     }
 
     public Integer getAgno() {

@@ -5,7 +5,7 @@
  */
 package action.titulosygrados;
 
-import service.titulosygrados.TitulosyGradosLoginService;
+import service.login.titulosygrados.TitulosyGradosLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

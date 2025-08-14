@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeGetReceivedMessageService;
+import service.mensaje.CommonMensajeGetReceivedMessageService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 

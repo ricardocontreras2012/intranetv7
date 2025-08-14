@@ -5,7 +5,7 @@
  */
 package action.consulta;
 
-import service.consulta.ConsultaLoginService;
+import service.login.consulta.ConsultaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

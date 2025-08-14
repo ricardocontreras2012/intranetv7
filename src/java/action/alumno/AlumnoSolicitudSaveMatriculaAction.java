@@ -6,7 +6,7 @@
 package action.alumno;
 
 import java.io.File;
-import service.alumno.AlumnoSolicitudSaveMatriculaService;
+import service.solicitud.matricula.alumno.AlumnoSolicitudSaveMatriculaService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.titulosygrados;
 
-import service.titulosygrados.TitulosyGradosNominaAddAlumnoService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosNominaAddAlumnoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

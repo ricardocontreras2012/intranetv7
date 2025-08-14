@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import service.egresado.EgresadoLoginSeleccionarIngresoService;
+import service.login.egresado.EgresadoLoginSeleccionarIngresoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

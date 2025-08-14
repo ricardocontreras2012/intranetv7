@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoGetCursosService;
+import service.curso.CommonCursoGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 

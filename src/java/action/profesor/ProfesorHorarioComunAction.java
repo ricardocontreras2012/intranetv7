@@ -6,7 +6,7 @@
 package action.profesor;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.profesor.ProfesorHorarioComunService;
+import service.horario.GetHorarioComunService;
 import session.Manager;
 
 /**
@@ -25,6 +25,6 @@ public class ProfesorHorarioComunAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorHorarioComunService().service(getGenericSession(), Manager.getProfesorSession(sesion), getKey());
+        return new GetHorarioComunService().service(getGenericSession(), Manager.getProfesorSession(sesion), getKey());
     }
 }

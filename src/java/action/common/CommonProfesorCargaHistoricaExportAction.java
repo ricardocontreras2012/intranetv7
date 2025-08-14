@@ -7,7 +7,7 @@ package action.common;
 
 import java.io.InputStream;
 
-import service.common.CommonProfesorCargaHistoricaExportService;
+import service.profesor.CommonProfesorCargaHistoricaExportService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.common.CommonMaterialUtil;

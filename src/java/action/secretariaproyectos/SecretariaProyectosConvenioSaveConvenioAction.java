@@ -7,7 +7,7 @@ package action.secretariaproyectos;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioSaveConvenioService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

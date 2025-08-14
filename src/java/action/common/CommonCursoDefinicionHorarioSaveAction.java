@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionHorarioSaveService;
+import service.curso.CommonCursoDefinicionHorarioSaveService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

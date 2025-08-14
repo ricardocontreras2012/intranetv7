@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularSolicitudReprintService;
+import service.reincorporacion.registradorcurricular.RegistradorCurricularSolicitudReprintService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

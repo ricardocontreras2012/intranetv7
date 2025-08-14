@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorEvaluacionEnableFormService;
+import service.evaluacion.profesor.ProfesorEvaluacionEnableFormService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

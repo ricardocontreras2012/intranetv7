@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoExamenAPGenerarService;
+import service.examen.alumno.AlumnoExamenAPGenerarService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

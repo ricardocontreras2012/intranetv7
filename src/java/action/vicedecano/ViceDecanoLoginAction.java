@@ -5,7 +5,7 @@
  */
 package action.vicedecano;
 
-import service.vicedecano.ViceDecanoLoginService;
+import service.login.vicedecano.ViceDecanoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

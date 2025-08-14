@@ -6,7 +6,7 @@
 package action.profesor;
 
 import infrastructure.support.action.ActionValidationPosSupport;
-import service.profesor.ProfesorEvaluacionGetAlumnoEvaluacionService;
+import service.evaluacion.profesor.ProfesorEvaluacionGetAlumnoEvaluacionService;
 
 /**
  * Procesa el action mapeado del request a la URL

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoGetCursosxAgnoSemEncuestaService;
+import service.curso.CommonCursoGetCursosxAgnoSemEncuestaService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**

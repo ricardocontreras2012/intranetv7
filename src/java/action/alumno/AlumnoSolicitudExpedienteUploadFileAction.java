@@ -2,7 +2,7 @@ package action.alumno;
 
 import infrastructure.support.action.post.ActionPostCommonSupport;
 import java.io.File;
-import service.alumno.AlumnoSolicitudExpedienteUploadFileService;
+import service.solicitud.expediente.alumno.AlumnoUploadFileService;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -31,7 +31,7 @@ public class AlumnoSolicitudExpedienteUploadFileAction extends ActionPostCommonS
      */
     @Override
     public String action() throws Exception {
-        retValue = new AlumnoSolicitudExpedienteUploadFileService().service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
+        retValue = new AlumnoUploadFileService().service(this, getGenericSession(), upload,  uploadFileName, tdoc, getKey());
         return retValue;
     }
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAlumnoSearchDirectService;
+import service.alumno.CommonAlumnoSearchDirectService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 

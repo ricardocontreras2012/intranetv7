@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorActaRectificatoriaGetCursosService;
+import service.acta.profesor.ProfesorActaRectificatoriaGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 

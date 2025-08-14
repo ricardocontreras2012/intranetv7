@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeRemoveReceivedMessagesService;
+import service.mensaje.CommonMensajeRemoveReceivedMessagesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

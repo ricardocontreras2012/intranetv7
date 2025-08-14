@@ -39,10 +39,20 @@
                                     <s:if test="planLogro.logro.logrCod == 20 || planLogro.logro.logrCod == 50">
                                         <tr data-estado="<s:property value="explEstado"/>" data-solicitud="<s:property value="explSol"/>" data-logro="<s:property value="planLogro.logro.logrCod"/>">
                                             <td>
+                                                <s:if test="explSol != null">
+                                                <a role="button" tabindex="0" data-bs-toggle="modal" data-bs-target="#solicitudEnviadaModal">
+                                                    <s:property value="planLogro.plalNomLogro"/>
+                                                </a>
+                                                </s:if>
+                                                <s:else>
                                                 <a id="expl_<s:property value="#row.count -1"/>"><s:property value="planLogro.plalNomLogro"/></a>
+                                                </s:else>
                                             </td>
                                         </tr>
                                     </s:if>
+                                    <s:elseif test="planLogro.logro.logrCod == 80">
+                                        <!--tr><td><s:property value="planLogro.plalNomLogro"/></td></tr-->
+                                    </s:elseif>    
                                     <s:else>
                                         <tr data-estado="<s:property value="explEstado"/>" data-solicitud="<s:property value="explSol"/>" data-logro="<s:property value="planLogro.logro.logrCod"/>">
                                             <td>
@@ -102,7 +112,7 @@
             </div>
         </div>
 
-        <!-- Modal Aviso si logro no puede tramitarse vía intranet -->
+        <!-- Modal Aviso logro no puede tramitarse vía intranet -->
         <div class="modal fade" id="noDisponibleModal" tabindex="-1" aria-labelledby="noDisponibleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -130,6 +140,24 @@
                     </div>
                     <div class="modal-body">
                         Debe solicitar su Licencitura como requisito para la entrega del Título.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal Aviso solicitud ya enviada -->
+        <div class="modal fade" id="solicitudEnviadaModal" tabindex="-1" aria-labelledby="solicitudEnviadaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="solicitudEnviadaModalLabel">Aviso</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Solicitud de expediente ya enviada.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>

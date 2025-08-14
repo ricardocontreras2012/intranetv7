@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.File;
-import service.common.CommonMensajeSendMessageService;
+import service.mensaje.CommonMensajeSendMessageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

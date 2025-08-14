@@ -9,7 +9,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularReincorporacionService;
+import service.reincorporacion.registradorcurricular.RegistradorCurricularReincorporacionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 

@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import org.apache.commons.lang3.StringUtils;
-import service.titulosygrados.TitulosyGradosNominaGetNominaService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosNominaGetNominaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

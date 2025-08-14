@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonActaRectificatoriaEmitirActaService;
+import service.acta.CommonActaRectificatoriaEmitirActaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

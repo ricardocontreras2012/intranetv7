@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonInscripcionGetCursosService;
+import service.inscripcion.CommonInscripcionGetCursosService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

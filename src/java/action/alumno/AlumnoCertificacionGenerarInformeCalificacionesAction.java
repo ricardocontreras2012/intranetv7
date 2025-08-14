@@ -1,7 +1,7 @@
 
 package action.alumno;
 
-import service.alumno.AlumnoCertificacionGenerarInformeCalificacionesService;
+import service.certificacion.alumno.AlumnoCertificacionGenerarInformeCalificacionesService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoGetBoletinHorarioService;
+import service.curso.CommonCursoGetBoletinHorarioService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

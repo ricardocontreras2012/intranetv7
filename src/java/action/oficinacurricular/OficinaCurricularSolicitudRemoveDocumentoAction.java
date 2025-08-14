@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.oficinacurricular.OficinaCurricularSolicitudRemoveDocumentoService;
+import service.solicitud.oficinacurricular.OficinaCurricularRemoveDocumentoService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class OficinaCurricularSolicitudRemoveDocumentoAction extends Actio
      */
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularSolicitudRemoveDocumentoService().service(getGenericSession(), getMapParameters(), getKey());
+        return new OficinaCurricularRemoveDocumentoService().service(getGenericSession(), getMapParameters(), getKey());
     }
 
     /**

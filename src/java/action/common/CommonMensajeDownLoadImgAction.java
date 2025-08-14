@@ -8,7 +8,7 @@ package action.common;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.common.CommonMensajeDownLoadImgService;
+import service.mensaje.CommonMensajeDownLoadImgService;
 
 /**
  * Procesa el action mapeado del request a la URL CommonMensajeDownLoadFile

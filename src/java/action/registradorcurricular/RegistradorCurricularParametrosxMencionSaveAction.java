@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularParametrosxMencionSaveService;
+import service.parametromencion.registradorcurricular.RegistradorCurricularParametrosxMencionSaveService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 

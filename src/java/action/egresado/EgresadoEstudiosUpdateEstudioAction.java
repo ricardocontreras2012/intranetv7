@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import service.egresado.EgresadoEstudiosUpdateEstudioService;
+import service.misdatos.egresado.EgresadoEstudiosUpdateEstudioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
-import service.common.CommonCursoGetBoletinService;
+import service.curso.CommonCursoGetBoletinService;
 
 /**
  *

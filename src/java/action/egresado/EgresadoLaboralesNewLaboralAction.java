@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import service.egresado.EgresadoLaboralesNewLaboralService;
+import service.misdatos.egresado.EgresadoLaboralesNewLaboralService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

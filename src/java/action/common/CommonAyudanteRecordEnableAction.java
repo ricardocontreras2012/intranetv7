@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAyudanteRecordEnableService;
+import service.ayudante.CommonAyudanteRecordEnableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

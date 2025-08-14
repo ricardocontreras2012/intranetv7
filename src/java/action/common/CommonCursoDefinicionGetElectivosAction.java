@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionGetElectivosService;
+import service.curso.CommonCursoDefinicionGetElectivosService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**

@@ -5,7 +5,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.ActionValidationPosSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.titulosygrados.TitulosyGradosAlumnoCertificadoPrintService;
+import service.certificacion.titulosygrados.TitulosyGradosAlumnoCertificadoPrintService;
 
 /**
  *

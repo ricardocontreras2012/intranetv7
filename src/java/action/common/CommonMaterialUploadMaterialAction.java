@@ -9,7 +9,7 @@ package action.common;
 
 
 import java.io.File;
-import service.common.CommonMaterialUploadMaterialService;
+import service.material.UploadMaterialService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 
@@ -37,7 +37,7 @@ public final class CommonMaterialUploadMaterialAction extends ActionPostCommonSu
     @Override
     public String action() throws Exception {
         tipoMaterial = getGenericSession().getWorkSession(getKey()).getTipoMaterial();
-        return new CommonMaterialUploadMaterialService().service(this, getGenericSession(), tipo, upload, uploadFileName,
+        return new UploadMaterialService().service(this, getGenericSession(), tipo, upload, uploadFileName,
                 caption, getKey());
     }
 

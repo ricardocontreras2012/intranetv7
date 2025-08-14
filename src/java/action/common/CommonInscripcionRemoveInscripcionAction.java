@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonInscripcionRemoveInscripcionService;
+import service.inscripcion.CommonInscripcionRemoveInscripcionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

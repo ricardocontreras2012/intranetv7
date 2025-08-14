@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAyudanteGetAyudanteService;
+import service.ayudante.CommonAyudanteGetAyudanteService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

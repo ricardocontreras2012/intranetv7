@@ -6,7 +6,7 @@
 package action.secretariadocente;
 
 import java.io.File;
-import service.secretariadocente.SecretariaDocenteConvalidacionGetExcelService;
+import service.convalidacion.secretariadocente.SecretariaDocenteConvalidacionGetExcelService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

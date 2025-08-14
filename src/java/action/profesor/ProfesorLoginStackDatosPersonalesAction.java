@@ -1,7 +1,7 @@
 
 package action.profesor;
 
-import service.profesor.ProfesorLoginStackDatosPersonalesService;
+import service.login.profesor.ProfesorLoginStackDatosPersonalesService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonInscripcionAdmRemoveNominaDerService;
+import service.inscripcion.CommonInscripcionAdmRemoveNominaDerService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionRemoveCursosService;
+import service.curso.CommonCursoDefinicionRemoveCursosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

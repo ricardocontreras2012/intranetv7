@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.alumno.AlumnoSolicitudExpedienteGeneraPagoArancelService;
+import service.solicitud.expediente.alumno.AlumnoGeneraPagoAranceService;
 
 /**
  *
@@ -29,7 +29,7 @@ public class AlumnoSolicitudExpedienteGeneraPagoArancelAction extends  ActionCom
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = new AlumnoSolicitudExpedienteGeneraPagoArancelService().service(getGenericSession(), getKey());
+            ais = new AlumnoGeneraPagoAranceService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

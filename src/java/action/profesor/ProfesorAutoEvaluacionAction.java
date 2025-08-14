@@ -6,7 +6,7 @@
 package action.profesor;
 
 
-import service.profesor.ProfesorAutoEvaluacionService;
+import service.autoevaluacion.profesor.ProfesorAutoEvaluacionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import service.secretariadocente.SecretariaDocenteLoginService;
+import service.login.secretariadocente.SecretariaDocenteLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.common.CommonAlumnoProgramaEstudioPrintProgramasService;
+import service.alumno.CommonAlumnoProgramaEstudioPrintProgramasService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

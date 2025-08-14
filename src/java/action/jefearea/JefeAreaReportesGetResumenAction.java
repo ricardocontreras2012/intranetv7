@@ -5,7 +5,7 @@
  */
 package action.jefearea;
 
-import service.jefearea.JefeAreaReportesGetResumenService;
+import service.reporteclase.jefearea.JefeAreaReportesGetResumenService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**

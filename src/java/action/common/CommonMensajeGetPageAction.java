@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import service.common.CommonMensajeGetPageService;
+import service.mensaje.CommonMensajeGetPageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

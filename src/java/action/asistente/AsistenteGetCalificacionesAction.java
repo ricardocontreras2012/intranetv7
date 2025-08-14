@@ -5,7 +5,7 @@
  */
 package action.asistente;
 
-import service.asistente.AsistenteGetCalificacionesService;
+import service.calificacion.asistente.AsistenteGetCalificacionesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

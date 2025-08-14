@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.oficinacurricular.OficinaCurricularSolicitudReceiveSolicitudService;
+import service.solicitud.oficinacurricular.OficinaCurricularReceiveSolicitudService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class OficinaCurricularSolicitudReceiveSolicitudAction extends Acti
      */
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularSolicitudReceiveSolicitudService().service();
+        return new OficinaCurricularReceiveSolicitudService().service();
     }
 }

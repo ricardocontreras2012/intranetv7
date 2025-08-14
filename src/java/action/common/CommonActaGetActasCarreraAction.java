@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonActaGetActasCarreraService;
+import service.acta.CommonActaGetActasCarreraService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**

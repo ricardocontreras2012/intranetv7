@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAsistenciaRemoveAsistenciaService;
+import service.asistencia.CommonAsistenciaRemoveAsistenciaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

@@ -6,7 +6,7 @@
 package action.common;
 
 import java.util.List;
-import service.common.CommonInscripcionAdmChangeNominaIzqService;
+import service.inscripcion.CommonInscripcionAdmChangeNominaIzqService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import java.util.Collection;

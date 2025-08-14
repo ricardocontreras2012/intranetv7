@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import service.common.CommonAyudanteGetFotoService;
+import service.ayudante.CommonAyudanteGetFotoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

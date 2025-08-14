@@ -5,7 +5,7 @@
  */
 package action.formacionintegral;
 
-import service.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemService;
+import service.curso.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**

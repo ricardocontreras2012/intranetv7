@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAsistenciaGetPlanillaService;
+import service.asistencia.CommonAsistenciaGetPlanillaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

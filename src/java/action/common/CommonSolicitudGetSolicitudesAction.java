@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonSolicitudGetSolicitudesService;
+import service.solicitud.GetSolicitudesService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -30,7 +30,7 @@ public final class CommonSolicitudGetSolicitudesAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        String retValue = new CommonSolicitudGetSolicitudesService().service(getGenericSession(), getKey(), estado, inicio, termino);
+        String retValue = new GetSolicitudesService().service(getGenericSession(), getKey(), estado, inicio, termino);
         inicio = getGenericSession().getWorkSession(getKey()).getFechaInicio();
         termino = getGenericSession().getWorkSession(getKey()).getFechaTermino();
         return retValue;

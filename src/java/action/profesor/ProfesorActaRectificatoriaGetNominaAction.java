@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorActaRectificatoriaGetNominaService;
+import service.acta.profesor.ProfesorActaRectificatoriaGetNominaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

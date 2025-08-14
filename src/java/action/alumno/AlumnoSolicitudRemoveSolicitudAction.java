@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoSolicitudRemoveSolicitudService;
+import service.solicitud.alumno.AlumnoSolicitudRemoveSolicitudService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

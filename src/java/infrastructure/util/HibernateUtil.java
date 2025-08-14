@@ -85,12 +85,10 @@ public class HibernateUtil {
     /**
      * Method description
      */
-    @SuppressWarnings("rawtypes")
     private static void getSessionFactories() {
-        APP_DB_USERS.values()
-                .stream()
-                .distinct() // Elimina duplicados automáticamente
-                .forEach(userDB -> processUsersGetSessionFactories(userDB));
+        APP_DB_USERS.values().stream()
+                .distinct()
+                .forEach(HibernateUtil::processUsersGetSessionFactories);
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorEvaluacionPorcentajesRelativosService;
+import service.evaluacion.profesor.ProfesorEvaluacionPorcentajesRelativosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

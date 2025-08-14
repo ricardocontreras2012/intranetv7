@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionGetElectivoService;
+import service.curso.CommonCursoDefinicionGetElectivoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

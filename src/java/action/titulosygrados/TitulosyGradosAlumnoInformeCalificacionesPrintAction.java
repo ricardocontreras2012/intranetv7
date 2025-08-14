@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import java.io.InputStream;
-import service.titulosygrados.TitulosyGradosAlumnoInformeCalificacionesPrintService;
+import service.certificacion.titulosygrados.TitulosyGradosAlumnoInformeCalificacionesPrintService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeGetNumMessagesService;
+import service.mensaje.CommonMensajeGetNumMessagesService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**

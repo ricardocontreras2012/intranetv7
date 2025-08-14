@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularUserExternoRemoveService;
+import service.mantenedor.registradorcurricular.RegistradorCurricularUserExternoRemoveService;
 import session.Manager;
 import infrastructure.support.action.ActionParameterAwareSupport;
 

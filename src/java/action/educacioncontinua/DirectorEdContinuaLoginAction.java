@@ -5,7 +5,7 @@
  */
 package action.educacioncontinua;
 
-import service.educacioncontinua.DirectorEdContinuaLoginService;
+import service.login.educacioncontinua.DirectorEdContinuaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

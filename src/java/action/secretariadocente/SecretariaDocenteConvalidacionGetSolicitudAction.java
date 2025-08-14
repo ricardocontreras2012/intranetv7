@@ -5,7 +5,7 @@
  */
 package action.secretariadocente;
 
-import service.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudService;
+import service.convalidacion.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

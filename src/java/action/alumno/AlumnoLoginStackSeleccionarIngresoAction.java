@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoLoginStackSeleccionarIngresoService;
+import service.login.alumno.AlumnoLoginStackSeleccionarIngresoService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

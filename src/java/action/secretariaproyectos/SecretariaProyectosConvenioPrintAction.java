@@ -7,7 +7,7 @@ package action.secretariaproyectos;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.secretariaproyectos.SecretariaProyectosConvenioPrintService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioPrintService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;

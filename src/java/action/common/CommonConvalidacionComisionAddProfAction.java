@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonConvalidacionComisionAddProfService;
+import service.convalidacion.CommonConvalidacionComisionAddProfService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

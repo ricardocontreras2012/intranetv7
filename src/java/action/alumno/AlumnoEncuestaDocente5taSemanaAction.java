@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoEncuestaDocente5taSemanaService;
+import service.encuesta.alumno.AlumnoEncuestaDocente5taSemanaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import session.Manager;
 

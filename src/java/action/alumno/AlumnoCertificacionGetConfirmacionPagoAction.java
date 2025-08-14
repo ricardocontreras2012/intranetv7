@@ -10,7 +10,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoCertificacionGetConfirmacionPagoService;
+import service.certificacion.alumno.AlumnoCertificacionGetConfirmacionPagoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

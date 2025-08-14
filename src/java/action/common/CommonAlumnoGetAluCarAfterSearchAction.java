@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAlumnoGetAluCarAfterSearchService;
+import service.alumno.CommonAlumnoGetAluCarAfterSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

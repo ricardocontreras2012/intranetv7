@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoMisDatosSaveService;
+import service.misdatos.alumno.AlumnoMisDatosSaveService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

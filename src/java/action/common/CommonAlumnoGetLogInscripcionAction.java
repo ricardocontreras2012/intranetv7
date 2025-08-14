@@ -6,7 +6,7 @@
 package action.common;
 
 import domain.model.LogInscripcion;
-import service.common.CommonAlumnoGetLogInscripcionService;
+import service.alumno.CommonAlumnoGetLogInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import java.util.List;
 

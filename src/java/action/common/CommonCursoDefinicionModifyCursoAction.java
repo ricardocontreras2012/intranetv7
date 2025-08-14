@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionModifyCursoService;
+import service.curso.CommonCursoDefinicionModifyCursoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

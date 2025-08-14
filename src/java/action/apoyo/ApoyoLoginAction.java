@@ -5,7 +5,7 @@
  */
 package action.apoyo;
 
-import service.apoyo.ApoyoLoginService;
+import service.login.apoyo.ApoyoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

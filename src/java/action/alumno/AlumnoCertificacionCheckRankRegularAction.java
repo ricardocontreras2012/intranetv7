@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoCertificacionCheckRankRegularService;
+import service.certificacion.alumno.AlumnoCertificacionCheckRankRegularService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

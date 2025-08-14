@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.post.ActionPostValidationSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.common.CommonMensajePrintMessageService;
+import service.mensaje.CommonMensajePrintMessageService;
 
 /**
  * Procesa el action mapeado del request a la URL CommonMensajePrintMessage

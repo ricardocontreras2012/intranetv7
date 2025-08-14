@@ -10,7 +10,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import static infrastructure.util.common.CommonMaterialUtil.getContentDispositionSemAgno;
 import java.io.InputStream;
-import service.common.CommonInscripcionResumenExportService;
+import service.inscripcion.CommonInscripcionResumenExportService;
 
 
 public final class CommonInscripcionResumenExportAction extends ActionCommonSupport {

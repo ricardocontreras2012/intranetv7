@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonHorarioGetHorarioService;
+import service.horario.GetHorarioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonHorarioGetHorarioAction extends ActionCommonSupport {
      */
     @Override
     public String action(){
-        return new CommonHorarioGetHorarioService().service(getGenericSession(), id, getKey());
+        return new GetHorarioService().service(getGenericSession(), id, getKey());
     }
     
     public void setId(String id) {

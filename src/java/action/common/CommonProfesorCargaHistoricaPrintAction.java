@@ -8,7 +8,7 @@ package action.common;
 import domain.model.Curso;
 import java.util.List;
 
-import service.common.CommonProfesorCargaHistoricaPrintService;
+import service.profesor.CommonProfesorCargaHistoricaPrintService;
 import infrastructure.support.action.ActionReportSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoCertificacionCheckNoImpedimientosService;
+import service.certificacion.alumno.AlumnoCertificacionCheckNoImpedimientosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

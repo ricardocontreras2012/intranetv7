@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonInscripcionAddInscripcionService;
+import service.inscripcion.CommonInscripcionAddInscripcionService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoGetCursoAdmInscripcionIzqService;
+import service.curso.CommonCursoGetCursoAdmInscripcionIzqService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

@@ -5,7 +5,7 @@
  */
 package action.coordinadorpractica;
 
-import service.coordinadorpractica.CoordinadorPracticaLoginService;
+import service.login.coordinadorpractica.CoordinadorPracticaLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

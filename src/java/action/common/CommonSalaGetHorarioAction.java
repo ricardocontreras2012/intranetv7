@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonSalaGetHorarioService;
+import service.sala.GetHorarioService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonSalaGetHorarioAction extends ActionValidationAgnoSemSup
      */
     @Override
     public String action() throws Exception {
-        return new CommonSalaGetHorarioService().service(getGenericSession(), getPos(), getAgno(), getSem(), getKey());
+        return new GetHorarioService().service(getGenericSession(), getPos(), getAgno(), getSem(), getKey());
     }
 
     /**

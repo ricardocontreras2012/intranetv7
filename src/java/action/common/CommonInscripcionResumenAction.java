@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
-import service.common.CommonInscripcionResumenService;
+import service.inscripcion.CommonInscripcionResumenService;
 import session.Manager;
 
 /**

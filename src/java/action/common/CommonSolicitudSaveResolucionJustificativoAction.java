@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.ActionParameterAwareSupport;
-import service.common.CommonSolicitudSaveResolucionJustificativoService;
+import service.solicitud.secretariadocente.SecretariaDocenteSaveResolucionService;
 
 /**
  *
@@ -24,6 +24,6 @@ public class CommonSolicitudSaveResolucionJustificativoAction extends ActionPara
      */
     @Override
     public String action() throws Exception {
-        return new CommonSolicitudSaveResolucionJustificativoService().service(getGenericSession(), getMapParameters(), getKey());
+        return new SecretariaDocenteSaveResolucionService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

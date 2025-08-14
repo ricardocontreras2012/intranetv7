@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonInscripcionAdministracionGetNominaDerService;
+import service.inscripcion.CommonInscripcionAdministracionGetNominaDerService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

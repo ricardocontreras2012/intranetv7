@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonActaRectificatoriaGetActaService;
+import service.acta.CommonActaRectificatoriaGetActaService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

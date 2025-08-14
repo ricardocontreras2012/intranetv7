@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonPracticaGetSolicitudesxEstadoService;
+import service.practica.GetSolicitudesxEstadoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,7 +26,7 @@ public class CommonPracticaGetSolicitudesxEstadoAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return new CommonPracticaGetSolicitudesxEstadoService().service(getGenericSession(), getKey(), autoridad, estado);
+        return new GetSolicitudesxEstadoService().service(getGenericSession(), getKey(), autoridad, estado);
     }
 
     public Integer getEstado() {

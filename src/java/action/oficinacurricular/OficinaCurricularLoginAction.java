@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.oficinacurricular.OficinaCurricularLoginService;
+import service.login.oficinacurricular.OficinaCurricularLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

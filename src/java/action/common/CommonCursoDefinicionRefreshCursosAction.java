@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionRefreshCursosService;
+import service.curso.CommonCursoDefinicionRefreshCursosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

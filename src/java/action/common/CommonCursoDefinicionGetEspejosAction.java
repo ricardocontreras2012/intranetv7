@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionGetEspejosService;
+import service.curso.CommonCursoDefinicionGetEspejosService;
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
 
 /**

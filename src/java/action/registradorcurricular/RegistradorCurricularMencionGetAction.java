@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularMencionGetService;
+import service.mantenedor.registradorcurricular.RegistradorCurricularMencionGetService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

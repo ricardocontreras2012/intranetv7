@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularUserExternoGetNominaService;
+import service.mantenedor.registradorcurricular.RegistradorCurricularUserExternoGetNominaService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

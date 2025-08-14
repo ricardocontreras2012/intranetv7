@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoPracticaDeleteFileService;
+import service.practica.alumno.AlumnoPracticaDeleteFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

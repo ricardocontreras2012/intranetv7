@@ -7,7 +7,7 @@ package action.alumno;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.alumno.AlumnoSolicitudRetiroConstanciaService;
+import service.solicitud.situacion.alumno.AlumnoGetConstanciaRetiroService;
 import session.Manager;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -31,7 +31,7 @@ public class AlumnoSolicitudRetiroConstanciaAction extends ActionCommonSupport {
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = new AlumnoSolicitudRetiroConstanciaService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+            ais = new AlumnoGetConstanciaRetiroService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

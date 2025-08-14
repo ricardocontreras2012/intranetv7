@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeProcessListaService;
+import service.mensaje.CommonMensajeProcessListaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

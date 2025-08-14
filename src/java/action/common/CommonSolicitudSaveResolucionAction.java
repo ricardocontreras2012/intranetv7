@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonSolicitudSaveResolucionService;
+import service.solicitud.SaveResolucionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,7 +26,7 @@ public class CommonSolicitudSaveResolucionAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonSolicitudSaveResolucionService().service(getGenericSession(), getKey(), resolucion, respuesta);
+        return new SaveResolucionService().service(getGenericSession(), getKey(), resolucion, respuesta);
     }
 
     /**

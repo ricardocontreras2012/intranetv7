@@ -6,7 +6,7 @@
 package action.profesor;
 
 import java.io.InputStream;
-import service.common.CommonMaterialDownLoadMaterialService;
+import service.material.DownLoadMaterialService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import static infrastructure.util.LogUtil.logExceptionMessage;
@@ -36,7 +36,7 @@ public final class ProfesorMaterialDownLoadReusedMaterialAction extends ActionVa
         String retValue = SUCCESS;
         
         try {
-            ais = new CommonMaterialDownLoadMaterialService().service(getGenericSession(),
+            ais = new DownLoadMaterialService().service(getGenericSession(),
                     getGenericSession().getWorkSession(getKey()).getOtrosTmaterial(), tipo, material, getKey());
         } catch (Exception e) {
             retValue = "exception";

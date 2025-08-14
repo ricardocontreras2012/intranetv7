@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoCertificacionCheckLogroEnTramiteService;
+import service.certificacion.alumno.AlumnoCertificacionCheckLogroEnTramiteService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

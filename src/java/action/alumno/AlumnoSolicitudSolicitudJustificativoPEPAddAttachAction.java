@@ -6,7 +6,7 @@
 package action.alumno;
 
 import java.io.File;
-import service.alumno.AlumnoSolicitudSolicitudJustificativoPEPAddAttachService;
+import service.solicitud.justificativo.alumno.AlumnoAddAttachService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public class AlumnoSolicitudSolicitudJustificativoPEPAddAttachAction extends Act
      */
     @Override
     public String action() throws Exception {                  
-        return new AlumnoSolicitudSolicitudJustificativoPEPAddAttachService().service(this, getGenericSession(), upload,  uploadFileName, getKey());
+        return new AlumnoAddAttachService().service(this, getGenericSession(), upload,  uploadFileName, getKey());
     } 
 
     public File[] getUpload() {

@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoLoginEmailService;
+import service.login.alumno.AlumnoLoginEmailService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

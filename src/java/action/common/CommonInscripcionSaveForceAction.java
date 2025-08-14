@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonInscripcionSaveForceService;
+import service.inscripcion.CommonInscripcionSaveForceService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

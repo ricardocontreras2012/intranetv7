@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import domain.model.ExpedienteLogro;
-import service.titulosygrados.TitulosyGradosNominaRemoveService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosNominaRemoveService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

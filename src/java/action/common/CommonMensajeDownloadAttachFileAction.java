@@ -3,7 +3,7 @@ package action.common;
 
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.InputStream;
-import service.common.CommonMensajeDownloadAttachFileService;
+import service.mensaje.CommonMensajeDownloadAttachFileService;
 import infrastructure.util.ActionInputStreamUtil;
 
 /**

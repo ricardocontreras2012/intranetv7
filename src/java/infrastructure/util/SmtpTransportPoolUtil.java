@@ -12,13 +12,14 @@ package infrastructure.util;
 import javax.mail.*;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SmtpTransportPoolUtil {
 
     private final List<SmtpAccountUtil> accounts = new ArrayList<>();
     private static final int MAX_BORROW_RETRIES = 3;
-    private final List<ArrayBlockingQueue<Transport>> transportPools = new ArrayList<>();
+    private final List<BlockingQueue<Transport>> transportPools = new ArrayList<>();
     private final Session session;
     private final Properties mailProperties;
     private final AtomicInteger nextIndex = new AtomicInteger(0);

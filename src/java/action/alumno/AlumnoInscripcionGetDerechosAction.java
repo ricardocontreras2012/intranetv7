@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoInscripcionGetDerechosService;
+import service.inscripcion.alumno.AlumnoInscripcionGetDerechosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

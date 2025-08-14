@@ -1,7 +1,7 @@
 package action.common;
 
 import java.io.File;
-import service.common.CommonMensajeUploadListaRUNService;
+import service.mensaje.CommonMensajeUploadListaRUNService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**

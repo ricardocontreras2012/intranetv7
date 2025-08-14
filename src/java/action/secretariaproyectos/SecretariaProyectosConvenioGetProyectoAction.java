@@ -6,7 +6,7 @@
 package action.secretariaproyectos;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.secretariaproyectos.SecretariaProyectosConvenioGetProyectoService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioGetProyectoService;
 import session.Manager;
 
 /**

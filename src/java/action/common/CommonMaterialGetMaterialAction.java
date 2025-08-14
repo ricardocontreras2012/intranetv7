@@ -8,7 +8,7 @@
 package action.common;
 
 
-import service.common.CommonMaterialGetMaterialService;
+import service.material.GetMaterialService;
 import infrastructure.support.action.post.ActionPostValidationSupport;
 import static infrastructure.util.LogUtil.logExceptionMessage;
 import static infrastructure.util.common.CommonMaterialUtil.existeMaterial;
@@ -34,7 +34,7 @@ public final class CommonMaterialGetMaterialAction extends ActionPostValidationS
      */
     @Override
     public String action() throws Exception {
-        return new CommonMaterialGetMaterialService().service(getGenericSession(), tipo, material, getKey());
+        return new GetMaterialService().service(getGenericSession(), tipo, material, getKey());
     }
 
     /**

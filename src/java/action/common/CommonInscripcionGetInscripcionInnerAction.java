@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonInscripcionGetInscripcionInnerService;
+import service.inscripcion.CommonInscripcionGetInscripcionInnerService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

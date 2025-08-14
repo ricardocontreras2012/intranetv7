@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeSendFwdMessageService;
+import service.mensaje.CommonMensajeSendFwdMessageService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

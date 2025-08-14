@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoInscripcionGetCursosSwapService;
+import service.inscripcion.alumno.AlumnoInscripcionGetCursosSwapService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import session.Manager;
 

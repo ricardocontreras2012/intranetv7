@@ -6,7 +6,7 @@
 package action.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import service.oficinacurricular.OficinaCurricularActaPrintActasService;
+import service.acta.oficinacurricular.OficinaCurricularActaPrintActasService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 

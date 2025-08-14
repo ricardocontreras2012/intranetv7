@@ -5,7 +5,7 @@
  */
 package action.jefearea;
 
-import service.jefearea.JefeAreaGetCursosService;
+import service.curso.jefearea.JefeAreaGetCursosService;
 import infrastructure.support.action.common.ActionCommonAgnoSemSupport;
 
 /**

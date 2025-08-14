@@ -8,7 +8,7 @@
 package action.common;
 
 
-import service.common.CommonMensajeAddProfesorService;
+import service.mensaje.CommonMensajeAddProfesorService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 

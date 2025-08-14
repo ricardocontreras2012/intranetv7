@@ -5,7 +5,7 @@
  */
 package action.egresado;
 
-import service.egresado.EgresadoLaboralesDeleteLaboralService;
+import service.misdatos.egresado.EgresadoLaboralesDeleteLaboralService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

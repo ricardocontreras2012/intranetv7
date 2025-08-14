@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionSaveEspejoService;
+import service.curso.CommonCursoDefinicionSaveEspejoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

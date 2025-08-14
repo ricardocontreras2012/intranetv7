@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAsistenciaGetAsistenciaService;
+import service.asistencia.CommonAsistenciaGetAsistenciaService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**

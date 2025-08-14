@@ -5,7 +5,6 @@
  */
 package domain.model;
 
-import domain.model.AluCarId;
 import java.io.Serializable;
 
 /**

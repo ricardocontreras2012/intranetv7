@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonSalaReservaGetSalasService;
+import service.reservasala.GetSalasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonSalaReservaGetSalasAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonSalaReservaGetSalasService().service(getGenericSession(), getKey());
+        return new GetSalasService().service(getGenericSession(), getKey());
     }
 }

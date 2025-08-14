@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.common.CommonAlumnoPrintLogInscripcionService;
+import service.alumno.CommonAlumnoPrintLogInscripcionService;
 
 /**
  * Procesa el action mapeado del request a la URL

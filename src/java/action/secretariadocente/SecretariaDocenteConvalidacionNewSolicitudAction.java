@@ -8,7 +8,7 @@
 package action.secretariadocente;
 
 
-import service.secretariadocente.SecretariaDocenteConvalidacionNewSolicitudService;
+import service.convalidacion.secretariadocente.SecretariaDocenteConvalidacionNewSolicitudService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 

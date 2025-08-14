@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonSalaReservaGetHorarioService;
+import service.reservasala.GetHorarioService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonSalaReservaGetHorarioAction extends ActionValidationPos
      */
     @Override
     public String action() throws Exception {
-        return new CommonSalaReservaGetHorarioService().service(getGenericSession(), getPos(), inicio, termino, getKey());
+        return new GetHorarioService().service(getGenericSession(), getPos(), inicio, termino, getKey());
     }
 
     /**

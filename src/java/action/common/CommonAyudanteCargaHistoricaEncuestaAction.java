@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAyudanteGetCargaHistoricaService;
+import service.ayudante.CommonAyudanteGetCargaHistoricaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

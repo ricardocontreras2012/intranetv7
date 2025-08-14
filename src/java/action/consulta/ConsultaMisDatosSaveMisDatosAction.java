@@ -5,7 +5,7 @@
  */
 package action.consulta;
 
-import service.consulta.ConsultaMisDatosSaveMisDatosService;
+import service.misdatos.consulta.ConsultaMisDatosSaveMisDatosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

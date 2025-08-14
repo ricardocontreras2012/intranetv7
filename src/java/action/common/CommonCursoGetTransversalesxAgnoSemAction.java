@@ -6,7 +6,7 @@
 package action.common;
 
 import infrastructure.support.action.ActionValidationAgnoSemSupport;
-import service.common.CommonCursoGetTransversalesxAgnoSemService;
+import service.curso.CommonCursoGetTransversalesxAgnoSemService;
 
 /**
  *

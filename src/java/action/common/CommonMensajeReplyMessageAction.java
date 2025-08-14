@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeReplyMessageService;
+import service.mensaje.CommonMensajeReplyMessageService;
 import infrastructure.support.action.post.ActionPostValidationSupport;
 
 /**

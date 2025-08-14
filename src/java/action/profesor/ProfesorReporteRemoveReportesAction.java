@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorReporteRemoveReportesService;
+import service.reporteclase.profesor.ProfesorRemoveReportesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class ProfesorReporteRemoveReportesAction extends ActionParameterAw
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorReporteRemoveReportesService().service(getGenericSession(), getMapParameters(), getKey());
+        return new ProfesorRemoveReportesService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

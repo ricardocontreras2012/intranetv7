@@ -5,7 +5,7 @@
  */
 package action.secretariaproyectos;
 
-import service.secretariaproyectos.SecretariaProyectosConvenioGetProfesorService;
+import service.convenio.secretariaproyectos.SecretariaProyectosConvenioGetProfesorService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularActaGenerarIntercambioService;
+import service.acta.registradorcurricular.RegistradorCurricularActaGenerarIntercambioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

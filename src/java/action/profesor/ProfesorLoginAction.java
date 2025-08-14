@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorLoginService;
+import service.login.profesor.ProfesorLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

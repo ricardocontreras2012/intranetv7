@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.titulosygrados.TitulosyGradosAlumnoGetLogrosService;
+import service.logro.titulosygrados.TitulosyGradosGetLogrosAlumnoService;
 
 /**
  *
@@ -24,6 +24,6 @@ public class TitulosyGradosAlumnoGetLogrosAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new TitulosyGradosAlumnoGetLogrosService().service(getGenericSession(), getKey());
+        return new TitulosyGradosGetLogrosAlumnoService().service(getGenericSession(), getKey());
     }
 }

@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.oficinacurricular.OficinaCurricularActaConsultarGetActasService;
+import service.acta.oficinacurricular.OficinaCurricularActaConsultarGetActasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAlumnoGetCarreraService;
+import service.alumno.CommonAlumnoGetCarreraService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

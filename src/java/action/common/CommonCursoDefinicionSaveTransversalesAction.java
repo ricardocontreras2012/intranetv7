@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionSaveTransversalesService;
+import service.curso.CommonCursoDefinicionSaveTransversalesService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

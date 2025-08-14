@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionGetMallaService;
+import service.curso.CommonCursoDefinicionGetMallaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

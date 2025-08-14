@@ -5,7 +5,7 @@
  */
 package action.postgrado;
 
-import service.postgrado.DirectorPostgradoLoginService;
+import service.login.postgrado.DirectorPostgradoLoginService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

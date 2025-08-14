@@ -6,7 +6,7 @@
 package action.alumno;
 
 import java.io.File;
-import service.alumno.AlumnoPracticaAddAttachFileService;
+import service.practica.alumno.AlumnoPracticaAddAttachFileService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

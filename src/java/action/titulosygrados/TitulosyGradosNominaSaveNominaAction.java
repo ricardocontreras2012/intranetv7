@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import domain.model.ExpedienteLogro;
-import service.titulosygrados.TitulosyGradosNominaSaveNominaService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosNominaSaveNominaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

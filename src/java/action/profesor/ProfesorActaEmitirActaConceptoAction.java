@@ -5,7 +5,7 @@
  */
 package action.profesor;
 
-import service.profesor.ProfesorActaEmitirActaConceptoService;
+import service.acta.profesor.ProfesorActaEmitirActaConceptoService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

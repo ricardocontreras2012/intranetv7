@@ -6,7 +6,7 @@
 package action.oficinacurricular;
 
 import java.io.File;
-import service.oficinacurricular.OficinaCurricularSolicitudAddDocumentoService;
+import service.solicitud.oficinacurricular.OficinaCurricularAddDocumentoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -34,7 +34,7 @@ public final class OficinaCurricularSolicitudAddDocumentoAction extends ActionCo
      */
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularSolicitudAddDocumentoService().service(this, getGenericSession(), tipoDocumento, upload,
+        return new OficinaCurricularAddDocumentoService().service(this, getGenericSession(), tipoDocumento, upload,
                 uploadFileName, caption, getKey());
     }
 

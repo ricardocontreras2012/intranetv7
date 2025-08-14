@@ -7,7 +7,7 @@ package action.alumno;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.alumno.AlumnoCertificacionEmitirInformeCalificacionesService;
+import service.certificacion.alumno.AlumnoCertificacionEmitirInformeCalificacionesService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 

@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonActaComplementariaGetCursosService;
+import service.acta.CommonActaComplementariaGetCursosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

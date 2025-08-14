@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularParametrosxMencionGetService;
+import service.parametromencion.registradorcurricular.RegistradorCurricularParametrosxMencionGetService;
 import session.Manager;
 import infrastructure.support.action.ActionValidationPosSupport;
 

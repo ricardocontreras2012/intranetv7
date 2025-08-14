@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import service.common.CommonEncuestaPrintGroupCursosService;
+import service.encuesta.CommonEncuestaPrintGroupCursosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

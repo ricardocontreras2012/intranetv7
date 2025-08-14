@@ -6,7 +6,7 @@
 package action.alumno;
 
 import infrastructure.support.action.ActionParameterAwareSupport;
-import service.alumno.AlumnoEncuestaAyudanteService;
+import service.encuesta.alumno.AlumnoEncuestaAyudanteService;
 
 /**
  * Procesa el action mapeado del request a la URL AlumnoEncuesta

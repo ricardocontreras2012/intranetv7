@@ -8,7 +8,7 @@
 package action.common;
 
 
-import service.common.CommonMensajeEnableFwdService;
+import service.mensaje.CommonMensajeEnableFwdService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 

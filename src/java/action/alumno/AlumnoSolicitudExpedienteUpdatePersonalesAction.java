@@ -6,7 +6,7 @@
 package action.alumno;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.alumno.AlumnoSolicitudExpedienteUpdatePersonalesService;
+import service.solicitud.expediente.alumno.AlumnoUpdatePersonalesService;
 
 /**
  *
@@ -27,7 +27,7 @@ public class AlumnoSolicitudExpedienteUpdatePersonalesAction extends ActionCommo
     @Override
     public String action() {
         try {
-            new AlumnoSolicitudExpedienteUpdatePersonalesService().service(
+            new AlumnoUpdatePersonalesService().service(
                     this, getGenericSession(), this.email, this.emailLaboral,
                     this.direccion, this.comuna, this.fono, this.estadoCivil
             );

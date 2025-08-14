@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonMensajeReceiveListaService;
+import service.mensaje.CommonMensajeReceiveListaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

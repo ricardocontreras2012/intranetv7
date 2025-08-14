@@ -6,7 +6,7 @@
 package action.common;
 
 
-import service.common.CommonInscripcionGetDerechosService;
+import service.inscripcion.CommonInscripcionGetDerechosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

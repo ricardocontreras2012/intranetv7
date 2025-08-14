@@ -107,8 +107,8 @@ public class FormatUtil {
     /**
      * Método para obtener el nombre formateado para la búsqueda. Este método
      * convierte el nombre a mayúsculas, y asegura que solo se mantengan letras
-     * y guiones. Permite caracteres especiales de varios idiomas
-     * como español, francés, alemán, portugués, etc.
+     * y guiones. Permite caracteres especiales de varios idiomas como español,
+     * francés, alemán, portugués, etc.
      *
      * @param nombre el nombre que se desea formatear.
      * @return el nombre formateado para la búsqueda.
@@ -154,38 +154,27 @@ public class FormatUtil {
     public static String initCapital(String inputStr) {
         return StringUtils.capitalize(StringUtils.lowerCase(inputStr));
     }
-    
-    public static String initCapAll(String inStr)
-    {
-     /*return  Arrays.stream(inStr.split(" ")) // Divide la cadena por espacios
-                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase()) // Capitaliza la primera letra de cada palabra
-                .collect(Collectors.joining(" "));*/
-        List<String> EXCLUDE_WORDS = Arrays.asList(
-            "la", "el", "los", "las", "de", "en", "a", "por", "con", "para", "sobre", "entre", "desde", "hasta", "sin", "durante", "antes", "bajo"
+
+    public static String initCapAll(String input) {
+        List<String> excludeWords = Arrays.asList(
+                "la", "el", "los", "las", "de", "en", "a", "por", "con",
+                "para", "sobre", "entre", "desde", "hasta", "sin", "durante", "antes", "bajo"
         );
 
-        String[] words = inStr.split(" ");  // Dividimos la cadena en palabras
+        String[] words = input.trim().split("\\s+");
 
-        // Usamos IntStream para recorrer el arreglo de palabras con índice
         return IntStream.range(0, words.length)
                 .mapToObj(index -> {
-                    String word = words[index];
-                    // Si es la primera palabra, siempre la capitalizamos
-                    if (index == 0) {
-                        return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                    String word = words[index].toLowerCase();
+
+                    if (index == 0 || !excludeWords.contains(word)) {
+                        return StringUtils.capitalize(word);
                     } else {
-                        // Si la palabra está en la lista de exclusión, la dejamos en minúsculas
-                        if (EXCLUDE_WORDS.contains(word.toLowerCase())) {
-                            return word.toLowerCase();
-                        } else {
-                            // Capitalizamos la primera letra de las demás palabras
-                            return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
-                        }
+                        return word;
                     }
                 })
-                .collect(Collectors.joining(" "));  // Unimos las palabras con un espacio entre ellas
+                .collect(Collectors.joining(" "));
     }
-        
 
     /**
      * Obtiene el dígito verificador de un RUT.
@@ -252,13 +241,13 @@ public class FormatUtil {
         switch (color.length()) {
             case 6:  // RGB: #RRGGBB
                 return new Color(
-                        Integer.valueOf(color.substring(0, 2), 16), // Rojo
-                        Integer.valueOf(color.substring(2, 4), 16), // Verde
-                        Integer.valueOf(color.substring(4, 6), 16) // Azul
+                        Integer.parseInt(color.substring(0, 2), 16), // Rojo
+                        Integer.parseInt(color.substring(2, 4), 16), // Verde
+                        Integer.parseInt(color.substring(4, 6), 16) // Azul
                 );
 
             case 8:  // RGBA: #AARRGGBB
-                int rgba = Integer.valueOf(color, 16);
+                int rgba = Integer.parseInt(color, 16);
                 int alpha = (rgba >> 24) & 0xFF;  // Extraemos el componente alfa
                 int red = (rgba >> 16) & 0xFF;    // Extraemos el componente rojo
                 int green = (rgba >> 8) & 0xFF;   // Extraemos el componente verde
@@ -344,14 +333,14 @@ public class FormatUtil {
                 .map(s -> s.toUpperCase(ContextUtil.getLocale())) // Convierte el String a mayúsculas usando la configuración regional
                 .orElse("");  // Retorna una cadena vacía si el input es null
     }
-    
+
     /* Convierte un string a un formato optimo para ser usado como nombre de archivo 
     *  
-    */
+     */
     public static String sanitizeFileName(String input) {
         // 1. Normalizar acentos
         String normalized = Normalizer.normalize(input, Normalizer.Form.NFD)
-            .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); // eliminar diacríticos
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", ""); // eliminar diacríticos
 
         // 2. Reemplazar ñ, Ñ manualmente
         normalized = normalized.replace("ñ", "n").replace("Ñ", "N");

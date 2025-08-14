@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonCursoDefinicionRemoveEspejosService;
+import service.curso.CommonCursoDefinicionRemoveEspejosService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**

@@ -9,7 +9,7 @@ import domain.model.Mensaje;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
-import service.common.CommonMensajeGetSentDataTableService;
+import service.mensaje.CommonMensajeGetSentDataTableService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

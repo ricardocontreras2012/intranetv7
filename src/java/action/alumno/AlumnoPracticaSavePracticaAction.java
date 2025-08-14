@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.alumno.AlumnoPracticaSavePracticaService;
+import service.practica.alumno.AlumnoPracticaSavePracticaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.common.CommonHorarioPrintService;
+import service.horario.PrintHorarioService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -31,7 +31,7 @@ public class CommonHorarioPrintAction extends ActionCommonSupport {
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = new CommonHorarioPrintService().service(getGenericSession(), id, getKey());
+            ais = new PrintHorarioService().service(getGenericSession(), id, getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

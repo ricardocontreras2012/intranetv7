@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAlumnoGetMatriculasService;
+import service.alumno.CommonAlumnoGetMatriculasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

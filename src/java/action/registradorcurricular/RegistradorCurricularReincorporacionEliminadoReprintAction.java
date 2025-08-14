@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.registradorcurricular.RegistradorCurricularReincorporacionEliminadoReprintService;
+import service.reincorporacion.registradorcurricular.RegistradorCurricularReincorporacionEliminadoReprintService;
 import infrastructure.support.action.ActionReportSupport;
 
 /**

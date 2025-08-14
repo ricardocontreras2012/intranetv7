@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.common.CommonAyudanteGetEncuestaService;
+import service.ayudante.CommonAyudanteGetEncuestaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

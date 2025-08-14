@@ -6,7 +6,7 @@
 package action.common;
 
 import java.io.InputStream;
-import service.common.CommonCursoGetFotoAlumnoService;
+import service.curso.CommonCursoGetFotoAlumnoService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
