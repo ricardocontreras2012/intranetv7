@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.acta.oficinacurricular.OficinaCurricularActaRecepcionarGetActasService;
+import service.acta.oficinacurricular.OficinaCurricularRecepcionarGetActasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,6 +28,6 @@ public final class OficinaCurricularActaRecepcionarGetActasAction extends Action
      */
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularActaRecepcionarGetActasService().service(getGenericSession(), getKey());
+        return new OficinaCurricularRecepcionarGetActasService().service(getGenericSession(), getKey());
     }
 }

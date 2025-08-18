@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.asistencia.CommonAsistenciaExportPlanillaService;
+import service.asistencia.ExportPlanillaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -32,7 +32,7 @@ public final class CommonAsistenciaExportPlanillaAction extends ActionCommonSupp
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = new CommonAsistenciaExportPlanillaService().service(getGenericSession(), getKey());
+            ais = new ExportPlanillaService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

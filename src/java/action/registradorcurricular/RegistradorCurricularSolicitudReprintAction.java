@@ -5,7 +5,7 @@
  */
 package action.registradorcurricular;
 
-import service.reincorporacion.registradorcurricular.RegistradorCurricularSolicitudReprintService;
+import service.reincorporacion.registradorcurricular.RegistradorCurricularReprintSolicitudService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,7 +24,7 @@ public class RegistradorCurricularSolicitudReprintAction  extends ActionCommonSu
      */
     @Override
     public String action() throws Exception {
-        return new RegistradorCurricularSolicitudReprintService().service(getGenericSession(), getKey(), folio);
+        return new RegistradorCurricularReprintSolicitudService().service(getGenericSession(), getKey(), folio);
     }
 
     public Integer getFolio() {

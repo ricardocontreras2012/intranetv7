@@ -32,16 +32,16 @@ public final class ProfesorEvaluacionGetAlumnoEvaluacionService {
      */
     public String service(GenericSession genericSession, Integer pos, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        EvaluacionAlumnoRepository evaluacionAlumnoRepository
+        EvaluacionAlumnoRepository evaluacionAlumnoRepo
                 = ContextUtil.getDAO().getEvaluacionAlumnoRepository(ActionUtil.getDBUser());
         Evaluacion evaluacion = ws.getEvaluacionList().get(pos);       
         
         HibernateUtil.beginTransaction(ActionUtil.getDBUser());
-        evaluacionAlumnoRepository.sincronizaCurso(ws.getCurso().getId());
+        evaluacionAlumnoRepo.sincronizaCurso(ws.getCurso().getId());
         HibernateUtil.commitTransaction();
 
         ws.setEvaluacion(evaluacion);
-        ws.setEvaluacionAlumno(evaluacionAlumnoRepository.find(evaluacion));
+        ws.setEvaluacionAlumno(evaluacionAlumnoRepo.find(evaluacion));
 
         return SUCCESS;
     }

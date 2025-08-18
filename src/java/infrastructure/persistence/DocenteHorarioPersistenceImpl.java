@@ -55,8 +55,9 @@ public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<Docente
         query.setParameter(6, id.getCurComp(), StandardBasicTypes.STRING);
         query.setParameter(7, rut, StandardBasicTypes.INTEGER);
         query.setParameter(8, tipo, StandardBasicTypes.STRING);
-        query.setParameter(9, "".equals(horario) ? "NULL" : horario.substring(0, 1), StandardBasicTypes.STRING);
-        query.setParameter(10, "".equals(horario) ? Integer.valueOf(-1) : Integer.valueOf(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
+        query.setParameter(9, "".equals(horario) ? "NULL" : horario.substring(0, 1), StandardBasicTypes.STRING);        
+        query.setParameter(10, "".equals(horario) ? -1 : Integer.parseInt(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
+
         query.executeUpdate();
     }
 
@@ -74,7 +75,7 @@ public final class DocenteHorarioPersistenceImpl extends CrudAbstractDAO<Docente
         query.setParameter(7, rut, StandardBasicTypes.INTEGER);
         query.setParameter(8, tipo, StandardBasicTypes.STRING);
         query.setParameter(9, "".equals(horario) ? "NULL" : horario.substring(0, 1), StandardBasicTypes.STRING);
-        query.setParameter(10, "".equals(horario) ? Integer.valueOf(-1) : Integer.valueOf(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
+        query.setParameter(10,"".equals(horario) ? -1 : Integer.parseInt(horario.substring(1, 2)), StandardBasicTypes.INTEGER);
 
         query.executeUpdate();
     }

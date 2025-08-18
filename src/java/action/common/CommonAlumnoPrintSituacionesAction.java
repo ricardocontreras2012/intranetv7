@@ -9,7 +9,7 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionInputStreamUtil;
 import java.io.InputStream;
-import service.alumno.CommonAlumnoPrintSituacionesService;
+import service.alumno.PrintSituacionesService;
 
 /**
  * Procesa el action mapeado del request a la URL CommonAlumnoPrintSituaciones
@@ -30,7 +30,7 @@ public final class CommonAlumnoPrintSituacionesAction extends ActionCommonSuppor
     public String action() {
         String retValue = SUCCESS;
         try {
-            ais = new CommonAlumnoPrintSituacionesService().service(getGenericSession(), getKey());
+            ais = new PrintSituacionesService().service(getGenericSession(), getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.generated"));

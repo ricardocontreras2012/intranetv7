@@ -54,7 +54,7 @@
     </package>
 
     <package name="intranetDecanoActions" extends="intranetDecanoInterceptors">
-        <action name="DecanoLogin" class="action.decano.DecanoLoginAction" method="execute">
+        <action name="DecanoLogin" class="action.login.decano.DecanoLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

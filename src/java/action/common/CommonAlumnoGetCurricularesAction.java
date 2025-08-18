@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.alumno.CommonAlumnoGetCurricularesService;
+import service.alumno.GetCurricularesService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,6 +25,6 @@ public final class CommonAlumnoGetCurricularesAction extends ActionCommonSupport
      */
     @Override
     public String action(){
-        return new CommonAlumnoGetCurricularesService().service(getGenericSession(), getKey());
+        return new GetCurricularesService().service(getGenericSession(), getKey());
     }
 }

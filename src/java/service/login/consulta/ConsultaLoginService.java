@@ -42,17 +42,17 @@ public final class ConsultaLoginService {
         String retValue = SUCCESS;
 
         if (sesion != null && key != null) {
-            ExternoRepository externoRepository
+            ExternoRepository externoRepo
                     = ContextUtil.getDAO().getExternoRepository(ActionUtil.getDBUser());
-            Externo externo = externoRepository.find(rut, passwd);
+            Externo externo = externoRepo.find(rut, passwd);
 
             if (externo != null) {
                 GenericSession genericSession = new GenericSession(ActionUtil.getDBUser(), rut, passwd, 0);
                 WorkSession ws = new WorkSession(ActionUtil.getDBUser());
                 genericSession.setLastLogin(externo.getExtLastLogin());
-                genericSession.setSessionMap(new HashMap<String, WorkSession>());
+                genericSession.setSessionMap(new HashMap<>());
                 genericSession.getSessionMap().put(key, ws);
-                externoRepository.setLastLogin(rut);
+                externoRepo.setLastLogin(rut);
                 getComplemento(genericSession, externo);
 
                 getRequest().getSession().setMaxInactiveInterval(1800);

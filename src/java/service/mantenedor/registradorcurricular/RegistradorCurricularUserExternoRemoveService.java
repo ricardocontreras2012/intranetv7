@@ -35,20 +35,20 @@ public final class RegistradorCurricularUserExternoRemoveService {
      */
     public String service(GenericSession genericSession, RegistradorSession registradorSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
-        ExternoRepository externoRepository
+        ExternoRepository externoRepo
                 = ContextUtil.getDAO().getExternoRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
 
         for (int i = 0; i < ws.getSentMsgs().size(); i++) {
             if (parameters.get("ck_" + i) != null) {
-                externoRepository.makeTransient(
+                externoRepo.makeTransient(
                         registradorSession.getExternoList().get(i));
             }
         }
 
         commitTransaction();
-        registradorSession.setExternoList(externoRepository.find());
+        registradorSession.setExternoList(externoRepo.find());
 
         return SUCCESS;
     }

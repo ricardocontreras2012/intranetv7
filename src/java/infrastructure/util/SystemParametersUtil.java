@@ -46,7 +46,7 @@ public class SystemParametersUtil {
      * Constantes que definen tipos de ingreso de usuarios.
      */
     public static final Integer INGRESO_REGULAR = 0;
-    public static final Integer INGRESO_CLAVE_UNICA = 1;
+    public static final Integer LOGIN_CLAVE_UNICA = 1;
 
     /*
      * Logos USACH

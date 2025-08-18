@@ -34,7 +34,7 @@ public class EgresadoEstudiosNewEstudioService {
          * Integer agnoMat;
          * ParametroRepository parametroRepository
          *           = ContextUtil.getDAO().getParametroRepository(AppStaticsUtil.USER_TYPE_COMMON);
-         * agnoMat = Integer.valueOf(parametroRepository.find("agno_mat").getParValor());
+         * agnoMat = Integer.valueOf(parametroRepo.find("agno_mat").getParValor());
          * ws.getFechaActual();
          */
         return SUCCESS;

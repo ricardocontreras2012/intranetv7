@@ -9,7 +9,6 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.SolicitudAttach;
 import java.util.List;
 import java.util.Map;
-import domain.repository.SolicitudAttachRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
@@ -38,9 +37,7 @@ public final class OficinaCurricularRemoveDocumentoService {
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
 
-        if ("OC".equals(genericSession.getUserType()) || "RC".equals(genericSession.getUserType())) {
-            SolicitudAttachRepository solicitudDocumentoRepository
-                    = ContextUtil.getDAO().getSolicitudAttachRepository(user);
+        if ("OC".equals(genericSession.getUserType()) || "RC".equals(genericSession.getUserType())) {            
             List<SolicitudAttach> solicitudDocumentoList = ws.getSolicitud().getSolicitudAttachList();
 
             beginTransaction(user);
@@ -49,7 +46,7 @@ public final class OficinaCurricularRemoveDocumentoService {
                 if (parameters.get("ck_" + i) != null) {
                     SolicitudAttach attach = solicitudDocumentoList.get(i);                    
                     LogUtil.setLog(genericSession.getRut(), attach.getSolaAttachFile());
-                    solicitudDocumentoRepository.makeTransient(attach);
+                    ContextUtil.getDAO().getSolicitudAttachRepository(user).makeTransient(attach);
                 }
             }
 

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.asistencia.CommonAsistenciaGetAsistenciaService;
+import service.asistencia.GetAsistenciaService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
 /**
@@ -26,7 +26,7 @@ public final class CommonAsistenciaGetAsistenciaAction extends ActionValidationP
      */
     @Override
     public String action() throws Exception {
-        return new CommonAsistenciaGetAsistenciaService().service(getGenericSession(), getKey(), getPos());
+        return new GetAsistenciaService().service(getGenericSession(), getKey(), getPos());
     }
     
     @Override

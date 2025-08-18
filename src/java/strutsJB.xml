@@ -55,7 +55,7 @@
     </package>
 
     <package name="intranetJefeBibliotecaActions" extends="intranetJefeBibliotecaInterceptors">
-        <action name="JefeBibliotecaLogin" class="action.jefebiblioteca.JefeBibliotecaLoginAction" method="execute">
+        <action name="JefeBibliotecaLogin" class="action.login.jefebiblioteca.JefeBibliotecaLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

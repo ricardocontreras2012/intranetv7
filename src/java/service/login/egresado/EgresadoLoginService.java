@@ -48,9 +48,9 @@ public final class EgresadoLoginService {
         String user = ActionUtil.getDBUser();
 
         if (!sesion.isEmpty()) {
-            AlumnoRepository alumnoRepository
+            AlumnoRepository alumnoRepo
                     = ContextUtil.getDAO().getAlumnoRepository(user);
-            Alumno alumno = alumnoRepository.find(rut, password);
+            Alumno alumno = alumnoRepo.find(rut, password);
 
             if (alumno != null) {
                 GenericSession genericSession = new GenericSession(user, rut, password, 0);
@@ -61,7 +61,7 @@ public final class EgresadoLoginService {
 
                 EgresadoSession egresadoSession = new EgresadoSession();
                 egresadoSession.setAlumno(alumno);
-                alumnoRepository.setLastLogin(rut);
+                alumnoRepo.setLastLogin(rut);
 
                 List<AluCar> aluCarList = ContextUtil.getDAO().getAluCarRepository(user).findEgresado(rut);
 

@@ -6,7 +6,6 @@
 package service.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import domain.repository.EmpleadorRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ContextUtil;
@@ -28,11 +27,8 @@ public class CommonEmpleadorGetEmpleadoresxNombreService {
     public String service(GenericSession genericSession, String key, String nombre) {
 //        genericSession.getWorkSession(key).setEmpleador(
 //                ContextUtil.getDAO().getEmpleadorRepository(AppStaticsUtil.USER_TYPE_COMMON).find(rut));
-        WorkSession ws = genericSession.getWorkSession(key);
-        EmpleadorRepository empleadorRepository
-                = ContextUtil.getDAO().getEmpleadorRepository("EG");
-
-        ws.setEmpleadorList(empleadorRepository.find(nombre));
+        WorkSession ws = genericSession.getWorkSession(key);        
+        ws.setEmpleadorList(ContextUtil.getDAO().getEmpleadorRepository("EG").find(nombre));
 
         return SUCCESS;
     }

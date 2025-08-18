@@ -60,15 +60,6 @@ public class TrequisitoLogroAdicional implements Serializable {
     public void setTrlaDes(String trlaDes) {
         this.trlaDes = trlaDes;
     }    
-
-    /*
-     public List<CalificacionRequisitoAdicionalLogro> getCalificacionRequisitoAdicionalLogroList() {
-     this.calificacionRequisitoAdicionalLogroList = new ArrayList<CalificacionRequisitoAdicionalLogro>(calificacionLogroAdicionals);
-     Collections.sort(this.calificacionRequisitoAdicionalLogroList, new CalificacionRequisitoAdicionalLogroComparable());
-
-     return this.calificacionRequisitoAdicionalLogroList;
-     }
-     */
     /**
      * Method description
      *

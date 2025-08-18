@@ -76,7 +76,7 @@ public final class ProfesorReuseMaterialesService {
      * @param materialRepository La persistencia para almacenar el material.
      */
     private void doReuse(MaterialApoyo materialBase, String userTypeShort, Curso curso,
-            MaterialApoyoRepository materialRepository) {
+            MaterialApoyoRepository materialRepo) {
         Integer folio = CommonSequenceUtil.getDocumentSeq();
         MaterialApoyo material = new MaterialApoyo();
 
@@ -92,6 +92,6 @@ public final class ProfesorReuseMaterialesService {
         material.setMatFechaHabilitacion(getSysdate());
 
         // Guarda el nuevo material reutilizado
-        materialRepository.makePersistent(material);
+        materialRepo.makePersistent(material);
     }
 }

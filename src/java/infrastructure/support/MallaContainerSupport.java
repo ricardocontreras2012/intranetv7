@@ -20,7 +20,7 @@ public final class MallaContainerSupport implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private List<Calificacion> calificacion;
-    private List<CalificacionLogroAdicional> calificacionRequisitoAdicionalLogroList;
+    private List<CalificacionLogroAdicional> calificacionLogroAdicionalList;
     private List<List<MallaNodoSupport>> malla;
 
     /**
@@ -64,17 +64,17 @@ public final class MallaContainerSupport implements Serializable {
      *
      * @return
      */
-    public List<CalificacionLogroAdicional> getCalificacionRequisitoAdicionalLogroList() {
-        return calificacionRequisitoAdicionalLogroList;
+    public List<CalificacionLogroAdicional> getcalificacionLogroAdicionalList() {
+        return calificacionLogroAdicionalList;
     }
 
     /**
      * Method description
      *
-     * @param calificacionRequisitoAdicionalLogroList
+     * @param calificacionLogroAdicionalList
      *
      */
-    public void setCalificacionRequisitoAdicionalLogroList(List<CalificacionLogroAdicional> calificacionRequisitoAdicionalLogroList) {
-        this.calificacionRequisitoAdicionalLogroList = calificacionRequisitoAdicionalLogroList;
+    public void setcalificacionLogroAdicionalList(List<CalificacionLogroAdicional> calificacionLogroAdicionalList) {
+        this.calificacionLogroAdicionalList = calificacionLogroAdicionalList;
     }
 }

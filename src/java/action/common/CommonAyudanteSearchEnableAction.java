@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.ayudante.CommonAyudanteSearchEnableService;
+import service.ayudante.EnableSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -33,7 +33,7 @@ public final class CommonAyudanteSearchEnableAction extends ActionCommonSupport 
 
         setKey(getKeySession());
 
-        return new CommonAyudanteSearchEnableService().service(getGenericSession(), actionCall, typeSearch, getKey(),
+        return new EnableSearchService().service(getGenericSession(), actionCall, typeSearch, getKey(),
                 keyParent);
     }
 

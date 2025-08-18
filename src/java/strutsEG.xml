@@ -80,11 +80,11 @@
             <result name="success">/jsp/users/egresado/id/egresadoIdHomePage.jsp
             </result>
         </action>
-        <action name="EgresadoGetMisDatos" class="action.alumno.AlumnoMisDatosGetMisDatosAction" method="execute">
+        <action name="EgresadoGetMisDatos" class="action.misdatos.alumno.AlumnoGetMisDatosAction" method="execute">
             <result name="success">/jsp/users/egresado/id/egresadoIdMisDatos.jsp
             </result>
         </action>
-        <action name="EgresadoMisDatosSave" class="action.alumno.AlumnoMisDatosSaveAction" method="execute">
+        <action name="EgresadoMisDatosSave" class="action.misdatos.alumno.AlumnoSaveMisDatosAction" method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/egresado/id/egresadoIdMisDatos.jsp</result>
             <result name="error">/jsp/users/egresado/id/egresadoIdMisDatos.jsp</result>

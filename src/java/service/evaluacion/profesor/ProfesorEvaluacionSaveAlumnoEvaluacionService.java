@@ -40,7 +40,7 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         String dbUser = ActionUtil.getDBUser();
-        EvaluacionRepository evaluacionRepository = ContextUtil.getDAO().getEvaluacionRepository(dbUser);
+        EvaluacionRepository evaluacionRepo = ContextUtil.getDAO().getEvaluacionRepository(dbUser);
 
         List<EvaluacionAlumno> alumnos = ws.getEvaluacionAlumno();
         AtomicBoolean hayNotas = new AtomicBoolean(false);
@@ -59,11 +59,11 @@ public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
 
         if (hayNotas.get()) {
             Evaluacion evaluacion = ws.getEvaluacion();
-            evaluacionRepository.setStatusConNota(evaluacion);
+            evaluacionRepo.setStatusConNota(evaluacion);
 
             if (!"CN".equals(evaluacion.getEvalStatus())) {
                 evaluacion.setEvalStatus("CN");
-                evaluacionRepository.makePersistent(evaluacion);
+                evaluacionRepo.makePersistent(evaluacion);
             }
         }
 

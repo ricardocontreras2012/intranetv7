@@ -64,7 +64,7 @@
                          class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="SecretariaDocenteLogin" class="action.secretariadocente.SecretariaDocenteLoginAction"
+        <action name="SecretariaDocenteLogin" class="action.login.secretariadocente.SecretariaDocenteLoginAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -82,7 +82,7 @@
 
 
         <action name="SecretariaDocenteConvalidacionGenerarActa"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionGenerarActaAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteGenerarActaAction" method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="noMatriculado">/jsp/message/messageActionError.jsp</result>
         </action>
@@ -95,13 +95,31 @@
         </action>
 
         <action name="SecretariaDocenteConvalidacionGetExcel"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionGetExcelAction">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteGetExcelAction">
             <result name="success">
                 /jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp
             </result>
         </action>
+        
+         <action name="CommonConvalidacionComisionEnable" class="action.convalidacion.secretariadocente.SecretariaDocenteEnableComisionAction"
+                method="execute">
+            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
+            </result>
+        </action>
 
-        <!--action name="SecretariaDocenteConvalidacionGetExcel" class="action.secretariadocente.SecretariaDocenteConvalidacionGetExcelAction"
+        <action name="CommonConvalidacionComisionAddProf" class="action.convalidacion.secretariadocente.SecretariaDocenteAddProfComisionAction"
+                method="execute">
+            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
+            </result>
+        </action>
+
+        <action name="CommonConvalidacionComisionSave" class="action.convalidacion.secretariadocente.SecretariaDocenteSaveComisionAction"
+                method="execute">
+            <result name="success">/jsp/message/messageSuccess.jsp
+            </result>
+        </action>
+
+        <!--action name="SecretariaDocenteConvalidacionGetExcel" class="action.convalidacion.secretariadocente.SecretariaDocenteGetExcelAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -121,28 +139,28 @@
         </action>
 
         <action name="SecretariaDocenteConvalidacionGetSolicitudes"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudesAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteGetSolicitudesAction" method="execute">
             <result name="success">
                 /jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitudes.jsp
             </result>
         </action>
 
         <action name="SecretariaDocenteConvalidacionGetSolicitud"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionGetSolicitudAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteGetSolicitudAction" method="execute">
             <result name="success">
                 /jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp
             </result>
         </action>
 
         <action name="SecretariaDocenteConvalidacionNewSolicitud"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionNewSolicitudAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteNewSolicitudAction" method="execute">
             <result name="success">
                 /jsp/users/secretariaDocente/convalidacion/secretariaDocenteConvalidacionSolicitud.jsp
             </result>
         </action>
 
         <action name="SecretariaDocenteConvalidacionSaveSolicitud"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionSaveSolicitudAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteSaveSolicitudAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">SecretariaDocenteConvalidacionGetSolicitudes</param>
                 <param name="key">${key}</param>
@@ -150,7 +168,7 @@
         </action>
 
         <action name="SecretariaDocenteConvalidacionImprimirInforme"
-                class="action.secretariadocente.SecretariaDocenteConvalidacionImprimirInformeAction" method="execute">
+                class="action.convalidacion.secretariadocente.SecretariaDocenteImprimirInformeAction" method="execute">
             <result type="myStream"/>
         </action>
 

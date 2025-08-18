@@ -65,7 +65,7 @@
                          class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="AreaApoyoLogin" class="action.areaapoyo.AreaApoyoLoginAction" method="execute">
+        <action name="AreaApoyoLogin" class="action.login.areaapoyo.AreaApoyoLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

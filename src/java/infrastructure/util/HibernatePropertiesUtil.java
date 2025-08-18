@@ -6,9 +6,9 @@
 package infrastructure.util;
 
 import java.util.Properties;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_PASSWORD;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_URL;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_USERNAME;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_PASSWORD;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_URL;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_USERNAME;
 import static infrastructure.util.PropertyLoaderUtil.loadProperties;
 
 /**
@@ -31,9 +31,9 @@ class HibernatePropertiesUtil {
 
         JasyptDecrypterUtil du = new JasyptDecrypterUtil();
 
-        url = du.decrypt(properties.getProperty(HIBERNATE_KEY_CONNECTION_URL));
-        username = du.decrypt(properties.getProperty(HIBERNATE_KEY_CONNECTION_USERNAME));
-        password = du.decrypt(properties.getProperty(HIBERNATE_KEY_CONNECTION_PASSWORD));
+        url = du.decrypt(properties.getProperty(HIBERNATE_URL));
+        username = du.decrypt(properties.getProperty(HIBERNATE_USERNAME));
+        password = du.decrypt(properties.getProperty(HIBERNATE_PASSWORD));
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.asistencia.CommonAsistenciaRemoveAsistenciaService;
+import service.asistencia.RemoveAsistenciaService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class CommonAsistenciaRemoveAsistenciaAction extends ActionParamete
      */
     @Override
     public String action() throws Exception {
-        return new CommonAsistenciaRemoveAsistenciaService().service(getGenericSession(), getMapParameters(), getKey());
+        return new RemoveAsistenciaService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.alumno.CommonAlumnoProgramaEstudioPrintProgramasService;
+import service.alumno.PrintProgramasEstudioService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import infrastructure.util.ActionInputStreamUtil;
 
@@ -30,7 +30,7 @@ public class CommonAlumnoProgramaEstudioPrintProgramasAction extends ActionParam
     public String action() throws Exception {
         String retValue = SUCCESS;
         try {
-            ais = new CommonAlumnoProgramaEstudioPrintProgramasService().service(this, getGenericSession(), getMapParameters(), getKey());
+            ais = new PrintProgramasEstudioService().service(this, getGenericSession(), getMapParameters(), getKey());
 
         } catch (Exception e) {
             retValue = "exception";

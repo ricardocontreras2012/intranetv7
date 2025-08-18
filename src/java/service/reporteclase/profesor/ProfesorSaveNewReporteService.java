@@ -96,25 +96,25 @@ public final class ProfesorSaveNewReporteService {
             reporte.setRclaAttach(nombre);
         }
 
-        ReporteClaseRepository reporteRepository
+        ReporteClaseRepository reporteRepo
                 = ContextUtil.getDAO().getReporteClaseRepository(ActionUtil.getDBUser());
         String retValue = SUCCESS;
 
-        if (reporteRepository.exists(reporte)) {
+        if (reporteRepo.exists(reporte)) {
             ws.setReporte(reporte);
             action.addActionError(action.getText("error.reporte.repetido"));
             retValue = "yaExiste";
         } else {
             beginTransaction(ActionUtil.getDBUser());
-            reporteRepository.makePersistent(reporte);
+            reporteRepo.makePersistent(reporte);
 
-            Iterator<ReporteClase> iter = reporteRepository.find(cursoId).iterator();
+            Iterator<ReporteClase> iter = reporteRepo.find(cursoId).iterator();
             int i = 1;
 
             while (iter.hasNext()) {
                 reporte = iter.next();
                 reporte.setRclaSesion(i++);
-                reporteRepository.makePersistent(reporte);
+                reporteRepo.makePersistent(reporte);
             }
 
             commitTransaction();

@@ -41,7 +41,7 @@ public final class ProfesorRemoveReportesService {
                 && ws.getCurso().cursoPropio(genericSession.getUserType(), genericSession.getUserType(),
                         genericSession.getRut(), genericSession.isAutoridad()))) {
 
-            ReporteClaseRepository reporteClaseRepository
+            ReporteClaseRepository reporteClaseRepo
                     = ContextUtil.getDAO().getReporteClaseRepository(ActionUtil.getDBUser());
 
             beginTransaction(ActionUtil.getDBUser());
@@ -49,14 +49,14 @@ public final class ProfesorRemoveReportesService {
             // Elimina reportes si existen en los parámetros
             ws.getReportes().stream()
                     .filter(reporte -> parameters.containsKey("ck_" + ws.getReportes().indexOf(reporte)))
-                    .forEach(reporteClaseRepository::makeTransient);
+                    .forEach(reporteClaseRepo::makeTransient);
 
             // Obtiene los reportes y asigna el número de sesión de manera secuencial
             AtomicInteger counter = new AtomicInteger(1);
-            reporteClaseRepository.find(genericSession.getCurso(key).getId())
+            reporteClaseRepo.find(genericSession.getCurso(key).getId())
                     .forEach(reporte -> {
                         reporte.setRclaSesion(counter.getAndIncrement());
-                        reporteClaseRepository.makePersistent(reporte);
+                        reporteClaseRepo.makePersistent(reporte);
                     });
 
             commitTransaction();

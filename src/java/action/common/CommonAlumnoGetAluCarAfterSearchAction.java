@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.alumno.CommonAlumnoGetAluCarAfterSearchService;
+import service.alumno.GetAluCarAfterSearchService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -30,7 +30,7 @@ public class CommonAlumnoGetAluCarAfterSearchAction extends ActionCommonSupport 
         keyParent = getGenericSession().getWorkSession(getKey()).getKeyParent();
         actionNested = getGenericSession().getWorkSession(getKey()).getActionNested();
         
-        return  new CommonAlumnoGetAluCarAfterSearchService().service(getGenericSession(), getKey());
+        return  new GetAluCarAfterSearchService().service(getGenericSession(), getKey());
     }
 
     public String getKeyParent() {

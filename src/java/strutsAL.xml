@@ -79,7 +79,7 @@
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
 
-        <action name="AlumnoLogin" class="action.alumno.AlumnoLoginAction" method="execute">
+        <action name="AlumnoLogin" class="action.login.alumno.AlumnoLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
@@ -96,7 +96,7 @@
             </result>
         </action>
 
-        <action name="AlumnoLoginStackSeleccionarIngreso" class="action.alumno.AlumnoLoginStackSeleccionarIngresoAction"
+        <action name="AlumnoLoginStackSeleccionarIngreso" class="action.login.alumno.AlumnoSeleccionarIngresoStackAction"
                 method="execute">
             <result name="multiplesIngresos">/jsp/users/alumno/id/alumnoIdIngresos.jsp
             </result>
@@ -106,7 +106,7 @@
             </result>
         </action>
 
-        <action name="AlumnoLoginSeleccionarIngreso" class="action.alumno.AlumnoLoginSeleccionarIngresoAction"
+        <action name="AlumnoLoginSeleccionarIngreso" class="action.login.alumno.AlumnoSeleccionarIngresoAction"
                 method="execute">
             <result name="stack" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -114,7 +114,7 @@
             </result>
         </action>
 
-        <action name="AlumnoLoginStackEmail" class="action.alumno.AlumnoLoginStackEmailAction" method="execute">
+        <action name="AlumnoLoginStackEmail" class="action.login.alumno.AlumnoGetEmailStackAction" method="execute">
             <result name="email">/jsp/users/alumno/id/alumnoIdEmail.jsp
             </result>
             <result name="stack" type="redirectAction">
@@ -123,7 +123,7 @@
             </result>
         </action>
 
-        <action name="AlumnoLoginEmail" class="action.alumno.AlumnoLoginEmailAction" method="execute">
+        <action name="AlumnoLoginEmail" class="action.login.alumno.AlumnoSetEmailAction" method="execute">
             <result name="stack" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
@@ -135,11 +135,11 @@
             </result>
         </action>
 
-        <action name="AlumnoGetMisDatos" class="action.alumno.AlumnoMisDatosGetMisDatosAction" method="execute">
+        <action name="AlumnoGetMisDatos" class="action.misdatos.alumno.AlumnoGetMisDatosAction" method="execute">
             <result name="success">/jsp/users/alumno/id/alumnoIdMisDatos.jsp
             </result>
         </action>
-        <action name="AlumnoMisDatosSave" class="action.alumno.AlumnoMisDatosSaveAction" method="execute">
+        <action name="AlumnoMisDatosSave" class="action.misdatos.alumno.AlumnoSaveMisDatosAction" method="execute">
             <!--interceptor-ref name="tokenSession"/-->
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="input">/jsp/users/alumno/id/alumnoIdMisDatos.jsp</result>
@@ -154,20 +154,20 @@
 
             CERTIFICACION
         -->
-        <action name="AlumnoCertificacionGetCertificados" class="action.alumno.AlumnoCertificacionGetCertificadosAction"
+        <action name="AlumnoCertificacionGetCertificados" class="action.certificacion.alumno.AlumnoGetCertificadosAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoGetCertificados.jsp
             </result>
         </action>
 
-        <action name="AlumnoCertificacionCheckRegular" class="action.alumno.AlumnoCertificacionCheckRegularAction"
+        <action name="AlumnoCertificacionCheckRegular" class="action.certificacion.alumno.AlumnoCheckRegularAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoAlumnoRegular.jsp
             </result>
         </action>
 
         <action name="AlumnoCertificacionGenerarAlumnoRegular"
-                class="action.alumno.AlumnoCertificacionGenerarAlumnoRegularAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarAlumnoRegularAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -181,18 +181,18 @@
         </action>
 
         <action name="AlumnoCertificacionEmitirAlumnoRegular"
-                class="action.alumno.AlumnoCertificacionEmitirAlumnoRegularAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirAlumnoRegularAction" method="execute">
             <result type="myStream"/>
         </action>
 
         <action name="AlumnoCertificacionCheckNoImpedimentos"
-                class="action.alumno.AlumnoCertificacionCheckNoImpedimentosAction"
+                class="action.certificacion.alumno.AlumnoCheckNoImpedimentosAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoNoImpedimentos.jsp
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarNoImpedimentos"
-                class="action.alumno.AlumnoCertificacionGenerarNoImpedimentosAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarNoImpedimentosAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -205,7 +205,7 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirNoImpedimentos"
-                class="action.alumno.AlumnoCertificacionEmitirNoImpedimentosAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirNoImpedimentosAction" method="execute">
             <result type="myStream"/>
         </action>
 
@@ -215,7 +215,7 @@
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarInformeCalificaciones"
-                class="action.alumno.AlumnoCertificacionGenerarInformeCalificacionesAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarInformeCalificacionesAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -228,7 +228,7 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirInformeCalificaciones"
-                class="action.alumno.AlumnoCertificacionEmitirInformeCalificacionesAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirInformeCalificacionesAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
@@ -239,7 +239,7 @@
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarAlumnoEgresado"
-                class="action.alumno.AlumnoCertificacionGenerarAlumnoEgresadoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarAlumnoEgresadoAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -252,18 +252,18 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirAlumnoEgresado"
-                class="action.alumno.AlumnoCertificacionEmitirAlumnoEgresadoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirAlumnoEgresadoAction" method="execute">
             <result type="myStream"/>
         </action>
 
         <action name="AlumnoCertificacionCheckLogroEnTramite"
-                class="action.alumno.AlumnoCertificacionCheckLogroEnTramiteAction"
+                class="action.certificacion.alumno.AlumnoCheckLogroEnTramiteAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoLogroEnTramite.jsp
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarLogroEnTramite"
-                class="action.alumno.AlumnoCertificacionGenerarLogroEnTramiteAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarLogroEnTramiteAction" method="execute">
 
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
@@ -277,18 +277,18 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirLogroEnTramite"
-                class="action.alumno.AlumnoCertificacionEmitirLogroEnTramiteAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirLogroEnTramiteAction" method="execute">
             <result type="myStream"/>
         </action>
 
         <action name="AlumnoCertificacionCheckRankEgresado"
-                class="action.alumno.AlumnoCertificacionCheckRankEgresadoAction"
+                class="action.certificacion.alumno.AlumnoCheckRankEgresadoAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoRankEgresado.jsp
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarRankEgresado"
-                class="action.alumno.AlumnoCertificacionGenerarRankEgresadoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarRankEgresadoAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -301,18 +301,18 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirRankEgresado"
-                class="action.alumno.AlumnoCertificacionEmitirRankEgresadoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirRankEgresadoAction" method="execute">
             <result type="myStream"/>
         </action>
 
         <action name="AlumnoCertificacionCheckRankRegular"
-                class="action.alumno.AlumnoCertificacionCheckRankRegularAction"
+                class="action.certificacion.alumno.AlumnoCheckRankRegularAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoRankRegular.jsp
             </result>
         </action>
         <action name="AlumnoCertificacionGenerarRankRegular"
-                class="action.alumno.AlumnoCertificacionGenerarRankRegularAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGenerarRankRegularAction" method="execute">
             <result name="PA" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionGetBotonPago</param>
                 <param name="key">${key}</param>
@@ -325,18 +325,18 @@
             </result>
         </action>
         <action name="AlumnoCertificacionEmitirRankRegular"
-                class="action.alumno.AlumnoCertificacionEmitirRankRegularAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirRankRegularAction" method="execute">
             <result type="myStream"/>
         </action>
 
 
-        <action name="AlumnoCertificacionGetBotonPago" class="action.alumno.AlumnoCertificacionGetBotonPagoAction"
+        <action name="AlumnoCertificacionGetBotonPago" class="action.certificacion.alumno.AlumnoGetBotonPagoAction"
                 method="execute">
             <result name="success" type="redirect">${url}</result>
         </action>
 
         <action name="AlumnoCertificacionGetConfirmacionPago"
-                class="action.alumno.AlumnoCertificacionGetConfirmacionPagoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoGetConfirmacionPagoAction" method="execute">
             <result name="C1" type="redirectAction">
                 <param name="actionName">AlumnoCertificacionEmitirAlumnoRegular</param>
                 <param name="correl">${correl}</param>
@@ -385,7 +385,7 @@
             </result>
         </action>
 
-        <action name="AlumnoCertificacionGlosa" class="action.alumno.AlumnoCertificacionGlosaAction"
+        <action name="AlumnoCertificacionGlosa" class="action.certificacion.alumno.AlumnoSetGlosaAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/certificado/alumnoCertificadoSolicitado.jsp
             </result>
@@ -395,7 +395,7 @@
             ENCUESTAS
         -->
 
-        <action name="AlumnoEncuestaDocenteSearchEncuesta" class="action.alumno.AlumnoEncuestaDocenteAction"
+        <action name="AlumnoEncuestaDocenteSearchEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaDocenteAction"
                 method="search">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaDocenteGetEncuesta</param>
@@ -406,7 +406,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoEncuestaDocenteGetEncuesta" class="action.alumno.AlumnoEncuestaDocenteAction"
+        <action name="AlumnoEncuestaDocenteGetEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaDocenteAction"
                 method="showForm">
             <result name="success">/jsp/users/alumno/encuesta/alumnoEncuestaDocente.jsp
             </result>
@@ -415,7 +415,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoEncuestaDocenteSaveEncuesta" class="action.alumno.AlumnoEncuestaDocenteAction"
+        <action name="AlumnoEncuestaDocenteSaveEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaDocenteAction"
                 method="save">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaDocenteGetEncuesta
@@ -424,7 +424,7 @@
             </result>
         </action>
 
-        <action name="AlumnoEncuestaAyudanteSearchEncuesta" class="action.alumno.AlumnoEncuestaAyudanteAction"
+        <action name="AlumnoEncuestaAyudanteSearchEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaAyudanteAction"
                 method="searchEncuesta">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaAyudanteGetEncuesta
@@ -436,7 +436,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoEncuestaAyudanteGetEncuesta" class="action.alumno.AlumnoEncuestaAyudanteAction"
+        <action name="AlumnoEncuestaAyudanteGetEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaAyudanteAction"
                 method="showForm">
             <result name="success">/jsp/users/alumno/encuesta/alumnoEncuestaAyudante.jsp
             </result>
@@ -445,7 +445,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoEncuestaAyudanteSaveEncuesta" class="action.alumno.AlumnoEncuestaAyudanteAction"
+        <action name="AlumnoEncuestaAyudanteSaveEncuesta" class="action.encuesta.alumno.AlumnoGetEncuestaAyudanteAction"
                 method="save">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaAyudanteGetEncuesta
@@ -455,7 +455,7 @@
         </action>
 
         <action name="AlumnoEncuestaDocenteSearchEncuesta5taSemana"
-                class="action.alumno.AlumnoEncuestaDocente5taSemanaAction" method="searchEncuesta">
+                class="action.encuesta.alumno.AlumnoGetEncuestaDocente5taSemanaAction" method="searchEncuesta">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaDocenteGetEncuesta5taSemana</param>
                 <param name="key">${key}</param>
@@ -466,7 +466,7 @@
             </result>
         </action>
         <action name="AlumnoEncuestaDocenteGetEncuesta5taSemana"
-                class="action.alumno.AlumnoEncuestaDocente5taSemanaAction" method="showForm">
+                class="action.encuesta.alumno.AlumnoGetEncuestaDocente5taSemanaAction" method="showForm">
             <result name="success">/jsp/users/alumno/encuesta/alumnoEncuestaDocente5taSemana.jsp</result>
             <result name="stack" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -474,7 +474,7 @@
             </result>
         </action>
         <action name="AlumnoEncuestaDocenteSaveEncuesta5taSemana"
-                class="action.alumno.AlumnoEncuestaDocente5taSemanaAction" method="save">
+                class="action.encuesta.alumno.AlumnoGetEncuestaDocente5taSemanaAction" method="save">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoEncuestaDocenteGetEncuesta5taSemana</param>
                 <param name="key">${key}</param>
@@ -488,23 +488,23 @@
         <action name="AlumnoInscripcionEnableInscripcion" class="action.common.CommonDummyAction" method="execute">
             <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcionConsola.jsp</result>
         </action>
-        <action name="AlumnoInscripcionGetDerechos" class="action.alumno.AlumnoInscripcionGetDerechosAction"
+        <action name="AlumnoInscripcionGetDerechos" class="action.inscripcion.alumno.AlumnoGetDerechosAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcionDerechos.jsp</result>
         </action>
-        <action name="AlumnoInscripcionGetInscripcion" class="action.alumno.AlumnoInscripcionGetInscripcionAction"
+        <action name="AlumnoInscripcionGetInscripcion" class="action.inscripcion.alumno.AlumnoGetInscripcionAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcion.jsp
             </result>
         </action>
-        <action name="AlumnoInscripcionGetCursos" class="action.alumno.AlumnoInscripcionGetCursosAction"
+        <action name="AlumnoInscripcionGetCursos" class="action.inscripcion.alumno.AlumnoGetCursosAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcionCursos.jsp
             </result>
             <result name="cambioMencion">/jsp/users/alumno/inscripcion/alumnoInscripcionCambioMencion.jsp
             </result>
         </action>
-        <action name="AlumnoInscripcionAddInscripcion" class="action.alumno.AlumnoInscripcionAddInscripcionAction"
+        <action name="AlumnoInscripcionAddInscripcion" class="action.inscripcion.alumno.AlumnoAddInscripcionAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoInscripcionGetInscripcion</param>
@@ -513,7 +513,7 @@
             <result name="error">/jsp/users/alumno/inscripcion/alumnoInscripcion.jsp
             </result>
         </action>
-        <action name="AlumnoInscripcionRemoveInscripcion" class="action.alumno.AlumnoInscripcionRemoveInscripcionAction"
+        <action name="AlumnoInscripcionRemoveInscripcion" class="action.inscripcion.alumno.AlumnoRemoveInscripcionAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoInscripcionGetInscripcion
@@ -523,12 +523,12 @@
             <result name="acta_emitida">/jsp/users/alumno/inscripcion/alumnoInscripcion.jsp
             </result>
         </action>
-        <action name="AlumnoInscripcionGetCursosSwap" class="action.alumno.AlumnoInscripcionGetCursosSwapAction"
+        <action name="AlumnoInscripcionGetCursosSwap" class="action.inscripcion.alumno.AlumnoGetCursosSwapAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcionCursosSwap.jsp
             </result>
         </action>
-        <action name="AlumnoInscripcionSwapInscripcion" class="action.alumno.AlumnoInscripcionSwapInscripcionAction"
+        <action name="AlumnoInscripcionSwapInscripcion" class="action.inscripcion.alumno.AlumnoSwapInscripcionAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoInscripcionGetInscripcion</param>
@@ -536,7 +536,7 @@
             </result>
         </action>
 
-        <action name="AlumnoInscripcionCambioMencion" class="action.alumno.AlumnoInscripcionCambioMencionAction"
+        <action name="AlumnoInscripcionCambioMencion" class="action.inscripcion.alumno.AlumnoCambioMencionAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginEnableForm
@@ -554,25 +554,25 @@
             PRACTICA
         -->
 
-        <action name="AlumnoPracticaSavePractica" class="action.alumno.AlumnoPracticaSavePracticaAction"
+        <action name="AlumnoPracticaSavePractica" class="action.practica.alumno.AlumnoSavePracticaAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/practica/alumnoSolicitudPracticaAviso.jsp
             </result>
         </action>
 
         <action name="AlumnoPracticaPresentacionPrint"
-                class="action.alumno.AlumnoPracticaPresentacionPrintAction" method="execute">
+                class="action.practica.alumno.AlumnoPrintPresentacionAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
         <action name="AlumnoPracticaAutorizacionPrint"
-                class="action.alumno.AlumnoPracticaAutorizacionPrintAction" method="execute">
+                class="action.practica.alumno.AlumnoPrintAutorizacionAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="AlumnoPracticaAddAttachFile" class="action.alumno.AlumnoPracticaAddAttachFileAction"
+        <action name="AlumnoPracticaAddAttachFile" class="action.practica.alumno.AlumnoAddAttachFileAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -583,7 +583,7 @@
             </result>
         </action>
 
-        <action name="AlumnoPracticaDeleteFile" class="action.alumno.AlumnoPracticaDeleteFileAction"
+        <action name="AlumnoPracticaDeleteFile" class="action.practica.alumno.AlumnoDeleteFileAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/practica/alumnoSolicitudPracticaViewSolicitud.jsp
             </result>
@@ -811,14 +811,14 @@
             </result>
         </action>
 
-        <action name="AlumnoSolicitudExpedienteLogrados" class="action.alumno.AlumnoSolicitudExpedienteLogradosAction"
+        <action name="AlumnoSolicitudExpedienteLogrados" class="action.expediente.alumno.AlumnoGetLogrosAction"
                 method="execute">
             <result name="success">
                 /jsp/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroGetLogros.jsp
             </result>
         </action>
 
-        <action name="AlumnoSolicitudExpedienteNew" class="action.alumno.AlumnoSolicitudExpedienteNewAction"
+        <action name="AlumnoSolicitudExpedienteNew" class="action.expediente.alumno.AlumnoNewAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/expedienteLogro/alumnoSolicitudExpedienteLogroNew.jsp
             </result>
@@ -827,25 +827,25 @@
         </action>
 
         <action name="AlumnoSolicitudExpedienteUpdatePersonales"
-                class="action.alumno.AlumnoSolicitudExpedienteUpdatePersonalesAction" method="execute">
+                class="action.expediente.alumno.AlumnoUpdatePersonalesAction" method="execute">
             <result name="success" type="json"/>
             <result name="error" type="json"/>
         </action>
 
         <action name="AlumnoSolicitudExpedienteAddSolicitud"
-                class="action.alumno.AlumnoSolicitudExpedienteAddSolicitudAction" method="execute">
+                class="action.expediente.alumno.AlumnoAddSolicitudAction" method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp
             </result>
         </action>
 
         <action name="AlumnoSolicitudExpedienteUploadFile"
-                class="action.alumno.AlumnoSolicitudExpedienteUploadFileAction" method="execute">
+                class="action.expediente.alumno.AlumnoUploadFileAction" method="execute">
             <result name="success" type="json"/>
             <result name="error" type="json"/>
         </action>
 
         <action name="AlumnoSolicitudExpedienteDownloadFile"
-                class="action.alumno.AlumnoSolicitudExpedienteDownloadFileAction" method="execute">
+                class="action.expediente.alumno.AlumnoDownloadFileAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -856,7 +856,7 @@
         </action>
 
         <action name="AlumnoSolicitudExpedienteGeneraPagoArancel"
-                class="action.alumno.AlumnoSolicitudExpedienteGeneraPagoArancelAction"
+                class="action.expediente.alumno.AlumnoGeneraPagoArancelAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -867,7 +867,7 @@
         </action>
 
         <action name="AlumnoSolicitudExpedienteGeneraCaratula"
-                class="action.alumno.AlumnoSolicitudExpedienteGeneraCaratulaAction"
+                class="action.expediente.alumno.AlumnoGeneraCaratulaAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -877,7 +877,7 @@
             </result>
         </action>
 
-	<action name="AlumnoSolicitudExpedienteGeneraSolicitudGenero" class="action.alumno.AlumnoSolicitudExpedienteGeneraSolicitudGeneroAction"
+	<action name="AlumnoSolicitudExpedienteGeneraSolicitudGenero" class="action.expediente.alumno.AlumnoGeneraSolicitudGeneroAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>

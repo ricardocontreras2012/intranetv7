@@ -46,7 +46,7 @@ public class AluCar implements Serializable {
     private Alumno alumno;
     private Integer asignaturasInscritas;
     private List<Ccalidad> calidades;
-    private List<CalificacionLogroAdicional> calificacionRequisitoAdicionalLogroList;
+    private List<CalificacionLogroAdicional> calificacionLogroAdicionalList;
     private List<Calificacion> calificaciones;
     private List<Calificacion> calificacionesAsignatura;
     private List<Curso> carga;
@@ -473,18 +473,18 @@ public class AluCar implements Serializable {
      *
      * @return
      */
-    public List<CalificacionLogroAdicional> getCalificacionRequisitoAdicionalLogroList() {
-        return calificacionRequisitoAdicionalLogroList;
+    public List<CalificacionLogroAdicional> getcalificacionLogroAdicionalList() {
+        return calificacionLogroAdicionalList;
     }
 
     /**
      * Method description
      *
-     * @param calificacionRequisitoAdicionalLogroList
+     * @param calificacionLogroAdicionalList
      *
      */
-    public void setCalificacionRequisitoAdicionalLogroList(List<CalificacionLogroAdicional> calificacionRequisitoAdicionalLogroList) {
-        this.calificacionRequisitoAdicionalLogroList = calificacionRequisitoAdicionalLogroList;
+    public void setcalificacionLogroAdicionalList(List<CalificacionLogroAdicional> calificacionLogroAdicionalList) {
+        this.calificacionLogroAdicionalList = calificacionLogroAdicionalList;
     }
 
     /**

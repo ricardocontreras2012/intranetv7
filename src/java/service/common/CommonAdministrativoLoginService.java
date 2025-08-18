@@ -40,8 +40,8 @@ public final class CommonAdministrativoLoginService {
             return retReLogin();
         }
 
-        AdministrativoRepository admRepository = ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser());
-        Administrativo administrativo = admRepository.find(rut, passwd);
+        AdministrativoRepository admRepo = ContextUtil.getDAO().getAdministrativoRepository(ActionUtil.getDBUser());
+        Administrativo administrativo = admRepo.find(rut, passwd);
         
         // Verificamos si el administrativo existe
         if (administrativo == null) {
@@ -56,7 +56,7 @@ public final class CommonAdministrativoLoginService {
         // Verificación de tipo de usuario
         if (administrativo.is(userType)) {
             // Configuración exitosa de la sesión
-            admRepository.setLastLogin(rut);
+            admRepo.setLastLogin(rut);
             getComplemento(genericSession, administrativo);
 
             // Guardamos la sesión

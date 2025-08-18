@@ -39,7 +39,7 @@ public final class RemoveMaterialesService {
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key)
             throws Exception {
         WorkSession ws = genericSession.getWorkSession(key);
-        MaterialApoyoRepository materialApoyoRepository = ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser());
+        MaterialApoyoRepository materialApoyoRepo = ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
     
@@ -52,7 +52,7 @@ public final class RemoveMaterialesService {
                     if (materialApoyo.getMatRutAutor().equals(genericSession.getRut())) {
                         LogUtil.setLog(genericSession.getRut(), genericSession.getCurso(key).getNombreCorto()
                                 + " > " + materialApoyo.getMatArchivo());
-                        materialApoyoRepository.makeTransient(materialApoyo);
+                        materialApoyoRepo.makeTransient(materialApoyo);
                     }
                 }));
 

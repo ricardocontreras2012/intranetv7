@@ -12,9 +12,9 @@ import static org.hibernate.EmptyInterceptor.INSTANCE;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import static infrastructure.util.AppStaticsUtil.APP_DB_USERS;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_PASSWORD;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_URL;
-import static infrastructure.util.AppStaticsUtil.HIBERNATE_KEY_CONNECTION_USERNAME;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_PASSWORD;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_URL;
+import static infrastructure.util.AppStaticsUtil.HIBERNATE_USERNAME;
 import static infrastructure.util.LogUtil.logExceptionMessage;
 import static infrastructure.util.LogUtil.logInfo;
 
@@ -104,9 +104,9 @@ public class HibernateUtil {
 
             configuration = new Configuration();
             configuration.configure("config/hibernate/hibernate" + userType + ".cfg.xml");
-            configuration.setProperty(HIBERNATE_KEY_CONNECTION_URL, hibernatePropertiesUtil.getUrl());
-            configuration.setProperty(HIBERNATE_KEY_CONNECTION_USERNAME, hibernatePropertiesUtil.getUsername());
-            configuration.setProperty(HIBERNATE_KEY_CONNECTION_PASSWORD, hibernatePropertiesUtil.getPassword());
+            configuration.setProperty(HIBERNATE_URL, hibernatePropertiesUtil.getUrl());
+            configuration.setProperty(HIBERNATE_USERNAME, hibernatePropertiesUtil.getUsername());
+            configuration.setProperty(HIBERNATE_PASSWORD, hibernatePropertiesUtil.getPassword());
             StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 
             SessionFactory factory = configuration.buildSessionFactory(builder.build());
@@ -158,8 +158,7 @@ public class HibernateUtil {
     public static void closeSessionFactory() throws HibernateException {
         synchronized (SESSION_FACTORIES) {
             try {
-                processUsersCloseSessionFactories();
-                configuration = null;
+                processUsersCloseSessionFactories();                
                 logInfo("HibernateUtil.closeSessionFactory() - Destroy the current SessionFactory.");
             } catch (Exception x) {
                 throw new HibernateException(

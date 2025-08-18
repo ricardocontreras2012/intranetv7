@@ -367,7 +367,7 @@
             </result>
         </action>
 
-        <action name="CommonCertificacionCheckRegular" class="action.alumno.AlumnoCertificacionCheckRegularAction"
+        <action name="CommonCertificacionCheckRegular" class="action.certificacion.alumno.AlumnoCheckRegularAction"
                 method="execute">
             <result name="success">/jsp/common/certificacion/commonCertificacionAlumnoRegular.jsp
             </result>
@@ -384,25 +384,25 @@
             <result name="noMatriculado">/jsp/message/messageActionError.jsp</result>
         </action>
         <action name="CommonCertificacionEmitirAlumnoRegular"
-                class="action.alumno.AlumnoCertificacionEmitirAlumnoRegularAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirAlumnoRegularAction" method="execute">
             <result type="myStream"/>
         </action>
         <action name="CommonCertificacionEmitirAlumnoEgresado"
-                class="action.alumno.AlumnoCertificacionEmitirAlumnoEgresadoAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirAlumnoEgresadoAction" method="execute">
             <result type="myStream"/>
         </action>
         <action name="CommonCertificacionEmitirInformeCalificaciones"
-                class="action.alumno.AlumnoCertificacionEmitirInformeCalificacionesAction" method="execute">
+                class="action.certificacion.alumno.AlumnoEmitirInformeCalificacionesAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonActaGetActasCarrera" class="action.common.CommonActaGetActasCarreraAction" method="execute">
+        <action name="CommonActaGetActasCarrera" class="action.acta.GetActasCarreraAction" method="execute">
             <result name="success">/jsp/common/acta/commonActaListaActas.jsp
             </result>
         </action>
 
-        <action name="CommonActaActasCarreraExport" class="action.common.CommonActaActasCarreraExportAction"
+        <action name="CommonActaActasCarreraExport" class="action.acta.ExportActasCarreraAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -1373,14 +1373,14 @@
             </result>
         </action>
 
-        <action name="CommonMensajeEnableConsola" class="action.common.CommonMensajeEnableConsolaAction"
+        <action name="CommonMensajeEnableConsola" class="action.mensaje.EnableConsolaAction"
                 method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeConsola.jsp
             </result>
         </action>
 
         <action name="CommonMensajeEnableListaDestinatarios"
-                class="action.common.CommonMensajeEnableListaDestinatariosAction" method="execute">
+                class="action.mensaje.EnableListaDestinatariosAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeProcessLista</param>
                 <!--param name="method">post</param-->
@@ -1388,21 +1388,21 @@
             </result>
         </action>
 
-        <action name="CommonMensajeEnableFwd" class="action.common.CommonMensajeEnableFwdAction" method="execute">
+        <action name="CommonMensajeEnableFwd" class="action.mensaje.EnableFwdAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeProcessLista</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonMensajeReceiveLista" class="action.common.CommonMensajeReceiveListaAction" method="execute">
+        <action name="CommonMensajeReceiveLista" class="action.mensaje.ReceiveListaAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeProcessLista</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonMensajeProcessLista" class="action.common.CommonMensajeProcessListaAction" method="execute">
+        <action name="CommonMensajeProcessLista" class="action.mensaje.ProcessListaAction" method="execute">
             <result name="processList" type="redirectAction">
                 <param name="actionName">CommonMensajeProcessLista</param>
                 <param name="key">${key}</param>
@@ -1466,7 +1466,7 @@
             </result>
         </action>
 
-        <action name="CommonMensajeUploadListaRUN" class="action.common.CommonMensajeUploadListaRUNAction"
+        <action name="CommonMensajeUploadListaRUN" class="action.mensaje.UploadListaRUNAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -1479,7 +1479,7 @@
             </result>
         </action>
 
-        <action name="CommonMensajeSendMessage" class="action.common.CommonMensajeSendMessageAction" method="execute">
+        <action name="CommonMensajeSendMessage" class="action.mensaje.SendMessageAction" method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
             </interceptor-ref>
@@ -1492,7 +1492,7 @@
             <result name="input">/jsp/common/mensaje/commonMensajeNewMessage.jsp</result>
         </action>
 
-        <action name="CommonMensajeSendFwdMessage" class="action.common.CommonMensajeSendFwdMessageAction"
+        <action name="CommonMensajeSendFwdMessage" class="action.mensaje.SendFwdMessageAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeGetSentMessages</param>
@@ -1506,19 +1506,19 @@
             </result>
         </action>
 
-        <action name="CommonMensajeGetDataTable" class="action.common.CommonMensajeGetDataTableAction">
+        <action name="CommonMensajeGetDataTable" class="action.mensaje.GetDataTableAction">
             <result type="json"/>
         </action>
 
         <action name="CommonMensajeRemoveReceivedMessages"
-                class="action.common.CommonMensajeRemoveReceivedMessagesAction" method="execute">
+                class="action.mensaje.RemoveReceivedMessagesAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeGetReceivedMessages</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonMensajeRemoveSentMessages" class="action.common.CommonMensajeRemoveSentMessagesAction"
+        <action name="CommonMensajeRemoveSentMessages" class="action.mensaje.RemoveSentMessagesAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMensajeGetSentMessages</param>
@@ -1531,49 +1531,49 @@
             </result>
         </action>
 
-        <action name="CommonMensajeGetSentDataTable" class="action.common.CommonMensajeGetSentDataTableAction">
+        <action name="CommonMensajeGetSentDataTable" class="action.mensaje.GetSentDataTableAction">
             <result type="json"/>
         </action>
 
-        <action name="CommonMensajeGetReceivedMessage" class="action.common.CommonMensajeGetReceivedMessageAction"
+        <action name="CommonMensajeGetReceivedMessage" class="action.mensaje.GetReceivedMessageAction"
                 method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeViewReceivedMessage.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeGetSentMessage" class="action.common.CommonMensajeGetSentMessageAction"
+        <action name="CommonMensajeGetSentMessage" class="action.mensaje.GetSentMessageAction"
                 method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeViewSentMessage.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeReplyMessage" class="action.common.CommonMensajeReplyMessageAction" method="execute">
+        <action name="CommonMensajeReplyMessage" class="action.mensaje.ReplyMessageAction" method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeNewMessage.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeGetNumMessages" class="action.common.CommonMensajeGetNumMessagesAction"
+        <action name="CommonMensajeGetNumMessages" class="action.mensaje.GetNumMessagesAction"
                 method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeNumMessages.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeAddAlumno" class="action.common.CommonMensajeAddAlumnoAction" method="execute">
+        <action name="CommonMensajeAddAlumno" class="action.mensaje.AddAlumnoAction" method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeAlumnoLista.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeAddAyudante" class="action.common.CommonMensajeAddAyudanteAction" method="execute">
+        <action name="CommonMensajeAddAyudante" class="action.mensaje.AddAyudanteAction" method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeAyudanteLista.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeAddProfesor" class="action.common.CommonMensajeAddProfesorAction" method="execute">
+        <action name="CommonMensajeAddProfesor" class="action.mensaje.AddProfesorAction" method="execute">
             <result name="success">/jsp/common/mensaje/commonMensajeProfesorLista.jsp
             </result>
         </action>
 
-        <action name="CommonMensajeGetPage" class="action.common.CommonMensajeGetPageAction" method="execute">
+        <action name="CommonMensajeGetPage" class="action.mensaje.GetPageAction" method="execute">
             <result type="stream">
                 <param name="contentType">text/html</param>
                 <param name="inputName">inputStream</param>
@@ -1753,7 +1753,7 @@
         </action>
 
         <!-- ACTAS -->
-        <action name="CommonActaGetActa" class="action.common.CommonActaGetActaAction" method="execute">
+        <action name="CommonActaGetActa" class="action.acta.GetActaAction" method="execute">
             <result name="success">/jsp/common/acta/commonActaGetActa.jsp</result>
         </action>
 
@@ -1766,17 +1766,17 @@
             <result name="multiplesIngresos">/jsp/common/alumno/commonAlumnoCarreras.jsp</result>
         </action>
 
-        <action name="CommonActaComplementariaGetForm" class="action.common.CommonActaComplementariaGetCursosAction"
+        <action name="CommonActaComplementariaGetForm" class="action.acta.GetCursosActaComplementariaAction"
                 method="execute">
             <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
         </action>
 
-        <action name="CommonActaComplementariaGetCursos" class="action.common.CommonActaComplementariaGetCursosAction"
+        <action name="CommonActaComplementariaGetCursos" class="action.acta.GetCursosActaComplementariaAction"
                 method="execute">
             <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
         </action>
 
-        <action name="CommonActaComplementariaEmitirActa" class="action.common.CommonActaComplementariaEmitirActaAction"
+        <action name="CommonActaComplementariaEmitirActa" class="action.acta.EmitirActaComplementariaAction"
                 method="execute">
             <!--result name="success" type="redirectAction">
                 <param name="actionName">CommonActaComplementariaGetCursos</param>
@@ -1793,7 +1793,7 @@
             </result>
         </action>
 
-        <action name="CommonActaRectificatoriaGetActa" class="action.common.CommonActaRectificatoriaGetActaAction"
+        <action name="CommonActaRectificatoriaGetActa" class="action.acta.GetActaRectificatoriaAction"
                 method="execute">
             <result name="success">/jsp/common/acta/commonActaRectificatoriaActaNumerica.jsp
             </result>
@@ -1803,20 +1803,20 @@
             </result>
         </action>
 
-        <action name="CommonActaRectificatoriaEmitirActa" class="action.common.CommonActaRectificatoriaEmitirActaAction"
+        <action name="CommonActaRectificatoriaEmitirActa" class="action.acta.EmitirActaRectificatoriaAction"
                 method="execute">
             <result name="success">/jsp/common/acta/commonActaRectificatoriaCursos.jsp
             </result>
         </action>
 
         <action name="CommonActaPrint"
-                class="action.common.CommonActaPrintAction" method="execute">
+                class="action.acta.PrintActaAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
         <action name="CommonActaExport"
-                class="action.common.CommonActaExportAction" method="execute">
+                class="action.acta.ExportActaAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
@@ -2023,23 +2023,7 @@
             </result>
         </action>
 
-        <action name="CommonConvalidacionComisionEnable" class="action.common.CommonConvalidacionComisionEnableAction"
-                method="execute">
-            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
-            </result>
-        </action>
-
-        <action name="CommonConvalidacionComisionAddProf" class="action.common.CommonConvalidacionComisionAddProfAction"
-                method="execute">
-            <result name="success">/jsp/common/convalidacion/commonConvalidacionComision.jsp
-            </result>
-        </action>
-
-        <action name="CommonConvalidacionComisionSave" class="action.common.CommonConvalidacionComisionSaveAction"
-                method="execute">
-            <result name="success">/jsp/message/messageSuccess.jsp
-            </result>
-        </action>
+       
 
         <action name="CommonCursoListaExport" class="action.common.CommonCursoListaExportAction"
                 method="execute">
@@ -2096,7 +2080,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonMensajeDownLoadFile" class="action.common.CommonMensajeDownLoadFileAction" method="execute">
+        <action name="CommonMensajeDownLoadFile" class="action.mensaje.DownLoadFileAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -2106,7 +2090,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonMensajeDownLoadImg" class="action.common.CommonMensajeDownLoadImgAction" method="execute">
+        <action name="CommonMensajeDownLoadImg" class="action.mensaje.DownLoadImgAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -2116,7 +2100,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonMensajeDownloadAttachFile" class="action.common.CommonMensajeDownloadAttachFileAction"
+        <action name="CommonMensajeDownloadAttachFile" class="action.mensaje.DownloadAttachFileAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -2232,7 +2216,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonMensajePrintMessage" class="action.common.CommonMensajePrintMessageAction" method="execute">
+        <action name="CommonMensajePrintMessage" class="action.mensaje.PrintMessageAction" method="execute">
             <result type="myStream"/>
         </action>
 

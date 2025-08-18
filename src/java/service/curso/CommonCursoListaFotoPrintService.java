@@ -60,7 +60,8 @@ public class CommonCursoListaFotoPrintService {
 
         PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100);
-        float[] columnWidths = new float[]{4, 20, 30, 30, 50, 20};
+        float[] columnWidths = {4, 20, 30, 30, 50, 20};
+        
         table.setWidths(columnWidths);
 
         String[] headers = {"", "RUN", "Paterno", "Materno", "Nombre", "Foto"};

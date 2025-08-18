@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.alumno.CommonAlumnoGetAlumnoCarreraService;
+import service.alumno.GetAlumnoCarreraService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -24,6 +24,6 @@ public class CommonAlumnoGetAlumnoCarreraAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonAlumnoGetAlumnoCarreraService().service(getGenericSession(), getKey());
+        return new GetAlumnoCarreraService().service(getGenericSession(), getKey());
     }
 }

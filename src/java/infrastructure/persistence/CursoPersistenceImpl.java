@@ -184,7 +184,7 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
     @SuppressWarnings("unchecked")
     @Override
     public List<Curso> find(Integer rut, Integer agno, Integer sem, String proyecto) {
-        String sql = "select * from Curso "
+        String sql = "select * from curso "
                 + "join curso_profesor on cur_asign = cpro_asign and cur_elect = cpro_elect and cur_coord = cpro_coord and cur_secc = cpro_secc and cur_agno = cpro_agno and cur_sem = cpro_sem "
                 + "join curso_car ccar on ccar_asign = cpro_asign and ccar_elect = cpro_elect and ccar_coord = cpro_coord "
                 + "and ccar_secc = cpro_secc and ccar_agno = cpro_agno and ccar_sem = cpro_sem "

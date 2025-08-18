@@ -14,7 +14,6 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import domain.repository.AlumnoEmpleadorRepository;
 
 
 /**
@@ -36,11 +35,9 @@ public class EgresadoLaboralesNewLaboralService {
     public String service(GenericSession genericSession, EgresadoSession es, String key) {
         WorkSession ws = genericSession.getWorkSession(key);
         es.setAreaTrabajoList(ContextUtil.getAreaTrabajoList());
-        AlumnoEmpleadorRepository alumnoEmpleadorRepository
-                = ContextUtil.getDAO().getAlumnoEmpleadorRepository(ActionUtil.getDBUser());
-
+       
         es.setAlumnoEmpleadorList(
-                alumnoEmpleadorRepository.find(ws.getAluCar().getAlumno().getAluRut()));
+                ContextUtil.getDAO().getAlumnoEmpleadorRepository(ActionUtil.getDBUser()).find(ws.getAluCar().getAlumno().getAluRut()));
         return SUCCESS;
     }
 }

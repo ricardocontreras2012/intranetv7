@@ -37,9 +37,9 @@ public class AppStaticsUtil {
     /**
      * PARAMETROS HIBERNATE
      */
-    public static final String HIBERNATE_KEY_CONNECTION_PASSWORD = "hibernate.connection.password";
-    public static final String HIBERNATE_KEY_CONNECTION_URL = "hibernate.connection.url";
-    public static final String HIBERNATE_KEY_CONNECTION_USERNAME = "hibernate.connection.username";
+    public static final String HIBERNATE_PASSWORD = "hibernate.connection.password";
+    public static final String HIBERNATE_URL = "hibernate.connection.url";
+    public static final String HIBERNATE_USERNAME = "hibernate.connection.username";
 
     /**
      * TIPOS DE USUARIOS DE APLICACION

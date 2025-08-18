@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.calificacionRequisitoAdicionalLogroList" status="row">
+    <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.calificacionLogroAdicionalList" status="row">
         <tr>
             <s:if test="calSitAlu ==\"A\"">
                 <td style="height: 16px; background-color: white; color: blue"><s:property value="calNota"/><s:property

@@ -42,8 +42,8 @@ public final class CommonAutoridadLoginService {
             return retReLogin();
         }
 
-        ProfesorRepository profesorRepository = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
-        Profesor profesor = profesorRepository.find(rut, passwd);
+        ProfesorRepository profesorRepo = ContextUtil.getDAO().getProfesorRepository(ActionUtil.getDBUser());
+        Profesor profesor = profesorRepo.find(rut, passwd);
 
         // Verificamos si el profesor existe
         if (profesor == null) {
@@ -76,7 +76,7 @@ public final class CommonAutoridadLoginService {
 
         if (!retValue.equals(ACTION_NOTALLOW)) {
             // Configuración adicional de la sesión
-            configurarSessionData(genericSession, profesor, userType, key, profesorRepository);
+            configurarSessionData(genericSession, profesor, userType, key, profesorRepo);
             action.getSesion().put("genericSession", genericSession);
         }
 
@@ -92,7 +92,7 @@ public final class CommonAutoridadLoginService {
      * @param key La clave de sesión.
      * @param profesorRepository El objeto de persistencia de profesor.
      */
-    private void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorRepository profesorRepository) {
+    private void configurarSessionData(GenericSession genericSession, Profesor profesor, String userType, String key, ProfesorRepository profesorRepo) {
         WorkSession ws = new WorkSession(userType);
 
         genericSession.setSessionMap(new HashMap<>());
@@ -108,7 +108,7 @@ public final class CommonAutoridadLoginService {
         genericSession.setNombreMensaje(profesor.getNombreMensaje());
 
         // Actualizar el último login del profesor
-        profesorRepository.setLastLogin(profesor.getProfRut());
+        profesorRepo.setLastLogin(profesor.getProfRut());
         genericSession.setLastLogin(profesor.getProfLastLogin());
 
         // Configuramos el tiempo de inactividad de la sesión

@@ -94,7 +94,8 @@ public class CommonCursoDefinicionPrintService {
         // Crear la tabla con 9 columnas para los datos de los cursos
         PdfPTable table = new PdfPTable(9);
         table.setWidthPercentage(100);
-        float[] columnWidths = new float[]{10, 24, 18, 16, 8, 15, 3, 3, 3};
+        float[] columnWidths = {10, 24, 18, 16, 8, 15, 3, 3, 3};
+
         table.setWidths(columnWidths);
 
         // Encabezados de la tabla

@@ -8,7 +8,6 @@ package service.material;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.MaterialApoyo;
 import java.io.File;
-import domain.repository.MaterialApoyoRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -73,13 +72,10 @@ public final class ModifyMaterialService {
         WorkSession ws = genericSession.getWorkSession(key);
         MaterialApoyo materialApoyo = ws.getMaterial();
 
-        if (materialApoyo.getMatRutAutor().equals(genericSession.getRut())) {
-            MaterialApoyoRepository materialApoyoRepository
-                    = ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser());
-
+        if (materialApoyo.getMatRutAutor().equals(genericSession.getRut())) {            
             doNewFile(action, genericSession, tipo, upload, uploadFileName, caption, key);
             beginTransaction(ActionUtil.getDBUser());
-            materialApoyoRepository.makeTransient(materialApoyo);
+            ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser()).makeTransient(materialApoyo);
             commitTransaction();
             ws.setMaterial(null);
         }
@@ -101,11 +97,8 @@ public final class ModifyMaterialService {
             materialApoyo.setMatDescripcion(caption);
             materialApoyo.setMatTipo(tipo);
 
-            MaterialApoyoRepository materialApoyoRepository
-                    = ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser());
-
             beginTransaction(ActionUtil.getDBUser());
-            materialApoyoRepository.makePersistent(materialApoyo);
+            ContextUtil.getDAO().getMaterialApoyoRepository(ActionUtil.getDBUser()).makePersistent(materialApoyo);
             commitTransaction();
         }
     }

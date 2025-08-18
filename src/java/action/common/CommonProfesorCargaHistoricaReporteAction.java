@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.profesor.CommonProfesorGetCargaHistoricaService;
+import service.profesor.GetCargaHistoricaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import static infrastructure.util.common.CommonRandomUtil.getKeySession;
 
@@ -33,7 +33,7 @@ public final class CommonProfesorCargaHistoricaReporteAction extends ActionCommo
 
         setKey(getKeySession());
 
-        return new CommonProfesorGetCargaHistoricaService().service(getGenericSession(), getKey(), keyParent);
+        return new GetCargaHistoricaService().service(getGenericSession(), getKey(), keyParent);
     }
 
     /**

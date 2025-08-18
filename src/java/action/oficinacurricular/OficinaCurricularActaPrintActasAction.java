@@ -6,7 +6,7 @@
 package action.oficinacurricular;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
-import service.acta.oficinacurricular.OficinaCurricularActaPrintActasService;
+import service.acta.oficinacurricular.OficinaCurricularPrintActasService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 
@@ -21,7 +21,7 @@ public final class OficinaCurricularActaPrintActasAction extends ActionParameter
 
     @Override
     public String action() throws Exception {
-        new OficinaCurricularActaPrintActasService().service(getGenericSession(), getMapParameters(), getKey());
+        new OficinaCurricularPrintActasService().service(getGenericSession(), getMapParameters(), getKey());
 
         return SUCCESS;
     }

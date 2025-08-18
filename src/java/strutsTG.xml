@@ -66,7 +66,7 @@
                          class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="TitulosyGradosLogin" class="action.titulosygrados.TitulosyGradosLoginAction" method="execute">
+        <action name="TitulosyGradosLogin" class="action.login.titulosygrados.TitulosyGradosLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

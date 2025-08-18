@@ -66,7 +66,7 @@ public final class GenericSession {
         this.rut = rut;
         this.password = password;
 
-        if (SystemParametersUtil.INGRESO_CLAVE_UNICA.equals(flag)) {
+        if (SystemParametersUtil.LOGIN_CLAVE_UNICA.equals(flag)) {
             userType += "_CU";
         }
         setStackActionList(CommonUsersUtil.getActionStack(userType));

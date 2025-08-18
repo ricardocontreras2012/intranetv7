@@ -30,51 +30,53 @@ public final class CommonSessionCloseService {
      * @param key
      * @return
      */
-    private static final String DEFAULT_URL ="www.google.cl";
+    private static final String DEFAULT_URL = "www.google.cl";
 
     /**
      *
-     * @param action
      * @param sesion
      * @param key
      * @return
      */
     public String service(Map<String, Object> sesion, String key) {
-        GenericSession genericSession;
-
         String retValue = DEFAULT_URL;
-        genericSession = null;
 
         try {
             if (sesion != null && key != null) {
-                genericSession = (GenericSession) sesion.get("genericSession");
+                GenericSession genericSession = (GenericSession) sesion.get("genericSession");
                 if (genericSession != null) {
                     WorkSession ws = genericSession.getWorkSession(key);
 
                     switch (genericSession.getUserType()) {
                         case "AL":
-                            retValue=ws.getAluCar().getUnidadFacultad().getUniUrl();
+                            retValue = ws.getAluCar().getUnidadFacultad().getUniUrl();
                             break;
                         case "PR":
-                            retValue=ContextUtil.getDAO().getUnidadRepository(ActionUtil.getDBUser()).find(getUnidadxProf(ws.getProfesor().getProfRut())).getUniUrl();
+                            retValue = ContextUtil.getDAO()
+                                    .getUnidadRepository(ActionUtil.getDBUser())
+                                    .find(getUnidadxProf(ws.getProfesor().getProfRut()))
+                                    .getUniUrl();
                             break;
                         default:
                             retValue = DEFAULT_URL;
                     }
+
+                    LogUtil.setLog(genericSession.getRut());
                 }
             }
-            if (genericSession != null) {
-                LogUtil.setLog(genericSession.getRut());
-            }
         } catch (Exception e) {
+            LogUtil.logExceptionMessage(e); // ← importante loguear
         } finally {
             if (sesion != null) {
                 sesion.remove("genericSession");
-                ((SessionMap) sesion).invalidate();
+                if (sesion instanceof SessionMap) {
+                    ((SessionMap) sesion).invalidate();
+                }
+
                 sesion.clear();
             }
         }
 
-        return (retValue==null)?"0":retValue;
+        return retValue;
     }
 }

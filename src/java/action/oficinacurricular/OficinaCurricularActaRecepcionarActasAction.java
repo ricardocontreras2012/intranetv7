@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.acta.oficinacurricular.OficinaCurricularActaRecepcionarActasService;
+import service.acta.oficinacurricular.OficinaCurricularRecepcionarActasService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class OficinaCurricularActaRecepcionarActasAction extends ActionPar
      */
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularActaRecepcionarActasService().service(getGenericSession(), getMapParameters(), getKey());
+        return new OficinaCurricularRecepcionarActasService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

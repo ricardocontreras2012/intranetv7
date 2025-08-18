@@ -37,15 +37,15 @@ public final class ProfesorEvaluacionSavePorcentajesAbsolutosService {
      */
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
         Curso curso = genericSession.getWorkSession(key).getCurso();
-        CursoTevaluacionRepository cursoTevaluacionRepository
+        CursoTevaluacionRepository cursoTevaluacionRepo
                 = ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser());
 
-        EvaluacionRepository evaluacionRepository
+        EvaluacionRepository evaluacionRepo
                 = ContextUtil.getDAO().getEvaluacionRepository(ActionUtil.getDBUser());
 
-        resoloverDiferenciasTipos(parameters, cursoTevaluacionRepository.find(curso), cursoTevaluacionRepository, curso);
-        resolverDiferenciasEvaluaciones(parameters, evaluacionRepository.find(curso), evaluacionRepository, curso);
-        setearPorcentajesEvaluaciones(parameters, evaluacionRepository, curso);
+        resoloverDiferenciasTipos(parameters, cursoTevaluacionRepo.find(curso), cursoTevaluacionRepo, curso);
+        resolverDiferenciasEvaluaciones(parameters, evaluacionRepo.find(curso), evaluacionRepo, curso);
+        setearPorcentajesEvaluaciones(parameters, evaluacionRepo, curso);
         setModoEvaluacion(curso, "A");
         LogUtil.setLogCurso(genericSession.getRut(), curso);
 

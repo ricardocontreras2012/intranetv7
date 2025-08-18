@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import infrastructure.support.action.common.ActionCommonSupport;
-import service.nominatitulacion.titulosygrados.TitulosyGradosNominaNewService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosNewService;
 
 /**
  *
@@ -16,6 +16,6 @@ public class TitulosyGradosNominaNewAction extends ActionCommonSupport {
 
     @Override
     public String action() throws Exception {
-        return new TitulosyGradosNominaNewService().service(getGenericSession(),  getKey());
+        return new TitulosyGradosNewService().service(getGenericSession(),  getKey());
     }
 }

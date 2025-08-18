@@ -27,20 +27,20 @@ public class CommonFuncionarioSearchService {
         WorkSession ws = genericSession.getWorkSession(key);
         List<Funcionario> list = new ArrayList<>();
 
-        FuncionarioRepository funcionarioRepository
+        FuncionarioRepository funcionarioRepo
                 = ContextUtil.getDAO().getFuncionarioRepository(ActionUtil.getDBUser());
 
         if (rut != null) {
-            Funcionario funcionario = funcionarioRepository.find(rut);
+            Funcionario funcionario = funcionarioRepo.find(rut);
             if (funcionario == null) {
-                funcionarioRepository.creaFuncionario(rut);
-                funcionario = funcionarioRepository.find(rut);
+                funcionarioRepo.creaFuncionario(rut);
+                funcionario = funcionarioRepo.find(rut);
             }
             
             list.add(funcionario);
 
         } else {
-            list = funcionarioRepository.find(cleanName(paterno));
+            list = funcionarioRepo.find(cleanName(paterno));
         }   
         
         ws.setFuncionarioList(list);

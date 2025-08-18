@@ -6,7 +6,7 @@
 package action.registradorcurricular;
 
 import java.io.InputStream;
-import service.certificacion.registradorcurricular.RegistradorCurricularCertificacionEmitirISO27001Service;
+import service.certificacion.registradorcurricular.RegistradorCurriculaEmitirISO27001Service;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.AppStaticsUtil;
 import infrastructure.util.common.CommonCertificacionUtil;
@@ -31,7 +31,7 @@ public class RegistradorCurricularCertificacionEmitirISO27001Action extends Acti
      */
     @Override
     public String action() throws Exception {
-        RegistradorCurricularCertificacionEmitirISO27001Service serviceCert = new RegistradorCurricularCertificacionEmitirISO27001Service();
+        RegistradorCurriculaEmitirISO27001Service serviceCert = new RegistradorCurriculaEmitirISO27001Service();
         
         Integer folio = CommonCertificacionUtil.getFolio();
         description = AppStaticsUtil.PDF_MIME;

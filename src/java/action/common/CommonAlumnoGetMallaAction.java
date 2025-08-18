@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.alumno.CommonAlumnoGetMallaService;
+import service.alumno.GetMallaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonAlumnoGetMallaAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonAlumnoGetMallaService().service(getGenericSession(), getKey());
+        return new GetMallaService().service(getGenericSession(), getKey());
     }
 }

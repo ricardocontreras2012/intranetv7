@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.profesor.CommonProfesorGetMisDatosService;
+import service.profesor.GetMisDatosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonProfesorGetMisDatosAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonProfesorGetMisDatosService().service(getGenericSession(), getKey());
+        return new GetMisDatosService().service(getGenericSession(), getKey());
     }
 }

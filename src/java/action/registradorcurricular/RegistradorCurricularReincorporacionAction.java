@@ -9,7 +9,7 @@
  */
 package action.registradorcurricular;
 
-import service.reincorporacion.registradorcurricular.RegistradorCurricularReincorporacionService;
+import service.reincorporacion.registradorcurricular.RegistradorCurricularReincorporarService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 
@@ -30,7 +30,7 @@ public class RegistradorCurricularReincorporacionAction extends ActionCommonSupp
      */
     @Override
     public String action() throws Exception {        
-        new RegistradorCurricularReincorporacionService().service(getGenericSession(), tipo, getKey());
+        new RegistradorCurricularReincorporarService().service(getGenericSession(), tipo, getKey());
         return SUCCESS;
     }
 

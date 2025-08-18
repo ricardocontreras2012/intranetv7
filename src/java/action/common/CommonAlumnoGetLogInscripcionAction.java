@@ -6,7 +6,7 @@
 package action.common;
 
 import domain.model.LogInscripcion;
-import service.alumno.CommonAlumnoGetLogInscripcionService;
+import service.alumno.GetLogInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public final class CommonAlumnoGetLogInscripcionAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {              
-        logInscripcionList =  new CommonAlumnoGetLogInscripcionService().service(getGenericSession(), getKey(), this.sem, this.agno);
+        logInscripcionList =  new GetLogInscripcionService().service(getGenericSession(), getKey(), this.sem, this.agno);
         return SUCCESS;
     }
 

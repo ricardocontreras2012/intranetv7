@@ -7,7 +7,7 @@ package action.common;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.io.InputStream;
-import service.alumno.CommonAlumnoGetFotoService;
+import service.alumno.GetFotoService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -28,7 +28,7 @@ public final class CommonAlumnoGetFotoAction extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        image = new CommonAlumnoGetFotoService().service(getGenericSession(), getKey());
+        image = new GetFotoService().service(getGenericSession(), getKey());
         return SUCCESS;
     }
 

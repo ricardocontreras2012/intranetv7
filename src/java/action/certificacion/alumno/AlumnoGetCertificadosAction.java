@@ -1,0 +1,31 @@
+/*
+ * @(#)AlumnoGetCertificadosAction.java
+ *
+ * Copyright (c) 2025 FAE-USACH
+ */
+package action.certificacion.alumno;
+
+import service.certificacion.alumno.AlumnoGetCertificadosService;
+import session.Manager;
+import infrastructure.support.action.common.ActionCommonSupport;
+
+/**
+ * Procesa el action mapeado del request a la URL AlumnoCertificacionGetTramites
+ *
+ * @author Ricardo Contreras S.
+ * @version 7, 28/05/2012
+ */
+public final class AlumnoGetCertificadosAction extends ActionCommonSupport {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Method description
+     *
+     * @return Action status.
+     */
+    @Override
+    public String action(){
+        return new AlumnoGetCertificadosService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+    }
+}

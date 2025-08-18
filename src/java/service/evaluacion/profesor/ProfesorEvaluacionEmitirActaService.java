@@ -14,7 +14,6 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
-import domain.repository.ActaCalificacionRepository;
 
 /**
  * Class description
@@ -35,11 +34,9 @@ public final class ProfesorEvaluacionEmitirActaService {
     public String service(ActionCommonSupport action, GenericSession genericSession, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
-        ActaCalificacionRepository actaRepository
-                = ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser());
-
+        
         beginTransaction(ActionUtil.getDBUser());
-        actaRepository.emiteActas(ws.getCurso());
+        ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).emiteActas(ws.getCurso());
         commitTransaction();
         LogUtil.setLogCurso(genericSession.getRut(), ws.getCurso());
         action.addActionMessage(action.getText("message.acta.emitida"));

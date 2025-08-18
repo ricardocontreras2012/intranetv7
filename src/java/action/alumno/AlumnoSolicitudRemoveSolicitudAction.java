@@ -5,7 +5,7 @@
  */
 package action.alumno;
 
-import service.solicitud.alumno.AlumnoSolicitudRemoveSolicitudService;
+import service.solicitud.alumno.AlumnoRemoveSolicitudService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class AlumnoSolicitudRemoveSolicitudAction extends ActionParameterA
      */
     @Override
     public String action() throws Exception {
-        return new AlumnoSolicitudRemoveSolicitudService().service(getGenericSession(), getMapParameters(), getKey());
+        return new AlumnoRemoveSolicitudService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

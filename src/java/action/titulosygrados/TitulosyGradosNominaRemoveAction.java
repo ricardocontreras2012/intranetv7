@@ -6,7 +6,7 @@
 package action.titulosygrados;
 
 import domain.model.ExpedienteLogro;
-import service.nominatitulacion.titulosygrados.TitulosyGradosNominaRemoveService;
+import service.nominatitulacion.titulosygrados.TitulosyGradosRemoveService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -34,7 +34,7 @@ public class TitulosyGradosNominaRemoveAction extends ActionParameterAwareSuppor
         nomina = expediente.getNomina().getExpnNumero();
         tipo = expediente.getPlanLogro().getLogro().getLogrCod();
 
-        return new TitulosyGradosNominaRemoveService().service(getGenericSession(), getMapParameters(), agno, nomina, tipo, getKey());
+        return new TitulosyGradosRemoveService().service(getGenericSession(), getMapParameters(), agno, nomina, tipo, getKey());
     }
 
     public Integer getTipo() {

@@ -33,9 +33,9 @@ public final class CommonEstadisticasAlumnosxCalidadService {
      * @return
      */
     public List<Ccalidad> service(Map<String, Object> report, Integer agno, Integer calidad){
-        CcalidadRepository ccalidadRepository
+        CcalidadRepository ccalidadRepo
                 = ContextUtil.getDAO().getCcalidadRepository(ActionUtil.getDBUser());
-        List<Ccalidad> nomina = ccalidadRepository.findxCalidad(agno, calidad);
+        List<Ccalidad> nomina = ccalidadRepo.findxCalidad(agno, calidad);
 
         report.put("fecha", getDate(DATE_FULL_FORMAT));
         report.put("logoUsach",

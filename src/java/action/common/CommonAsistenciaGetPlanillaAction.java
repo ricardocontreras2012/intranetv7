@@ -5,7 +5,7 @@
  */
 package action.common;
 
-import service.asistencia.CommonAsistenciaGetPlanillaService;
+import service.asistencia.GetPlanillaService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class CommonAsistenciaGetPlanillaAction extends ActionCommonSupport
      */
     @Override
     public String action() throws Exception {
-        return new CommonAsistenciaGetPlanillaService().service(getGenericSession(), getKey());
+        return new GetPlanillaService().service(getGenericSession(), getKey());
     }
 }

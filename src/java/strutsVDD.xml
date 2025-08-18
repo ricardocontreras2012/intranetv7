@@ -54,7 +54,7 @@
 
     <package name="intranetViceDecanoDocenciaActions" extends="intranetViceDecanoDocenciaInterceptors">
 
-        <action name="ViceDecanoDocenciaLogin" class="action.vicedecano.ViceDecanoLoginAction" method="execute">
+        <action name="ViceDecanoDocenciaLogin" class="action.login.vicedecano.ViceDecanoLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

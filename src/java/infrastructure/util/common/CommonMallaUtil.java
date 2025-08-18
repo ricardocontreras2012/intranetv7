@@ -335,11 +335,11 @@ public final class CommonMallaUtil {
      * @param key
      */
     public static void getCalificacionRequisitoAdicionalLogroionales(GenericSession genericSession, Integer adicional, String key) {
-        List<CalificacionLogroAdicional> lista = genericSession.getMallaContainer().getCalificacionRequisitoAdicionalLogroList().stream()
+        List<CalificacionLogroAdicional> lista = genericSession.getMallaContainer().getcalificacionLogroAdicionalList().stream()
                 .filter(calificacion -> calificacion.getId().getClaReq() == adicional.intValue()) // Filtra las calificaciones que coinciden con el requisito adicional
                 .collect(Collectors.toList()); // Recolecta los resultados en una lista
 
-        genericSession.getWorkSession(key).getAluCar().setCalificacionRequisitoAdicionalLogroList(lista); // Asigna la lista filtrada
+        genericSession.getWorkSession(key).getAluCar().setcalificacionLogroAdicionalList(lista); // Asigna la lista filtrada
     }
 
     /**

@@ -70,7 +70,7 @@
             <result name="success">/jsp/users/coordinadorPractica/id/coordinadorPracticaIdHomePage.jsp
             </result>
         </action>
-        <action name="CoordinadorPracticaLogin" class="action.coordinadorpractica.CoordinadorPracticaLoginAction"
+        <action name="CoordinadorPracticaLogin" class="action.login.coordinadorpractica.CoordinadorPracticaLoginAction"
                 method="execute">
             <result name="success">/jsp/users/coordinadorPractica/id/coordinadorPracticaIdHomePage.jsp
             </result>

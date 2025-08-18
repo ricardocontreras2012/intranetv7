@@ -41,7 +41,7 @@ public class EmitirActaRectificatoriaService {
         Integer folio;
         folio = crearActa(practica, agno, sem, porc_emp, porc_coord);
         
-        PracticaRepository practicaRepository = ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser());
+        PracticaRepository practicaRepo = ContextUtil.getDAO().getPracticaRepository(ActionUtil.getDBUser());
 
         beginTransaction(ActionUtil.getDBUser());
         IntStream.range(0, ws.getPracticaList().size())
@@ -50,7 +50,7 @@ public class EmitirActaRectificatoriaService {
                 BigDecimal notaEmp = new BigDecimal(parameters.get("emp_" + i)[0].replace(",", "."));
                 BigDecimal notaCoord = new BigDecimal(parameters.get("coord_" + i)[0].replace(",", "."));
 
-                practicaRepository.agregarNomina(
+                practicaRepo.agregarNomina(
                         ws.getPracticaList().get(i).getAluCar().getId(), folio, notaEmp, notaCoord);
             });
         commitTransaction();

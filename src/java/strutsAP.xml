@@ -55,7 +55,7 @@
     </package>
 
     <package name="intranetApoyoActions" extends="intranetApoyoInterceptors">
-        <action name="ApoyoLogin" class="action.apoyo.ApoyoLoginAction" method="execute">
+        <action name="ApoyoLogin" class="action.login.apoyo.ApoyoLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

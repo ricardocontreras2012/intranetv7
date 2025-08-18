@@ -117,14 +117,14 @@ public final class CommonEncuestaPrintGroupService {
             Document document, PdfContentByte cb, Image image)
             throws Exception {
 
-        RespEnctaCursoRepository respEnctaCursoRepository
+        RespEnctaCursoRepository respEnctaCursoRepo
                 = ContextUtil.getDAO().getRespEnctaCursoRepository(ActionUtil.getDBUser());
-        ComentarioEncuestaDocenteRepository comenEnctaRepository
+        ComentarioEncuestaDocenteRepository comenEnctaRepo
                 = ContextUtil.getDAO().getComentarioEncuestaDocenteRepository(ActionUtil.getDBUser());
         
         /// OJO se puso 0 e I mientras
-        List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoRepository.find(curso.getId(),0, "I");
-        List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaRepository.find(curso,0, "I");
+        List<RespEnctaCursoView> respEnctaCursoViewList = respEnctaCursoRepo.find(curso.getId(),0, "I");
+        List<ComentarioEncuestaDocente> comenEnctaList = comenEnctaRepo.find(curso,0, "I");
 
         if (n > 0) {
             document.newPage();

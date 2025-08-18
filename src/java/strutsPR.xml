@@ -68,7 +68,7 @@
                          class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="ProfesorLogin" class="action.profesor.ProfesorLoginAction" method="execute">
+        <action name="ProfesorLogin" class="action.login.profesor.ProfesorLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
@@ -89,7 +89,7 @@
             </result>
         </action>
 
-        <action name="ProfesorLoginStackDatosPersonales" class="action.profesor.ProfesorLoginStackDatosPersonalesAction"
+        <action name="ProfesorLoginStackDatosPersonales" class="action.login.profesor.ProfesorGetDatosPersonalesStackAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonProfesorGetMisDatos</param>
@@ -99,6 +99,10 @@
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>
             </result>
+        </action>
+        
+        <action name="ProfesorLoginWelcome" class="action.common.CommonDummyAction" method="execute">
+            <result name="success">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
         </action>
 
         <action name="ProfesorMisDatosSave" class="action.profesor.ProfesorMisDatosSaveAction" method="execute">
@@ -149,9 +153,7 @@
             <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
         </action>
 
-        <action name="ProfesorLoginWelcome" class="action.profesor.ProfesorLoginWelcomeAction" method="execute">
-            <result name="success">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
-        </action>
+        
 
         <!--
 

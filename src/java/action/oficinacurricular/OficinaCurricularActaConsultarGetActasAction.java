@@ -5,7 +5,7 @@
  */
 package action.oficinacurricular;
 
-import service.acta.oficinacurricular.OficinaCurricularActaConsultarGetActasService;
+import service.acta.oficinacurricular.OficinaCurricularGetActasService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -18,7 +18,7 @@ public class OficinaCurricularActaConsultarGetActasAction extends ActionCommonSu
 
     @Override
     public String action() throws Exception {
-        return new OficinaCurricularActaConsultarGetActasService().service(getGenericSession(), flag, getKey());
+        return new OficinaCurricularGetActasService().service(getGenericSession(), flag, getKey());
     }
 
     public void setFlag(String flag) {

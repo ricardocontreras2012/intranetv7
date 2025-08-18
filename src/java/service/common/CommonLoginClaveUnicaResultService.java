@@ -75,10 +75,10 @@ public class CommonLoginClaveUnicaResultService {
 
                 switch (userType) {
                     case "AL":
-                        retValue = CommonAlumnoUtil.login(rut, "", key, sesion, SystemParametersUtil.INGRESO_CLAVE_UNICA);
+                        retValue = CommonAlumnoUtil.login(rut, "", key, sesion, SystemParametersUtil.LOGIN_CLAVE_UNICA);
                         break;
                     case "PR":
-                        retValue = CommonProfesorUtil.login(rut, "", key, sesion, SystemParametersUtil.INGRESO_CLAVE_UNICA);
+                        retValue = CommonProfesorUtil.login(rut, "", key, sesion, SystemParametersUtil.LOGIN_CLAVE_UNICA);
                         break;
                     default:
                         // Tipo de usuario no reconocido
