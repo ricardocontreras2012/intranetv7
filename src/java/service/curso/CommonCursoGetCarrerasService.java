@@ -36,14 +36,14 @@ public final class CommonCursoGetCarrerasService {
         CommonUtil.setAgnoSemAct(ws);
 
         List<Mencion> list = ContextUtil.getDAO().getMencionRepository(ActionUtil.getDBUser()).find(genericSession.getUserType(), genericSession.getRut());
-
+        
         Iterator<Mencion> iter = list.iterator();
         Set<MiCarreraSupport> miCarreraSupportSet = new HashSet<>(0);
 
         while (iter.hasNext()) {
             Mencion mencion = iter.next();
             MiCarreraSupport carrera = new MiCarreraSupport();
-
+            carrera.setMencion(mencion);
             carrera.setEspCod(mencion.getCarrera().getEspecialidad().getEspCod());
             carrera.setRegimen(mencion.getCarrera().getCarRegimen());
             carrera.setNombreCarrera(mencion.getNombreCarreraFull() + " (" + mencion.getCarrera().getCarRegimen() + ')');

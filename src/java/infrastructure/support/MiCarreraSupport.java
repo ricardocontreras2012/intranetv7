@@ -5,6 +5,7 @@
  */
 package infrastructure.support;
 
+import domain.model.Mencion;
 import java.util.Objects;
 
 /**
@@ -19,6 +20,7 @@ public final class MiCarreraSupport {
     private String regimen;
     private String nombreCarrera;
     private Integer tcrCtip;
+    private Mencion mencion;
 
     /**
      *
@@ -86,6 +88,14 @@ public final class MiCarreraSupport {
      */
     public void setTcrCtip(Integer tcrCtip) {
         this.tcrCtip = tcrCtip;
+    }
+
+    public Mencion getMencion() {
+        return mencion;
+    }
+
+    public void setMencion(Mencion mencion) {
+        this.mencion = mencion;
     }
 
     /**
