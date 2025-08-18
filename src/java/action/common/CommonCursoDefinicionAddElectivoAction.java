@@ -20,6 +20,7 @@ public class CommonCursoDefinicionAddElectivoAction extends ActionCommonSupport 
     private String electivo;
     private Integer minor;
     private Integer area;
+    private String tipo;
 
     /**
      * Method description
@@ -29,7 +30,7 @@ public class CommonCursoDefinicionAddElectivoAction extends ActionCommonSupport 
      */
     @Override
     public String action() throws Exception {
-        return new CommonCursoDefinicionAddElectivoService().service(getGenericSession(), asign, elect, electivo, minor, area, getKey());
+        return new CommonCursoDefinicionAddElectivoService().service(getGenericSession(), asign, elect, electivo, minor, area, tipo, getKey());
     }
 
     public void setAsign(Integer asign) {
@@ -50,5 +51,9 @@ public class CommonCursoDefinicionAddElectivoAction extends ActionCommonSupport 
 
     public void setArea(Integer area) {
         this.area = area;
+    }
+    
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

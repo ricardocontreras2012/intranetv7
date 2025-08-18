@@ -19,12 +19,12 @@ import static infrastructure.util.HibernateUtil.commitTransaction;
  * @author Administrador
  */
 public class CommonCursoDefinicionAddElectivoService {
-    public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer minor, Integer area, String key) {
+    public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer minor, Integer area, String tipo, String key) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         String user = ActionUtil.getDBUser();
         beginTransaction(user);
-        ContextUtil.getDAO().getElectivoRepository(user).add(asign,elect, electivo, minor, area, ws.getAgnoAct(), ws.getSemAct());
+        ContextUtil.getDAO().getElectivoRepository(user).add(asign, elect, electivo, minor, area, tipo, ws.getAgnoAct(), ws.getSemAct());
         commitTransaction();
                 
         MiCarreraSupport carrera = ws.getMiCarreraSupport();                        

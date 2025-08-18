@@ -17,10 +17,10 @@ import infrastructure.util.ContextUtil;
  * @author Administrador
  */
 public class CommonCursoDefinicionModifyElectivoService {
-   public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer area, Integer minor, String key) {       
+   public String service(GenericSession genericSession, Integer asign, String elect, String electivo, Integer area, Integer minor, String tipo, String key) {       
         WorkSession ws = genericSession.getWorkSession(key);
               
-        ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).modify(asign,elect, electivo, minor, area, ws.getAgnoAct(), ws.getSemAct());                
+        ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).modify(asign, elect, electivo, minor, area, tipo, ws.getAgnoAct(), ws.getSemAct());                
         MiCarreraSupport carrera = ws.getMiCarreraSupport();                        
         ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()));
         

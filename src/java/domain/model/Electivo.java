@@ -19,6 +19,7 @@ public class Electivo implements Serializable {
     private String eleNom;
     private Integer minor;
     private ElectivoId id;
+    private String eleTipo;
 
     /**
      *
@@ -94,5 +95,13 @@ public class Electivo implements Serializable {
 
     public void setMinor(Integer minor) {
         this.minor = minor;
+    }
+    
+    public String getEleTipo() {
+        return eleTipo;
+    }
+
+    public void setEleTipo(String eleTipo) {
+        this.eleTipo = eleTipo;
     }
 }

@@ -79,9 +79,9 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
     }
 
     @Override
-    public void add(Integer asign, String elect, String electivo, Integer minor, Integer area, Integer agno, Integer sem) {
+    public void add(Integer asign, String elect, String electivo, Integer minor, Integer area, String tipo, Integer agno, Integer sem) {
         // SQL con parámetros
-        String sql = "INSERT INTO electivo(ele_asign, ele_elect, ele_agno, ele_sem, ele_nom, ele_asign_minor, ele_area) VALUES (:asign, :elect, :agno, :sem, :electivo, :minor, :area)";
+        String sql = "INSERT INTO electivo(ele_asign, ele_elect, ele_agno, ele_sem, ele_nom, ele_asign_minor, ele_area, ele_tipo) VALUES (:asign, :elect, :agno, :sem, :electivo, :minor, :area, :tipo)";
 
         // Crear insert con Hibernate
         Query query = getSession().createSQLQuery(sql);
@@ -92,6 +92,7 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
         query.setParameter("agno", agno, StandardBasicTypes.INTEGER);
         query.setParameter("sem", sem, StandardBasicTypes.INTEGER);
         query.setParameter("electivo", electivo, StandardBasicTypes.STRING);
+        query.setParameter("tipo", tipo, StandardBasicTypes.STRING);
         // Si minor es 0 o null, pasamos null, de lo contrario pasamos el valor
         query.setParameter("minor", minor == null || minor == 0 ? null : minor, StandardBasicTypes.INTEGER);
         query.setParameter("area", area, StandardBasicTypes.INTEGER);
@@ -101,16 +102,27 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
     }
 
     @Override
-    public void modify(Integer asign, String elect, String electivo, Integer minor, Integer area, Integer agno, Integer sem) {
+    public void modify(Integer asign, String elect, String electivo, Integer minor, Integer area, String tipo, Integer agno, Integer sem) {
+        try{
         String sql = "UPDATE electivo SET "
                 + "ele_nom = :electivo, "
                 + "ele_asign_minor = :minor, "
-                + "ele_area = :area "
+                + "ele_area = :area, "
+                + "ele_tipo = :tipo "
                 + "WHERE ele_asign = :asign "
                 + "AND ele_elect = :elect "
                 + "AND ele_agno = :agno "
                 + "AND ele_sem = :sem";
 
+        
+            System.out.println("KKKKele_nom = "+electivo
+                + "ele_asign_minor = "+minor
+                + "ele_area = "+area
+                + "ele_tipo = "+tipo
+                + "WHERE ele_asign = "+asign
+                + "AND ele_elect = "+elect
+                + "AND ele_agno = "+agno
+                + "AND ele_sem = "+sem);
         // Crear el update con Hibernate
         SQLQuery query = getSession().createSQLQuery(sql);
 
@@ -118,6 +130,7 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
         query.setParameter("electivo", electivo, StandardBasicTypes.STRING);
         query.setParameter("minor", minor == null || minor <= 0 ? null : minor, StandardBasicTypes.INTEGER); // Si minor es null o <= 0, se pasa como null
         query.setParameter("area", area, StandardBasicTypes.INTEGER);
+        query.setParameter("tipo", tipo, StandardBasicTypes.STRING);
         query.setParameter("asign", asign, StandardBasicTypes.INTEGER);
         query.setParameter("elect", elect, StandardBasicTypes.STRING);
         query.setParameter("agno", agno, StandardBasicTypes.INTEGER);
@@ -125,6 +138,9 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
 
         // Ejecutar la actualización
         query.executeUpdate();
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 
     @Override

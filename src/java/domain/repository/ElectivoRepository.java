@@ -28,7 +28,7 @@ public interface ElectivoRepository extends CrudGenericDAO<Electivo, Long> {
      */
     Electivo find(Integer asign, String elect, Integer agno, Integer sem);
     List<Electivo> find(Integer tcarrera, Integer especialidad, Integer agno, Integer sem, Integer rut, String perfil);
-    void add(Integer asign, String elect, String electivo, Integer minor, Integer area, Integer agno, Integer sem);
-    void modify(Integer asign, String elect, String electivo, Integer minor, Integer area, Integer agno, Integer sem);
+    void add(Integer asign, String elect, String electivo, Integer minor, Integer area, String Tipo, Integer agno, Integer sem);
+    void modify(Integer asign, String elect, String electivo, Integer minor, Integer area, String Tipo, Integer agno, Integer sem);
     void delete(Integer asign, String elect, Integer agno, Integer sem);
 }

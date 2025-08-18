@@ -73,22 +73,35 @@
                                         <th scope="col" style="width: 2%"></th>
                                         <th scope="col" style="width: 6%"><s:text name="label.asignatura"/></th>
                                         <th scope="col" style="width: 2%">Electividad</th>
-                                        <th scope="col" style="width: 78%"><s:text name="label.name"/></th>
+                                        <th scope="col" style="width: 72%"><s:text name="label.name"/></th>
                                         <th scope="col" style="width: 6%">Area</th>
                                         <th scope="col" style="width: 6%">Minor</th>
+                                        <s:if test="true">
+                                            <th scope="col" style="width: 6%">Tipo</th>
+                                        </s:if>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <s:iterator value="#session.genericSession.getWorkSession(key).electivoList" status="row">
-                                        <tr>
+                                        <s:if test="eleTipo == 'PRO'"><tr style="background-color:#629aed"></s:if>
+                                        <s:elseif test="eleTipo == 'COM'"><tr style="background-color:#3ec8a5"></s:elseif>
+                                        <s:elseif test="eleTipo == 'PRA'"><tr style="background-color:#ffad52"></s:elseif>
+                                        <s:else><tr></s:else>
                                             <td><input type="checkbox" id="ck_<s:property value="#row.count -1"/>"
                                                        name="ck_<s:property value="#row.count -1"/>"/></td>
-
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>')"><s:property value="id.eleAsign"/></a></td>
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>')"><s:property value="id.eleElect"/></a></td>                                            
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>')"><s:property value="eleNom"/></a></td>
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>')"><s:property value="area.areDes"/></a></td>
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>')"><s:property value="minor.asiCod"/></a></td>
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="id.eleAsign"/></a></td>
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="id.eleElect"/></a></td>                                            
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="eleNom"/></a></td>
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="area.areDes"/></a></td>
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="minor.asiCod"/></a></td>
+                                            <s:if test="true">
+                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')">
+                                                    <s:if test="eleTipo == 'PRO'">Profundización</s:if>
+                                                    <s:if test="eleTipo == 'COM'">Complementario</s:if>
+                                                    <s:if test="eleTipo == 'PRA'">Práctico</s:if>
+                                                </a></td>
+                                            </s:if>
                                         </tr>
                                     </s:iterator>
                                 </tbody>
@@ -172,6 +185,18 @@
                                                         </select>
                                                     </td>
                                                 </tr>
+                                                <s:if test="true">
+                                                <tr>
+                                                    <td>Tipo</td>
+                                                    <td><select id="tipo" name="tipo" class="form-control">
+                                                            <option value="">Seleccione Tipo</option>
+                                                            <option value="PRO">Profundización</option>
+                                                            <option value="COM">Complementario</option>
+                                                            <option value="PRA">Práctico</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                </s:if>
 
                                                 </tbody>
                                             </table>
@@ -237,6 +262,19 @@
                                                             </select>
                                                         </td>
                                                     </tr>
+                                                    
+                                                    <s:if test="true">
+                                                    <tr>
+                                                        <td>Tipo</td>
+                                                        <td><select id="tipoMod" name="tipoMod" class="form-control">
+                                                                <option value="">Seleccione Tipo</option>
+                                                                <option value="PRO">Profundización</option>
+                                                                <option value="COM">Complementario</option>
+                                                                <option value="PRA">Práctico</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                    </s:if>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -20,6 +20,7 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
     private String electivoMod;
     private Integer minorMod;
     private Integer areaMod;
+    private String tipoMod;
     /**
      * Method description
      *
@@ -28,7 +29,7 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return new CommonCursoDefinicionModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, getKey());
+        return new CommonCursoDefinicionModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, tipoMod, getKey());
     }
 
     public void setAsignMod(Integer asignMod) {
@@ -45,10 +46,14 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
 
     public void setAreaMod(Integer areaMod) {
         this.areaMod = areaMod;
-    }    
+    }
 
     public void setMinorMod(Integer minorMod) {
         this.minorMod = minorMod;
+    }
+    
+    public void setTipoMod(String tipoMod) {
+        this.tipoMod = tipoMod;
     }
 }
 
