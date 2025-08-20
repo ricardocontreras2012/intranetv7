@@ -78,21 +78,21 @@
             <result name="success">/jsp/users/jefeArea/id/jefeAreaIdBienvenida.jsp
             </result>
         </action>
-        <action name="JefeAreaGetCursosReporte" class="action.jefearea.JefeAreaGetCursosAction" method="execute">
+        <action name="JefeAreaGetCursosReporte" class="action.curso.jefearea.JefeAreaGetCursosAction" method="execute">
             <result name="success">/jsp/common/reporte/commonReporteListaCursoAgnoSem.jsp
             </result>
         </action>
-        <action name="JefeAreaGetCursosEncuesta" class="action.jefearea.JefeAreaGetCursosEncuestaAction"
+        <action name="JefeAreaGetCursosEncuesta" class="action.curso.jefearea.JefeAreaGetCursosEncuestaAction"
                 method="execute">
             <result name="success">/jsp/common/encuesta/commonEncuestaListaCursoAgnoSem.jsp
             </result>
         </action>
-        <action name="JefeAreaReportesGetResumen" class="action.jefearea.JefeAreaReportesGetResumenAction"
+        <action name="JefeAreaReportesGetResumen" class="action.reporteclase.jefearea.GetResumenAction"
                 method="execute">
             <result name="success">/jsp/common/reporte/commonReporteResumenListaCursoAgnoSem.jsp
             </result>
         </action>
-        <action name="JefeAreaMaterialesGetResumen" class="action.jefearea.JefeAreaMaterialesGetResumenAction"
+        <action name="JefeAreaMaterialesGetResumen" class="action.material.jefearea.GetResumenAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialResumenListaCursoAgnoSem.jsp
             </result>

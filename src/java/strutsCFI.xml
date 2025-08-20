@@ -68,7 +68,7 @@
         </action>
 
         <action name="FormacionIntegralGetCursos"
-                class="action.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemAction" method="execute">
+                class="action.curso.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemAction" method="execute">
             <!--result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result-->
 
@@ -77,7 +77,7 @@
         </action>
 
         <action name="FormacionIntegralGetCursosNomina"
-                class="action.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemAction" method="execute">
+                class="action.curso.formacionintegral.FormacionIntegralCursoGetCursosxAgnoSemAction" method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursosxAgnoSem.jsp
             </result>
         </action>

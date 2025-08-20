@@ -34,6 +34,8 @@ import infrastructure.util.ContextUtil;
 import infrastructure.util.DateUtil;
 import infrastructure.util.SystemParametersUtil;
 import infrastructure.util.common.CommonArchivoUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -115,34 +117,18 @@ public class ConvenioSupport {
         nombrePrestador = convenio.getFuncionario().getNombre();
         dirPrestador = convenio.getFuncionario().getFunDireccion();
 
-        switch (DateUtil.getFormattedDate(convenio.getConvFecha(), "yyyy")) {
-            case "2020":
-                retencion = "10,75";
-                break;
-            case "2021":
-                retencion = "11,50";
-                break;
-            case "2022":
-                retencion = "12,25";
-                break;
-            case "2023":
-                retencion = "13,00";
-                break;
-            case "2024":
-                retencion = "13,75";
-                break;
-            case "2025":
-                retencion = "14,50";
-                break;
-            case "2026":
-                retencion = "15,25";
-                break;
-            case "2027":
-                retencion = "16,00";
-                break;
-            default:
-                retencion = "17,00";
-        }
+        Map<String, String> retenciones = new HashMap<>();
+        retenciones.put("2020", "10,75");
+        retenciones.put("2021", "11,50");
+        retenciones.put("2022", "12,25");
+        retenciones.put("2023", "13,00");
+        retenciones.put("2024", "13,75");
+        retenciones.put("2025", "14,50");
+        retenciones.put("2026", "15,25");
+        retenciones.put("2027", "16,00");
+
+        String anio = DateUtil.getFormattedDate(convenio.getConvFecha(), "yyyy");
+        retencion = retenciones.getOrDefault(anio, "17,00");
 
         switch (administrado) {
             case "SDT":
@@ -176,49 +162,48 @@ public class ConvenioSupport {
 
         String cab = "\nEn Santiago, a " + fecha.toLowerCase(ContextUtil.getLocale()) + ", comparecen " + donDonaAutoridad + " " + nombreFirma + ", cédula nacional de identidad " + FormatUtil.getRutFormateado(rutJefe) + ", en nombre y representación de " + aTraves + ", en adelante ”" + aTravesShort + "”, RUT " + rutUnidad + ", y " + donDona.toLowerCase(ContextUtil.getLocale()) + ": " + nombrePrestador + ", RUT " + FormatUtil.getRutFormateado(rutPrestador) + ", domiciliado en: " + dirPrestador + " en adelante 'el prestador' y exponen lo siguiente:";
 
-        String p1 = "PRIMERO: ANTECEDENTES. " + aTravesShort + " es una persona jurídica de derecho privado que tiene por objeto " + objUnidad
+        String parr1 = "PRIMERO: ANTECEDENTES. " + aTravesShort + " es una persona jurídica de derecho privado que tiene por objeto " + objUnidad
                 + "\nEl " + unidadMayorInitCap + " se encuentra realizando el siguiente proyecto a través de " + aTraves + ": " + nombreProyecto + ", proyecto " + codigoProyecto + ", bajo la dirección " + srSraJefe + nombreFirma + ".";
 
-        String p2 = "SEGUNDO: OBJETO. Por el presente instrumento " + donDona + nombrePrestador + ", se compromete a prestar para " + aTravesShort + " la función de: " + funcion + " del programa " + nombreProyecto + ", a partir de " + fechaInicio + " hasta " + fechaTermino + ". En la prestación de sus servicios, el prestador deberá respetar las normas internas definidas por " + aTravesShort + " y el jefe del proyecto.";
+        String parr2 = "SEGUNDO: OBJETO. Por el presente instrumento " + donDona + nombrePrestador + ", se compromete a prestar para " + aTravesShort + " la función de: " + funcion + " del programa " + nombreProyecto + ", a partir de " + fechaInicio + " hasta " + fechaTermino + ". En la prestación de sus servicios, el prestador deberá respetar las normas internas definidas por " + aTravesShort + " y el jefe del proyecto.";
 
-        String p3 = "TERCERO: HONORARIOS. Por la prestación de los servicios " + donDona + nombrePrestador + ", contra la presentación de la respectiva boleta de honorarios, percibirá de parte de " + aTraves + " la suma de $" + FormatUtil.getIntegerFormateado(monto) + ".-(" + montoFormateado.toLowerCase(ContextUtil.getLocale()) + " pesos) " + ("G".equals(tipoPago) ? "global" : "mensual") + (obsPago == null ? "" : " " + obsPago) + ", de la cual se retendrá un " + retencion + "% por concepto de impuesto a la renta, establecido en la ley tributaria vigente al momento de la emisión del documento tributario.";
+        String parr3 = "TERCERO: HONORARIOS. Por la prestación de los servicios " + donDona + nombrePrestador + ", contra la presentación de la respectiva boleta de honorarios, percibirá de parte de " + aTraves + " la suma de $" + FormatUtil.getIntegerFormateado(monto) + ".-(" + montoFormateado.toLowerCase(ContextUtil.getLocale()) + " pesos) " + ("G".equals(tipoPago) ? "global" : "mensual") + (obsPago == null ? "" : " " + obsPago) + ", de la cual se retendrá un " + retencion + "% por concepto de impuesto a la renta, establecido en la ley tributaria vigente al momento de la emisión del documento tributario.";
 
-        String p4 = "CUARTO: CONFIDENCIALIDAD Y ÉTICA.";
-        String p4_a = "El Prestador declara conocer y aceptar que toda información que, con motivo del contrato de prestación de servicios profesionales antes señalado, le sea entregada o resulte de la ejecución de este (ambas en adelante, la información “Confidencial”), sólo podrá ser utilizada para los fines señalados en dicho contrato, lo que deberá interpretarse siempre en sentido restrictivo, de modo tal, que la información recabada, recibida o a la que tenga acceso, deberá aplicarse o destinarse exclusiva y únicamente al objeto materia del señalado contrato de prestación de servicios profesionales.";
-        String p4_b = "Por información “Confidencial”, se entenderá toda información que no sea de conocimiento público, tales como los documentos, programas de trabajo, procedimientos, contratos de los trabajadores, manuales operativos o protocolares de las Empresas Asociadas a " + aTravesShort + ", ó cualquier otro que documente los antecedentes previos, desarrollo y resultados de los servicios contratados y en general, toda la información que se genere, con ocasión del referido contrato de prestación de servicios. Dicha información deberá mantenerse bajo la más estricta confidencialidad en los términos establecidos en la Ley Nº 19.628.";
-        String p4_c = "A no ser que de otro modo fuese específicamente estipulado en el presente acuerdo, los Prestadores no podrán, sin contar con el permiso previo manifestado por escrito por " + aTravesShort + ", suministrar ninguna copia de la información Confidencial a ninguna persona o entidad, que no participe directa y efectivamente del proceso de evaluación a realizar. Además, las Partes harán sus mejores esfuerzos en limitar el conocimiento, y el acceso a dicha información, solamente a aquellos profesionales quienes, dentro del curso y alcance ordinario del trabajo, requieren tener conocimiento de ella.";
-        String p4_d = "El prestador, por el presente acuerdo, se obliga a: (i) usar la Información Confidencial única y exclusivamente para los efectos de cumplir en forma adecuada con sus obligaciones y realización de actos bajo el Contrato de Prestación de Servicios que lo vincula con " + aTravesShort + "; (ii) mantener en estricta reserva y manejar confidencialmente respecto de cualquier persona natural o jurídica, la Información Confidencial a que acceda; (iii) custodiar y proteger diligentemente toda la Información Confidencial a que tenga acceso o conocimiento o que se encuentre en su poder; así como custodiar y proteger diligentemente, de igual forma, todos y cada uno de los soportes, de cualquier especie o formato, en los que conste o se contenga parte cualquiera de la Información Confidencial; iv) abstenerse de hacer copias o reproducciones de la Información Confidencial que no sean estrictamente necesarias para los efectos de la prestación de sus servicios profesionales; v) no impugnar ni pretender titularidad o autoría de ninguna especie sobre la Información Confidencial; vi) no solicitar privilegio de propiedad intelectual o industrial alguna relativo a la Información Confidencial; vii) no impugnar las solicitudes y tramitaciones de obtención de privilegios de propiedad intelectual o industrial de la otra Parte; viii) comunicar inmediatamente y por escrito a la otra Parte acerca de la ocurrencia de cualquier acto, hecho u omisión que constituya una infracción a las obligaciones asumidas precedentemente, sea por acciones u omisiones propias o de terceros; e, ix) impetrar todas las medidas que fueren necesarias o convenientes y cooperar para que, en el evento que por un acto, hecho u omisión suya o de los terceros antes señalados, todo o parte de la Información Confidencial hubiere sido divulgada en contravención a lo establecido en este Acuerdo. "
+        String parr4 = "CUARTO: CONFIDENCIALIDAD Y ÉTICA.";
+        String parr4A = "El Prestador declara conocer y aceptar que toda información que, con motivo del contrato de prestación de servicios profesionales antes señalado, le sea entregada o resulte de la ejecución de este (ambas en adelante, la información “Confidencial”), sólo podrá ser utilizada para los fines señalados en dicho contrato, lo que deberá interpretarse siempre en sentido restrictivo, de modo tal, que la información recabada, recibida o a la que tenga acceso, deberá aplicarse o destinarse exclusiva y únicamente al objeto materia del señalado contrato de prestación de servicios profesionales.";
+        String parr4B = "Por información “Confidencial”, se entenderá toda información que no sea de conocimiento público, tales como los documentos, programas de trabajo, procedimientos, contratos de los trabajadores, manuales operativos o protocolares de las Empresas Asociadas a " + aTravesShort + ", ó cualquier otro que documente los antecedentes previos, desarrollo y resultados de los servicios contratados y en general, toda la información que se genere, con ocasión del referido contrato de prestación de servicios. Dicha información deberá mantenerse bajo la más estricta confidencialidad en los términos establecidos en la Ley Nº 19.628.";
+        String parr4C = "A no ser que de otro modo fuese específicamente estipulado en el presente acuerdo, los Prestadores no podrán, sin contar con el permiso previo manifestado por escrito por " + aTravesShort + ", suministrar ninguna copia de la información Confidencial a ninguna persona o entidad, que no participe directa y efectivamente del proceso de evaluación a realizar. Además, las Partes harán sus mejores esfuerzos en limitar el conocimiento, y el acceso a dicha información, solamente a aquellos profesionales quienes, dentro del curso y alcance ordinario del trabajo, requieren tener conocimiento de ella.";
+        String parr4D = "El prestador, por el presente acuerdo, se obliga a: (i) usar la Información Confidencial única y exclusivamente para los efectos de cumplir en forma adecuada con sus obligaciones y realización de actos bajo el Contrato de Prestación de Servicios que lo vincula con " + aTravesShort + "; (ii) mantener en estricta reserva y manejar confidencialmente respecto de cualquier persona natural o jurídica, la Información Confidencial a que acceda; (iii) custodiar y proteger diligentemente toda la Información Confidencial a que tenga acceso o conocimiento o que se encuentre en su poder; así como custodiar y proteger diligentemente, de igual forma, todos y cada uno de los soportes, de cualquier especie o formato, en los que conste o se contenga parte cualquiera de la Información Confidencial; iv) abstenerse de hacer copias o reproducciones de la Información Confidencial que no sean estrictamente necesarias para los efectos de la prestación de sus servicios profesionales; v) no impugnar ni pretender titularidad o autoría de ninguna especie sobre la Información Confidencial; vi) no solicitar privilegio de propiedad intelectual o industrial alguna relativo a la Información Confidencial; vii) no impugnar las solicitudes y tramitaciones de obtención de privilegios de propiedad intelectual o industrial de la otra Parte; viii) comunicar inmediatamente y por escrito a la otra Parte acerca de la ocurrencia de cualquier acto, hecho u omisión que constituya una infracción a las obligaciones asumidas precedentemente, sea por acciones u omisiones propias o de terceros; e, ix) impetrar todas las medidas que fueren necesarias o convenientes y cooperar para que, en el evento que por un acto, hecho u omisión suya o de los terceros antes señalados, todo o parte de la Información Confidencial hubiere sido divulgada en contravención a lo establecido en este Acuerdo. "
                 + "El deber de confidencialidad que debe guardar el Prestador tiene el carácter de permanente, incluso en el evento que no se firme contrato alguno, en el futuro. "
                 + "En lo que al aspecto ético se refiere, el Prestador deberá respetar el secreto profesional y de no revelar, por ningún motivo, en beneficio propio o de terceros, los hechos, datos o circunstancias de que tenga o hubiese tenido conocimiento en el ejercicio de sus labores relativas al contrato de prestación de servicios que lo vincula con " + aTravesShort + ".";
 
-        String p5 = "QUINTO: PROPIEDAD INTELECTUAL E INDUSTRIAL.";
-        String p5_a = "Las partes reconocen que como parte de la naturaleza de las funciones encomendadas, la realización de labores creativas o inventivas. Por lo anterior, la propiedad intelectual e industrial de los productos y resultados del servicio contratado, incluyendo aquellos productos que el prestador haya contribuido a crear o perfeccionar, sean éstos libros, programas computacionales, artículos, memorándums, notas o materiales gráficos, informes, estudios, bases de datos, diseños, memorias o, en general, ideas, marcas, invenciones, procesos, mejoras, entre otros, que sean patentables o protegibles por las leyes de propiedad intelectual o industrial, y que el prestador, sus dependientes y subcontratistas hayan creado o desarrollado durante el curso del presente Contrato o con ocasión de él, son de propiedad de la Universidad de Santiago de Chile, y no podrá ser traspasada a terceros.";
-        String p5_b = "Al término del presente contrato el prestador entregará íntegramente los documentos físicos o electrónicos, normativas, procedimientos, bases de datos, estudios, especificaciones técnicas, términos de referencia, y cualquier otro tipo de información que le hayan sido entregados para los efectos de este Contrato o producidos a causa de este.";
-        String p5_c = "El prestador se obliga a no registrar como propiedad intelectual y/o industrial suya, patentes, creaciones u otras formas de obtener derechos sobre los bienes intelectuales e industriales señalados en el párrafo primero de esta cláusula, aun cuando en dichos productos haya intervenido el trabajador. Si el trabajador ha registrado sobre tales o partes que los componen, propiedad de alguna naturaleza bajo su nombre, deberá ceder dicha propiedad a la Universidad de Santiago de Chile. Lo anterior se entiende sin perjuicio de las acciones legales que pueda impetrar la Universidad de Santiago de Chile como tercera beneficiaria de esta cláusula, o " + aTravesShort + " como contratante, para exigir el cumplimiento de este contrato y/o resarcirse de los daños que pudiere haber sufrido, y perseguir las sanciones civiles y penales que correspondan.";
+        String parr5 = "QUINTO: PROPIEDAD INTELECTUAL E INDUSTRIAL.";
+        String parr5A = "Las partes reconocen que como parte de la naturaleza de las funciones encomendadas, la realización de labores creativas o inventivas. Por lo anterior, la propiedad intelectual e industrial de los productos y resultados del servicio contratado, incluyendo aquellos productos que el prestador haya contribuido a crear o perfeccionar, sean éstos libros, programas computacionales, artículos, memorándums, notas o materiales gráficos, informes, estudios, bases de datos, diseños, memorias o, en general, ideas, marcas, invenciones, procesos, mejoras, entre otros, que sean patentables o protegibles por las leyes de propiedad intelectual o industrial, y que el prestador, sus dependientes y subcontratistas hayan creado o desarrollado durante el curso del presente Contrato o con ocasión de él, son de propiedad de la Universidad de Santiago de Chile, y no podrá ser traspasada a terceros.";
+        String parr5B = "Al término del presente contrato el prestador entregará íntegramente los documentos físicos o electrónicos, normativas, procedimientos, bases de datos, estudios, especificaciones técnicas, términos de referencia, y cualquier otro tipo de información que le hayan sido entregados para los efectos de este Contrato o producidos a causa de este.";
+        String parr5C = "El prestador se obliga a no registrar como propiedad intelectual y/o industrial suya, patentes, creaciones u otras formas de obtener derechos sobre los bienes intelectuales e industriales señalados en el párrafo primero de esta cláusula, aun cuando en dichos productos haya intervenido el trabajador. Si el trabajador ha registrado sobre tales o partes que los componen, propiedad de alguna naturaleza bajo su nombre, deberá ceder dicha propiedad a la Universidad de Santiago de Chile. Lo anterior se entiende sin perjuicio de las acciones legales que pueda impetrar la Universidad de Santiago de Chile como tercera beneficiaria de esta cláusula, o " + aTravesShort + " como contratante, para exigir el cumplimiento de este contrato y/o resarcirse de los daños que pudiere haber sufrido, y perseguir las sanciones civiles y penales que correspondan.";
 
-        String p6 = "SEXTO: CONSTANCIA. Se deja expresa constancia que en el caso en que el prestador del servicio sea funcionario de la Universidad de Santiago de Chile, o que durante la vigencia de este contrato adquiera tal calidad, los servicios independientes y específicos a que se compromete por este contrato deberán realizarse sin interferir ni afectar las funciones que debe ejecutar en su calidad de empleado público ni tampoco su jornada de trabajo en dicha institución.";
-        String p7 = "SÉPTIMO: CLÁUSULA DE SALIDA. " + aTravesShort + " podrá poner término al presente contrato en forma unilateral sin expresión de causa y sin derecho a indemnización a favor del prestador, a través de la sola comunicación escrita o enviada por correo electrónico, percibiendo el prestador del servicio sus honorarios proporcionales al servicio otorgado a la fecha de término según los servicios efectivamente prestados.";
+        String parr6 = "SEXTO: CONSTANCIA. Se deja expresa constancia que en el caso en que el prestador del servicio sea funcionario de la Universidad de Santiago de Chile, o que durante la vigencia de este contrato adquiera tal calidad, los servicios independientes y específicos a que se compromete por este contrato deberán realizarse sin interferir ni afectar las funciones que debe ejecutar en su calidad de empleado público ni tampoco su jornada de trabajo en dicha institución.";
+        String parr7 = "SÉPTIMO: CLÁUSULA DE SALIDA. " + aTravesShort + " podrá poner término al presente contrato en forma unilateral sin expresión de causa y sin derecho a indemnización a favor del prestador, a través de la sola comunicación escrita o enviada por correo electrónico, percibiendo el prestador del servicio sus honorarios proporcionales al servicio otorgado a la fecha de término según los servicios efectivamente prestados.";
 
-        String p8 = "OCTAVO: ARBITRAJE. Cualquier dificultad o controversia que se produzca entre los contratantes respecto de la aplicación, interpretación, duración, validez o ejecución de este contrato o cualquier otro motivo será sometida a arbitraje, conforme al Reglamento Procesal de Arbitraje del Centro de Arbitraje y Mediación de Santiago, vigente al momento de solicitarlo.";
-        String p8_a = "Las partes confieren poder especial irrevocable a la Cámara de Comercio de Santiago A.G., para que, a petición escrita de cualquiera de ellas, designe a un árbitro arbitrador en cuanto al procedimiento y de derecho en cuanto al fallo, de entre los integrantes del cuerpo arbitral del Centro de Arbitraje y Mediación de Santiago.";
-        String p8_b = "En contra de las resoluciones del árbitro no procederá recurso alguno. El árbitro queda especialmente facultado para resolver todo asunto relacionado con su competencia y/o jurisdicción.";
+        String parr8 = "OCTAVO: ARBITRAJE. Cualquier dificultad o controversia que se produzca entre los contratantes respecto de la aplicación, interpretación, duración, validez o ejecución de este contrato o cualquier otro motivo será sometida a arbitraje, conforme al Reglamento Procesal de Arbitraje del Centro de Arbitraje y Mediación de Santiago, vigente al momento de solicitarlo.";
+        String parr8A = "Las partes confieren poder especial irrevocable a la Cámara de Comercio de Santiago A.G., para que, a petición escrita de cualquiera de ellas, designe a un árbitro arbitrador en cuanto al procedimiento y de derecho en cuanto al fallo, de entre los integrantes del cuerpo arbitral del Centro de Arbitraje y Mediación de Santiago.";
+        String parr8B = "En contra de las resoluciones del árbitro no procederá recurso alguno. El árbitro queda especialmente facultado para resolver todo asunto relacionado con su competencia y/o jurisdicción.";
 
-        String p9 = "NOVENO: PERSONERÍA. La personería del representante de " + aTravesShort + " consta en convenio general de administración de proyectos otorgado por escritura pública de 12 de agosto de 2015, de la Notaría de don Félix Jara Cadot, Santiago, repertorio Nº 24299-2015.";
+        String parr9 = "NOVENO: PERSONERÍA. La personería del representante de " + aTravesShort + " consta en convenio general de administración de proyectos otorgado por escritura pública de 12 de agosto de 2015, de la Notaría de don Félix Jara Cadot, Santiago, repertorio Nº 24299-2015.";
 
-        return generarPDF(cab, p1, p2, p3, p4, p4_a, p4_b, p4_c, p4_d,
-                p5, p5_a, p5_b, p5_c, p6, p7, p8, p8_a, p8_b, p9);
+        return generarPDF(cab, parr1, parr2, parr3, parr4, parr4A, parr4B, parr4C, parr4D, parr5, parr5A, parr5B, parr5C, parr6, parr7, parr8, parr8A, parr8B, parr9);
 
     }
 
-    private InputStream generarPDF(String cab, String p1, String p2, String p3,
-            String p4, String p4_a, String p4_b, String p4_c, String p4_d,
-            String p5, String p5_a, String p5_b, String p5_c,
-            String p6, String p7,
-            String p8, String p8_a, String p8_b, String p9) {
+    private InputStream generarPDF(String cab, String parr1, String parr2, String parr3,
+            String parr4, String parr4A, String parr4B, String parr4C, String parr4D,
+            String parr5, String parr5A, String parr5B, String parr5C,
+            String parr6, String parr7,
+            String parr8, String parr8A, String parr8B, String parr9) {
 
         try {
             CommonArchivoUtil.deleteFile(SystemParametersUtil.PATH_CONV + name);
-            
+
             // Preparar recursos
             String path = getServletContext().getRealPath("/fonts/local/bookos.ttf");
             register(path, "bookos_font");
@@ -240,7 +225,7 @@ public class ConvenioSupport {
 
                 doc.open();
                 putHeader(doc);
-                putBody(doc, cab, p1, p2, p3, p4, p4_a, p4_b, p4_c, p4_d, p5, p5_a, p5_b, p5_c, p6, p7, p8, p8_a, p8_b, p9);
+                putBody(doc, cab, parr1, parr2, parr3, parr4, parr4A, parr4B, parr4C, parr4D, parr5, parr5A, parr5B, parr5C, parr6, parr7, parr8, parr8A, parr8B, parr9);
                 putFooter(doc);
                 doc.close();
 
@@ -290,31 +275,31 @@ public class ConvenioSupport {
         doc.add(top);
     }
 
-    private void putBody(Document doc, String cab, String p1, String p2, String p3,
-            String p4, String p4_a, String p4_b, String p4_c, String p4_d,
-            String p5, String p5_a, String p5_b, String p5_c,
-            String p6, String p7,
-            String p8, String p8_a, String p8_b, String p9) throws Exception {
+    private void putBody(Document doc, String cab, String parr1, String parr2, String parr3,
+            String parr4, String parr4A, String parr4B, String parr4C, String parr4D,
+            String parr5, String parr5A, String parr5B, String parr5C,
+            String parr6, String parr7,
+            String parr8, String parr8A, String parr8B, String parr9) throws Exception {
 
         addParagraph(doc, cab, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p1, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p2, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p3, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p4, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p4_a, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p4_b, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p4_c, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p4_d, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p5, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p5_a, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p5_b, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p5_c, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p6, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p7, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p8, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p8_a, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p8_b, 2, Element.ALIGN_JUSTIFIED, normalFont);
-        addParagraph(doc, p9, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr1, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr2, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr3, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr4, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr4A, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr4B, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr4C, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr4D, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr5, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr5A, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr5B, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr5C, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr6, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr7, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr8, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr8A, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr8B, 2, Element.ALIGN_JUSTIFIED, normalFont);
+        addParagraph(doc, parr9, 2, Element.ALIGN_JUSTIFIED, normalFont);
     }
 
     private void putFooter(Document doc) throws Exception {

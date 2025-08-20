@@ -593,7 +593,7 @@
 
             SOLICITUD
         -->
-        <action name="AlumnoSolicitudEnableForm" class="action.alumno.AlumnoSolicitudEnableFormAction"
+        <action name="AlumnoSolicitudEnableForm" class="action.solicitud.alumno.EnableFormAction"
                 method="execute">
             <result name="inscripcion">
                 /jsp/users/alumno/solicitud/inscripcion/alumnoSolicitudInscripcionNewSolicitud.jsp
@@ -627,7 +627,7 @@
             </result>
         </action>
 
-        <action name="AlumnoSolicitudSaveRetiroExpresion" class="action.alumno.AlumnoSolicitudSaveRetiroExpresionAction"
+        <action name="AlumnoSolicitudSaveRetiroExpresion" class="action.solicitud.alumno.SaveRetiroExpresionAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -641,7 +641,7 @@
         </action>
 
         <action name="AlumnoSolicitudSaveReincorporacionEliminacion"
-                class="action.alumno.AlumnoSolicitudSaveReincorporacionEliminacionAction"
+                class="action.solicitud.alumno.SaveReincorporacionEliminacionAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -654,7 +654,7 @@
             </result>
         </action>
 
-        <action name="AlumnoSolicitudSaveMatricula" class="action.alumno.AlumnoSolicitudSaveMatriculaAction"
+        <action name="AlumnoSolicitudSaveMatricula" class="action.solicitud.alumno.SaveMatriculaAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -668,25 +668,25 @@
         </action>
 
 
-        <action name="AlumnoSolicitudGetSolicitudes" class="action.alumno.AlumnoSolicitudGetSolicitudesAction"
+        <action name="AlumnoSolicitudGetSolicitudes" class="action.solicitud.alumno.GetSolicitudesAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/alumnoSolicitudListado.jsp
             </result>
         </action>
 
-        <action name="AlumnoSolicitudGetNewSolicitud" class="action.alumno.AlumnoSolicitudGetNewSolicitudAction"
+        <action name="AlumnoSolicitudGetNewSolicitud" class="action.solicitud.alumno.GetNewSolicitudAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/solicitud/alumnoSolicitudNewSolicitud.jsp
             </result>
         </action>
 
         <action name="AlumnoSolicitudAddSolicitudInscripcion"
-                class="action.alumno.AlumnoSolicitudAddSolicitudInscripcionAction" method="execute">
+                class="action.solicitud.alumno.AddSolicitudInscripcionAction" method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp
             </result>
         </action>
         <action name="AlumnoSolicitudAddSolicitudInscripcionAttach"
-                class="action.alumno.AlumnoSolicitudAddSolicitudInscripcionAttachAction" method="execute">
+                class="action.solicitud.alumno.AddSolicitudInscripcionAttachAction" method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
             </interceptor-ref>
@@ -699,12 +699,12 @@
         </action>
 
         <action name="AlumnoSolicitudSolicitudJustificativoPEPAdd"
-                class="action.alumno.AlumnoSolicitudSolicitudJustificativoPEPAddAction" method="execute">
+                class="action.solicitud.alumno.AddJustificativoPEPAction" method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp
             </result>
         </action>
         <action name="AlumnoSolicitudSolicitudJustificativoPEPAddAttach"
-                class="action.alumno.AlumnoSolicitudSolicitudJustificativoPEPAddAttachAction" method="execute">
+                class="action.solicitud.alumno.AddAttachJustificativoPEPAction" method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
             </interceptor-ref>
@@ -717,7 +717,7 @@
         </action>
 
 
-        <action name="AlumnoSolicitudRemoveSolicitud" class="action.alumno.AlumnoSolicitudRemoveSolicitudAction"
+        <action name="AlumnoSolicitudRemoveSolicitud" class="action.solicitud.alumno.RemoveSolicitudAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoSolicitudGetSolicitudes</param>
@@ -763,19 +763,19 @@
             </result>
         </action>
 
-        <action name="AlumnoSolicitudRetiroConstancia" class="action.alumno.AlumnoSolicitudRetiroConstanciaAction"
+        <action name="AlumnoSolicitudRetiroConstancia" class="action.solicitud.alumno.GetConstanciaRetiroAction"
                 method="execute">
             <result name="exception">/jsp/users/alumno/solicitud/alumnoSolicitudError.jsp
             </result>
             <result type="myStream"/>
         </action>
-        <action name="AlumnoSolicitudProrrogaConstancia" class="action.alumno.AlumnoSolicitudProrrogaConstanciaAction"
+        <action name="AlumnoSolicitudProrrogaConstancia" class="action.solicitud.alumno.GetConstanciaProrrogaAction"
                 method="execute">
             <result name="exception">/jsp/users/alumno/solicitud/alumnoSolicitudError.jsp
             </result>
             <result type="myStream"/>
         </action>
-        <action name="AlumnoSolicitudRenunciaConstancia" class="action.alumno.AlumnoSolicitudRenunciaConstanciaAction"
+        <action name="AlumnoSolicitudRenunciaConstancia" class="action.solicitud.alumno.GetConstanciaRenunciaAction"
                 method="execute">
             <result name="exception">/jsp/users/alumno/solicitud/alumnoSolicitudError.jsp
             </result>
@@ -784,7 +784,7 @@
         <!-- /////////////////////////////////// -->
 
 
-        <action name="AlumnoExamenAPConfirmacion" class="action.alumno.AlumnoExamenAPConfirmacionAction"
+        <action name="AlumnoExamenAPConfirmacion" class="action.examen.alumno.ConfirmacionAPAction"
                 method="execute">
             <result name="confirmar">/jsp/users/alumno/examen/alumnoExamenAPConfirmacion.jsp
             </result>
@@ -793,14 +793,14 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoExamenAPGenerar" class="action.alumno.AlumnoExamenAPGenerarAction"
+        <action name="AlumnoExamenAPGenerar" class="action.examen.alumno.GenerarAPAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoExamenAPMostrar</param>
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoExamenAPMostrar" class="action.alumno.AlumnoExamenAPMostrarAction"
+        <action name="AlumnoExamenAPMostrar" class="action.examen.alumno.MostrarAPAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/examen/alumnoExamenAPMostrar.jsp
             </result>

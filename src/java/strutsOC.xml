@@ -55,7 +55,7 @@
 
     <package name="intranetOficinaCurricularActions" extends="intranetOficinaCurricularInterceptors">
 
-        <action name="OficinaCurricularLogin" class="action.oficinacurricular.OficinaCurricularLoginAction"
+        <action name="OficinaCurricularLogin" class="action.login.oficinacurricular.OficinaCurricularLoginAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -83,7 +83,7 @@
         </action>
 
         <action name="OficinaCurricularActaConsultarGetActas"
-                class="action.oficinacurricular.OficinaCurricularActaConsultarGetActasAction" method="execute">
+                class="action.acta.oficinacurricular.OficinaCurricularGetActasConsultaAction" method="execute">
             <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaConsulta.jsp
             </result>
         </action>
@@ -103,12 +103,12 @@
             </result>
         </action>
         <action name="OficinaCurricularActaPrintGetActas"
-                class="action.oficinacurricular.OficinaCurricularActaPrintGetActasAction" method="execute">
+                class="action.acta.oficinacurricular.OficinaCurricularGetActasPrintAction" method="execute">
             <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaxImprimir.jsp
             </result>
         </action>
         <action name="OficinaCurricularActaPrintActas"
-                class="action.oficinacurricular.OficinaCurricularActaPrintActasAction" method="execute">
+                class="action.acta.oficinacurricular.OficinaCurricularPrintActasAction" method="execute">
             <result name="success">/jsp/common/print/commonPrintPDF.jsp
             </result>
         </action>
@@ -128,12 +128,12 @@
             </result>
         </action>
         <action name="OficinaCurricularActaRecepcionarGetActas"
-                class="action.oficinacurricular.OficinaCurricularActaRecepcionarGetActasAction" method="execute">
+                class="action.acta.oficinacurricular.OficinaCurricularGetActasRecepcionarAction" method="execute">
             <result name="success">/jsp/users/oficinaCurricular/acta/oficinaCurricularActaxRecepcionar.jsp
             </result>
         </action>
         <action name="OficinaCurricularActaRecepcionarActas"
-                class="action.oficinacurricular.OficinaCurricularActaRecepcionarActasAction" method="execute">
+                class="action.acta.oficinacurricular.OficinaCurricularRecepcionarActasAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">OficinaCurricularActaRecepcionarGetActas</param>
                 <param name="key">${key}</param>

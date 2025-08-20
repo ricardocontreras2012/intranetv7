@@ -105,7 +105,7 @@
             <result name="success">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
         </action>
 
-        <action name="ProfesorMisDatosSave" class="action.profesor.ProfesorMisDatosSaveAction" method="execute">
+        <action name="ProfesorMisDatosSave" class="action.misdatos.profesor.ProfesorMisDatosSaveAction" method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
             <result name="stack" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -115,7 +115,7 @@
             <result name="error">/jsp/users/profesor/id/profesorIdMisDatos.jsp</result>
         </action>
 
-        <action name="ProfesorAutoEvaluacionSearchAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction"
+        <action name="ProfesorAutoEvaluacionSearchAutoEvaluacion" class="action.autoevaluacion.profesor.AutoEvaluacionAction"
                 method="search">
             <result name="success">/jsp/users/profesor/encuesta/profesorEncuestaConfirm.jsp
             </result>
@@ -126,7 +126,7 @@
             <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
         </action>
 
-        <action name="ProfesorAutoEvaluacionGetAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction"
+        <action name="ProfesorAutoEvaluacionGetAutoEvaluacion" class="action.autoevaluacion.profesor.AutoEvaluacionAction"
                 method="showForm">
             <result name="success">/jsp/users/profesor/encuesta/profesorEncuestaFormAutoEvaluacion.jsp
             </result>
@@ -136,7 +136,7 @@
             </result-->
             <result name="stack">/jsp/users/profesor/id/profesorIdLogIn.jsp</result>
         </action>
-        <action name="ProfesorAutoEvaluacionSaveAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction"
+        <action name="ProfesorAutoEvaluacionSaveAutoEvaluacion" class="action.autoevaluacion.profesor.AutoEvaluacionAction"
                 method="save">
             <result name="success" type="redirectAction">
                 <param name="actionName">ProfesorAutoEvaluacionGetAutoEvaluacion
@@ -144,7 +144,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="ProfesorAutoEvaluacionRemoveAutoEvaluacion" class="action.profesor.ProfesorAutoEvaluacionAction"
+        <action name="ProfesorAutoEvaluacionRemoveAutoEvaluacion" class="action.autoevaluacion.profesor.AutoEvaluacionAction"
                 method="remove">
             <!--result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -159,7 +159,7 @@
 
             ACTA
         -->
-        <action name="ProfesorActaGetActa" class="action.profesor.ProfesorActaGetActaAction" method="execute">
+        <action name="ProfesorActaGetActa" class="action.acta.profesor.GetActaAction" method="execute">
             <result name="acta_numerica">/jsp/users/profesor/calificacion/profesorCalificacionActaNumerica.jsp
             </result>
             <result name="acta_concepto">/jsp/users/profesor/calificacion/profesorCalificacionActaConcepto.jsp
@@ -167,33 +167,33 @@
             <result name="acta_no_generada">/jsp/message/messageActionMessage.jsp
             </result>
         </action>
-        <action name="ProfesorActaEmitirActaNumerica" class="action.profesor.ProfesorActaEmitirActaNumericaAction"
+        <action name="ProfesorActaEmitirActaNumerica" class="action.acta.profesor.EmitirActaNumericaAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">ProfesorActaGetActa</param>
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="ProfesorActaEmitirActaConcepto" class="action.profesor.ProfesorActaEmitirActaConceptoAction"
+        <action name="ProfesorActaEmitirActaConcepto" class="action.acta.profesor.EmitirActaConceptoAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">ProfesorActaGetActa</param>
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="ProfesorActaGetCargaHistorica" class="action.common.CommonProfesorCargaHistoricaActaAction"
+        <action name="ProfesorActaGetCargaHistorica" class="action.profesor.GetCargaHistoricaActaAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
             </result>
         </action>
         <action name="ProfesorActaRectificatoriaGetCursos"
-                class="action.profesor.ProfesorActaRectificatoriaGetCursosAction"
+                class="action.acta.profesor.GetCursosActaRectificatoriaAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
             </result>
         </action>
         <action name="ProfesorActaRectificatoriaGetNomina"
-                class="action.profesor.ProfesorActaRectificatoriaGetNominaAction"
+                class="action.acta.profesor.GetNominaActaRectificatoriaAction"
                 method="execute">
             <result name="success">/jsp/users/profesor/calificacion/profesorCalificacionActaRectificatoriaNumerica.jsp
             </result>
@@ -203,7 +203,7 @@
 
             EVALUACIONES PARCIALES
         -->
-        <action name="ProfesorEvaluacionEnableForm" class="action.profesor.ProfesorEvaluacionEnableFormAction"
+        <action name="ProfesorEvaluacionEnableForm" class="action.evaluacion.profesor.EnableFormAction"
                 method="execute">
             <result name="none">
                 /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionSeleccionModalidad.jsp
@@ -217,7 +217,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="ProfesorEvaluacionSetModalidad" class="action.profesor.ProfesorEvaluacionSetModalidadAction"
+        <action name="ProfesorEvaluacionSetModalidad" class="action.evaluacion.profesor.SetModalidadAction"
                 method="execute">
             <result name="relativa" type="redirectAction">
                 <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
@@ -229,40 +229,39 @@
             </result>
         </action>
         <action name="ProfesorEvaluacionPorcentajesRelativos"
-                class="action.profesor.ProfesorEvaluacionPorcentajesRelativosAction" method="execute">
+                class="action.evaluacion.profesor.SetPorcentajesRelativosAction" method="execute">
             <result name="success">
                 /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionPorcentajesRelativos.jsp
             </result>
         </action>
         <action name="ProfesorEvaluacionSavePorcentajesRelativos"
-                class="action.profesor.ProfesorEvaluacionSavePorcentajesRelativosAction" method="execute">
+                class="action.evaluacion.profesor.SavePorcentajesRelativosAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
                 <param name="key">${key}</param>
             </result>
         </action>
         <action name="ProfesorEvaluacionPorcentajesAbsolutos"
-                class="action.profesor.ProfesorEvaluacionPorcentajesAbsolutosAction" method="execute">
+                class="action.evaluacion.profesor.SetPorcentajesAbsolutosAction" method="execute">
             <result name="success">
                 /jsp/users/profesor/calificacion/profesorCalificacionEvaluacionPorcentajesAbsolutos.jsp
             </result>
         </action>
         <action name="ProfesorEvaluacionSavePorcentajesAbsolutos"
-                class="action.profesor.ProfesorEvaluacionSavePorcentajesAbsolutosAction" method="execute">
+                class="action.evaluacion.profesor.SavePorcentajesAbsolutosAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">ProfesorEvaluacionPorcentajesAbsolutos</param>
                 <param name="key">${key}</param>
             </result>
         </action>
         <action name="ProfesorEvaluacionGetAlumnoEvaluacion"
-                class="action.profesor.ProfesorEvaluacionGetAlumnoEvaluacionAction" method="execute">
+                class="action.evaluacion.profesor.GetAlumnoEvaluacionAction" method="execute">
             <result name="success">/jsp/users/profesor/calificacion/profesorCalificacionEvaluacionNominaCurso.jsp
             </result>
         </action>
 
-
         <action name="ProfesorEvaluacionSaveAlumnoEvaluacion"
-                class="action.profesor.ProfesorEvaluacionSaveAlumnoEvaluacionAction" method="execute">
+                class="action.evaluacion.profesor.SaveAlumnoEvaluacionAction" method="execute">
             <result name="R" type="redirectAction">
                 <param name="actionName">ProfesorEvaluacionPorcentajesRelativos</param>
                 <param name="key">${key}</param>
@@ -272,7 +271,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="ProfesorEvaluacionEmitirActa" class="action.profesor.ProfesorEvaluacionEmitirActaAction"
+        <action name="ProfesorEvaluacionEmitirActa" class="action.evaluacion.profesor.EmitirActaAction"
                 method="execute">
             <result name="success">/jsp/message/messageActionMessage.jsp</result>
         </action>
@@ -283,16 +282,16 @@
             MATERIAL
         -->
         <action name="ProfesorMaterialGetListaCursosReutilizacion"
-                class="action.profesor.ProfesorMaterialGetListaCursosReutilizacionAction" method="execute">
+                class="action.material.profesor.GetListaCursosReutilizacionAction" method="execute">
             <result name="success">/jsp/common/material/commonMaterialCursosReutilizacion.jsp
             </result>
         </action>
         <action name="ProfesorMaterialGetListaMaterialesReutilizacion"
-                class="action.profesor.ProfesorMaterialGetListaMaterialesReutilizacionAction" method="execute">
+                class="action.material.profesor.GetListaMaterialesReutilizacionAction" method="execute">
             <result name="success">/jsp/common/material/commonMaterialReutilizacion.jsp
             </result>
         </action>
-        <action name="ProfesorMaterialReuseMateriales" class="action.profesor.ProfesorMaterialReuseMaterialesAction"
+        <action name="ProfesorMaterialReuseMateriales" class="action.material.profesor.ReuseMaterialesAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMaterialGetMaterialesCurso</param>
@@ -301,7 +300,7 @@
             </result>
         </action>
         <action name="ProfesorMaterialDownLoadReusedMaterial"
-                class="action.profesor.ProfesorMaterialDownLoadReusedMaterialAction" method="execute">
+                class="action.material.profesor.DownLoadReusedMaterialAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -311,7 +310,7 @@
         </action>
 
         <action name="ProfesorMaterialGetMaterialesOtrosCursos"
-                class="action.profesor.ProfesorMaterialGetMaterialesOtrosCursosAction"
+                class="action.material.profesor.GetMaterialesOtrosCursosAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonCursoGetCursoActual</param>
@@ -332,13 +331,13 @@
         </action>
 
         <action name="ProfesorSolicitudGetJustificativosCurso"
-                class="action.profesor.ProfesorSolicitudGetJustificativosCursoAction" method="execute">
+                class="action.solicitud.profesor.GetJustificativosCursoAction" method="execute">
             <result name="success">/jsp/users/profesor/solicitud/profesorSolicitudListado.jsp
             </result>
         </action>
 
         <action name="ProfesorHorarioComun"
-                class="action.profesor.ProfesorHorarioComunAction" method="execute">
+                class="action.horario.GetHorarioComunAction" method="execute">
             <result name="success">/jsp/users/profesor/horario/profesorHorarioComun.jsp
             </result>
         </action>
@@ -347,12 +346,12 @@
 
             REPORTES DE CLASES
         -->
-        <action name="ProfesorReporteAddReporte" class="action.profesor.ProfesorReporteAddReporteAction"
+        <action name="ProfesorReporteAddReporte" class="action.reporteclase.profesor.AddReporteAction"
                 method="execute">
             <result name="success">/jsp/users/profesor/reporte/profesorReporteFormulario.jsp
             </result>
         </action>
-        <action name="ProfesorReporteSaveNewReporte" class="action.profesor.ProfesorReporteSaveNewReporteAction"
+        <action name="ProfesorReporteSaveNewReporte" class="action.reporteclase.profesor.SaveNewReporteAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
@@ -364,7 +363,7 @@
             </result>
         </action>
         <action name="ProfesorReporteSaveModifiedReporte"
-                class="action.profesor.ProfesorReporteSaveModifiedReporteAction" method="execute">
+                class="action.reporteclase.profesor.SaveModifiedReporteAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
                 <param name="key">${key}</param>
@@ -372,7 +371,7 @@
             <result name="input">/jsp/common/reporte/commonReporteViewReporte.jsp
             </result>
         </action>
-        <action name="ProfesorReporteRemoveReportes" class="action.profesor.ProfesorReporteRemoveReportesAction"
+        <action name="ProfesorReporteRemoveReportes" class="action.reporteclase.profesor.RemoveReportesAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonReporteGetReportesCursoNoLog</param>
@@ -380,7 +379,7 @@
             </result>
         </action>
 
-        <action name="ProfesorEvaluacionExportPlanilla" class="action.profesor.ProfesorEvaluacionExportPlanillaAction"
+        <action name="ProfesorEvaluacionExportPlanilla" class="action.evaluacion.profesor.ExportPlanillaAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
