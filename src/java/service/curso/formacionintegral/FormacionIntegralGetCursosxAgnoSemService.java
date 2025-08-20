@@ -16,7 +16,7 @@ import infrastructure.util.common.CommonHorarioUtil;
  *
  * @author Administrador
  */
-public class FormacionIntegralCursoGetCursosxAgnoSemService {
+public class FormacionIntegralGetCursosxAgnoSemService {
 
     public String service(GenericSession genericSession, String key, Integer agno, Integer sem) {
 

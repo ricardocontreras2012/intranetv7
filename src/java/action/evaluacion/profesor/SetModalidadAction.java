@@ -5,7 +5,7 @@
  */
 package action.evaluacion.profesor;
 
-import service.evaluacion.profesor.ProfesorEvaluacionSetModalidadService;
+import service.evaluacion.profesor.ProfesorSetModalidadService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -25,7 +25,7 @@ public class SetModalidadAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorEvaluacionSetModalidadService().service(getGenericSession(), modalidad, getKey());
+        return new ProfesorSetModalidadService().service(getGenericSession(), modalidad, getKey());
     }
 
     /**

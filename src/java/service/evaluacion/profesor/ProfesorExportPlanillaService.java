@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionExportPlanillaService.java
+ * @(#)ProfesorExportPlanillaService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -53,7 +53,7 @@ import static infrastructure.util.common.CommonFacultadUtil.getNombrexAsign;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorEvaluacionExportPlanillaService {
+public final class ProfesorExportPlanillaService {
 
     public ActionInputStreamUtil service(GenericSession genericSession, String key)
             throws Exception {

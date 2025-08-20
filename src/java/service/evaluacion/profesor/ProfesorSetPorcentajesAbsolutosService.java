@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionPorcentajesAbsolutosService.java
+ * @(#)ProfesorSetPorcentajesAbsolutosService.java
  *
  * Copyright (c) 2023 FAE-USACH
  */
@@ -31,7 +31,7 @@ import infrastructure.util.LogUtil;
  * @author Ricardo Contreras S.
  * @version 1.0, 2023-12-18
  */
-public final class ProfesorEvaluacionPorcentajesAbsolutosService {
+public final class ProfesorSetPorcentajesAbsolutosService {
 
     /**
      * Servicio principal que obtiene las evaluaciones para un curso y las asigna al contexto de sesión.

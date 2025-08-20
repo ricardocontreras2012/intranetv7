@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionEmitirActaService.java
+ * @(#)ProfesoEmitirActaService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -21,7 +21,7 @@ import infrastructure.util.LogUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorEvaluacionEmitirActaService {
+public final class ProfesoEmitirActaService {
 
     /**
      * Method Servicio

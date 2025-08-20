@@ -5,7 +5,7 @@
  */
 package action.evaluacion.profesor;
 
-import service.evaluacion.profesor.ProfesorEvaluacionSaveAlumnoEvaluacionService;
+import service.evaluacion.profesor.ProfesorSaveAlumnoEvaluacionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class SaveAlumnoEvaluacionAction extends ActionParameterAwareSuppor
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorEvaluacionSaveAlumnoEvaluacionService().service(getGenericSession(), getMapParameters(), getKey());
+        return new ProfesorSaveAlumnoEvaluacionService().service(getGenericSession(), getMapParameters(), getKey());
     }
 }

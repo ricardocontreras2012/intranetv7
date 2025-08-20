@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionGetAlumnoEvaluacionService.java
+ * @(#)ProfesorGetAlumnoEvaluacionService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -20,7 +20,7 @@ import infrastructure.util.HibernateUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorEvaluacionGetAlumnoEvaluacionService {
+public final class ProfesorGetAlumnoEvaluacionService {
 
     /**
      * Method Servicio

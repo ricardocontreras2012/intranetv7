@@ -6,7 +6,7 @@
 package action.evaluacion.profesor;
 
 import infrastructure.support.action.ActionValidationPosSupport;
-import service.evaluacion.profesor.ProfesorEvaluacionGetAlumnoEvaluacionService;
+import service.evaluacion.profesor.ProfesorGetAlumnoEvaluacionService;
 
 /**
  * Procesa el action mapeado del request a la URL
@@ -27,7 +27,7 @@ public final class GetAlumnoEvaluacionAction extends ActionValidationPosSupport 
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorEvaluacionGetAlumnoEvaluacionService().service(getGenericSession(), getPos(), getKey());
+        return new ProfesorGetAlumnoEvaluacionService().service(getGenericSession(), getPos(), getKey());
     }
     
     @Override

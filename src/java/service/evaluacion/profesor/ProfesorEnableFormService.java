@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionEnableFormService.java
+ * @(#)ProfesorEnableFormService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -13,7 +13,7 @@ import session.WorkSession;
  *
  * @author Ricardo Contreras S.
  */
-public class ProfesorEvaluacionEnableFormService {
+public class ProfesorEnableFormService {
 
     /**
      * Method description

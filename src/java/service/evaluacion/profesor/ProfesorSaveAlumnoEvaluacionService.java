@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionSaveAlumnoEvaluacionService.java
+ * @(#)ProfesorSaveAlumnoEvaluacionService.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorEvaluacionSaveAlumnoEvaluacionService {
+public final class ProfesorSaveAlumnoEvaluacionService {
 
     /**
      * Method Servicio

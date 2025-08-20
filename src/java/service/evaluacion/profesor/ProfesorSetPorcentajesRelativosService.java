@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionPorcentajesRelativosService.java
+ * @(#)ProfesorSetPorcentajesRelativosService.java
  *
  * Copyright (c) 2023 FAE-USACH
  */
@@ -31,7 +31,7 @@ import infrastructure.util.LogUtil;
  * @version 2.0, 24/05/2012
  * @author Ricardo Contreras S.
  */
-public final class ProfesorEvaluacionPorcentajesRelativosService {
+public final class ProfesorSetPorcentajesRelativosService {
 
     /**
      * Método principal del servicio que gestiona las evaluaciones y los porcentajes

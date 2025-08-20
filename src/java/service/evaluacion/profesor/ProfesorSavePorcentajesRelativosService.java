@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionSavePorcentajesAbsolutosService.java
+ * @(#)ProfesorSavePorcentajesRelativosService.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
@@ -17,6 +17,7 @@ import static infrastructure.util.common.CommonEvaluacionUtil.resoloverDiferenci
 import static infrastructure.util.common.CommonEvaluacionUtil.resolverDiferenciasEvaluaciones;
 import static infrastructure.util.common.CommonEvaluacionUtil.setModoEvaluacion;
 import static infrastructure.util.common.CommonEvaluacionUtil.setearPorcentajesEvaluaciones;
+import static infrastructure.util.common.CommonEvaluacionUtil.setearPorcentajesTipos;
 import domain.repository.CursoTevaluacionRepository;
 
 /**
@@ -25,7 +26,7 @@ import domain.repository.CursoTevaluacionRepository;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class ProfesorEvaluacionSavePorcentajesAbsolutosService {
+public final class ProfesorSavePorcentajesRelativosService {
 
     /**
      * Method Servicio
@@ -36,6 +37,7 @@ public final class ProfesorEvaluacionSavePorcentajesAbsolutosService {
      * @return Action status.
      */
     public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+
         Curso curso = genericSession.getWorkSession(key).getCurso();
         CursoTevaluacionRepository cursoTevaluacionRepo
                 = ContextUtil.getDAO().getCursoTevaluacionRepository(ActionUtil.getDBUser());
@@ -46,7 +48,8 @@ public final class ProfesorEvaluacionSavePorcentajesAbsolutosService {
         resoloverDiferenciasTipos(parameters, cursoTevaluacionRepo.find(curso), cursoTevaluacionRepo, curso);
         resolverDiferenciasEvaluaciones(parameters, evaluacionRepo.find(curso), evaluacionRepo, curso);
         setearPorcentajesEvaluaciones(parameters, evaluacionRepo, curso);
-        setModoEvaluacion(curso, "A");
+        setearPorcentajesTipos(parameters, cursoTevaluacionRepo, curso);
+        setModoEvaluacion(curso, "R");
         LogUtil.setLogCurso(genericSession.getRut(), curso);
 
         return SUCCESS;

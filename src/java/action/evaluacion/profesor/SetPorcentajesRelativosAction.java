@@ -5,7 +5,7 @@
  */
 package action.evaluacion.profesor;
 
-import service.evaluacion.profesor.ProfesorEvaluacionPorcentajesRelativosService;
+import service.evaluacion.profesor.ProfesorSetPorcentajesRelativosService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -27,6 +27,6 @@ public final class SetPorcentajesRelativosAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new ProfesorEvaluacionPorcentajesRelativosService().service(getGenericSession(), getKey());
+        return new ProfesorSetPorcentajesRelativosService().service(getGenericSession(), getKey());
     }
 }

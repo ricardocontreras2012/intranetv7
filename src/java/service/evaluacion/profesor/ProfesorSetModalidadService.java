@@ -1,5 +1,5 @@
 /*
- * @(#)ProfesorEvaluacionSetModalidadService.java
+ * @(#)ProfesorSetModalidadService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -12,7 +12,7 @@ import infrastructure.util.LogUtil;
  *
  * @author Ricardo Contreras S.
  */
-public class ProfesorEvaluacionSetModalidadService {
+public class ProfesorSetModalidadService {
 
     /**
      * Method description
