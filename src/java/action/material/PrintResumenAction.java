@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2025 FAE-USACH
  */
-package action.common;
+package action.material;
 
 import java.util.List;
 import service.material.PrintResumenService;
@@ -16,7 +16,7 @@ import infrastructure.support.action.ActionReportSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialPrintResumenAction extends ActionReportSupport {
+public final class PrintResumenAction extends ActionReportSupport {
 
     private static final long serialVersionUID = 1L;
     private List<CursoResumenSupport> cursos;

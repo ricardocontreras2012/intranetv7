@@ -1,11 +1,11 @@
 /*
- * @(#)CommonMaterialRemoveMaterialesAction.java
+ * @(#)RemoveMaterialesAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 import service.material.RemoveMaterialesService;
@@ -18,7 +18,7 @@ import infrastructure.support.action.ActionParameterAwareSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialRemoveMaterialesAction extends ActionParameterAwareSupport {
+public final class RemoveMaterialesAction extends ActionParameterAwareSupport {
     private static final long serialVersionUID = 1L;
     private String            tipoMaterial;
 

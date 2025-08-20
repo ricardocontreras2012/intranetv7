@@ -1,9 +1,9 @@
 /*
- * @(#)CommonMaterialGetMaterialesCursoAction.java
+ * @(#)GetMaterialesCursoAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
-package action.common;
+package action.material;
 
 import service.material.GetMaterialesCursoService;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -15,7 +15,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialGetMaterialesCursoAction extends ActionCommonSupport {
+public final class GetMaterialesCursoAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
     private String tipoMaterial;

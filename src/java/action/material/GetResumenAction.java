@@ -1,11 +1,11 @@
 /*
- * @(#)CommonMaterialGetResumenAction.java
+ * @(#)GetResumenAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 import service.material.GetResumenService;
@@ -18,7 +18,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialGetResumenAction extends ActionCommonSupport {
+public final class GetResumenAction extends ActionCommonSupport {
     private static final long serialVersionUID = 1L;
     private Integer           agno;
     private Integer           pos;

@@ -1,11 +1,11 @@
 /*
- * @(#)CommonMaterialGetMaterialesAlumnoAction.java
+ * @(#)GetMaterialesAlumnoAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 import service.material.GetMaterialesAlumnoService;
@@ -16,7 +16,7 @@ import infrastructure.support.action.post.ActionPostValidationSupport;
  *
  * @author Ricardo Contreras S.
  */
-public class CommonMaterialGetMaterialesAlumnoAction extends ActionPostValidationSupport {
+public class GetMaterialesAlumnoAction extends ActionPostValidationSupport {
     private static final long serialVersionUID = 1L;
 
     /**

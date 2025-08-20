@@ -1,11 +1,11 @@
 /*
- * @(#)CommonMaterialGetMaterialAction.java
+ * @(#)GetMaterialAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 import service.material.GetMaterialService;
@@ -20,7 +20,7 @@ import static infrastructure.util.common.CommonMaterialUtil.existeMaterial;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialGetMaterialAction extends ActionPostValidationSupport {
+public final class GetMaterialAction extends ActionPostValidationSupport {
     private static final long serialVersionUID = 1L;
     private Integer           material;
     private Integer           tipo;

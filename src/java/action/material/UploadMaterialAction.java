@@ -1,25 +1,25 @@
 /*
- * @(#)CommonMaterialModifyMaterialAction.java
+ * @(#)UploadMaterialAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 import java.io.File;
-import service.material.ModifyMaterialService;
+import service.material.UploadMaterialService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 
 /**
- * Procesa el action mapeado del request a la URL CommonMaterialModifyMaterial
+ * Procesa el action mapeado del request a la URL CommonMaterialUploadMaterial
  *
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialModifyMaterialAction extends ActionPostCommonSupport {
+public final class UploadMaterialAction extends ActionPostCommonSupport {
     private static final long serialVersionUID = 1L;
     private String            caption;
     private Integer           tipo;
@@ -35,10 +35,9 @@ public final class CommonMaterialModifyMaterialAction extends ActionPostCommonSu
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception {             
-        tipoMaterial = getGenericSession().getWorkSession(getKey()).getTipoMaterial();        
-
-        return new ModifyMaterialService().service(this, getGenericSession(), tipo, upload, uploadFileName,
+    public String action() throws Exception {
+        tipoMaterial = getGenericSession().getWorkSession(getKey()).getTipoMaterial();
+        return new UploadMaterialService().service(this, getGenericSession(), tipo, upload, uploadFileName,
                 caption, getKey());
     }
 

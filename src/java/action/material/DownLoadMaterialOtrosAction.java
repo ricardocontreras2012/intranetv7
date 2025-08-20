@@ -1,9 +1,9 @@
 /*
- * @(#)CommonMaterialDownLoadMaterialAction.java
+ * @(#)DownLoadMaterialOtrosAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
-package action.common;
+package action.material;
 
 import java.io.InputStream;
 import service.material.DownLoadMaterialService;
@@ -18,11 +18,11 @@ import static infrastructure.util.common.CommonMaterialUtil.existeMaterial;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialDownLoadMaterialAction extends ActionValidationPosSupport {
+public final class DownLoadMaterialOtrosAction extends ActionValidationPosSupport {
 
     private Integer material;
     private Integer tipo;
-    private ActionInputStreamUtil ais;
+    ActionInputStreamUtil ais;
 
     /**
      * Method description
@@ -34,7 +34,7 @@ public final class CommonMaterialDownLoadMaterialAction extends ActionValidation
         String retValue = SUCCESS;
         try {
             ais = new DownLoadMaterialService().service(getGenericSession(),
-                    getGenericSession().getWorkSession(getKey()).getTmaterial(), tipo, material, getKey());
+                    getGenericSession().getWorkSession(getKey()).getOtrosTmaterial(), tipo, material, getKey());
         } catch (Exception e) {
             retValue = "exception";
             this.addActionError(this.getText("error.file.not.found"));
@@ -53,7 +53,7 @@ public final class CommonMaterialDownLoadMaterialAction extends ActionValidation
         boolean retValid;
 
         try {
-            retValid = existeMaterial(getGenericSession().getWorkSession(getKey()).getTmaterial(), tipo, material);
+            retValid = existeMaterial(getGenericSession().getWorkSession(getKey()).getOtrosTmaterial(), tipo, material);
         } catch (Exception e) {
             retValid = false;
             logExceptionMessage(e);

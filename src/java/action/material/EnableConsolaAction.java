@@ -1,11 +1,11 @@
 /*
- * @(#)CommonMaterialEnableConsolaAction.java
+ * @(#)EnableConsolaAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
 
 
-package action.common;
+package action.material;
 
 
 
@@ -15,7 +15,7 @@ package action.common;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonMaterialEnableConsolaAction extends infrastructure.support.action.post.ActionPostCommonSupport {
+public final class EnableConsolaAction extends infrastructure.support.action.post.ActionPostCommonSupport {
     private static final long serialVersionUID = 1L;
     private String tipo;
 

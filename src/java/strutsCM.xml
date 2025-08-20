@@ -1248,7 +1248,7 @@
 
         <!-- MATERIAL -->
 
-        <action name="CommonMaterialEnableConsola" class="action.common.CommonMaterialEnableConsolaAction"
+        <action name="CommonMaterialEnableConsola" class="action.material.EnableConsolaAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMaterialGetMaterialesCurso</param>
@@ -1257,21 +1257,20 @@
             </result>
         </action>
 
-
-        <action name="CommonMaterialGetAsignaturas" class="action.common.CommonMaterialGetAsignaturasAction"
+        <action name="CommonMaterialGetAsignaturas" class="action.material.GetAsignaturasAction"
                 method="execute">
             <result name="success">/jsp/common/asignatura/commonAsignaturaListado.jsp
             </result>
         </action>
 
-        <action name="CommonMaterialGetMaterialesCurso" class="action.common.CommonMaterialGetMaterialesCursoAction"
+        <action name="CommonMaterialGetMaterialesCurso" class="action.material.GetMaterialesCursoAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
             </result>
         </action>
 
         <action name="CommonMaterialHistoricoGetMaterialesCurso"
-                class="action.common.CommonMaterialGetMaterialesCursoAction"
+                class="action.material.GetMaterialesCursoAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialHistoricoListado.jsp
             </result>
@@ -1285,7 +1284,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialGetMaterialesAlumno" class="action.common.CommonMaterialGetMaterialesAlumnoAction"
+        <action name="CommonMaterialGetMaterialesAlumno" class="action.material.GetMaterialesAlumnoAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
             </result>
@@ -1294,7 +1293,7 @@
         </action>
 
         <action name="CommonMaterialGetMaterialesCursoNoLog"
-                class="action.common.CommonMaterialGetMaterialesCursoAction"
+                class="action.material.GetMaterialesCursoAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialListadoMateriales.jsp
             </result>
@@ -1313,12 +1312,12 @@
             </result>
         </action>
 
-        <action name="CommonMaterialGetMaterial" class="action.common.CommonMaterialGetMaterialAction" method="execute">
+        <action name="CommonMaterialGetMaterial" class="action.material.GetMaterialAction" method="execute">
             <result name="success">/jsp/common/material/commonMaterialViewMaterial.jsp
             </result>
         </action>
 
-        <action name="CommonMaterialModifyMaterial" class="action.common.CommonMaterialModifyMaterialAction"
+        <action name="CommonMaterialModifyMaterial" class="action.material.ModifyMaterialAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -1331,7 +1330,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialRemoveMateriales" class="action.common.CommonMaterialRemoveMaterialesAction"
+        <action name="CommonMaterialRemoveMateriales" class="action.material.RemoveMaterialesAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonMaterialGetMaterialesCursoNoLog</param>
@@ -1340,7 +1339,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialUploadMaterial" class="action.common.CommonMaterialUploadMaterialAction"
+        <action name="CommonMaterialUploadMaterial" class="action.material.UploadMaterialAction"
                 method="execute">
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">104857600</param>
@@ -1362,7 +1361,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialGetResumen" class="action.common.CommonMaterialGetResumenAction" method="execute">
+        <action name="CommonMaterialGetResumen" class="action.material.GetResumenAction" method="execute">
             <result name="success">/jsp/common/curso/commonCursoMaterialesResumen.jsp
             </result>
         </action>
@@ -2055,7 +2054,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialDownLoadMaterial" class="action.common.CommonMaterialDownLoadMaterialAction"
+        <action name="CommonMaterialDownLoadMaterial" class="action.material.DownLoadMaterialAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -2067,7 +2066,7 @@
         </action>
 
         <action name="CommonMaterialDownLoadMaterialOtros"
-                class="action.common.CommonMaterialDownLoadMaterialOtrosAction"
+                class="action.material.DownLoadMaterialOtrosAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -2151,7 +2150,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialPrintResumen" class="action.common.CommonMaterialPrintResumenAction"
+        <action name="CommonMaterialPrintResumen" class="action.material.PrintResumenAction"
                 method="execute">
             <result name="success" type="jasper">
                 <param name="location">/WEB-INF/jasper/common/CommonMaterialesResumen.jasper</param>
