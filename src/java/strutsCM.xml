@@ -734,7 +734,7 @@
             <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaListAsistencia.jsp</result>
         </action>
 
-        <action name="CommonAsistenciaNewAsistencia" class="action.common.CommonCursoGetListaCursoAction"
+        <action name="CommonAsistenciaNewAsistencia" class="action.curso.GetListaCursoAction"
                 method="execute">
             <result name="success">/jsp/users/profesor/asistencia/profesorAsistenciaNew.jsp</result>
         </action>
@@ -763,20 +763,20 @@
             <result name="success">/jsp/common/comuna/commonComunaComunas.jsp</result>
         </action>
 
-        <action name="CommonCursoGetCursos" class="action.common.CommonCursoGetCursosAction"
+        <action name="CommonCursoGetCursos" class="action.curso.GetCursosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoGetCursoActual" class="action.common.CommonCursoGetCursoActualAction" method="execute">
+        <action name="CommonCursoGetCursoActual" class="action.curso.GetCursoActualAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonCursoGetMenu" class="action.common.CommonCursoGetMenuAction" method="execute">
+        <action name="CommonCursoGetMenu" class="action.curso.GetMenuAction" method="execute">
             <result name="PR">/jsp/users/profesor/menuCurso/profesorMenuCurso.jsp
             </result>
             <result name="AL">/jsp/users/alumno/menuCurso/alumnoMenuCurso.jsp
@@ -799,7 +799,7 @@
             </result>
         </action>
 
-        <action name="CommonCursoGetCursoResumen" class="action.common.CommonCursoGetCursoResumenAction"
+        <action name="CommonCursoGetCursoResumen" class="action.curso.GetCursoResumenAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
@@ -807,7 +807,7 @@
             </result>
         </action>
 
-        <action name="CommonCursoGetCursoActualxAgnoSem" class="action.common.CommonCursoGetCursoActualxAgnoSemAction"
+        <action name="CommonCursoGetCursoActualxAgnoSem" class="action.curso.GetCursoActualxAgnoSemAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
@@ -815,12 +815,12 @@
             </result>
         </action>
 
-        <action name="CommonCursoGetCarreras" class="action.common.CommonCursoGetCarrerasAction" method="execute">
+        <action name="CommonCursoGetCarreras" class="action.curso.GetCarrerasAction" method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCarreras.jsp
             </result>
         </action>
 
-        <action name="CommonCursoGetCursosxAgnoSem" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonCursoGetCursosxAgnoSem" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursosxAgnoSem.jsp
             </result>
@@ -851,12 +851,12 @@
         </action>
 
         <action name="CommonCursoGetCursosxAgnoSemEncuesta"
-                class="action.common.CommonCursoGetCursosxAgnoSemEncuestaAction" method="execute">
+                class="action.curso.GetCursosxAgnoSemEncuestaAction" method="execute">
             <result name="success">/jsp/common/encuesta/commonEncuestaListaCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoListaDefCursosActuales" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonCursoListaDefCursosActuales" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaDefCursos.jsp
             </result>
@@ -922,7 +922,7 @@
             </result>
         </action>
 
-        <action name="CommonCursoGetDefCursosxAgnoSem" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonCursoGetDefCursosxAgnoSem" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoListaCursosConsulta.jsp
             </result>
@@ -1047,13 +1047,13 @@
             <result name="success">/jsp/common/id/commonIdMisCursos.jsp</result>
         </action>
 
-        <action name="CommonCursoGetListaCurso" class="action.common.CommonCursoGetListaCursoAction"
+        <action name="CommonCursoGetListaCurso" class="action.curso.GetListaCursoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/commonCursoNominaAlumnos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoGetFotoAlumno" class="action.common.CommonCursoGetFotoAlumnoAction"
+        <action name="CommonCursoGetFotoAlumno" class="action.curso.GetFotoAlumnoAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">image/jpg
@@ -1067,7 +1067,7 @@
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetCursos" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonCursoDefinicionGetCursos" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonCursoDefinicionGetMalla</param>
@@ -1075,171 +1075,171 @@
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetElectivos" class="action.common.CommonCursoDefinicionGetElectivosAction"
+        <action name="CommonCursoDefinicionGetElectivos" class="action.curso.GetElectivosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionAddElectivo" class="action.common.CommonCursoDefinicionAddElectivoAction"
+        <action name="CommonCursoDefinicionAddElectivo" class="action.curso.AddElectivoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionModifyElectivo"
-                class="action.common.CommonCursoDefinicionModifyElectivoAction"
+                class="action.curso.ModifyElectivoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionRemoveElectivos"
-                class="action.common.CommonCursoDefinicionRemoveElectivosAction"
+                class="action.curso.RemoveElectivosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetMalla" class="action.common.CommonCursoDefinicionGetMallaAction"
+        <action name="CommonCursoDefinicionGetMalla" class="action.curso.GetMallaAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetElectivo" class="action.common.CommonCursoDefinicionGetElectivoAction"
+        <action name="CommonCursoDefinicionGetElectivo" class="action.curso.GetElectivoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetElectivo.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionAddCurso" class="action.common.CommonCursoDefinicionAddCursoAction"
+        <action name="CommonCursoDefinicionAddCurso" class="action.curso.AddDefinicionAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionModifyCurso" class="action.common.CommonCursoDefinicionModifyCursoAction"
+        <action name="CommonCursoDefinicionModifyCurso" class="action.curso.ModifyCursoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionRemoveCursos" class="action.common.CommonCursoDefinicionRemoveCursosAction"
+        <action name="CommonCursoDefinicionRemoveCursos" class="action.curso.RemoveCursosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionRefreshCursos" class="action.common.CommonCursoDefinicionRefreshCursosAction"
+        <action name="CommonCursoDefinicionRefreshCursos" class="action.curso.RefreshCursosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetCursos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionToolGetHorario" class="action.common.CommonCursoDefinicionToolAction"
+        <action name="CommonCursoDefinicionToolGetHorario" class="action.curso.GetToolAction"
                 method="getHorario">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetHorario.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionToolGetProfesor" class="action.common.CommonCursoDefinicionToolAction"
+        <action name="CommonCursoDefinicionToolGetProfesor" class="action.curso.GetToolAction"
                 method="getProfesor">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesor.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionToolGetProfesorEstricto"
-                class="action.common.CommonCursoDefinicionToolAction"
+                class="action.curso.GetToolAction"
                 method="getProfesor">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesorEstricto.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionToolGetAyudante" class="action.common.CommonCursoDefinicionToolAction"
+        <action name="CommonCursoDefinicionToolGetAyudante" class="action.curso.GetToolAction"
                 method="getAyudante">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudante.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionToolGetAyudanteEstricto"
-                class="action.common.CommonCursoDefinicionToolAction"
+                class="action.curso.GetToolAction"
                 method="getAyudante">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudanteEstricto.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionHorarioSave" class="action.common.CommonCursoDefinicionHorarioSaveAction"
+        <action name="CommonCursoDefinicionHorarioSave" class="action.curso.SaveHorarioAction"
                 method="execute">
             <result name="success">/jsp/common/action/commonActionResult.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionProfesorSearch"
-                class="action.common.CommonCursoDefinicionProfesorSearchAction"
+                class="action.curso.SearchProfesorAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionProfesorSearch.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionProfesorEstrictoSearch"
-                class="action.common.CommonCursoDefinicionProfesorSearchAction"
+                class="action.curso.SearchProfesorAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionProfesorEstrictoSearch.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionProfesorSave" class="action.common.CommonCursoDefinicionProfesorSaveAction"
+        <action name="CommonCursoDefinicionProfesorSave" class="action.curso.SaveProfesorAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetProfesorSaved.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionAyudanteSearch"
-                class="action.common.CommonCursoDefinicionAyudanteSearchAction"
+                class="action.curso.SearchAyudanteAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionAyudanteSearch.jsp
             </result>
         </action>
 
         <action name="CommonCursoDefinicionAyudanteEstrictoSearch"
-                class="action.common.CommonCursoDefinicionAyudanteSearchAction"
+                class="action.curso.SearchAyudanteAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionAyudanteEstrictoSearch.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionAyudanteSave" class="action.common.CommonCursoDefinicionAyudanteSaveAction"
+        <action name="CommonCursoDefinicionAyudanteSave" class="action.curso.SaveAyudanteAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetAyudanteSaved.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetTransversales" class="action.common.CommonCursoGetTransversalesxAgnoSemAction"
+        <action name="CommonCursoDefinicionGetTransversales" class="action.curso.GetTransversalesxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp
             </result>
         </action>
                
         <action name="CommonCursoDefinicionSaveTransversales"
-                class="action.common.CommonCursoDefinicionSaveTransversalesAction" method="execute">
+                class="action.curso.SaveTransversalesAction" method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetTransversales.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionGetEspejos" class="action.common.CommonCursoDefinicionGetEspejosAction"
+        <action name="CommonCursoDefinicionGetEspejos" class="action.curso.GetEspejosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionSaveEspejo" class="action.common.CommonCursoDefinicionSaveEspejoAction"
+        <action name="CommonCursoDefinicionSaveEspejo" class="action.curso.SaveEspejoAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionRemoveEspejos" class="action.common.CommonCursoDefinicionRemoveEspejosAction"
+        <action name="CommonCursoDefinicionRemoveEspejos" class="action.curso.RemoveEspejosAction"
                 method="execute">
             <result name="success">/jsp/common/curso/definicion/commonCursoDefinicionGetEspejos.jsp
             </result>
@@ -1302,7 +1302,7 @@
             </result>
         </action>
 
-        <action name="CommonMaterialGetListaCurso" class="action.common.CommonCursoGetListaCursoAction"
+        <action name="CommonMaterialGetListaCurso" class="action.curso.GetListaCursoAction"
                 method="execute">
             <result name="success">/jsp/common/material/commonMaterialNominaAlumnos.jsp
             </result>
@@ -1787,7 +1787,7 @@
             <result name="success">/jsp/common/acta/commonActaComplementariaConsola.jsp</result>
         </action>
 
-        <action name="CommonActaRectificatoriaGetCursos" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonActaRectificatoriaGetCursos" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/acta/commonActaRectificatoriaCursos.jsp
             </result>
@@ -1909,7 +1909,7 @@
             </result>
         </action>
 
-        <action name="CommonInscripcionAdministracion" class="action.common.CommonCursoGetCursosxAgnoSemAction"
+        <action name="CommonInscripcionAdministracion" class="action.curso.GetCursosxAgnoSemAction"
                 method="execute">
             <result name="success">/jsp/common/inscripcion/commonInscripcionAdministracion.jsp
             </result>
@@ -1983,7 +1983,7 @@
         </action>
 
         <action name="CommonCursoGetCursoAdmInscripcionIzq"
-                class="action.common.CommonCursoGetCursoAdmInscripcionIzqAction" method="execute">
+                class="action.curso.GetCursoAdmInscripcionIzqAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
                 <param name="key">${key}</param>
@@ -1991,7 +1991,7 @@
         </action>
 
         <action name="CommonCursoGetCursoAdmInscripcionDer"
-                class="action.common.CommonCursoGetCursoAdmInscripcionDerAction" method="execute">
+                class="action.curso.GetCursoAdmInscripcionDerAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
                 <param name="key">${key}</param>
@@ -2023,9 +2023,7 @@
             </result>
         </action>
 
-       
-
-        <action name="CommonCursoListaExport" class="action.common.CommonCursoListaExportAction"
+        <action name="CommonCursoListaExport" class="action.curso.ExportListaAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="inputName">excelFile
@@ -2111,7 +2109,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonCursoDefinicionExport" class="action.common.CommonCursoDefinicionExportAction"
+        <action name="CommonCursoDefinicionExport" class="action.curso.ExportDefinicionAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -2164,7 +2162,7 @@
             </result>
         </action>
 
-        <action name="CommonCursoDefinicionPrint" class="action.common.CommonCursoDefinicionPrintAction"
+        <action name="CommonCursoDefinicionPrint" class="action.curso.PrintDefinicionAction"
                 method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
@@ -2205,12 +2203,12 @@
             <result name="exception">/jsp/message/messageException.jsp</result>
         </action>
 
-        <action name="CommonCursoListaFotoPrint" class="action.common.CommonCursoListaFotoPrintAction" method="execute">
+        <action name="CommonCursoListaFotoPrint" class="action.curso.PrintListaFotoAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonCursoListaAsistenciaPrint" class="action.common.CommonCursoListaAsistenciaPrintAction"
+        <action name="CommonCursoListaAsistenciaPrint" class="action.curso.PrintListaAsistenciaAction"
                 method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
@@ -2274,13 +2272,13 @@
             <result name="exception">/jsp/message/messageException.jsp</result>
         </action>
 
-        <action name="CommonCursoGetBoletin" class="action.common.CommonCursoGetBoletinAction" method="execute">
+        <action name="CommonCursoGetBoletin" class="action.curso.GetBoletinAction" method="execute">
             <result name="success">
                 /jsp/common/curso/CommonCursoGetBoletin.jsp
             </result>
         </action>
 
-        <action name="CommonCursoGetBoletinHorario" class="action.common.CommonCursoGetBoletinHorarioAction"
+        <action name="CommonCursoGetBoletinHorario" class="action.curso.GetBoletinHorarioAction"
                 method="execute">
             <result name="success">
                 /jsp/common/horario/commonHorario.jsp
