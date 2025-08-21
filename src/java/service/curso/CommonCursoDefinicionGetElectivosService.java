@@ -5,6 +5,7 @@
  */
 package service.curso;
 
+import action.common.CommonCursoDefinicionGetElectivosAction;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.Malla;
 import java.util.List;
@@ -20,10 +21,17 @@ import infrastructure.util.common.CommonMallaUtil;
  * @author Administrador
  */
 public class CommonCursoDefinicionGetElectivosService {
-   public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem) {
+   public String service(GenericSession genericSession, String key, Integer pos, Integer agno, Integer sem, CommonCursoDefinicionGetElectivosAction action) {
 
         WorkSession ws = genericSession.getWorkSession(key);
         MiCarreraSupport carrera = ws.getMiCarreraSupportList().get(pos);
+        
+        if ((carrera.getTcrCtip() == 16) && (carrera.getMencion().getId().getMenCodMen() == 2)) {
+            action.setIsEconomia(true);
+        } else {
+            action.setIsEconomia(false);
+        }
+        
         ws.setAgnoAct(agno);
         ws.setSemAct(sem);
         

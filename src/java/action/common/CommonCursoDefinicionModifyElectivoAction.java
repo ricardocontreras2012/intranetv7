@@ -21,6 +21,7 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
     private Integer minorMod;
     private Integer areaMod;
     private String tipoMod;
+    private boolean isEconomia;
     /**
      * Method description
      *
@@ -29,7 +30,7 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
      */
     @Override
     public String action() throws Exception {
-        return new CommonCursoDefinicionModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, tipoMod, getKey());
+        return new CommonCursoDefinicionModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, tipoMod, getKey(), this);
     }
 
     public void setAsignMod(Integer asignMod) {
@@ -54,6 +55,14 @@ public class CommonCursoDefinicionModifyElectivoAction extends ActionCommonSuppo
     
     public void setTipoMod(String tipoMod) {
         this.tipoMod = tipoMod;
+    }
+    
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
     }
 }
 

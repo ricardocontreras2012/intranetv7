@@ -29,22 +29,20 @@
         <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetElectivos-3.0.1.js"></script>
     </head>
     <body class="inner-body" style="overflow: hidden">
-        <div class="container-fluid d-flex flex-column vh-100">
-            <row>
-                <div class="navbar-brand container-fluid">
-                    <div class="title-div">
-                        <s:text name="label.title.definicion.electivos"/> &nbsp;<s:property
-                            value="#session.genericSession.getWorkSession(key).nombreCarrera"/>
-                        &nbsp;<s:property
-                            value="#session.genericSession.getWorkSession(key).agnoAct"/>
-                        /<s:property
-                            value="#session.genericSession.getWorkSession(key).semAct"/>
-                    </div>
+        <nav class="navbar-brand  fixed-top bg-light">
+            <div class="container-fluid" >
+                <div class="title-div">
+                    <s:text name="label.title.definicion.electivos"/> &nbsp;<s:property
+                        value="#session.genericSession.getWorkSession(key).nombreCarrera"/>
+                    &nbsp;<s:property
+                        value="#session.genericSession.getWorkSession(key).agnoAct"/>
+                    /<s:property
+                        value="#session.genericSession.getWorkSession(key).semAct"/>
                 </div>
-            </row>
-            <row>
-                <div class="container-fluid container-menu">
-                    <div class="row">
+            </div>
+            <div class="container-fluid container-menu">
+                <div class="row">
+                    <div class="col">
                         <div id="justified-button-bar" class="col-lg-12">
                             <div class="btn-group">
                                 <div class="btn-group">
@@ -61,7 +59,11 @@
                         </div>
                     </div>
                 </div>
-            </row>
+            </div>
+        </nav>
+        <div class="container-fluid d-flex flex-column vh-100">
+
+
 
             <row class="overflow-auto">
                 <div class="container-fluid overflow-auto">
@@ -73,13 +75,14 @@
                                         <th scope="col" style="width: 2%"></th>
                                         <th scope="col" style="width: 6%"><s:text name="label.asignatura"/></th>
                                         <th scope="col" style="width: 2%">Electividad</th>
-                                        <th scope="col" style="width: 72%"><s:text name="label.name"/></th>
+                                        <th scope="col" style="width: 66%"><s:text name="label.name"/></th>
                                         <th scope="col" style="width: 6%">Area</th>
                                         <th scope="col" style="width: 6%">Minor</th>
-                                        <s:if test="true">
+                                            <s:if test="isEconomia">
                                             <th scope="col" style="width: 6%">Tipo</th>
-                                        </s:if>
-                                        
+                                            <th scope="col" style="width: 6%">SCT</th>
+                                            </s:if>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -95,12 +98,14 @@
                                             <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="eleNom"/></a></td>
                                             <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="area.areDes"/></a></td>
                                             <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')"><s:property value="minor.asiCod"/></a></td>
-                                            <s:if test="true">
-                                            <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')">
-                                                    <s:if test="eleTipo == 'PRO'">Profundización</s:if>
-                                                    <s:if test="eleTipo == 'COM'">Complementario</s:if>
-                                                    <s:if test="eleTipo == 'PRA'">Práctico</s:if>
-                                                </a></td>
+                                                <s:if test="isEconomia">
+                                                <td><a id="searchAnchor_<s:property value="#row.count -1"/>" onclick="show(<s:property value="id.eleAsign"/>, '<s:property value="id.eleElect"/>', '<s:property value="eleNom"/>', '<s:property value="minor"/>', '<s:property value="area.areDes"/>', '<s:property value="eleTipo"/>')">
+                                                        <s:if test="eleTipo == 'PRO'">Profundización</s:if>
+                                                        <s:if test="eleTipo == 'COM'">Complementario</s:if>
+                                                        <s:if test="eleTipo == 'PRA'">Práctico</s:if>
+                                                        </a>
+                                                    </td>
+                                                    <td><s:property value="asignatura.asiSct"/></td>
                                             </s:if>
                                         </tr>
                                     </s:iterator>
@@ -185,17 +190,17 @@
                                                         </select>
                                                     </td>
                                                 </tr>
-                                                <s:if test="true">
-                                                <tr>
-                                                    <td>Tipo</td>
-                                                    <td><select id="tipo" name="tipo" class="form-control">
-                                                            <option value="">Seleccione Tipo</option>
-                                                            <option value="PRO">Profundización</option>
-                                                            <option value="COM">Complementario</option>
-                                                            <option value="PRA">Práctico</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
+                                                <s:if test="isEconomia">
+                                                    <tr>
+                                                        <td>Tipo</td>
+                                                        <td><select id="tipo" name="tipo" class="form-control">
+                                                                <option value="">Seleccione Tipo</option>
+                                                                <option value="PRO">Profundización</option>
+                                                                <option value="COM">Complementario</option>
+                                                                <option value="PRA">Práctico</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
                                                 </s:if>
 
                                                 </tbody>
@@ -262,18 +267,18 @@
                                                             </select>
                                                         </td>
                                                     </tr>
-                                                    
-                                                    <s:if test="true">
-                                                    <tr>
-                                                        <td>Tipo</td>
-                                                        <td><select id="tipoMod" name="tipoMod" class="form-control">
-                                                                <option value="">Seleccione Tipo</option>
-                                                                <option value="PRO">Profundización</option>
-                                                                <option value="COM">Complementario</option>
-                                                                <option value="PRA">Práctico</option>
-                                                            </select>
-                                                        </td>
-                                                    </tr>
+
+                                                    <s:if test="isEconomia">
+                                                        <tr>
+                                                            <td>Tipo</td>
+                                                            <td><select id="tipoMod" name="tipoMod" class="form-control">
+                                                                    <option value="">Seleccione Tipo</option>
+                                                                    <option value="PRO">Profundización</option>
+                                                                    <option value="COM">Complementario</option>
+                                                                    <option value="PRA">Práctico</option>
+                                                                </select>
+                                                            </td>
+                                                        </tr>
                                                     </s:if>
                                                 </tbody>
                                             </table>

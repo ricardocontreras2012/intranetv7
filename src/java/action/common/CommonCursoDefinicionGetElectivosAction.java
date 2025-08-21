@@ -15,6 +15,16 @@ import infrastructure.support.action.ActionValidationAgnoSemSupport;
 public class CommonCursoDefinicionGetElectivosAction extends ActionValidationAgnoSemSupport {
 
     private static final long serialVersionUID = 1L;
+    
+    private boolean isEconomia;
+
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
+    }
 
     /**
      * Method description
@@ -24,7 +34,7 @@ public class CommonCursoDefinicionGetElectivosAction extends ActionValidationAgn
      */
     @Override
     public String action() throws Exception {
-        return new CommonCursoDefinicionGetElectivosService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new CommonCursoDefinicionGetElectivosService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem(), this);
     }
 
     /**
