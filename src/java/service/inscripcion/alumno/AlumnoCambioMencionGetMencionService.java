@@ -13,7 +13,7 @@ import session.GenericSession;
  *
  * @author Usach
  */
-public class AlumnoInscripcionCambioMencionGetMencionService {
+public class AlumnoCambioMencionGetMencionService {
  public String service(GenericSession genericSession, AlumnoSession alumnoSession,  String key) { 
         /*AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
         Integer mencion = alumnoSession.getCambioMencion();

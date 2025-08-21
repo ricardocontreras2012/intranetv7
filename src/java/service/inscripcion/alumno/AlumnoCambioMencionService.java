@@ -1,5 +1,5 @@
 /*
- * @(#)AlumnoInscripcionCambioMencionService.java
+ * @(#)AlumnoCambioMencionService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -19,7 +19,7 @@ import infrastructure.util.LogUtil;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AlumnoInscripcionCambioMencionService {
+public final class AlumnoCambioMencionService {
 
     /**
      * Method Servicio

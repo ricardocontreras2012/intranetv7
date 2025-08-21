@@ -53,18 +53,18 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
 
         return criteria.list();
     }
-    
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns) {
         Criteria criteria = getSession().createCriteria(Inscripcion.class);
 
-        String filter=" NOT EXISTS (SELECT 1 FROM calificacion WHERE cal_rut = ? and cal_cod_car = ? and "+
-                " cal_agno_ing = ? and cal_sem_ing = ? and cal_asign = ins_asign and cal_agno = ? and cal_sem = ?)";
+        String filter = " NOT EXISTS (SELECT 1 FROM calificacion WHERE cal_rut = ? and cal_cod_car = ? and "
+                + " cal_agno_ing = ? and cal_sem_ing = ? and cal_asign = ins_asign and cal_agno = ? and cal_sem = ?)";
 
         criteria.setFetchMode("aluCar", JOIN);
         criteria.setFetchMode("curso", JOIN);
-        criteria.createAlias("curso.asignatura","asignatura");
+        criteria.createAlias("curso.asignatura", "asignatura");
         criteria.add(eq("id.insAgno", agnoIns));
         criteria.add(eq("id.insSem", semIns));
         criteria.add(eq("asignatura.asiFlagPractica", "S"));
@@ -83,8 +83,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
 
     @Override
     public int deleteInscripcion(AluCar aluCar, CursoId id, String proceso, Integer rutRea, String user) {
-        int retValue;
-                   
+
         Query query = getSession().getNamedQuery("InscripcionRemoveFunction");
 
         query.setParameter(0, aluCar.getId().getAcaRut(), StandardBasicTypes.INTEGER);
@@ -104,7 +103,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         query.setParameter(12, proceso, StandardBasicTypes.STRING);
         query.setParameter(13, rutRea, StandardBasicTypes.INTEGER);
 
-        retValue = query.executeUpdate();
+        query.executeUpdate();
 
         return 0;
     }
@@ -314,26 +313,26 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
 
         query.executeUpdate();
     }
-    
+
     @Override
-    public String getResumen(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil) {      
-        
+    public String getResumen(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil) {
+
         String sql = "SELECT inscripcion_pkg.get_resumen_inscripcion(:tcarrera,:especialidad,:jornada,:rut,:perfil,:agno,:sem) from dual";
 
         Query query = getSession().createSQLQuery(sql);
-        
-            query.setParameter("tcarrera", tcarrera, StandardBasicTypes.INTEGER);
-            query.setParameter("especialidad", especialidad, StandardBasicTypes.INTEGER);
-            query.setParameter("jornada", jornada, StandardBasicTypes.STRING);
-            query.setParameter("rut", rut, StandardBasicTypes.INTEGER);
-            query.setParameter("perfil", perfil, StandardBasicTypes.STRING);
-            query.setParameter("agno", agno, StandardBasicTypes.INTEGER);
-            query.setParameter("sem", sem, StandardBasicTypes.INTEGER);
-            
-            try {
+
+        query.setParameter("tcarrera", tcarrera, StandardBasicTypes.INTEGER);
+        query.setParameter("especialidad", especialidad, StandardBasicTypes.INTEGER);
+        query.setParameter("jornada", jornada, StandardBasicTypes.STRING);
+        query.setParameter("rut", rut, StandardBasicTypes.INTEGER);
+        query.setParameter("perfil", perfil, StandardBasicTypes.STRING);
+        query.setParameter("agno", agno, StandardBasicTypes.INTEGER);
+        query.setParameter("sem", sem, StandardBasicTypes.INTEGER);
+
+        try {
             Clob resultClob = (Clob) query.uniqueResult();
             String resultString = resultClob.getSubString(1, (int) resultClob.length());
-                                  
+
             return resultString.replaceAll("\\s+", "");
 
         } catch (Exception e) {

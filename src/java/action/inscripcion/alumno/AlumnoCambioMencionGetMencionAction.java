@@ -5,7 +5,7 @@
  */
 package action.inscripcion.alumno;
 
-import service.inscripcion.alumno.AlumnoInscripcionCambioMencionGetMencionService;
+import service.inscripcion.alumno.AlumnoCambioMencionGetMencionService;
 import session.Manager;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -23,6 +23,6 @@ public class AlumnoCambioMencionGetMencionAction extends ActionCommonSupport {
      */
     @Override
     public String action() {
-        return new AlumnoInscripcionCambioMencionGetMencionService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
+        return new AlumnoCambioMencionGetMencionService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getKey());
     }
 }

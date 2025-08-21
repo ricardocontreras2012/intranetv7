@@ -16,7 +16,7 @@ import session.AlumnoSession;
  *
  * @author Administrador
  */
-public class AlumnoInscripcionSwapInscripcionService {
+public class AlumnoSwapInscripcionService {
 
     /**
      *

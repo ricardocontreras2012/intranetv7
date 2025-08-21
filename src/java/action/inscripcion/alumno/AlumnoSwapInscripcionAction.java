@@ -5,7 +5,7 @@
  */
 package action.inscripcion.alumno;
 
-import service.inscripcion.alumno.AlumnoInscripcionSwapInscripcionService;
+import service.inscripcion.alumno.AlumnoSwapInscripcionService;
 import infrastructure.support.action.ActionValidationPosSupport;
 import session.Manager;
 
@@ -24,7 +24,7 @@ public class AlumnoSwapInscripcionAction extends  ActionValidationPosSupport {
      */
     @Override
     public String action(){
-        return new AlumnoInscripcionSwapInscripcionService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(),getKey());
+        return new AlumnoSwapInscripcionService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(),getKey());
     }
 /**
      * Method description

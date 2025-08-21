@@ -1,5 +1,5 @@
 /*
- * @(#)AlumnoInscripcionGetCursosService.java
+ * @(#)AlumnoGetCursosService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -18,7 +18,7 @@ import session.WorkSession;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AlumnoInscripcionGetCursosService {
+public final class AlumnoGetCursosService {
 
     /**
      * Method Servicio

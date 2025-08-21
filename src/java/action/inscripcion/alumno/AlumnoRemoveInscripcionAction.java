@@ -5,7 +5,7 @@
  */
 package action.inscripcion.alumno;
 
-import service.inscripcion.alumno.AlumnoInscripcionRemoveInscripcionService;
+import service.inscripcion.alumno.AlumnoRemoveInscripcionService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 
 /**
@@ -26,6 +26,6 @@ public final class AlumnoRemoveInscripcionAction extends ActionParameterAwareSup
      */
     @Override
     public String action() {
-        return new AlumnoInscripcionRemoveInscripcionService().service(this, getGenericSession(), getMapParameters(), getKey());
+        return new AlumnoRemoveInscripcionService().service(this, getGenericSession(), getMapParameters(), getKey());
     }
 }

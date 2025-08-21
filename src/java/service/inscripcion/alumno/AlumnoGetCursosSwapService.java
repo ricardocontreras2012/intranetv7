@@ -28,7 +28,7 @@ import session.AlumnoSession;
  * vez y actualizar la sesión de trabajo con los cursos intercambiables
  * relacionados con ese curso en particular.
  */
-public class AlumnoInscripcionGetCursosSwapService {
+public class AlumnoGetCursosSwapService {
 
     /**
      * Este método maneja el intercambio de cursos para un alumno, basado en la

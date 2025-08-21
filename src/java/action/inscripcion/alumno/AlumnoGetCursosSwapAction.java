@@ -5,7 +5,7 @@
  */
 package action.inscripcion.alumno;
 
-import service.inscripcion.alumno.AlumnoInscripcionGetCursosSwapService;
+import service.inscripcion.alumno.AlumnoGetCursosSwapService;
 import infrastructure.support.action.ActionParameterAwareSupport;
 import session.Manager;
 
@@ -24,7 +24,7 @@ public class AlumnoGetCursosSwapAction extends ActionParameterAwareSupport {
      */
     @Override
     public String action() {
-        return new AlumnoInscripcionGetCursosSwapService().service(this, getGenericSession(), Manager.getAlumnoSession(sesion), getMapParameters(), getKey());
+        return new AlumnoGetCursosSwapService().service(this, getGenericSession(), Manager.getAlumnoSession(sesion), getMapParameters(), getKey());
     }
 }
 

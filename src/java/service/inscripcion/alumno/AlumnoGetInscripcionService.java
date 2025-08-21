@@ -1,5 +1,5 @@
 /*
- * @(#)AlumnoInscripcionGetInscripcionService.java
+ * @(#)AlumnoGetInscripcionService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
@@ -14,7 +14,7 @@ import session.GenericSession;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class AlumnoInscripcionGetInscripcionService {
+public final class AlumnoGetInscripcionService {
 
     /**
      * Method Servicio
