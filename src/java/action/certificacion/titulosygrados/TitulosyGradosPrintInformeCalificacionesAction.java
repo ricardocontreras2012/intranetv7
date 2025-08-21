@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2021 FAE-USACH
  */
-package action.titulosygrados;
+package action.certificacion.titulosygrados;
 
 import java.io.InputStream;
 import service.certificacion.titulosygrados.TitulosyGradosPrintInformeCalificacionesService;

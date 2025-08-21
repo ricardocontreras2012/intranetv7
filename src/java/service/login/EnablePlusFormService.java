@@ -1,12 +1,12 @@
 /*
- * @(#)CommonLoginEnableFormService.java
+ * @(#)EnablePlusFormService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
-package service.common;
+package service.login;
 
 import java.util.Map;
-import static infrastructure.util.AppStaticsUtil.NORMAL_USERS;
+import static infrastructure.util.AppStaticsUtil.PRIVILEGED_USERS;
 
 /**
  * Class description
@@ -14,14 +14,14 @@ import static infrastructure.util.AppStaticsUtil.NORMAL_USERS;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CommonLoginEnableFormService {
+public final class EnablePlusFormService {
 
     /**
-     * Habilita formulario de LogIn.
+     * Method description
      *
      * @return 
      */
     public Map<String, String> service() {
-        return NORMAL_USERS;        
+        return PRIVILEGED_USERS;        
     }
 }

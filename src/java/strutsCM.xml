@@ -168,7 +168,7 @@
             </result>
         </action>
 
-        <action name="CommonPasswordAskNewPassword" class="action.common.CommonPasswordAskNewPasswordAction"
+        <action name="CommonPasswordAskNewPassword" class="action.login.AskNewPasswordAction"
                 method="execute">
             <result name="success">/jsp/common/id/commonIdSolicitudPasswordSuccess.jsp
             </result>
@@ -178,7 +178,7 @@
             </result>
         </action>
 
-        <action name="CommonPasswordSetNewPassword" class="action.common.CommonPasswordSetNewPasswordAction"
+        <action name="CommonPasswordSetNewPassword" class="action.login.SetNewPasswordAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${actionCall}</param>
@@ -191,11 +191,11 @@
             </result>
         </action>
 
-        <action name="CommonSessionClose" class="action.common.CommonSessionCloseAction" method="execute">
+        <action name="CommonSessionClose" class="action.login.CloseSessionAction" method="execute">
             <result name="success">/jsp/message/messageExit.jsp</result>
         </action>
 
-        <action name="CommonSessionHelp" class="action.common.CommonSessionHelpAction" method="execute">
+        <action name="CommonSessionHelp" class="action.login.HelpAction" method="execute">
             <result name="success">${page}
             </result>
         </action>
@@ -907,7 +907,7 @@
             </result>
         </action>
 
-        <action name="CommonPasswordChangeSave" class="action.common.CommonPasswordSavePasswordAction"
+        <action name="CommonPasswordChangeSave" class="action.login.SavePasswordAction"
                 method="execute">
             <result name="success">/jsp/message/messageSuccess.jsp
             </result>
@@ -1029,7 +1029,7 @@
             </result>
         </action>
 
-        <action name="CommonLoginStackPasswordSave" class="action.common.CommonPasswordSavePasswordAction"
+        <action name="CommonLoginStackPasswordSave" class="action.login.SavePasswordAction"
                 method="execute">
             <interceptor-ref name="tokenSession"/>
             <interceptor-ref name="IntranetStack"/>

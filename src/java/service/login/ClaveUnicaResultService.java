@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service.common;
+package service.login;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Ricardo
  */
-public class CommonLoginClaveUnicaResultService {
+public class ClaveUnicaResultService {
 
     public String service(HttpServletRequest request, Map<String, Object> sesion, String key) {
 

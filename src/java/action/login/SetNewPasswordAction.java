@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.common;
+package action.login;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.PasswordTicket;
@@ -21,7 +21,7 @@ import static infrastructure.util.common.CommonRandomUtil.getKeySession;
  *
  * @author Ricardo
  */
-public class CommonPasswordSetNewPasswordAction extends ActionCommonSupportDirect {
+public class SetNewPasswordAction extends ActionCommonSupportDirect {
 
     private static final long serialVersionUID = 1L;
     private Integer rut;

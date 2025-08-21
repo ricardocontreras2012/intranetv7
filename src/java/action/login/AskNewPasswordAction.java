@@ -1,12 +1,12 @@
 /*
- * @(#)CommonPasswordAskNewPasswordAction.java
+ * @(#)AskNewPasswordAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
-package action.common;
+package action.login;
 
 
-import service.common.CommonPasswordAskNewPasswordService;
+import service.login.AskNewPasswordService;
 import infrastructure.support.action.post.ActionPostCommonSupport;
 
 /**
@@ -15,7 +15,7 @@ import infrastructure.support.action.post.ActionPostCommonSupport;
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonPasswordAskNewPasswordAction extends ActionPostCommonSupport {
+public final class AskNewPasswordAction extends ActionPostCommonSupport {
 
     private static final long serialVersionUID = 1L;
     private Integer rut;
@@ -29,7 +29,7 @@ public final class CommonPasswordAskNewPasswordAction extends ActionPostCommonSu
      */
     @Override
     public String action()  throws Exception{        
-        return new CommonPasswordAskNewPasswordService().service(this, rut, userType);
+        return new AskNewPasswordService().service(this, rut, userType);
     }
 
 

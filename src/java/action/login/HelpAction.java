@@ -1,23 +1,23 @@
 /*
- * @(#)CommonSessionCloseAction.java
+ * @(#)HelpAction.java
  *
  * Copyright (c) 2025 FAE-USACH
  */
-package action.common;
+package action.login;
 
-import service.common.CommonSessionCloseService;
+import service.login.HelpService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
- * Procesa el action mapeado del request a la URL CommonSessionClose
+ * Procesa el action mapeado del request a la URL CommonSessionHelp
  *
  * @author Ricardo Contreras S.
  * @version 7, 28/05/2012
  */
-public final class CommonSessionCloseAction extends ActionCommonSupport {
+public final class HelpAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
-    private String urlRedirect;
+    private String page;
 
     /**
      * Method description
@@ -27,8 +27,7 @@ public final class CommonSessionCloseAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        urlRedirect= new CommonSessionCloseService().service(getSesion(), getKey());
-
+        page = new HelpService().service(getGenericSession());
         return SUCCESS;
     }
 
@@ -36,7 +35,7 @@ public final class CommonSessionCloseAction extends ActionCommonSupport {
      *
      * @return
      */
-    public String getUrlRedirect() {
-        return urlRedirect;
+    public String getPage() {
+        return page;
     }
 }

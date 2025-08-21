@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.common;
+package action.login;
 
-import service.common.CommonPasswordSavePasswordService;
+import service.login.SavePasswordService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
  *
  * @author Ricardo
  */
-public class CommonPasswordSavePasswordAction extends ActionCommonSupport {
+public class SavePasswordAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,7 +27,7 @@ public class CommonPasswordSavePasswordAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new CommonPasswordSavePasswordService().service(this, getGenericSession(), passwdActual, passwdNueva);
+        return new SavePasswordService().service(this, getGenericSession(), passwdActual, passwdNueva);
     }
 
     public String getPasswdActual() {

@@ -1,9 +1,9 @@
 /*
- * @(#)CommonSessionCloseService.java
+ * @(#)CloseSessionService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
-package service.common;
+package service.login;
 
 import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -20,7 +20,7 @@ import static infrastructure.util.common.CommonFacultadUtil.getUnidadxProf;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CommonSessionCloseService {
+public final class CloseSessionService {
 
     /**
      * Method description

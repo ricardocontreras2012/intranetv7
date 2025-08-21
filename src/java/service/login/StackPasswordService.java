@@ -1,5 +1,5 @@
 
-package service.common;
+package service.login;
 
 import session.GenericSession;
 import static infrastructure.util.AppStaticsUtil.PRIVILEGED_USERS;
@@ -9,7 +9,7 @@ import infrastructure.util.PasswordUtil;
  *
  * @author Ricardo
  */
-public class CommonLoginStackPasswordService {
+public class StackPasswordService {
 
     public String service(GenericSession genericSession) {
         String retValue;

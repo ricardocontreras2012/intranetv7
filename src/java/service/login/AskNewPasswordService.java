@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service.common;
+package service.login;
 
 import com.opensymphony.xwork2.Action;
 import infrastructure.support.action.post.ActionPostCommonSupport;
@@ -16,7 +16,7 @@ import static infrastructure.util.MailUtil.sendURLNewPassword;
  *
  * @author Ricardo
  */
-public class CommonPasswordAskNewPasswordService {
+public class AskNewPasswordService {
 
     public String service(ActionPostCommonSupport action, int rut, String user) throws Exception {
   

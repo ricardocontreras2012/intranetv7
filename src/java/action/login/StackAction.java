@@ -1,7 +1,7 @@
 
 package action.login;
 
-import service.common.CommonLoginStackService;
+import service.login.CommonLoginStackService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**

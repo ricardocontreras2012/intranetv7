@@ -5,7 +5,7 @@
  */
 package action.login;
 
-import service.common.CommonLoginEnableFormService;
+import service.login.EnableFormService;
 import infrastructure.support.action.common.ActionCommonSupport;
 import java.util.Map;
 
@@ -30,7 +30,7 @@ public final class EnableFormAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        userTypeMap = new CommonLoginEnableFormService().service();
+        userTypeMap = new EnableFormService().service();
 
         return SUCCESS;
     }

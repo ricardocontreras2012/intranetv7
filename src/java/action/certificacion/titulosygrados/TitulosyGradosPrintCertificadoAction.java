@@ -1,5 +1,5 @@
 
-package action.titulosygrados;
+package action.certificacion.titulosygrados;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import infrastructure.support.action.ActionValidationPosSupport;

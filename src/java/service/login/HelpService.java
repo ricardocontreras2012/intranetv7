@@ -1,9 +1,9 @@
 /*
- * @(#)CommonSessionHelpService.java
+ * @(#)HelpService.java
  *
  * Copyright (c) Copyright (c) 2023 FAE-USACH
  */
-package service.common;
+package service.login;
 
 import static java.lang.System.out;
 import session.GenericSession;
@@ -14,7 +14,7 @@ import session.GenericSession;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class CommonSessionHelpService {
+public final class HelpService {
 
     /**
      *

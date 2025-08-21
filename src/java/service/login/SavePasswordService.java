@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service.common;
+package service.login;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import session.GenericSession;
@@ -16,7 +16,7 @@ import static infrastructure.util.MailUtil.sendNewPassword;
  *
  * @author Ricardo
  */
-public class CommonPasswordSavePasswordService {
+public class SavePasswordService {
 
     public String service(ActionCommonSupport action, GenericSession genericSession, String passwdActual, String passwdNueva) {
        
