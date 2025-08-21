@@ -5,7 +5,7 @@
  */
 package service.alumno;
 
-import action.common.CommonAlumnoGetCarreraAction;
+import action.alumno.GetCarreraAction;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.AluCar;
 import session.GenericSession;
@@ -28,7 +28,7 @@ public final class GetCarreraService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public String service(CommonAlumnoGetCarreraAction action, GenericSession gs, Integer pos,
+    public String service(GetCarreraAction action, GenericSession gs, Integer pos,
             String key)
             {
                 

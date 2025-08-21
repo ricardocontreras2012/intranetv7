@@ -65,7 +65,7 @@
         </result-types>
 
         <action name="SecretariaApoyoDiplomadosLogin"
-                class="action.secretariadiplomados.SecretariaApoyoDiplomadosLoginAction" method="execute">
+                class="action.login.secretariadiplomados.SecretariaApoyoDiplomadosLoginAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
                 <param name="key">${key}</param>

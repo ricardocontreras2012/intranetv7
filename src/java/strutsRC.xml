@@ -60,7 +60,7 @@
                          class="infrastructure.dispatcher.DynamicStreamResultDispatcher"/>
         </result-types>
 
-        <action name="RegistradorCurricularLogin" class="action.registradorcurricular.RegistradorCurricularLoginAction"
+        <action name="RegistradorCurricularLogin" class="action.login.registradorcurricular.RegistradorCurricularLoginAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -173,7 +173,7 @@
             </result>
         </action>
         <action name="RegistradorCurricularActaGenerarxCarrera"
-                class="action.registradorcurricular.RegistradorCurricularActaGenerarxCarreraAction" method="execute">
+                class="action.acta.registradorcurricular.RegistradorCurricularGenerarActaxCarreraAction" method="execute">
             <result name="success">
                 /jsp/users/registradorCurricular/acta/registradorCurricularActaNominaGeneradas.jsp
             </result>
@@ -185,7 +185,7 @@
             </result>
         </action>
         <action name="RegistradorCurricularActaGenerarIntercambio"
-                class="action.registradorcurricular.RegistradorCurricularActaGenerarIntercambioAction" method="execute">
+                class="action.acta.registradorcurricular.RegistradorCurricularGenerarActaIntercambioAction" method="execute">
             <result name="success">
                 /jsp/users/registradorCurricular/acta/registradorCurricularActaNominaGeneradas.jsp
             </result>
@@ -229,7 +229,7 @@
             <result type="myStream"/>
         </action>
 
-        <action name="RegistradorCurricularGetCartola" class="action.common.CommonAlumnoGetCalificacionesAction"
+        <action name="RegistradorCurricularGetCartola" class="action.alumno.GetCalificacionesAction"
                 method="execute">
             <result name="success">
                 /jsp/users/registradorCurricular/calificacion/registradorCurricularCalificacionesCartola.jsp

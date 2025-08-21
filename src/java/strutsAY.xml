@@ -78,7 +78,7 @@
         </action>
 
         <action name="AyudanteHorarioComun"
-                class="action.profesor.ProfesorHorarioComunAction" method="execute">
+                class="action.horario.GetHorarioComunAction" method="execute">
             <result name="success">/jsp/users/profesor/horario/profesorHorarioComun.jsp
             </result>
         </action>

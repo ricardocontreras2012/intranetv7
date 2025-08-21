@@ -82,7 +82,7 @@
         </action>
 
         <action name="TitulosyGradosAlumnoInformeCalificacionesPrint"
-                class="action.titulosygrados.TitulosyGradosAlumnoInformeCalificacionesPrintAction" method="execute">
+                class="action.certificacion.titulosygrados.TitulosyGradosPrintInformeCalificacionesAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
@@ -94,7 +94,7 @@
         </action>
 
         <action name="TitulosyGradosAlumnoCertificadoPrint"
-                class="action.titulosygrados.TitulosyGradosAlumnoCertificadoPrintAction" method="execute">
+                class="action.certificacion.titulosygrados.TitulosyGradosPrintCertificadoAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
