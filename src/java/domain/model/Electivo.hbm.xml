@@ -35,5 +35,9 @@
             <column length="120" name="ELE_NOM"/>
         </property>
         
+        <property name="eleTipo" type="string">
+            <column length="3" name="ELE_TIPO"/>
+        </property>
+        
     </class>
 </hibernate-mapping>

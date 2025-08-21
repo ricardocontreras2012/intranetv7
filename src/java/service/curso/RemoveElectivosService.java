@@ -5,6 +5,7 @@
  */
 package service.curso;
 
+import action.curso.RemoveElectivosAction;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.ElectivoId;
 import java.util.Map;
@@ -20,7 +21,7 @@ import infrastructure.util.ContextUtil;
  */
 public class RemoveElectivosService {
 
-    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key) {
+    public String service(GenericSession genericSession, Map<String, String[]> parameters, String key, RemoveElectivosAction action) {
         WorkSession ws = genericSession.getWorkSession(key);
 
         // Eliminar los electivos seleccionados
@@ -35,6 +36,12 @@ public class RemoveElectivosService {
 
         // Actualizar la lista de electivos
         MiCarreraSupport carrera = ws.getMiCarreraSupport();
+        if ((carrera.getTcrCtip() == 16) && (carrera.getMencion().getId().getMenCodMen() == 2)) {
+            action.setIsEconomia(true);
+        } else {
+            action.setIsEconomia(false);
+        }
+        
         ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser())
                 .find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(),
                         genericSession.getRut(), genericSession.getUserType()));

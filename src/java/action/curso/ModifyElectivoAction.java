@@ -20,6 +20,8 @@ public class ModifyElectivoAction extends ActionCommonSupport {
     private String electivoMod;
     private Integer minorMod;
     private Integer areaMod;
+    private String tipoMod;
+    private boolean isEconomia;
     /**
      * Method description
      *
@@ -28,7 +30,7 @@ public class ModifyElectivoAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new ModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, getKey());
+        return new ModifyElectivoService().service(getGenericSession(), asignMod, electMod, electivoMod, areaMod, minorMod, tipoMod, getKey(), this);
     }
 
     public void setAsignMod(Integer asignMod) {
@@ -45,10 +47,22 @@ public class ModifyElectivoAction extends ActionCommonSupport {
 
     public void setAreaMod(Integer areaMod) {
         this.areaMod = areaMod;
-    }    
+    }
 
     public void setMinorMod(Integer minorMod) {
         this.minorMod = minorMod;
+    }
+    
+    public void setTipoMod(String tipoMod) {
+        this.tipoMod = tipoMod;
+    }
+    
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
     }
 }
 

@@ -14,7 +14,9 @@ import infrastructure.support.action.ActionParameterAwareSupport;
  */
 public class RemoveElectivosAction extends ActionParameterAwareSupport{
     private static final long serialVersionUID = 1L;
-
+    
+    private boolean isEconomia;
+    
     /**
      * Method description
      *
@@ -24,6 +26,15 @@ public class RemoveElectivosAction extends ActionParameterAwareSupport{
      */
     @Override
     public String action() throws Exception {
-        return new RemoveElectivosService().service(getGenericSession(), getMapParameters(), getKey());
-    } 
+        return new RemoveElectivosService().service(getGenericSession(), getMapParameters(), getKey(), this);
+    }
+    
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
+    }
+    
 }

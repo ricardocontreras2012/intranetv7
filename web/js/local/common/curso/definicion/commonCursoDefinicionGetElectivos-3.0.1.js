@@ -33,12 +33,13 @@ function remove()
 }
 
 
-function show(asign, elect, electivo, minor, area)
+function show(asign, elect, electivo, minor, area, tipo)
 {
     $("#asignMod").val(asign);
     $("#electMod").val(elect);
     $("#minorMod").val(minor).change();
     $("#electivoMod").val(electivo);
+    $("#tipoMod").val(tipo);
 
     const valor = $('#areaMod option').filter(function () {
         return $(this).text() === area;
@@ -71,7 +72,7 @@ $(document).ready(function () {
         $("#electivoMod").val(nombre);
     });
 
-    $("#electivos-table").dataTable({
+    $("#cursos-table").dataTable({
         "sPaginationType": "full_numbers",
         "oLanguage": {
             "sProcessing": "Procesando...",
@@ -90,12 +91,9 @@ $(document).ready(function () {
                 "sLast": "\u00daltimo"
             }
         },
-        "aoColumns": [
-            {"bSortable": false},
-            {"sType": null},
-            {"sType": null},
-            {"sType": null}
-        ],
+        columnDefs: [
+        { targets: 0, orderable: false }  // desactiva orden en la 1ra columna (checkbox)
+    ],
         "aaSorting": [
             [0, "asc"]
         ], "aLengthMenu": [

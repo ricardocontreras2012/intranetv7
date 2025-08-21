@@ -15,6 +15,16 @@ import infrastructure.support.action.ActionValidationAgnoSemSupport;
 public class GetElectivosAction extends ActionValidationAgnoSemSupport {
 
     private static final long serialVersionUID = 1L;
+    
+    private boolean isEconomia;
+
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
+    }
 
     /**
      * Method description
@@ -24,7 +34,7 @@ public class GetElectivosAction extends ActionValidationAgnoSemSupport {
      */
     @Override
     public String action() throws Exception {
-        return new GetElectivosService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem());
+        return new GetElectivosService().service(getGenericSession(), getKey(), getPos(), getAgno(), getSem(), this);
     }
 
     /**
