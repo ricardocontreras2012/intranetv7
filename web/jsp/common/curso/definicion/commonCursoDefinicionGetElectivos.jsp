@@ -29,20 +29,23 @@
         <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetElectivos-3.0.1.js"></script>
     </head>
     <body class="inner-body" style="overflow: hidden">
-        <nav class="navbar-brand  fixed-top bg-light">
-            <div class="container-fluid" >
-                <div class="title-div">
-                    <s:text name="label.title.definicion.electivos"/> &nbsp;<s:property
-                        value="#session.genericSession.getWorkSession(key).nombreCarrera"/>
-                    &nbsp;<s:property
-                        value="#session.genericSession.getWorkSession(key).agnoAct"/>
-                    /<s:property
-                        value="#session.genericSession.getWorkSession(key).semAct"/>
+        <div class="container-fluid d-flex flex-column vh-100">
+            <row>
+                <div class="navbar-brand container-fluid">
+                    <div class="title-div">
+                        <s:text name="label.title.definicion.electivos"/> &nbsp;<s:property
+                            value="#session.genericSession.getWorkSession(key).nombreCarrera"/>
+                        &nbsp;<s:property
+                            value="#session.genericSession.getWorkSession(key).agnoAct"/>
+                        /<s:property
+                            value="#session.genericSession.getWorkSession(key).semAct"/>
+                    </div>
                 </div>
-            </div>
-            <div class="container-fluid container-menu">
-                <div class="row">
-                    <div class="col">
+            </row>
+
+            <row>
+                <div class="container-fluid container-menu">
+                    <div class="row">
                         <div id="justified-button-bar" class="col-lg-12">
                             <div class="btn-group">
                                 <div class="btn-group">
@@ -54,16 +57,12 @@
                                     <button id="delete-button" title="Eliminar" type="button" class="btn btn-light" >
                                         <span class="fa fa-trash"></span>&nbsp; <span class="hidden-xs"><s:text name="label.button.delete"/></span>
                                     </button>
-                                </div>                                
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-        <div class="container-fluid d-flex flex-column vh-100">
-
-
+            </row>
 
             <row class="overflow-auto">
                 <div class="container-fluid overflow-auto">

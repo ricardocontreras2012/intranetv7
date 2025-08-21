@@ -21,6 +21,7 @@ public class AddElectivoAction extends ActionCommonSupport {
     private Integer minor;
     private Integer area;
     private String tipo;
+    private boolean isEconomia;
 
     /**
      * Method description
@@ -30,7 +31,7 @@ public class AddElectivoAction extends ActionCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        return new AddElectivoService().service(getGenericSession(), asign, elect, electivo, minor, area, tipo, getKey());
+        return new AddElectivoService().service(getGenericSession(), asign, elect, electivo, minor, area, tipo, getKey(), this);
     }
 
     public void setAsign(Integer asign) {
@@ -55,5 +56,13 @@ public class AddElectivoAction extends ActionCommonSupport {
     
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    
+    public boolean isIsEconomia() {
+        return isEconomia;
+    }
+
+    public void setIsEconomia(boolean isEconomia) {
+        this.isEconomia = isEconomia;
     }
 }

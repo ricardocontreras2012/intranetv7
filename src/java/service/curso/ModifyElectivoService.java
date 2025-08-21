@@ -32,9 +32,6 @@ public class ModifyElectivoService {
         }
         
         ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(ActionUtil.getDBUser()).find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()));
-        
-        ws.getElectivoList().get(0).getAsignatura().getAsiSct();
-        ws.getElectivoList().get(0).getEleTipo();
         return SUCCESS;
     }
 }
