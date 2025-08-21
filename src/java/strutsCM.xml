@@ -104,12 +104,12 @@
             <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
         </result-types>
 
-        <action name="CommonLoginEnableForm" class="action.common.CommonLoginEnableFormAction" method="execute">
+        <action name="CommonLoginEnableForm" class="action.login.EnableFormAction" method="execute">
             <result name="success">/jsp/common/id/commonIdLogIn.jsp
             </result>
         </action>
 
-        <action name="CommonLogin" class="action.common.CommonLoginAction" method="execute">
+        <action name="CommonLogin" class="action.login.LoginAction" method="execute">
             <interceptor-ref name="tokenSession"/>
             <interceptor-ref name="IntranetStack"/>
             <result name="success" type="redirectAction">
@@ -125,17 +125,17 @@
             <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
         </action>
 
-        <action name="CommonLoginPlusEnableForm" class="action.common.CommonLoginPlusEnableFormAction" method="execute">
+        <action name="CommonLoginPlusEnableForm" class="action.login.EnablePlusFormAction" method="execute">
             <result name="success">/jsp/common/idPlus/commonIdPlusLogIn.jsp
             </result>
         </action>
 
-        <action name="LoginPlusEnableForm" class="action.common.CommonLoginPlusEnableFormAction" method="execute">
+        <action name="LoginPlusEnableForm" class="action.login.EnablePlusFormAction" method="execute">
             <result name="success">/jsp/common/idPlus/commonIdPlusLogIn.jsp
             </result>
         </action>
 
-        <action name="CommonLoginPlus" class="action.common.CommonLoginAction" method="execute">
+        <action name="CommonLoginPlus" class="action.login.LoginAction" method="execute">
             <interceptor-ref name="tokenSession"/>
             <interceptor-ref name="IntranetStack"/>
             <result name="success" type="redirectAction">
@@ -157,12 +157,12 @@
             <result name="invalid.token">/jsp/message/messageInvalidToken.jsp</result>
         </action>
 
-        <action name="CommonLoginSolicitudEnable" class="action.common.CommonLoginEnableFormAction" method="execute">
+        <action name="CommonLoginSolicitudEnable" class="action.login.EnableFormAction" method="execute">
             <result name="success">/jsp/common/id/commonIdSolicitudPassword.jsp
             </result>
         </action>
 
-        <action name="CommonLoginSolicitudPlusEnable" class="action.common.CommonLoginPlusEnableFormAction"
+        <action name="CommonLoginSolicitudPlusEnable" class="action.login.EnablePlusFormAction"
                 method="execute">
             <result name="success">/jsp/common/idPlus/commonIdPlusSolicitudPassword.jsp
             </result>
@@ -345,7 +345,7 @@
             </result>
         </action>
 
-        <action name="CommonLoginClaveUnicaResult" class="action.common.CommonLoginClaveUnicaResultAction"
+        <action name="CommonLoginClaveUnicaResult" class="action.login.ClaveUnicaResultAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonLoginStack</param>
@@ -862,7 +862,7 @@
             </result>
         </action>
 
-        <action name="CommonLoginIframeContent" class="action.common.CommonLoginIframeContentAction" method="execute">
+        <action name="CommonLoginIframeContent" class="action.login.GetIframeContentAction" method="execute">
             <result name="alumno">/jsp/users/alumno/id/alumnoIdBienvenida.jsp</result>
             <result name="egresado">/jsp/users/egresado/id/egresadoIdBienvenida.jsp</result>
             <result name="profesor">/jsp/users/profesor/id/profesorIdBienvenida.jsp</result>
@@ -960,7 +960,7 @@
             </result>
         </action>
 
-        <action name="CommonEncuestaGetCargaHistorica" class="action.common.CommonEncuestaGetCargaHistoricaAction"
+        <action name="CommonEncuestaGetCargaHistorica" class="action.encuesta.GetCargaHistoricaAction"
                 method="execute">
             <result name="success">/jsp/common/encuesta/commonEncuestaListaCursos.jsp
             </result>
@@ -984,7 +984,7 @@
             </result>
         </action>
 
-        <action name="CommonHorarioGetHorario" class="action.common.CommonHorarioGetHorarioAction" method="execute">
+        <action name="CommonHorarioGetHorario" class="action.horario.GetHorarioAction" method="execute">
             <result name="success">/jsp/common/horario/commonHorario.jsp
             </result>
         </action>
@@ -1011,14 +1011,14 @@
             </result>
         </action>        
 
-        <action name="CommonLoginStack" class="action.common.CommonLoginStackAction" method="execute">
+        <action name="CommonLoginStack" class="action.login.StackAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">${action}</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonLoginStackPassword" class="action.common.CommonLoginStackPasswordAction" method="execute">
+        <action name="CommonLoginStackPassword" class="action.login.StackPasswordAction" method="execute">
             <result name="askNormal">/jsp/common/id/commonIdSecurePassword.jsp
             </result>
             <result name="askPlus">/jsp/common/idPlus/commonIdPlusSecurePassword.jsp
@@ -1579,16 +1579,16 @@
             </result>
         </action>
 
-        <action name="CommonPracticaActaEnable" class="action.common.CommonPracticaActaEnableAction" method="execute">
+        <action name="CommonPracticaActaEnable" class="action.practica.EnableActaAction" method="execute">
             <result name="success">/jsp/common/practica/commonPracticaActaEnable.jsp</result>
         </action>
 
         <action name="CommonPracticaActaRectificatoriaEnable"
-                class="action.common.CommonPracticaActaRectificatoriaEnableAction" method="execute">
+                class="action.practica.EnableActaRectificatoriaAction" method="execute">
             <result name="success">/jsp/common/practica/commonPracticaActaRectificatoriaEnable.jsp</result>
         </action>
 
-        <action name="CommonPracticaActaEmitir" class="action.common.CommonPracticaActaEmitirAction" method="execute">
+        <action name="CommonPracticaActaEmitir" class="action.practica.EmitirActaAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonPracticaActaEnable</param>
                 <param name="key">${key}</param>
@@ -1596,20 +1596,20 @@
         </action>
 
         <action name="CommonPracticaActaRectificatoriaEmitir"
-                class="action.common.CommonPracticaActaRectificatoriaEmitirAction" method="execute">
+                class="action.practica.EmitirActaRectificatoriaAction" method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonPracticaActaRectificatoriaEnable</param>
                 <param name="key">${key}</param>
             </result>
         </action>
 
-        <action name="CommonReporteGetReportesCurso" class="action.common.CommonReporteGetReportesCursoAction"
+        <action name="CommonReporteGetReportesCurso" class="action.reporteclase.GetReportesCursoAction"
                 method="execute">
             <result name="success">/jsp/common/reporte/commonReporteListado.jsp
             </result>
         </action>
 
-        <action name="CommonReporteGetReportesCursoNoLog" class="action.common.CommonReporteGetReportesCursoAction"
+        <action name="CommonReporteGetReportesCursoNoLog" class="action.reporteclase.GetReportesCursoAction"
                 method="execute">
             <result name="success">/jsp/common/reporte/commonReporteListado.jsp
             </result>
@@ -1621,17 +1621,17 @@
             </result>
         </action>
 
-        <action name="CommonReporteViewReporte" class="action.common.CommonReporteViewReporteAction" method="execute">
+        <action name="CommonReporteViewReporte" class="action.reporteclase.ViewReporteAction" method="execute">
             <result name="success">/jsp/common/reporte/commonReporteViewReporte.jsp
             </result>
         </action>
 
-        <action name="CommonReporteGetResumen" class="action.common.CommonReporteGetResumenAction" method="execute">
+        <action name="CommonReporteGetResumen" class="action.reporteclase.GetResumenAction" method="execute">
             <result name="success">/jsp/common/curso/commonCursoReportesResumen.jsp
             </result>
         </action>
 
-        <action name="CommonReporteDownLoadAttach" class="action.common.CommonReporteDownLoadAttachAction"
+        <action name="CommonReporteDownLoadAttach" class="action.reporteclase.DownLoadAttachAction"
                 method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
@@ -1641,7 +1641,7 @@
             <result name="success">/jsp/common/solicitud/commonSolicitudEstados.jsp</result>
         </action>
 
-        <action name="CommonSolicitudViewSolicitud" class="action.common.CommonSolicitudViewSolicitudAction"
+        <action name="CommonSolicitudViewSolicitud" class="action.solicitud.ViewSolicitudAction"
                 method="execute">
             <result name="inscripcion">/jsp/common/solicitud/inscripcion/commonSolicitudInscripcionViewSolicitud.jsp
             </result>
@@ -1657,19 +1657,19 @@
         </action>
 
         <action name="CommonPracticaGetSolicitudesxEstado"
-                class="action.common.CommonPracticaGetSolicitudesxEstadoAction" method="execute">
+                class="action.practica.GetSolicitudesxEstadoAction" method="execute">
             <result name="success">/jsp/common/practica/commonPracticaSolicitudListado.jsp
             </result>
         </action>
 
-        <action name="CommonPracticaViewSolicitud" class="action.common.CommonPracticaViewSolicitudAction"
+        <action name="CommonPracticaViewSolicitud" class="action.practica.ViewSolicitudAction"
                 method="execute">
             <result name="success">/jsp/common/practica/commonPracticaViewSolicitud.jsp
             </result>
         </action>
 
         <action name="CommonPracticaSaveResolucionPractica"
-                class="action.common.CommonPracticaSaveResolucionPracticaAction"
+                class="action.practica.SaveResolucionPracticaAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonPracticaGetSolicitudesxEstado</param>
@@ -1997,13 +1997,13 @@
             </result>
         </action>
 
-        <action name="CommonSolicitudGetSolicitudes" class="action.common.CommonSolicitudGetSolicitudesAction"
+        <action name="CommonSolicitudGetSolicitudes" class="action.solicitud.GetSolicitudesAction"
                 method="execute">
             <result name="success">/jsp/common/solicitud/commonSolicitudListado.jsp
             </result>
         </action>
 
-        <action name="CommonSolicitudSaveResolucion" class="action.common.CommonSolicitudSaveResolucionAction"
+        <action name="CommonSolicitudSaveResolucion" class="action.solicitud.SaveResolucionAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonSolicitudGetSolicitudes
@@ -2013,7 +2013,7 @@
         </action>
 
         <action name="CommonSolicitudSaveResolucionJustificativo"
-                class="action.common.CommonSolicitudSaveResolucionJustificativoAction"
+                class="action.solicitud.SaveResolucionJustificativoAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">CommonSolicitudGetSolicitudes
@@ -2035,7 +2035,7 @@
             <result name="exception">/jsp/message/messageException.jsp</result>
         </action>
 
-        <action name="CommonEncuestaPrintGroup" class="action.common.CommonEncuestaPrintGroupAction" method="execute">
+        <action name="CommonEncuestaPrintGroup" class="action.encuesta.PrintGroupAction" method="execute">
             <result type="stream">
                 <param name="contentType">application/pdf; charset=UTF-8</param>
                 <param name="inputName">inputStream</param>
@@ -2044,7 +2044,7 @@
             </result>
         </action>
 
-        <action name="CommonEncuestaPrintGroupCursos" class="action.common.CommonEncuestaPrintGroupCursosAction"
+        <action name="CommonEncuestaPrintGroupCursos" class="action.encuesta.PrintGroupCursosAction"
                 method="execute">
             <result type="stream">
                 <param name="contentType">application/pdf; charset=UTF-8</param>
@@ -2119,7 +2119,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonSolicitudDownLoadFile" class="action.common.CommonSolicitudDownLoadFileAction"
+        <action name="CommonSolicitudDownLoadFile" class="action.solicitud.DownLoadFileAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
@@ -2140,7 +2140,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonReportePrintResumen" class="action.common.CommonReportePrintResumenAction" method="execute">
+        <action name="CommonReportePrintResumen" class="action.reporteclase.PrintResumenAction" method="execute">
             <result name="success" type="jasper">
                 <param name="location">/WEB-INF/jasper/common/CommonReportesResumen.jasper</param>
                 <param name="dataSource">cursos</param>
@@ -2167,7 +2167,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonReporteExport" class="action.common.CommonReporteExportAction" method="execute">
+        <action name="CommonReporteExport" class="action.reporteclase.ExportReporteAction" method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>
                 <param name="contentDisposition">attachment;filename="${name}"</param>
@@ -2177,13 +2177,13 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonEncuestaExport" class="action.common.CommonEncuestaExportAction"
+        <action name="CommonEncuestaExport" class="action.encuesta.ExportEncuestaAction"
                 method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonEncuestaPrint" class="action.common.CommonEncuestaPrintAction"
+        <action name="CommonEncuestaPrint" class="action.encuesta.PrintEncuestaAction"
                 method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
@@ -2233,7 +2233,7 @@
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>
 
-        <action name="CommonHorarioPrint" class="action.common.CommonHorarioPrintAction" method="execute">
+        <action name="CommonHorarioPrint" class="action.horario.PrintHorarioAction" method="execute">
             <result type="myStream"/>
             <result name="exception">/jsp/message/messageActionError.jsp</result>
         </action>

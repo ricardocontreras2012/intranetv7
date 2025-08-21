@@ -724,7 +724,7 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoSolicitudViewSolicitud" class="action.common.CommonSolicitudViewSolicitudAction"
+        <action name="AlumnoSolicitudViewSolicitud" class="action.solicitud.ViewSolicitudAction"
                 method="execute">
             <result name="inscripcion">
                 /jsp/users/alumno/solicitud/inscripcion/alumnoSolicitudInscripcionViewSolicitud.jsp
@@ -784,7 +784,7 @@
         <!-- /////////////////////////////////// -->
 
 
-        <action name="AlumnoExamenAPConfirmacion" class="action.examen.alumno.ConfirmacionAPAction"
+        <action name="AlumnoExamenAPConfirmacion" class="action.examen.alumno.AlumnoConfirmacionAPAction"
                 method="execute">
             <result name="confirmar">/jsp/users/alumno/examen/alumnoExamenAPConfirmacion.jsp
             </result>
@@ -793,14 +793,14 @@
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoExamenAPGenerar" class="action.examen.alumno.GenerarAPAction"
+        <action name="AlumnoExamenAPGenerar" class="action.examen.alumno.AlumnoGenerarAPAction"
                 method="execute">
             <result name="success" type="redirectAction">
                 <param name="actionName">AlumnoExamenAPMostrar</param>
                 <param name="key">${key}</param>
             </result>
         </action>
-        <action name="AlumnoExamenAPMostrar" class="action.examen.alumno.MostrarAPAction"
+        <action name="AlumnoExamenAPMostrar" class="action.examen.alumno.AlumnoMostrarAPAction"
                 method="execute">
             <result name="success">/jsp/users/alumno/examen/alumnoExamenAPMostrar.jsp
             </result>
