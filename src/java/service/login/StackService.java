@@ -11,7 +11,7 @@ import session.GenericSession;
  *
  * @author Ricardo
  */
-public class CommonLoginStackService {
+public class StackService {
 
     public String service(GenericSession genericSession, String key) {
         String action = null;

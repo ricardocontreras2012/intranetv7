@@ -36,8 +36,6 @@
             <s:text name="label.title.acta.convalidacion"/>  <s:property value="#session.genericSession.getWorkSession(key).aluCar.alumno.getNombreStd()"/>
         </div>
         
-        Estado=<s:property value="#session.secretariaSession.convalidacion.cosEstado"/>
-
         <div class="container container-menu">
             <div class="row">
                 <div id="justified-button-bar" class="col-lg-12">
