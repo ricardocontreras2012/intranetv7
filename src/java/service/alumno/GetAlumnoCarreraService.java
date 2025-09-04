@@ -41,7 +41,7 @@ public class GetAlumnoCarreraService {
                 aluCar.setAlumno(ws.getAlumno());
                 aluCar.setInitValues();
                 ws.setAluCar(aluCar);
-                ws.setNombre( CommonAlumnoUtil.getNombreSocial(aluCar.getAlumno()));
+                ws.setNombre(aluCar.getAlumno().getNombreSocial());
                 retValue = SUCCESS;
             } else {
                 ws.setAluCarList(aluCarList);

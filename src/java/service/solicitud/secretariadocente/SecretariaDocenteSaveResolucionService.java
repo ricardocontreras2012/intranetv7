@@ -112,7 +112,7 @@ public class SecretariaDocenteSaveResolucionService {
                 DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy");
         String body = "La solicitud de justificación por inasistencia a PEP del curso " +curso.getNombreCorto()+ " "+
                 ("1".equals(alumno.getAluSexo())?" la alumna ":"del alumno ")+
-                CommonAlumnoUtil.getNombreSocial(alumno) + " correspondiente al periodo del "+DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
+                alumno.getNombreSocial() + " correspondiente al periodo del "+DateUtil.getFormattedDate(sol.getSolFechaInicio(),"dd-mm-yyyy") + " al " + DateUtil.getFormattedDate(sol.getSolFechaTermino(),"dd-mm-yyyy")+ " ha sido aceptada por esta unidad académica.";
 
         CommonCursoUtil.getProfesores(curso).stream()
                 .map(Profesor::getProfEmail)

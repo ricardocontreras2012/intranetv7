@@ -20,7 +20,7 @@ public class GetBoletinHorarioService {
     public String service(GenericSession genericSession, String key, Integer pos) {
         WorkSession ws = genericSession.getWorkSession(key);
         CommonAlumnoUtil.loadAluCar(genericSession, ws, ws.getAluCarList().get(pos));
-        ws.setNombre(CommonAlumnoUtil.getNombreSocial(ws.getAluCar().getAlumno()));
+        ws.setNombre(ws.getAluCar().getAlumno().getAluNombreSocial());
         ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioList(ws.getAluCar().getCarga()));
         ws.setHorario(getHorario("AL",ws.getModuloHorarioList(), ws.getAluCar().getCarga(), genericSession.getUserType()));
         ws.setIdHorario("AL");

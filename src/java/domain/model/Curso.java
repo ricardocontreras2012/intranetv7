@@ -491,8 +491,8 @@ public class Curso implements Serializable {
                 && ContextUtil.getDAO().getCursoProfesorRepository(userType).exists(this, rut);
     }
 
-    public boolean cursoPropio(Integer asign, String userTypeShort, Integer rut) {
-        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).isCursoPropio(asign, rut, userTypeShort) == 1;
+    public boolean puedeEliminar(Integer carrera, Integer mencion, Integer asign, String userTypeShort, Integer rut) {        
+        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).puedeEliminar(carrera, mencion, asign, rut, userTypeShort) == 1;
     }
 
     /**

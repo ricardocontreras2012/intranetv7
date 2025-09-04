@@ -105,7 +105,7 @@ public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long>
         query.setParameter(6, aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip(), StandardBasicTypes.INTEGER);
         query.setParameter(7, rut, StandardBasicTypes.INTEGER);
         query.setParameter(8, userType, StandardBasicTypes.STRING);
-
+        
         List<Object[]> results = query.list();
 
         return results.stream()

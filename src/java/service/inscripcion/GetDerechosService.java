@@ -26,12 +26,11 @@ public final class GetDerechosService {
      */
     public String service(GenericSession genericSession, String key) {
         AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
-
         aluCar.setIsAlumnoPropio(genericSession);       
         
-        if (aluCar.getIsAlumnoPropio()) {            
+        if (aluCar.getIsAlumnoPropio()) {   
             aluCar.setDerechosCoordinadorInscripcion(genericSession.getRut(), genericSession.getUserType());
-        } else {            
+        } else {                         
             switch (genericSession.getUserType()) {
                 case "JC":
                 case "SP":
@@ -41,8 +40,7 @@ public final class GetDerechosService {
                     aluCar.setDerechosFIInscripcion(genericSession.getRut(), genericSession.getUserType());
                     break;
             }
-        }             
-        
+        }       
         return SUCCESS;
     }
 }

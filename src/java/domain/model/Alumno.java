@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.swing.*;
 import static infrastructure.util.DateUtil.getDateGetterSetter;
+import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonUsersUtil;
 
 /**
@@ -518,6 +519,10 @@ public class Alumno implements Serializable {
      */
     public String getNombre() {
         return CommonUsersUtil.getNombre(this.aluPaterno, this.aluMaterno, this.aluNombre);
+    }
+    
+    public String getNombreSocial() {
+        return CommonUsersUtil.getNombre(this.aluPaterno, this.aluMaterno, CommonAlumnoUtil.getNombreSocial(this));
     }
 
     /**

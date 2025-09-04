@@ -185,15 +185,12 @@ public interface ScalarRespository extends CrudGenericDAO<Object, Serializable> 
     String getColorHexPorAsignatura(Integer asignatura);
     
     String getColorHexPorSala(String sala);
+              
+    String validarInscripcionAlumno(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem); 
+    String validarInscripcionCoord(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);    
     
-    String hayCupo(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);
-    String hayCupoCarrera(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, Integer carrera, Integer mencion);
-       
-    int tienePreReqElectivo(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect,  Integer agno, Integer sem);    
-    int electivoYaAprobado(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asign, String elect,  Integer agno, Integer sem) ;
-    String topeHorario(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);
     String topeHorarioCambioCurso(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asignOri, String electOri, String coordOri, Integer seccOri, Integer agnoOri, Integer semOri, Integer asignDest, String electDest, String coordDest, Integer seccDest, Integer agnoDest, Integer semDest);
-    int isCursoPropio(Integer asig, Integer rut, String userType);
+    int puedeEliminar(Integer carrera, Integer mencion, Integer asig, Integer rut, String userType);
     
     int getHorasCromoMalla(Integer carrera, Integer mencion, Integer plan);
     String getNombreNormalizado(String str);

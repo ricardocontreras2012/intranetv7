@@ -32,14 +32,14 @@
                     <span class="fa fa-print"></span>&nbsp; <span class="hidden-xs"><s:text name="label.imprimir"/></span>
                 </button>
             </div>
-                
+
             <div style="background-color: #679FD2;">
                 <p colspan="2" style="width: 55%; color: #fff;">
                     &nbsp;Asignaturas de Malla: Créditos Inscritos <s:property value="#session.genericSession.getWorkSession(key).aluCar.getCreditosInscritos()"/>
                     &nbsp;&nbsp;Sct Inscritos <s:property value="#session.genericSession.getWorkSession(key).aluCar.getSctInscritos()"/>
                 </p>
             </div>
-                
+
             <div style="overflow-y: scroll; height: 80vh;">
                 <table class="table table-sm table-striped" style="width: 97%">
                     <thead>
@@ -55,7 +55,7 @@
                     <tbody>
                         <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.insList" status="row">
                             <tr>                                            
-                                <s:if test="curso.cursoPropio(id.insAsign, #session.genericSession.userType, #session.genericSession.rut) >0">
+                                <s:if test="curso.puedeEliminar(#session.genericSession.getWorkSession(key).aluCar.id.acaCodCar, #session.genericSession.getWorkSession(key).aluCar.acaCodMen,  id.insAsign, #session.genericSession.userType, #session.genericSession.rut) >0">
                                     <td style="width: 5%; text-align: center">
                                         <input type="checkbox" name="ck_<s:property value="#row.count -1"/>"
                                                id="ck_<s:property value="#row.count -1"/>"/>
@@ -81,17 +81,21 @@
                                         id="profesor_<s:property value="#row.count -1"/>_<s:property value="curso.curProfesores.trim().replace('/ /g','0')"/>"
                                         src="/intranetv7/images/local/icon/user.png" height="16" width="16" alt="prof"/></td>
                                 <td>
-                                    <select id="force_<s:property value="#row.count -1"/>" name="force_<s:property value="#row.count -1"/>" class="form-control form-select form-select-lg mb-3" onChange="changeForce(<s:property value="#row.count -1"/>, '<s:property value="insForce"/>')">                                    
-                                        <s:if test="insForce == \"F\"">
-                                            <option value="F" class="form-control" selected>F</option>
-                                            <option value="N" class="form-control">N</option>
-                                        </s:if>
-                                        <s:else>
-                                            <option value="F" class="form-control">F</option>
-                                            <option value="N" class="form-control" selected>N</option>
-                                        </s:else>
-                                    </select>
-
+                                    <s:if test="curso.puedeEliminar(#session.genericSession.getWorkSession(key).aluCar.id.acaCodCar, #session.genericSession.getWorkSession(key).aluCar.acaCodMen,  id.insAsign, #session.genericSession.userType, #session.genericSession.rut) >0">
+                                        <select id="force_<s:property value="#row.count -1"/>" name="force_<s:property value="#row.count -1"/>" class="form-control form-select form-select-lg mb-3" onChange="changeForce(<s:property value="#row.count -1"/>, '<s:property value="insForce"/>')">                                    
+                                            <s:if test="insForce == \"F\"">
+                                                <option value="F" class="form-control" selected>F</option>
+                                                <option value="N" class="form-control">N</option>
+                                            </s:if>
+                                            <s:else>
+                                                <option value="F" class="form-control">F</option>
+                                                <option value="N" class="form-control" selected>N</option>
+                                            </s:else>
+                                        </select>
+                                    </s:if>
+                                    <s:else>
+                                        <s:property value="insForce"/>
+                                    </s:else>
                                 </td>
                             </tr>
                         </s:iterator>
@@ -114,20 +118,20 @@
             let acum = "";
 
             for (let i = 0; i < ary.length; i++) {
-                    if (typeof ary[i] !== "undefined")
-                    {
-                        acum += "<li><span>" + ary[i] + "</li></span>";
-                    }
+                if (typeof ary[i] !== "undefined")
+                {
+                    acum += "<li><span>" + ary[i] + "</li></span>";
                 }
+            }
 
-                $(window.parent.document).contents().find("#msg-confirmacion-div").html("<div class='actionError'>" + acum + "</div><div><p><s:text name="confirmation.inscripcion.jefe.carrera"/></div>");
-                window.parent.$('#msg-confirmacion').modal('show');
+            $(window.parent.document).contents().find("#msg-confirmacion-div").html("<div class='actionError'>" + acum + "</div><div><p><s:text name="confirmation.inscripcion.jefe.carrera"/></div>");
+            window.parent.$('#msg-confirmacion').modal('show');
 
             </s:if>
             <s:if test="hasActionErrors()">
             const msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
             $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
-                window.parent.$('#msg-error').modal('show');
+            window.parent.$('#msg-error').modal('show');
             </s:if>
         </script>
 
