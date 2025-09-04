@@ -46,7 +46,7 @@ public final class EnableRecordService {
                     CommonAlumnoUtil.loadAluCar(genericSession, ws, aluCar);
 
                     aluCar.setAlumno(ws.getAlumno());
-                    ws.setNombre(CommonAlumnoUtil.getNombreSocial(aluCar.getAlumno()));
+                    ws.setNombre(aluCar.getAlumno().getAluNombreSocial());
 
                     retValue = SUCCESS;
                 } else {

@@ -27,7 +27,7 @@ public final class AddInscripcionAction extends ActionValidationPosSupport {
      * @throws Exception Si recibe una exception del service.
      */
     @Override
-    public String action() throws Exception {
+    public String action() throws Exception {              
         return new AddInscripcionService().service(this, getGenericSession(), getPos(), getKey());
     }
 

@@ -174,6 +174,10 @@ public class AluCar implements Serializable {
      *
      * @return
      */
+     /**
+     *
+     * @return
+     */
     public ParametroMencion getParametroMencion() {
         return parametroMencion;
     }
@@ -185,6 +189,7 @@ public class AluCar implements Serializable {
     public void setParametroMencion(ParametroMencion parametroMencion) {
         this.parametroMencion = parametroMencion;
     }
+
 
     /**
      * Method description

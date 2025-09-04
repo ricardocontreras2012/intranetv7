@@ -44,7 +44,7 @@ public final class SearchDirectService {
 
         CommonAlumnoUtil.loadAluCar(genericSession, ws, aluCar);
 
-        ws.setNombre(CommonAlumnoUtil.getNombreSocial(aluCar.getAlumno()));
+        ws.setNombre(aluCar.getAlumno().getNombreSocial());
         ws.setAlumno(aluCar.getAlumno());
 
         return SUCCESS;

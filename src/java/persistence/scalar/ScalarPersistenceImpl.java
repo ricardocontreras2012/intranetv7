@@ -356,11 +356,13 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     }
 
     @Override
-    public int isCursoPropio(Integer asign, Integer rut, String userType) {
-        String sql = "SELECT perfil_intranet_pkg.curso_propio(:asign, :userType, :rut) as val FROM dual";
+    public int puedeEliminar(Integer carrera, Integer mencion, Integer asign, Integer rut, String userType) {
+        String sql = "SELECT jefe_carrera_pkg.puede_eliminar_inscripcion(:carrera, :mencion, :asign, :userType, :rut) as val FROM dual";
 
         return ((Number) getSession()
                 .createSQLQuery(sql)
+                .setParameter("carrera", carrera, StandardBasicTypes.INTEGER)
+                .setParameter("mencion", mencion, StandardBasicTypes.INTEGER)
                 .setParameter("asign", asign, StandardBasicTypes.INTEGER)
                 .setParameter("userType", userType, StandardBasicTypes.STRING)
                 .setParameter("rut", rut, StandardBasicTypes.INTEGER)
@@ -398,9 +400,9 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
     }
 
     @Override
-    public int tienePreReqElectivo(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect, Integer agno, Integer sem) {
-        String sql = "select inscripcion_pkg.tiene_prerequisito_electivo(:rut, :carrera, :agnoIng, :semIng, :mencion, :plan, :asign, :elect, :agno, :sem) from dual";
-        return ((Number) getSession().createSQLQuery(sql)
+    public String validarInscripcionAlumno(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
+        String sql = "select inscripcion_pkg.validar_inscripcion_x_alumno(:rut, :carrera, :agnoIng, :semIng, :mencion, :plan, :asign, :elect, :coord, :secc, :agno, :sem, 'T') from dual";
+        return ((String) getSession().createSQLQuery(sql)
                 .setParameter("rut", rut, StandardBasicTypes.INTEGER)
                 .setParameter("carrera", carrera, StandardBasicTypes.INTEGER)
                 .setParameter("agnoIng", agnoIng, StandardBasicTypes.INTEGER)
@@ -409,48 +411,36 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
                 .setParameter("plan", plan, StandardBasicTypes.INTEGER)
                 .setParameter("asign", asign, StandardBasicTypes.INTEGER)
                 .setParameter("elect", elect, StandardBasicTypes.STRING)
+                .setParameter("coord", coord, StandardBasicTypes.STRING)
+                .setParameter("secc", secc, StandardBasicTypes.INTEGER)
                 .setParameter("agno", agno, StandardBasicTypes.INTEGER)
                 .setParameter("sem", sem, StandardBasicTypes.INTEGER)
-                .uniqueResult()).intValue();
+                .uniqueResult());
     }
-
+    
     @Override
-    public int electivoYaAprobado(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asign, String elect, Integer agno, Integer sem) {
-        return (Integer) getSession().createSQLQuery("select inscripcion_pkg.electivo_ya_aprobado(" + rut + "," + carrera + "," + agnoIng + "," + semIng + "," + asign + ",'" + elect + "'," + agno + "," + sem + " ) flag from dual").addScalar("flag", INTEGER).uniqueResult();
-    }
-
-    @Override
-    public String topeHorario(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
-        return getString("inscripcion_pkg.get_topes_horario(:rut, :carrera, :agnoIng, :semIng, :asign, :elect, :coord, :secc, :agno, :sem)",
-                new Object[]{rut, carrera, agnoIng, semIng, asign, elect, coord, secc, agno, sem},
-                new String[]{"rut", "carrera", "agnoIng", "semIng", "asign", "elect", "coord", "secc", "agno", "sem"},
-                new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER,
-                    StandardBasicTypes.INTEGER, StandardBasicTypes.STRING, StandardBasicTypes.STRING, StandardBasicTypes.INTEGER,
-                    StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER});
+    public String validarInscripcionCoord(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer mencion, Integer plan, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
+        String sql = "select inscripcion_pkg.validar_inscripcion_x_coord(:rut, :carrera, :agnoIng, :semIng, :mencion, :plan, :asign, :elect, :coord, :secc, :agno, :sem, 'T') from dual";
+        return ((String) getSession().createSQLQuery(sql)
+                .setParameter("rut", rut, StandardBasicTypes.INTEGER)
+                .setParameter("carrera", carrera, StandardBasicTypes.INTEGER)
+                .setParameter("agnoIng", agnoIng, StandardBasicTypes.INTEGER)
+                .setParameter("semIng", semIng, StandardBasicTypes.INTEGER)
+                .setParameter("mencion", mencion, StandardBasicTypes.INTEGER)
+                .setParameter("plan", plan, StandardBasicTypes.INTEGER)
+                .setParameter("asign", asign, StandardBasicTypes.INTEGER)
+                .setParameter("elect", elect, StandardBasicTypes.STRING)
+                .setParameter("coord", coord, StandardBasicTypes.STRING)
+                .setParameter("secc", secc, StandardBasicTypes.INTEGER)
+                .setParameter("agno", agno, StandardBasicTypes.INTEGER)
+                .setParameter("sem", sem, StandardBasicTypes.INTEGER)
+                .uniqueResult());
     }
 
     @Override
     public String topeHorarioCambioCurso(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asignOri, String electOri, String coordOri, Integer seccOri, Integer agnoOri, Integer semOri, Integer asignDest, String electDest, String coordDest, Integer seccDest, Integer agnoDest, Integer semDest) {
         return (String) getSession().createSQLQuery("select get_topes_horario_cambio_curso(" + rut + "," + carrera + "," + agnoIng + "," + semIng + "," + asignOri + ",'" + electOri + "','" + coordOri + "'," + seccOri + "," + agnoOri + "," + semOri + "," + asignDest + ",'" + electDest + "','" + coordDest + "'," + seccDest + "," + agnoDest + "," + semDest + "  ) flag from dual").addScalar("flag", STRING).uniqueResult();
-    }
-
-    @Override
-    public String hayCupo(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem) {
-        return getString("inscripcion_pkg.hay_cupo(:asign, :elect, :coord, :secc, :agno, :sem)",
-                new Object[]{asign, elect, coord, secc, agno, sem},
-                new String[]{"asign", "elect", "coord", "secc", "agno", "sem"},
-                new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.STRING, StandardBasicTypes.STRING, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER});
-    }
-
-    @Override
-    public String hayCupoCarrera(Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, Integer carrera, Integer mencion) {
-        return getString("inscripcion_pkg.hay_cupo_carrera(:asign, :elect, :coord, :secc, :agno, :sem, :carrera, :mencion)",
-                new Object[]{asign, elect, coord, secc, agno, sem, carrera, mencion},
-                new String[]{"asign", "elect", "coord", "secc", "agno", "sem", "carrera", "mencion"},
-                new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.STRING, StandardBasicTypes.STRING,
-                    StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER,
-                    StandardBasicTypes.INTEGER, StandardBasicTypes.INTEGER});
-    }
+    }   
 
     @Override
     public int getHorasCromoMalla(Integer carrera, Integer mencion, Integer plan) {

@@ -32,12 +32,9 @@ import infrastructure.util.LogUtil;
 import static infrastructure.util.common.CommonCursoUtil.getDistinctAsc;
 import domain.model.InscripcionCursoView;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Reglas de negocio para la inscripción de asignaturas.
@@ -120,7 +117,7 @@ public final class InscripcionSupport {
     public Integer isAlumnoPropio(Integer rut, String userType) {
         return ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).isAlumnoPropio(aluCar, rut, userType);
     }
-    
+
     public List<Inscripcion> getInscripcionFull(Integer agno, Integer sem) {
         List<Inscripcion> insList = getInscripcion(agno, sem);
         getTotales(insList);
@@ -169,7 +166,7 @@ public final class InscripcionSupport {
      * @param parameters Check-box del formulario de inscripción.
      */
     public void removeInscripcionAlumno(Map<String, String[]> parameters) {
-        if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {                        
+        if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
             removeInscripciones(action, parameters, true);
         }
     }
@@ -230,7 +227,7 @@ public final class InscripcionSupport {
 
     public String addInscripcionAlumno(Curso curso, Derecho derecho, Integer carrera, Integer mencion) {
 
-        String retValor = puedeInscribirAlumno(action, curso, derecho, carrera, mencion);
+        String retValor = puedeInscribirAlumno(action, curso);
 
         if (retValor.equals(SUCCESS)) {
             newInscripcion(curso, "INS_ALUMNO", derecho.getDerForce());
@@ -253,41 +250,37 @@ public final class InscripcionSupport {
      */
     public String addInscripcionCoordinador(String userType, AluCar aluCar, Curso curso, DerechoCoordinadorSupport derecho) {
         action.clearErrorsAndMessages();
-        if (!aluCar.estaActivo()) {
 
-            action.clearErrorsAndMessages();
-            action.addActionError(action.getText("error.alumno.no.activo"));
+        try {
+            if (!aluCar.estaActivo()) {
+                action.addActionError(action.getText("error.alumno.no.activo"));
 
-            LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
-                    + action.getText("error.alumno.no.activo"));
+                LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
+                        + action.getText("error.alumno.no.activo"));
 
-            return ERROR;
+                return ERROR;
+            }
+
+            if (ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), curso.getId()) != 0) {
+                action.addActionError(action.getText("error.acta.generada"));
+                LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
+                        + action.getText("error.acta.generada"));
+
+                return ERROR;
+            }
+
+            if (!SUCCESS.equals(puedeInscribirCoordinador(action, curso))) {
+                LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa No puede inscribir");
+
+                return ERROR;
+            }
+            
+            newInscripcion(curso, "INS_COORD", "");
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if (asignaturaInscrita(curso)) {
-
-            action.addActionError(action.getText("error.asignatura.ya.inscrita"));
-            LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
-                    + action.getText("error.asignatura.ya.inscrita"));
-
-            return ERROR;
-        }
-
-        if (ContextUtil.getDAO().getActaCalificacionRepository(ActionUtil.getDBUser()).isExisteActaCoordinador(aluCar.getId(), curso.getId()) != 0) {
-            action.addActionError(action.getText("error.acta.generada"));
-            LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
-                    + action.getText("error.acta.generada"));
-
-            return ERROR;
-        }
-
-        if (!SUCCESS.equals(puedeInscribirCoordinador(userType, action, curso, derecho, aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen()))) {
-            LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa No puede inscribir");
-
-            return ERROR;
-        }
-
-        newInscripcion(curso, "INS_COORD", "");
         return SUCCESS;
 
     }
@@ -337,8 +330,8 @@ public final class InscripcionSupport {
 
         beginTransaction(ActionUtil.getDBUser());
         ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).makePersistent(
-                inscripcionNueva(curso, realizador, genericSession.getRut(), force));      
-        
+                inscripcionNueva(curso, realizador, genericSession.getRut(), force));
+
         commitTransaction();
         LogUtil.setLog(genericSession.getRut(), rut + "> " + curso.getNombreFull());
     }
@@ -367,40 +360,26 @@ public final class InscripcionSupport {
      * @param curso Curso a inscribir.
      * @return SUCCESS: OK, ERROR: No cumple alguna de las reglas.
      */
-    private String puedeInscribirAlumno(ActionCommonSupport action, Curso curso, Derecho derecho, Integer carrera, Integer mencion) {
-        ParametroSesionSupport param = aluCar.getParametros();
+    private String puedeInscribirAlumno(ActionCommonSupport action, Curso curso) {
+        String retValue = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).validarInscripcionAlumno(
+                this.aluCar.getId().getAcaRut(),
+                this.aluCar.getId().getAcaCodCar(),
+                this.aluCar.getId().getAcaAgnoIng(),
+                this.aluCar.getId().getAcaSemIng(),
+                this.aluCar.getAcaCodMen(),
+                this.aluCar.getAcaCodPlan(),
+                curso.getId().getCurAsign(),
+                curso.getId().getCurElect(),
+                curso.getId().getCurCoord(),
+                curso.getId().getCurSecc(),
+                curso.getId().getCurAgno(),
+                curso.getId().getCurSem());
 
-        return Stream.<Supplier<Optional<String>>>of(
-                () -> puedeInscribir(derecho, param) ? Optional.empty() : Optional.of("error.inscripcion.noPuedeInscribir"),
-                () -> asignaturaInscrita(curso) ? Optional.of("error.asignatura.ya.inscrita") : Optional.empty(),
-                () -> sobrepasaMaxSct(derecho.getDerTipo(), getSct(derecho.getAsignatura())) ? Optional.of("error.excede.maximo.sct") : Optional.empty(),
-                () -> sobrepasaMaxAsign(derecho.getDerTipo()) ? Optional.of("error.excede.maximo.inscripciones") : Optional.empty(),
-                () -> sobrepasaMaxNivel(derecho.getDerTipo(), derecho.getDerNiv()) ? Optional.of("error.excede.maximo.nivel") : Optional.empty(),
-                () -> sobrepasaCreditosNivel(curso, derecho.getDerTipo()) ? Optional.of("error.excede.maximo.creditos") : Optional.empty(),
-                () -> noTieneRequisitosElectivo(curso) ? Optional.of("error.sin.requisitos") : Optional.empty(),
-                () -> electivoYaAprobado(curso) ? Optional.of("error.electivo.aprobado") : Optional.empty(),
-                () -> {
-                    String tope = topeHorario(curso);
-                    return tope.isEmpty() ? Optional.empty() : Optional.of(action.getText("error.tope.horario") + " " + tope);
-                },
-                () -> noHayCupo(curso, carrera, mencion) ? Optional.of("error.sin.cupos") : Optional.empty()
-        )
-                .map(Supplier::get)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .findFirst()
-                .map(error -> addError(action, error))
-                .orElse(SUCCESS);
-    }
+        if (!SUCCESS.equals(retValue)) {
+            action.addActionError(retValue);
+        }
 
-    private boolean puedeInscribir(Derecho derecho, ParametroSesionSupport param) {
-        return (derecho.getDerTipo() == 1 && ("SI".equals(param.getPuedeInscribirMalla()) || "SI".equals(param.getPuedeModificar())))
-                || ((derecho.getDerTipo() == 2 || derecho.getDerTipo() == 3) && "SI".equals(param.getPuedeInscribirFormacionIntegral()));
-    }
-
-    private String addError(ActionCommonSupport action, String errorKey) {
-        action.addActionError(action.getText(errorKey));
-        return ERROR;
+        return retValue;
     }
 
     /**
@@ -412,56 +391,33 @@ public final class InscripcionSupport {
      * @param curso Curso a inscribir.
      * @return SUCCESS: OK, ERROR: No cumple alguna de las reglas.
      */
-    private String puedeInscribirCoordinador(String userType, ActionCommonSupport action, Curso curso,
-            DerechoCoordinadorSupport derecho, Integer carrera, Integer mencion) {
+    private String puedeInscribirCoordinador(ActionCommonSupport action, Curso curso) {
+        
+        action.clearMessages();
+        String retValue = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).validarInscripcionCoord(
+                this.aluCar.getId().getAcaRut(),
+                this.aluCar.getId().getAcaCodCar(),
+                this.aluCar.getId().getAcaAgnoIng(),
+                this.aluCar.getId().getAcaSemIng(),
+                this.aluCar.getAcaCodMen(),
+                this.aluCar.getAcaCodPlan(),
+                curso.getId().getCurAsign(),
+                curso.getId().getCurElect(),
+                curso.getId().getCurCoord(),
+                curso.getId().getCurSecc(),
+                curso.getId().getCurAgno(),
+                curso.getId().getCurSem());
 
-        String tope = topeHorario(curso);
-        StringBuilder actionMessage = new StringBuilder();
-        Integer tipoDerecho = 0;
-
-        switch (userType) {
-            case "JC":
-            case "SP":
-                tipoDerecho = 1;
-                break;
-            case "CFI":
-                tipoDerecho = 3;
+        if (!SUCCESS.equals(retValue)) {            
+            String[] textos = retValue.split("\\n");
+            for (String texto : textos) {
+                if (texto != null && !texto.trim().isEmpty()) {
+                    action.addActionMessage(texto.trim());
+                }
+            }           
         }
 
-        if (sobrepasaMaxSct(tipoDerecho, derecho.getDerSct())) {
-            actionMessage.append(" ").append(action.getText("error.excede.maximo.sct"));
-        }
-
-        if (sobrepasaMaxAsign(tipoDerecho)) {
-            actionMessage.append(" ").append(action.getText("error.excede.maximo.inscripciones"));
-        }
-
-        if (sobrepasaMaxNivel(tipoDerecho, derecho.getDerNivel())) {
-            actionMessage.append(" ").append(action.getText("error.excede.maximo.nivel"));
-        }
-
-        if (sobrepasaCreditosNivel(curso, tipoDerecho)) {
-            actionMessage.append(" ").append(action.getText("error.excede.maximo.creditos"));
-        }
-
-        if (noTieneRequisitosElectivo(curso)) {
-            actionMessage.append(" ").append(action.getText("error.sin.requisitos"));
-        }
-
-        if (tope != null && !tope.isEmpty()) {
-            actionMessage.append(" ").append(action.getText("error.tope.horario")).append(" ").append(tope);
-        }
-
-        if (noHayCupo(curso, carrera, mencion)) {
-            actionMessage.append(" ").append(action.getText("error.sin.cupos"));
-        }
-
-        if (actionMessage.length() == 0) {
-            return SUCCESS;
-        } else {
-            action.addActionMessage(actionMessage.toString().trim());
-            return ERROR;
-        }
+        return retValue;
     }
 
     /**
@@ -495,42 +451,6 @@ public final class InscripcionSupport {
 
     }
 
-    /**
-     * Verifica si se pasa del máximo de asignaturas a inscribir permitido.
-     *
-     * @return True: sobrepasa el máximo, false de lo contrario.
-     */
-    private boolean sobrepasaMaxAsign(Integer tipoDerecho) {
-        boolean retValue = false;
-
-        if (tipoDerecho == 1 && this.aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 33 && this.aluCar.getAcaCodPlan() < 3) {
-            retValue = this.aluCar.getAsignaturasInscritas() + 1
-                    > this.aluCar.getParametros().getMaxAsignInscritas();
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param tipoDerecho
-     * @param sct
-     *
-     * @return
-     */
-    private boolean sobrepasaMaxSct(Integer tipoDerecho, Integer sct) {
-
-        Integer sctExtra = 4;
-        
-
-        /*if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 16) {
-            sctExtra = 4;
-        }*/
-        return (tipoDerecho == 1 || tipoDerecho == 4) &&  this.aluCar.getSctInscritos() + sct > 34 ;
-    }
-
     public void setSctNivel() {
         if ("SI".equals(aluCar.getParametros().getPuedeInscribirMalla())
                 || "SI".equals(aluCar.getParametros().getPuedeModificar())
@@ -544,157 +464,6 @@ public final class InscripcionSupport {
 
             aluCar.setSctNivel(mallaPersistence.getSctNivel(aluCar));
         }
-    }
-
-    /**
-     * Verifica si el nivel del curso a inscribir sobrepasa al permitido.
-     *
-     * @return True: sobrepasa el máximo nivel, false de lo contrario.
-     */
-    private boolean sobrepasaMaxNivel(Integer tipoDerecho, Integer nivel) {
-        boolean retValue = false;
-
-        if (tipoDerecho == 1 && this.aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 35) {
-            retValue = this.aluCar.getAluCarFunction().getNivel() + this.aluCar.getParametros().getMaxNivelAdelanto()
-                    < nivel;
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Verifica si se pasa del máximo de créditos que un alumno puede inscribir,
-     * dependiendo del nivel en que se encuentra el alumno.
-     *
-     * @param curso Curso a inscribir.
-     * @return True: Sobrepasa el número de créditos, false de lo contrario.
-     */
-    private boolean sobrepasaCreditosNivel(Curso curso, Integer tipoDerecho) {
-        boolean retValue = false;
-
-        if (tipoDerecho == 1 && this.aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 35 && this.aluCar.getAcaCodPlan() < 7) {
-            int creditos = curso.getAsignatura().getAsiHcredTeo() + curso.getAsignatura().getAsiHcredEje()
-                    + curso.getAsignatura().getAsiHcredLab();
-
-            retValue = this.aluCar.getCreditosInscritos() + creditos > this.aluCar.getCreditosNivel() + 4;
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Verifica si no hay cupos disponibles.
-     *
-     * @param curso Curso a inscribir.
-     * @return True: No hay cupos disponible, false de lo contrario.
-     */
-    private boolean noHayCupo(Curso curso, Integer carrera, Integer mencion) {
-        boolean retValue = false;
-        CursoId id = curso.getId();
-
-        if (!"P".equals(curso.getAsignatura().getAsiTipo())) {
-            retValue = "NO".equals(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).hayCupoCarrera(
-                    id.getCurAsign(),
-                    id.getCurElect(),
-                    id.getCurCoord(),
-                    id.getCurSecc(),
-                    id.getCurAgno(),
-                    id.getCurSem(),
-                    carrera, mencion));
-        } else {
-            if ("SI".equals(this.aluCar.getParametros().getPuedeModificar())) {
-                retValue = "NO".equals(ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).hayCupo(
-                        id.getCurAsign(),
-                        id.getCurElect(),
-                        id.getCurCoord(),
-                        id.getCurSecc(),
-                        id.getCurAgno(),
-                        id.getCurSem()));
-            }
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Verifica si no tiene prerequisitos para inscribir curso en el caso de ser
-     * electivo.
-     *
-     * @param curso Curso a verificar si es electivo y cumple los prerequisitos.
-     * @return True: Si no cumple, false de lo contrario.
-     */
-    private boolean noTieneRequisitosElectivo(Curso curso) {
-        boolean retValue = false;
-
-        if ("S".equals(curso.getAsignatura().getAsiElect())) {
-            CursoId cursoId = curso.getId();
-            AluCarId aluCarId = this.aluCar.getId();
-            int flag = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).tienePreReqElectivo(
-                    aluCarId.getAcaRut(),
-                    aluCarId.getAcaCodCar(),
-                    aluCarId.getAcaAgnoIng(),
-                    aluCarId.getAcaSemIng(),
-                    this.aluCar.getAcaCodMen(),
-                    this.aluCar.getAcaCodPlan(),
-                    cursoId.getCurAsign(),
-                    cursoId.getCurElect(),
-                    cursoId.getCurAgno(),
-                    cursoId.getCurSem()
-            );
-
-            retValue = (flag == 0);
-        }
-
-        return retValue;
-    }
-
-    private boolean electivoYaAprobado(Curso curso) {
-        boolean retValue = false;
-
-        if ("S".equals(curso.getAsignatura().getAsiElect())) {
-            CursoId cursoId = curso.getId();
-            AluCarId aluCarId = this.aluCar.getId();
-
-            int flag = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).electivoYaAprobado(
-                    aluCarId.getAcaRut(),
-                    aluCarId.getAcaCodCar(),
-                    aluCarId.getAcaAgnoIng(),
-                    aluCarId.getAcaSemIng(),
-                    cursoId.getCurAsign(),
-                    cursoId.getCurElect(),
-                    cursoId.getCurAgno(),
-                    cursoId.getCurSem()
-            );
-
-            retValue = (flag == 1);
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Verifica tope de horario del curso con los cursos ya inscritos.
-     *
-     * @param curso Curso a inscribir.
-     * @return String con el tope (día-módulo), null si no hay tope.
-     */
-    private String topeHorario(Curso curso) {
-        AluCarId id = this.aluCar.getId();
-        CursoId cursoId = curso.getId();
-
-        return ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).topeHorario(
-                id.getAcaRut(),
-                id.getAcaCodCar(),
-                id.getAcaAgnoIng(),
-                id.getAcaSemIng(),
-                cursoId.getCurAsign(),
-                cursoId.getCurElect(),
-                cursoId.getCurCoord(),
-                cursoId.getCurSecc(),
-                cursoId.getCurAgno(),
-                cursoId.getCurSem()
-        );
-
     }
 
     private String topeHorarioCambioCurso(AluCar aluCar, Curso cursoOri, Curso cursoDest) {
@@ -721,20 +490,6 @@ public final class InscripcionSupport {
                 destId.getCurSem()
         );
 
-    }
-
-    /**
-     * Verifica si la asignatura ya fue inscrita.
-     *
-     * @param curso Curso a inscribir.
-     * @return True: Ya está inscrita, false de lo contrario.
-     */
-    private boolean asignaturaInscrita(Curso curso) {
-        return this.aluCar.getInsList().stream()
-                .anyMatch(insAux -> asList(16, 20, 33, 35).contains(aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip())
-                ? insAux.getId().getInsAsign().equals(curso.getId().getCurAsign())
-                && insAux.getId().getInsElect().trim().equals(curso.getId().getCurElect().trim())
-                : insAux.getId().getInsAsign().equals(curso.getId().getCurAsign()));
     }
 
     /**

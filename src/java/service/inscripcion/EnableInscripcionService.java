@@ -43,7 +43,7 @@ public class EnableInscripcionService {
                 aluCar.setAlumno(ws.getAlumno());
                 aluCar.setInitValues();
                 ws.setAluCar(aluCar);
-                ws.setNombre(CommonAlumnoUtil.getNombreSocial(ws.getAluCar().getAlumno()));
+                ws.setNombre(ws.getAluCar().getAlumno().getNombreSocial());
 
                 ws.setAgnoAct(aluCar.getParametros().getAgnoIns());
                 ws.setSemAct(aluCar.getParametros().getSemIns());

@@ -37,7 +37,7 @@ public final class GetAlumnoService {
                             ws.getAlumnoList().get(pos).getAluRut());
 
             ws.setAlumno(alumno);
-            ws.setNombre(CommonAlumnoUtil.getNombreSocial(alumno));
+            ws.setNombre(alumno.getNombreSocial());
         }
 
         return SUCCESS;

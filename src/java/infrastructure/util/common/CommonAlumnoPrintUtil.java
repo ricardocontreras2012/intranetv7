@@ -161,7 +161,7 @@ public abstract class CommonAlumnoPrintUtil {
             header.writeSelectedRows(0, -1, 0, 750, canvas);  // Ajusta las coordenadas se
 
             PdfPTable tHeader = getTableTwoCols();
-            addRow(tHeader, "Nombre:", CommonAlumnoUtil.getNombreSocial(alumno));
+            addRow(tHeader, "Nombre:", alumno.getNombreSocial());
             addRow(tHeader, "Cédula Nacional de Identidad N°:", alumno.getAluRut() + "-" + alumno.getAluDv());
             addRow(tHeader, "Carrera:", aluCar.getNombreCarrera());
             addRow(tHeader, "Plan de Estudios: Resolución(es):", aluCar.getPlan().getPlaResoluciones());
