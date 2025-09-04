@@ -62,7 +62,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a href="#" class="dropdown-item" onclick="showNormativa();"><s:text name="label.menu.normativa"/></a>
                             <a href="#" class="dropdown-item" onclick="executeAction('CommonAlumnoGetDatosCurriculares');"><s:text name="label.menu.mis.datos"/></a>
-                            <a href="#" class="dropdown-item" onclick="getMalla();"><s:text name="label.menu.malla"/></a>                               
+                            <a href="#" class="dropdown-item" onclick="getMalla();"><s:text name="label.menu.malla"/></a>
                             <a href="#" class="dropdown-item" onclick="executeAction('CommonAlumnoGetCalificaciones');"><s:text name="label.menu.cartola"/></a>
                         </div>
                     </li>

@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import infrastructure.support.MallaContainerSupport;
+import infrastructure.support.MallaJsonSupport;
 import static infrastructure.util.AppStaticsUtil.AUTORIDADES;
 import static infrastructure.util.AppStaticsUtil.SECRETARIAS;
 import infrastructure.util.ContextUtil;
@@ -37,6 +38,7 @@ public final class GenericSession {
     private String email;
     private Date lastLogin;
     private MallaContainerSupport mallaContainer;
+    private List<MallaJsonSupport> mallaJson;
     private String materno;
     private String nombre;
     private String nombreMensaje;
@@ -242,6 +244,14 @@ public final class GenericSession {
     public void setMallaContainer(MallaContainerSupport mallaContainer) {
         this.mallaContainer = mallaContainer;
     }
+    
+    public List<MallaJsonSupport> getMallaJson() {
+        return mallaJson;
+    }
+
+    public void setMallaJson(List<MallaJsonSupport> mallaJson) {
+        this.mallaJson = mallaJson;
+    }    
 
     /**
      * Method description

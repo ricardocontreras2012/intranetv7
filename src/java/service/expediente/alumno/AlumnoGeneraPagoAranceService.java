@@ -9,6 +9,7 @@ import com.lowagie.text.pdf.*;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import domain.model.AluCar;
 import domain.model.Alumno;
+import domain.model.ExpedienteLogro;
 import domain.model.Unidad;
 import infrastructure.util.ActionInputStreamUtil;
 import infrastructure.util.ActionUtil;
@@ -59,6 +60,7 @@ public class AlumnoGeneraPagoAranceService {
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aca = ws.getAluCar();
         Alumno alumno = aca.getAlumno();
+        ExpedienteLogro expl = ws.getExpedienteLogro();
         
         float margin = 28.35f * 2;
         Document document = new Document(PageSize.LETTER, margin, margin, margin / 2, margin / 2);      
@@ -108,6 +110,7 @@ public class AlumnoGeneraPagoAranceService {
 
         document.add(new Paragraph("Cédula Nacional de Identidad N°.: " + alumnoDoc + "\n\n", fontRegular));
         document.add(new Paragraph("Nombre: " + alumnoNombre + "\n\n", fontRegular));
+        document.add(new Paragraph("Tramita el Grado de: " + expl.getPlanLogro().getPlalNomLogro().toUpperCase() + "\n\n", fontRegular));
         document.add(new Paragraph("Arancel correspondiente a tramitación para la obtención de Certificado y Diploma de Grado Académico y/o Título Profesional.", fontRegular));
 
         document.add(new Paragraph("\n"));

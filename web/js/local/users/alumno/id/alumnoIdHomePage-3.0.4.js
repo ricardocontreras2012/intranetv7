@@ -8,6 +8,11 @@ function getMalla() {
     $("#alumno-form").attr("target", "_blank");
     $("#alumno-form").submit();
 }
+function getMallaJson() {
+    $("#alumno-form").attr("action", "CommonAlumnoGetMallaJson?key=" + $("#keyDummy").val());
+    $("#alumno-form").attr("target", "_blank");
+    $("#alumno-form").submit();
+}
 
 function showCalendario()
 {

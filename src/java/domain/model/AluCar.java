@@ -11,6 +11,7 @@ import infrastructure.support.InscripcionSupport;
 import infrastructure.support.MallaContainerSupport;
 import infrastructure.support.ParametroSesionSupport;
 import infrastructure.support.DerechoCoordinadorSupport;
+import infrastructure.support.MallaJsonSupport;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
@@ -22,6 +23,7 @@ import static infrastructure.util.DateUtil.getDateGetterSetter;
 import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCursoUtil;
 import static infrastructure.util.common.CommonMallaUtil.getMallaCommonAlumno;
+import static infrastructure.util.common.CommonMallaUtil.getMallaCommonAlumnoJson;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -692,6 +694,17 @@ public class AluCar implements Serializable {
         return getMallaCommonAlumno(this, userType);
     }
 
+    
+    /**
+     * Method description
+     *
+     * @param userType
+     * @return
+     */
+    public List<MallaJsonSupport> getMallaJson(String userType) {
+        return getMallaCommonAlumnoJson(this, userType);
+    }
+    
     /**
      * Method description
      *

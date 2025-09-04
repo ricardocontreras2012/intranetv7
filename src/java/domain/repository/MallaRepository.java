@@ -27,6 +27,16 @@ public interface MallaRepository extends CrudGenericDAO<Malla, Long> {
      * @return
      */
     List<Object[]> getCalificacionesMalla(AluCar aluCar);
+    
+    /**
+     * Method description
+     *
+     *
+     * @param aluCar
+     *
+     * @return
+     */
+    String getMallaJson(AluCar aluCar);
 
     /**
      * Method description

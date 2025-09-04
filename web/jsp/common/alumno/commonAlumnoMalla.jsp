@@ -21,6 +21,242 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/common/alumno/commonAlumnoMalla-3.0.0.js"></script>
+        <style>
+            /* Contenedor general */
+            .contenedor-malla {
+                display: grid;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                background: #f1f5f9;
+                /* display: flex;
+              flex-direction: column;
+              width: 100%;
+              padding: 10px;
+              border: 1px solid #ddd;*/
+            }
+
+            /* Cabecera */
+            .fila-cabecera {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 0.5rem;
+                /*display: flex;*/
+                /*justify-content: flex-start;*/
+                /*margin-bottom: 10px;*/
+            }
+
+            .nivel-cabecera {
+                font-size: 16px;
+                font-weight: bold;
+                /*margin-right: 20px;*/
+                padding: 5px 10px;
+                background-color: #e5e7eb;
+                text-align: center;
+                /*border: 1px solid #ddd;*/
+                /*border-radius: 5px;*/
+            }
+
+            /* Fila de la malla */
+            .fila-malla {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 0.5rem;
+                /*  display: flex;
+                  justify-content: flex-start;
+                  margin-bottom: 10px;
+                  padding-bottom: 5px;*/
+            }
+
+            /* Estilo de los rectángulos de los nodos */
+            .rectangulo-malla {
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border: solid;
+                border-width: 1px;
+                border-color: rgb(209 213 219);
+                background-color: rgb(255 255 255);
+                padding: 0.5rem;    
+
+                /*position: relative;
+                width: 180px; 
+                height: 100px;
+                margin-right: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;*/
+            }
+
+            /*.rectangulo-malla.texto-blanco {
+              color: white;
+            }*/
+
+            /* Segmentos de cada rectángulo */
+            .segmento-superior {
+                /*height: 100%;*/
+                padding: 0.125rem;
+                /*  display: flex;
+                  justify-content: space-between;
+                  padding: 5px;*/
+                /*background-color: #007bff;*/
+                /*border-top-left-radius: 5px;
+                border-top-right-radius: 5px;*/
+            }
+
+            .label-superior {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+
+            .numero-correlativo {
+                font-weight: bold;
+                color: white;
+            }
+
+            .codigo-asignatura {
+                color: white;
+                font-size: 12px;
+            }
+
+            /* Segmento inferior */
+            .segmento-inferior {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 5px;
+                height: 100%;
+                /*background-color: #f9f9f9;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;*/
+            }
+
+            /* Área central con nombre del nodo */
+            .area-central {
+                font-size: 13px;
+                padding: 2px 0;
+            }
+
+            /*.area-central.texto-blanco {
+              color: white;
+            }*/
+
+            .label-requisitos {
+                font-size: 12px;
+            }
+
+            /*.label-requisitos.texto-blanco {
+              color: white;
+            }*/
+
+            .label-inferior {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .creditos {
+                font-size: 14px;
+            }
+
+            .reprobaciones-rojo {
+                font-size: 14px;
+                color: #fff;
+                background: #b91c1c;
+                height: 1.5rem;
+                width: 1.5rem;
+                border-radius: 9999px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Color de fondo según la situación */
+            .rectangulo-malla-A .segmento-superior {
+                background-color: #15803d; /* Verde */
+            }
+            .rectangulo-malla-R .segmento-superior {
+                background-color: #dc2626; /* Rojo */
+            }
+            .rectangulo-malla-I .segmento-superior {
+                background-color: #eab308; /* Amarillo */
+            }
+            .rectangulo-malla-C .segmento-superior {
+                background-color: #10b981; /* Verde Claro*/
+            }
+            /*.rectangulo-malla-P .segmento-superior {
+                background-color: #f97316;
+            }*/
+            .rectangulo-malla-L .segmento-superior, .rectangulo-malla-S .segmento-superior {
+                background-color: #cad5e2; /* Slate 300 / Gris claro */
+            }
+            .rectangulo-malla-E .segmento-superior, .rectangulo-malla-P .segmento-superior {
+                background-color: #00d3f2; /* Amber 900 / Tierra */
+            }
+.tipo-electivo-H,
+.tipo-electivo-C,
+.tipo-electivo-E {
+  background: #a3b3ff; color:#fff; border-radius:0.5rem; padding: 0 0.5rem;
+}
+.tipo-electivo-PRO {
+  background: #629aed; color:#fff; border-radius:0.5rem; padding: 0 0.5rem;
+}
+.tipo-electivo-COM {
+  background: #3ec8a5; color:#fff; border-radius:0.5rem; padding: 0 0.5rem;
+}
+.tipo-electivo-PRA {
+  background: #ffad52; color:#fff; border-radius:0.5rem; padding: 0 0.5rem;
+}
+            /* Para cargar mensaje o error */
+            .loading-message,
+            .not-found {
+                text-align: center;
+                font-size: 18px;
+                color: #888;
+                padding: 20px;
+            }
+
+            .loading-message {
+                color: #007bff;
+            }
+
+            .not-found {
+                color: #f44336;
+            }
+/* zoom control */
+.zoom-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-family: sans-serif;
+}
+
+.zoom-controls button {
+  font-size: 18px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+#zoom-level {
+  font-size: 14px;
+  min-width: 40px;
+  display: inline-block;
+  text-align: center;
+}
+        </style>
+        
+        
     </head>
     <body>
         <div class="">
@@ -30,115 +266,16 @@
                     value="#session.genericSession.getWorkSession(key).aluCar.alumno.aluDv"/>&nbsp;&nbsp;<s:property
                     value="#session.genericSession.getWorkSession(key).aluCar.alumno.nombre"/>
             </div>
-            <div class="mt-5">
+            <div id="contenedor" class="mt-5 ">
+                <div class="zoom-controls">
+                    <button id="zoom-out">−</button>
+                    <span id="zoom-level">100%</span>
+                    <button id="zoom-in">+</button>
+                </div>
+                <div class="contenedor-malla">
+
+                </div>
                 <form id="malla-form" action="#">
-                    <table class="table" style="font-size:11px;">
-                        <thead>
-                            <tr>
-                                <%
-                                    GenericSession genericSession = (GenericSession) session.getAttribute("genericSession");
-                                    int mallaSize = genericSession.getMallaContainer().getMalla().size();
-                                    for (int i = 0; i < mallaSize; i++) {
-                                        if ("P".equals(genericSession.getMallaContainer().getMalla().get(i).get(0).getTipo())) {
-                                            out.println(
-                                                    "<th>NIVEL " + (i + 1) + "</th>");
-                                        }
-                                        if ("C".equals(genericSession.getMallaContainer().getMalla().get(i).get(0).getTipo())) {
-                                            out.println(
-                                                    "<th>COPRO</th>");
-                                        }
-                                        if ("A".equals(genericSession.getMallaContainer().getMalla().get(i).get(0).getTipo())) {
-                                            out.println(
-                                                    "<th>ADIC</th>");
-                                        }
-                                    }
-
-                                    int maxFilas = CommonMallaUtil.getMaxLinea(genericSession.getMallaContainer().getMalla());
-                                %>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                for (int i = 1; i <= maxFilas; i++) {
-                                    out.println("<tr>");
-                                    for (int j = 0; j < mallaSize; j++) {
-                                        if (i <= CommonMallaUtil.getMaxLineaNivel(genericSession.getMallaContainer().getMalla(), j)) {
-                                            MallaNodoSupport nodo = CommonMallaUtil.getNodo(genericSession.getMallaContainer().getMalla(), j, i);
-                                            if (nodo != null) {
-                                                if (nodo.getReprobaciones() > 0) {
-                                                    out.println("<td align=\"center\">");
-                                                    out.println("<div class=\"box\">");
-                                                    out.println("<div class=\"codigo\">");
-                                                    out.println("<table class=\"tableHead\"><tr><td style=\"text-align:left\">" + nodo.getCorrel() + "</td><td style=\"text-align:right\">");
-                                                    if (!"A".equals(nodo.getTipo())) {
-                                                        out.println("<a onclick=\"showNotas(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "','" + nodo.getElectiva() + "');\">" + nodo.getAsignatura() + "</a>");
-                                                    } else {
-                                                        out.println("<a onclick=\"showAdicionales(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "','" + nodo.getElectiva() + "')\">" + nodo.getAsignatura() + "</a>");
-                                                    }
-                                                    out.println("</td></tr></table>");
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"nombre " + nodo.getEstado() + "\">");
-                                                    out.println(nodo.getNombre());
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"requisitos " + nodo.getEstado() + "\">");
-
-                                                    if (nodo.getRequisitos().length() >= 15) {
-                                                        out.println("Req: " + nodo.getRequisitos().substring(0, 11) + "<a onClick=\"showRequisitos(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "'); \">...</a>");
-                                                        out.println("<input type=\"hidden\" id=\"asignatura_input" + nodo.getAsignatura() + "\" name=\"asignatura_input" + nodo.getAsignatura() + "\" value=\"" + nodo.getRequisitos() + "\">");
-                                                    } else {
-                                                        out.println("Req: " + nodo.getRequisitos());
-                                                    }
-
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"tel-reprobaciones " + nodo.getEstado() + "\">");
-                                                    out.println("<table class=\"tableTelRepro\"><tr><td class=\"" + nodo.getEstado() + "\">" + nodo.getTelSct() + "</td><td style=\"width:18px\"><img src=\"/intranetv7/images/local/numbers/0" + nodo.getReprobaciones() + "RedNo_32X32.png\" alt=\"repro\" width=\"17\" height=\"18\"/></td></tr></table>");
-                                                    out.println("</div>");
-                                                    out.println("</div>");
-                                                    out.println("</td>");
-                                                } else {
-                                                    out.println("<td align=\"center\">");
-                                                    out.println("<div class=\"box\">");
-                                                    out.println("<div class=\"codigo\">");
-                                                    out.println("<table class=\"tableHead\"><tr><td style=\"text-align:left\">" + nodo.getCorrel() + "</td><td style=\"text-align:right\">");
-                                                    if (!"A".equals(nodo.getTipo())) {
-                                                        out.println("<a onclick=\"showNotas(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "','" + nodo.getElectiva() + "');\">" + nodo.getAsignatura() + "</a>");
-                                                    } else {
-                                                        out.println("<a onclick=\"showAdicionales(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "','" + nodo.getElectiva() + "')\">" + nodo.getAsignatura() + "</a>");
-                                                    }
-                                                    out.println("</td></tr></table>");
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"nombre " + nodo.getEstado() + "\">");
-                                                    out.println(nodo.getNombre());
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"requisitos " + nodo.getEstado() + "\">");
-
-                                                    if (nodo.getRequisitos().length() >= 15) {
-                                                        out.println("Req: " + nodo.getRequisitos().substring(0, 11) + "<a onClick=\"showRequisitos(" + nodo.getAsignatura() + ",'" + nodo.getNombre() + "'); \">...</a>");
-                                                        out.println("<input type=\"hidden\" id=\"asignatura_input" + nodo.getAsignatura() + "\" name=\"asignatura_input" + nodo.getAsignatura() + "\" value=\"" + nodo.getRequisitos() + "\">");
-                                                    } else {
-                                                        out.println("Req: " + nodo.getRequisitos());
-                                                    }
-
-                                                    out.println("</div>");
-                                                    out.println("<div class=\"tel-reprobaciones " + nodo.getEstado() + "\">");
-                                                    out.println(nodo.getTelSct());
-                                                    out.println("</div>");
-                                                    out.println("</div>");
-                                                    out.println("</td>");
-                                                }
-                                            } else {
-                                                out.println("<td></td>");
-                                            }
-                                        } else {
-                                            out.println("<td></td>");
-                                        }
-                                    }
-                                    out.println("</tr>");
-                                }
-                            %>
-                        </tbody>
-                    </table>
-                    <!--img src="/Alumno/Cartola/Classes/simbologia.jpg" align=center-->
                     <div id="hidden-input-div">
                         <input type="hidden" id="asignatura" name="asignatura" value="<s:property value="asignatura"/>"/>
                         <input type="hidden" id="electiva" name="electiva" value="<s:property value="electiva"/>"/>

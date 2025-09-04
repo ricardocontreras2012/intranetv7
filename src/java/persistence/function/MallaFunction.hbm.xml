@@ -11,6 +11,9 @@
     <sql-query callable="true" name="NotasAsinaturaMallaFunction">
         { ? = call malla_grafica_pkg.get_malla_calif_asignatura(?,?,?,?,?,?,?) }
     </sql-query>
+    <sql-query callable="true" name="MallaJsonFunction">
+        { ? = call malla_grafica_pkg.get_malla_json(?,?,?,?,?,?) }
+    </sql-query>
     <sql-query name="CreditosNivelFunction">
         <return-scalar column="creditos"  type="java.lang.Integer" />
         <![CDATA[select get_creditos_nivel(?,?,?,?,?,?) as creditos from dual]]>

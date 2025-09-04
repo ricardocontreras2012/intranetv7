@@ -13,6 +13,7 @@ import domain.model.Asignatura;
 import domain.model.Malla;
 import domain.model.MallaId;
 import domain.model.PlanId;
+import java.sql.Clob;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +46,34 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
 
         return query.list();
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getMallaJson(AluCar aluCar) {
+        System.out.println("Mall JSON");
+        
+        String sql = "select malla_grafica_pkg.get_malla_json(:id,:codCar,:agnoIng,:semIng,:codMen,:codPlan) from dual";
+        Query query = getSession().createSQLQuery(sql);
+        
+        AluCarId id = aluCar.getId();
+        query.setParameter("id", id.getAcaRut(), StandardBasicTypes.INTEGER);
+        query.setParameter("codCar", id.getAcaCodCar(), StandardBasicTypes.INTEGER);
+        query.setParameter("agnoIng", id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
+        query.setParameter("semIng", id.getAcaSemIng(), StandardBasicTypes.INTEGER);
+        query.setParameter("codMen", aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
+        query.setParameter("codPlan", aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
+
+        try {
+            Clob resultClob = (Clob) query.uniqueResult();
+            return resultClob.getSubString(1, (int) resultClob.length());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+    
+    
 
     @SuppressWarnings("unchecked")
     @Override

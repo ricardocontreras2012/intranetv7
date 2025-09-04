@@ -5,6 +5,10 @@
  */
 package infrastructure.util.common;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import domain.model.Malla;
 import domain.model.AluCar;
 import domain.model.CalificacionLogroAdicional;
@@ -21,9 +25,11 @@ import domain.repository.MallaRepository;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.MallaContainerSupport;
+import infrastructure.support.MallaJsonSupport;
 import infrastructure.support.MallaNodoSupport;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
+import java.lang.reflect.Type;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +55,17 @@ public final class CommonMallaUtil {
      */
     public static MallaContainerSupport getMallaCommonAlumno(AluCar aluCar, String user) {
         return getMallaGrafica(aluCar, user);
+    }
+    
+    /**
+     * Method description
+     *
+     * @param aluCar
+     * @param user
+     * @return
+     */
+    public static List<MallaJsonSupport> getMallaCommonAlumnoJson(AluCar aluCar, String user) {
+        return getMallaGraficaJson(aluCar, user);
     }
 
     /**
@@ -83,6 +100,80 @@ public final class CommonMallaUtil {
 
         return mallaContainer;
     }
+    
+    /**
+     * Method description
+     *
+     *
+     * @param aluCar
+     *
+     * @return
+     */
+    private static List<MallaJsonSupport> getMallaGraficaJson(AluCar aluCar, String user) {
+        
+        System.out.println("getMallaGraficaJson");
+
+    MallaRepository mallaRepository = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser());
+
+    String mallaRaw = mallaRepository.getMallaJson(aluCar);
+    System.out.println("Pase de largo: " + mallaRaw.length());
+
+    List<MallaJsonSupport> result = new ArrayList<>();
+
+    // Usamos Gson para deserializar el JSON
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+    // Deserializamos el JSON en una lista de objetos MallaJsonSupport
+    // Asumimos que el JSON tiene la estructura adecuada para deserializar
+    try {
+        Type listType = new TypeToken<List<MallaJsonSupport>>() {}.getType();
+        result = gson.fromJson(mallaRaw, listType);
+
+        // Mostrar los resultados para depuración
+        System.out.println("Malla deserializada: " + gson.toJson(result));
+
+    } catch (JsonSyntaxException e) {
+        e.printStackTrace();
+        System.out.println("Error al deserializar el JSON.");
+    }
+
+    return result;
+
+        
+    /*System.out.println("getMallaGraficaJson");
+
+    MallaRepository mallaRepository =
+            ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser());
+
+    String mallaRaw = mallaRepository.getMallaJson(aluCar);
+        System.out.println("Pase de largo:"+mallaRaw.length());
+    List<MallaJsonSupport> result = new ArrayList<>();
+
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(mallaRaw);
+        System.out.println("MALLA RAW");
+        System.out.println(json);
+    
+    return result;*/
+    /*for (Object[] row : mallaRaw) {
+        MallaJsonSupport item = new MallaJsonSupport();
+        
+        item.setNivel((Integer) row[0]);
+        item.setAsig((Integer) row[1]);
+        item.setNombre((String) row[2]);
+        item.setXxx((String) row[3]);
+        item.setReprobaciones((Integer) row[4]);
+        item.setSituacion((String) row[5]);
+        item.setYyy((String) row[6]);
+        item.setLinea((Integer) row[7]);
+        item.setRequisitos((String) row[8]);
+        item.setCorrel((Integer) row[9]);
+        item.setTel_sct((String) row[10]);
+        item.setOrigen((String) row[11]);
+
+        result.add(item);
+    }*/
+}
 
     /**
      * Method description
@@ -93,6 +184,7 @@ public final class CommonMallaUtil {
      * @return
      */
     private static List<List<MallaNodoSupport>> getMalla(List<Object[]> lMalla) {
+        System.out.println("MallaNodoSupport");
         return lMalla.stream()
                 .map(mallaObj -> {
                     MallaNodoSupport nodo = new MallaNodoSupport("P");

@@ -212,6 +212,7 @@
                     </h2>
                     <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#accordionSteps">
                         <div class="accordion-body">
+                            <p>Estos documentos serán solicitados por Registro Curricular a las distintas unidades.</p>
                             <table class="table">
                                 <tbody>
                                     <s:iterator value="#session.genericSession.getWorkSession(key).estadoDocExpList" status="row">
