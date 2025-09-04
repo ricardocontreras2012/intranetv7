@@ -94,7 +94,7 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
     @Override
     public int getNextElectivo(AluCar aluCar) {
         AluCarId id = aluCar.getId();
-        String strQuery = "SELECT " + "get_next_correl_elect(" + id.getAcaRut() + ","
+        String strQuery = "SELECT get_next_correl_elect(" + id.getAcaRut() + ","
                 + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
                 + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
                 + aluCar.getAcaCodPlan() + ") nextElectivo FROM dual";
@@ -106,14 +106,14 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
     public Object[] getNextElectivoxTipo(AluCar aluCar) {
         AluCarId id = aluCar.getId();
 
-        String strQuery = "SELECT " + "get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
+        String strQuery = "SELECT get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
                 + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
                 + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
-                + aluCar.getAcaCodPlan() + ",'E') esp," + "get_next_correl_elect_x_tipo("
+                + aluCar.getAcaCodPlan() + ",'E') esp, get_next_correl_elect_x_tipo("
                 + id.getAcaRut() + "," + id.getAcaCodCar() + ","
                 + id.getAcaAgnoIng() + "," + id.getAcaSemIng() + ","
                 + aluCar.getAcaCodMen() + "," + aluCar.getAcaCodPlan()
-                + ",'H') hab," + "get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
+                + ",'H') hab, get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
                 + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
                 + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
                 + aluCar.getAcaCodPlan() + ",'C') cs FROM dual";
