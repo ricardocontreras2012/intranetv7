@@ -12,15 +12,11 @@ import domain.model.AluCarId;
 import domain.model.Asignatura;
 import domain.model.Malla;
 import domain.model.MallaId;
-import domain.model.PlanId;
 import java.sql.Clob;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import static org.hibernate.type.StandardBasicTypes.INTEGER;
-import static org.hibernate.type.StandardBasicTypes.STRING;
 import org.hibernate.type.StandardBasicTypes;
 
 /**
@@ -31,27 +27,11 @@ import org.hibernate.type.StandardBasicTypes;
  */
 public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> implements MallaRepository {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Object[]> getCalificacionesMalla(AluCar aluCar) {
-        Query query = getSession().getNamedQuery("CalificacionesMallaFunction");
-        AluCarId id = aluCar.getId();
-
-        query.setParameter(0, id.getAcaRut(), StandardBasicTypes.INTEGER);
-        query.setParameter(1, id.getAcaCodCar(), StandardBasicTypes.INTEGER);
-        query.setParameter(2, id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(3, id.getAcaSemIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(4, aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
-
-        return query.list();
-    }
+ 
     
     @SuppressWarnings("unchecked")
     @Override
-    public String getMallaJson(AluCar aluCar) {
-        System.out.println("Mall JSON");
-        
+    public String getMallaJson(AluCar aluCar) {        
         String sql = "select malla_grafica_pkg.get_malla_json(:id,:codCar,:agnoIng,:semIng,:codMen,:codPlan) from dual";
         Query query = getSession().createSQLQuery(sql);
         
@@ -71,56 +51,7 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
             e.printStackTrace();
             return "";
         }
-    }
-    
-    
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Object[]> getInscripcionesMalla(AluCar aluCar) {
-        Query query = getSession().getNamedQuery("InscripcionesMallaFunction");
-        AluCarId id = aluCar.getId();
-
-        query.setParameter(0, id.getAcaRut(), StandardBasicTypes.INTEGER);
-        query.setParameter(1, id.getAcaCodCar(), StandardBasicTypes.INTEGER);
-        query.setParameter(2, id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(3, id.getAcaSemIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(4, aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
-
-        return query.list();
-    }
-
-    @Override
-    public int getNextElectivo(AluCar aluCar) {
-        AluCarId id = aluCar.getId();
-        String strQuery = "SELECT get_next_correl_elect(" + id.getAcaRut() + ","
-                + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
-                + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
-                + aluCar.getAcaCodPlan() + ") nextElectivo FROM dual";
-
-        return (Integer) getSession().createSQLQuery(strQuery).addScalar("nextElectivo", INTEGER).uniqueResult();
-    }
-
-    @Override
-    public Object[] getNextElectivoxTipo(AluCar aluCar) {
-        AluCarId id = aluCar.getId();
-
-        String strQuery = "SELECT get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
-                + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
-                + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
-                + aluCar.getAcaCodPlan() + ",'E') esp, get_next_correl_elect_x_tipo("
-                + id.getAcaRut() + "," + id.getAcaCodCar() + ","
-                + id.getAcaAgnoIng() + "," + id.getAcaSemIng() + ","
-                + aluCar.getAcaCodMen() + "," + aluCar.getAcaCodPlan()
-                + ",'H') hab, get_next_correl_elect_x_tipo(" + id.getAcaRut() + ","
-                + id.getAcaCodCar() + "," + id.getAcaAgnoIng() + ","
-                + id.getAcaSemIng() + "," + aluCar.getAcaCodMen() + ","
-                + aluCar.getAcaCodPlan() + ",'C') cs FROM dual";
-        SQLQuery query = getSession().createSQLQuery(strQuery);
-
-        return (Object[]) query.uniqueResult();
-    }
+    }            
 
     @SuppressWarnings("unchecked")
     @Override
@@ -137,78 +68,9 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
         query.setParameter(6, asignatura, StandardBasicTypes.INTEGER);
 
         return query.list();
-    }
+    }         
 
-    /**
-     * Method description
-     *
-     *
-     * @param planId
-     * @param correl
-     *
-     * @return
-     */
-    @Override
-    public int getAsignaturaElectiva(PlanId planId, int correl) {
-        String sqlQuery = "SELECT malla_grafica_pkg.get_malla_cod_asig_electiva(" + planId.getPlaCodCar() + ","
-                + planId.getPlaCodMen() + "," + planId.getPlaCod() + "," + correl + ") asignatura FROM dual";
-
-        return (Integer) getSession().createSQLQuery(sqlQuery).addScalar("asignatura", INTEGER).uniqueResult();
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param planId
-     * @param correl
-     * @param tipo
-     *
-     * @return
-     */
-    @Override
-    public int getAsignaturaElectivaxTipo(PlanId planId, int correl, String tipo) {
-        String sqlQuery = "SELECT get_electivo_x_tipo_x_posicion(" + planId.getPlaCodCar() + ","
-                + planId.getPlaCodMen() + "," + planId.getPlaCod() + ",'" + tipo + "'," + correl
-                + ") asignatura FROM dual";
-
-        return (Integer) getSession().createSQLQuery(sqlQuery).addScalar("asignatura", INTEGER).uniqueResult();
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param planId
-     * @param asignatura
-     *
-     * @return
-     */
-    @Override
-    public String getTipoElect(PlanId planId, int asignatura) {
-        String sqlQuery = "SELECT ma_tipo_elect tipo FROM malla WHERE ma_cod_car=" + planId.getPlaCodCar()
-                + " AND ma_cod_men=" + planId.getPlaCodMen() + " AND ma_cod_plan=" + planId.getPlaCod()
-                + " AND ma_asign=" + asignatura;
-
-        return (String) getSession().createSQLQuery(sqlQuery).addScalar("tipo", STRING).uniqueResult();
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public Integer getCreditosNivel(AluCar aluCar) {
-        Query query = getSession().getNamedQuery("CreditosNivelFunction");
-        AluCarId id = aluCar.getId();
-
-        query.setParameter(0, id.getAcaRut(), StandardBasicTypes.INTEGER);
-        query.setParameter(1, id.getAcaCodCar(), StandardBasicTypes.INTEGER);
-        query.setParameter(2, id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(3, id.getAcaSemIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(4, aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
-
-        return (Integer) query.uniqueResult();
-    }
-
+   
     @SuppressWarnings("unchecked")
     @Override
     public Integer getSctNivel(AluCar aluCar) {
@@ -295,8 +157,8 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
             // Devuelve lista vacía en lugar de null para evitar problemas en código consumidor
             return Collections.emptyList();
         }
-    }
-
+    } 
+    
     @SuppressWarnings("unchecked")
     @Override
     public List<Malla> getElectivosMalla(Integer tcarrera, Integer especialidad, String jornada, Integer rut, String cargo) {
@@ -339,4 +201,21 @@ public final class MallaPersistenceImpl extends CrudAbstractDAO<Malla, Long> imp
             return Collections.emptyList();
         }
     }
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public Integer getCreditosNivel(AluCar aluCar) {
+        Query query = getSession().getNamedQuery("CreditosNivelFunction");
+        AluCarId id = aluCar.getId();
+
+        query.setParameter(0, id.getAcaRut(), StandardBasicTypes.INTEGER);
+        query.setParameter(1, id.getAcaCodCar(), StandardBasicTypes.INTEGER);
+        query.setParameter(2, id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
+        query.setParameter(3, id.getAcaSemIng(), StandardBasicTypes.INTEGER);
+        query.setParameter(4, aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
+        query.setParameter(5, aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
+
+        return (Integer) query.uniqueResult();
+    }
+
 }

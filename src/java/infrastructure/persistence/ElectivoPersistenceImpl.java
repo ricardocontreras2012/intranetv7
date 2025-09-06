@@ -114,15 +114,6 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
                 + "AND ele_agno = :agno "
                 + "AND ele_sem = :sem";
 
-        
-            System.out.println("KKKKele_nom = "+electivo
-                + "ele_asign_minor = "+minor
-                + "ele_area = "+area
-                + "ele_tipo = "+tipo
-                + "WHERE ele_asign = "+asign
-                + "AND ele_elect = "+elect
-                + "AND ele_agno = "+agno
-                + "AND ele_sem = "+sem);
         // Crear el update con Hibernate
         SQLQuery query = getSession().createSQLQuery(sql);
 
@@ -138,8 +129,7 @@ public final class ElectivoPersistenceImpl extends CrudAbstractDAO<Electivo, Lon
 
         // Ejecutar la actualización
         query.executeUpdate();
-        } catch(Exception e) {
-            System.out.println(e);
+        } catch(Exception e) {            
         }
     }
 

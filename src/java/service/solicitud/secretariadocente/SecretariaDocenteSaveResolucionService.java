@@ -20,7 +20,6 @@ import infrastructure.util.HibernateUtil;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.LogUtil;
 import infrastructure.util.MailUtil;
-import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCursoUtil;
 import java.util.Map;
 import java.util.Set;

@@ -173,9 +173,7 @@ public final class ExportListaService {
         XSSFRichTextString textoCabEmail = new XSSFRichTextString("E-MAIL");
         celdaCabEmail.setCellValue(textoCabEmail);
         celdaCabEmail.setCellStyle(estiloCabecera);
-        
-System.out.println("usuario="+genericSession.getUserType());
-        
+                
         XSSFCell celdaCabRank = cabecera.createCell(6);
         XSSFRichTextString textoCabRank = new XSSFRichTextString("JC".equals(genericSession.getUserType())?"RANK":"");
         celdaCabRank.setCellValue(textoCabRank);

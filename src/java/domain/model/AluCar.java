@@ -8,7 +8,6 @@ package domain.model;
 import com.opensymphony.xwork2.Action;
 import domain.repository.DerechoRepository;
 import infrastructure.support.InscripcionSupport;
-import infrastructure.support.MallaContainerSupport;
 import infrastructure.support.ParametroSesionSupport;
 import infrastructure.support.DerechoCoordinadorSupport;
 import infrastructure.support.MallaJsonSupport;
@@ -22,7 +21,7 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.DateUtil.getDateGetterSetter;
 import infrastructure.util.common.CommonAlumnoUtil;
 import infrastructure.util.common.CommonCursoUtil;
-import static infrastructure.util.common.CommonMallaUtil.getMallaCommonAlumno;
+//import static infrastructure.util.common.CommonMallaUtil.getMallaCommonAlumno;
 import static infrastructure.util.common.CommonMallaUtil.getMallaCommonAlumnoJson;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -688,17 +687,6 @@ public class AluCar implements Serializable {
     public void setCalificaciones(String userType) {
         this.calificaciones = ContextUtil.getDAO().getCalificacionRepository(userType).find(this);
     }
-
-    /**
-     * Method description
-     *
-     * @param userType
-     * @return
-     */
-    public MallaContainerSupport getMalla(String userType) {
-        return getMallaCommonAlumno(this, userType);
-    }
-
     
     /**
      * Method description

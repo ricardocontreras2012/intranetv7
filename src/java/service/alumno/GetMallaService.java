@@ -27,9 +27,7 @@ public final class GetMallaService {
      * @throws Exception Si el servicio genera una exception
      */
     public String service(GenericSession genericSession, String key) throws Exception {
-        AluCar aluCar = genericSession.getWorkSession(key).getAluCar();
-
-        genericSession.setMallaContainer(aluCar.getMalla(genericSession.getUserType()));
+        AluCar aluCar = genericSession.getWorkSession(key).getAluCar();        
         LogUtil.setLog(genericSession.getRut(), aluCar.getId().getAcaRut());
 
         return SUCCESS;

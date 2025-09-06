@@ -46,10 +46,7 @@ public final class AddDefinicionService {
      */
     public String service(GenericSession genericSession, Integer asign, String elect, String electivo, String coord, Integer secc, Integer cupo, String inicio, String termino,
             String diurno, String vesp, String key) throws Exception {
-        WorkSession ws = genericSession.getWorkSession(key);
-        
-        
-System.out.println("inicio="+inicio);        
+        WorkSession ws = genericSession.getWorkSession(key);       
 
         //int pos = -1;
         Curso curso = new Curso();

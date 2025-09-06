@@ -357,12 +357,10 @@ public final class ScalarPersistenceImpl extends CrudAbstractDAO<Object, Seriali
 
     @Override
     public int puedeEliminar(Integer carrera, Integer mencion, Integer asign, Integer rut, String userType) {
-        String sql = "SELECT jefe_carrera_pkg.puede_eliminar_inscripcion(:carrera, :mencion, :asign, :userType, :rut) as val FROM dual";
+        String sql = "SELECT jefe_carrera_pkg.puede_eliminar_inscripcion(:asign, :userType, :rut) as val FROM dual";
 
         return ((Number) getSession()
-                .createSQLQuery(sql)
-                .setParameter("carrera", carrera, StandardBasicTypes.INTEGER)
-                .setParameter("mencion", mencion, StandardBasicTypes.INTEGER)
+                .createSQLQuery(sql)                
                 .setParameter("asign", asign, StandardBasicTypes.INTEGER)
                 .setParameter("userType", userType, StandardBasicTypes.STRING)
                 .setParameter("rut", rut, StandardBasicTypes.INTEGER)

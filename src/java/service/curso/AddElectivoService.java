@@ -39,7 +39,6 @@ public class AddElectivoService {
         
         ws.setElectivoList(ContextUtil.getDAO().getElectivoRepository(user).find(carrera.getTcrCtip(), carrera.getEspCod(), ws.getAgnoAct(), ws.getSemAct(), genericSession.getRut(), genericSession.getUserType()));
     } catch (Exception e){
-        System.out.println(e);
     }
         
         return SUCCESS;

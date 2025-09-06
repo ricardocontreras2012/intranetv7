@@ -11,7 +11,6 @@ import session.GenericSession;
 import session.WorkSession;
 import infrastructure.util.ActionUtil;
 import infrastructure.util.ContextUtil;
-import infrastructure.util.common.CommonAlumnoUtil;
 
 /**
  * Class description
