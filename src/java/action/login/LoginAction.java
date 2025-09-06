@@ -32,9 +32,8 @@ public final class LoginAction extends ActionPostCommonSupport {
      */
     @Override
     public String action() throws Exception {
-        this.key = getKeySession();
-        actionCall = new LoginService().service(userType);
-        
+        this.key = getKeySession();              
+        new LoginService().service(this, userType, getSesion());  
         return SUCCESS;
     }
 
