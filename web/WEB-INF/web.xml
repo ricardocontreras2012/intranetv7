@@ -7,7 +7,7 @@
             infrastructure.listener.IntranetContextListener
         </listener-class>
     </listener>
-    
+        
     <!-- activar cuando se necesite conocer los actions cargados en struts2 -->
     <!--listener>
         <listener-class>
