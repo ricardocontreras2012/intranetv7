@@ -328,8 +328,7 @@ public final class CommonAlumnoUtil {
         wsNew.setAluCar(aluCar);
     }
 
-    public static String searchEncuestaDocente(GenericSession genericSession, String key, String tipo) {
-               
+    public static String searchEncuestaDocente(GenericSession genericSession, String key, String tipo) {  
         WorkSession ws = genericSession.getWorkSession(key);
         String retVal = SUCCESS;
         AluCar aluCar = ws.getAluCar();
@@ -340,7 +339,8 @@ public final class CommonAlumnoUtil {
         EncuestaDocente encuesta = ContextUtil.getDAO().getEncuestaDocenteRepository(ActionUtil.getDBUser()).find(agnoEnc, semEnc, aluCar.getPlan().getMencion().getId().getMenCodCar(), aluCar.getAcaCodMen(), tipo);
         
         if (encuesta != null) {            
-            ws.setEncuestaDocente(encuesta);                        
+            ws.setEncuestaDocente(encuesta);  
+                       
             List<CursoProfesor> cursoProfesorList = ContextUtil.getDAO().getCursoProfesorRepository(ActionUtil.getDBUser()).getCursosEncuesta(aluCar.getId(), agnoEnc, semEnc);           
             
             evitarLazyCursoProf(cursoProfesorList);
@@ -349,7 +349,7 @@ public final class CommonAlumnoUtil {
             retVal = "stack";
         }         
         
-        return retVal;
+        return retVal;        
     }
 
     public static String searchEncuestaAyudante(GenericSession genericSession, String key, String tipo) {

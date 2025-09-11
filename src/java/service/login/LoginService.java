@@ -17,10 +17,10 @@ public class LoginService {
     public void service(LoginAction action, String userType, Map<String, Object> sesion) {
         action.setActionCall(ContextUtil.getDAO().getLogActionRepository(userType).getActionLogin(userType));
         
-        if (sesion.get("genericSession") != null)
+        /*if (sesion.get("genericSession") != null)
         {
             sesion.clear();
             System.out.println("Se elimino sesion anterior......");
-        }
+        }*/
     }
 }

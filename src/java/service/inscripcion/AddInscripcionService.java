@@ -32,7 +32,7 @@ public final class AddInscripcionService {
      */
     public String service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key)
-            throws Exception {     
+            throws Exception {    
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();        
@@ -40,7 +40,7 @@ public final class AddInscripcionService {
         
         InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
         insSup.setSctNivel();
-
-        return aluCar.addInscripcionCoordinador(action, genericSession, ws.getCurso(), ws.getDerechoCoordinador());      
+               
+        return aluCar.addInscripcionCoordinador(action, genericSession, ws.getCurso(), ws.getDerechoCoordinador());                  
     }
 }

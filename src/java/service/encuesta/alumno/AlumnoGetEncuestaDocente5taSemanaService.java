@@ -29,7 +29,7 @@ import infrastructure.util.common.CommonEncuestaUtil;
  */
 public final class AlumnoGetEncuestaDocente5taSemanaService {
 
-    public  String search(GenericSession genericSession, String key) {
+    public  String search(GenericSession genericSession, String key) {             
         return CommonAlumnoUtil.searchEncuestaDocente(genericSession, key, "V");
     }
 
@@ -56,7 +56,7 @@ public final class AlumnoGetEncuestaDocente5taSemanaService {
      */
     public  String saveService(GenericSession genericSession, Map<String, String[]> parameters, AlumnoSession alumnoSession, String key) {
         Integer correl;
-
+               
         WorkSession ws = genericSession.getWorkSession(key);
         CursoProfesor cursoProfesor = ws.getCursoProfesor();
         alumnoSession.setBienvenida(false);
@@ -101,7 +101,7 @@ public final class AlumnoGetEncuestaDocente5taSemanaService {
             commitTransaction();
             ws.getCursoProfesorList().remove(0);
         }
-
+        
         return SUCCESS;
     }
 }

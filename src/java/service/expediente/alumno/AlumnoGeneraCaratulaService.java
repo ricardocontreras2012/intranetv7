@@ -152,7 +152,7 @@ public class AlumnoGeneraCaratulaService {
         tablaPersonales.setWidths(columnPersonalesWidths);
         tablaPersonales.setWidthPercentage(100);
 
-        PdfPCell celdaPerf1c1 = new PdfPCell(new Phrase(alumno.getNombreStd(), new Font(Font.HELVETICA, 10, Font.BOLD)));
+        PdfPCell celdaPerf1c1 = new PdfPCell(new Phrase(alumno.getAluPaterno()+ " " + alumno.getAluMaterno() + ", " + alumno.getAluNombre(), new Font(Font.HELVETICA, 11, Font.BOLD)));
         celdaPerf1c1.setColspan(3);
         celdaPerf1c1.setPadding(5f);
         celdaPerf1c1.setHorizontalAlignment(Element.ALIGN_CENTER);
