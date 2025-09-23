@@ -131,7 +131,6 @@ public final class InscripcionSupport {
         return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionSimpleJson(aluCar.getId(), agno, sem));
     }
 
-    
     /**
      * Elimina inscripción por el alumno.
      *
@@ -139,9 +138,9 @@ public final class InscripcionSupport {
      */
     /// OOOOOOOOJJJJJOOOOO
     public void removeInscripcionAlumno(Map<String, String[]> parameters) {
-        /*if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
-            removeInscripciones(action, parameters, true);
-        }*/
+        ///if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
+        removeInscripciones(action, parameters, true);
+        //}
     }
 
     /**
@@ -156,7 +155,9 @@ public final class InscripcionSupport {
         //}
     }
 
-    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> parameters, boolean alumno) {
+    /* private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> parameters, boolean alumno) {
+try{        
+        
         action.clearActionErrors();
         beginTransaction(ActionUtil.getDBUser());
 
@@ -196,20 +197,43 @@ public final class InscripcionSupport {
         } else {
             rollbackTransaction();
         }
+        
+}catch(Exception e){e.printStackTrace();}
+        
+    }*/
+    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> params, boolean alumno) {
+        params.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith("ck_")) // solo los checkboxes
+                .forEach(entry -> {
+                    String index = entry.getKey().substring(3);
+
+                    String insAsign = getParameter(params, index + "_insAsign");
+                    String insElect = getParameter(params, index + "_insElect");
+                    String insCoord = getParameter(params, index + "_insCoord");
+                    String insSecc = getParameter(params, index + "_insSecc");
+                    String insAgno = getParameter(params, index + "_insAgno");
+                    String insSem = getParameter(params, index + "_insSem");
+                    String insTipo = getParameter(params, index + "_insTipo");
+
+                    // Procesamiento aquí
+                    System.out.println("CHECKED index " + index + ": " + insAsign + " / " + insElect);
+                });
     }
 
-    public InscripcionJsonDTO addInscripcionAlumno(AluCarId id, CursoId cursoId) {     
-                
+    private String getParameter(Map<String, String[]> params, String key) {
+        String[] values = params.get(key);
+        return (values != null && values.length > 0) ? values[0] : null;
+    }
+
+    public InscripcionJsonDTO addInscripcionAlumno(AluCarId id, CursoId cursoId) {
+
         InscripcionJsonDTO response = InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).postInscripcionJson(id, cursoId));
-        if ("OK".equals(response.getStatus()))
-        {
+        if ("OK".equals(response.getStatus())) {
             LogUtil.setLog(rut, "Inscribe " + cursoId.getCodigo(" "));
+        } else {
+            LogUtil.setLog(rut, "NO inscribe " + cursoId.getCodigo(" ") + " Causa " + response.getMessage());
         }
-        else
-        {
-            LogUtil.setLog(rut, "NO inscribe " + cursoId.getCodigo(" ") + " Causa "+response.getMessage());
-        }
-        
+
         return response;
     }
 
@@ -573,8 +597,8 @@ public final class InscripcionSupport {
     public static InscripcionJsonDTO getResponseFromJson(String json) {
         InscripcionJsonDTO dto = new InscripcionJsonDTO();
 
-System.out.println("json="+json);
-        
+        System.out.println("json=" + json);
+
         try {
             Gson gson = new Gson();
             JsonObject root = JsonParser.parseString(json).getAsJsonObject();
@@ -601,7 +625,8 @@ System.out.println("json="+json);
             if (root.has("inscripciones")) {
                 JsonArray inscripcionesArray = root.getAsJsonArray("inscripciones");
 
-                Type listType = new TypeToken<List<InscripcionJsonDTO.Inscripcion>>() {}.getType();
+                Type listType = new TypeToken<List<InscripcionJsonDTO.Inscripcion>>() {
+                }.getType();
                 List<InscripcionJsonDTO.Inscripcion> insJsonList = gson.fromJson(inscripcionesArray, listType);
 
                 insList = insJsonList.stream().map(insDTO -> {
@@ -610,12 +635,12 @@ System.out.println("json="+json);
                     InscripcionId insId = new InscripcionId();
                     Curso curso = new Curso();
                     CursoId id = new CursoId();
-                    
+
                     insId.setInsRut(insDTO.getRUT());
                     insId.setInsCodCar(insDTO.getCOD_CAR());
                     insId.setInsAgnoIng(insDTO.getAGNO_ING());
                     insId.setInsSemIng(insDTO.getSEM_ING());
-                    
+
                     insId.setInsAsign(insDTO.getASIGN());
                     insId.setInsElect(insDTO.getELECT());
                     insId.setInsAgno(insDTO.getAGNO());
@@ -623,6 +648,8 @@ System.out.println("json="+json);
                     insId.setInsComp(insDTO.getCOMP());
 
                     ins.setId(insId);
+                    ins.setInsCoord(insDTO.getCOORD());
+                    ins.setInsSecc(insDTO.getSECC());
                     ins.setInsRutReali(insDTO.getRUT_REALI());
 
                     id.setCurAsign(insDTO.getASIGN());
@@ -649,7 +676,7 @@ System.out.println("json="+json);
                     return ins;
                 }).collect(Collectors.toList());
 
-                dto.setInscripciones(insList);                                
+                dto.setInscripciones(insList);
             }
 
             // Procesar totales
@@ -663,14 +690,14 @@ System.out.println("json="+json);
 
                 dto.setTotales(totales);
             }
-            
+
             if (root.has("flags")) {
                 JsonObject flagsObj = root.getAsJsonObject("flags");
                 InscripcionJsonDTO.Flags flags = new InscripcionJsonDTO.Flags();
 
-                flags.setPuedeInscribir(flagsObj.has("puede_inscribir")?flagsObj.get("puede_inscribir").getAsString():"NO");
-                flags.setPuedeEliminar(flagsObj.has("puede_eliminar")?flagsObj.get("puede_eliminar").getAsString():"NO");                                               
-                flags.setPuedeModificar(flagsObj.has("puede_modificar")?flagsObj.get("puede_modificar").getAsString():"NO");               
+                flags.setPuedeInscribir(flagsObj.has("puede_inscribir") ? flagsObj.get("puede_inscribir").getAsString() : "NO");
+                flags.setPuedeEliminar(flagsObj.has("puede_eliminar") ? flagsObj.get("puede_eliminar").getAsString() : "NO");
+                flags.setPuedeModificar(flagsObj.has("puede_modificar") ? flagsObj.get("puede_modificar").getAsString() : "NO");
 
                 dto.setFlags(flags);
             }

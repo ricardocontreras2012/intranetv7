@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-            </div>        
+            </div>  
 
             <div class="table-responsive">
                 <table class="table table-sm table-striped">
@@ -68,6 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         <s:iterator value="response.inscripciones" status="row">
                             <tr>
                                 <s:if test="(id.insRut == insRutReali || insForce != 'F') && (response.flags.puedeEliminar==\"OK\" || response.flags.puedeModificar==\"OK\")">                               
@@ -80,7 +81,14 @@
                                     <td style="width: 5%"></td>
                                 </s:else>                                                    
                                 <td style="width: 50%">
-                                    <s:property value="id.insAsign"/>
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insAsign" value="<s:property value='id.insAsign' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insElect" value="<s:property value='id.insElect' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insCoord" value="<s:property value='insCoord' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insSecc" value="<s:property value='insSecc' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insAgno" value="<s:property value='id.insAgno' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insSem" value="<s:property value='id.insSem' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insTipo" value="<s:property value='id.insTipo' />" />
+                                    <s:property value="id.insAsign"/> 
                                     <s:property value="id.insElect"/>
                                     <s:property value="insCoord"/>
                                     <s:property value="insSecc"/>
