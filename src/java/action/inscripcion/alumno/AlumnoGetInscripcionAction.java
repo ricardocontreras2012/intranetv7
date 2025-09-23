@@ -5,6 +5,7 @@
  */
 package action.inscripcion.alumno;
 
+import infrastructure.dto.InscripcionJsonDTO;
 import service.inscripcion.alumno.AlumnoGetInscripcionService;
 import infrastructure.support.action.common.ActionCommonSupport;
 
@@ -18,6 +19,7 @@ import infrastructure.support.action.common.ActionCommonSupport;
 public final class AlumnoGetInscripcionAction extends ActionCommonSupport {
 
     private static final long serialVersionUID = 1L;
+    private InscripcionJsonDTO response;
 
     /**
      * Method description
@@ -26,6 +28,11 @@ public final class AlumnoGetInscripcionAction extends ActionCommonSupport {
      */
     @Override
     public String action(){
-        return new AlumnoGetInscripcionService().service(getGenericSession(), getKey());
+        response =  new AlumnoGetInscripcionService().service(getGenericSession(), getKey());
+        return SUCCESS;
     }
+
+    public InscripcionJsonDTO getResponse() {
+        return response;
+    }    
 }

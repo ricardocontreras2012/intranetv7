@@ -120,7 +120,6 @@ import domain.repository.DiaRepository;
 import domain.repository.DocenteHorarioRepository;
 import domain.repository.DummyRepository;
 import domain.repository.NominaActaViewRepository;
-import domain.repository.FlagInscripcionViewRepository;
 import persistence.scalar.ScalarRespository;
 
 /**
@@ -486,17 +485,7 @@ abstract class FactoryGenericDAO {
      * @return
      */
     public abstract ExternoRepository getExternoRepository(String userType);
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    public abstract FlagInscripcionViewRepository getFlagInscripcionViewRepository(String userType);
-
+   
     public abstract FuncionarioRepository getFuncionarioRepository(String userType);
 
     /**

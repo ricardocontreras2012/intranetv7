@@ -16,7 +16,7 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/5.1.3/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/multilevel/multilevel.bootstrap-5.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.5.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/registradorCurricular/id/registradorCurricularIdHomePage-3.0.0.js"></script>
     </head>
     <body>

@@ -506,9 +506,7 @@
         </action>
         <action name="AlumnoInscripcionAddInscripcion" class="action.inscripcion.alumno.AlumnoAddInscripcionAction"
                 method="execute">
-            <result name="success" type="redirectAction">
-                <param name="actionName">AlumnoInscripcionGetInscripcion</param>
-                <param name="key">${key}</param>
+            <result name="success">/jsp/users/alumno/inscripcion/alumnoInscripcion.jsp
             </result>
             <result name="error">/jsp/users/alumno/inscripcion/alumnoInscripcion.jsp
             </result>
@@ -877,7 +875,7 @@
             </result>
         </action>
 
-	<action name="AlumnoSolicitudExpedienteGeneraSolicitudGenero" class="action.expediente.alumno.AlumnoGeneraSolicitudGeneroAction"
+        <action name="AlumnoSolicitudExpedienteGeneraSolicitudGenero" class="action.expediente.alumno.AlumnoGeneraSolicitudGeneroAction"
                 method="execute">
             <result name="success" type="stream">
                 <param name="contentType">${contentType}</param>

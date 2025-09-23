@@ -12,7 +12,6 @@ import infrastructure.persistence.CartolaViewPersistenceImpl;
 import infrastructure.persistence.ActaNominaViewPersistenceImpl;
 import infrastructure.persistence.NominaActaViewPersistenceImpl;
 import infrastructure.persistence.ActaViewPersistenceImpl;
-import infrastructure.persistence.FlagInscripcionViewPersistenceImpl;
 import infrastructure.persistence.ExamenPersistenceImpl;
 import infrastructure.persistence.MensajePersistenceImpl;
 import infrastructure.persistence.AsignaturaPersistenceImpl;
@@ -244,7 +243,6 @@ import domain.repository.DiaRepository;
 import domain.repository.DocenteHorarioRepository;
 import domain.repository.DummyRepository;
 import domain.repository.NominaActaViewRepository;
-import domain.repository.FlagInscripcionViewRepository;
 import persistence.scalar.ScalarRespository;
 
 /**
@@ -780,20 +778,7 @@ public final class FactoryConcreteDAO extends FactoryGenericDAO {
     @Override
     public ExternoRepository getExternoRepository(String userType) {
         return (ExternoRepository) instantiateDAO(ExternoPersistenceImpl.class, userType);
-    }
-
-    /**
-     * Method description
-     *
-     *
-     * @param userType
-     *
-     * @return
-     */
-    @Override
-    public FlagInscripcionViewRepository getFlagInscripcionViewRepository(String userType) {
-        return (FlagInscripcionViewRepository) instantiateDAO(FlagInscripcionViewPersistenceImpl.class, userType);
-    }
+    }    
 
     @Override
     public FuncionarioRepository getFuncionarioRepository(String userType) {

@@ -7,17 +7,14 @@ package infrastructure.persistence;
 
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCar;
-import domain.model.Asignatura;
 import domain.model.Curso;
 import domain.model.CursoId;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import org.hibernate.Criteria;
 import static org.hibernate.FetchMode.JOIN;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.criterion.Order;
 import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
 import static org.hibernate.criterion.Order.desc;
 import org.hibernate.criterion.Restrictions;
@@ -30,6 +27,11 @@ import infrastructure.support.CursoResumenSupport;
 import java.util.Collections;
 import java.util.stream.Collectors;
 import domain.repository.CursoRepository;
+import infrastructure.util.FormatUtil;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+
+import org.hibernate.Session;
 
 /**
  * Class description
@@ -52,79 +54,41 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
         return criteria.list();
     }
 
-    /*@SuppressWarnings("unchecked")
-    @Override
-    public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion) {
-
-        Criteria criteria = getSession().createCriteria(Curso.class);
-        String sqlFilter;
-        String sqlFilterPrefijo = "exists (select * from curso_car where "
-                + "ccar_asign = this_.cur_asign and "
-                + "ccar_elect = this_.cur_elect and "
-                + "ccar_coord = this_.cur_coord and "
-                + "ccar_secc = this_.cur_secc and "
-                + "ccar_agno = this_.cur_agno and "
-                + "ccar_sem = this_.cur_sem and "
-                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
-
-        if (asignatura > 1000) {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = ?)";
-        } else {         
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, ?))";
-        }
-
-        criteria.setFetchMode("asignatura", JOIN);
-        criteria.add(eq("id.curAsign", asignatura));
-        criteria.add(eq("id.curAgno", agno));
-        criteria.add(eq("id.curSem", sem));
-
-        // Armar lista de parámetros dependiendo del caso
-        Object[] params;
-        Type[] types;
-
-        params = new Object[]{carrera, mencion, carrera};
-        types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
-
-        criteria.add(Restrictions.sqlRestriction(sqlFilter, params, types));
-
-        return criteria.list();
-    }*/
     @SuppressWarnings("unchecked")
     @Override
-    public List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion) {
+    public String findJson(Integer asign, Integer agno, Integer sem, Integer carrera, Integer mencion) {
 
-        Criteria criteria = getSession().createCriteria(Curso.class);
-        String sqlFilter;
-        String sqlFilterPrefijo = "exists (select * from curso_car where "
-                + "ccar_asign = this_.cur_asign and "
-                + "ccar_elect = this_.cur_elect and "
-                + "ccar_coord = this_.cur_coord and "
-                + "ccar_secc = this_.cur_secc and "
-                + "ccar_agno = this_.cur_agno and "
-                + "ccar_sem = this_.cur_sem and "
-                + "inscripcion_pkg.get_puede_ver_curso(?, ?, ccar_asign, ccar_elect, ccar_coord, ccar_secc) = 1 and ";
+        try {
+            Session session = getSession();
 
-        Object[] params;
-        Type[] types;
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call curso_pkg.get_cursos_inscripcion_json(?,?,?,?,?) }";
 
-        if (asignatura > 1000) {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = ?)";
-            params = new Object[]{carrera, mencion,carrera};
-            types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
-        } else {
-            sqlFilter = sqlFilterPrefijo + "ccar_cod_car = facultad_pkg.get_unidad_x_carrera_mencion(?, ?))";
-            params = new Object[]{carrera, mencion, carrera, mencion};
-            types = new Type[]{IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE, IntegerType.INSTANCE};
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, asign);
+                    stmt.setInt(3, agno);
+                    stmt.setInt(4, sem);
+                    stmt.setInt(5, carrera);
+                    stmt.setInt(6, mencion);
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
         }
-
-        criteria.setFetchMode("asignatura", JOIN);
-        criteria.add(eq("id.curAsign", asignatura));
-        criteria.add(eq("id.curAgno", agno));
-        criteria.add(eq("id.curSem", sem));
-
-        criteria.add(Restrictions.sqlRestriction(sqlFilter, params, types));
-
-        return criteria.list();
     }
 
     @SuppressWarnings("unchecked")
@@ -382,25 +346,6 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
         query.executeUpdate();
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Curso> findTransversales(Integer agno, Integer sem) {
-        Criteria criteria = getSession().createCriteria(Curso.class);
-
-        criteria.createAlias("asignatura", "asignatura");
-        criteria.createCriteria("electivo", LEFT_OUTER_JOIN);
-
-        criteria.add(Restrictions.eq("id.curAgno", agno));
-        criteria.add(Restrictions.eq("id.curSem", sem));
-        criteria.add(Restrictions.eq("curTipo", "T"));
-        criteria.addOrder(Order.asc("id.curAsign"));
-        criteria.addOrder(Order.asc("id.curElect"));
-        criteria.addOrder(Order.asc("id.curCoord"));
-        criteria.addOrder(Order.asc("id.curSecc"));
-        return criteria.list();
-
-    }
-
     /**
      *
      * @param tcarrera
@@ -413,65 +358,86 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
      * @param tipo
      * @return
      */
+
     @SuppressWarnings("unchecked")
     @Override
-    public List<Curso> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {
+    public String findJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {
 
         try {
-            Query query = getSession().getNamedQuery("GetCursosFunction");
-            query.setParameter(0, tcarrera, StandardBasicTypes.INTEGER);
-            query.setParameter(1, especialidad, StandardBasicTypes.INTEGER);
-            query.setParameter(2, jornada, StandardBasicTypes.STRING);
-            query.setParameter(3, rut, StandardBasicTypes.INTEGER);
-            query.setParameter(4, perfil, StandardBasicTypes.STRING);
-            query.setParameter(5, agno, StandardBasicTypes.INTEGER);
-            query.setParameter(6, sem, StandardBasicTypes.INTEGER);
+            Session session = getSession();
 
-            List<Object[]> results = query.list();
+            // Usar doReturningWork para trabajar con la conexión real (Hikari lo maneja por detrás)
+            String result;
+            result = session.doReturningWork(connection -> {
+                String json = null;
 
-            return results.stream()
-                    .filter(obj -> tipo.contains((String) obj[18])) // Filtrar según `tipo`
-                    .map(obj -> {
-                        Curso curso = new Curso();
-                        CursoId id = new CursoId();
-                        Asignatura asig = new Asignatura();
+                try (CallableStatement stmt = connection.prepareCall("{ ? = call curso_pkg.get_cursos_json(?,?,?,?,?,?,?,?) }")) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, tcarrera);
+                    stmt.setInt(3, especialidad);
+                    stmt.setString(4, jornada);
+                    stmt.setInt(5, agno);
+                    stmt.setInt(6, sem);
+                    stmt.setString(7, tipo);
+                    stmt.setInt(8, rut);
+                    stmt.setString(9, perfil);
+                    stmt.execute();
 
-                        id.setCurAsign(((Number) obj[0]).intValue());
-                        id.setCurElect((String) obj[1]);
-                        id.setCurCoord((String) obj[2]);
-                        id.setCurSecc(((Number) obj[3]).intValue());
-                        id.setCurAgno(((Number) obj[4]).intValue());
-                        id.setCurSem(((Number) obj[5]).intValue());
-                        id.setCurComp((String) obj[6]);
-                        curso.setCurNombre((String) obj[7]);
-                        curso.setCurProfesores(Objects.toString(obj[8], ""));
-                        curso.setCurAyudantes(Objects.toString(obj[9], ""));
-                        curso.setCurHorario(Objects.toString(obj[10], ""));
-                        curso.setCurSalas((String) obj[11]);
-                        curso.setCurCupoIni(((Number) obj[12]).intValue());
-                        curso.setCurCupoDis(((Number) obj[13]).intValue());
-                        curso.setCurFechaInicio((Date) obj[14]);
-                        curso.setCurFechaTermino((Date) obj[15]);
-                        curso.setCurJorDiurno((String) obj[16]);
-                        curso.setCurJorVesp((String) obj[17]);
-                        asig.setAsiHcredTeo(((Number) obj[19]).intValue());
-                        asig.setAsiHcredEje(((Number) obj[20]).intValue());
-                        asig.setAsiHcredLab(((Number) obj[21]).intValue());
-                        asig.setAsiTipoControlTel((String) obj[25]);
-                        curso.setCurEnableProf((String) obj[22]);
-                        curso.setCurEnableAyu((String) obj[23]);
-                        curso.setCurEnableLab((String) obj[24]);
-                        curso.setCurTipo((String) obj[18]);
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        json = clob.getSubString(1, (int) clob.length());
+                    }
 
-                        curso.setAsignatura(asig);
-                        curso.setId(id);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    json = "{\"error\": \"" + ex.getMessage() + "\"}";
+                }
 
-                        return curso;
-                    })
-                    .collect(Collectors.toList());
+                return json;
+            });
+
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
-            return Collections.emptyList(); // Retorna una lista vacía en caso de excepción
+            return ""; // Retorna una lista vacía en caso de excepción
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public String transversalesJson(Integer agno, Integer sem) {
+
+        try {
+            Session session = getSession();
+
+            // Usar doReturningWork para trabajar con la conexión real (Hikari lo maneja por detrás)
+            String result;
+            result = session.doReturningWork(connection -> {
+                String json = null;
+
+                try (CallableStatement stmt = connection.prepareCall("{ ? = call curso_pkg.get_transversales_json(?,?) }")) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, agno);
+                    stmt.setInt(3, sem);
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        json = clob.getSubString(1, (int) clob.length());
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    json = "{\"error\": \"" + ex.getMessage() + "\"}";
+                }
+
+                return json;
+            });
+
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ""; // Retorna una lista vacía en caso de excepción
         }
     }
 

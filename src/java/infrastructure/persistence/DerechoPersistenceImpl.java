@@ -10,15 +10,14 @@ import domain.model.AluCar;
 import domain.model.AluCarId;
 import domain.model.Derecho;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import static org.hibernate.criterion.Order.asc;
-import static org.hibernate.criterion.Restrictions.eq;
-import static org.hibernate.criterion.Restrictions.sqlRestriction;
 import org.hibernate.type.StandardBasicTypes;
 import infrastructure.support.DerechoCoordinadorSupport;
 import java.util.stream.Collectors;
 import domain.repository.DerechoRepository;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+import org.hibernate.Session;
 
 /**
  * Class description
@@ -26,67 +25,47 @@ import domain.repository.DerechoRepository;
  * @author Ricardo Contreras S.
  * @version 7, 24/05/2012
  */
-public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long> implements DerechoRepository {
-
+public final class DerechoPersistenceImpl extends CrudAbstractDAO<Derecho, Long> implements DerechoRepository {    
     @SuppressWarnings("unchecked")
     @Override
-    public void generarDerechos(AluCar aluCar) {
+    public String getDerechosJson(AluCarId id) {
 
-        Query query = getSession().getNamedQuery("DerechoAlumnoFunction");
-        AluCarId id = aluCar.getId();
+        try {
+            Session session = getSession();
 
-        query.setParameter(0, id.getAcaRut(), StandardBasicTypes.INTEGER);
-        query.setParameter(1, id.getAcaCodCar(), StandardBasicTypes.INTEGER);
-        query.setParameter(2, id.getAcaAgnoIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(3, id.getAcaSemIng(), StandardBasicTypes.INTEGER);
-        query.setParameter(4, aluCar.getAcaCodMen(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, aluCar.getAcaCodPlan(), StandardBasicTypes.INTEGER);
-        query.setParameter(6, aluCar.getParametroMencion().getPmenAgnoIns(), StandardBasicTypes.INTEGER);
-        query.setParameter(7, aluCar.getParametroMencion().getPmenSemIns(), StandardBasicTypes.INTEGER);
-        query.setParameter(8, aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip(), StandardBasicTypes.INTEGER);
-        query.setParameter(9, aluCar.getAluCarFunction().getNivel(), StandardBasicTypes.INTEGER);
-        query.setParameter(10, aluCar.getAaingreso().getAaiViaIng().getViiCod(), StandardBasicTypes.INTEGER);
+            // Usar doReturningWork para trabajar con la conexión real (Hikari lo maneja por detrás)
+            String result = null;
+            result = session.doReturningWork(connection -> {
+                String json = null;
 
-        query.executeUpdate();
+                try (CallableStatement stmt = connection.prepareCall("{ ? = call derecho_inscripcion_pkg.get_derechos_json(?,?,?,?) }")) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
 
-    }
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+                    
+                    stmt.execute();
 
-    /**
-     * Method description
-     *
-     * @param aluCar
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Derecho> findDerMalla(AluCar aluCar) {
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        json = clob.getSubString(1, (int) clob.length());
+                    }
 
-        Criteria criteria = getSession().createCriteria(Derecho.class);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    json = "{\"error\": \"" + ex.getMessage() + "\"}";
+                }
 
-        String sqlFilter = " asi_tipo='P' AND EXISTS(SELECT * FROM flag_inscripcion WHERE param_car = der_cod_car AND param_men =der_men AND (puede_inscribir=1 OR puede_modificar=1))";
-        criteria.createAlias("asignatura", "asignatura");
-        criteria.add(eq("aluCar.id", aluCar.getId()));
-        criteria.add(sqlRestriction(sqlFilter));
-        criteria.addOrder(asc("derTipo"));
-        criteria.addOrder(asc("asignatura.asiCod"));
-
-        return criteria.list();
-
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<Derecho> findDerFI(AluCar aluCar) {
-        Criteria criteria = getSession().createCriteria(Derecho.class);
-
-        String sqlFilter = " asi_tipo in ('A','C','I','D') AND EXISTS(SELECT * FROM flag_inscripcion WHERE param_car = der_cod_car AND param_men =der_men AND puede_inscribirfi=1)";
-        criteria.createAlias("asignatura", "asignatura");
-        criteria.add(eq("aluCar.id", aluCar.getId()));
-        criteria.add(sqlRestriction(sqlFilter));
-        criteria.addOrder(asc("derTipo"));
-        criteria.addOrder(asc("asignatura.asiCod"));
-
-        return criteria.list();
+                return json;
+            });
+            
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ""; // Retorna una lista vacía en caso de excepción
+        }
     }
 
     @SuppressWarnings("unchecked")

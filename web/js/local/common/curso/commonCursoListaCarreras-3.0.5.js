@@ -1,6 +1,29 @@
-function executeAction(posValue) {    
-    $("#carreras-form").attr("action", $("#actionName").val() + "?pos=" + posValue + '&key=' + $("#keyDummy").val());
-    $("#carreras-form").attr("target", "_blank").submit();
+function executeAction(posValue) {
+
+    Swal.fire({
+        html: `
+        <div style="display: flex; align-items: center;">
+            <div class="spinner-border text-primary" role="status" style="width: 2rem; height: 2rem; margin-right: 1rem;">
+                <span class="sr-only">Cargando...</span>
+            </div>
+            <div>
+                <h5 style="margin-bottom: 0.25rem;">Cardando información</h5>
+                <small style="color: #6c757d;">Por favor, espere un momento...</small>
+            </div>
+        </div>
+    `,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        backdrop: true,
+        customClass: {
+            popup: 'swal2-popup-inline-style'
+        },
+        didOpen: () => {
+            $("#carreras-form").attr("action", $("#actionName").val() + "?pos=" + posValue + '&key=' + $("#keyDummy").val());
+            $("#carreras-form").attr("target", "_self").submit();
+        }
+    });
 }
 
 $(document).ready(function () {
@@ -35,7 +58,7 @@ $(document).ready(function () {
             }
         ],
         "aaSorting": [
-            [ 0, "asc" ]
+            [0, "asc"]
         ],
         "iDisplayLength": 18
     });

@@ -21,7 +21,7 @@
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.corner.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-ui-1.11.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.5.min.js"></script>
         <script type="text/javascript">
             "use strict";
 

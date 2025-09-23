@@ -5,6 +5,7 @@
  */
 package action.inscripcion.alumno;
 
+import infrastructure.dto.InscripcionJsonDTO;
 import service.inscripcion.alumno.AlumnoAddInscripcionService;
 import infrastructure.support.action.ActionValidationPosSupport;
 
@@ -18,6 +19,7 @@ import infrastructure.support.action.ActionValidationPosSupport;
 public final class AlumnoAddInscripcionAction extends ActionValidationPosSupport {
 
     private static final long serialVersionUID = 1L;
+    InscripcionJsonDTO response;
 
     /**
      * Method description
@@ -27,7 +29,8 @@ public final class AlumnoAddInscripcionAction extends ActionValidationPosSupport
      */
     @Override
     public String action() throws Exception {
-        return new AlumnoAddInscripcionService().service(this, getGenericSession(), getPos(), getKey());
+        response =  new AlumnoAddInscripcionService().service(this, getGenericSession(), getPos(), getKey());
+        return SUCCESS;
     }
 
     /**
@@ -38,5 +41,9 @@ public final class AlumnoAddInscripcionAction extends ActionValidationPosSupport
     @Override
     public boolean isValidParam() throws IllegalArgumentException {
         return isValidPos(getPos(), getGenericSession().getWorkSession(getKey()).getAluCar().getCursosInscripcion());
+    }
+
+    public InscripcionJsonDTO getResponse() {
+        return response;
     }
 }

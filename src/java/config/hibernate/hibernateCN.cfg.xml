@@ -142,7 +142,6 @@
         <mapping resource="domain/model/AyudanteActivoView.hbm.xml"/>
         <mapping resource="domain/model/CartolaView.hbm.xml"/>        
         <mapping resource="domain/model/CursoActualView.hbm.xml"/>
-        <mapping resource="domain/model/FlagInscripcionView.hbm.xml"/>
         <mapping resource="domain/model/ProfesorActivoView.hbm.xml"/>
         <mapping resource="domain/model/TrabajadorView.hbm.xml"/>
     </session-factory>

@@ -51,5 +51,12 @@
         <property name="derForce" type="string">
             <column length="1" name="DER_FORCE"/>
         </property>
+        
+        <property name="derAgno" type="int">
+            <column name="DER_AGNO" precision="4" scale="0"/>
+        </property>
+        <property name="derSem" type="int">
+            <column name="DER_SEM" precision="1" scale="0"/>
+        </property>
     </class>
 </hibernate-mapping>

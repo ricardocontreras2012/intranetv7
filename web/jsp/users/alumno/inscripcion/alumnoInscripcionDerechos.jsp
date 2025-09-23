@@ -25,7 +25,8 @@
     </head>
     <body class="inner-body">        
         <form id="derechos-form" action="#" method="post">
-            <s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeInscribirMalla==\"SI\" || #session.genericSession.getWorkSession(key).aluCar.parametros.puedeModificar==\"SI\"">
+            <!-- OOOOOOOOJJJJOOOOO -->
+            <%--s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeInscribirMalla==\"SI\" || #session.genericSession.getWorkSession(key).aluCar.parametros.puedeModificar==\"SI\"" --%>
                 <table class="table table-sm table-striped" style="width: 97%">
                     <thead>
                         <tr style="text-align: center; background-color: #CCCCCC">
@@ -61,7 +62,7 @@
                         </s:iterator>
                     </tbody>
                 </table>
-            </s:if>
+            <%--/s:if --%>
             
             <s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeInscribirFormacionIntegral==\"SI\"">
                 <table class="table table-striped" style="width: 97%">

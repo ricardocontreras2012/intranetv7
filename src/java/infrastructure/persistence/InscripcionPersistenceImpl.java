@@ -22,7 +22,10 @@ import static org.hibernate.criterion.Order.asc;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
 import domain.model.InscripcionCursoView;
+import infrastructure.util.FormatUtil;
+import java.sql.CallableStatement;
 import java.sql.Clob;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
 
@@ -34,25 +37,160 @@ import org.hibernate.type.Type;
  */
 public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcion, Long>
         implements InscripcionRepository {
-
+    
     @SuppressWarnings("unchecked")
     @Override
-    public List<Inscripcion> getInscripcion(AluCar aluCar, Integer agnoIns, Integer semIns) {
-        Criteria criteria = getSession().createCriteria(Inscripcion.class);
+    public String getInscripcionJson(AluCarId id) {
 
-        criteria.setFetchMode("aluCar", JOIN);
-        criteria.setFetchMode("curso", JOIN);
-        criteria.setFetchMode("curso.asignatura", JOIN);
-        criteria.add(eq("id.insAgno", agnoIns));
-        criteria.add(eq("id.insSem", semIns));
-        criteria.add(eq("aluCar.id", aluCar.getId()));
-        criteria.addOrder(asc("id.insAsign"));
-        criteria.addOrder(asc("id.insElect"));
-        criteria.addOrder(asc("insCoord"));
-        criteria.addOrder(asc("insSecc"));
+        try {
+            Session session = getSession();
 
-        return criteria.list();
-    }
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call inscripcion_pkg.get_inscripcion_json(?,?,?,?) }";
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
+        }
+    }  
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public String postInscripcionJson(AluCarId id, CursoId cursoId) {
+
+        try {
+            Session session = getSession();
+
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call inscripcion_pkg.post_inscripcion_json(?,?,?,?, ?,?,?,?,?,?,?) }";
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+                    
+                    stmt.setInt(6, cursoId.getCurAsign());
+                    stmt.setString(7, cursoId.getCurElect());
+                    stmt.setString(8, cursoId.getCurCoord());
+                    stmt.setInt(9, cursoId.getCurSecc());
+                    stmt.setInt(10, cursoId.getCurAgno());
+                    stmt.setInt(11, cursoId.getCurSem());
+                    stmt.setString(12, cursoId.getCurComp());
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
+        }
+    }    
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getCargaJson(AluCarId id) {
+
+        try {
+            Session session = getSession();
+
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call inscripcion_pkg.get_carga_json(?,?,?,?) }";
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
+        }
+    } 
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getInscripcionSimpleJson(AluCarId id, Integer agno, Integer sem) {
+
+        try {
+            Session session = getSession();
+
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call inscripcion_pkg.get_inscripcion_simple_json(?,?,?,?,?,?) }";
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+                    stmt.setInt(6, agno);
+                    stmt.setInt(7, sem);
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
+        }
+    }   
 
     @SuppressWarnings("unchecked")
     @Override
@@ -238,7 +376,9 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         query.setParameter("secc", id.getCurSecc(), StandardBasicTypes.INTEGER);
         query.setParameter("agno", id.getCurAgno(), StandardBasicTypes.INTEGER);
         query.setParameter("sem", id.getCurSem(), StandardBasicTypes.INTEGER);
-        query.setParameter("puede_modificar", aluCar.getParametros().getPuedeModificar(), StandardBasicTypes.STRING);
+        
+        /// OOOOJJJJOOOO
+        ///query.setParameter("puede_modificar", aluCar.getParametros().getPuedeModificar(), StandardBasicTypes.STRING);
 
         // Ejecutar la consulta y devolver los resultados
         return query.list();

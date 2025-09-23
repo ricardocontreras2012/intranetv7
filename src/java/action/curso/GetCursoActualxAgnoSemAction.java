@@ -27,6 +27,8 @@ public final class GetCursoActualxAgnoSemAction extends ActionValidationPosSuppo
      */
     @Override
     public String action() throws Exception {
+System.out.println("en GetCursoActualxAgnoSemAction");        
+        
         return new GetCursoActualxAgnoSemService().service(getGenericSession(), getPos(), getKey());
     }
     

@@ -8,13 +8,9 @@ package infrastructure.persistence;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.AluCarId;
 import domain.model.Curso;
-import domain.model.CursoId;
 import domain.model.CursoProfesor;
-import domain.model.Profesor;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import static org.hibernate.criterion.Restrictions.eq;
@@ -22,6 +18,9 @@ import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.type.Type;
 import domain.repository.CursoProfesorRepository;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+import org.hibernate.Session;
 
 /**
  * Class description
@@ -155,7 +154,7 @@ public final class CursoProfesorPersistenceImpl extends CrudAbstractDAO<CursoPro
         return criteria.list();
     }
 
-    @SuppressWarnings("unchecked")
+    /*@SuppressWarnings("unchecked")
     @Override
     public List<CursoProfesor> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {
         try {
@@ -206,6 +205,51 @@ public final class CursoProfesorPersistenceImpl extends CrudAbstractDAO<CursoPro
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }*/
+    
+    @SuppressWarnings("unchecked")
+    @Override
+    public String findJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo) {
+
+        try {
+            Session session = getSession();
+
+            // Usar doReturningWork para trabajar con la conexión real (Hikari lo maneja por detrás)
+            String result = null;
+            result = session.doReturningWork(connection -> {
+                String json = null;
+
+                try (CallableStatement stmt = connection.prepareCall("{ ? = call curso_pkg.get_cursos_prof_json(?,?,?,?,?,?,?) }")) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+
+                    stmt.setInt(2, tcarrera);
+                    stmt.setInt(3, especialidad);
+                    stmt.setString(4, jornada);
+                    stmt.setInt(5, agno);
+                    stmt.setInt(6, sem);
+                    stmt.setInt(7, rut);
+                    stmt.setString(8, perfil);
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        json = clob.getSubString(1, (int) clob.length());
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    json = "{\"error\": \"" + ex.getMessage() + "\"}";
+                }
+
+                return json;
+            });
+            
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ""; // Retorna una lista vacía en caso de excepción
         }
     }
 }

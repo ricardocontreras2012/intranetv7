@@ -26,7 +26,9 @@ public class GetInscripcionInnerService {
         aluCar.getParametros().setSemIns(ws.getSemAct());
 
         InscripcionSupport insSup = new InscripcionSupport(aluCar,genericSession);
-        aluCar.setInsList(insSup.getInscripcionFull(ws.getAgnoAct(), ws.getSemAct()));
+        
+        // OOOOOOOJJJJJJJOOOOOOOOO
+        //aluCar.setInsList(insSup.getInscripcionFull(ws.getAgnoAct(), ws.getSemAct()));
         return SUCCESS;
     }    
 }

@@ -1,3 +1,14 @@
+function showModal()
+{
+    $("#msg").html("Tu postulación de inscripción se encuentra actualmente en proceso. A partir del " + $("#message").val() + ", podrás acceder al resultado del proceso. Te invitamos a estar atento(a) a la fecha indicada");
+    $("#inscripcion").modal('show');
+}
+
+function showErr()
+{
+    $("#error").html("ERROR " + $("#message").val());
+    $("#inscripcion").modal('show');
+}
 
 function deleteInscripcion() {
     if (anyChecked("inscripcion-form") === true) {
@@ -7,8 +18,6 @@ function deleteInscripcion() {
     }
     return false;
 }
-
-
 
 function printInscripcion() {
     $("#inscripcion-form").attr("action", "CommonAlumnoHorarioInscripcionPrint");
@@ -33,11 +42,27 @@ function getCursosSwap() {
         const dataString = $("#inscripcion-form").serialize();
 
         $('#swap-iframe', window.parent.document).attr("src", 'AlumnoInscripcionGetCursosSwap?' + dataString);
-       
+
     } else {
         window.parent.$('#aviso-swap').modal('show');
     }
 }
 
-$(document).ready(function () {
+$(document).ready(function () {   
+    if ($("#status").val() === "BLOQUEADO")
+    {
+        showModal();
+    }
+
+    if ($("#status").val() === "ERROR")
+    {
+        showErr();
+    }
+
+    $('#inscripcion').on('hidden.bs.modal', function () {
+        if ($("#status").val() === "BLOQUEADO") {
+            $(window.parent.document.body).empty();
+        }
+    });
+
 });

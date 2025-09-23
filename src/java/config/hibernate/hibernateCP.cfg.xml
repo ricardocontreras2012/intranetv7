@@ -145,8 +145,6 @@
         <mapping resource="domain/model/AluCarFunctionsView.hbm.xml"/>
         <mapping resource="domain/model/CartolaView.hbm.xml"/>
         <mapping resource="domain/model/CursoActualView.hbm.xml"/>
-
-        <mapping resource="domain/model/FlagInscripcionView.hbm.xml"/>
         <mapping resource="domain/model/TrabajadorView.hbm.xml"/>
         <mapping resource="persistence/function/PasswordFunction.hbm.xml"/>
         <mapping resource="persistence/function/PracticaFunction.hbm.xml"/>

@@ -17,15 +17,13 @@
         <link rel="stylesheet" href="/intranetv7/css/local/local-form.css" type="text/css" />
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
-        
-        <script type="text/javascript" src="/intranetv7/js/sweetalert2/sweetalert2.all.min.js"></script>
-        
+        <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>        
+        <script type="text/javascript" src="/intranetv7/js/sweetalert2/sweetalert2.all.min.js"></script>        
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/datatables.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetTransversales-3.1.0.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/common/curso/definicion/commonCursoDefinicionGetTransversales-3.1.1.js"></script>
     </head>
     <body class="inner-body" style="overflow: hidden">
         <div class="container-fluid d-flex flex-column vh-100">
@@ -97,7 +95,6 @@
                                             <td><s:property value="curJorVesp"/></td>
                                             <td><s:property value="curFechaInicio"/></td>
                                             <td><s:property value="curFechaTermino"/></td>
-
                                         </tr>
                                     </s:iterator>
                                 </tbody>

@@ -103,11 +103,11 @@
                                                         value="transversal.curNombre"/></a></td>
                                             <td><s:property value="transversal.curProfesores"/></td>
                                             <td><s:property value="transversal.curAyudantes"/></td>
-                                            <td><s:property value="espejo.curCupoIni"/></td>
+                                            <td><s:property value="transversal.curCupoIni"/></td>
                                             <td><s:property value="transversal.curHorario"/></td>
                                             <td><s:property value="transversal.curSalas"/></td>
-                                            <td><s:property value="espejo.curJorDiurno"/></td>
-                                            <td><s:property value="espejo.curJorVesp"/></td>
+                                            <td><s:property value="transversal.curJorDiurno"/></td>
+                                            <td><s:property value="transversal.curJorVesp"/></td>
                                             <td><s:property value="transversal.curFechaInicio"/></td>
                                             <td><s:property value="transversal.curFechaTermino"/></td>
 

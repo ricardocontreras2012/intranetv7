@@ -5,7 +5,10 @@
  */
 package service.inscripcion.alumno;
 
-import static com.opensymphony.xwork2.Action.SUCCESS;
+import infrastructure.dto.InscripcionJsonDTO;
+import infrastructure.support.InscripcionSupport;
+import infrastructure.util.ActionUtil;
+import infrastructure.util.ContextUtil;
 import session.GenericSession;
 
 /**
@@ -23,9 +26,7 @@ public final class AlumnoGetInscripcionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public String service(GenericSession genericSession, String key) {
-
-        genericSession.getWorkSession(key).getAluCar().setInscripcion(genericSession);
-        return SUCCESS;
+    public InscripcionJsonDTO service(GenericSession genericSession, String key) {        
+        return InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionJson(genericSession.getWorkSession(key).getAluCar().getId()));                         
     }
 }

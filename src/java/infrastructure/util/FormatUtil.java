@@ -354,4 +354,11 @@ public class FormatUtil {
         // 5. Convertir a minúsculas
         return normalized.toLowerCase();
     }
+    
+     public static String sanitizeMgsJson(String message) {
+        if (message == null) {
+            return "Error desconocido";
+        }
+        return message.replace("\"", "'"); // Prevenir problemas con comillas en JSON
+    }
 }

@@ -13,7 +13,7 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.5.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/decano/id/decanoIdHomePage-3.0.0.js"></script>
     </head>
     <body>

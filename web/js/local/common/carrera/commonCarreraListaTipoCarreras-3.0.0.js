@@ -1,5 +1,4 @@
 
-
 function getCursos(posValue) {
     $("#carreras-form").attr("action", "CommonCursoGetCursosxAgnoSem?pos=" + posValue + '&key=' + $("#keyDummy").val());
     $("#carreras-form").attr("target", "_self").submit();

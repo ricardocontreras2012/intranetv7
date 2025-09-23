@@ -41,5 +41,5 @@ public interface CursoProfesorRepository extends CrudGenericDAO<CursoProfesor, L
     List<CursoProfesor> getCursosEncuesta(AluCarId aluCarId, Integer agno, Integer sem);
     List<CursoProfesor> getCursosEncuesta(Integer rut);
     List<CursoProfesor> findCursosMallaJefeArea(Integer rut, Integer agno, Integer sem);
-    List<CursoProfesor> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo);
+    String findJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo);
 }

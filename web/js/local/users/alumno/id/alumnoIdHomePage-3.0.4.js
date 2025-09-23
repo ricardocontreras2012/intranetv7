@@ -1,7 +1,3 @@
-function showModal()
-{
-   $("#inscripcion").modal('show'); 
-}
 
 function getMalla() {
     $("#alumno-form").attr("action", "CommonAlumnoGetMalla?key=" + $("#keyDummy").val());

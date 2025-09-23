@@ -23,6 +23,8 @@ public class Derecho implements Serializable {
     private DerechoId id;
     private Malla malla;
     private String derForce;
+    private Integer derAgno;
+    private Integer derSem;
 
     /**
      *
@@ -182,5 +184,21 @@ public class Derecho implements Serializable {
 
     public void setDerForce(String derForce) {
         this.derForce = derForce;
+    }
+
+    public Integer getDerAgno() {
+        return derAgno;
+    }
+
+    public void setDerAgno(Integer derAgno) {
+        this.derAgno = derAgno;
+    }
+
+    public Integer getDerSem() {
+        return derSem;
+    }
+
+    public void setDerSem(Integer derSem) {
+        this.derSem = derSem;
     }
 }

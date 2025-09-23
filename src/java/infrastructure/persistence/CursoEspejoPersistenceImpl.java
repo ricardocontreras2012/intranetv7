@@ -8,15 +8,14 @@ package infrastructure.persistence;
 import domain.model.CursoEspejo;
 import infrastructure.persistence.dao.CrudAbstractDAO;
 import domain.model.CursoId;
-import java.util.List;
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import static org.hibernate.criterion.Restrictions.eq;
 import org.hibernate.type.StandardBasicTypes;
-import org.hibernate.type.Type;
 import domain.repository.CursoEspejoRepository;
+import java.sql.CallableStatement;
+import java.sql.Clob;
+import org.hibernate.Session;
 
 /**
  *
@@ -51,30 +50,48 @@ public class CursoEspejoPersistenceImpl extends CrudAbstractDAO<CursoEspejo, Lon
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<CursoEspejo> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String tipo) {
-        // Creamos el Criteria para la clase CursoEspejo
-        Criteria criteria = getSession().createCriteria(CursoEspejo.class);
+    public String espejosJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String tipo) {
 
-        // Establecemos las relaciones y las estrategias de carga para las entidades relacionadas
-        criteria.setFetchMode("espejo", FetchMode.JOIN);
-        criteria.setFetchMode("transversal", FetchMode.JOIN);
+        try {
+            Session session = getSession();
 
-        // Agregamos las restricciones para los valores de agno y sem
-        criteria.add(Restrictions.eq("id.cesAgno", agno));
-        criteria.add(Restrictions.eq("id.cesSem", sem));
+            // Usar doReturningWork para trabajar con la conexión real (Hikari lo maneja por detrás)
+            String result = null;
+            result = session.doReturningWork(connection -> {
+                String json = null;
 
-        // Construcción de la subconsulta SQL de manera segura utilizando parámetros
-        String sql = "perfil_intranet_pkg.curso_propio_x_tcarrera(ces_asign, ces_elect, ces_coord, ces_secc, ces_agno, ces_sem, ces_comp, ?, ?, ?, ?, ?) > 0";
+                try (CallableStatement stmt = connection.prepareCall("{ ? = call curso_pkg.get_espejos_json(?,?,?,?,?,?,?) }")) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
 
-        // Agregamos el sqlRestriction con los parámetros adecuados
-        criteria.add(Restrictions.sqlRestriction(sql,
-                new Object[]{rut, tipo, tcarrera, especialidad, jornada}, // Pasamos los parámetros correctamente
-                new Type[]{StandardBasicTypes.INTEGER, StandardBasicTypes.STRING, StandardBasicTypes.INTEGER,
-                    StandardBasicTypes.INTEGER, StandardBasicTypes.STRING})); // Especificamos los tipos correctos
+                    stmt.setInt(2, tcarrera);
+                    stmt.setInt(3, especialidad);
+                    stmt.setString(4, jornada);
+                    stmt.setInt(5, agno);
+                    stmt.setInt(6, sem);
+                    stmt.setInt(7, rut);
+                    stmt.setString(8, tipo);
+                    
+                    stmt.execute();
 
-        // Ejecutamos la consulta y devolvemos los resultados
-        return criteria.list();
-    }
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        json = clob.getSubString(1, (int) clob.length());
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    json = "{\"error\": \"" + ex.getMessage() + "\"}";
+                }
+
+                return json;
+            });
+            
+            return result;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ""; // Retorna una lista vacía en caso de excepción
+        }
+    }    
 
     @Override
     public void add(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,

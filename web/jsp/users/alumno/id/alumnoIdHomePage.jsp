@@ -18,7 +18,7 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.5.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/users/alumno/id/alumnoIdHomePage-3.0.4.js"></script>
     </head>
     <body>
@@ -27,12 +27,12 @@
                 <div class="row">
                     <div class="col-lg-8 color1">                        
                         <p><s:if test="#session.genericSession.getWorkSession(key).aluCar.alumno.aluSexo==1">
-                        BIENVENIDA
-                        </s:if>
-                        <s:else>
-                        BIENVENIDO
-                        </s:else>                        
-                        &nbsp;<s:property value="#session.genericSession.nombre"/></p>
+                                BIENVENIDA
+                            </s:if>
+                            <s:else>
+                                BIENVENIDO
+                            </s:else>                        
+                            &nbsp;<s:property value="#session.genericSession.nombre"/></p>
                     </div>
                 </div>
             </div>
@@ -82,21 +82,12 @@
                                 <s:text name="label.menu.calendario"/></a>
                             <a href="#" class="dropdown-item" onclick="executeAction('AlumnoCertificacionGetCertificados');">
                                 <s:text name="label.menu.certificados"/></a>                             
-
-                            <s:if test="#session.genericSession.getWorkSession(key).aluCar.getParametros().getBloqueada() == \"NO\" ">                                    
-                                <a href="#" class="dropdown-item" onclick="executeAction('AlumnoInscripcionEnableInscripcion');">
-                                    <s:text name="label.inscripcion"/></a>                                
-                                </s:if>
-                                <s:else>
-
-                                <a href="#" class="dropdown-item" onclick="showModal();">
-                                    <s:text name="label.inscripcion"/></a>  
-                                </s:else>    
-
+                            <a href="#" class="dropdown-item" onclick="executeAction('AlumnoInscripcionEnableInscripcion');">
+                                <s:text name="label.inscripcion"/></a>
                             <a href="#" class="dropdown-item" onclick="executeAction('AlumnoSolicitudGetSolicitudes');">
                                 <s:text name="label.menu.solicitudes"/></a>
                                 <s:if test="#session.genericSession.getWorkSession(key).aluCar.inscribioExamenAP()">
-                                <a href="#" class="dropdown-item" onclick="executeAction('AlumnoExamenAPConfirmacion');">Sorteo Grado</a>
+                            <a href="#" class="dropdown-item" onclick="executeAction('AlumnoExamenAPConfirmacion');">Sorteo Grado</a>
                             </s:if>
                             <a href="#" class="dropdown-item" onclick="executeActionMessage();">
                                 <s:text name="label.menu.mensajes"/></a>
@@ -114,26 +105,6 @@
             <div class="row content no-padding">
                 <div class="col-xs-12 col-sm-12 col-md-12 home-iframe no-padding" style="width: 100vw;height: 90vh;">                    
                     <iframe id="main-content-iframe" src="" style="width: 100%; height: 90vh; border: none;" allowfullscreen loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="inscripcion" role="dialog">
-            <div class="modal-dialog" role="document">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Aviso</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Tu postulación de inscripción se encuentra actualmente en proceso. A partir del <s:date name="#session.genericSession.getWorkSession(key).aluCar.parametros.getTerminoFechaCorte()" format="dd/MM/yyyy HH:mm:ss"/>, podrás acceder al resultado del proceso. Te invitamos a estar atento(a) a la fecha indicada.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-                    </div>
                 </div>
             </div>
         </div>

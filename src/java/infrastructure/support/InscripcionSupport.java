@@ -5,6 +5,12 @@
  */
 package infrastructure.support;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import domain.model.Derecho;
 import domain.model.Curso;
 import domain.model.AluCar;
@@ -19,7 +25,6 @@ import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
-import domain.repository.MallaRepository;
 import session.GenericSession;
 import infrastructure.support.action.common.ActionCommonSupport;
 import infrastructure.util.ActionUtil;
@@ -31,8 +36,10 @@ import static infrastructure.util.HibernateUtil.rollbackTransaction;
 import infrastructure.util.LogUtil;
 import static infrastructure.util.common.CommonCursoUtil.getDistinctAsc;
 import domain.model.InscripcionCursoView;
-import java.util.HashSet;
-import java.util.Set;
+import infrastructure.dto.CargaAlumnoJsonDTO;
+import infrastructure.dto.InscripcionJsonDTO;
+import infrastructure.util.common.CommonCursoUtil;
+import java.lang.reflect.Type;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -85,9 +92,11 @@ public final class InscripcionSupport {
         List<Curso> cursoLists = new ArrayList<>();
 
         if (this.aluCar.getDerechosInscripcion() != null) {
-            cursoLists = ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).find(
-                    derecho.getId().getDerAsign(), this.aluCar.getParametros().getAgnoIns(),
-                    this.aluCar.getParametros().getSemIns(), this.aluCar.getPlan().getMencion().getId().getMenCodCar(), this.aluCar.getPlan().getMencion().getId().getMenCodMen());
+            cursoLists = CommonCursoUtil.getListInsFromJson(ContextUtil.getDAO().getCursoRepository(ActionUtil.getDBUser()).findJson(
+                    derecho.getId().getDerAsign(),
+                    derecho.getDerAgno(),
+                    derecho.getDerSem(),
+                    this.aluCar.getPlan().getMencion().getId().getMenCodCar(), this.aluCar.getPlan().getMencion().getId().getMenCodMen()));
         }
 
         return cursoLists;
@@ -118,57 +127,21 @@ public final class InscripcionSupport {
         return ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).isAlumnoPropio(aluCar, rut, userType);
     }
 
-    public List<Inscripcion> getInscripcionFull(Integer agno, Integer sem) {
-        List<Inscripcion> insList = getInscripcion(agno, sem);
-        getTotales(insList);
-        return insList;
-    }
-
     public List<Inscripcion> getInscripcion(Integer agno, Integer sem) {
-        return ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcion(aluCar, agno,
-                sem);
+        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionSimpleJson(aluCar.getId(), agno, sem));
     }
 
-    /**
-     * Totaliza número de asignaturas y créditos inscritos.
-     *
-     * @param cursoList Lista de cursos inscritos.
-     */
-    private void getTotales(List<Inscripcion> insList) {
-        Set<String> tipoAsignaturasValidas = new HashSet<>();
-        tipoAsignaturasValidas.add("P");
-        tipoAsignaturasValidas.add("M");
-
-        // Inicialización de variables de acumulación
-        final int[] nroAsignMallaInscritas = {0};
-        final int[] nroCredMallaInscitos = {0};
-        final int[] sctAcum = {0};
-
-        // Recorremos la lista 
-        insList.forEach(ins -> {
-            Asignatura asignatura = ins.getCurso().getAsignatura();
-            if (tipoAsignaturasValidas.contains(asignatura.getAsiTipo())) {
-                nroAsignMallaInscritas[0]++;
-                nroCredMallaInscitos[0] += asignatura.getAsiHcredTeo() + asignatura.getAsiHcredEje() + asignatura.getAsiHcredLab();
-                sctAcum[0] += (asignatura.getAsiSct() == null) ? 0 : getSct(asignatura);
-            }
-        });
-
-        // Asignamos los resultados a aluCar
-        this.aluCar.setAsignaturasInscritas(nroAsignMallaInscritas[0]);
-        this.aluCar.setCreditosInscritos(nroCredMallaInscitos[0]);
-        this.aluCar.setSctInscritos(sctAcum[0]);
-    }
-
+    
     /**
      * Elimina inscripción por el alumno.
      *
      * @param parameters Check-box del formulario de inscripción.
      */
+    /// OOOOOOOOJJJJJOOOOO
     public void removeInscripcionAlumno(Map<String, String[]> parameters) {
-        if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
+        /*if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
             removeInscripciones(action, parameters, true);
-        }
+        }*/
     }
 
     /**
@@ -225,18 +198,19 @@ public final class InscripcionSupport {
         }
     }
 
-    public String addInscripcionAlumno(Curso curso, Derecho derecho, Integer carrera, Integer mencion) {
-
-        String retValor = puedeInscribirAlumno(action, curso);
-
-        if (retValor.equals(SUCCESS)) {
-            newInscripcion(curso, "INS_ALUMNO", derecho.getDerForce());
-        } else {
-            LogUtil.setLog(rut, "NO inscribe " + curso.getNombreFull() + " Causa "
-                    + action.getActionErrors().iterator().next());
+    public InscripcionJsonDTO addInscripcionAlumno(AluCarId id, CursoId cursoId) {     
+                
+        InscripcionJsonDTO response = InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).postInscripcionJson(id, cursoId));
+        if ("OK".equals(response.getStatus()))
+        {
+            LogUtil.setLog(rut, "Inscribe " + cursoId.getCodigo(" "));
         }
-
-        return retValor;
+        else
+        {
+            LogUtil.setLog(rut, "NO inscribe " + cursoId.getCodigo(" ") + " Causa "+response.getMessage());
+        }
+        
+        return response;
     }
 
     /**
@@ -274,7 +248,7 @@ public final class InscripcionSupport {
 
                 return ERROR;
             }
-            
+
             newInscripcion(curso, "INS_COORD", "");
 
         } catch (Exception e) {
@@ -360,39 +334,8 @@ public final class InscripcionSupport {
      * @param curso Curso a inscribir.
      * @return SUCCESS: OK, ERROR: No cumple alguna de las reglas.
      */
-    private String puedeInscribirAlumno(ActionCommonSupport action, Curso curso) {
-        String retValue = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).validarInscripcionAlumno(
-                this.aluCar.getId().getAcaRut(),
-                this.aluCar.getId().getAcaCodCar(),
-                this.aluCar.getId().getAcaAgnoIng(),
-                this.aluCar.getId().getAcaSemIng(),
-                this.aluCar.getAcaCodMen(),
-                this.aluCar.getAcaCodPlan(),
-                curso.getId().getCurAsign(),
-                curso.getId().getCurElect(),
-                curso.getId().getCurCoord(),
-                curso.getId().getCurSecc(),
-                curso.getId().getCurAgno(),
-                curso.getId().getCurSem());
-
-        if (!SUCCESS.equals(retValue)) {
-            action.addActionError(retValue);
-        }
-
-        return retValue;
-    }
-
-    /**
-     * Reglas de negocio de inscripción de asignaturas. Estas se implementan
-     * como una cascade validaciones.
-     *
-     * @param action Action que invoca para responder el mensaje de error
-     * correspondiente mediante struts2( actionError).
-     * @param curso Curso a inscribir.
-     * @return SUCCESS: OK, ERROR: No cumple alguna de las reglas.
-     */
     private String puedeInscribirCoordinador(ActionCommonSupport action, Curso curso) {
-        
+
         action.clearMessages();
         String retValue = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).validarInscripcionCoord(
                 this.aluCar.getId().getAcaRut(),
@@ -408,13 +351,13 @@ public final class InscripcionSupport {
                 curso.getId().getCurAgno(),
                 curso.getId().getCurSem());
 
-        if (!SUCCESS.equals(retValue)) {            
+        if (!SUCCESS.equals(retValue)) {
             String[] textos = retValue.split("\\n");
             for (String texto : textos) {
                 if (texto != null && !texto.trim().isEmpty()) {
                     action.addActionMessage(texto.trim());
                 }
-            }           
+            }
         }
 
         return retValue;
@@ -451,8 +394,9 @@ public final class InscripcionSupport {
 
     }
 
+    //OOOOOOOOOOOOOOOOJJJJJJJJJJJOOOOOOOOOO
     public void setSctNivel() {
-        if ("SI".equals(aluCar.getParametros().getPuedeInscribirMalla())
+        /*if ("SI".equals(aluCar.getParametros().getPuedeInscribirMalla())
                 || "SI".equals(aluCar.getParametros().getPuedeModificar())
                 || asList("JC", "SP").contains(genericSession.getUserType())) {
 
@@ -463,7 +407,7 @@ public final class InscripcionSupport {
             }
 
             aluCar.setSctNivel(mallaPersistence.getSctNivel(aluCar));
-        }
+        }*/
     }
 
     private String topeHorarioCambioCurso(AluCar aluCar, Curso cursoOri, Curso cursoDest) {
@@ -568,5 +512,177 @@ public final class InscripcionSupport {
         return insList.stream()
                 .map(Inscripcion::getCurso)
                 .collect(Collectors.toList());
+    }
+
+    public static List<Inscripcion> getListFromJson(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<CargaAlumnoJsonDTO>>() {
+        }.getType();
+        List<CargaAlumnoJsonDTO> insJsonList = gson.fromJson(json, listType);
+        List<Inscripcion> insList;
+
+        insList = insJsonList.stream().map(dto -> {
+
+            Inscripcion ins = new Inscripcion();
+            InscripcionId insId = new InscripcionId();
+            Curso curso = new Curso();
+            CursoId id = new CursoId();
+
+            insId.setInsRut(dto.RUT);
+            insId.setInsRut(dto.COD_CAR);
+            insId.setInsRut(dto.AGNO_ING);
+            insId.setInsRut(dto.SEM_ING);
+            insId.setInsAsign(dto.ASIGN);
+            insId.setInsElect(dto.ELECT);
+            insId.setInsAgno(dto.AGNO);
+            insId.setInsSem(dto.SEM);
+            insId.setInsComp(dto.COMP);
+            ins.setId(insId);
+            ins.setInsRutReali(dto.RUT_REALI);
+
+            id.setCurAsign(dto.ASIGN);
+            id.setCurElect(dto.ELECT);
+            id.setCurCoord(dto.COORD);
+            id.setCurSecc(dto.SECC);
+            id.setCurAgno(dto.AGNO);
+            id.setCurSem(dto.SEM);
+            id.setCurComp(dto.COMP);
+            curso.setId(id);
+
+            // Virtuales
+            curso.setCurNombre(dto.NOMBRE);
+            curso.setCurProfesores(dto.NOMBRE_PROFESORES);
+            curso.setCurHorario(dto.HORARIO);
+
+            // Asignatura
+            Asignatura asignatura = new Asignatura();
+            asignatura.setAsiCod(dto.ASIGN);
+            /*asignatura.setAsiHcredTeo(dto.HCRED_TEO);
+            asignatura.setAsiHcredEje(dto.HCRED_EJE);
+            asignatura.setAsiHcredLab(dto.HCRED_LAB);
+            asignatura.setAsiTipoControlTel(dto.TIPO_CONTROL_TEL);*/
+            curso.setAsignatura(asignatura);
+            ins.setCurso(curso);
+
+            return ins;
+        }).collect(Collectors.toList());
+
+        return insList;
+    }
+
+    public static InscripcionJsonDTO getResponseFromJson(String json) {
+        InscripcionJsonDTO dto = new InscripcionJsonDTO();
+
+System.out.println("json="+json);
+        
+        try {
+            Gson gson = new Gson();
+            JsonObject root = JsonParser.parseString(json).getAsJsonObject();
+
+            // Leer status
+            String status = root.has("status") ? root.get("status").getAsString() : null;
+            dto.setStatus(status);
+
+            // Leer message si está presente
+            if (root.has("message")) {
+                dto.setMessage(root.get("message").getAsString());
+            }
+
+            // Si está bloqueado, no hay inscripciones ni totales
+            if ("BLOQUEADO".equalsIgnoreCase(status)) {
+                dto.setInscripciones(new ArrayList<>());
+                dto.setTotales(null);
+                return dto;
+            }
+
+            List<Inscripcion> insList;
+
+            // Procesar lista de inscripciones
+            if (root.has("inscripciones")) {
+                JsonArray inscripcionesArray = root.getAsJsonArray("inscripciones");
+
+                Type listType = new TypeToken<List<InscripcionJsonDTO.Inscripcion>>() {}.getType();
+                List<InscripcionJsonDTO.Inscripcion> insJsonList = gson.fromJson(inscripcionesArray, listType);
+
+                insList = insJsonList.stream().map(insDTO -> {
+
+                    Inscripcion ins = new Inscripcion();
+                    InscripcionId insId = new InscripcionId();
+                    Curso curso = new Curso();
+                    CursoId id = new CursoId();
+                    
+                    insId.setInsRut(insDTO.getRUT());
+                    insId.setInsCodCar(insDTO.getCOD_CAR());
+                    insId.setInsAgnoIng(insDTO.getAGNO_ING());
+                    insId.setInsSemIng(insDTO.getSEM_ING());
+                    
+                    insId.setInsAsign(insDTO.getASIGN());
+                    insId.setInsElect(insDTO.getELECT());
+                    insId.setInsAgno(insDTO.getAGNO());
+                    insId.setInsSem(insDTO.getSEM());
+                    insId.setInsComp(insDTO.getCOMP());
+
+                    ins.setId(insId);
+                    ins.setInsRutReali(insDTO.getRUT_REALI());
+
+                    id.setCurAsign(insDTO.getASIGN());
+                    id.setCurElect(insDTO.getELECT());
+                    id.setCurCoord(insDTO.getCOORD());
+                    id.setCurSecc(insDTO.getSECC());
+                    id.setCurAgno(insDTO.getAGNO());
+                    id.setCurSem(insDTO.getSEM());
+                    id.setCurComp(insDTO.getCOMP());
+                    curso.setId(id);
+
+                    // Virtuales
+                    curso.setCurNombre(insDTO.getNOMBRE());
+                    curso.setCurProfesores(insDTO.getNOMBRE_PROFESORES());
+                    curso.setCurHorario(insDTO.getHORARIO());
+
+                    // Asignatura
+                    Asignatura asignatura = new Asignatura();
+                    asignatura.setAsiCod(insDTO.getASIGN());
+                    curso.setAsignatura(asignatura);
+
+                    ins.setCurso(curso);
+
+                    return ins;
+                }).collect(Collectors.toList());
+
+                dto.setInscripciones(insList);                                
+            }
+
+            // Procesar totales
+            if (root.has("totales")) {
+                JsonObject totalesObj = root.getAsJsonObject("totales");
+                InscripcionJsonDTO.Totales totales = new InscripcionJsonDTO.Totales();
+
+                totales.setInscritas(totalesObj.has("inscritas") ? totalesObj.get("inscritas").getAsInt() : 0);
+                totales.setCreditos(totalesObj.has("creditos") ? totalesObj.get("creditos").getAsInt() : 0);
+                totales.setSct(totalesObj.has("sct") ? totalesObj.get("sct").getAsInt() : 0);
+
+                dto.setTotales(totales);
+            }
+            
+            if (root.has("flags")) {
+                JsonObject flagsObj = root.getAsJsonObject("flags");
+                InscripcionJsonDTO.Flags flags = new InscripcionJsonDTO.Flags();
+
+                flags.setPuedeInscribir(flagsObj.has("puede_inscribir")?flagsObj.get("puede_inscribir").getAsString():"NO");
+                flags.setPuedeEliminar(flagsObj.has("puede_eliminar")?flagsObj.get("puede_eliminar").getAsString():"NO");                                               
+                flags.setPuedeModificar(flagsObj.has("puede_modificar")?flagsObj.get("puede_modificar").getAsString():"NO");               
+
+                dto.setFlags(flags);
+            }
+
+        } catch (JsonSyntaxException | IllegalStateException e) {
+            e.printStackTrace();
+            dto.setStatus("ERROR");
+            dto.setMessage("Error al parsear el JSON.");
+            dto.setInscripciones(new ArrayList<>());
+            dto.setTotales(null);
+        }
+
+        return dto;
     }
 }

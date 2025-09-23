@@ -29,7 +29,7 @@
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/datatables.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.4.min.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.menu-3.0.5.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.validate.1.19.5.js"></script>
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.messages_es.js"></script>

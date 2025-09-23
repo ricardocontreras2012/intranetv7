@@ -20,12 +20,7 @@ public final class ParametroSesionSupport implements Serializable {
     private Integer agnoAct;
     private Integer agnoCal;
     private Integer agnoEnc;
-    private Integer agnoIns;    
-    private String puedeInscribirMalla;
-    private String puedeInscribirFormacionIntegral;
-    private String puedeEliminar;
-    private String puedeModificar;
-    private String bloqueada;
+    private Integer agnoIns;       
     private Integer maxAsignInscritas;
     private Integer maxNivelAdelanto;
     private Integer semAct;
@@ -106,39 +101,7 @@ public final class ParametroSesionSupport implements Serializable {
      */
     public void setSemIns(Integer semIns) {
         this.semIns = semIns;
-    }
-
-    public String getPuedeInscribirMalla() {
-        return puedeInscribirMalla;
-    }
-
-    public void setPuedeInscribirMalla(String puedeInscribirMalla) {
-        this.puedeInscribirMalla = puedeInscribirMalla;
-    }
-
-    public String getPuedeInscribirFormacionIntegral() {
-        return puedeInscribirFormacionIntegral;
-    }
-
-    public void setPuedeInscribirFormacionIntegral(String puedeInscribirFormacionIntegral) {
-        this.puedeInscribirFormacionIntegral = puedeInscribirFormacionIntegral;
-    }
-
-    public String getPuedeModificar() {
-        return puedeModificar;
-    }
-
-    public void setPuedeModificar(String puedeModificar) {
-        this.puedeModificar = puedeModificar;
-    }
-
-    public String getPuedeEliminar() {
-        return puedeEliminar;
-    }
-
-    public void setPuedeEliminar(String puedeEliminar) {
-        this.puedeEliminar = puedeEliminar;
-    }
+    }   
 
     /**
      * Method description
@@ -278,15 +241,7 @@ public final class ParametroSesionSupport implements Serializable {
      */
     public void setSemMat(Integer semMat) {
         this.semMat = semMat;
-    }
-
-    public String getBloqueada() {
-        return bloqueada;
-    }
-
-    public void setBloqueada(String bloqueada) {
-        this.bloqueada = bloqueada;
-    }
+    }    
 
     public Date getTerminoFechaCorte() {
         return terminoFechaCorte;

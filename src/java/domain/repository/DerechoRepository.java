@@ -7,6 +7,7 @@ package domain.repository;
 
 import infrastructure.persistence.dao.CrudGenericDAO;
 import domain.model.AluCar;
+import domain.model.AluCarId;
 import domain.model.Derecho;
 import java.util.List;
 import infrastructure.support.DerechoCoordinadorSupport;
@@ -18,9 +19,7 @@ import infrastructure.support.DerechoCoordinadorSupport;
  *
  */
 public interface DerechoRepository extends CrudGenericDAO<Derecho, Long> {
-    void generarDerechos(AluCar aluCar);
-    List<Derecho> findDerMalla(AluCar aluCar);
-    List<Derecho> findDerFI(AluCar aluCar);
+    String getDerechosJson(AluCarId id);
     List<DerechoCoordinadorSupport> getDerechoCoordinador(AluCar aluCar, Integer rut, String userType);
     List<DerechoCoordinadorSupport> getDerechoFI(AluCar aluCar, Integer rut, String userType);
     List<DerechoCoordinadorSupport> getDerechoCoordinadorLibre(AluCar aluCar, Integer rut);

@@ -5,6 +5,7 @@
  */
 package service.inscripcion.alumno;
 
+import infrastructure.dto.InscripcionJsonDTO;
 import session.GenericSession;
 import session.WorkSession;
 import infrastructure.support.action.common.ActionCommonSupport;
@@ -26,7 +27,7 @@ public final class AlumnoAddInscripcionService {
      * @param key LLave para acceder a los datos de la sesion.
      * @return Action status
      */
-    public String service(ActionCommonSupport action, GenericSession genericSession,
+    public InscripcionJsonDTO service(ActionCommonSupport action, GenericSession genericSession,
             Integer pos, String key)
     {
         WorkSession ws = genericSession.getWorkSession(key);       

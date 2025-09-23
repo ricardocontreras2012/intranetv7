@@ -8,7 +8,6 @@ package domain.repository;
 import domain.model.CursoEspejo;
 import infrastructure.persistence.dao.CrudGenericDAO;
 import domain.model.CursoId;
-import java.util.List;
 
 /**
  *
@@ -18,7 +17,7 @@ public interface CursoEspejoRepository extends CrudGenericDAO<CursoEspejo, Long>
 
     CursoEspejo getEspejo(CursoId curso);
 
-    List<CursoEspejo> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String tipo);
+    String espejosJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String tipo);
 
     void add(Integer asignTr, String electTr, String coordTr, Integer seccTr, Integer agnoTr, Integer semTr,
             Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem);

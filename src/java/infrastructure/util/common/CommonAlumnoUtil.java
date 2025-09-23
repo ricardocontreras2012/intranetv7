@@ -5,6 +5,8 @@
  */
 package infrastructure.util.common;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.comparator.CalificacionLogroAdicionalComparable;
 import domain.model.comparator.RequisitoAdicionalTitPLanComparable;
@@ -41,13 +43,18 @@ import infrastructure.util.SystemParametersUtil;
 import static infrastructure.util.common.CommonCursoUtil.evitarLazyCursoAyudante;
 import static infrastructure.util.common.CommonCursoUtil.evitarLazyCursoProf;
 import domain.model.AluCarFunctionsView;
-import domain.model.FlagInscripcionView;
+import domain.model.AluCarId;
+import domain.model.Asignatura;
+import domain.model.Derecho;
+import domain.model.DerechoId;
 import domain.model.Inscripcion;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.stream.Collectors;
 import domain.repository.AlumnoRepository;
+import infrastructure.dto.DerechoJsonDTO;
+import java.lang.reflect.Type;
 
 /**
  * Class description
@@ -128,8 +135,8 @@ public final class CommonAlumnoUtil {
         String next = ContextUtil.getDAO().getScalarRepository(ActionUtil.getDBUser()).getSemestrePrevio(agno, sem, aluCar.getId().getAcaCodCar(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());
         Integer agnoPrev = Integer.parseInt(next.substring(0, 4));
         Integer semPrev = Integer.parseInt(next.substring(4));
-
-        List<Inscripcion> insList = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcion(aluCar, agno, sem);
+        
+        List<Inscripcion> insList = InscripcionSupport.getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getCargaJson(aluCar.getId()));
         List<Inscripcion> insPracticaList = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionPractica(aluCar.getId(), agnoPrev, semPrev);
 
         if (insPracticaList != null && !insPracticaList.isEmpty()) {
@@ -137,6 +144,7 @@ public final class CommonAlumnoUtil {
         }
 
         return InscripcionSupport.getCursoList(insList);
+        
     }
 
     public static String getNombreSocial(Alumno alumno) {
@@ -181,37 +189,7 @@ public final class CommonAlumnoUtil {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(terminoFechaCorte);
         calendar.add(Calendar.SECOND, 1); // Agregar un segundo
-        parametro.setTerminoFechaCorte(calendar.getTime());
-
-        parametro.setPuedeInscribirMalla("NO");
-        parametro.setPuedeInscribirFormacionIntegral("NO");
-        parametro.setPuedeEliminar("NO");
-        parametro.setPuedeModificar("NO");
-        parametro.setBloqueada("NO");
-
-        FlagInscripcionView flags = ContextUtil.getDAO().getFlagInscripcionViewRepository(ActionUtil.getDBUser()).find(
-                aluCar.getId().getAcaCodCar(),
-                aluCar.getAcaCodMen());
-
-        if ("1".equals(flags.getPuedeInscribirMalla())) {
-            parametro.setPuedeInscribirMalla("SI");
-        }
-
-        if ("1".equals(flags.getPuedeInscribirFormacionIntegral())) {
-            parametro.setPuedeInscribirFormacionIntegral("SI");
-        }
-
-        if ("1".equals(flags.getPuedeEliminar())) {
-            parametro.setPuedeEliminar("SI");
-        }
-
-        if ("1".equals(flags.getPuedeModificar())) {
-            parametro.setPuedeModificar("SI");
-        }
-
-        if ("1".equals(flags.getBloqueada())) {
-            parametro.setBloqueada("SI");
-        }
+        parametro.setTerminoFechaCorte(calendar.getTime());        
 
         ParametroRepository parametroRepository
                 = ContextUtil.getDAO().getParametroRepository(ActionUtil.getDBUser());
@@ -416,5 +394,51 @@ public final class CommonAlumnoUtil {
         requisitoLogroAdicionalList.sort(new RequisitoAdicionalTitPLanComparable());
 
         return requisitoLogroAdicionalList;
+    }
+    
+    public static List<Derecho> getListFromJson(String json) {       
+        
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<DerechoJsonDTO>>() {}.getType();
+        List<DerechoJsonDTO> derechoJsonList = gson.fromJson(json, listType);
+        List<Derecho> derechoList;       
+        
+        derechoList = derechoJsonList.stream().map(dto -> {
+            Derecho derecho = new Derecho();
+            DerechoId derechoId = new DerechoId();
+            AluCar aluCar = new AluCar();
+            AluCarId id = new AluCarId();
+            Asignatura asi = new Asignatura();
+
+            id.setAcaRut(dto.RUT);
+            id.setAcaCodCar(dto.RUT);
+            id.setAcaAgnoIng(dto.AGNO_ING);            
+            id.setAcaSemIng(dto.SEM_ING);
+            aluCar.setId(id);
+            derecho.setAluCar(aluCar);
+            asi.setAsiCod(dto.ASIGN);
+            asi.setAsiNom(dto.ASI_NOM);
+            asi.setAsiSct(dto.ASI_SCT);
+            derecho.setAsignatura(asi);
+            
+            derechoId.setDerRut(dto.RUT);
+            derechoId.setDerCodCar(dto.RUT);
+            derechoId.setDerAgnoIng(dto.AGNO_ING);
+            derechoId.setDerSemIng(dto.SEM_ING);
+            derechoId.setDerAsign(dto.ASIGN);
+            
+            derecho.setDerCred(dto.CRED);
+            derecho.setDerForce(dto.FORCE);
+            derecho.setDerMencion(dto.MEN);
+            derecho.setDerNiv(dto.NIV);                                 
+            derecho.setDerTipo(dto.TIPO);
+            derecho.setDerAgno(dto.AGNO);
+            derecho.setDerSem(dto.SEM);
+            derecho.setId(derechoId);
+
+            return derecho;
+        }).collect(Collectors.toList());      
+        
+        return derechoList;
     }
 }

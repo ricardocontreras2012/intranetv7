@@ -30,7 +30,12 @@ public final class AlumnoGetCursosService {
      * @return Action status
      */
     public String service(GenericSession genericSession, AlumnoSession alumnoSession, Integer pos, String key) {
+        
+       
         String retValue = SUCCESS;
+        
+        
+try{         
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();
         Derecho derecho = aluCar.getDerechos().get(pos);
@@ -43,6 +48,8 @@ public final class AlumnoGetCursosService {
             alumnoSession.setCambioMencion(derecho.getDerMencion());
             retValue = "cambioMencion";
         }
+}        
+catch(Exception e){e.printStackTrace();}
 
         return retValue;        
     }

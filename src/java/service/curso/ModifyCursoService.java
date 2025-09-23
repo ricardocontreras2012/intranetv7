@@ -34,9 +34,9 @@ public class ModifyCursoService {
     public String service(GenericSession genericSession, Integer pos, Integer cupo, String inicio, String termino,
             String diurno, String vesp, String key) throws Exception{
         WorkSession ws = genericSession.getWorkSession(key);
-
+        
         CursoId id = ws.getCursoList().get(pos).getId();
-
+        
         String jornada = "";
         if (diurno != null) {
             jornada += diurno;

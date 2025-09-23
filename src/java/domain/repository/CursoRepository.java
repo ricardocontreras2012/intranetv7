@@ -49,7 +49,7 @@ public interface CursoRepository extends CrudGenericDAO<Curso, Long> {
      * @param mencion
      * @return
      */
-    List<Curso> find(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion);
+    String findJson(Integer asignatura, Integer agno, Integer sem, Integer carrera, Integer mencion);
 
     /**
      *
@@ -77,8 +77,6 @@ public interface CursoRepository extends CrudGenericDAO<Curso, Long> {
      * @return
      */
     Curso find(CursoId cursoId);
-
-    List<Curso> findTransversales( Integer agno, Integer sem);
 
     /**
      * Method description
@@ -130,8 +128,9 @@ public interface CursoRepository extends CrudGenericDAO<Curso, Long> {
      * @param modo
      */
     void setModoEvaluacion(CursoId cursoId, String modo);
-
-    List<Curso> find(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo);
+   
+    String findJson(Integer tcarrera, Integer especialidad, String jornada, Integer agno, Integer sem, Integer rut, String perfil, String tipo);
+    String transversalesJson(Integer agno, Integer sem);
     List<Curso> findxPerfilPeriodo(Integer agno, Integer sem, Integer rut, String perfil);
 
     List<Curso> findxUser(Integer rut, String tipo);

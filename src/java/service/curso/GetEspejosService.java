@@ -40,9 +40,7 @@ public class GetEspejosService {
         ws.setActionCall(actionCall);
         CommonCursoUtil.getCursos(genericSession, "E", key); //Espejos
         CommonCursoUtil.getCursos(genericSession, "T*", key); //Todos los Transversales
-        CommonCursoUtil.getCursos(genericSession, "C", key); //Cerrados
         
         return SUCCESS;
     }
-
 }

@@ -1,5 +1,4 @@
 
-
 function executeActionDummy() {
     $("#carreras-form").attr("action", $("#actionDummy").val());
     $("#carreras-form").attr("target", "_self").submit();

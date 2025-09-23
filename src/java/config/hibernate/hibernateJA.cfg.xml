@@ -167,7 +167,6 @@
         <mapping resource="domain/model/CartolaView.hbm.xml"/>        
         <mapping resource="domain/model/CursoActualView.hbm.xml"/>
         <mapping resource="domain/model/EvaluacionAlumnoView.hbm.xml"/>
-        <mapping resource="domain/model/FlagInscripcionView.hbm.xml"/>
         <mapping resource="domain/model/RespEnctaCursoView.hbm.xml"/>
         <mapping resource="domain/model/TrabajadorView.hbm.xml"/>
     </session-factory>

@@ -17,12 +17,13 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript"
-        src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcion-3.0.12.js"></script>        
+        src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcion-3.1.1.js"></script>        
     </head>
     <body class="inner-body">
+
         <form id="inscripcion-form" action="#" method="post">
             <!-- Bloque superior de botones -->
-             <div class="container container-menu" style="margin-bottom: 5px; margin-top: 10px; padding-bottom: 0px">
+            <div class="container container-menu" style="margin-bottom: 5px; margin-top: 10px; padding-bottom: 0px">
                 <div class="row">
                     <div id="justified-button-bar" class="col-lg-12">
                         <div class="btn-group">
@@ -32,7 +33,7 @@
                                 </button>
                             </div>
 
-                            <s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeEliminar==\"SI\"">
+                            <s:if test="response.flags.puedeEliminar==\"OK\"">
                                 <div class="btn-group">
                                     <button id="delete-button" title="Desinscribir Cursos Seleccionados" type="button" class="btn btn-light" onClick="deleteInscripcion();
                                             return false;">
@@ -40,7 +41,8 @@
                                     </button>
                                 </div>
                             </s:if>
-                            <s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeModificar==\"SI\"">
+
+                            <s:if test="response.flags.puedeModificar==\"OK\"">
                                 <div class="btn-group">
                                     <button id="change-button" title="Cambiar curso" type="button" class="btn btn-light" onClick="getCursosSwap();
                                             return false;">
@@ -66,9 +68,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.insList" status="row">
+                        <s:iterator value="response.inscripciones" status="row">
                             <tr>
-                                <s:if test="(id.insRut == insRutReali || insForce != 'F') && (#session.genericSession.getWorkSession(key).aluCar.parametros.puedeEliminar==\"SI\" || #session.genericSession.getWorkSession(key).aluCar.parametros.puedeModificar==\"SI\")">                               
+                                <s:if test="(id.insRut == insRutReali || insForce != 'F') && (response.flags.puedeEliminar==\"OK\" || response.flags.puedeModificar==\"OK\")">                               
                                     <td class="align-middle text-center" style="width: 5%; padding: 0;">
                                         <input class="form-check-input" type="checkbox" name="ck_<s:property value="#row.count -1"/>"
                                                id="ck_<s:property value="#row.count -1"/>"/>
@@ -93,14 +95,14 @@
                                         id="profesor_<s:property value="#row.count -1"/>_<s:property value="curso.curProfesores.trim().replace('/ /g','0')"/>"
                                         src="/intranetv7/images/local/icon/user.png" height="16" width="16" alt="prof"/></td>
                                 <td style="display: none"><span id="force_<s:property value="#row.count -1"/>"><s:property value="insForce"/></span></td>
-                                
+
                             </tr>
                         </s:iterator>
                         <tr style="background-color: #679FD2;">
                             <td colspan="2" style="width: 55%; color: #fff;">Asignaturas de Malla: Créditos Inscritos <s:property
-                                    value="#session.genericSession.getWorkSession(key).aluCar.getCreditosInscritos()"/>
+                                    value="response.totales.creditos"/>
                                 &nbsp;&nbsp;Sct Inscritos <s:property
-                                    value="#session.genericSession.getWorkSession(key).aluCar.getSctInscritos()"/>
+                                    value="response.totales.sct"/>
                             </td>
                             <td></td>
                             <td></td>
@@ -114,15 +116,30 @@
             <div id="hidden-input-div">
                 <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
                 <input type="hidden" id="pos" name="pos" value="<s:property value="pos"/>"/>
+                <input type="hidden" id="status" name="status" value="<s:property value="response.status"/>"/>
+                <input type="hidden" id="message" name="message" value="<s:property value="response.message"/>"/>
             </div>
         </form>
 
-        <script>           
-            <s:if test="hasActionErrors()">
-            const msgError = $("#msg-dummy").html().replace(/(\r\n|\n|\r)/g, "");
-            $(window.parent.document).contents().find("#msg-error-div").html("<div class='actionError'><ul><li><span>" + msgError + "</li></ul></span></div>");
-            window.parent.$('#msg-error').modal('show');
-            </s:if>
-        </script>        
+        <div class="modal fade" id="inscripcion" role="dialog">
+            <div class="modal-dialog" role="document">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Aviso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="msg"></div>
+                        <div id="error" class="error"></div>                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </body>
 </html>

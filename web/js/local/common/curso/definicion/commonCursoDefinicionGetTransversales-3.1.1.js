@@ -1,26 +1,38 @@
 
 function setTransversales() {
     Swal.fire({
-        title: 'Guardando...',
-        html: '<div class="spinner-border text-primary" role="status"></div><br><br>Por favor, espera.',
+        html: `
+        <div style="display: flex; align-items: center;">
+            <div class="spinner-border text-primary" role="status" style="width: 2rem; height: 2rem; margin-right: 1rem;">
+                <span class="sr-only">Cargando...</span>
+            </div>
+            <div>
+                <h5 style="margin-bottom: 0.25rem;">Guardando información</h5>
+                <small style="color: #6c757d;">Por favor, espere un momento...</small>
+            </div>
+        </div>
+    `,
         allowOutsideClick: false,
         allowEscapeKey: false,
         showConfirmButton: false,
         backdrop: true,
+        customClass: {
+            popup: 'swal2-popup-inline-style'
+        },
         didOpen: () => {
             $("#cursos-form")
-                .attr("action", "CommonCursoDefinicionSaveTransversales")
-                .attr("target", "_self")
-                .submit();
+                    .attr("action", "CommonCursoDefinicionSaveTransversales")
+                    .attr("target", "_self")
+                    .submit();
         }
     });
 }
 
-$(document).ready(function () {    
+$(document).ready(function () {
     if (Swal.isVisible()) {
         Swal.close();
     }
-    
+
     $("#save-button").click(setTransversales);
 
     $("#cursos-table").dataTable({
@@ -66,7 +78,7 @@ $(document).ready(function () {
         "paging": false
     });
 
-     $("table").on("click", ":checkbox", function ()
+    $("table").on("click", ":checkbox", function ()
     {
         if ($(this).is(':checked'))
         {

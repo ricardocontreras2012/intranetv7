@@ -25,7 +25,7 @@ public final class AlumnoGetCursosAction extends ActionValidationPosSupport {
      * @return Action status.
      */
     @Override
-    public String action(){
+    public String action(){       
         return new AlumnoGetCursosService().service(getGenericSession(), Manager.getAlumnoSession(sesion), getPos(), getKey());
     }
 

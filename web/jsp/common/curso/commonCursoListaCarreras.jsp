@@ -16,7 +16,8 @@
         <link rel="stylesheet" href="/intranetv7/css/local/local-project-3.0.1.css" type="text/css" />
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery-3.6.4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/bootstrap/4.6.0/bootstrap.min.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
+        <!--script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script-->
+        <script type="text/javascript" src="/intranetv7/js/sweetalert2/sweetalert2.all.min.js"></script>  
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/datatables.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/dataTables/1.10.24/dataTables.bootstrap4.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.data.tables.sort-3.0.2.js"></script>
@@ -24,7 +25,7 @@
         <script type="text/javascript" src="/intranetv7/js/jquery/jquery.messages_es.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.custom.validation.methods-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/common/curso/commonCursoListaCarreras-3.0.4.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/common/curso/commonCursoListaCarreras-3.0.5.js"></script>
     </head>
     <body class="inner-body">
         <div class="title-div">
