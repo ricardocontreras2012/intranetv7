@@ -28,7 +28,7 @@ public interface InscripcionRepository extends CrudGenericDAO<Inscripcion, Long>
     String getCargaJson(AluCarId id);
     String getInscripcionSimpleJson(AluCarId id, Integer agno, Integer sem);
     List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns);
-    int deleteInscripcion(AluCar aluCar, CursoId id, String proceso, Integer rutRea, String user);
+    int deleteInscripcion(AluCar aluCar, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String tipo, String proceso, Integer rutRea, String user);
     List<InscripcionCursoView> findNomina(Curso curso);
     List<InscripcionCursoView> findNominaRanking(Curso curso);
     void cambioMencion(AluCar aluCar, Integer mencion, Integer agnoIns, Integer semIns);

@@ -207,16 +207,17 @@ try{
                 .forEach(entry -> {
                     String index = entry.getKey().substring(3);
 
-                    String insAsign = getParameter(params, index + "_insAsign");
+                    Integer insAsign = Integer.valueOf(getParameter(params, index + "_insAsign"));
                     String insElect = getParameter(params, index + "_insElect");
                     String insCoord = getParameter(params, index + "_insCoord");
-                    String insSecc = getParameter(params, index + "_insSecc");
-                    String insAgno = getParameter(params, index + "_insAgno");
-                    String insSem = getParameter(params, index + "_insSem");
-                    String insTipo = getParameter(params, index + "_insTipo");
+                    Integer insSecc = Integer.valueOf(getParameter(params, index + "_insSecc"));
+                    Integer insAgno = Integer.valueOf(getParameter(params, index + "_insAgno"));
+                    Integer insSem = Integer.valueOf(getParameter(params, index + "_insSem"));
+                    String insComp = getParameter(params, index + "_insComp");
 
                     // Procesamiento aquí
                     System.out.println("CHECKED index " + index + ": " + insAsign + " / " + insElect);
+                    int errDelete = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, insAsign, insElect, insCoord, insSecc, insAgno, insSem, insComp, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
                 });
     }
 

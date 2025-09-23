@@ -220,7 +220,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     }
 
     @Override
-    public int deleteInscripcion(AluCar aluCar, CursoId id, String proceso, Integer rutRea, String user) {
+    public int deleteInscripcion(AluCar aluCar, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp, String proceso, Integer rutRea, String user) {
 
         Query query = getSession().getNamedQuery("InscripcionRemoveFunction");
 
@@ -229,13 +229,13 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         query.setParameter(2, aluCar.getId().getAcaAgnoIng(), StandardBasicTypes.INTEGER);
         query.setParameter(3, aluCar.getId().getAcaSemIng(), StandardBasicTypes.INTEGER);
 
-        query.setParameter(4, id.getCurAsign(), StandardBasicTypes.INTEGER);
-        query.setParameter(5, id.getCurElect(), StandardBasicTypes.STRING);
-        query.setParameter(6, id.getCurCoord(), StandardBasicTypes.STRING);
-        query.setParameter(7, id.getCurSecc(), StandardBasicTypes.INTEGER);
-        query.setParameter(8, id.getCurAgno(), StandardBasicTypes.INTEGER);
-        query.setParameter(9, id.getCurSem(), StandardBasicTypes.INTEGER);
-        query.setParameter(10, id.getCurComp(), StandardBasicTypes.STRING);
+        query.setParameter(4, asign, StandardBasicTypes.INTEGER);
+        query.setParameter(5, elect, StandardBasicTypes.STRING);
+        query.setParameter(6, coord, StandardBasicTypes.STRING);
+        query.setParameter(7, secc, StandardBasicTypes.INTEGER);
+        query.setParameter(8, agno, StandardBasicTypes.INTEGER);
+        query.setParameter(9, sem, StandardBasicTypes.INTEGER);
+        query.setParameter(10, comp, StandardBasicTypes.STRING);
 
         query.setParameter(11, user, StandardBasicTypes.STRING);
         query.setParameter(12, proceso, StandardBasicTypes.STRING);

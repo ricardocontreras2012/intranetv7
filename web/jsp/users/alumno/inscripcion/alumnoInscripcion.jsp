@@ -87,7 +87,7 @@
                                     <input type="hidden" name="<s:property value="#row.count -1"/>_insSecc" value="<s:property value='insSecc' />" />
                                     <input type="hidden" name="<s:property value="#row.count -1"/>_insAgno" value="<s:property value='id.insAgno' />" />
                                     <input type="hidden" name="<s:property value="#row.count -1"/>_insSem" value="<s:property value='id.insSem' />" />
-                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insTipo" value="<s:property value='id.insTipo' />" />
+                                    <input type="hidden" name="<s:property value="#row.count -1"/>_insComp" value="<s:property value='id.insComp' />" />
                                     <s:property value="id.insAsign"/> 
                                     <s:property value="id.insElect"/>
                                     <s:property value="insCoord"/>
