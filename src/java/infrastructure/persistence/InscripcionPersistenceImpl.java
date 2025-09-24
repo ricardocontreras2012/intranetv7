@@ -76,7 +76,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     
     @SuppressWarnings("unchecked")
     @Override
-    public String postInscripcionJson(AluCarId id, CursoId cursoId) {
+    public String postInscripcionJson(AluCarId id, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp) {
 
         try {
             Session session = getSession();
@@ -91,13 +91,13 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
                     stmt.setInt(4, id.getAcaAgnoIng());
                     stmt.setInt(5, id.getAcaSemIng());
                     
-                    stmt.setInt(6, cursoId.getCurAsign());
-                    stmt.setString(7, cursoId.getCurElect());
-                    stmt.setString(8, cursoId.getCurCoord());
-                    stmt.setInt(9, cursoId.getCurSecc());
-                    stmt.setInt(10, cursoId.getCurAgno());
-                    stmt.setInt(11, cursoId.getCurSem());
-                    stmt.setString(12, cursoId.getCurComp());
+                    stmt.setInt(6, asign);
+                    stmt.setString(7, elect);
+                    stmt.setString(8, coord);
+                    stmt.setInt(9, secc);
+                    stmt.setInt(10, agno);
+                    stmt.setInt(11, sem);
+                    stmt.setString(12, comp);
 
                     stmt.execute();
 
@@ -156,13 +156,13 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     
     @SuppressWarnings("unchecked")
     @Override
-    public String getInscripcionSimpleJson(AluCarId id, Integer agno, Integer sem) {
+    public String getInscripcionAgnoSemJson(AluCarId id, Integer agno, Integer sem) {
 
         try {
             Session session = getSession();
 
             return session.doReturningWork(connection -> {
-                String sql = "{ ? = call inscripcion_pkg.get_inscripcion_simple_json(?,?,?,?,?,?) }";
+                String sql = "{ ? = call inscripcion_pkg.get_ins_x_agno_sem_json(?,?,?,?,?,?) }";
 
                 try (CallableStatement stmt = connection.prepareCall(sql)) {
                     stmt.registerOutParameter(1, java.sql.Types.CLOB);
@@ -192,6 +192,42 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         }
     }   
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public String getInscripcionSimpleJson(AluCarId id) {
+
+        try {
+            Session session = getSession();
+
+            return session.doReturningWork(connection -> {
+                String sql = "{ ? = call inscripcion_pkg.get_inscripcion_simple_json(?,?,?,?) }";
+
+                try (CallableStatement stmt = connection.prepareCall(sql)) {
+                    stmt.registerOutParameter(1, java.sql.Types.CLOB);
+                    stmt.setInt(2, id.getAcaRut());
+                    stmt.setInt(3, id.getAcaCodCar());
+                    stmt.setInt(4, id.getAcaAgnoIng());
+                    stmt.setInt(5, id.getAcaSemIng());
+
+                    stmt.execute();
+
+                    Clob clob = stmt.getClob(1);
+                    if (clob != null) {
+                        return clob.getSubString(1, (int) clob.length());
+                    } else {
+                        return "{}";
+                    }
+
+                } catch (Exception ex) {
+                    return String.format("{\"error\": \"%s\"}", FormatUtil.sanitizeMgsJson(ex.getMessage()));
+                }
+            });
+
+        } catch (Exception e) {
+            return "{\"error\": \"Error interno en el servidor\"}";
+        }
+    }   
+    
     @SuppressWarnings("unchecked")
     @Override
     public List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns) {

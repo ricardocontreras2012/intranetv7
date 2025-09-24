@@ -21,49 +21,45 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionDerechos-3.0.3.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionDerechos-3.1.0.js"></script>
     </head>
     <body class="inner-body">        
-        <form id="derechos-form" action="#" method="post">
-            <!-- OOOOOOOOJJJJOOOOO -->
-            <%--s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeInscribirMalla==\"SI\" || #session.genericSession.getWorkSession(key).aluCar.parametros.puedeModificar==\"SI\"" --%>
-                <table class="table table-sm table-striped" style="width: 97%">
-                    <thead>
-                        <tr style="text-align: center; background-color: #CCCCCC">
-                            <th colspan="2"><s:text name="label.asignatura"/></th>
-                            <th scope="col"><s:text name="label.creditos"/></th>
-                            <th scope="col">&nbsp;<s:text name="label.sct"/></th>
-                            <th scope="col">&nbsp;<s:text name="label.nivel"/></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.derechosInscripcion" status="row">
-                            <%--tr--%>
-                            <s:if test="derTipo==1">
-                                <tr class="<s:if test="#row.odd">odd</s:if><s:else>even</s:else>">
-                                        <td style="text-align: right">
-                                                <a onClick="searchCursos(<s:property value="#row.count -1"/>);" class="link"
-                                           id="derecho_<s:property value="#row.count -1"/>"><s:property value="asignatura.asiCod"/></a>
-                                    </td>
-                                    <td>
-                                        &nbsp;<s:property value="asignatura.asiNom"/>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <s:property value="derCred"/>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <s:property value="asignatura.asiSct"/>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <s:property value="derNiv"/>
-                                    </td>
-                                </tr>
-                            </s:if>
-                        </s:iterator>
-                    </tbody>
-                </table>
-            <%--/s:if --%>
-            
+        <form id="derechos-form" action="#" method="post">           
+            <table class="table table-sm table-striped" style="width: 97%">
+                <thead>
+                    <tr style="text-align: center; background-color: #CCCCCC">
+                        <th colspan="2"><s:text name="label.asignatura"/></th>
+                        <th scope="col"><s:text name="label.creditos"/></th>
+                        <th scope="col">&nbsp;<s:text name="label.sct"/></th>
+                        <th scope="col">&nbsp;<s:text name="label.nivel"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.derechosInscripcion" status="row">
+                        <s:if test="derTipo==1">
+                            <tr class="<s:if test="#row.odd">odd</s:if><s:else>even</s:else>">
+                                    <td style="text-align: right">
+                                            <a onClick="searchCursos(<s:property value="asignatura.asiCod"/>);" class="link"
+                                       id="derecho_<s:property value="#row.count -1"/>"><s:property value="asignatura.asiCod"/></a>
+                                </td>
+                                <td>
+                                    &nbsp;<s:property value="asignatura.asiNom"/>
+                                </td>
+                                <td style="text-align: center">
+                                    <s:property value="derCred"/>
+                                </td>
+                                <td style="text-align: center">
+                                    <s:property value="asignatura.asiSct"/>
+                                </td>
+                                <td style="text-align: center">
+                                    <s:property value="derNiv"/>
+                                </td>
+                            </tr>
+                        </s:if>
+                    </s:iterator>
+                </tbody>
+            </table>
+
             <s:if test="#session.genericSession.getWorkSession(key).aluCar.parametros.puedeInscribirFormacionIntegral==\"SI\"">
                 <table class="table table-striped" style="width: 97%">
                     <thead>
@@ -91,7 +87,7 @@
             </s:if>
             <div id="hidden-input-div">
                 <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
-                <input type="hidden" id="pos" name="pos" />
+                <input type="hidden" id="asign" name="asign" />
             </div>
         </form>
     </body>

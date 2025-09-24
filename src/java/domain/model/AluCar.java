@@ -5,7 +5,6 @@
  */
 package domain.model;
 
-import com.opensymphony.xwork2.Action;
 import infrastructure.dto.InscripcionJsonDTO;
 import infrastructure.support.InscripcionSupport;
 import infrastructure.support.ParametroSesionSupport;
@@ -730,21 +729,13 @@ public class AluCar implements Serializable {
         this.cursosInscripcion = cursosInscripcion;
     }
 
-    /**
-     * Method description
-     *
-     * @param action
-     * @param genericSession
-     * @param pos
-     * @param derecho
-     * @return
-     */
-    public InscripcionJsonDTO addInscripcionAlumno(ActionCommonSupport action, GenericSession genericSession,
-            Integer pos, Derecho derecho) {        
-        
-        InscripcionJsonDTO response= new InscripcionSupport(this, action, genericSession).addInscripcionAlumno(this.id, getCursosInscripcion().get(pos).getId());
 
-        if ("OK".equals(response.getStatus()) && "P".equals(derecho.getAsignatura().getAsiTipo()))
+    public InscripcionJsonDTO addInscripcionAlumno(ActionCommonSupport action, GenericSession genericSession,
+            Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp, Derecho derecho) {        
+        
+        InscripcionJsonDTO response= new InscripcionSupport(this, action, genericSession).addInscripcionAlumno(this.id, asign, elect, coord, secc, agno, sem, comp);
+        
+        if ("OK".equals(response.getStatus()))
         {          
             setDerechosAlumno();
         }

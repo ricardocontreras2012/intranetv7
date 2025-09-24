@@ -56,7 +56,7 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
 
     @SuppressWarnings("unchecked")
     @Override
-    public String findJson(Integer asign, Integer agno, Integer sem, Integer carrera, Integer mencion) {
+    public String findJson(Integer rut, Integer carrera, Integer agnoIng, Integer semIng, Integer asign) {
 
         try {
             Session session = getSession();
@@ -66,11 +66,11 @@ public final class CursoPersistenceImpl extends CrudAbstractDAO<Curso, Long> imp
 
                 try (CallableStatement stmt = connection.prepareCall(sql)) {
                     stmt.registerOutParameter(1, java.sql.Types.CLOB);
-                    stmt.setInt(2, asign);
-                    stmt.setInt(3, agno);
-                    stmt.setInt(4, sem);
-                    stmt.setInt(5, carrera);
-                    stmt.setInt(6, mencion);
+                    stmt.setInt(2, rut);
+                    stmt.setInt(3, carrera);
+                    stmt.setInt(4, agnoIng);
+                    stmt.setInt(5, semIng);                    
+                    stmt.setInt(6, asign);
 
                     stmt.execute();
 

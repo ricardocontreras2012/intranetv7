@@ -27,6 +27,7 @@ import infrastructure.dto.CursoEspejoJsonDTO;
 import infrastructure.dto.CursoInsJsonDTO;
 import infrastructure.dto.CursoJsonDTO;
 import infrastructure.dto.CursoProfesorJsonDTO;
+import infrastructure.wrapper.CursoResponseWrapper;
 import java.lang.reflect.Type;
 import java.sql.Date;
 
@@ -238,7 +239,7 @@ public final class CommonCursoUtil {
         switch (tipo) {
             case "*":
                 ws.setCursoList(getListFromJson(cursoRepository.findJson(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE")));
-                break;            
+                break;
             case "T": // Transversales propios               
                 ws.setCursoTransversalList(getListFromJson(cursoRepository.findJson(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CT")));
                 break;
@@ -276,7 +277,7 @@ public final class CommonCursoUtil {
         switch (tipo) {
             case "*":
                 ws.setCursoProfesorList(getListCursoProfFromJson(cursoProfesorRepository.findJson(tipoCarrera, especialidad, regimen, agno, sem, rut, userType, "CTE")));
-                break;            
+                break;
         }
     }
 
@@ -343,7 +344,8 @@ public final class CommonCursoUtil {
 
     public static List<Curso> getListFromJson(String json) {
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<CursoJsonDTO>>() {}.getType();
+        Type listType = new TypeToken<List<CursoJsonDTO>>() {
+        }.getType();
         List<CursoJsonDTO> cursoJsonList = gson.fromJson(json, listType);
         List<Curso> cursoList;
 
@@ -401,8 +403,8 @@ public final class CommonCursoUtil {
 
         return cursoList;
     }
-    
-    public static List<Curso> getListInsFromJson(String json) {
+
+    /*public static List<Curso> getListInsFromJson(String json) {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<CursoInsJsonDTO>>() {
         }.getType();
@@ -431,10 +433,7 @@ public final class CommonCursoUtil {
             // Asignatura
             Asignatura asignatura = new Asignatura();
             asignatura.setAsiCod(dto.ASIGN);
-            /*asignatura.setAsiHcredTeo(dto.HCRED_TEO);
-            asignatura.setAsiHcredEje(dto.HCRED_EJE);
-            asignatura.setAsiHcredLab(dto.HCRED_LAB);
-            asignatura.setAsiTipoControlTel(dto.TIPO_CONTROL_TEL);*/
+            
             curso.setAsignatura(asignatura);
 
             
@@ -443,11 +442,57 @@ public final class CommonCursoUtil {
         }).collect(Collectors.toList());
 
         return cursoList;
+    }*/
+    public static List<Curso> getListInsFromJson(String json) {
+        Gson gson = new Gson();
+
+        // Deserializar el objeto raíz
+        CursoResponseWrapper response = gson.fromJson(json, CursoResponseWrapper.class);
+
+        // Validar status
+        if (!"OK".equalsIgnoreCase(response.getStatus())
+                && !"CAMBIO MENCION".equalsIgnoreCase(response.getStatus())) {
+            throw new RuntimeException("Error en JSON: status = " + response.getStatus());
+        }
+
+        // Convertir data a lista de Curso
+        List<CursoInsJsonDTO> cursoJsonList = response.getData();
+        List<Curso> cursoList;
+
+        cursoList = cursoJsonList.stream().map(dto -> {
+            Curso curso = new Curso();
+
+            // ID compuesto
+            CursoId id = new CursoId();
+            id.setCurAsign(dto.ASIGN);
+            id.setCurElect(dto.ELECT);
+            id.setCurCoord(dto.COORD);
+            id.setCurSecc(dto.SECC);
+            id.setCurAgno(dto.AGNO);
+            id.setCurSem(dto.SEM);
+            id.setCurComp(dto.COMP);
+            curso.setId(id);
+
+            // Virtuales
+            curso.setCurNombre(dto.NOMBRE);
+            curso.setCurProfesores(dto.NOMBRE_PROFESORES);
+            curso.setCurHorario(dto.HORARIO);
+
+            // Asignatura
+            Asignatura asignatura = new Asignatura();
+            asignatura.setAsiCod(dto.ASIGN);
+            curso.setAsignatura(asignatura);
+
+            return curso;
+        }).collect(Collectors.toList());
+
+        return cursoList;
     }
-    
+
     public static List<CursoEspejo> getListEspejoFromJson(String json) {
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<CursoEspejoJsonDTO>>() {}.getType();
+        Type listType = new TypeToken<List<CursoEspejoJsonDTO>>() {
+        }.getType();
         List<CursoEspejoJsonDTO> cursoJsonList = gson.fromJson(json, listType);
         List<CursoEspejo> cursoList;
 
@@ -459,7 +504,7 @@ public final class CommonCursoUtil {
             CursoEspejoId idCursoEspejo = new CursoEspejoId();
             CursoId idEspejo = new CursoId();
             CursoId idTransversal = new CursoId();
-            
+
             idCursoEspejo.setCesAsign(dto.ASIGN);
             idCursoEspejo.setCesElect(dto.ELECT);
             idCursoEspejo.setCesCoord(dto.COORD);
@@ -468,7 +513,7 @@ public final class CommonCursoUtil {
             idCursoEspejo.setCesSem(dto.SEM);
             idCursoEspejo.setCesComp(dto.COMP);
             cursoEspejo.setId(idCursoEspejo);
-            
+
             idEspejo.setCurAsign(dto.ASIGN);
             idEspejo.setCurElect(dto.ELECT);
             idEspejo.setCurCoord(dto.COORD);
@@ -478,7 +523,7 @@ public final class CommonCursoUtil {
             idEspejo.setCurComp(dto.COMP);
             espejo.setId(idEspejo);
             espejo.setCurNombre(dto.NOMBRE);
-            
+
             idTransversal.setCurAsign(dto.ASIGN_TR);
             idTransversal.setCurElect(dto.ELECT_TR);
             idTransversal.setCurCoord(dto.COORD_TR);
@@ -493,15 +538,12 @@ public final class CommonCursoUtil {
             transversal.setCurJorDiurno(dto.JOR_DIURNO_TR);
             transversal.setCurJorVesp(dto.JOR_VESP_TR);
 
-
             // Virtuales
             transversal.setCurNombre(dto.NOMBRE_TR);
             transversal.setCurProfesores(dto.NOMBRE_PROFESORES_TR);
             transversal.setCurAyudantes(dto.NOMBRE_AYUDANTES_TR);
             transversal.setCurHorario(dto.HORARIO_TR);
             transversal.setCurSalas(dto.SALAS_TR);
-
-           
 
             // Fechas (solo si no están vacías)
             if (dto.FECHA_INICIO_TR != null && !dto.FECHA_INICIO_TR.isEmpty()) {
@@ -511,7 +553,7 @@ public final class CommonCursoUtil {
             if (dto.FECHA_TERMINO_TR != null && !dto.FECHA_TERMINO_TR.isEmpty()) {
                 transversal.setCurFechaTermino(Date.valueOf(dto.FECHA_TERMINO_TR));
             }
-            
+
             cursoEspejo.setEspejo(espejo);
             cursoEspejo.setTransversal(transversal);
 
@@ -520,10 +562,11 @@ public final class CommonCursoUtil {
 
         return cursoList;
     }
-    
+
     public static List<CursoProfesor> getListCursoProfFromJson(String json) {
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<CursoProfesorJsonDTO>>() {}.getType();
+        Type listType = new TypeToken<List<CursoProfesorJsonDTO>>() {
+        }.getType();
         List<CursoProfesorJsonDTO> cursoJsonList = gson.fromJson(json, listType);
         List<CursoProfesor> cursoList;
 
@@ -535,7 +578,7 @@ public final class CommonCursoUtil {
             // ID compuesto
             CursoProfesorId id = new CursoProfesorId();
             CursoId cursoId = new CursoId();
-            
+
             cursoId.setCurAsign(dto.ASIGN);
             cursoId.setCurElect(dto.ELECT);
             cursoId.setCurCoord(dto.COORD);
@@ -544,26 +587,26 @@ public final class CommonCursoUtil {
             cursoId.setCurSem(dto.SEM);
             curso.setCurNombre(dto.NOMBRE);
             curso.setId(cursoId);
-            
+
             id.setCproAsign(dto.ASIGN);
             id.setCproElect(dto.ELECT);
             id.setCproCoord(dto.COORD);
             id.setCproSecc(dto.SECC);
             id.setCproAgno(dto.AGNO);
             id.setCproSem(dto.SEM);
-            id.setCproRut(dto.PROF_RUT);            
+            id.setCproRut(dto.PROF_RUT);
             cursoProf.setId(id);
-            
+
             prof.setProfRut(dto.PROF_RUT);
             prof.setProfPat(dto.PROF_PAT);
             prof.setProfMat(dto.PROF_MAT);
             prof.setProfNom(dto.PROF_NOM);
             cursoProf.setProfesor(prof);
             cursoProf.setCurso(curso);
-            
+
             return cursoProf;
         }).collect(Collectors.toList());
-        
+
         return cursoList;
     }
 

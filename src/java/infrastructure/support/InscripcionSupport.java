@@ -32,7 +32,6 @@ import infrastructure.util.ContextUtil;
 import static infrastructure.util.DateUtil.getSysdate;
 import static infrastructure.util.HibernateUtil.beginTransaction;
 import static infrastructure.util.HibernateUtil.commitTransaction;
-import static infrastructure.util.HibernateUtil.rollbackTransaction;
 import infrastructure.util.LogUtil;
 import static infrastructure.util.common.CommonCursoUtil.getDistinctAsc;
 import domain.model.InscripcionCursoView;
@@ -41,7 +40,6 @@ import infrastructure.dto.InscripcionJsonDTO;
 import infrastructure.util.common.CommonCursoUtil;
 import java.lang.reflect.Type;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Reglas de negocio para la inscripción de asignaturas.
@@ -128,7 +126,11 @@ public final class InscripcionSupport {
     }
 
     public List<Inscripcion> getInscripcion(Integer agno, Integer sem) {
-        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionSimpleJson(aluCar.getId(), agno, sem));
+        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionAgnoSemJson(aluCar.getId(),  agno, sem));
+    }
+    
+    public List<Inscripcion> getInscripcion() {
+        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionSimpleJson(aluCar.getId()));
     }
 
     /**
@@ -215,8 +217,6 @@ try{
                     Integer insSem = Integer.valueOf(getParameter(params, index + "_insSem"));
                     String insComp = getParameter(params, index + "_insComp");
 
-                    // Procesamiento aquí
-                    System.out.println("CHECKED index " + index + ": " + insAsign + " / " + insElect);
                     int errDelete = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, insAsign, insElect, insCoord, insSecc, insAgno, insSem, insComp, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
                 });
     }
@@ -226,13 +226,13 @@ try{
         return (values != null && values.length > 0) ? values[0] : null;
     }
 
-    public InscripcionJsonDTO addInscripcionAlumno(AluCarId id, CursoId cursoId) {
+    public InscripcionJsonDTO addInscripcionAlumno(AluCarId id, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp) {
 
-        InscripcionJsonDTO response = InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).postInscripcionJson(id, cursoId));
+        InscripcionJsonDTO response = InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).postInscripcionJson(id, asign, elect, coord, secc, agno, sem, comp));
         if ("OK".equals(response.getStatus())) {
-            LogUtil.setLog(rut, "Inscribe " + cursoId.getCodigo(" "));
+            LogUtil.setLog(rut, "Inscribe " + asign+" "+elect+" "+coord+" "+secc+" "+agno+" "+sem);
         } else {
-            LogUtil.setLog(rut, "NO inscribe " + cursoId.getCodigo(" ") + " Causa " + response.getMessage());
+            LogUtil.setLog(rut, "NO inscribe " + + asign+" "+elect+" "+coord+" "+secc+" "+agno+" "+sem + " Causa " + response.getMessage());
         }
 
         return response;
@@ -597,8 +597,6 @@ try{
 
     public static InscripcionJsonDTO getResponseFromJson(String json) {
         InscripcionJsonDTO dto = new InscripcionJsonDTO();
-
-        System.out.println("json=" + json);
 
         try {
             Gson gson = new Gson();

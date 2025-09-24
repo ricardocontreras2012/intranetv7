@@ -22,7 +22,7 @@
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
         <script type="text/javascript"
-        src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionCursos-3.0.6.js"></script>        
+        src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionCursos-3.1.0.js"></script>        
     </head>
     <body class="inner-body">
         <form id="cursos-form" action="#" method="post">
@@ -35,9 +35,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <s:iterator value="#session.genericSession.getWorkSession(key).aluCar.cursosInscripcion" status="row">
+                    <s:iterator value="lCurso" status="row">
                         <tr style="height: 14px">
                             <td style="width:80%; text-align:left">
+                                
+                                <div id="<s:property value='#row.count - 1'/>_curAsignDiv" style="display: none;">
+                                    <s:property value="id.curAsign" />
+                                </div>
+                                
+                                <div id="<s:property value='#row.count - 1'/>_curElectDiv" style="display: none;">
+                                    <s:property value="id.curElect" />
+                                </div>
+
+                                <div id="<s:property value='#row.count - 1'/>_curCoordDiv" style="display: none;">
+                                    <s:property value="id.curCoord" />
+                                </div>
+
+                                <div id="<s:property value='#row.count - 1'/>_curSeccDiv" style="display: none;">
+                                    <s:property value="id.curSecc" />
+                                </div>
+
+                                <div id="<s:property value='#row.count - 1'/>_curAgnoDiv" style="display: none;">
+                                    <s:property value="id.curAgno" />
+                                </div>
+
+                                <div id="<s:property value='#row.count - 1'/>_curSemDiv" style="display: none;">
+                                    <s:property value="id.curSem" />
+                                </div>
+
+                                <div id="<s:property value='#row.count - 1'/>_curCompDiv" style="display: none;">
+                                    <s:property value="id.curComp" />
+                                </div>
+
                                 <a onClick="inscribir(<s:property value="#row.count -1"/>);" class="link"
                                    id="curso_<s:property value="#row.count -1"/>"><s:property value="id.curAsign"/></a>
                                 <s:property value="id.curElect"/>
@@ -56,7 +85,13 @@
             </table>
             <div id="hidden-input-div">
                 <input type="hidden" id="key" name="key" value="<s:property value="key"/>"/>
-                <input type="hidden" id="pos" name="pos" />
+                <input type="hidden" id="curAsign" name="curAsign"/>
+                <input type="hidden" id="curElect" name="curElect"/>
+                <input type="hidden" id="curCoord" name="curCoord"/>
+                <input type="hidden" id="curSecc" name="curSecc"/>
+                <input type="hidden" id="curAgno" name="curAgno"/>
+                <input type="hidden" id="curSem" name="curSem"/>
+                <input type="hidden" id="curComp" name="curComp"/>
             </div>
         </form>        
     </body>

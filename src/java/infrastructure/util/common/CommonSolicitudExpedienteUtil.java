@@ -65,7 +65,6 @@ public class CommonSolicitudExpedienteUtil {
                     if (fileName != null && !fileName.toLowerCase().endsWith(".pdf")) {
                         // Si no es PDF, puedes devolver un error específico
                         throw new IllegalArgumentException("El archivo " + fileName + " no es un archivo PDF.");
-                        //System.out.println("El archivo " + fileName + " no es un archivo PDF.");
                     }
 
                     SolicitudAttach attach = new SolicitudAttach();

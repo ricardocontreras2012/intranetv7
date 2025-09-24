@@ -13,8 +13,6 @@ import java.util.Map;
 import session.GenericSession;
 import session.JefeCarreraSession;
 import session.WorkSession;
-import infrastructure.util.ActionUtil;
-import infrastructure.util.ContextUtil;
 import static infrastructure.util.HibernateUtil.commitTransaction;
 import infrastructure.util.common.CommonCursoUtil;
 import infrastructure.util.common.CommonInscripcionUtil;
@@ -48,8 +46,9 @@ public class RemoveNominaDerService {
 
             for (CommonInscripcionUtil.RowData row : selectedRows) {
                 int i = Integer.parseInt(row.getIdRow()) -1;
-                retValue = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(
-                        jcSession.getNominaCursoAdmDer().get(i), jcSession.getCursoAdmDer().getId(), "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
+                // OOOOOOOOOOOOOJJJJJJJJJJJJJJJOOOOOOOOO
+                //retValue = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(
+                //        jcSession.getNominaCursoAdmDer().get(i), jcSession.getCursoAdmDer().getId(), "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
             }
         }
               

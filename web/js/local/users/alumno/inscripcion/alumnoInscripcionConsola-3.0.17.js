@@ -1,5 +1,6 @@
 function showCambioMencionDialog()
-{
+{  
+    
     const data_string = $("#inscripcion-form").serialize();
     //var menDivValue = "";
     jQuery.ajax({
@@ -7,6 +8,8 @@ function showCambioMencionDialog()
         type: "POST",
         data: data_string,
         success: function (data) {
+            
+alert('data='+data) ;             
             $("#men1-div").html(data);
             $("#men2-div").html(data);
         },

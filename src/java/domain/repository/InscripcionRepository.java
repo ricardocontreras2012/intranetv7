@@ -24,9 +24,10 @@ import domain.model.InscripcionCursoView;
 public interface InscripcionRepository extends CrudGenericDAO<Inscripcion, Long> {
     
     String getInscripcionJson(AluCarId id);
-    String postInscripcionJson(AluCarId id, CursoId idCurso);
+    String postInscripcionJson(AluCarId id, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp);
     String getCargaJson(AluCarId id);
-    String getInscripcionSimpleJson(AluCarId id, Integer agno, Integer sem);
+    String getInscripcionSimpleJson(AluCarId id);
+    String getInscripcionAgnoSemJson(AluCarId id, Integer agno, Integer sem);
     List<Inscripcion> getInscripcionPractica(AluCarId id, Integer agnoIns, Integer semIns);
     int deleteInscripcion(AluCar aluCar, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String tipo, String proceso, Integer rutRea, String user);
     List<InscripcionCursoView> findNomina(Curso curso);

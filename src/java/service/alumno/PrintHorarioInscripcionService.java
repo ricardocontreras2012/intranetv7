@@ -49,9 +49,12 @@ public class PrintHorarioInscripcionService {
         Integer rut = aca.getId().getAcaRut();
         String name = "horario_inscripcion_" + rut + ".pdf";
         String description = FormatUtil.getMimeType(name);
-        ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioDocencia(aca.getParametros().getAgnoIns(), aca.getParametros().getSemIns()));
+        ///OOOOOOOOOJJJJJOOOOO
+        ws.setModuloHorarioList(CommonHorarioUtil.getModuloHorarioDocencia(2025,2));
+        
+        InscripcionSupport insSup = new InscripcionSupport(aca, genericSession);
 
-        return new ActionInputStreamUtil(name, description, getInput(name, "AL", genericSession.getRut(), ws.getType(), rut, ws.getNombre(), ws.getModuloHorarioList(), InscripcionSupport.getCursoList(ws.getAluCar().getInsList())));
+        return new ActionInputStreamUtil(name, description, getInput(name, "AL", genericSession.getRut(), ws.getType(), rut, ws.getNombre(), ws.getModuloHorarioList(), InscripcionSupport.getCursoList(insSup.getInscripcion())));
     }
 
     private InputStream getInput(String name, String id, Integer genera, String userType, Integer rut, String userName, List<ModuloHorario> modList, List<Curso> cursoList) throws Exception {

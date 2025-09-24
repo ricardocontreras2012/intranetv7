@@ -1,6 +1,21 @@
 
 function inscribir(pos) {
-    $("#pos").val(pos);
+   
+    const asign = $('#' + pos + '_curAsignDiv').text().trim();
+    const elect = $('#' + pos + '_curElectDiv').text().trim();
+    const coord = $('#' + pos + '_curCoordDiv').text().trim();
+    const secc = $('#' + pos + '_curSeccDiv').text().trim();
+    const agno = $('#' + pos + '_curAgnoDiv').text().trim();
+    const sem = $('#' + pos + '_curSemDiv').text().trim();
+    const comp = $('#' + pos + '_curCompDiv').text().trim();
+
+    $('#curAsign').val(asign);
+    $('#curElect').val(elect);
+    $('#curCoord').val(coord);
+    $('#curSecc').val(secc);
+    $('#curAgno').val(agno);
+    $('#curSem').val(sem);
+    $('#curComp').val(comp);
 
     // Serializa los datos del formulario para enviarlos como parámetros en la URL
     const data_string = $("#cursos-form").serialize();
@@ -8,11 +23,13 @@ function inscribir(pos) {
     // Obtiene los elementos iframe correspondientes
     const inscripcionIframe = $('#inscripcion-iframe', window.parent.document);
     const derechosIframe = $('#derechos-iframe', window.parent.document);
+    const cursosIframe = $('#cursos-iframe', window.parent.document);
 
     // Asegurarse de que el iframe de inscripcion se haya cargado correctamente
     inscripcionIframe.on('load', function () {
         // Cuando el iframe de inscripción se haya cargado, cargamos el iframe de derechos
         derechosIframe.attr("src", 'AlumnoInscripcionGetDerechos?key=' + $("#key").val());
+        //cursosIframe.attr("src", '');
     });
 
     // Establecer la URL para el iframe de inscripcion
@@ -28,10 +45,10 @@ function showProfesor(profesor, pos, source) {
 
     // Inserta el HTML generado en el div correspondiente de la ventana padre
     parent.$("#profesor-div").html(html_text);
-    
+
     // Muestra la ventana modal con la información del profesor
     parent.$("#profesor").modal('show');
-    
+
     return false;
 }
 

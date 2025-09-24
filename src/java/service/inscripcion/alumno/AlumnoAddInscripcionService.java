@@ -18,20 +18,12 @@ import infrastructure.support.action.common.ActionCommonSupport;
  */
 public final class AlumnoAddInscripcionService {
 
-    /**
-     * Method Servicio
-     *
-     * @param action Clase(action) que invoca al servicio.
-     * @param genericSession Sesion de trabajo.
-     * @param pos Numero del registro seleccionado en el formulario
-     * @param key LLave para acceder a los datos de la sesion.
-     * @return Action status
-     */
+
     public InscripcionJsonDTO service(ActionCommonSupport action, GenericSession genericSession,
-            Integer pos, String key)
-    {
+            Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp, String key)
+    {        
         WorkSession ws = genericSession.getWorkSession(key);       
         
-        return ws.getAluCar().addInscripcionAlumno(action, genericSession, pos, ws.getDerecho());        
+        return ws.getAluCar().addInscripcionAlumno(action, genericSession, asign, elect, coord, secc, agno, sem, comp, ws.getDerecho());        
     }
 }
