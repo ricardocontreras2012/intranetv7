@@ -65,7 +65,7 @@ public final class AlumnoSession implements Serializable {
 
     public void setCambioMencion(Integer newMencion) {
         this.newMencion = newMencion;
-        this.mencionCambio = MencionSupport.getMencion(this.aluCar.getId().getAcaCodCar(), newMencion);
+        this.mencionCambio = MencionSupport.getMencion(this.aluCar.getId().getAcaCodCar(), newMencion);                 
     }
 
     public List<CertificacionView> getCertList() {

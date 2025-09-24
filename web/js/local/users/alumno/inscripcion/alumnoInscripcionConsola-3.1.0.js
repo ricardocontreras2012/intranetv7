@@ -1,28 +1,40 @@
-function showCambioMencionDialog()
-{  
-    
+function limpiarHtmlCrudo(htmlString) {
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlString;
+    let texto = temp.textContent || temp.innerText || '';
+    return texto.replace(/\t+/g, ' ')
+                .replace(/\n+/g, ' ')
+                .replace(/\s{2,}/g, ' ')
+                .trim();
+}
+
+function showCambioMencionDialog() {
     const data_string = $("#inscripcion-form").serialize();
-    //var menDivValue = "";
+
     jQuery.ajax({
         url: "AlumnoInscripcionCambioMencionGetMencion",
         type: "POST",
         data: data_string,
-        success: function (data) {
+        success: function (data) {            
+            // Limpiar y decodificar el HTML recibido
+            const textoLimpio = limpiarHtmlCrudo(data);
             
-alert('data='+data) ;             
+            // Inyectar en los divs si aún lo necesitas
             $("#men1-div").html(data);
             $("#men2-div").html(data);
+
+            // Comparar correctamente
+            if (textoLimpio === "Ingeniería Comercial en Administración de Empresas") {
+                $("#cambio-mencion1").modal("show");
+            } else {
+                $("#cambio-mencion2").modal("show");
+            }
         },
         async: false
     });
-    if ($("#men1-div").text().trim() === "Ingeniería Comercial en Administración de Empresas")
-    {
-        $("#cambio-mencion1").modal("show");
-    } else
-    {
-        $("#cambio-mencion2").modal("show");
-    }
 }
+
+
 
 function cambiarMencion()
 {

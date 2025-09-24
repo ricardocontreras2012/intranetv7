@@ -19,7 +19,7 @@
         <script type="text/javascript" src="/intranetv7/js/bootstrap/wait.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.std.ready-3.0.0.min.js"></script>
         <script type="text/javascript" src="/intranetv7/js/local/lib/lib.main-3.0.2.js"></script>
-        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionConsola-3.0.17.js"></script>
+        <script type="text/javascript" src="/intranetv7/js/local/users/alumno/inscripcion/alumnoInscripcionConsola-3.1.0.js"></script>
     </head>
     <body class="inner-body" style="font-size: 14px;">
         <div class="title-div">

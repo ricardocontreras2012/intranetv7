@@ -15,6 +15,7 @@ import java.util.List;
 public class CursoResponseWrapper {
     private String status;
     private List<CursoInsJsonDTO> data;
+    private Integer mencion;
 
     public String getStatus() {
         return status;
@@ -30,6 +31,14 @@ public class CursoResponseWrapper {
 
     public void setData(List<CursoInsJsonDTO> data) {
         this.data = data;
+    }
+
+    public Integer getMencion() {
+        return mencion;
+    }
+
+    public void setMencion(Integer mencion) {
+        this.mencion = mencion;
     }
 }
 

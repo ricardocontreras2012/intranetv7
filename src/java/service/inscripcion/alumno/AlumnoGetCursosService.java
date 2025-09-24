@@ -86,6 +86,8 @@ public final class AlumnoGetCursosService {
             return cursoList;
 
         } else if ("CAMBIO MENCION".equalsIgnoreCase(status)) {
+            alumnoSession.setCambioMencion(response.getMencion());
+            
             action.setRetValue("cambioMencion");
             return null;
 
