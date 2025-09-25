@@ -24,7 +24,6 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 import domain.model.CursoEspejo;
 import domain.model.CursoEspejoId;
 import java.util.ArrayList;
-import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.Map;
 import session.GenericSession;
@@ -470,15 +469,6 @@ public final class InscripcionSupport {
      */
     public void setErrDelete(int errDelete) {
         this.errDelete = errDelete;
-    }
-
-    private int getSct(Asignatura asignatura) {
-        int retValue = asignatura.getAsiSct();
-        if (asList(351425, 351458).contains(asignatura.getAsiCod())) {
-            retValue = 0;
-        }
-
-        return retValue;
     }
 
     public static List<AluCar> getNomina(List<InscripcionCursoView> nomina) {
