@@ -154,8 +154,8 @@ public final class InscripcionSupport {
     public void removeInscripcionCoordinador(String userType, Map<String, String[]> parameters) {
         removeInscripciones(action, parameters);
     }
-    
-    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> params) { 
+
+    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> params) {
         AtomicBoolean flag = new AtomicBoolean(false);
         params.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith("ck_")) // solo los checkboxes
@@ -172,22 +172,19 @@ public final class InscripcionSupport {
 
                     String json = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, insAsign, insElect, insCoord, insSecc, insAgno, insSem, insComp, genericSession.getRut(), genericSession.getUserType());
                     Gson gson = new Gson();
-                    
+
                     CommonResponseUtil response = gson.fromJson(json, CommonResponseUtil.class);
 
                     if ("ERROR".equals(response.getStatus())) {
                         flag.set(true);
                         action.addActionError(response.getMessage());
-                        
-                        LogUtil.setLog(rut, "Eliminación no realizada: "+insAsign+" "+insElect+" "+insCoord+" "+insSecc+" "+insAgno+" "+insSem); 
-                    }
-                    else
-                    {
-                        LogUtil.setLog(rut, "Eliminación exitosa: "+insAsign+" "+insElect+" "+insCoord+" "+insSecc+" "+insAgno+" "+insSem); 
+
+                        LogUtil.setLog(rut, "Eliminación no realizada: " + insAsign + " " + insElect + " " + insCoord + " " + insSecc + " " + insAgno + " " + insSem);
+                    } else {
+                        LogUtil.setLog(rut, "Eliminación exitosa: " + insAsign + " " + insElect + " " + insCoord + " " + insSecc + " " + insAgno + " " + insSem);
                     }
 
                 });
-        
     }
 
     private String getParameter(Map<String, String[]> params, String key) {
