@@ -21,6 +21,14 @@ public class CargaAlumnoJsonDTO {
     public Integer AGNO; 
     public Integer SEM;
     public String COMP;
+    public Integer ASIGN_TR; 
+    public String ELECT_TR; 
+    public String COORD_TR; 
+    public Integer SECC_TR; 
+    public Integer AGNO_TR; 
+    public Integer SEM_TR;
+    public String COMP_TR;
+    public String TIPO;
     public Integer RUT_REALI;
     public String NOMBRE; 
     public String NOMBRE_PROFESORES;

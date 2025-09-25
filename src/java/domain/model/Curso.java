@@ -413,7 +413,9 @@ public class Curso implements Serializable {
      * @return
      */
     public String getNombreCorto() {
-        return getNombreCurso(50);
+        //return getNombreCurso(50);
+        
+        return this.curNombre;
     }
 
     /**
@@ -422,11 +424,14 @@ public class Curso implements Serializable {
      * @return
      */
     public String getNombreHorario() {
-        return getNombre(40);
+        //return getNombre(40);
+        
+        return this.curNombre;
     }
 
-    private String getNombre(int largo) {
-        String nombreRet = this.getCurNombre();
+    private String getNombre(int largo) {  
+        
+        /*String nombreRet = this.getCurNombre();
 
         if (nombreRet.length() > largo) {
             int li = nombreRet.lastIndexOf(' ');
@@ -445,8 +450,10 @@ public class Curso implements Serializable {
                 nombreRet = nombreRet.substring(0, largo);
             }
         }
-
-        return nombreRet;
+        
+        return nombreRet; */
+        
+        return this.curNombre;
     }
 
     /**

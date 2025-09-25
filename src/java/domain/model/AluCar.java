@@ -404,8 +404,8 @@ public class AluCar implements Serializable {
     }
 
     public void setCarga(GenericSession gs) {
-        this.carga = CommonAlumnoUtil.getCarga(this, gs);       
-        this.cargaEspejo = CommonCursoUtil.getEspejos(this.carga);
+        this.carga = CommonAlumnoUtil.getCarga(this, gs);         
+        this.cargaEspejo = CommonCursoUtil.getEspejos(this.carga);        
     }
 
     /**

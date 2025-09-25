@@ -9,7 +9,6 @@ package service.inscripcion;
 import domain.model.AluCar;
 import session.GenericSession;
 import session.WorkSession;
-import infrastructure.support.InscripcionSupport;
 import infrastructure.support.action.common.ActionCommonSupport;
 
 /**
@@ -36,10 +35,7 @@ public final class AddInscripcionService {
 
         WorkSession ws = genericSession.getWorkSession(key);
         AluCar aluCar = ws.getAluCar();        
-        ws.setCurso(aluCar.getCursosInscripcion().get(pos));                   
-        
-        InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
-        insSup.setSctNivel();
+        ws.setCurso(aluCar.getCursosInscripcion().get(pos));
                
         return aluCar.addInscripcionCoordinador(action, genericSession, ws.getCurso(), ws.getDerechoCoordinador());                  
     }

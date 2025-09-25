@@ -3,8 +3,8 @@
         "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <sql-query name="InscripcionRemoveFunction">
-        <return-scalar column="estado"  type="java.lang.Integer" />
-         <![CDATA[select inscripcion_pkg.remove(?,?,?,?,?,?,?,?,?,?,?,?,?,?) as estado from dual]]>
+        <return-scalar column="estado"  type="java.lang.String" />
+         <![CDATA[select inscripcion_pkg.remove_json(?,?,?,?,?,?,?,?,?,?,?,?,?) as estado from dual]]>
     </sql-query>
          
     <sql-query name="IscripcionSwapFunction">

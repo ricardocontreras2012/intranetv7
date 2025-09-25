@@ -21,6 +21,8 @@ import domain.model.InscripcionId;
 import domain.model.Inscripcion;
 import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import domain.model.CursoEspejo;
+import domain.model.CursoEspejoId;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
@@ -38,7 +40,9 @@ import domain.model.InscripcionCursoView;
 import infrastructure.dto.CargaAlumnoJsonDTO;
 import infrastructure.dto.InscripcionJsonDTO;
 import infrastructure.util.common.CommonCursoUtil;
+import infrastructure.util.common.CommonResponseUtil;
 import java.lang.reflect.Type;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 /**
@@ -126,9 +130,9 @@ public final class InscripcionSupport {
     }
 
     public List<Inscripcion> getInscripcion(Integer agno, Integer sem) {
-        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionAgnoSemJson(aluCar.getId(),  agno, sem));
+        return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionAgnoSemJson(aluCar.getId(), agno, sem));
     }
-    
+
     public List<Inscripcion> getInscripcion() {
         return getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionSimpleJson(aluCar.getId()));
     }
@@ -138,11 +142,8 @@ public final class InscripcionSupport {
      *
      * @param parameters Check-box del formulario de inscripción.
      */
-    /// OOOOOOOOJJJJJOOOOO
     public void removeInscripcionAlumno(Map<String, String[]> parameters) {
-        ///if ("SI".equals(this.aluCar.getParametros().getPuedeEliminar())) {
-        removeInscripciones(action, parameters, true);
-        //}
+        removeInscripciones(action, parameters);
     }
 
     /**
@@ -152,58 +153,11 @@ public final class InscripcionSupport {
      * @param parameters Check-box del formulario de inscripción.
      */
     public void removeInscripcionCoordinador(String userType, Map<String, String[]> parameters) {
-        //if (this.aluCar.getIsAlumnoPropio() || "CFI".equals(userType)) {
-        removeInscripciones(action, parameters, false);
-        //}
+        removeInscripciones(action, parameters);
     }
-
-    /* private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> parameters, boolean alumno) {
-try{        
-        
-        action.clearActionErrors();
-        beginTransaction(ActionUtil.getDBUser());
-
-        List<Curso> cursosSeleccionados = IntStream.range(0, this.aluCar.getInsList().size())
-                .filter(i -> parameters.containsKey("ck_" + i))
-                .mapToObj(i -> this.aluCar.getInsList().get(i).getCurso())
-                .collect(Collectors.toList());
-
-        boolean eliminacionExitosa = cursosSeleccionados.stream()
-                .allMatch(curso -> {
-                    CursoId idCurso = curso.getId();
-                    String nombre = curso.getNombreFull();
-
-                    int errDelete = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, idCurso, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
-
-                    if (errDelete > 0) {
-                        String errMsg;
-
-                        if (errDelete == 20001) {
-                            errMsg = action.getText("error.acta.generada") + " " + nombre;
-                        } else {
-                            errMsg = "NO elimina " + nombre + ". Dé aviso de esta situación a Registro Curricular";
-                        }
-
-                        action.addActionError(errMsg);
-                        LogUtil.setLog(rut, errMsg);
-
-                        return false; // Indica que no fue exitoso
-                    }
-
-                    return true; // Indica que fue exitoso
-                });
-
-        if (eliminacionExitosa) {
-            LogUtil.setLog(rut, "Eliminación exitosa");
-            commitTransaction();
-        } else {
-            rollbackTransaction();
-        }
-        
-}catch(Exception e){e.printStackTrace();}
-        
-    }*/
-    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> params, boolean alumno) {
+    
+    private void removeInscripciones(ActionCommonSupport action, Map<String, String[]> params) { 
+        AtomicBoolean flag = new AtomicBoolean(false);
         params.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith("ck_")) // solo los checkboxes
                 .forEach(entry -> {
@@ -217,8 +171,24 @@ try{
                     Integer insSem = Integer.valueOf(getParameter(params, index + "_insSem"));
                     String insComp = getParameter(params, index + "_insComp");
 
-                    int errDelete = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, insAsign, insElect, insCoord, insSecc, insAgno, insSem, insComp, alumno ? "DEL_ALUMNO" : "DEL_COORD", genericSession.getRut(), genericSession.getUserType());
+                    String json = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).deleteInscripcion(this.aluCar, insAsign, insElect, insCoord, insSecc, insAgno, insSem, insComp, genericSession.getRut(), genericSession.getUserType());
+                    Gson gson = new Gson();
+                    
+                    CommonResponseUtil response = gson.fromJson(json, CommonResponseUtil.class);
+
+                    if ("ERROR".equals(response.getStatus())) {
+                        flag.set(true);
+                        action.addActionError(response.getMessage());
+                        
+                        LogUtil.setLog(rut, "Eliminación no realizada: "+insAsign+" "+insElect+" "+insCoord+" "+insSecc+" "+insAgno+" "+insSem); 
+                    }
+                    else
+                    {
+                        LogUtil.setLog(rut, "Eliminación exitosa: "+insAsign+" "+insElect+" "+insCoord+" "+insSecc+" "+insAgno+" "+insSem); 
+                    }
+
                 });
+        
     }
 
     private String getParameter(Map<String, String[]> params, String key) {
@@ -230,9 +200,9 @@ try{
 
         InscripcionJsonDTO response = InscripcionSupport.getResponseFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).postInscripcionJson(id, asign, elect, coord, secc, agno, sem, comp));
         if ("OK".equals(response.getStatus())) {
-            LogUtil.setLog(rut, "Inscribe " + asign+" "+elect+" "+coord+" "+secc+" "+agno+" "+sem);
+            LogUtil.setLog(rut, "Inscribe " + asign + " " + elect + " " + coord + " " + secc + " " + agno + " " + sem);
         } else {
-            LogUtil.setLog(rut, "NO inscribe " + + asign+" "+elect+" "+coord+" "+secc+" "+agno+" "+sem + " Causa " + response.getMessage());
+            LogUtil.setLog(rut, "NO inscribe " + +asign + " " + elect + " " + coord + " " + secc + " " + agno + " " + sem + " Causa " + response.getMessage());
         }
 
         return response;
@@ -419,22 +389,6 @@ try{
 
     }
 
-    //OOOOOOOOOOOOOOOOJJJJJJJJJJJOOOOOOOOOO
-    public void setSctNivel() {
-        /*if ("SI".equals(aluCar.getParametros().getPuedeInscribirMalla())
-                || "SI".equals(aluCar.getParametros().getPuedeModificar())
-                || asList("JC", "SP").contains(genericSession.getUserType())) {
-
-            MallaRepository mallaPersistence = ContextUtil.getDAO().getMallaRepository(ActionUtil.getDBUser());
-
-            if (aluCar.getPlan().getMencion().getCarrera().getTcarrera().getTcrCtip() == 35 && aluCar.getAcaCodPlan() < 7) {
-                aluCar.setCreditosNivel(mallaPersistence.getCreditosNivel(aluCar));
-            }
-
-            aluCar.setSctNivel(mallaPersistence.getSctNivel(aluCar));
-        }*/
-    }
-
     private String topeHorarioCambioCurso(AluCar aluCar, Curso cursoOri, Curso cursoDest) {
         AluCarId id = aluCar.getId();
         CursoId oriId = cursoOri.getId();
@@ -572,6 +526,7 @@ try{
             id.setCurAgno(dto.AGNO);
             id.setCurSem(dto.SEM);
             id.setCurComp(dto.COMP);
+            curso.setCurTipo(dto.TIPO);
             curso.setId(id);
 
             // Virtuales
@@ -582,10 +537,82 @@ try{
             // Asignatura
             Asignatura asignatura = new Asignatura();
             asignatura.setAsiCod(dto.ASIGN);
-            /*asignatura.setAsiHcredTeo(dto.HCRED_TEO);
-            asignatura.setAsiHcredEje(dto.HCRED_EJE);
-            asignatura.setAsiHcredLab(dto.HCRED_LAB);
-            asignatura.setAsiTipoControlTel(dto.TIPO_CONTROL_TEL);*/
+            curso.setAsignatura(asignatura);
+            ins.setCurso(curso);
+
+            return ins;
+        }).collect(Collectors.toList());
+
+        return insList;
+    }
+
+    public static List<Inscripcion> getCargaFromJson(String json) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<List<CargaAlumnoJsonDTO>>() {
+        }.getType();
+        List<CargaAlumnoJsonDTO> insJsonList = gson.fromJson(json, listType);
+        List<Inscripcion> insList;
+
+        insList = insJsonList.stream().map(dto -> {
+
+            Inscripcion ins = new Inscripcion();
+            InscripcionId insId = new InscripcionId();
+            Curso curso = new Curso();
+            CursoId id = new CursoId();
+
+            CursoEspejo espejo = new CursoEspejo();
+            CursoEspejoId idEspejo = new CursoEspejoId();
+
+            insId.setInsRut(dto.RUT);
+            insId.setInsRut(dto.COD_CAR);
+            insId.setInsRut(dto.AGNO_ING);
+            insId.setInsRut(dto.SEM_ING);
+            insId.setInsAsign(dto.ASIGN);
+            insId.setInsElect(dto.ELECT);
+            insId.setInsAgno(dto.AGNO);
+            insId.setInsSem(dto.SEM);
+            insId.setInsComp(dto.COMP);
+            ins.setId(insId);
+            ins.setInsRutReali(dto.RUT_REALI);
+
+            id.setCurAsign(dto.ASIGN);
+            id.setCurElect(dto.ELECT);
+            id.setCurCoord(dto.COORD);
+            id.setCurSecc(dto.SECC);
+            id.setCurAgno(dto.AGNO);
+            id.setCurSem(dto.SEM);
+            id.setCurComp(dto.COMP);
+            curso.setCurTipo(dto.TIPO);
+            curso.setId(id);
+
+            if ("E".equals(curso.getCurTipo())) {
+                idEspejo.setCesAsign(dto.ASIGN);
+                idEspejo.setCesElect(dto.ELECT);
+                idEspejo.setCesCoord(dto.COORD);
+                idEspejo.setCesSecc(dto.SECC);
+                idEspejo.setCesAgno(dto.AGNO);
+                idEspejo.setCesSem(dto.SEM);
+                idEspejo.setCesComp(dto.COMP);
+
+                espejo.setCesAsignTr(dto.ASIGN_TR);
+                espejo.setCesElectTr(dto.ELECT_TR);
+                espejo.setCesCoordTr(dto.COORD_TR);
+                espejo.setCesSeccTr(dto.SECC_TR);
+                espejo.setCesAgnoTr(dto.AGNO_TR);
+                espejo.setCesSemTr(dto.SEM_TR);
+                espejo.setId(idEspejo);
+                curso.setEspejo(espejo);
+            }
+
+            // Virtuales
+            curso.setCurNombre(dto.NOMBRE);
+            curso.setCurProfesores(dto.NOMBRE_PROFESORES);
+            curso.setCurHorario(dto.HORARIO);
+
+            // Asignatura
+            Asignatura asignatura = new Asignatura();
+            asignatura.setAsiCod(dto.ASIGN);
+
             curso.setAsignatura(asignatura);
             ins.setCurso(curso);
 

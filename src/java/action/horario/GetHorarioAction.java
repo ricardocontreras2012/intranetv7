@@ -25,7 +25,7 @@ public final class GetHorarioAction extends ActionCommonSupport {
      * @return Action status.
      */
     @Override
-    public String action(){
+    public String action(){        
         return new GetHorarioService().service(getGenericSession(), id, getKey());
     }
     

@@ -136,7 +136,7 @@ public final class CommonAlumnoUtil {
         Integer agnoPrev = Integer.parseInt(next.substring(0, 4));
         Integer semPrev = Integer.parseInt(next.substring(4));
         
-        List<Inscripcion> insList = InscripcionSupport.getListFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getCargaJson(aluCar.getId()));
+        List<Inscripcion> insList = InscripcionSupport.getCargaFromJson(ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getCargaJson(aluCar.getId()));
         List<Inscripcion> insPracticaList = ContextUtil.getDAO().getInscripcionRepository(ActionUtil.getDBUser()).getInscripcionPractica(aluCar.getId(), agnoPrev, semPrev);
 
         if (insPracticaList != null && !insPracticaList.isEmpty()) {
@@ -224,16 +224,14 @@ public final class CommonAlumnoUtil {
 
         Alumno alumno = alumnoSession.getAlumno();
         aluCar.setAlumno(alumno);
-        ws.setNombre(getNombreSocial(alumno));
+        ws.setNombre(alumno.getNombreSocialStd());
+        //ws.setNombre(getNombreSocial(alumno));
 
         ws.setTmaterialSelectOption(ContextUtil.getTipoMaterialMap().get("AL"));
         setTipoCursos(ws);
         ws.setMencionInfoIntranet(ContextUtil.getDAO().getMencionInfoIntranetRepository("AL").find(
                 aluCar.getPlan()));
 
-        InscripcionSupport insSup = new InscripcionSupport(aluCar, genericSession);
-        insSup.setSctNivel();              
-        
         ContextUtil.getDAO().getAluCarRepository(ActionUtil.getDBUser()).generaLogros(aluCar.getId(), aluCar.getAcaCodMen(), aluCar.getAcaCodPlan());      
     }
 

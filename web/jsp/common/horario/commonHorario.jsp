@@ -92,23 +92,27 @@
                         List<Curso> carga = CommonHorarioUtil.getCarga(ws);
                         Horario[][] horarioMatrix = ws.getHorario();
                         List<ModuloHorario> modList = ws.getModuloHorarioList();
-
-                        int listSize = modList.size();
+                        
+                        int nCarga = carga.size();
+                                              
+                        int listSize = modList.size();                        
                         for (int i = 0; i < listSize; i++) {
                             int pos = CommonSalaUtil.getPos(modList, i);
+                                                          
                             out.println("<tr style=\"height:60px\">");
                             out.println("<td style=\"text-align:center; vertical-align:middle\">" + modList.get(pos).getModDesde() + ' ' + modList.get(pos).getModHasta() + "</td>");
+                                                        
                             for (int j = 0; j < nDias; j++) {
                                 Horario horario = horarioMatrix[pos][j];
-
-                                if (horario != null) {
+                                if (horario != null) {                                                                         
                                     int k;
-                                    int nCarga = carga.size();
+                                    
                                     Curso curso = null;
-
-                                    for (k = 0; k < nCarga; k++) {
-                                        if (CommonCursoUtil.iguales(carga.get(k), horario.getCurso(), genericSession.getWorkSession(key).getCargaEspejo())) {
+                                    for (k = 0; k < nCarga; k++) {                                                                               
+                                        //if (CommonCursoUtil.iguales(carga.get(k), horario.getCurso(), genericSession.getWorkSession(key).getCargaEspejo())) {
+                                        if (CommonCursoUtil.equals(carga.get(k).getId(), horario.getCurso().getId())) {
                                             curso = carga.get(k);
+
                                             break;
                                         }
                                     }
@@ -118,7 +122,8 @@
                                     if (horario.getSala() != null) {
                                         out.println("<a style=\"color:#444444\" onclick=\"showSala('"
                                                 + ContextUtil.getDiaList().get(j).getDiaNom() + '-' + modList.get(i).getId().getModCod() + "','" + horario.getSala().getSalaNum() + "','" + curso.getNombreCorto() + "','" + curso.getCurProfesores() + "');\">" + curso.getNombreHorario() + "</a>");
-                                    } else {
+
+                                    } else {   
                                         out.println("<a style=\"color:#444444\" onclick=\"showSala('" + ContextUtil.getDiaList().get(j).getDiaNom() + '-' + modList.get(i).getId().getModCod() + "',' ','" + curso.getNombreCorto() + "','" + curso.getCurProfesores() + "');\">" + curso.getNombreHorario() + "</a>");
                                     }
 
@@ -129,7 +134,7 @@
                                 out.println("</td>");
                             }
                             out.println("</tr>");
-                        }
+                        }                        
                     %>
                 </tbody>
             </table>
@@ -137,8 +142,7 @@
                 <tr>
                     <td colspan="7" style="height: 20px;text-align: center; text-transform: capitalize; color: white"><s:text name="label.menu.mis.cursos"/></td>
                 </tr>
-                <%
-                    int nCarga = carga.size();
+                <%                    
                     for (int k = 0; k < nCarga; k++) {
                         out.println("<tr style=\"height: 20px; width:100%\">");
                         out.println("<td colspan=\"7\" style=\"height: 20px; width:100%;background-color:" + colorCurso[k % 10] + "\">" + carga.get(k).getNombreFull() + "</td>");

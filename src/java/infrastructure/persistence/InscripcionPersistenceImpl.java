@@ -256,7 +256,7 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
     }
 
     @Override
-    public int deleteInscripcion(AluCar aluCar, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp, String proceso, Integer rutRea, String user) {
+    public String deleteInscripcion(AluCar aluCar, Integer asign, String elect, String coord, Integer secc, Integer agno, Integer sem, String comp, Integer rutRea, String user) {
 
         Query query = getSession().getNamedQuery("InscripcionRemoveFunction");
 
@@ -272,14 +272,10 @@ public final class InscripcionPersistenceImpl extends CrudAbstractDAO<Inscripcio
         query.setParameter(8, agno, StandardBasicTypes.INTEGER);
         query.setParameter(9, sem, StandardBasicTypes.INTEGER);
         query.setParameter(10, comp, StandardBasicTypes.STRING);
-
         query.setParameter(11, user, StandardBasicTypes.STRING);
-        query.setParameter(12, proceso, StandardBasicTypes.STRING);
-        query.setParameter(13, rutRea, StandardBasicTypes.INTEGER);
+        query.setParameter(12, rutRea, StandardBasicTypes.INTEGER);
 
-        query.executeUpdate();
-
-        return 0;
+        return (String) query.uniqueResult();        
     }
 
     /**

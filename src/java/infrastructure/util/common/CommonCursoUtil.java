@@ -93,6 +93,7 @@ public final class CommonCursoUtil {
         return lista.stream()
                 .filter(curso -> "E".equals(curso.getCurTipo()))
                 .map(curso -> {
+                    
                     CursoEspejoId id = new CursoEspejoId();
                     id.setCesAsign(curso.getId().getCurAsign());
                     id.setCesElect(curso.getId().getCurElect());
@@ -103,6 +104,7 @@ public final class CommonCursoUtil {
 
                     CursoEspejo espejo = new CursoEspejo();
                     espejo.setId(id);
+
                     espejo.setCesAsignTr(curso.getEspejo().getCesAsignTr());
                     espejo.setCesElectTr(curso.getEspejo().getCesElectTr());
                     espejo.setCesCoordTr(curso.getEspejo().getCesCoordTr());
@@ -183,6 +185,10 @@ public final class CommonCursoUtil {
      * @return true si los cursos son iguales, false de lo contrario.
      */
     public static boolean iguales(Curso c1, Curso c2, List<CursoEspejo> espejos) {
+
+System.out.println("espejos="+espejos);
+System.out.println("largo="+espejos.size());
+        
         return equals(getParent(c1, espejos), getParent(c2, espejos));
     }
 
